@@ -221,8 +221,19 @@ class CaptionLabel(Label):
         self.height = max(dp(28), texture_size[1] + dp(16))
 
 
+def _bind_label_text_size(label, *_):
+    # halign/valign are no-ops in Kivy until text_size constrains the
+    # label's layout box (see _add_label's docstring in tabs_chart.py for
+    # the fuller explanation) - this Label's width isn't known until the
+    # parent BoxLayout's own later layout pass assigns it, so text_size
+    # must be set from a live width binding, not a one-time read here.
+    label.text_size = (label.width, label.height)
+
+
 def field_row(label_text, widget, height=dp(40)):
     row = BoxLayout(orientation="horizontal", size_hint_y=None, height=height, spacing=dp(6))
-    row.add_widget(Label(text=label_text, size_hint_x=0.38, halign="right", valign="middle"))
+    label = Label(text=label_text, size_hint_x=0.38, halign="right", valign="middle")
+    label.bind(size=_bind_label_text_size)
+    row.add_widget(label)
     row.add_widget(widget)
     return row

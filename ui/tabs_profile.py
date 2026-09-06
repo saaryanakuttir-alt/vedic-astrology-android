@@ -21,7 +21,15 @@ from ui.widgets import field_row
 
 def _show_message(title, text):
     content = BoxLayout(orientation="vertical", spacing=dp(8), padding=dp(10))
-    content.add_widget(Label(text=text))
+    # text_size must be bound to the label's own width, not left unset -
+    # without it a long error message (a real possibility here: geocoding
+    # failures, missing-field validation text, etc.) renders as one long
+    # unwrapped line that can overflow the popup instead of wrapping to
+    # fit it - the same class of bug documented at length elsewhere in
+    # this file's sibling widgets (see widgets.py's SimpleTable/LongText).
+    msg_label = Label(text=text, valign="top")
+    msg_label.bind(size=lambda inst, size: setattr(msg_label, "text_size", size))
+    content.add_widget(msg_label)
     popup = Popup(title=title, content=content, size_hint=(0.85, 0.5))
     close_btn = Button(text="OK", size_hint_y=None, height=dp(44))
     close_btn.bind(on_release=popup.dismiss)
@@ -88,11 +96,41 @@ class ProfileTab(BoxLayout):
         generate_btn.bind(on_release=self._on_generate)
         self.add_widget(generate_btn)
 
+        # text_size bound to width (not left unset) + height synced from
+        # texture_size: without this, a long status string (the actual
+        # generated-chart summary below routinely runs 70-90+ characters)
+        # renders as one unwrapped line and, since Kivy centers a Label's
+        # texture within its own box when text_size is unset, the START
+        # of the text ends up pushed off the left edge of the screen -
+        # confirmed repeatedly via emulator/device screenshot this session
+        # ("...nerated for Self..." with "Chart ge" missing off-screen).
         self.status_label = Label(text="Enter birth details and tap Generate Chart.",
-                                   size_hint_y=None, height=dp(40))
+                                   size_hint_y=None, height=dp(40), halign="left", valign="middle")
+        self.status_label.bind(width=self._update_status_text_size,
+                                texture_size=self._resize_status_label)
         self.add_widget(self.status_label)
 
         self._load_profile_into_form()
+
+    def _update_status_text_size(self, label, width):
+        label.text_size = (width, None)
+
+    def _resize_status_label(self, label, texture_size):
+        label.height = max(dp(40), texture_size[1] + dp(10))
+
+    def _set_status(self, text):
+        # Routed through here (not `self.status_label.text = ...` directly)
+        # for the same reason LongText.set_text() forces texture_update():
+        # a property-change-triggered re-layout isn't reliably observed on
+        # Android (see widgets.py's LongText for the fuller writeup) - so
+        # force the text_size/height recompute synchronously every time,
+        # rather than depending solely on the width/texture_size bindings
+        # above having already fired with a valid value.
+        self.status_label.text = text
+        if self.status_label.width:
+            self.status_label.text_size = (self.status_label.width, None)
+        self.status_label.texture_update()
+        self.status_label.height = max(dp(40), self.status_label.texture_size[1] + dp(10))
 
     # ------------------------------------------------------------------
     def _on_manual_toggle(self, checkbox, active):
@@ -133,9 +171,9 @@ class ProfileTab(BoxLayout):
         chart = self.store.current["chart"]
         label = PROFILE_LABELS[self.store.current_profile_id]
         if chart is not None:
-            self.status_label.text = f"{label}: chart generated (Ascendant {chart['ascendant']['sign']})."
+            self._set_status(f"{label}: chart generated (Ascendant {chart['ascendant']['sign']}).")
         else:
-            self.status_label.text = f"{label}: no chart generated yet."
+            self._set_status(f"{label}: no chart generated yet.")
 
     def _on_profile_change(self, spinner, label_text):
         new_id = next(pid for pid in PROFILE_IDS if PROFILE_LABELS[pid] == label_text)
@@ -191,19 +229,19 @@ class ProfileTab(BoxLayout):
             elif not place_name:
                 raise ValueError("Enter a place of birth, or check 'Enter exact coordinates' and fill those in instead.")
 
-            self.status_label.text = f"Computing chart for {PROFILE_LABELS[profile_id]}..."
+            self._set_status(f"Computing chart for {PROFILE_LABELS[profile_id]}...")
             chart = compute_birth_chart(**kwargs)
             reading = generate_reading(chart)
         except Exception as exc:  # noqa: BLE001 - surfaced to the user, not swallowed
             _show_message("Could not generate chart", str(exc))
-            self.status_label.text = "Error - see the message above. No chart was generated."
+            self._set_status("Error - see the message above. No chart was generated.")
             return
 
         self._save_form_into_profile(profile_id)
         self.store.profiles[profile_id]["chart"] = chart
         self.store.profiles[profile_id]["reading"] = reading
         warn_note = f" ({len(reading['warnings'])} KB lookup warning(s))" if reading["warnings"] else ""
-        self.status_label.text = (
+        self._set_status(
             f"Chart generated for {PROFILE_LABELS[profile_id]} ({name}) - Ascendant "
             f"{chart['ascendant']['sign']} {chart['ascendant']['degree_in_sign']:.2f} degrees.{warn_note}"
         )

@@ -34,7 +34,16 @@ class FamilyTab(BoxLayout):
         compute_btn.bind(on_release=lambda *_: self.refresh())
         self.add_widget(compute_btn)
 
-        self.summary_label = Label(text="", size_hint_y=None, height=dp(30), bold=True)
+        # text_size bound to width + a texture_update-forced height sync in
+        # _set_summary below - same fix, same reasoning, as ProfileTab's
+        # status_label (see tabs_profile.py): without it, a moderately
+        # long summary string ("Self <-> Life Partner - Total: X / Y -
+        # <verdict text>") renders unwrapped and can overflow the screen.
+        self.summary_label = Label(
+            text="", size_hint_y=None, height=dp(30), bold=True, halign="left", valign="middle",
+        )
+        self.summary_label.bind(width=self._update_summary_text_size,
+                                 texture_size=self._resize_summary_label)
         self.add_widget(self.summary_label)
 
         self.table = SimpleTable(["Koota", "Points", "Max"], [0.5, 0.25, 0.25])
@@ -44,11 +53,24 @@ class FamilyTab(BoxLayout):
         self.report_text = LongText(size_hint_y=0.65)
         self.add_widget(self.report_text)
 
+    def _update_summary_text_size(self, label, width):
+        label.text_size = (width, None)
+
+    def _resize_summary_label(self, label, texture_size):
+        label.height = max(dp(30), texture_size[1] + dp(10))
+
+    def _set_summary(self, text):
+        self.summary_label.text = text
+        if self.summary_label.width:
+            self.summary_label.text_size = (self.summary_label.width, None)
+        self.summary_label.texture_update()
+        self.summary_label.height = max(dp(30), self.summary_label.texture_size[1] + dp(10))
+
     def refresh(self):
         self_chart = self.store.profiles["self"]["chart"]
         self_reading = self.store.profiles["self"]["reading"]
         if self_chart is None or self_reading is None:
-            self.summary_label.text = "Generate a chart for Self first."
+            self._set_summary("Generate a chart for Self first.")
             self.table.clear_rows()
             self.report_text.set_text("")
             return
@@ -65,14 +87,14 @@ class FamilyTab(BoxLayout):
 
         result = report["ashtakoot"]
         if result:
-            self.summary_label.text = (
+            self._set_summary(
                 f"Self <-> Life Partner - Total: {result['total_points']:.1f} / "
                 f"{result['max_points']} - {result['verdict']}"
             )
             rows = [(k["koota"], k["points"], k["max_points"]) for k in result["kootas"]]
             self.table.set_rows(rows)
         else:
-            self.summary_label.text = "No Life Partner chart yet - showing Self's own disposition below."
+            self._set_summary("No Life Partner chart yet - showing Self's own disposition below.")
             self.table.clear_rows()
 
         self.report_text.set_text(report["text"])
