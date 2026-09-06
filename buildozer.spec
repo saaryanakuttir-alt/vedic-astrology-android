@@ -28,7 +28,18 @@ version = 1.0
 # against this runner's Python 3.14 host build. Kivy 2.3.1 (Dec 2024)
 # widened its Cython range (cython_min/cython_max) and explicitly added
 # Python 3.13 support, which carries the fix.
-requirements = python3,kivy==2.3.1,pyswisseph,tzdata
+#
+# filetype: Kivy 2.3.1's kivy/core/image/__init__.py imports this
+# unconditionally at module load time (used for image-type sniffing).
+# p4a is supposed to auto-detect and pip-install Kivy's own extra pure-
+# Python runtime deps into the bundle, but it silently didn't include
+# this one - confirmed via a real-device install + logcat capture
+# (2026-09-06, OnePlus 7T Pro): the app got as far as Kivy's compiled
+# graphics init, then crashed immediately with "ModuleNotFoundError: No
+# module named 'filetype'" the moment kivy.core.image imported. Listing
+# it explicitly here guarantees it's bundled regardless of that
+# auto-detection gap.
+requirements = python3,kivy==2.3.1,pyswisseph,tzdata,filetype
 
 p4a.local_recipes = ./recipes
 
@@ -61,7 +72,14 @@ android.permissions = INTERNET
 android.minapi = 26
 android.api = 33
 android.ndk = 25b
-android.archs = arm64-v8a, armeabi-v7a
+# x86_64 added alongside the two ARM ABIs specifically so this APK can run
+# on the Android Studio emulator (an x86_64 VM by default on Windows/Linux
+# hosts) for local testing without a physical device - the emulator's
+# QEMU2 backend refuses to run arm64 system images on an x86_64 host at
+# all ("Avd's CPU Architecture 'arm64' is not supported... System image
+# must match the host architecture"), and this Ubuntu 22.04/API 33 image
+# has no ARM-translation layer either.
+android.archs = arm64-v8a, armeabi-v7a, x86_64
 
 [buildozer]
 log_level = 2
