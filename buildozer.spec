@@ -17,7 +17,18 @@ version = 1.0
 # timezone database to Python's stdlib zoneinfo module, so the pure-Python
 # `tzdata` package (bundles the IANA database itself) is required for
 # timezone_resolver.py's zoneinfo.ZoneInfo(...) calls to work correctly.
-requirements = python3,kivy==2.3.0,pyswisseph,tzdata
+#
+# kivy: pinned to 2.3.1, NOT 2.3.0. Kivy 2.3.0's own pyproject.toml forces
+# an exact `cython==3.0.0` inside python-for-android's isolated build venv
+# for the kivy recipe specifically, regardless of any Cython version
+# installed outside it (see the "Install build dependencies" workflow
+# step) - and Cython 3.0.0 predates Python 3.13's removal of the private
+# _PyLong_AsByteArray() C-API function, so every Kivy .pyx-generated file
+# fails with "too few arguments to function call, expected 6, have 5"
+# against this runner's Python 3.14 host build. Kivy 2.3.1 (Dec 2024)
+# widened its Cython range (cython_min/cython_max) and explicitly added
+# Python 3.13 support, which carries the fix.
+requirements = python3,kivy==2.3.1,pyswisseph,tzdata
 
 p4a.local_recipes = ./recipes
 
