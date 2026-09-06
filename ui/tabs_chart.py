@@ -50,8 +50,27 @@ class ChartCanvas(Widget):
         self._redraw()
 
     def _clear_labels(self):
-        for lbl in self._sign_labels + self._planet_labels:
-            self.remove_widget(lbl)
+        # clear_widgets() rather than looping over the tracked lists below
+        # and remove_widget()-ing each one individually: on-device testing
+        # (both a real OnePlus 7T Pro and the x86_64 emulator) showed
+        # switching styles via the spinner leaves the PREVIOUS style's
+        # labels still rendered underneath the new ones - confirmed via
+        # screenshot, e.g. South Indian's sign abbreviations ("Ari",
+        # "Tau", ...) still visible after switching to North Indian.
+        # The remove_widget-per-tracked-label loop is logically correct
+        # and was verified, via four separate from-scratch desktop Kivy
+        # reproductions of this exact add/remove/redraw pattern (including
+        # driving the real ChartTab/TabbedPanel with genuine touch-
+        # dispatched spinner selections, matching the on-device sequence
+        # step for step), to behave perfectly on desktop's SDL2 backend -
+        # the ghosting never reproduced there. That points to an Android-
+        # specific GL/instruction-invalidation quirk rather than the
+        # tracked lists ever actually losing sync with self.children.
+        # clear_widgets() removes every widget ChartCanvas ACTUALLY has as
+        # a child right now, unconditionally, rather than only the ones
+        # the tracked lists remember adding - a strictly safer clear that
+        # can't be fooled by however this class of issue is occurring.
+        self.clear_widgets()
         self._sign_labels = []
         self._planet_labels = []
 
