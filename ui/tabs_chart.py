@@ -11,6 +11,7 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.label import Label
 from kivy.graphics import Color, Line, Rectangle
 from kivy.metrics import dp
+from kivy.clock import Clock
 
 import chart_geometry as cg
 from astrology_tables import SIGN_ABBR
@@ -42,13 +43,44 @@ class ChartCanvas(Widget):
         self.style = "North Indian"
         self._sign_labels = []
         self._planet_labels = []
-        self.bind(size=self._redraw, pos=self._redraw)
+        self._redraw_scheduled = False
+        # Bound to the SAME callback, size and pos are still two separate
+        # Kivy properties - when a layout pass assigns both together (the
+        # very first time this widget gets its real size, moving from
+        # Kivy's (100,100) default to the TabbedPanel's actual content
+        # area), each property change dispatches _schedule_redraw as its
+        # OWN independent event. Confirmed via screenshot on the emulator:
+        # every chart label (sign numbers AND planet groups) appeared
+        # doubled on the very first view of a freshly generated chart -
+        # before any style switch, before any style-spinner interaction -
+        # exactly what two back-to-back _redraw() calls would produce if
+        # anything about Kivy's Android GL layer doesn't fully discard the
+        # first call's rendered frame before the second one draws (the
+        # widget tree itself is provably correct after each individual
+        # _redraw() call - clear_widgets() unconditionally empties it -
+        # this was never reproducible on desktop's SDL2/GL backend despite
+        # multiple faithful attempts, including forcing simultaneous
+        # size+pos layout passes). Routing every trigger through Clock
+        # rather than calling _redraw() directly collapses any number of
+        # same-frame triggers (size AND pos changing together, or a
+        # set_chart() call landing in the same frame as a layout pass)
+        # into exactly ONE actual _redraw() execution.
+        self.bind(size=self._schedule_redraw, pos=self._schedule_redraw)
+
+    def _schedule_redraw(self, *args):
+        if not self._redraw_scheduled:
+            self._redraw_scheduled = True
+            Clock.schedule_once(self._run_scheduled_redraw, 0)
+
+    def _run_scheduled_redraw(self, dt):
+        self._redraw_scheduled = False
+        self._redraw()
 
     def set_chart(self, chart, varga_key, style):
         self.chart = chart
         self.varga_key = varga_key
         self.style = style
-        self._redraw()
+        self._schedule_redraw()
 
     def _clear_labels(self):
         # clear_widgets() rather than looping over the tracked lists below
