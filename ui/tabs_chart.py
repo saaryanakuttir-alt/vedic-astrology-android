@@ -55,10 +55,22 @@ class ChartCanvas(Widget):
         self._sign_labels = []
         self._planet_labels = []
 
-    def _add_label(self, text, x, y, bold=False, small=False, color=(1, 1, 1, 1)):
+    def _add_label(self, text, cx, cy, bold=False, small=False, color=(1, 1, 1, 1)):
+        """cx, cy is the point the label should be CENTERED on (not a
+        corner) - callers previously had to pre-offset by half the label
+        size themselves, which only worked for cells on the left/top of
+        the diagram; cells on the right edge had their label's default
+        left-aligned text extend straight off the visible canvas (and
+        past the screen edge entirely), confirmed via screenshot on the
+        emulator. halign="center" alone does nothing in Kivy without
+        text_size also being set to constrain it - it was silently a
+        no-op here before."""
+        size = (dp(60), dp(28) if small else dp(40))
         lbl = Label(
-            text=text, pos=(x, y), size=(dp(60), dp(40)), color=color,
-            bold=bold, font_size="11sp" if small else "13sp", halign="center",
+            text=text, pos=(cx - size[0] / 2, cy - size[1] / 2), size=size,
+            text_size=size, color=color, bold=bold,
+            font_size="11sp" if small else "13sp",
+            halign="center", valign="middle",
         )
         self.add_widget(lbl)
         (self._sign_labels if small else self._planet_labels).append(lbl)
@@ -107,14 +119,14 @@ class ChartCanvas(Widget):
             lx, ly = to_canvas((lx, ly))
 
             sign = sign_map[house_num]
-            self._add_label(str(_sign_number(sign)), lx - dp(10), ly - dp(10),
+            self._add_label(str(_sign_number(sign)), lx, ly,
                              small=True, color=(0.7, 0.7, 0.7, 1))
 
             planets_here = house_planets[house_num]
             label = "\n".join(planets_here) if planets_here else ""
             if house_num == 1:
                 label = ("ASC\n" + label) if label else "ASC"
-            self._add_label(label, cx - dp(25), cy - dp(15), bold=True,
+            self._add_label(label, cx, cy, bold=True,
                              color=(0.6, 0.75, 1, 1))
 
     def _draw_south_indian(self, ox, oy, size):
@@ -137,10 +149,14 @@ class ChartCanvas(Widget):
                     Color(0.75, 0.2, 0.15, 1)
                     Line(rectangle=(x0 + 3, y0 + 3, cell - 6, cell - 6), width=2)
                     Color(1, 1, 1, 1)
-            self._add_label(_abbr_sign(sign), x0 + dp(4), y0 + cell - dp(20),
+            # Sign abbreviation sits in the cell's top-left corner
+            # (classical South Indian style, not centered) - _add_label
+            # now takes a CENTER point, so offset by half its own (small)
+            # label size to land the same corner as before.
+            self._add_label(_abbr_sign(sign), x0 + dp(4) + dp(30), y0 + cell - dp(20) + dp(14),
                              small=True, color=(0.7, 0.7, 0.7, 1))
             label = "\n".join(sign_planets[sign])
-            self._add_label(label, cx - dp(25), cy - dp(15), bold=True,
+            self._add_label(label, cx, cy, bold=True,
                              color=(0.6, 0.75, 1, 1))
 
 

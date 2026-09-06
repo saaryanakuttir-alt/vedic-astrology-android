@@ -84,7 +84,7 @@ class LongText(ScrollView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.label = Label(
-            text="", size_hint_y=None, halign="left", valign="top",
+            text="", size_hint_y=None, height=dp(28), halign="left", valign="top",
             padding=(dp(10), dp(10)),
         )
         self.label.bind(texture_size=self._on_texture_size)
@@ -95,10 +95,27 @@ class LongText(ScrollView):
         self.label.text_size = (width - dp(20), None)
 
     def _on_texture_size(self, instance, texture_size):
-        self.label.height = texture_size[1] + dp(20)
+        self.label.height = max(dp(28), texture_size[1] + dp(20))
 
     def set_text(self, text):
         self.label.text = text or ""
+        # Belt-and-suspenders, not just the width binding above: confirmed
+        # via adb logcat + screenshot that the Karmic & Past Life and Life
+        # Predictions tabs (both LongText) rendered completely blank after
+        # a real, exception-free chart generation (no traceback anywhere
+        # in the log) - and stayed blank even after navigating away and
+        # back, which rules out a "tab not laid out yet" one-time timing
+        # fluke. This tab's content is set once, immediately after
+        # construction, while the TabbedPanelItem holding it may not be
+        # the active tab yet - if self.width happened to already equal
+        # whatever it was at bind time with no further change, _on_width
+        # never fires again and text_size is left at its unset default,
+        # producing a degenerate (often invisible) render. Reapplying
+        # text_size here against whatever width is currently known
+        # removes the dependency on that binding having already fired
+        # with a valid value by the time text changes.
+        if self.width:
+            self.label.text_size = (self.width - dp(20), None)
 
 
 def field_row(label_text, widget, height=dp(40)):

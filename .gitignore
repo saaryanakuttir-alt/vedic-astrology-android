@@ -4,3 +4,8 @@ bin/
 __pycache__/
 *.pyc
 .venv/
+
+# adb screenshot / UI-dump artifacts from manual device/emulator testing
+# sessions (see README_ANDROID.md) - not build inputs, don't belong in the repo.
+*.png
+ui.xml
