@@ -154,6 +154,25 @@ class LongText(ScrollView):
         # with a valid value by the time text changes.
         if self.width:
             self.label.text_size = (self.width - dp(20), None)
+        # STILL blank on-device even with the above (re-confirmed via a
+        # fresh emulator run after that fix shipped) - yet a from-scratch
+        # desktop Kivy repro of this exact sequence (real chart, real
+        # tab navigation) shows the label's own Python-level state
+        # (text, text_size, computed height, texture_size) all correct
+        # the moment the tab becomes visible. That points to the same
+        # class of Android-specific GL/texture-update quirk found and
+        # fixed for the Chart tab's label ghosting (also never
+        # reproduced on desktop) rather than a data or property-value
+        # bug - the values are right, the GPU-side texture just isn't
+        # ending up rendered. texture_update() forces Kivy to rebuild
+        # the label's texture SYNCHRONOUSLY right here instead of via
+        # its own automatic post-property-change scheduling (which is
+        # the one thing this code can't control and the one thing that
+        # differs from the desktop repro), and the height is then synced
+        # from that freshly rebuilt texture directly rather than waiting
+        # on the texture_size-bound callback below to fire on its own.
+        self.label.texture_update()
+        self.label.height = max(dp(28), self.label.texture_size[1] + dp(20))
 
 
 def field_row(label_text, widget, height=dp(40)):
