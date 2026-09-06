@@ -28,8 +28,10 @@ USAGE:
 import json
 import os
 
+import datetime as _dt
+
 import chara_karaka
-from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD
+from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
 from yogas import detect_all_yogas
 
 _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]
@@ -296,6 +298,154 @@ def _karaka_snapshot(karakas, abbr, planets_reading):
     return {**entry, **planet_snap}
 
 
+# Ketu is the classical significator of the past-life imprint — the domain
+# whose skills/tendencies were already heavily developed before this birth.
+# Reading Ketu's HOUSE as "the arena the past life centered on" is a
+# standard traditional interpretation; the phrasings below describe the
+# symbolic ROLE/arena each house points to, never a literal identity claim.
+_KETU_HOUSE_PAST_ARENA = {
+    1: "a life turned intensely inward on the self, the body, or a strongly individual identity — self-reliance developed to the point of over-identification with 'I' and 'my own way'",
+    2: "a life organized around family, lineage, accumulated wealth, and the spoken word — resources and belonging mastered, perhaps clung to",
+    3: "a hands-on life of courage, skill, and effort — a craftsperson, communicator, sibling-among-many, or someone who lived by their own initiative and daring",
+    4: "a life rooted in home, land, mother, and emotional belonging — deeply domestic, tied to a place, property, or the inner emotional world",
+    5: "a creative, devotional, or scholarly life — children, teaching, artistry, mantra, or speculative intelligence were the center of gravity",
+    6: "a life of service, discipline, conflict, or healing — a soldier, healer, servant, or someone defined by daily toil and the overcoming of obstacles",
+    7: "a life centered on others — partnership, trade, diplomacy, or public dealings — identity built through relationship and the marketplace",
+    8: "a life marked by the hidden, the transformative, and the sudden — occult knowledge, research, crises, inheritance, or a preoccupation with what lies beneath the surface",
+    9: "a philosophical, religious, or wandering life — a teacher, priest, pilgrim, or seeker of higher meaning, law, and distant horizons",
+    10: "a life of authority, duty, and public standing — governance, command, career, or a strong preoccupation with status and worldly achievement",
+    11: "a life of gains, networks, and community — commerce, alliances, elder siblings, and the pursuit of ambitions through the collective",
+    12: "a secluded, foreign, or otherworldly life — monastery, exile, distant lands, imagination, or a withdrawal from the visible world toward the inner or the beyond",
+}
+
+# Broad temperament flavor of the past-life imprint, by the ELEMENT of the
+# sign Ketu occupies — a coarse classical Tattva grouping, not a precise claim.
+_ELEMENT_PAST_NATURE = {
+    "Fire": "with a zealous, assertive, leadership-driven temperament (fire signs)",
+    "Earth": "with a practical, material, endurance-driven temperament (earth signs)",
+    "Air": "with an intellectual, social, communicative temperament (air signs)",
+    "Water": "with an emotional, intuitive, devotional temperament (water signs)",
+}
+
+_SIGN_ELEMENT = {
+    "Aries": "Fire", "Leo": "Fire", "Sagittarius": "Fire",
+    "Taurus": "Earth", "Virgo": "Earth", "Capricorn": "Earth",
+    "Gemini": "Air", "Libra": "Air", "Aquarius": "Air",
+    "Cancer": "Water", "Scorpio": "Water", "Pisces": "Water",
+}
+
+
+def _past_life_identity(ketu):
+    """From Ketu's house (the arena the past life centered on) and the
+    element of Ketu's sign (its temperament), sketch WHAT the native may
+    have been — a symbolic arena + temperament, never a literal identity."""
+    arena = _KETU_HOUSE_PAST_ARENA.get(ketu["house"], "an arena not cleanly captured by a single house theme")
+    element = _SIGN_ELEMENT.get(ketu["sign"], None)
+    nature = _ELEMENT_PAST_NATURE.get(element, "") if element else ""
+    summary = (
+        f"With Ketu in {ketu['sign']} (house {ketu['house']}, {ketu['nakshatra']} nakshatra), the "
+        f"strongest past-life imprint points to {arena}"
+        + (f", {nature}" if nature else "")
+        + "."
+    )
+    detail = (
+        "Classically, Ketu marks what the soul had already 'finished' — a mastery so complete it "
+        "was carried in as instinct rather than learned again. Wherever Ketu sits is therefore "
+        "read as the life-arena that was over-developed to the point of diminishing returns: "
+        "familiar, even effortless, but no longer where growth lies. That is precisely why this "
+        "life pulls in the opposite direction (see the main karmic goal below), toward the house "
+        "and sign Rahu occupies."
+    )
+    return {"house": ketu["house"], "sign": ketu["sign"], "summary": summary, "detail": detail}
+
+
+def _karmic_actions(ketu, saturn, purva_punya):
+    """What past actions plausibly led here: Ketu's over-developed arena (the
+    comfort/attachment that must now be released), Saturn as the karma-karaka
+    (debts and consequences being worked off), and the 5th house / Purva
+    Punya (the store of past merit carried forward)."""
+    bits = [
+        f"The over-reliance shown by Ketu in house {ketu['house']} ({ketu['sign']}) is read as the "
+        f"past-life pattern most in need of release now — the very competence that once served the "
+        f"soul became a groove too deep, a comfort clung to past its usefulness."
+    ]
+    if saturn.get("in_house_effects") or saturn.get("in_sign_effects"):
+        bits.append(
+            f"Saturn — the karaka of karma itself — sits in {saturn['sign']} (house {saturn['house']}), "
+            f"marking where accumulated debts and consequences of past conduct are being steadily "
+            f"worked off through responsibility and delay in this life: "
+            f"{saturn.get('in_house_effects') or saturn.get('in_sign_effects')}"
+        )
+    if purva_punya.get("summary"):
+        bits.append(
+            f"The 5th house — Purva Punya, the storehouse of merit EARNED by good past-life action — "
+            f"is ruled by {purva_punya['lord']} (in {purva_punya['lord_sign']}, placed in house "
+            f"{purva_punya['placed_in_house']}), describing the credit balance carried forward: "
+            f"{purva_punya.get('effects') or purva_punya['summary']}"
+        )
+    return " ".join(bits)
+
+
+# Rahu's house is read as the unfamiliar territory this life's karmic
+# growth reaches toward — the mirror image of _KETU_HOUSE_PAST_ARENA above
+# (same 12 houses, opposite pole: what is being BUILT, not what was already
+# mastered). Phrased as a goal/direction rather than a past-tense identity.
+_RAHU_HOUSE_GROWTH_GOAL = {
+    1: "building a confident, self-directed identity — learning to stand on one's own initiative rather than leaning on old, over-familiar support",
+    2: "developing a stable relationship with resources, family, and one's own voice — learning to value and articulate what one has rather than taking it for granted",
+    3: "growing into courage, self-effort, and communication — reaching for skills and initiative that must be earned firsthand, not inherited",
+    4: "cultivating genuine inner and domestic security — building a home, emotional foundation, or sense of belonging that had to be consciously created rather than assumed",
+    5: "developing creative, intellectual, or devotional expression — reaching toward legacy, children, or original ideas rather than simply repeating what already came easily",
+    6: "mastering discipline, service, and the resolution of conflict — learning to face obstacles directly and build competence through daily effort",
+    7: "learning genuine partnership and reciprocity — reaching outward into relationship and negotiation rather than staying self-contained",
+    8: "engaging transformation, shared resources, and the hidden directly — learning to sit with crisis, depth, and change instead of avoiding it",
+    9: "reaching for higher meaning, belief, and far horizons — building a personal philosophy or sense of purpose rather than inheriting one unexamined",
+    10: "stepping into public responsibility, career, and authority — building a reputation and standing earned through visible effort, not granted by birthright",
+    11: "growing through community, ambition, and long-term gain — learning to work toward goals through networks and collective effort rather than solitary comfort",
+    12: "developing surrender, imagination, and release — reaching toward the unseen, the spiritual, or the foreign, rather than clinging to the visible and familiar",
+}
+
+
+def _karmic_goal_statement(rahu, atmakaraka, dharma):
+    """Synthesize the ONE central karmic goal of THIS life. Rahu marks the
+    unfamiliar direction the soul is pulled to grow toward (opposite Ketu's
+    over-developed past); the Atmakaraka is the soul's own core focus; the
+    9th house (Dharma) frames higher purpose.
+
+    Returns a 2-4 sentence statement naming the main karmic goal and how
+    Rahu's direction and the Atmakaraka's nature combine to define it."""
+    goal_arena = _RAHU_HOUSE_GROWTH_GOAL.get(
+        rahu["house"], "an arena not cleanly captured by a single house theme"
+    )
+    sentences = [
+        f"This life's main karmic goal centers on {goal_arena} — the territory Rahu occupies in "
+        f"{rahu['sign']} (house {rahu['house']}, {rahu['nakshatra']} nakshatra), read as the "
+        f"direction the soul is here to stretch toward, however unfamiliar or effortful it may "
+        f"feel at first."
+    ]
+    if rahu.get("in_house_effects") or rahu.get("in_sign_effects"):
+        sentences.append(
+            "Concretely, that stretch plays out as: "
+            + (rahu.get("in_house_effects") or rahu.get("in_sign_effects"))
+        )
+    sentences.append(
+        f"This growth is carried out through the lens of the Atmakaraka, {atmakaraka['planet']} "
+        f"in {atmakaraka['sign']} (house {atmakaraka['house']}) — the soul's central "
+        f"quality — meaning the goal is not simply to arrive in Rahu's territory, but to bring "
+        f"{atmakaraka['planet']}'s own nature into it: "
+        + (atmakaraka.get("in_sign_effects") or f"the qualities {atmakaraka['sign']} classically signifies")
+        + "."
+    )
+    if dharma.get("summary"):
+        sentences.append(
+            f"The 9th house (Dharma) frames why this matters beyond the individual: ruled by "
+            f"{dharma['lord']} in {dharma['lord_sign']}, placed in house {dharma['placed_in_house']}, "
+            f"it points to {dharma.get('effects') or dharma['summary']} — the larger sense of "
+            f"purpose this life's karmic stretch is ultimately in service of."
+        )
+    return " ".join(sentences)
+
+
 def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     ketu = _significator_snapshot("Ketu", planets_reading)
     rahu = _significator_snapshot("Rahu", planets_reading)
@@ -441,6 +591,25 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
             "Compatibility tab's Karmic Connection sections cover.)"
         )
 
+    # --- Past-life identity, the actions that led here, and this life's
+    #     main karmic goal (the three things the user specifically asked to
+    #     see spelled out) ---
+    past_life = _past_life_identity(ketu)
+    karmic_actions = _karmic_actions(ketu, saturn, purva_punya)
+    main_karmic_goal = _karmic_goal_statement(rahu, atmakaraka, dharma)
+
+    paragraphs.append(
+        "--- What you may have been (past-life imprint) ---\n"
+        + past_life["summary"] + " " + past_life["detail"]
+    )
+    paragraphs.append(
+        "--- What led here (the actions carried forward) ---\n" + karmic_actions
+    )
+    if main_karmic_goal:
+        paragraphs.append(
+            "--- Your main karmic goal this life ---\n" + main_karmic_goal
+        )
+
     # --- Closing synthesis ---
     closing = (
         f"Read together, these significators sketch one coherent traditional narrative: a soul "
@@ -481,6 +650,9 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
         "purva_punya_house_5": purva_punya,
         "dharma_house_9": dharma,
         "moksha_house_12": moksha,
+        "past_life_identity": past_life,
+        "karmic_actions": karmic_actions,
+        "main_karmic_goal": main_karmic_goal,
         "soul_narrative": soul_narrative,
         "synthesis": short_synthesis,
         "caveat": _KARMIC_CAVEAT,
@@ -524,6 +696,190 @@ def _planet_text(planets_reading, planet, prefer="in_house"):
     if not entry:
         return None
     return f"{planet} in {r['sign']} (house {r['house']}): {entry.get('effects') or entry.get('summary')}"
+
+
+# ---------------------------------------------------------------------------
+# Longevity / lifespan (Ayurdaya + Maraka) — the most sensitive section in
+# the whole app. Classical Vedic astrology DOES have longevity techniques,
+# but every serious text is emphatic that (a) they yield a BAND (Alpayu /
+# Madhyayu / Purnayu), not a precise date, (b) the three main calculation
+# schemes (Pindayu, Nisargayu, Amsayu) routinely disagree, and (c) longevity
+# is the single hardest thing to judge and should never be stated as a
+# certainty. What follows is therefore a deliberately TRANSPARENT, simplified
+# indication built from factors this project already computes — it is NOT a
+# medical opinion, NOT a certainty, and NOT a substitute for a doctor or a
+# qualified astrologer. The single "most likely age" figure is a midpoint
+# estimate the user explicitly asked to see, wrapped in that framing.
+_LONGEVITY_CAVEAT = (
+    "IMPORTANT: This is a traditional, symbolic longevity indication, not a medical assessment "
+    "and not a certainty. Classical astrology deliberately gives a lifespan BAND rather than an "
+    "exact date, its three main longevity methods routinely disagree, and every serious text "
+    "warns that longevity is the hardest judgment in the entire subject. The single 'most likely "
+    "age' below is only the midpoint of the indicated band, shown because it was asked for — it "
+    "is NOT a prediction of when anyone will actually die. If this raises real worry, or for any "
+    "health concern, please speak with a doctor. Read everything here as reflection, nothing more."
+)
+
+# Ayurdaya bands and the age RANGE this app shows for each. (Balarishta /
+# infant-mortality bands are deliberately omitted — they do not apply to
+# anyone old enough to be reading their own chart.)
+_LONGEVITY_BANDS = {
+    "Alpayu": (32, 55, "short span"),
+    "Madhyayu": (55, 78, "middle span"),
+    "Purnayu": (78, 100, "full span"),
+}
+
+# Classical body/ailment karaka themes per planet — used ONLY to describe the
+# symbolic "area" a maraka planet points at, never as a diagnosis.
+_PLANET_HEALTH_THEME = {
+    "Sun": "heart, bones, general vitality, and the eyes",
+    "Moon": "the mind and emotions, blood, bodily fluids, and the chest/lungs",
+    "Mars": "blood, muscles, inflammation, accidents, wounds, and surgical events",
+    "Mercury": "the nervous system, skin, and speech",
+    "Jupiter": "the liver, weight/metabolism, and sugar regulation",
+    "Venus": "the reproductive and urinary systems and the kidneys",
+    "Saturn": "chronic and degenerative conditions, the joints, bones, and slow-developing ailments",
+    "Rahu": "hard-to-diagnose, toxic, or unusual conditions",
+    "Ketu": "sudden, undiagnosed, or accident-related conditions",
+}
+
+_MALEFICS = {"Sun", "Mars", "Saturn", "Rahu", "Ketu"}
+_BENEFICS = {"Jupiter", "Venus", "Mercury", "Moon"}
+
+
+def _age_at(dt_value, birth_utc):
+    """Age in years at a timeline datetime, relative to birth (both UTC)."""
+    if isinstance(dt_value, str):
+        dt_value = _dt.datetime.fromisoformat(dt_value)
+    # Normalize both to naive for subtraction (timeline datetimes are UTC).
+    a = dt_value.replace(tzinfo=None) if dt_value.tzinfo else dt_value
+    b = birth_utc.replace(tzinfo=None) if birth_utc.tzinfo else birth_utc
+    return (a - b).days / 365.25
+
+
+def _build_longevity(chart, planets_reading, house_lords, dasha):
+    birth_utc = _dt.datetime.fromisoformat(chart["resolved_datetime"]["utc"])
+    planets = chart["planets"]
+
+    # --- Longevity strength score (transparent, simplified) ---
+    # Strong 1st lord (vitality) and 8th lord (the house OF longevity), a
+    # dignified Saturn (ayushkaraka), and benefic vs malefic occupation of
+    # the 1st/8th are the factors that most consistently push the band up or
+    # down across sources. This is a heuristic, not a full Pindayu calc.
+    def dignity_points(lord, sign):
+        d = get_dignity(lord, sign)
+        if d in ("exalted", "moolatrikona", "own"):
+            return 2
+        if d in ("debilitated", "great enemy", "enemy"):
+            return -1
+        return 1  # friend / neutral
+
+    first = house_lords[1]
+    eighth = house_lords[8]
+    score = 0
+    score += dignity_points(first["lord"], first["lord_sign"])
+    score += dignity_points(eighth["lord"], eighth["lord_sign"])
+    if "Saturn" in planets:
+        score += 1 if get_dignity("Saturn", planets["Saturn"]["sign"]) in ("exalted", "moolatrikona", "own", "friend", "neutral") else -1
+    # 1st lord tucked away in a dusthana (6/8/12) weakens vitality.
+    if first["placed_in_house"] in (6, 8, 12):
+        score -= 1
+    # Benefic / malefic occupation of the 1st and 8th houses.
+    for planet, detail in planets.items():
+        if detail["house"] in (1, 8):
+            if planet in _BENEFICS:
+                score += 1
+            elif planet in _MALEFICS:
+                score -= 1
+
+    if score >= 3:
+        band = "Purnayu"
+    elif score >= 0:
+        band = "Madhyayu"
+    else:
+        band = "Alpayu"
+    low, high, band_desc = _LONGEVITY_BANDS[band]
+    # Most-likely age: midpoint of the band, nudged within the band by how
+    # strongly the score sits above/below that band's own entry threshold.
+    midpoint = (low + high) / 2
+    most_likely_age = int(round(max(low, min(high, midpoint))))
+
+    # --- Maraka (killer) significators: lords of the 2nd and 7th houses,
+    #     plus Saturn as a natural maraka/ayushkaraka. ---
+    maraka_lords = []
+    for h in (2, 7):
+        hl = house_lords[h]
+        maraka_lords.append((hl["lord"], f"{h}th-house lord"))
+    maraka_planet_names = {p for p, _ in maraka_lords} | {"Saturn"}
+
+    # --- Maraka dasha periods: Mahadashas ruled by a maraka planet whose
+    #     age-span overlaps or follows the indicated band. These are the
+    #     classically-flagged 'vulnerable' windows. ---
+    vulnerable_periods = []
+    for maha in dasha["timeline"]:
+        if maha["lord"] in maraka_planet_names:
+            start_age = _age_at(maha["start"], birth_utc)
+            end_age = _age_at(maha["end"], birth_utc)
+            # Only windows that reach into or past the band's lower edge.
+            if end_age >= low - 5:
+                role = "natural maraka (Saturn)" if maha["lord"] == "Saturn" else \
+                    next((r for p, r in maraka_lords if p == maha["lord"]), "maraka")
+                vulnerable_periods.append({
+                    "lord": maha["lord"], "role": role,
+                    "start_age": max(0, int(round(start_age))),
+                    "end_age": int(round(end_age)),
+                })
+
+    # --- Possible causes: the health themes of the maraka planets, plus the
+    #     6th (disease) and 8th (manner/chronic) house significations. ---
+    cause_themes = []
+    for planet in sorted(maraka_planet_names):
+        theme = _PLANET_HEALTH_THEME.get(planet)
+        if theme:
+            cause_themes.append(f"{planet} (a maraka here) classically signifies {theme}")
+    sixth = house_lords[6]
+    cause_themes.append(
+        f"the 6th house of illness is ruled by {sixth['lord']} (in {sixth['lord_sign']}), "
+        f"pointing broadly to {_PLANET_HEALTH_THEME.get(sixth['lord'], 'its own significations')}"
+    )
+
+    # --- Assemble the readable text ---
+    parts = []
+    parts.append(
+        f"Indicated longevity band: {band} — the classical '{band_desc}' — which this app maps to "
+        f"roughly age {low}-{high}. Most likely age (midpoint estimate only): about {most_likely_age}."
+    )
+    parts.append(
+        f"This band comes from a simplified strength reading of the 1st house/lord (vitality: "
+        f"{first['lord']} in {first['lord_sign']}), the 8th house/lord (the house of longevity "
+        f"itself: {eighth['lord']} in {eighth['lord_sign']}), Saturn as the ayushkaraka "
+        f"(longevity significator), and the benefic vs. malefic planets occupying the 1st and 8th."
+    )
+    if vulnerable_periods:
+        period_bits = [
+            f"the {vp['lord']} Mahadasha ({vp['role']}), spanning roughly age {vp['start_age']}-{vp['end_age']}"
+            for vp in vulnerable_periods
+        ]
+        parts.append(
+            "Classically-flagged vulnerable periods (Maraka Mahadashas — the 2nd- and 7th-house "
+            "lords and Saturn are the traditional 'markers of transition'): " + "; ".join(period_bits) + "."
+        )
+    parts.append(
+        "Possible symbolic health themes (NOT a diagnosis): " + "; ".join(cause_themes) + "."
+    )
+    parts.append(_LONGEVITY_CAVEAT)
+
+    return {
+        "title": "Longevity & Lifespan (Ayurdaya)",
+        "band": band,
+        "age_low": low,
+        "age_high": high,
+        "most_likely_age": most_likely_age,
+        "strength_score": score,
+        "maraka_planets": sorted(maraka_planet_names),
+        "vulnerable_periods": vulnerable_periods,
+        "text": "\n\n".join(parts),
+    }
 
 
 def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, karakas):
@@ -593,6 +949,9 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
         ),
         "spirituality_and_inner_growth": area("Spirituality & Inner Growth", [9, 12], ["Jupiter", "Ketu"]),
         "travel_and_foreign_connections": area("Travel & Foreign Connections", [3, 9, 12], []),
+        # Longevity is intentionally placed LAST so it reads after the
+        # life-area predictions above, and carries its own strong caveat.
+        "longevity_and_lifespan": _build_longevity(chart, planets_reading, house_lords, dasha),
     }
     predictions["caveat"] = _LIFE_PREDICTIONS_CAVEAT
     return predictions
@@ -616,13 +975,21 @@ def generate_reading(chart):
           "karmic_and_past_life": {"atmakaraka": {...}, "darakaraka": {...}, "putrakaraka": {...},
                                     "ketu": {...}, "rahu": {...}, "saturn": {...},
                                     "purva_punya_house_5": {...}, "dharma_house_9": {...},
-                                    "moksha_house_12": {...}, "soul_narrative": "... (long-form)",
+                                    "moksha_house_12": {...},
+                                    "past_life_identity": {"house", "sign", "summary", "detail"},
+                                    "karmic_actions": "... (past actions that led here)",
+                                    "main_karmic_goal": "... (this life's central karmic goal)",
+                                    "soul_narrative": "... (long-form, includes the three above)",
                                     "synthesis": "... (short)", "caveat": "..."},
           "life_predictions": {"career_and_profession": {...}, "wealth_and_finances": {...},
                                 "marriage_and_relationships": {...}, "health_and_vitality": {...},
                                 "education_and_learning": {...}, "family_and_home": {...},
                                 "children": {...}, "spirituality_and_inner_growth": {...},
-                                "travel_and_foreign_connections": {...}, "caveat": "..."},
+                                "travel_and_foreign_connections": {...},
+                                "longevity_and_lifespan": {"title", "band", "age_low", "age_high",
+                                                            "most_likely_age", "maraka_planets",
+                                                            "vulnerable_periods", "text"},
+                                "caveat": "..."},
           "warnings": [ "..." ]   # any KB ids that couldn't be found
         }
 

@@ -9,6 +9,14 @@ purpose:
    overall relationship synthesis. This is the classically correct use of
    Ashtakoot — it is a marriage-compatibility technique, nothing else.
 
+3. **Karmic dimension, any two family members**: `build_karmic_family_connection()` adds a
+   past-life/karmic-goal layer on top of EITHER relationship above — it reuses each person's
+   own already-computed `karmic_and_past_life` fields (past_life_identity, main_karmic_goal,
+   Rahu/Atmakaraka) rather than inventing a two-chart karmic technique, and reflects on how
+   each person's Rahu-direction growth is the kind of unfamiliar ground the OTHER person can
+   help hold. Included automatically for Self<->Life Partner and for Self<->every generated
+   Child in `build_family_compatibility_report()` below.
+
 2. **Self <-> Child (or any parent <-> child pair)**: `build_parent_child_connection()`
    deliberately does NOT run Ashtakoot Guna Milan on a parent/child pair —
    doing so would misapply a spouse-compatibility system to a relationship
@@ -407,6 +415,77 @@ def _individual_relational_disposition(reading, label):
     return " ".join(bits)
 
 
+_KARMIC_FAMILY_CAVEAT = (
+    "This karmic view is a symbolic, traditional lens — it reads each person's own Ketu "
+    "(past-life imprint), Rahu (this-life growth direction), and Atmakaraka (soul focus), then "
+    "reflects on how the two might support each other. It is NOT a claim about a literal shared "
+    "past life between these two specific people, and NOT a verdict on the relationship."
+)
+
+
+def build_karmic_family_connection(a_reading, a_label, b_reading, b_label):
+    """A karmic-lens layer over any two family members: what past-life
+    imprint each carries, what each one's main goal this life is, and how
+    each can practically support the other toward that goal. Reuses the
+    per-person karmic fields rule_engine already computes (past_life_identity,
+    main_karmic_goal, rahu, atmakaraka) so nothing new is invented here."""
+    ka = a_reading["karmic_and_past_life"]
+    kb = b_reading["karmic_and_past_life"]
+
+    def past_life_line(k, label):
+        pli = k.get("past_life_identity")
+        if pli and pli.get("summary"):
+            return f"{label}: {pli['summary']}"
+        ketu = k.get("ketu", {})
+        return (f"{label}: Ketu in {ketu.get('sign', '?')} (house {ketu.get('house', '?')}) marks "
+                f"the strongest past-life imprint.")
+
+    def goal_line(k, label):
+        goal = k.get("main_karmic_goal")
+        if goal:
+            return f"{label}'s main goal this life: {goal}"
+        rahu = k.get("rahu", {})
+        return (f"{label}'s growth this life pulls toward Rahu in {rahu.get('sign', '?')} "
+                f"(house {rahu.get('house', '?')}) — the unfamiliar direction the soul is here to develop.")
+
+    past_lives = (
+        "Past-life imprints each person carries into this bond:\n"
+        + past_life_line(ka, a_label) + "\n" + past_life_line(kb, b_label)
+    )
+    goals = (
+        "The main goals of this life for each:\n"
+        + goal_line(ka, a_label) + "\n" + goal_line(kb, b_label)
+    )
+
+    # How each can support the other: each person's growth direction (Rahu)
+    # is exactly the ground the OTHER can help hold, since Rahu's territory
+    # is by definition unfamiliar and uncomfortable at first.
+    a_rahu = ka.get("rahu", {})
+    b_rahu = kb.get("rahu", {})
+    support = (
+        "How each can support the other toward these goals:\n"
+        f"{a_label} grows by leaning into the themes of Rahu in {a_rahu.get('sign', '?')} "
+        f"(house {a_rahu.get('house', '?')}) — territory that feels unfamiliar at first, so "
+        f"{b_label} helps most by encouraging {a_label} there rather than letting them retreat to "
+        f"the old, over-comfortable Ketu pattern. "
+        f"Reciprocally, {b_label} grows by leaning into Rahu in {b_rahu.get('sign', '?')} "
+        f"(house {b_rahu.get('house', '?')}), and {a_label} helps most by steadying and "
+        f"encouraging {b_label} in exactly that direction. In practice, each person's natural "
+        f"past-life strengths (their Ketu arena) are often precisely what the other one is still "
+        f"reaching to build (their Rahu direction) — which is what makes family members such "
+        f"effective, if sometimes uncomfortable, mirrors for each other's growth."
+    )
+
+    narrative = past_lives + "\n\n" + goals + "\n\n" + support + "\n\n" + _KARMIC_FAMILY_CAVEAT
+    return {
+        "past_lives": past_lives,
+        "goals": goals,
+        "support": support,
+        "narrative": narrative,
+        "caveat": _KARMIC_FAMILY_CAVEAT,
+    }
+
+
 def build_family_compatibility_report(self_reading, self_chart, partner_reading=None, partner_chart=None,
                                        children=None, self_label="Self", partner_label="Life Partner"):
     """
@@ -459,6 +538,13 @@ def build_family_compatibility_report(self_reading, self_chart, partner_reading=
             f"--- Ashtakoot Guna Milan: {self_label} <-> {partner_label} ---\n"
             f"{ashtakoot_result['methodology_note']}\n\n{koota_lines}\n\n{ashtakoot_result['overall_narrative']}"
         )
+        # Karmic dimension for the couple: past-life imprints, each one's
+        # main goal this life, and how they can support each other toward it.
+        partner_karmic = build_karmic_family_connection(self_reading, self_label, partner_reading, partner_label)
+        sections.append(
+            f"--- Karmic Connection: {self_label} <-> {partner_label} (past lives, goals & mutual support) ---\n"
+            f"{partner_karmic['narrative']}"
+        )
 
     parent_child_results = {}
     for child_label, child_chart, child_reading in children:
@@ -473,6 +559,14 @@ def build_family_compatibility_report(self_reading, self_chart, partner_reading=
         sections.append(
             f"--- Parent-Child Thematic Connection: {self_label} <-> {child_label} ---\n"
             f"{pcc['methodology_note']}\n\n{pcc['narrative']}\n\n{pcc['reflection']}\n\n{pcc['caveat']}"
+        )
+        # Karmic dimension for the parent-child pair too: past-life imprints,
+        # each one's main goal this life, and how they can support each other.
+        child_karmic = build_karmic_family_connection(self_reading, self_label, child_reading, child_label)
+        pcc["karmic_connection"] = child_karmic
+        sections.append(
+            f"--- Karmic Connection: {self_label} <-> {child_label} (past lives, goals & mutual support) ---\n"
+            f"{child_karmic['narrative']}"
         )
 
     sections = [s for s in sections if s]
