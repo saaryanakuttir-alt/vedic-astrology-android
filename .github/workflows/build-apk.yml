@@ -62,6 +62,16 @@ jobs:
 
       - name: Build debug APK with Buildozer
         run: |
+          # This runner has several JDKs pre-installed (8/11/17/21/25), and
+          # its default JAVA_HOME resolves to JDK 11 - too old for the
+          # Gradle version p4a v2024.01.21's generated project template
+          # uses, which fails Gradle's own final APK-assembly step with
+          # "Your current JDK is located in .../temurin-11-jdk-amd64" and
+          # a Gradle-9-incompatibility warning (confirmed failure,
+          # 2026-09-06 run). Installing openjdk-17-jdk above isn't enough
+          # by itself since it doesn't change which JDK is *active* -
+          # point JAVA_HOME at it explicitly.
+          export JAVA_HOME="$JAVA_HOME_17_X64"
           yes | buildozer android debug
 
       - name: Upload APK artifact
