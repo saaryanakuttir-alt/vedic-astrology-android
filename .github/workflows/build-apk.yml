@@ -31,7 +31,16 @@ jobs:
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip \
             autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
             libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          pip install --upgrade buildozer cython==0.29.36
+          # Cython was previously pinned to 0.29.36 (the classic Kivy/Buildozer
+          # advice for older toolchains), but that version predates Python
+          # 3.13's removal of the private _PyLong_AsByteArray() C-API function
+          # Cython 0.29.x's generated C code calls — it fails to compile
+          # against this runner's Python 3.14 host build with "too few
+          # arguments to function call, expected 6, have 5" across many of
+          # Kivy's .pyx-generated files. Kivy 2.3.0 (pinned in
+          # buildozer.spec) added Cython 3.x support, so install a modern
+          # Cython instead, which already carries the Python 3.13+ fix.
+          pip install --upgrade buildozer "cython>=3.0.11"
 
       - name: Build debug APK with Buildozer
         run: |
