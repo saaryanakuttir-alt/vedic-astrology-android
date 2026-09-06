@@ -35,12 +35,18 @@ jobs:
           # advice for older toolchains), but that version predates Python
           # 3.13's removal of the private _PyLong_AsByteArray() C-API function
           # Cython 0.29.x's generated C code calls — it fails to compile
-          # against this runner's Python 3.14 host build with "too few
-          # arguments to function call, expected 6, have 5" across many of
-          # Kivy's .pyx-generated files. Kivy 2.3.0 (pinned in
-          # buildozer.spec) added Cython 3.x support, so install a modern
-          # Cython instead, which already carries the Python 3.13+ fix.
-          pip install --upgrade buildozer "cython>=3.0.11"
+          # against a Python 3.14 host build with "too few arguments to
+          # function call, expected 6, have 5" across many of Kivy's
+          # .pyx-generated files. Install a modern Cython instead, which
+          # already carries the Python 3.13+ fix.
+          #
+          # buildozer is pinned to 1.5.0 (Jan 2023) to match the pinned
+          # python-for-android release in buildozer.spec's p4a.branch
+          # (v2024.01.21, see that file's comment for the full story) -
+          # buildozer's own most recent release (1.6.0/2.7, May 2026) was
+          # built alongside p4a's new Python-3.14-targeting rewrite and
+          # isn't tested against the older p4a we're deliberately using here.
+          pip install "buildozer==1.5.0" "cython>=3.0.11"
 
       - name: Build debug APK with Buildozer
         run: |

@@ -32,6 +32,17 @@ requirements = python3,kivy==2.3.1,pyswisseph,tzdata
 
 p4a.local_recipes = ./recipes
 
+# Pin python-for-android to its last pre-rewrite release (Jan 2024). Buildozer
+# git-clones p4a fresh on every build (not a pip dependency) and defaults to
+# "master" - which had no releases between 2024.01.21 and 2026.05.09, then
+# jumped straight to targeting Python 3.14 as the on-device CPython. That
+# jump broke this build twice: Python 3.13 removed a private C-API function
+# Kivy's Cython-generated code needs (fixed by bumping kivy to 2.3.1 above),
+# and separately pip's own venv bootstrap breaks under 3.14 with an
+# unrelated ImportError. v2024.01.21 predates Python 3.13/3.14 entirely and
+# targets a mature, widely-used CPython version, sidestepping both at once.
+p4a.branch = v2024.01.21
+
 orientation = portrait
 fullscreen = 0
 
