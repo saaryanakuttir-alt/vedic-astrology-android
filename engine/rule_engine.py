@@ -803,13 +803,21 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
     # strongly the score sits above/below that band's own entry threshold.
     midpoint = (low + high) / 2
     most_likely_age = int(round(max(low, min(high, midpoint))))
+    # Approximate calendar years, for readers who want a year rather than
+    # an age (birth year + age). Same heavy caveat applies - these are
+    # midpoint/band estimates, never a prediction of an actual date.
+    birth_year = birth_utc.year
+    most_likely_year = birth_year + most_likely_age
+    year_low = birth_year + low
+    year_high = birth_year + high
 
     # --- Maraka (killer) significators: lords of the 2nd and 7th houses,
     #     plus Saturn as a natural maraka/ayushkaraka. ---
     maraka_lords = []
     for h in (2, 7):
         hl = house_lords[h]
-        maraka_lords.append((hl["lord"], f"{h}th-house lord"))
+        ordinal = {2: "2nd", 7: "7th"}[h]
+        maraka_lords.append((hl["lord"], f"{ordinal}-house lord"))
     maraka_planet_names = {p for p, _ in maraka_lords} | {"Saturn"}
 
     # --- Maraka dasha periods: Mahadashas ruled by a maraka planet whose
@@ -824,10 +832,14 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
             if end_age >= low - 5:
                 role = "natural maraka (Saturn)" if maha["lord"] == "Saturn" else \
                     next((r for p, r in maraka_lords if p == maha["lord"]), "maraka")
+                sa = max(0, int(round(start_age)))
+                ea = int(round(end_age))
                 vulnerable_periods.append({
                     "lord": maha["lord"], "role": role,
-                    "start_age": max(0, int(round(start_age))),
-                    "end_age": int(round(end_age)),
+                    "start_age": sa,
+                    "end_age": ea,
+                    "start_year": birth_year + sa,
+                    "end_year": birth_year + ea,
                 })
 
     # --- Possible causes: the health themes of the maraka planets, plus the
@@ -847,7 +859,8 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
     parts = []
     parts.append(
         f"Indicated longevity band: {band} — the classical '{band_desc}' — which this app maps to "
-        f"roughly age {low}-{high}. Most likely age (midpoint estimate only): about {most_likely_age}."
+        f"roughly age {low}-{high} (around the years {year_low}-{year_high}). Most likely age "
+        f"(midpoint estimate only): about {most_likely_age}, i.e. around the year {most_likely_year}."
     )
     parts.append(
         f"This band comes from a simplified strength reading of the 1st house/lord (vitality: "
@@ -857,7 +870,8 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
     )
     if vulnerable_periods:
         period_bits = [
-            f"the {vp['lord']} Mahadasha ({vp['role']}), spanning roughly age {vp['start_age']}-{vp['end_age']}"
+            f"the {vp['lord']} Mahadasha ({vp['role']}), spanning roughly age {vp['start_age']}-{vp['end_age']} "
+            f"(years {vp['start_year']}-{vp['end_year']})"
             for vp in vulnerable_periods
         ]
         parts.append(
@@ -875,6 +889,10 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
         "age_low": low,
         "age_high": high,
         "most_likely_age": most_likely_age,
+        "most_likely_year": most_likely_year,
+        "year_low": year_low,
+        "year_high": year_high,
+        "cause_themes": cause_themes,
         "strength_score": score,
         "maraka_planets": sorted(maraka_planet_names),
         "vulnerable_periods": vulnerable_periods,
