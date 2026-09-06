@@ -12,21 +12,57 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
+from kivy.graphics import Color, Rectangle
 from kivy.metrics import dp
+
+# Border color shows through the 1dp gaps GridLayout leaves between cells
+# (see _make_cell_background below) - a plain medium gray reads as a grid
+# line against either the header or data cell fill color.
+_BORDER_COLOR = (0.4, 0.4, 0.45, 1)
+_HEADER_BG = (0.16, 0.16, 0.2, 1)
+_DATA_BG = (0.09, 0.09, 0.12, 1)
 
 
 class SimpleTable(ScrollView):
     """SimpleTable(columns=["A","B"], col_hints=[0.3,0.7]) then
-    .set_rows([("a1","b1"), ("a2","b2"), ...])."""
+    .set_rows([("a1","b1"), ("a2","b2"), ...]). Pass font_size to shrink
+    text for tables with many columns (e.g. Ashtakvarga's 13) - the
+    default suits most of this app's tables (up to ~9 columns)."""
 
-    def __init__(self, columns, col_hints=None, **kwargs):
+    def __init__(self, columns, col_hints=None, font_size="13sp", **kwargs):
         super().__init__(**kwargs)
         self.columns = columns
         self.col_hints = col_hints or [1.0 / len(columns)] * len(columns)
+        self.font_size = font_size
+        # spacing=dp(1) is the actual GAP between cells - it's what lets
+        # the grid's own border-colored background (below) show through
+        # as thin lines around every cell, so it must stay non-zero.
         self.grid = GridLayout(cols=len(columns), size_hint_y=None, spacing=dp(1))
         self.grid.bind(minimum_height=self.grid.setter("height"))
+        with self.grid.canvas.before:
+            Color(*_BORDER_COLOR)
+            self._grid_bg = Rectangle(pos=self.grid.pos, size=self.grid.size)
+        self.grid.bind(pos=self._update_grid_bg, size=self._update_grid_bg)
         self.add_widget(self.grid)
         self._add_row(self.columns, header=True)
+
+    def _update_grid_bg(self, instance, value):
+        self._grid_bg.pos = instance.pos
+        self._grid_bg.size = instance.size
+
+    def _make_cell_background(self, label, color):
+        # A filled Rectangle tracking the label's own pos/size, INSET by
+        # nothing (the visible border comes from the dp(1) gap between
+        # sibling cells showing the grid's own background behind them,
+        # not from insetting this rectangle) - each cell just needs to be
+        # opaque so it doesn't show the tab's own background through it.
+        with label.canvas.before:
+            Color(*color)
+            rect = Rectangle(pos=label.pos, size=label.size)
+        label.bind(
+            pos=lambda inst, val: setattr(rect, "pos", val),
+            size=lambda inst, val: setattr(rect, "size", val),
+        )
 
     def _add_row(self, values, header=False):
         for value, hint in zip(values, self.col_hints):
@@ -44,9 +80,11 @@ class SimpleTable(ScrollView):
                 text=str(value), size_hint_x=hint, size_hint_y=None,
                 height=dp(36) if header else dp(28), text_size=(None, None),
                 halign="left", valign="middle", bold=header,
+                font_size=self.font_size,
                 color=(1, 0.85, 0.3, 1) if header else (1, 1, 1, 1),
                 shorten=False,
             )
+            self._make_cell_background(lbl, _HEADER_BG if header else _DATA_BG)
             lbl.bind(texture_size=self._resize_label, width=self._update_text_size)
             self.grid.add_widget(lbl)
 

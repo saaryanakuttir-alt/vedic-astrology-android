@@ -19,11 +19,16 @@ from panchanga import SIGNS
 class _BaseTableTab(BoxLayout):
     columns = []
     col_hints = None
+    # Most tables (up to ~6 columns) read fine at SimpleTable's default
+    # font_size - subclasses with many columns or long cell text (Planets,
+    # Ashtakvarga) override this to fit more content without wrapping as
+    # aggressively, confirmed via emulator screenshot.
+    font_size = "13sp"
 
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
-        self.table = SimpleTable(self.columns, self.col_hints)
+        self.table = SimpleTable(self.columns, self.col_hints, font_size=self.font_size)
         self.add_widget(self.table)
 
     def refresh(self):
@@ -110,6 +115,10 @@ class KundliDetailsTab(_BaseTableTab):
 class PlanetsTab(_BaseTableTab):
     columns = ["Planet", "Sign", "Deg", "Rx", "House", "Chalit Hs", "Nakshatra", "Pada", "Dignity"]
     col_hints = [0.13, 0.13, 0.09, 0.06, 0.09, 0.11, 0.17, 0.07, 0.15]
+    # 9 columns including long values (nakshatra names, the "undetermined
+    # (classical texts disagree)" dignity string) wrap heavily at the
+    # default size - confirmed via emulator screenshot.
+    font_size = "12sp"
 
     def refresh(self):
         from astrology_tables import get_dignity
@@ -204,6 +213,10 @@ class DashaTab(_BaseTableTab):
 class AshtakvargaTab(_BaseTableTab):
     columns = ["Planet"] + [s[:3] for s in SIGNS]
     col_hints = [0.16] + [0.07] * 12
+    # 13 columns total (Planet + all 12 signs) - each sign column is only
+    # ~7% of the table's width, so the default font_size clips/wraps even
+    # the single- or double-digit point values it holds.
+    font_size = "11sp"
 
     def refresh(self):
         import ashtakvarga as av
