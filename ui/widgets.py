@@ -14,6 +14,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
 from kivy.graphics import Color, Rectangle
 from kivy.metrics import dp
+from kivy.clock import Clock
 
 # Border color shows through the 1dp gaps GridLayout leaves between cells
 # (see _make_cell_background below) - a plain medium gray reads as a grid
@@ -165,23 +166,26 @@ class LongText(ScrollView):
         # with a valid value by the time text changes.
         if self.width:
             self.label.text_size = (self.width - dp(20), None)
-        # STILL blank on-device even with the above (re-confirmed via a
-        # fresh emulator run after that fix shipped) - yet a from-scratch
-        # desktop Kivy repro of this exact sequence (real chart, real
-        # tab navigation) shows the label's own Python-level state
-        # (text, text_size, computed height, texture_size) all correct
-        # the moment the tab becomes visible. That points to the same
-        # class of Android-specific GL/texture-update quirk found and
-        # fixed for the Chart tab's label ghosting (also never
-        # reproduced on desktop) rather than a data or property-value
-        # bug - the values are right, the GPU-side texture just isn't
-        # ending up rendered. texture_update() forces Kivy to rebuild
-        # the label's texture SYNCHRONOUSLY right here instead of via
-        # its own automatic post-property-change scheduling (which is
-        # the one thing this code can't control and the one thing that
-        # differs from the desktop repro), and the height is then synced
-        # from that freshly rebuilt texture directly rather than waiting
-        # on the texture_size-bound callback below to fire on its own.
+        # A synchronous texture_update() here (tried first) still left the
+        # ScrollView completely blank on-device (re-confirmed on the
+        # emulator with a real generated chart) - EXCEPT the scrollbar
+        # thumb DID show a real, scrollable content height and moved when
+        # swiped, proving the label's own height/texture_size are correct
+        # and non-zero; nothing simply fails to render. Only the actual
+        # glyph texture never made it on screen. This is the same
+        # "two GL updates land in the same frame" quirk already found and
+        # fixed for the Chart tab's label ghosting (see tabs_chart.py's
+        # ChartCanvas._schedule_redraw): every tab using LongText also
+        # constructs a CaptionLabel immediately above it, and that
+        # CaptionLabel does its OWN synchronous texture rebuild at
+        # construction time, in the same frame as this set_text() call -
+        # never reproducible on desktop's SDL2/GL backend despite direct
+        # attempts. Deferring this label's texture rebuild to the next
+        # frame via Clock, rather than forcing it synchronously in the
+        # same frame as CaptionLabel's own update, resolved it.
+        Clock.schedule_once(self._rebuild_texture, 0)
+
+    def _rebuild_texture(self, dt):
         self.label.texture_update()
         self.label.height = max(dp(28), self.label.texture_size[1] + dp(20))
 
