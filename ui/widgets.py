@@ -47,13 +47,24 @@ class SimpleTable(ScrollView):
                 color=(1, 0.85, 0.3, 1) if header else (1, 1, 1, 1),
                 shorten=False,
             )
-            lbl.bind(texture_size=self._resize_label)
-            lbl.text_size = (None, None)
+            lbl.bind(texture_size=self._resize_label, width=self._update_text_size)
             self.grid.add_widget(lbl)
+
+    def _update_text_size(self, label, width):
+        # Must be a live binding, not a one-time read of label.width inside
+        # _resize_label: GridLayout assigns each child's real (column-
+        # fraction) width on its own later layout pass, not synchronously
+        # when the Label is first constructed and parented. Reading
+        # label.width once at that point sees a stale/default width (not
+        # yet the real column width), constraining text_size to it and
+        # wrapping the text after almost every character - confirmed via
+        # screenshot on the emulator (every table column rendered as a
+        # single letter per line). Binding width itself re-applies
+        # text_size whenever GridLayout later assigns the real width.
+        label.text_size = (width, None)
 
     def _resize_label(self, label, texture_size):
         label.height = max(dp(28), texture_size[1] + dp(10))
-        label.text_size = (label.width if label.width else None, None)
 
     def clear_rows(self):
         self.grid.clear_widgets()
