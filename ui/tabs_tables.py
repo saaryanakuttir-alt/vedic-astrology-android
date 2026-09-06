@@ -12,7 +12,7 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.label import Label
 from kivy.metrics import dp
 
-from ui.widgets import SimpleTable
+from ui.widgets import SimpleTable, CaptionLabel
 from panchanga import SIGNS
 
 
@@ -24,10 +24,17 @@ class _BaseTableTab(BoxLayout):
     # Ashtakvarga) override this to fit more content without wrapping as
     # aggressively, confirmed via emulator screenshot.
     font_size = "13sp"
+    # A one-to-three-line plain-English explainer shown above the table -
+    # every subclass below sets this, since every one of these tabs names
+    # at least one classical Sanskrit/astrology term (Chalit, Ashtakvarga,
+    # Nakshatra, Yoga, Dasha...) with no explanation otherwise.
+    caption = ""
 
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
+        if self.caption:
+            self.add_widget(CaptionLabel(self.caption))
         self.table = SimpleTable(self.columns, self.col_hints, font_size=self.font_size)
         self.add_widget(self.table)
 
@@ -38,6 +45,10 @@ class _BaseTableTab(BoxLayout):
 class KundliDetailsTab(_BaseTableTab):
     columns = ["Field", "Value"]
     col_hints = [0.4, 0.6]
+    caption = (
+        "A summary of your birth chart's key facts, plus traditional classifications "
+        "(the 'Avkahada Chakra') used for things like matching horoscopes."
+    )
 
     def refresh(self):
         chart = self.store.current["chart"]
@@ -119,6 +130,13 @@ class PlanetsTab(_BaseTableTab):
     # (classical texts disagree)" dignity string) wrap heavily at the
     # default size - confirmed via emulator screenshot.
     font_size = "12sp"
+    caption = (
+        "Where each planet sat in the sky at your birth. Deg = position within its "
+        "sign (0-30). Rx = retrograde (appears to move backward). House = the life-area "
+        "it falls in; Chalit Hs is a more precise recalculation of that. Nakshatra/Pada = "
+        "the lunar 'constellation' and its quarter-division. Dignity = how strong or "
+        "comfortable the planet is in that sign."
+    )
 
     def refresh(self):
         from astrology_tables import get_dignity
@@ -141,6 +159,11 @@ class PlanetsTab(_BaseTableTab):
 class HousesTab(_BaseTableTab):
     columns = ["House", "Sign", "Lord", "Lord placed in house", "Relation"]
     col_hints = [0.12, 0.2, 0.15, 0.25, 0.28]
+    caption = (
+        "The 12 houses represent 12 areas of life (career, home, relationships...). "
+        "'Lord' is the planet that rules each house's sign; where that planet itself "
+        "sits shapes how that life-area actually plays out for you."
+    )
 
     def refresh(self):
         reading = self.store.current["reading"]
@@ -159,6 +182,10 @@ class YogasTab(BoxLayout):
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
+        self.add_widget(CaptionLabel(
+            "'Yogas' are specific planetary combinations that classical texts link to "
+            "particular life themes (e.g. leadership, wealth, obstacles) when present."
+        ))
         toggle_row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(40))
         self.only_present_check = CheckBox(active=True)
         self.only_present_check.bind(active=lambda *_: self.refresh())
@@ -185,6 +212,11 @@ class YogasTab(BoxLayout):
 class DashaTab(_BaseTableTab):
     columns = ["Level", "Lord", "Start", "End", "At Birth?"]
     col_hints = [0.14, 0.16, 0.22, 0.22, 0.26]
+    caption = (
+        "'Dasha' is a timeline system: your life is divided into periods ruled by "
+        "each planet in turn ('Maha' = main period, 'Antar' = a sub-period within it), "
+        "used to time when a planet's themes are most active for you."
+    )
 
     def refresh(self):
         reading = self.store.current["reading"]
@@ -217,6 +249,11 @@ class AshtakvargaTab(_BaseTableTab):
     # ~7% of the table's width, so the default font_size clips/wraps even
     # the single- or double-digit point values it holds.
     font_size = "11sp"
+    caption = (
+        "'Ashtakvarga' scores each zodiac sign (0-8 points) for how supportive it "
+        "tends to be for each planet - higher numbers mean more support. 'Sarva "
+        "(Total)' adds every planet's score together per sign."
+    )
 
     def refresh(self):
         import ashtakvarga as av
@@ -237,6 +274,11 @@ class AshtakvargaTab(_BaseTableTab):
 class ChalitTab(_BaseTableTab):
     columns = ["Bhava", "Begin Sign", "Begin Deg", "Madhya Sign", "Madhya Deg", "Planets"]
     col_hints = [0.08, 0.17, 0.11, 0.17, 0.11, 0.36]
+    caption = (
+        "'Chalit' is a more precise recalculation of your house boundaries (each "
+        "'Bhava' = house). 'Begin' is where the house starts, 'Madhya' is its exact "
+        "midpoint - used to double-check which house a planet near a boundary truly falls in."
+    )
 
     def refresh(self):
         chart = self.store.current["chart"]

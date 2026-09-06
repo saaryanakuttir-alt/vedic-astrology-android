@@ -56,13 +56,24 @@ class SimpleTable(ScrollView):
         # sibling cells showing the grid's own background behind them,
         # not from insetting this rectangle) - each cell just needs to be
         # opaque so it doesn't show the tab's own background through it.
+        # The rect is stashed on the label itself and both pos/size bind
+        # to the SAME method (_sync_cell_bg) rather than two fresh lambda
+        # closures per cell - tables like Dasha can have 100+ rows (450+
+        # cells), and allocating 2 new closures + 2 bind() calls for each
+        # one measurably added up (~150ms for a 450-cell table even on a
+        # desktop GPU; far worse on the emulator's software SwiftShader
+        # renderer, where it contributed to an ANR during rapid tab-
+        # switching). One shared bound method avoids that per-cell
+        # closure-allocation overhead.
         with label.canvas.before:
             Color(*color)
-            rect = Rectangle(pos=label.pos, size=label.size)
-        label.bind(
-            pos=lambda inst, val: setattr(rect, "pos", val),
-            size=lambda inst, val: setattr(rect, "size", val),
-        )
+            label._bg_rect = Rectangle(pos=label.pos, size=label.size)
+        label.bind(pos=self._sync_cell_bg, size=self._sync_cell_bg)
+
+    @staticmethod
+    def _sync_cell_bg(label, value):
+        label._bg_rect.pos = label.pos
+        label._bg_rect.size = label.size
 
     def _add_row(self, values, header=False):
         for value, hint in zip(values, self.col_hints):
@@ -173,6 +184,41 @@ class LongText(ScrollView):
         # on the texture_size-bound callback below to fire on its own.
         self.label.texture_update()
         self.label.height = max(dp(28), self.label.texture_size[1] + dp(20))
+
+
+class CaptionLabel(Label):
+    """A short, plain-English one-to-three-line explainer shown at the top
+    of a tab, above its table/report content - e.g. "Your planetary time-
+    periods (Dasha) - a traditional system for timing when each planet's
+    themes are most active in your life." Astrology has a lot of jargon
+    (Ashtakvarga, Chalit, Nakshatra, Atmakaraka...); this doesn't remove
+    the technical names (they stay precise and searchable for anyone who
+    wants to look them up) but gives everyone a plain-language anchor
+    before diving into a table full of abbreviations.
+
+    Auto-sizes its own height to fit wrapped text, the same texture_update
+    pattern LongText above uses (needed even for a caption this short -
+    see LongText.set_text's own comment for why relying on Kivy's default
+    post-property-change scheduling alone isn't reliable on Android)."""
+
+    def __init__(self, text, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("halign", "left")
+        kwargs.setdefault("valign", "top")
+        kwargs.setdefault("padding", (dp(10), dp(8)))
+        kwargs.setdefault("color", (0.75, 0.78, 0.85, 1))
+        kwargs.setdefault("font_size", "12sp")
+        kwargs.setdefault("italic", True)
+        super().__init__(text=text, height=dp(28), **kwargs)
+        self.bind(width=self._on_width, texture_size=self._on_texture_size)
+
+    def _on_width(self, instance, width):
+        self.text_size = (width - dp(20), None)
+        self.texture_update()
+        self.height = max(dp(28), self.texture_size[1] + dp(16))
+
+    def _on_texture_size(self, instance, texture_size):
+        self.height = max(dp(28), texture_size[1] + dp(16))
 
 
 def field_row(label_text, widget, height=dp(40)):

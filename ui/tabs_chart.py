@@ -15,6 +15,7 @@ from kivy.metrics import dp
 import chart_geometry as cg
 from astrology_tables import SIGN_ABBR
 from panchanga import SIGNS
+from ui.widgets import CaptionLabel
 
 VARGA_CHOICES = [
     ("Rasi (D1)", "D1"), ("Hora (D2)", "D2"), ("Drekkana (D3)", "D3"),
@@ -192,6 +193,13 @@ class ChartTab(BoxLayout):
         controls.add_widget(self.style_spinner)
         controls.add_widget(self.varga_spinner)
         self.add_widget(controls)
+
+        self.add_widget(CaptionLabel(
+            "A visual diagram of your chart, showing which sign/house each planet falls "
+            "in. 'D1' (Rasi) is your main birth chart; the other 'D' options are "
+            "specialized zoom-ins classical texts use for specific life areas (e.g. D9 for "
+            "marriage)."
+        ))
 
         self.info_label = Label(text="No chart generated yet.", size_hint_y=None, height=dp(28))
         self.add_widget(self.info_label)

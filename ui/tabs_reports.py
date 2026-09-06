@@ -7,14 +7,20 @@ about it) onto the LongText widget instead of a tk.Text.
 """
 from kivy.uix.boxlayout import BoxLayout
 
-from ui.widgets import LongText
+from ui.widgets import LongText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
 
 
 class _BaseReportTab(BoxLayout):
+    # Plain-English explainer shown above the report text - every subclass
+    # below sets this.
+    caption = ""
+
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
+        if self.caption:
+            self.add_widget(CaptionLabel(self.caption))
         self.text_view = LongText()
         self.add_widget(self.text_view)
 
@@ -23,6 +29,12 @@ class _BaseReportTab(BoxLayout):
 
 
 class KarmicTab(_BaseReportTab):
+    caption = (
+        "A symbolic, reflective look at past-life themes and this life's karmic "
+        "direction - not literal history, just a traditional lens for thinking about "
+        "old patterns (Ketu) versus where you're being pulled to grow (Rahu)."
+    )
+
     def refresh(self):
         reading = self.store.current["reading"]
         if reading is None:
@@ -55,6 +67,12 @@ class KarmicTab(_BaseReportTab):
 
 
 class LifePredictionsTab(_BaseReportTab):
+    caption = (
+        "General traditional tendencies for different areas of life (career, health, "
+        "relationships...), based on your houses, planets, and current Dasha period - "
+        "broad themes to consider, not guaranteed events."
+    )
+
     def refresh(self):
         reading = self.store.current["reading"]
         if reading is None:
@@ -72,6 +90,8 @@ class LifePredictionsTab(_BaseReportTab):
 
 
 class FullReadingTab(_BaseReportTab):
+    caption = "Everything from the other tabs combined into one complete, readable report."
+
     def refresh(self):
         reading = self.store.current["reading"]
         if reading is None:

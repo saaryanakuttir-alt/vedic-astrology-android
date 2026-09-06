@@ -11,7 +11,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.metrics import dp
 
-from ui.widgets import SimpleTable, LongText
+from ui.widgets import SimpleTable, LongText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
 
 
@@ -20,11 +20,13 @@ class FamilyTab(BoxLayout):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
 
-        note = Label(
-            text=("Generate a chart for Self at minimum; add Life Partner and/or Child "
-                  "profiles for a fuller report. Self<->Life Partner uses Ashtakoot Guna "
-                  "Milan; Self<->Child deliberately does NOT (see family_bonds.py)."),
-            size_hint_y=None, height=dp(70), text_size=(None, None),
+        note = CaptionLabel(
+            "Generate a chart for Self at minimum; add Life Partner and/or Child profiles "
+            "for a fuller report. Self <-> Life Partner uses 'Ashtakoot Guna Milan' (a "
+            "classical 36-point marriage-matching score); Self <-> Child deliberately does "
+            "NOT, since that scoring system is only meant for spouses - children instead "
+            "get a separate, appropriately-scoped comparison. Both also get a karmic layer: "
+            "past-life themes and how each of you can support the other's growth."
         )
         self.add_widget(note)
 
