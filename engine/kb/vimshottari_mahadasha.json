@@ -1,0 +1,218 @@
+{
+  "checklist_category_id": "vimshottari_mahadasha",
+  "name": "Vimshottari Mahadasha Effects",
+  "tradition": "Parashari",
+  "schema_version": "1.2",
+  "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. This file covers the top-level Vimshottari mahadasha (120-year cycle, 9 planetary main-periods) layer only. Real results for a given native depend heavily on: the planet's dignity (own/exalted/debilitated/afflicted) at birth, which house(s) it rules and occupies for that ascendant, its planet_in_house and planet_in_sign placements (see those categories), and — most importantly for fine-grained timing — the running antardasha (sub-period) within this mahadasha, covered separately in the vimshottari_antardasha category. This file should not be used in isolation for predictions; it establishes only the broad theme of the ~6-to-20-year period.",
+  "dasha_sequence_order": [
+    "Ketu",
+    "Venus",
+    "Sun",
+    "Moon",
+    "Mars",
+    "Rahu",
+    "Jupiter",
+    "Saturn",
+    "Mercury"
+  ],
+  "dasha_sequence_note": "The nine mahadashas always run in this fixed order (cycling back to Ketu after Mercury), regardless of birth chart — only the STARTING point within the cycle depends on the Moon's nakshatra at birth. This is distinct from the checklist's own item order (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu), which is a simple enumeration, not the running sequence — the app's dasha-calculation logic should use dasha_sequence_order above, not the items array order.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Cross-checked the 9 planetary durations and their sum against multiple independent online sources.",
+    "changes_made": [
+      "Added the dasha_sequence_order field (the fixed Ketu-Venus-Sun-Moon-Mars-Rahu-Jupiter-Saturn-Mercury running order), which was discovered during verification and is needed for real dasha calculation but was missing from the original file — the items array itself was already correct and unchanged."
+    ],
+    "unchanged_after_verification": "All 9 durations (Sun 6, Moon 10, Mars 7, Mercury 17, Jupiter 16, Venus 20, Saturn 19, Rahu 18, Ketu 7 = 120 total) confirmed exactly correct."
+  },
+  "user_review_pass": {
+    "performed": true,
+    "reviewer": "project owner",
+    "method": "Spot-check sampling across the file following the online-source verification pass above.",
+    "outcome": "Approved as-is; no changes requested. All 9 items marked verified: true."
+  },
+  "generated_at": "2026-09-05T12:56:31.383697+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked against online sources; still recommend a final pass against your primary reference text",
+  "total_items": 9,
+  "items": [
+    {
+      "id": "MD-Su",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Sun",
+      "planet_sanskrit": "Surya",
+      "duration_years": 6,
+      "general_effects": "A Sun mahadasha typically brings focus to self-identity, authority, status, career, government or official dealings, and the relationship with the father. It is a period where the native's confidence, leadership, and public standing are tested and, when supported, come to the fore.",
+      "favorable_indications": "When the Sun is well-dignified (exalted, in its own sign, or otherwise well placed and unafflicted) and occupies a favorable house for the native's ascendant, this period tends to bring recognition, rise in authority or government favor, improved health and vitality, and leadership opportunities.",
+      "challenging_indications": "When the Sun is debilitated, combust, or heavily afflicted, this period can instead bring ego conflicts, friction with authority figures or the father, setbacks to status or reputation, and health concerns connected to vitality, the heart, or bones.",
+      "keywords": [
+        "authority",
+        "status",
+        "father",
+        "government",
+        "vitality"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Mo",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Moon",
+      "planet_sanskrit": "Chandra",
+      "duration_years": 10,
+      "general_effects": "A Moon mahadasha emphasizes the mind, emotions, the mother, domestic life, public perception, and matters requiring adaptability. Because the Moon changes phase and sign quickly, this period's tone can vary noticeably depending on the Moon's strength at birth and by transit.",
+      "favorable_indications": "When the Moon is strong (waxing, exalted, in its own sign, or otherwise well placed and unafflicted), this period tends to bring emotional stability, public popularity, domestic happiness, and success in fields involving the public, hospitality, or care-giving.",
+      "challenging_indications": "When the Moon is weak (waning, debilitated, or afflicted), this period can bring emotional instability, anxiety, fluctuating health (particularly fluid-related), and difficulties connected to the mother or domestic peace.",
+      "keywords": [
+        "mind and emotion",
+        "mother",
+        "domestic life",
+        "public standing",
+        "adaptability"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Ma",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Mars",
+      "planet_sanskrit": "Mangal / Kuja",
+      "duration_years": 7,
+      "general_effects": "A Mars mahadasha brings heightened energy, courage, and drive, typically activating matters of property, siblings, technical or competitive pursuits, and assertive action. This period often marks a phase of decisive initiative in the native's life.",
+      "favorable_indications": "When Mars is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period favors achievement through bold, direct action, gains in property or land, success in technical, athletic, or competitive fields, and courageous leadership.",
+      "challenging_indications": "When Mars is debilitated or heavily afflicted, this period can bring conflict, disputes, accidents or injuries, impulsive decisions, and friction with siblings or through legal/property matters.",
+      "keywords": [
+        "energy and courage",
+        "property",
+        "siblings",
+        "technical skill",
+        "competition"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Me",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Mercury",
+      "planet_sanskrit": "Budha",
+      "duration_years": 17,
+      "general_effects": "A Mercury mahadasha, being one of the longer periods, tends to shape a substantial phase of intellectual, communicative, and commercial development — emphasizing education, business, analytical work, and versatile skill-building.",
+      "favorable_indications": "When Mercury is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period favors success in trade, writing, education, or analytical professions, sharp intellect, and effective, persuasive communication.",
+      "challenging_indications": "When Mercury is debilitated, combust, or heavily afflicted, this period can bring nervous anxiety, communication misunderstandings, indecisiveness, and setbacks in business or academic matters.",
+      "keywords": [
+        "intellect",
+        "communication",
+        "business",
+        "education",
+        "long formative period"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Ju",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Jupiter",
+      "planet_sanskrit": "Guru / Brihaspati",
+      "duration_years": 16,
+      "general_effects": "A Jupiter mahadasha, also a long period, generally emphasizes expansion, wisdom, ethical and spiritual growth, higher education, children, and overall good fortune, often marking a phase of significant life development.",
+      "favorable_indications": "When Jupiter is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period tends to bring prosperity, respect, favorable developments regarding children or education, and marked spiritual or philosophical growth.",
+      "challenging_indications": "When Jupiter is debilitated or heavily afflicted, this period can bring overconfidence, excess, misplaced idealism, or delays in the growth and opportunities the native expects.",
+      "keywords": [
+        "expansion",
+        "wisdom",
+        "higher education",
+        "children",
+        "good fortune"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Ve",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Venus",
+      "planet_sanskrit": "Shukra",
+      "duration_years": 20,
+      "general_effects": "A Venus mahadasha, the longest of the nine, tends to define a major phase of life centered on relationships, marriage, comfort, artistic or aesthetic pursuits, and material prosperity.",
+      "favorable_indications": "When Venus is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period favors happy relationships or marriage, material comfort and luxury, success in artistic, creative, or luxury-related fields, and general enjoyment of life.",
+      "challenging_indications": "When Venus is debilitated or heavily afflicted, this period can bring relationship discord, overindulgence, financial extravagance, and health concerns connected to the reproductive or urinary systems.",
+      "keywords": [
+        "relationships",
+        "marriage",
+        "comfort",
+        "the arts",
+        "longest mahadasha"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Sa",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Saturn",
+      "planet_sanskrit": "Shani",
+      "duration_years": 19,
+      "general_effects": "A Saturn mahadasha, the second-longest period, generally brings discipline, hard work, karmic lessons, and long-term structural change, often requiring patience before results become visible.",
+      "favorable_indications": "When Saturn is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period rewards sustained, disciplined effort with steady, long-term achievement and authority earned through patience and responsibility.",
+      "challenging_indications": "When Saturn is debilitated or heavily afflicted, this period can bring prolonged hardship, health concerns, isolation, and financial struggle, with delays that may not resolve favorably without other mitigating factors in the chart.",
+      "keywords": [
+        "discipline",
+        "hard work",
+        "karmic lessons",
+        "long-term change",
+        "patience required"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Ra",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Rahu",
+      "planet_sanskrit": "Rahu (North Lunar Node)",
+      "duration_years": 18,
+      "general_effects": "A Rahu mahadasha typically brings unconventional ambition, sudden changes, intensified material desire, and often a connection to foreign lands, technology, or unconventional paths to status.",
+      "favorable_indications": "When Rahu is favorably placed (in a supportive house, not heavily afflicted, and well-disposed by its sign lord), this period can bring unconventional but substantial success, sudden rises in career or status, and gains connected to foreign or innovative ventures.",
+      "challenging_indications": "When Rahu is poorly placed or heavily afflicted, this period can bring confusion, obsession, scandal, instability, or anxiety, particularly regarding the specific life area (house) Rahu occupies and rules.",
+      "keywords": [
+        "ambition",
+        "sudden change",
+        "foreign connection",
+        "material desire",
+        "instability risk"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MD-Ke",
+      "category": "vimshottari_mahadasha",
+      "tradition": "Parashari",
+      "planet": "Ketu",
+      "planet_sanskrit": "Ketu (South Lunar Node)",
+      "duration_years": 7,
+      "general_effects": "A Ketu mahadasha typically brings detachment, introspection, and a turning away from material focus in whichever life area Ketu occupies, often accompanied by heightened intuition or a spiritual/psychic dimension to experience.",
+      "favorable_indications": "When Ketu is favorably placed, this period can bring genuine spiritual growth, liberation from unhelpful attachments, and valuable, sometimes unexpected, intuitive insight or past-life talent surfacing.",
+      "challenging_indications": "When Ketu is poorly placed or heavily afflicted, this period can bring isolation, confusion, sudden and hard-to-explain losses, and health concerns connected to vitality or the nervous system.",
+      "keywords": [
+        "detachment",
+        "spirituality",
+        "introspection",
+        "intuition",
+        "loss of material focus"
+      ],
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

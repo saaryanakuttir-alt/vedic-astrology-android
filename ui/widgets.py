@@ -1,0 +1,87 @@
+"""
+widgets.py — small reusable Kivy building blocks used across every tab, so
+each tab module only has to describe ITS data, not re-solve "how do I show
+a scrollable table" / "how do I show a scrollable block of text" every time.
+
+Kivy has no built-in ttk.Treeview equivalent, so SimpleTable below is a
+plain scrollable GridLayout: a bold header row, then one row per data row.
+It's intentionally simple (no sorting/column-resize) — this app's tables
+are for reading, not manipulating.
+"""
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.label import Label
+from kivy.metrics import dp
+
+
+class SimpleTable(ScrollView):
+    """SimpleTable(columns=["A","B"], col_hints=[0.3,0.7]) then
+    .set_rows([("a1","b1"), ("a2","b2"), ...])."""
+
+    def __init__(self, columns, col_hints=None, **kwargs):
+        super().__init__(**kwargs)
+        self.columns = columns
+        self.col_hints = col_hints or [1.0 / len(columns)] * len(columns)
+        self.grid = GridLayout(cols=len(columns), size_hint_y=None, spacing=dp(1))
+        self.grid.bind(minimum_height=self.grid.setter("height"))
+        self.add_widget(self.grid)
+        self._add_row(self.columns, header=True)
+
+    def _add_row(self, values, header=False):
+        for value, hint in zip(values, self.col_hints):
+            lbl = Label(
+                text=str(value), size_hint_x=hint, size_hint_y=None,
+                height=dp(36) if header else None, text_size=(None, None),
+                halign="left", valign="middle", bold=header,
+                color=(1, 0.85, 0.3, 1) if header else (1, 1, 1, 1),
+                shorten=False,
+            )
+            lbl.bind(texture_size=self._resize_label)
+            lbl.text_size = (None, None)
+            self.grid.add_widget(lbl)
+
+    def _resize_label(self, label, texture_size):
+        label.height = max(dp(28), texture_size[1] + dp(10))
+        label.text_size = (label.width if label.width else None, None)
+
+    def clear_rows(self):
+        self.grid.clear_widgets()
+        self._add_row(self.columns, header=True)
+
+    def set_rows(self, rows):
+        self.clear_rows()
+        for row in rows:
+            self._add_row(row, header=False)
+
+
+class LongText(ScrollView):
+    """A big scrollable block of read-only wrapped text — the mobile
+    equivalent of the desktop app's tk.Text widgets used for the Karmic,
+    Life Predictions, Full Reading, and Family Compatibility tabs."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.label = Label(
+            text="", size_hint_y=None, halign="left", valign="top",
+            padding=(dp(10), dp(10)),
+        )
+        self.label.bind(texture_size=self._on_texture_size)
+        self.bind(width=self._on_width)
+        self.add_widget(self.label)
+
+    def _on_width(self, instance, width):
+        self.label.text_size = (width - dp(20), None)
+
+    def _on_texture_size(self, instance, texture_size):
+        self.label.height = texture_size[1] + dp(20)
+
+    def set_text(self, text):
+        self.label.text = text or ""
+
+
+def field_row(label_text, widget, height=dp(40)):
+    row = BoxLayout(orientation="horizontal", size_hint_y=None, height=height, spacing=dp(6))
+    row.add_widget(Label(text=label_text, size_hint_x=0.38, halign="right", valign="middle"))
+    row.add_widget(widget)
+    return row

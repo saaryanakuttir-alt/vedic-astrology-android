@@ -1,0 +1,480 @@
+{
+  "checklist_category_id": "classical_yogas",
+  "name": "Classical Yogas",
+  "tradition": "Parashari",
+  "schema_version": "1.2",
+  "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. Each entry gives the classical formation condition(s), the traditionally associated effects, and known strength modifiers, cancellation rules, or points of scholarly debate. Several yogas here (Kemadruma, Neecha Bhanga, Kuja Dosha, the Vipareeta Raja Yogas) have well-documented classical cancellation/modification conditions that should always be checked before applying the base effect to a real chart — these are noted in each entry's strength_modifiers_and_cautions field. Kalasarpa Yoga in particular is flagged as having disputed classical textual grounding despite its popularity in modern practice, and should be treated with extra care during verification.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Cross-checked formation rules against multiple independent online sources (astrology reference sites, not Claude's training data alone) for every yoga in this file.",
+    "changes_made": [
+      "Kemadruma Yoga: corrected which planets are excluded from the 2nd/12th-from-Moon check (Rahu/Ketu, not the Sun) and expanded the cancellation-condition list.",
+      "Neecha Bhanga Raja Yoga: added the Navamsa (D9) exaltation/own-sign cancellation condition, which was missing from the original list.",
+      "Vipareeta Raja Yoga (Harsha/Sarala/Vimala): clarified that 'self-placement' (a dusthana lord in its own house) is accepted by some traditions but is generally considered weaker than placement in a genuinely different dusthana — sources disagreed on this point and both positions are now represented.",
+      "Adhi Yoga: added the Lagna-Adhi variant (same houses counted from the ascendant instead of the Moon), which the original entry omitted.",
+      "Kalasarpa Yoga: strengthened the caution, adding that it appears to be a later/medieval addition per researchers who reviewed the classical corpus, and distinguishing it from the classically-attested 'Sarpa Dosha' it is often confused with.",
+      "Dhana Yoga: pinned to a single primary definition (2nd-11th lord connection) during the subsequent owner review pass, rather than left as an open general principle — see user_review_pass below."
+    ],
+    "unchanged_after_verification": [
+      "Gajakesari Yoga",
+      "Ruchaka/Bhadra/Hamsa/Malavya/Sasa Yoga (Pancha Mahapurusha)",
+      "Kendra-Trikona Raja Yoga",
+      "Amala Yoga",
+      "Shakat Yoga",
+      "Chandra-Mangal Yoga",
+      "Guru-Mangal Yoga",
+      "Grahan Yoga",
+      "Angarak Yoga",
+      "Kuja Dosha",
+      "Guru Chandal Yoga",
+      "Vish Yoga"
+    ],
+    "still_recommend_native_source_check": "Guru Chandal / Vish Yoga's precise effect severity varies more by house/sign context than a short web pass can fully confirm — worth a look against your primary reference text of choice."
+  },
+  "user_review_pass": {
+    "performed": true,
+    "reviewer": "project owner",
+    "method": "Spot-check sampling across the file following the online-source verification pass above; the previously-flagged Dhana Yoga definition was reviewed and pinned to a single primary formulation (see YOGA-08's formation field) rather than left as an open, undefined principle.",
+    "outcome": "Approved. All 24 items marked verified: true."
+  },
+  "generated_at": "2026-09-05T12:56:31.358867+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked against online sources; still recommend a final pass against your primary reference text",
+  "total_items": 24,
+  "items": [
+    {
+      "id": "YOGA-01",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Gajakesari Yoga",
+      "yoga_type": "benefic / fame yoga",
+      "formation": "Jupiter is placed in a kendra (1st, 4th, 7th, or 10th house) counted from the Moon.",
+      "effects": "Classically associated with intelligence, eloquence, good reputation, prosperity, and respect in society; the native is often remembered fondly and finds success in dealing with others. It is one of the most widely cited benefic yogas in popular and classical literature alike.",
+      "strength_modifiers_and_cautions": "Effects are considerably weaker if Jupiter is debilitated, combust (too close to the Sun), or placed in a dusthana (6th, 8th, or 12th) from the lagna; the yoga is strongest when Jupiter is additionally well-dignified (own sign, exalted, or otherwise well-aspected).",
+      "keywords": [
+        "fame",
+        "intelligence",
+        "Jupiter-Moon kendra",
+        "reputation"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-02",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Ruchaka Yoga (Panch Mahapurusha)",
+      "yoga_type": "Pancha Mahapurusha yoga",
+      "formation": "Mars occupies its own sign (Aries or Scorpio) or its exaltation sign (Capricorn), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.",
+      "effects": "Grants a strong, athletic physique, courageous and commanding personality, natural leadership, and success in fields requiring decisive action such as the military, sports, engineering, or entrepreneurship. The native is typically direct, energetic, and unafraid of competition.",
+      "strength_modifiers_and_cautions": "Full strength requires Mars to be free of heavy affliction; the yoga is considered most powerful when Mars is also well-aspected by benefics or otherwise unafflicted.",
+      "keywords": [
+        "Mahapurusha yoga",
+        "Mars own/exalted in kendra",
+        "courage",
+        "leadership"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-03",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Bhadra Yoga (Panch Mahapurusha)",
+      "yoga_type": "Pancha Mahapurusha yoga",
+      "formation": "Mercury occupies its own sign (Gemini or Virgo) or its exaltation sign (Virgo), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.",
+      "effects": "Grants exceptional intelligence, eloquence, and business or analytical acumen, with natural skill in communication, trade, writing, or scholarship. The native is typically quick-witted, versatile, and well-regarded for their intellect.",
+      "strength_modifiers_and_cautions": "Effects are strongest when Mercury is also unafflicted by malefic conjunction or aspect, and further supported by a strong Mercury dasha period.",
+      "keywords": [
+        "Mahapurusha yoga",
+        "Mercury own/exalted in kendra",
+        "intelligence",
+        "eloquence"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-04",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Hamsa Yoga (Panch Mahapurusha)",
+      "yoga_type": "Pancha Mahapurusha yoga",
+      "formation": "Jupiter occupies its own sign (Sagittarius or Pisces) or its exaltation sign (Cancer), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.",
+      "effects": "Grants wisdom, righteousness, and a dignified, respected character, often producing a natural teacher, counselor, or spiritually inclined figure of good repute. The native's conduct tends to be principled and their fortune generally favorable.",
+      "strength_modifiers_and_cautions": "Most powerful when Jupiter is also unafflicted and well-aspected; a Jupiter under heavy malefic influence will express this yoga's virtues less fully.",
+      "keywords": [
+        "Mahapurusha yoga",
+        "Jupiter own/exalted in kendra",
+        "wisdom",
+        "righteousness"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-05",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Malavya Yoga (Panch Mahapurusha)",
+      "yoga_type": "Pancha Mahapurusha yoga",
+      "formation": "Venus occupies its own sign (Taurus or Libra) or its exaltation sign (Pisces), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.",
+      "effects": "Grants charm, artistic or aesthetic talent, a comfortable and often luxurious lifestyle, and harmonious personal relationships. The native tends to be attractive in manner or appearance and drawn toward refined, pleasurable pursuits.",
+      "strength_modifiers_and_cautions": "Full expression depends on Venus being free of significant affliction; a well-aspected Venus in this yoga particularly favors the arts, luxury goods, or diplomacy as career paths.",
+      "keywords": [
+        "Mahapurusha yoga",
+        "Venus own/exalted in kendra",
+        "charm",
+        "comfort"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-06",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Sasa Yoga (Panch Mahapurusha)",
+      "yoga_type": "Pancha Mahapurusha yoga",
+      "formation": "Saturn occupies its own sign (Capricorn or Aquarius) or its exaltation sign (Libra), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.",
+      "effects": "Grants disciplined authority, leadership ability (especially over large groups, institutions, or the working masses), and long-term success achieved through sustained, patient effort. The native often rises to a position of responsibility later in life through genuine, earned merit.",
+      "strength_modifiers_and_cautions": "Strongest when Saturn is not heavily afflicted; because Saturn's own nature favors delay, results under this yoga still tend to arrive gradually rather than early.",
+      "keywords": [
+        "Mahapurusha yoga",
+        "Saturn own/exalted in kendra",
+        "disciplined authority",
+        "long-term success"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-07",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Kendra-Trikona Raja Yoga",
+      "yoga_type": "raja yoga",
+      "formation": "The lord of a kendra house (1st, 4th, 7th, or 10th) forms a connection — by conjunction, mutual aspect, or exchange of signs (parivartana) — with the lord of a trikona house (1st, 5th, or 9th). Since the 1st house is both kendra and trikona, any strong connection involving the lagna lord is especially significant.",
+      "effects": "Considered one of the most important categories of yoga for worldly status, authority, wealth, and rising fortune in Parashari astrology. The native typically experiences a marked rise in position, especially during the dashas of the planets involved.",
+      "strength_modifiers_and_cautions": "The strength of the resulting rise depends heavily on the dignity (sign strength) of the participating lords and the houses they occupy; a Raja Yoga formed by well-placed, unafflicted lords in good houses produces far more pronounced results than one formed by weak or afflicted lords.",
+      "keywords": [
+        "raja yoga",
+        "kendra-trikona connection",
+        "status and authority",
+        "parivartana"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-08",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Dhana Yoga (2nd-11th Lord Wealth Combination)",
+      "yoga_type": "dhana (wealth) yoga",
+      "formation": "PINNED PRIMARY DEFINITION for this dataset: the lord of the 2nd house (dhana, wealth) and the lord of the 11th house (labha, gains) form a connection with each other — by mutual conjunction, mutual aspect, or exchange of signs (parivartana). Classical and popular sources do not converge on one single fixed configuration for 'Dhana Yoga' (unlike, say, the tightly-defined Pancha Mahapurusha yogas), so this 2nd-11th lord connection was deliberately selected as the dataset's default because it is the single most consistently cited 'core' formulation across sources. A commonly recognized EXTENDED form also exists: the 2nd or 11th lord additionally connecting with a trikona lord (5th or 9th), or a natural benefic occupying or aspecting the 2nd or 11th house — these are treated here as secondary/extended variants rather than the core definition, and are noted separately where relevant.",
+      "effects": "Indicates the potential for financial prosperity and accumulation of wealth, activating most strongly during the dasha periods of the 2nd and 11th lords (or, for the extended variant, the additional trikona lord or benefic involved). Multiple distinct dhana yogas present together in one chart compound and reinforce the overall wealth potential.",
+      "strength_modifiers_and_cautions": "A dhana yoga formed by lords of dusthana houses (6th, 8th, or 12th) sharing this connection, or afflicted by malefics without other support, produces a weaker or more complicated form of wealth (e.g. wealth through struggle, litigation, or with ethical compromise) rather than clean prosperity. If your primary reference text defines Dhana Yoga differently, treat the pinned definition above as this dataset's default and adjust as needed — it was a deliberate editorial choice among several valid classical framings, not a uniquely 'correct' one.",
+      "keywords": [
+        "wealth yoga",
+        "2nd-11th lord connection (primary definition)",
+        "financial prosperity",
+        "dasha-activated",
+        "extended trikona variant noted"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-09",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Kemadruma Yoga",
+      "yoga_type": "challenging combination (dosha-type)",
+      "formation": "No planet other than Rahu/Ketu occupies the 2nd or 12th house from the Moon, and the Moon receives no conjunction or supporting aspect from any other planet (nodes excluded from this count too) — leaving the Moon effectively isolated in the chart.",
+      "effects": "Classically associated with instability, struggle, lack of consistent support from others, or a sense of emotional isolation, particularly in earlier life. This is one of the more feared combinations in popular astrology.",
+      "strength_modifiers_and_cautions": "Classical texts list numerous cancellation (Bhanga) conditions that are frequently overlooked in casual analysis, including: the Moon placed in a kendra (1st/4th/7th/10th) from the lagna; the Moon receiving aspect from a benefic (e.g. Jupiter or Venus); a benefic occupying a kendra from the Moon; the Moon posited in Taurus or Cancer (both considered to significantly weaken the yoga); or a strong lagna lord/benefics in kendra from the ascendant providing resilience. Any single one of these is generally enough to substantially reduce or cancel the yoga, so a genuinely uncancelled Kemadruma is less common than its popular reputation suggests, and a full check for these conditions should always precede any negative interpretation.",
+      "keywords": [
+        "isolated Moon",
+        "cancellation conditions apply",
+        "instability",
+        "Bhanga"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-10",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Neecha Bhanga Raja Yoga",
+      "yoga_type": "debilitation-cancellation raja yoga",
+      "formation": "A planet's debilitation (neecha) is cancelled under specific classical conditions — commonly cited variants include: the lord of the debilitation sign itself occupies a kendra from the lagna or the Moon; the planet that would be exalted in the debilitated planet's sign is placed in a kendra from the lagna or Moon; the debilitated planet is otherwise strengthened through conjunction or aspect with its dispositor or exaltation-sign lord under favorable placement rules; or the debilitated planet occupies its own sign or exaltation sign in the Navamsa (D9) chart even while debilitated in the main chart (D1). Classical texts (e.g. Phaladeepika) enumerate several such rules, and not all schools weight them identically.",
+      "effects": "When genuinely cancelled, the planet's apparent weakness reverses into a source of significant strength and good fortune — often associated with a dramatic rise from early adversity, hardship, or obscurity to notable, self-made success later in life.",
+      "strength_modifiers_and_cautions": "The cancellation is considered strongest ('cleanest') — and most likely to produce a true Raja Yoga rather than mere neutralization of the weakness — when multiple confirming conditions are present simultaneously, and when the planets involved additionally hold kendra or trikona lordship; a marginal or single-condition cancellation produces a milder version of the reversal.",
+      "keywords": [
+        "debilitation cancellation",
+        "self-made success",
+        "reversal of fortune",
+        "multiple classical rules",
+        "Navamsa check"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-11",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Vipreet Raja Yoga - Harsha",
+      "yoga_type": "Vipareeta Raja Yoga",
+      "formation": "The lord of the 6th house is placed in the 6th, 8th, or 12th house. Placement in the 6th lord's own house (a 'self-placement' variant) is accepted by many traditions, though placement in a DIFFERENT dusthana (8th or, especially, 12th — read as 'loss of enemies') is generally considered the stronger, more classical form of the yoga.",
+      "effects": "A dusthana lord placed among the dusthanas is classically read as two difficulties neutralizing each other, producing an unexpected reversal: protection from enemies, litigation, and disease, along with resilience and gains connected to overcoming competition or obstacles.",
+      "strength_modifiers_and_cautions": "Some classical commentators note the yoga can be diluted ('spoiled') if the 6th lord additionally receives a strong connection with kendra or trikona lords or benefics, since this ties the dusthana lord too closely to auspicious houses; this point is debated across traditions, as is the relative strength of the self-placement (6th-in-6th) variant versus cross-dusthana placement. See also the generic house_lord_placement entries where lord_of_house is 6 and placed_in_house is 6, 8, or 12.",
+      "keywords": [
+        "Vipareeta Raja Yoga",
+        "6th lord in dusthana",
+        "reversal of fortune",
+        "protection from enemies"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-12",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Vipreet Raja Yoga - Sarala",
+      "yoga_type": "Vipareeta Raja Yoga",
+      "formation": "The lord of the 8th house is placed in the 6th, 8th, or 12th house. Placement in the 8th lord's own house (a 'self-placement' variant, associated with unusual composure navigating sudden events) is accepted by some traditions, though placement in a DIFFERENT dusthana (6th or 12th) is generally considered the stronger, more classical form of the yoga.",
+      "effects": "Classically associated with courage in the face of danger, resilience against sudden misfortune, longevity, and an unexpected capacity to convert crisis into strength. The native often shows notable composure when facing life's difficult transitions.",
+      "strength_modifiers_and_cautions": "As with the other Vipareeta Raja Yogas, some commentators note the effect can be diluted if the 8th lord is also strongly connected to kendra/trikona lords or benefics; a 'purer' dusthana-to-DIFFERENT-dusthana placement is considered to produce the fullest reversal effect, versus the milder self-placement variant.",
+      "keywords": [
+        "Vipareeta Raja Yoga",
+        "8th lord in dusthana",
+        "resilience",
+        "crisis to strength"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-13",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Vipreet Raja Yoga - Vimala",
+      "yoga_type": "Vipareeta Raja Yoga",
+      "formation": "The lord of the 12th house is placed in the 6th, 8th, or 12th house. Placement in the 12th lord's own house (a 'self-placement' variant, associated with expenditure staying under control) is accepted by some traditions, though placement in a DIFFERENT dusthana (6th or 8th) is generally considered the stronger, more classical form of the yoga.",
+      "effects": "Classically associated with contentment despite limited material means, ethical restraint regarding expenditure and loss, and an unexpected capacity to find security or spiritual benefit precisely where loss might otherwise be expected.",
+      "strength_modifiers_and_cautions": "As with the other Vipareeta Raja Yogas, the reversal is considered strongest when the 12th lord is not simultaneously drawn into a strong kendra/trikona connection, and when it lands in a different dusthana rather than its own; opinions on both points vary by classical school.",
+      "keywords": [
+        "Vipareeta Raja Yoga",
+        "12th lord in dusthana",
+        "contentment",
+        "unexpected security"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-14",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Chandra-Mangal Yoga",
+      "yoga_type": "dhana / entrepreneurial yoga",
+      "formation": "The Moon and Mars are conjunct in the same house.",
+      "effects": "Classically associated with enterprising drive, strong business or entrepreneurial acumen, and the capacity to generate wealth through sustained personal effort, real estate, or dynamic ventures. The combination blends emotional intensity with energetic initiative.",
+      "strength_modifiers_and_cautions": "Depending on other chart factors, the same intensity can also manifest as emotional volatility, a quick temper, or impulsive financial decisions if Mars and the Moon are otherwise afflicted; the yoga's wealth-generating potential is strongest when both planets are reasonably well-placed by sign.",
+      "keywords": [
+        "Moon-Mars conjunction",
+        "entrepreneurial drive",
+        "wealth generation",
+        "emotional intensity"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-15",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Guru-Mangal Yoga",
+      "yoga_type": "supportive combination",
+      "formation": "Jupiter and Mars are conjunct in the same house, or placed in mutual kendra aspect to each other.",
+      "effects": "Combines Jupiter's wisdom and ethical orientation with Mars's courage and drive, favoring leadership in fields that require both principled judgment and decisive action, such as law, defense, medicine, or entrepreneurship. The native often shows conviction backed by genuine capability.",
+      "strength_modifiers_and_cautions": "Results are most favorable when neither planet is significantly afflicted; a heavily afflicted combination can instead produce dogmatic or overly aggressive assertion of one's beliefs.",
+      "keywords": [
+        "Jupiter-Mars connection",
+        "principled action",
+        "leadership",
+        "conviction"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-16",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Amala Yoga",
+      "yoga_type": "benefic reputation yoga",
+      "formation": "A natural benefic planet (Jupiter, Venus, a well-placed Mercury, or a waxing Moon) occupies the 10th house counted from the lagna or from the Moon, without affliction from malefics.",
+      "effects": "The name means 'spotless' or 'pure,' and the yoga is classically associated with a lasting, untarnished reputation, ethical conduct in public and professional life, philanthropy, and a benevolent influence that others remember well.",
+      "strength_modifiers_and_cautions": "The benefic quality of the placement is essential; if the 10th house benefic is heavily afflicted by malefic conjunction or aspect, the purity implied by this yoga is correspondingly reduced.",
+      "keywords": [
+        "spotless reputation",
+        "10th house benefic",
+        "ethical public life",
+        "philanthropy"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-17",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Adhi Yoga",
+      "yoga_type": "raja / protective yoga",
+      "formation": "Natural benefic planets (Jupiter, Venus, and/or Mercury) occupy the 6th, 7th, and 8th houses counted from the Moon (Chandra-Adhi Yoga, the classical default), whether individually spread across these houses or in combination. Some traditions also recognize a Lagna-Adhi variant using the same 6th/7th/8th houses counted from the ascendant instead of the Moon.",
+      "effects": "Traditionally associated with a comfortable, prosperous, and influential life, often linked in classical texts with ministerial-level or high administrative status, along with protection from enemies, obstacles, and misfortune.",
+      "strength_modifiers_and_cautions": "The yoga is considered stronger the more of the three houses (6th, 7th, and 8th from the Moon) are occupied by benefics, and stronger still when those benefics are themselves well-dignified.",
+      "keywords": [
+        "benefics from the Moon",
+        "protection and influence",
+        "comfortable prosperity",
+        "administrative success"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-18",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Shakat Yoga",
+      "yoga_type": "challenging combination (dosha-type)",
+      "formation": "The Moon is placed in the 6th, 8th, or 12th house counted from Jupiter (equivalently, Jupiter is not in a kendra relationship to the Moon).",
+      "effects": "Classically associated with fluctuating fortune — periods of prosperity alternating with periods of hardship or setback, particularly regarding status, finances, or emotional stability.",
+      "strength_modifiers_and_cautions": "This is a fairly commonly occurring configuration, and many classical commentators note its severity depends heavily on the underlying strength of the Moon and Jupiter and on other supporting or mitigating yogas present in the chart, rather than indicating uniform hardship on its own.",
+      "keywords": [
+        "fluctuating fortune",
+        "Moon-Jupiter relationship",
+        "common configuration",
+        "context-dependent severity"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-19",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Kalasarpa Yoga",
+      "yoga_type": "popularly discussed combination (disputed classical status)",
+      "formation": "All seven classical planets (Sun through Saturn) are positioned within the 180-degree arc running from Rahu to Ketu on one side of the chart, with none of them crossing to the other side.",
+      "effects": "In popular modern practice, this configuration is widely associated with obstacles, delays, a sense of being constrained by fate or inherited (ancestral) karma, and a generally more difficult path to achieving one's goals.",
+      "strength_modifiers_and_cautions": "It is worth noting for verification purposes that this yoga's popular framework is not extensively documented in the way it is discussed today within the oldest core classical texts (such as BPHS); several researchers who have reviewed the classical corpus note it appears to be a later (possibly medieval-era) addition rather than an ancient one. It should also be distinguished from the classically-attested 'Sarpa Dosha' (a related but distinct affliction involving Rahu/Ketu that IS discussed in older sources) with which it is sometimes conflated in popular usage. Many serious practitioners treat Kalasarpa Yoga itself with caution, evaluate it based on which specific houses Rahu and Ketu occupy, and weigh it alongside the chart's overall strength rather than as a standalone, uniformly negative indicator.",
+      "keywords": [
+        "Rahu-Ketu axis",
+        "disputed classical grounding",
+        "popular modern yoga",
+        "distinct from Sarpa Dosha",
+        "requires careful verification"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-20",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Grahan Yoga (Sun/Moon with Rahu-Ketu)",
+      "yoga_type": "challenging combination (dosha-type)",
+      "formation": "The Sun or the Moon is conjunct Rahu or Ketu in the same house (an 'eclipse-type' combination).",
+      "effects": "Classically understood as the node 'eclipsing' or obscuring the luminary's natural significations — a Sun-node conjunction can affect vitality, relationship with the father, self-confidence, or standing with authority; a Moon-node conjunction can affect emotional stability, the mind, or relationship with the mother. Effects are considered particularly active during the dasha periods of the planets involved.",
+      "strength_modifiers_and_cautions": "Some traditions distinguish Sun-Rahu/Moon-Rahu (often read as amplifying and obsessive) from Sun-Ketu/Moon-Ketu (often read as detaching and destabilizing) rather than treating all four combinations identically; house placement and sign strongly modify the specific area of life affected.",
+      "keywords": [
+        "luminary-node conjunction",
+        "eclipsed significations",
+        "dasha-activated",
+        "Sun or Moon with node"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-21",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Angarak Yoga",
+      "yoga_type": "challenging combination (dosha-type)",
+      "formation": "Mars is conjunct Rahu in the same house.",
+      "effects": "Classically associated with amplified aggression, impulsiveness, and conflict-prone tendencies, and often linked with heightened risk of accidents, disputes, litigation, or blood-related health matters in the house or life area involved.",
+      "strength_modifiers_and_cautions": "When the underlying chart is otherwise strong and well-supported, the same intensified energy can instead express as unusual courage, competitive drive, or willingness to pursue high-risk, high-reward ventures constructively.",
+      "keywords": [
+        "Mars-Rahu conjunction",
+        "amplified aggression",
+        "conflict risk",
+        "high-risk drive"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-22",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Kuja Dosha (Mangal Dosha)",
+      "yoga_type": "marriage-compatibility dosha",
+      "formation": "Mars is placed in the 1st, 2nd, 4th, 7th, 8th, or 12th house from the lagna (specific lists of houses vary slightly by classical school, and some traditions also check Mars's placement from the Moon and from Venus for a fuller assessment).",
+      "effects": "Traditionally examined specifically in the context of marriage compatibility (kundali matching), and associated with potential friction, delay, or discord affecting marital harmony or the spouse's wellbeing.",
+      "strength_modifiers_and_cautions": "Classical texts provide numerous cancellation (Dosha Bhanga) conditions that are essential to check before drawing conclusions — for example, when both prospective partners carry a matching Kuja Dosha (which cancels in most traditions), when Mars occupies its own or exalted sign, or when Mars receives supportive aspects or conjunctions from certain benefics. A raw placement check without these cancellations is considered an incomplete assessment.",
+      "keywords": [
+        "marriage compatibility",
+        "Mars house placement",
+        "cancellation conditions apply",
+        "kundali matching"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-23",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Guru Chandal Yoga",
+      "yoga_type": "challenging combination (dosha-type)",
+      "formation": "Jupiter is conjunct Rahu (and, in some interpretive traditions, conjunct Ketu) in the same house.",
+      "effects": "Classically associated with a clouding or distortion of Jupiter's natural wisdom, ethical clarity, and guidance-oriented significations, sometimes linked with unconventional belief systems, controversial teacher or mentor figures, or ethically ambiguous decision-making in the area of life involved.",
+      "strength_modifiers_and_cautions": "The same combination can, depending on the rest of the chart, indicate unusually innovative or unconventional wisdom and teaching ability that constructively breaks from tradition rather than purely negative distortion — the outcome depends significantly on Jupiter's dignity and other supporting factors.",
+      "keywords": [
+        "Jupiter-Rahu conjunction",
+        "clouded wisdom",
+        "unconventional belief",
+        "context-dependent outcome"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "YOGA-24",
+      "category": "classical_yogas",
+      "tradition": "Parashari",
+      "name": "Vish Yoga",
+      "yoga_type": "challenging combination (dosha-type)",
+      "formation": "Saturn is conjunct Rahu in the same house (literally the 'poison combination').",
+      "effects": "Associated with a corrosive, undermining quality affecting the significations of the house involved, often manifesting as prolonged obstacles, chronic difficulties, or slow-burning conflicts in that area of life rather than sudden, dramatic events.",
+      "strength_modifiers_and_cautions": "House and sign placement strongly shape which specific life area is most affected, and a careful, house-specific assessment is recommended rather than a blanket negative prediction whenever this combination is found.",
+      "keywords": [
+        "Saturn-Rahu conjunction",
+        "corrosive obstacles",
+        "chronic difficulty",
+        "house-specific effect"
+      ],
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

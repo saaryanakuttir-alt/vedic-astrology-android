@@ -1,0 +1,45 @@
+name: Build Android APK
+
+# Builds the debug .apk with Buildozer on GitHub's own runners (which have
+# full internet access to fetch the Android SDK/NDK and python-for-android
+# itself), then uploads it as a downloadable workflow artifact. This exists
+# because this project was developed in two sandboxed environments (a cloud
+# workspace and, separately, the user's own PC) that BOTH block general
+# internet access to package registries/SDK downloads - see
+# android_app/README_ANDROID.md for the full story. Push this folder's
+# contents to a GitHub repo and this workflow builds the APK for you.
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip \
+            autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
+            libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          pip install --upgrade buildozer cython==0.29.36
+
+      - name: Build debug APK with Buildozer
+        run: |
+          yes | buildozer android debug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vedic-astrology-debug-apk
+          path: bin/*.apk
+          if-no-files-found: error

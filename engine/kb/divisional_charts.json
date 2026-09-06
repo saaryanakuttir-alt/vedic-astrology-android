@@ -1,0 +1,278 @@
+{
+  "checklist_category_id": "divisional_charts",
+  "name": "Divisional Charts (Vargas)",
+  "tradition": "Parashari",
+  "schema_version": "1.2",
+  "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. This file covers the 12 vargas at the REFERENCE/OVERVIEW level only, matching the checklist's own item shape for this category (varga, name, primary_use, priority) — it is NOT the full 9-planets x 12-signs interpretive expansion per varga (which the checklist itself marks as later-phase work, 'Do not start until Phase 3 core categories are verified'). Each item's expansion_scope_note flags this explicitly. Before implementing varga calculation in the app, verify each division_scheme and calculation_note against a trusted classical reference or a tested ephemeris/astrology calculation library, since divisional chart math is easy to get subtly wrong (especially for D3, D4, D30, and D60, which use non-trivial or unequal assignment schemes).",
+  "verification_pass": {
+    "performed": true,
+    "method": "Recomputed each varga's degree-per-division directly from 30/N (or the documented unequal scheme for D30) and cross-checked both the resulting figures and each chart's primary_use against multiple independent online sources.",
+    "changes_made": [],
+    "unchanged_after_verification": "All 12 division_scheme degree values and primary_use assignments confirmed correct (D2=15°, D3=10°, D4=7°30', D7=4°17'8\", D9=3°20', D10=3°, D12=2°30', D16=1°52'30\", D20=1°30', D24=1°15', D30=unequal 5-planet scheme, D60=0°30'). One source consulted during this pass stated D9 as 3°33', which is arithmetically incorrect (30/9 = 3°20', not 3°33') and appears to be a typo on that source's part rather than a real alternative convention; this file's 3°20' figure is the mathematically correct one and was left unchanged."
+  },
+  "user_review_pass": {
+    "performed": true,
+    "reviewer": "project owner",
+    "method": "Spot-check sampling across the file following the online-source verification pass above.",
+    "outcome": "Approved as-is; no changes requested. All 12 items marked verified: true."
+  },
+  "generated_at": "2026-09-05T12:56:31.433624+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked against online sources; still recommend a final pass against your primary reference text",
+  "total_items": 12,
+  "items": [
+    {
+      "id": "DIV-D9",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D9",
+      "name": "Navamsa",
+      "division_scheme": "Each sign is divided into 9 equal parts of 3°20' each.",
+      "primary_use": "marriage, dharma, overall strength",
+      "priority": "high",
+      "overview": "Considered the second most important chart after the main birth chart (Rasi/D1), the Navamsa is used to assess the strength of a planet's true underlying nature, the quality and timing of marriage, the spouse's characteristics, and the native's inner dharmic disposition. A planet occupying the same sign in both D1 and D9 is called Vargottama, a condition that significantly reinforces that planet's strength and reliability of results.",
+      "calculation_note": "Navamsa divisions are assigned to signs following a fixed classical starting-sign scheme based on the element (fire/earth/air/water) of the birth sign; the resulting D9 sign for a given birth-chart degree should be computed with a verified calculation method or ephemeris library rather than derived manually in the app.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "marriage",
+        "spouse",
+        "inner strength",
+        "Vargottama",
+        "dharma"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D10",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D10",
+      "name": "Dashamsha",
+      "division_scheme": "Each sign is divided into 10 equal parts of 3° each.",
+      "primary_use": "career, profession",
+      "priority": "high",
+      "overview": "Used specifically to assess career direction, professional status, public achievement, and the general trajectory of the native's working life. Planets and house lords are examined in the D10 much as in the main chart, but with the questions reframed specifically around profession, authority, and public standing.",
+      "calculation_note": "The starting sign for the ten divisions alternates by odd/even birth sign per classical rule; as with all vargas, exact division boundaries should be computed programmatically from precise birth data rather than approximated.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "career",
+        "profession",
+        "public status",
+        "authority",
+        "achievement"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D7",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D7",
+      "name": "Saptamsha",
+      "division_scheme": "Each sign is divided into 7 equal parts of approximately 4°17'8\" each.",
+      "primary_use": "children, progeny",
+      "priority": "medium",
+      "overview": "Used to assess matters of children and progeny in more detail than the main chart's 5th house alone provides, including the general prospects for having children, their wellbeing, and multi-generational (grandchildren) themes.",
+      "calculation_note": "The starting sign for the seven divisions depends on whether the birth sign is odd or even, following a fixed classical rule.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "children",
+        "progeny",
+        "5th house refinement",
+        "generational themes"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D12",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D12",
+      "name": "Dwadashamsha",
+      "division_scheme": "Each sign is divided into 12 equal parts of 2°30' each.",
+      "primary_use": "parents, lineage",
+      "priority": "medium",
+      "overview": "Used to examine matters relating to parents in more depth than the main chart's 4th (mother) and 9th (father) houses alone, including ancestral heritage, family lineage patterns, and the native's inherited circumstances.",
+      "calculation_note": "The twelve divisions of a sign map onto the twelve signs of the zodiac in fixed forward order starting from the birth sign itself.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "parents",
+        "ancestry",
+        "lineage",
+        "family heritage"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D3",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D3",
+      "name": "Drekkana",
+      "division_scheme": "Each sign is divided into 3 equal parts of 10° each.",
+      "primary_use": "siblings, courage",
+      "priority": "medium",
+      "overview": "Used to examine siblings (particularly the nature of the relationship with them) and the native's courage, valor, and capacity for self-initiated effort in more depth than the main chart's 3rd house alone provides.",
+      "calculation_note": "The three divisions of a sign are classically assigned to the sign itself, the 5th sign from it, and the 9th sign from it (a trikona-based scheme), though some later systems use alternate assignment rules.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "siblings",
+        "courage",
+        "self-effort",
+        "3rd house refinement"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D4",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D4",
+      "name": "Chaturthamsha",
+      "division_scheme": "Each sign is divided into 4 equal parts of 7°30' each.",
+      "primary_use": "property, fortune",
+      "priority": "low",
+      "overview": "Used to examine matters of property, fixed assets, homes, and general fortune or luck in more depth than the main chart's 4th house alone provides.",
+      "calculation_note": "The four divisions of a sign are classically assigned to the sign itself and the 4th, 7th, and 10th signs from it (a kendra-based scheme).",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "property",
+        "fixed assets",
+        "fortune",
+        "4th house refinement"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D2",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D2",
+      "name": "Hora",
+      "division_scheme": "Each sign is divided into 2 equal parts of 15° each.",
+      "primary_use": "wealth",
+      "priority": "low",
+      "overview": "Used to examine wealth and financial resources specifically, refining the main chart's 2nd and 11th house indications. Each half of a sign is classically assigned to either the Sun or the Moon (via their traditional rulership of Leo and Cancer), depending on whether the sign is odd or even and which half of the sign is involved.",
+      "calculation_note": "The exact Sun/Moon assignment rule differs slightly for odd versus even signs and should be implemented per the classical formula rather than approximated.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "wealth",
+        "financial resources",
+        "2nd/11th house refinement",
+        "Sun-Moon division"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D24",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D24",
+      "name": "Chaturvimshamsha",
+      "division_scheme": "Each sign is divided into 24 equal parts of 1°15' each.",
+      "primary_use": "education, learning",
+      "priority": "low",
+      "overview": "Used to examine formal and informal education, academic achievement, and the depth of learning or mastery (siddhi) the native attains in various fields of knowledge.",
+      "calculation_note": "The starting sign for the twenty-four divisions depends on whether the birth sign is odd or even, following a fixed classical rule.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "education",
+        "academic achievement",
+        "learning",
+        "mastery of knowledge"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D16",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D16",
+      "name": "Shodashamsha",
+      "division_scheme": "Each sign is divided into 16 equal parts of 1°52'30\" each.",
+      "primary_use": "vehicles, comforts",
+      "priority": "low",
+      "overview": "Used to examine vehicles, general material comforts, and overall quality-of-life pleasures beyond the essentials, refining themes touched on by the main chart's 4th house.",
+      "calculation_note": "The starting sign for the sixteen divisions follows a fixed classical rule based on the movable/fixed/dual nature (modality) of the birth sign.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "vehicles",
+        "comforts",
+        "quality of life",
+        "material pleasures"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D20",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D20",
+      "name": "Vimshamsha",
+      "division_scheme": "Each sign is divided into 20 equal parts of 1°30' each.",
+      "primary_use": "spiritual pursuits",
+      "priority": "low",
+      "overview": "Used to examine spiritual inclination, religious or devotional practice, and the native's capacity for and progress toward initiation into a spiritual path or discipline.",
+      "calculation_note": "The starting sign for the twenty divisions follows a fixed classical rule based on the modality (movable/fixed/dual) of the birth sign.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "spirituality",
+        "devotional practice",
+        "spiritual initiation",
+        "religious inclination"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D30",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D30",
+      "name": "Trimshamsha",
+      "division_scheme": "Each sign is divided into 30 unequal parts, ruled in sequence by five planets (Mars, Saturn, Jupiter, Mercury, and Venus, in a fixed but sign-dependent order and with unequal degree spans per classical rule).",
+      "primary_use": "misfortunes, weaknesses",
+      "priority": "low",
+      "overview": "Used to examine vulnerabilities, misfortunes, moral or characterological weaknesses, and areas where the native may be prone to difficulty or poor judgment, complementing the generally more fortune-oriented focus of most other divisional charts.",
+      "calculation_note": "Because the five planetary divisions within each sign have unequal degree spans (unlike the other vargas listed here, which divide each sign into equal parts) and the assignment order differs for odd versus even signs, this chart requires particularly careful, rule-verified implementation.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "misfortune",
+        "weakness",
+        "moral character",
+        "unequal division scheme"
+      ],
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "DIV-D60",
+      "category": "divisional_charts",
+      "tradition": "Parashari",
+      "varga": "D60",
+      "name": "Shashtiamsha",
+      "division_scheme": "Each sign is divided into 60 equal parts of 0°30' each, with each of the 60 divisions classically assigned its own presiding deity/name from a fixed traditional list.",
+      "primary_use": "past-life karma, fine-grained results",
+      "priority": "low",
+      "overview": "Considered by many classical authorities (including Brihat Parashara Hora Shastra) to be the single most sensitive and important divisional chart for fine-grained confirmation of results and for understanding past-life karma (purva janma) carried into the current birth. Because of its extremely fine 0.5-degree resolution, it is highly sensitive to birth time accuracy.",
+      "calculation_note": "Given the 0.5-degree resolution, an accurate birth time (ideally verified/rectified) is essential; small birth-time errors of only a minute or two can shift the D60 sign, so this chart's reliability depends more heavily on precise input data than any other varga listed here.",
+      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
+      "keywords": [
+        "past-life karma",
+        "fine-grained confirmation",
+        "birth-time sensitivity",
+        "purva janma"
+      ],
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}
