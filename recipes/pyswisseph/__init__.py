@@ -44,6 +44,22 @@ support (it only calls the default Moshier/Swiss Ephemeris analytical
 model), so no ephemeris data files need to be bundled — see ephemeris.py's
 own docstring in engine/ephemeris.py for confirmation of which mode this
 project actually uses.
+
+SECOND real-device bug found post-launch (2026-09-06, both a OnePlus 7T
+Pro and the x86_64 emulator): the app now launches fine, but crashes the
+instant `ephemeris.py`'s `import swisseph` actually runs (i.e. the moment
+"Generate Chart" is pressed, not at startup) with:
+
+    ImportError: dlopen failed: library "libc++_shared.so" not found:
+    needed by .../site-packages/swisseph.so in namespace classloader-namespace
+
+The NDK toolchain links compiled .so extensions against the shared C++
+runtime (libc++_shared.so) even for otherwise-plain-C code like libswe's,
+but python-for-android only copies that runtime library into the final
+APK for recipes that explicitly ask for it - see `need_stl_shared` below.
+Kivy's own recipe sets this (which is why the app could launch, render,
+and run its whole UI without issue up to this point); our recipe never
+did, so nothing ever bundled it for pyswisseph specifically.
 """
 import os
 from pythonforandroid.recipe import CompiledComponentsPythonRecipe
@@ -60,6 +76,15 @@ class PyswissephRecipe(CompiledComponentsPythonRecipe):
     # on 2026-09-06):
     url = "https://files.pythonhosted.org/packages/66/a6/db70d67a00dda42ebd033538c086879328f4c17f670eafe8aca2f11abfef/pyswisseph-{version}.tar.gz"
     depends = ["python3"]
+
+    # Bundles libc++_shared.so (the NDK's shared C++ runtime) into the APK
+    # for this recipe's ABI - without it, swisseph.so fails to dlopen at
+    # runtime with "library libc++_shared.so not found", even though it
+    # links fine at build time (the .so simply isn't present on-device
+    # unless something copies it in). See the module docstring above for
+    # the real crash this fixes, confirmed via adb logcat on both a real
+    # device and the emulator.
+    need_stl_shared = True
 
     # pyswisseph's setup.py must run under the TARGET (Android) Python
     # build environment, not the host build Python, so its Extension gets
