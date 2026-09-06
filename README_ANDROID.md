@@ -10,28 +10,61 @@ Android at all, so the UI layer was rebuilt from scratch on
 does run on Android and packages straight to an `.apk` via
 [Buildozer](https://buildozer.readthedocs.io/).
 
-## Status: a real debug APK has been built and verified (2026-09-06)
+## Status: verified working on a real Android device (2026-09-06)
 
-This project now has a **working, tested build**: `vedicastrology-1.0-
-arm64-v8a_armeabi-v7a-debug.apk`, built end to end from this exact source
-via Docker (Ubuntu 22.04, pinned Buildozer 1.5.0 / python-for-android
-v2024.01.21 / Cython 0.29.36 — see `Dockerfile.build`), including
-`pyswisseph`'s native Swiss Ephemeris C extension cross-compiling and
-linking successfully for both architectures. That was genuinely the
-biggest open question going in, and it's resolved: pyswisseph needed no
-compile-level fixes at all, only a one-line setup.py patch (see
+This project now has a **working, real-device-tested build**:
+`vedicastrology-1.0-arm64-v8a_armeabi-v7a_x86_64-debug.apk` (built via
+GitHub Actions, all three architectures). It was installed on a real
+phone (OnePlus 7T Pro, Android, arm64-v8a) via `adb`, launched, and
+confirmed running past Kivy's full startup sequence (Python init, OpenGL
+context creation on the device's real Adreno 640 GPU, "Start application
+main loop") with the Profile & Birth Data / Chart / Kundli Details /
+Planets tabs all visible and interactive - not just installed, actually
+used.
+
+Getting there took two rounds of real, since-fixed bugs:
+
+**Build-time (toolchain) bugs** — all now captured as comments in
+`buildozer.spec`, `Dockerfile.build`, and `.github/workflows/build-apk.yml`
+for anyone building this again later: python-for-android's own `master`
+branch had a multi-year release gap and jumped straight to targeting
+bleeding-edge Python 3.14 (pinning to the last pre-jump release,
+`v2024.01.21`, sidesteps that entirely); Ubuntu's `libtool` package splits
+a macro libffi needs into `libltdl-dev`; Cython 3.x removed the `long`
+builtin that pyjnius 1.6.1 still uses (hence the classic `0.29.36` pin,
+not a modern one); CPython's `grp` module needs API 26+ (hence
+`android.minapi = 26`); and GitHub's runner image defaults to the wrong
+pre-installed JDK for Gradle (hence pinning `JAVA_HOME` explicitly in the
+workflow). Through all of this, **`pyswisseph`'s native Swiss Ephemeris C
+extension - the thing everyone expected to be hardest - needed no
+compile-level fixes at all**, only a one-line setup.py patch (see
 `recipes/pyswisseph/__init__.py`) for a missing `setuptools` in
 python-for-android's own build-time interpreter.
 
-Getting there took several real, since-fixed toolchain bugs — all now
-captured as comments in `buildozer.spec`, `Dockerfile.build`, and
-`.github/workflows/build-apk.yml` for anyone building this again later:
-python-for-android's own `master` branch had a multi-year release gap and
-jumped straight to targeting bleeding-edge Python 3.14 (pinning to the
-last pre-jump release, `v2024.01.21`, sidesteps that entirely); Ubuntu's
-`libtool` package splits a macro libffi needs into `libltdl-dev`; and
-Cython 3.x removed the `long` builtin that pyjnius 1.6.1 still uses (hence
-the classic `0.29.36` pin, not a modern one).
+**A real runtime bug**, only found by actually installing and running the
+built APK: it crashed immediately on launch every time (splash icon for
+~1 second, then exit). Captured via `adb logcat` on the real device:
+`ModuleNotFoundError: No module named 'filetype'`, raised from
+`kivy/core/image/__init__.py` during Kivy's own startup, before any of
+this project's own code ever ran. Kivy 2.3.1 imports `filetype`
+unconditionally for image-type sniffing; python-for-android's
+auto-detection of Kivy's own extra pure-Python runtime dependencies
+silently missed it. Now listed explicitly in `requirements` in
+`buildozer.spec`.
+
+This is the general lesson worth keeping in mind for any future changes:
+**a build that completes without error is not the same as an app that
+runs.** A clean Buildozer/Gradle build only proves everything compiled
+and linked - it says nothing about whether the app's Python code actually
+imports and runs successfully on-device. `filetype` was never a compile-
+time dependency (nothing fails to *build* without it), only a runtime
+one, so no build log ever flagged it. Whenever `requirements` in
+`buildozer.spec` changes, or after bumping Kivy/pyswisseph/any dependency
+version, re-verify by actually installing and launching the APK — on a
+real device via `adb install` + `adb logcat` (fastest, and tests the real
+target architecture), or failing that, an x86_64 emulator AVD if you add
+`x86_64` to `android.archs` (already done here) so it doesn't need ARM
+translation, which recent emulator images no longer support.
 
 ## Option A — GitHub Actions (no local Android tooling needed)
 
@@ -125,25 +158,39 @@ buildozer android debug
 
 ## What's been verified vs. not
 
-**Verified**: the full Buildozer/python-for-android build pipeline now
-runs end to end and produces a real, installable `.apk` — every recipe
+**Verified**: the full Buildozer/python-for-android build pipeline runs
+end to end and produces a real, installable `.apk` — every recipe
 (CPython, Kivy, pyjnius, and `pyswisseph`'s native Swiss Ephemeris
-extension) compiles and links successfully for both `arm64-v8a` and
-`armeabi-v7a`, and Gradle successfully assembles and signs the debug APK.
-Separately, every screen's actual *logic* (parsing birth-detail input,
-calling the chart engine, populating every table and long-form report,
-computing Family Compatibility with a Life Partner and a Child profile,
-drawing both chart-diagram styles at multiple vargas) was smoke-tested end
-to end against a lightweight Kivy stub that runs the real chart engine
-underneath while faking Kivy's widget mechanics — the same technique used
-earlier in this project to validate the desktop tkinter app without a
-display. All of that logic ran correctly.
+extension) compiles and links successfully for all three architectures
+(`arm64-v8a`, `armeabi-v7a`, `x86_64`), and Gradle successfully assembles
+and signs the debug APK. **The APK has been installed and run on a real
+device** (OnePlus 7T Pro): it launches, Kivy fully initializes (Python,
+OpenGL context on the device's real GPU), and the app reaches its main
+loop with the Profile & Birth Data tab visible and its fields accepting
+real input. Separately, every screen's actual *logic* (parsing
+birth-detail input, calling the chart engine, populating every table and
+long-form report, computing Family Compatibility with a Life Partner and
+a Child profile, drawing both chart-diagram styles at multiple vargas) was
+smoke-tested end to end against a lightweight Kivy stub that runs the real
+chart engine underneath while faking Kivy's widget mechanics — the same
+technique used earlier in this project to validate the desktop tkinter app
+without a display. All of that logic ran correctly.
 
-**Not yet verified**: the built APK has not yet been installed and run on
-a real device or emulator, so real Kivy's actual rendering, touch/click
-behavior, and screen sizing are still unconfirmed. Visual polish (label
-sizing, spacing, the chart diagram's exact proportions) will likely need a
-pass or two once you've installed it and can see it running on a phone.
+**Not yet verified**: only the Profile & Birth Data tab has been
+confirmed on-device so far (basic navigation and field entry). The other
+tabs (Chart diagram rendering, Kundli Details, Planets, Houses, Yogas,
+Dasha, Ashtakvarga, Chalit, Karmic & Past Life, Life Predictions, Full
+Reading, Family Compatibility) haven't yet been exercised on a real
+device — a full end-to-end chart generation (fill in a real birth, tap
+Generate, click through every tab) is the natural next verification step.
+Visual polish (label sizing, spacing, the chart diagram's exact
+proportions) will likely need a pass or two once that's done. There's
+also one confirmed-harmless cosmetic issue in the log: a "Permission
+denied" error copying Kivy's default window-icon files into the app's
+`.kivy/icon/` cache directory on first launch - Kivy catches this itself
+and continues normally (doesn't affect any of this app's own logic), but
+it's worth a look if a custom app icon ever needs to go through that same
+path.
 
 ## Known limitations carried over from the desktop app
 
