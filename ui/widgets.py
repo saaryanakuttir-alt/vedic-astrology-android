@@ -218,6 +218,20 @@ class CaptionLabel(Label):
 
     def _on_width(self, instance, width):
         self.text_size = (width - dp(20), None)
+        # Deferred via Clock rather than calling texture_update()
+        # synchronously right here, same fix and same reasoning as
+        # LongText.set_text() (see its comment) - CaptionLabel's width is
+        # first set the moment its tab becomes the TabbedPanel's visible
+        # content, which is exactly when the TabbedPanel's OWN header
+        # strip is also redrawing for the tab switch. A synchronous
+        # texture_update() here lands in that same rendered frame; on
+        # Android this reportedly left the header strip itself blank
+        # (tab labels invisible) after sliding through several tabs -
+        # never reproducible on desktop. Scheduling this for the next
+        # frame keeps it out of that collision.
+        Clock.schedule_once(self._rebuild_texture, 0)
+
+    def _rebuild_texture(self, dt):
         self.texture_update()
         self.height = max(dp(28), self.texture_size[1] + dp(16))
 

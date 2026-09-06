@@ -10,6 +10,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.metrics import dp
+from kivy.clock import Clock
 
 from ui.widgets import SimpleTable, LongText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
@@ -63,6 +64,13 @@ class FamilyTab(BoxLayout):
         self.summary_label.text = text
         if self.summary_label.width:
             self.summary_label.text_size = (self.summary_label.width, None)
+        # Deferred a frame via Clock rather than calling texture_update()
+        # synchronously right here - same Android same-frame-collision fix
+        # as CaptionLabel/LongText/ProfileTab's status_label (see
+        # widgets.py's CaptionLabel for the fuller writeup).
+        Clock.schedule_once(self._rebuild_summary_texture, 0)
+
+    def _rebuild_summary_texture(self, dt):
         self.summary_label.texture_update()
         self.summary_label.height = max(dp(30), self.summary_label.texture_size[1] + dp(10))
 

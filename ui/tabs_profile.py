@@ -14,6 +14,7 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.metrics import dp
+from kivy.clock import Clock
 
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.widgets import field_row
@@ -123,12 +124,21 @@ class ProfileTab(BoxLayout):
         # for the same reason LongText.set_text() forces texture_update():
         # a property-change-triggered re-layout isn't reliably observed on
         # Android (see widgets.py's LongText for the fuller writeup) - so
-        # force the text_size/height recompute synchronously every time,
-        # rather than depending solely on the width/texture_size bindings
-        # above having already fired with a valid value.
+        # force the text_size/height recompute every time, rather than
+        # depending solely on the width/texture_size bindings above having
+        # already fired with a valid value. The actual texture_update()
+        # call is deferred a frame via Clock (see _rebuild_status_texture)
+        # rather than called synchronously right here - this text changes
+        # right as Generate is pressed, the same moment every other tab's
+        # own refresh() runs and does its own texture work in the same
+        # frame (see widgets.py's CaptionLabel for the fuller writeup of
+        # this Android-only same-frame collision).
         self.status_label.text = text
         if self.status_label.width:
             self.status_label.text_size = (self.status_label.width, None)
+        Clock.schedule_once(self._rebuild_status_texture, 0)
+
+    def _rebuild_status_texture(self, dt):
         self.status_label.texture_update()
         self.status_label.height = max(dp(40), self.status_label.texture_size[1] + dp(10))
 
