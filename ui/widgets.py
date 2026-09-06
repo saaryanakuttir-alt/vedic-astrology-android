@@ -30,9 +30,19 @@ class SimpleTable(ScrollView):
 
     def _add_row(self, values, header=False):
         for value, hint in zip(values, self.col_hints):
+            # height can't be None here even though _resize_label (bound
+            # below) immediately recomputes it once the label's texture is
+            # ready - Kivy's height is a NumericProperty that rejects a
+            # literal None at construction (raises "None is not allowed
+            # for Label.height", confirmed via adb logcat on a real
+            # device/emulator the moment any table got real data rows -
+            # this affects every data tab, not just profile-switching).
+            # dp(28) matches _resize_label's own floor value below, so it's
+            # a sensible placeholder for the instant before that binding
+            # fires.
             lbl = Label(
                 text=str(value), size_hint_x=hint, size_hint_y=None,
-                height=dp(36) if header else None, text_size=(None, None),
+                height=dp(36) if header else dp(28), text_size=(None, None),
                 halign="left", valign="middle", bold=header,
                 color=(1, 0.85, 0.3, 1) if header else (1, 1, 1, 1),
                 shorten=False,
