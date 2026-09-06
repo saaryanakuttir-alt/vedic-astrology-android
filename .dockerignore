@@ -1,0 +1,8 @@
+# The image builds no project files in (source is bind-mounted at run time),
+# so keep the build context minimal - none of this needs sending to the daemon.
+.git
+.buildozer
+bin
+__pycache__
+**/__pycache__
+*.pyc

@@ -6,16 +6,22 @@ app's chart math depends on) has NO official recipe in python-for-android's
 built-in recipe collection, so `buildozer`/`p4a` cannot cross-compile it for
 Android out of the box. This recipe fills that gap.
 
-pyswisseph's own setup.py is a plain distutils Extension build (it compiles
-pyswisseph.c plus every .c file under its bundled libswe/ directory into one
-C extension module) with no exotic build steps, so python-for-android's
-generic `CompiledComponentsPythonRecipe` — which just runs the package's own
-setup.py under the NDK cross-compilation toolchain p4a sets up — should be
-sufficient. This has NOT been build-tested end-to-end in the environment
-this project was developed in (that sandbox has no network access to the
-Android NDK/SDK at all — see chart_engine/BUILD_FROM_SOURCE.md for the
-parallel story with the desktop build). If the Android build fails inside
-this recipe specifically, the likely fixes, roughly in order of likelihood:
+pyswisseph's own setup.py is (almost) a plain distutils Extension build (it
+compiles pyswisseph.c plus every .c file under its bundled libswe/ directory
+into one C extension module), so python-for-android's generic
+`CompiledComponentsPythonRecipe` — which just runs the package's own
+setup.py under the NDK cross-compilation toolchain p4a sets up — is
+sufficient, with one patch (see prebuild_arch below): a real build attempt
+(2026-09-06, Buildozer 1.5.0 + python-for-android v2024.01.21, Docker/
+Ubuntu 22.04) got all the way into pyswisseph's own setup_ext build with no
+C-level cross-compilation issues at all — the only failure was setup.py's
+`from setuptools import ...` import, since p4a's hostpython3 (which runs
+setup.py here) is built --without-ensurepip and has no setuptools.
+prebuild_arch below patches that one import to distutils.core instead
+(every setup() argument used is plain-distutils-compatible - see the
+patch's own comment). Re-verify after that patch; if the build fails for a
+*different* reason, the speculative fixes below (still unconfirmed) are
+the next things to try:
 
   1. pyswisseph's setup.py probes for a system `pkg-config libswe` and only
      falls back to building its bundled libswe/ sources from scratch if that
@@ -39,6 +45,7 @@ model), so no ephemeris data files need to be bundled — see ephemeris.py's
 own docstring in engine/ephemeris.py for confirmation of which mode this
 project actually uses.
 """
+import os
 from pythonforandroid.recipe import CompiledComponentsPythonRecipe
 
 
@@ -67,6 +74,29 @@ class PyswissephRecipe(CompiledComponentsPythonRecipe):
         env["PKG_CONFIG_PATH"] = ""
         env["PKG_CONFIG_LIBDIR"] = ""
         return env
+
+    def prebuild_arch(self, arch):
+        super().prebuild_arch(arch)
+        # p4a's own hostpython3 (the interpreter that actually RUNS this
+        # setup.py, since call_hostpython_via_targetpython is False above)
+        # is built with --without-ensurepip, so it has no setuptools - only
+        # the stdlib. setup.py's only use of setuptools is the single
+        # `from setuptools import setup, Extension` import; every argument
+        # passed to setup() below that (name/version/description/author/
+        # classifiers/ext_modules/...) is plain distutils-compatible, so
+        # swapping the import for distutils.core (still present in the
+        # Python 3.11 this recipe builds) needs nothing else to change.
+        setup_py = self.get_build_dir(arch.arch) + "/setup.py"
+        if os.path.exists(setup_py):
+            with open(setup_py, "r", encoding="utf-8") as f:
+                content = f.read()
+            patched = content.replace(
+                "from setuptools import setup, Extension",
+                "from distutils.core import setup, Extension",
+            )
+            if patched != content:
+                with open(setup_py, "w", encoding="utf-8") as f:
+                    f.write(patched)
 
 
 recipe = PyswissephRecipe()

@@ -29,16 +29,15 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip \
-            autoconf libtool pkg-config zlib1g-dev libncurses5-dev \
-            libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          # Cython was previously pinned to 0.29.36 (the classic Kivy/Buildozer
-          # advice for older toolchains), but that version predates Python
-          # 3.13's removal of the private _PyLong_AsByteArray() C-API function
-          # Cython 0.29.x's generated C code calls — it fails to compile
-          # against a Python 3.14 host build with "too few arguments to
-          # function call, expected 6, have 5" across many of Kivy's
-          # .pyx-generated files. Install a modern Cython instead, which
-          # already carries the Python 3.13+ fix.
+            autoconf automake libtool libtool-bin libltdl-dev pkg-config \
+            zlib1g-dev libncurses-dev libncursesw5-dev libtinfo5 cmake \
+            libffi-dev libssl-dev liblzma-dev uuid-dev libbz2-dev \
+            libsqlite3-dev libreadline-dev libgdbm-dev libgdbm-compat-dev
+          # libltdl-dev specifically: provides /usr/share/aclocal/ltdl.m4,
+          # which defines the LT_SYS_SYMBOL_USCORE macro libffi's own
+          # configure.ac needs - without it, libffi's autoreconf step fails
+          # with "possibly undefined macro: LT_SYS_SYMBOL_USCORE" (plain
+          # libtool/libtool-bin isn't enough on Ubuntu).
           #
           # buildozer is pinned to 1.5.0 (Jan 2023) to match the pinned
           # python-for-android release in buildozer.spec's p4a.branch
@@ -46,7 +45,20 @@ jobs:
           # buildozer's own most recent release (1.6.0/2.7, May 2026) was
           # built alongside p4a's new Python-3.14-targeting rewrite and
           # isn't tested against the older p4a we're deliberately using here.
-          pip install "buildozer==1.5.0" "cython>=3.0.11"
+          #
+          # Cython is pinned to the classic 0.29.36, NOT a modern 3.x
+          # release. This p4a (v2024.01.21) uses ONE globally-installed
+          # `cython` for every recipe (no per-recipe isolated build-env like
+          # newer p4a releases have), and pyjnius 1.6.1's jnius_utils.pxi
+          # uses `isinstance(arg, long)` - Cython 3.x removed `long` from
+          # its builtin namespace entirely (Python 3 unified int/long),
+          # failing with "undeclared name not builtin: long". Cython 0.29.x
+          # still recognizes it, and Kivy 2.3.1 (pinned above) supports
+          # being built with either Cython line, so 0.29.36 is simply
+          # correct for this whole pinned-toolchain environment - verified
+          # by a full local build (2026-09-06, Docker/Ubuntu 22.04) that
+          # produced a working, installable debug APK end to end.
+          pip install "buildozer==1.5.0" "cython==0.29.36"
 
       - name: Build debug APK with Buildozer
         run: |

@@ -1,0 +1,66 @@
+# Controlled Buildozer build environment.
+#
+# WHY A DOCKERFILE (not just `buildozer android debug` on the host):
+# our host here is WSL Ubuntu 26.04 with Python 3.14 - the exact
+# bleeding-edge combination that broke every earlier attempt. This pins a
+# known-good Ubuntu 22.04 + Python 3.11 environment and, crucially, installs
+# the system -dev packages the GitHub Actions runs were missing
+# (liblzma-dev, uuid-dev, libncurses/…-dev), which is what actually caused
+# the older python-for-android's CPython cross-compile to fail with
+# "lzma.h file not found" and "unable to find library -luuid".
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Toolchain + every C library CPython's optional modules need at build time.
+# openjdk-17 for the Android build tooling; the rest are p4a/CPython deps.
+# libltdl-dev specifically: provides /usr/share/aclocal/ltdl.m4, which
+# defines the LT_SYS_SYMBOL_USCORE macro libffi's own configure.ac needs -
+# without it, libffi's autoreconf step fails with "possibly undefined
+# macro: LT_SYS_SYMBOL_USCORE" (plain libtool/libtool-bin isn't enough;
+# Ubuntu splits this specific macro out into libltdl-dev).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3.11 python3.11-dev python3.11-venv python3-pip \
+        git zip unzip openjdk-17-jdk \
+        autoconf automake libtool libtool-bin libltdl-dev pkg-config \
+        zlib1g-dev libncurses-dev libncursesw5-dev libtinfo5 \
+        cmake \
+        libffi-dev libssl-dev \
+        liblzma-dev uuid-dev libbz2-dev libsqlite3-dev libreadline-dev \
+        libgdbm-dev libgdbm-compat-dev \
+        build-essential ca-certificates curl wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Make python3.11 the default python3/python in this image so buildozer and
+# python-for-android both run under 3.11 (not the system default), avoiding
+# the Python 3.13/3.14 host issues seen earlier.
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
+
+# Buildozer 1.5.0 + classic Cython 0.29.36.
+#
+# NOTE: an earlier iteration of this Dockerfile pinned "cython>=3.0.11"
+# instead - that was the right fix for a DIFFERENT problem (Kivy 2.3.0's
+# Cython 3.0.0 pin breaking under Python 3.13's removed _PyLong_AsByteArray
+# C-API function) that only applied to the newer python-for-android/CI path
+# targeting Python 3.14. This Dockerfile pins p4a to v2024.01.21 (see
+# buildozer.spec), which targets an older CPython entirely - that problem
+# doesn't exist here. Worse, this old p4a uses ONE global `cython` install
+# for every recipe (no per-recipe isolated build-env like the newer p4a),
+# so bumping it broke a DIFFERENT package instead: pyjnius 1.6.1's
+# jnius_utils.pxi uses `isinstance(arg, long)`, and Cython 3.x removed
+# `long` from its builtin namespace entirely (Python 3 unified int/long) -
+# "undeclared name not builtin: long". Cython 0.29.x still recognizes it,
+# and Kivy 2.3.1 supports being built with either Cython line, so 0.29.36
+# is simply correct for this whole environment.
+RUN python3.11 -m pip install --upgrade pip \
+    && python3.11 -m pip install "buildozer==1.5.0" "cython==0.29.36"
+
+# Buildozer refuses to run as root without this.
+ENV APP_ANDROID_ROOT=/work
+WORKDIR /work
+
+# The actual build is invoked at `docker run` time (not baked into the image)
+# so the Android SDK/NDK it downloads on first run can be cached in a mounted
+# volume and the project source can be bind-mounted fresh each run.
+CMD ["bash", "-lc", "buildozer android debug"]

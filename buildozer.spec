@@ -50,9 +50,15 @@ icon.filename = %(source.dir)s/icon.png
 
 android.permissions = INTERNET
 
-# Android API levels — 21 (Lollipop) covers effectively all real devices
-# still in use; target the latest stable API p4a supports well.
-android.minapi = 21
+# Android API levels. minapi bumped from 21 to 26: the pinned
+# python-for-android (v2024.01.21) builds CPython 3.11 for the device, and
+# CPython's grp module calls setgrent()/getgrent()/endgrent(), which
+# Android's Bionic libc only declares at API 26+. Building against ndk-api
+# 21 made those implicit declarations a fatal -Werror compile error
+# (grpmodule.c) - raising the floor to 26 (Android 8.0, still ~95%+ of
+# active devices) makes them available and lets CPython compile. See the
+# grpmodule.c errors in the earlier CI logs.
+android.minapi = 26
 android.api = 33
 android.ndk = 25b
 android.archs = arm64-v8a, armeabi-v7a
