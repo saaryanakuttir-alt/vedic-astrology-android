@@ -72,14 +72,15 @@ android.permissions = INTERNET
 android.minapi = 26
 android.api = 33
 android.ndk = 25b
-# x86_64 added alongside the two ARM ABIs specifically so this APK can run
-# on the Android Studio emulator (an x86_64 VM by default on Windows/Linux
-# hosts) for local testing without a physical device - the emulator's
-# QEMU2 backend refuses to run arm64 system images on an x86_64 host at
-# all ("Avd's CPU Architecture 'arm64' is not supported... System image
-# must match the host architecture"), and this Ubuntu 22.04/API 33 image
-# has no ARM-translation layer either.
-android.archs = arm64-v8a, armeabi-v7a, x86_64
+# arm64-v8a ONLY for the distributable phone APK: every modern real phone
+# (incl. the OnePlus 7T Pro this ships to) is arm64, and a single-ABI APK
+# is roughly half the size of the three-ABI universal one (~25MB vs ~59MB)
+# - small enough to hand over directly. To rebuild the universal APK for
+# emulator testing again, restore:
+#   android.archs = arm64-v8a, armeabi-v7a, x86_64
+# (x86_64 is what let the Android Studio emulator - an x86_64 VM - run it;
+# its QEMU2 backend refuses arm64 system images on an x86_64 host.)
+android.archs = arm64-v8a
 
 [buildozer]
 log_level = 2
