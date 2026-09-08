@@ -86,6 +86,17 @@ def aspect_distances_for(planet):
     return SPECIAL_ASPECT_DISTANCES.get(planet, _DEFAULT_ASPECT_DISTANCES)
 
 
+def ordinal(n):
+    """1 -> '1st', 2 -> '2nd', 3 -> '3rd', 4..12 -> 'Nth'. Houses only ever
+    run 1-12 in this project, so the general English exceptions at 11/12/13
+    (which would otherwise need "11th" not "11st") never actually arise
+    here - this is deliberately NOT a general-purpose ordinal formatter.
+    Added after finding "the 1th house", "the 2th house" hardcoded in
+    rule_engine.py's life-predictions template - the same trivial-but-
+    visible bug an external report was independently caught making."""
+    return {1: "1st", 2: "2nd", 3: "3rd"}.get(n, f"{n}th")
+
+
 def house_distance(from_house, to_house):
     """Inclusive-counting distance from `from_house` to `to_house` (1-12),
     matching houses.get_house_of_sign's convention: same house = 1, the

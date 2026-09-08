@@ -41,7 +41,7 @@ import maitri
 import upaya
 import relationship_themes
 import doshas
-from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
+from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity, ordinal
 from yogas import detect_all_yogas
 
 _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]
@@ -328,6 +328,18 @@ def _planet_reading(chart, planet, warnings):
 
 
 def _house_lord_readings(chart, warnings):
+    """BUG FIX (found by auditing a third-party report that made the exact
+    same mistake): `lord_sign` must be the sign the LORD PLANET itself
+    occupies, not the sign of the house being described. Every downstream
+    consumer of this dict (_hl_text, the Karmic/Longevity prose, and
+    dignity_points()'s longevity scoring) reads `lord_sign` expecting
+    "what sign is this lord actually sitting in" - e.g. "the 10th house's
+    lord Jupiter (in {lord_sign}, placed in house {placed_in_house})" only
+    makes sense if lord_sign is Jupiter's own sign (Leo), not Pisces (the
+    10th house's sign, which is what SIGN_LORD[sign] was keyed off of to
+    find the lord in the first place - it was already available as
+    houses[house_num] directly, so nothing downstream needed it repeated
+    here under a name that implied something else)."""
     houses = chart["houses"]
     readings = {}
     for house_num in range(1, 13):
@@ -336,7 +348,8 @@ def _house_lord_readings(chart, warnings):
         placed_in = chart["planets"][lord]["house"]
         readings[house_num] = {
             "lord": lord,
-            "lord_sign": sign,
+            "house_sign": sign,  # the sign THIS HOUSE itself is (e.g. for a Houses-tab "Sign" column)
+            "lord_sign": chart["planets"][lord]["sign"],  # the sign the lord PLANET actually occupies
             "placed_in_house": placed_in,
             "reading": _lookup("house_lord_placement", house_lord_id(house_num, placed_in), warnings),
         }
@@ -956,7 +969,7 @@ def _hl_text(house_lords, house_num, prefer="effects"):
     if not r:
         return None
     text = r.get(prefer) or r.get("summary")
-    return f"the {house_num}th house's lord {hl['lord']} (in {hl['lord_sign']}, placed in house {hl['placed_in_house']}): {text}"
+    return f"the {ordinal(house_num)} house's lord {hl['lord']} (in {hl['lord_sign']}, placed in house {hl['placed_in_house']}): {text}"
 
 
 def _planet_text(planets_reading, planet, prefer="in_house"):

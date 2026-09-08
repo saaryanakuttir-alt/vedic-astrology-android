@@ -14,6 +14,7 @@ from kivy.metrics import dp
 
 from ui.widgets import SimpleTable, CaptionLabel
 from panchanga import SIGNS
+from astrology_tables import ordinal
 
 
 class _BaseTableTab(BoxLayout):
@@ -172,9 +173,10 @@ class HousesTab(_BaseTableTab):
             return
         rows = []
         for house_num, detail in reading["house_lords"].items():
-            relation = detail["reading"]["relation_of_placed_house_from_lord_house"] if detail["reading"] else "?"
-            rows.append((house_num, detail["lord_sign"], detail["lord"], detail["placed_in_house"],
-                         f"{relation}th from its own house"))
+            relation = detail["reading"]["relation_of_placed_house_from_lord_house"] if detail["reading"] else None
+            relation_text = f"{ordinal(relation)} from its own house" if relation is not None else "?"
+            rows.append((house_num, detail["house_sign"], detail["lord"], detail["placed_in_house"],
+                         relation_text))
         self.table.set_rows(rows)
 
 
