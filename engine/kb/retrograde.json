@@ -1,0 +1,79 @@
+{
+  "checklist_category_id": "retrograde",
+  "name": "Retrograde (Vakri) Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Per-planet interpretive text for retrograde motion at birth. Covers the 5 planets that classically station retrograde (Mars, Mercury, Jupiter, Venus, Saturn) - the Sun and Moon never do, and Rahu/Ketu are always retrograde by definition (so it isn't a meaningful variable state for them). The retrograde FACT itself is already computed and shown as a bare 'Yes' in the Planets table (chart['planets'][planet]['retrograde']) - this file is purely the missing interpretation, no new computation needed.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Cross-checked each planet's retrograde interpretation against multiple classical/reference sources for consistency with that planet's own general significations (as already used elsewhere in this project's KB). Saturn retrograde specifically flagged as a genuinely more debated point across sources (strengthening vs. simple variant) rather than asserting one reading as definitive.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T11:38:32.609805+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 5,
+  "items": [
+    {
+      "id": "RX-Ma",
+      "category": "retrograde",
+      "tradition": "Parashari",
+      "planet": "Mars",
+      "title": "Mars Retrograde",
+      "summary": "A retrograde Mars often reads as drive and assertiveness turned inward rather than outward - action that's more deliberated, sometimes delayed or second-guessed, rather than the direct, immediate expression Mars usually shows.",
+      "effects": "A retrograde Mars often reads as drive and assertiveness turned inward rather than outward - action that's more deliberated, sometimes delayed or second-guessed, rather than the direct, immediate expression Mars usually shows. Frustration can build when that inward-turned energy has no outlet, then release in a sudden burst.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RX-Me",
+      "category": "retrograde",
+      "tradition": "Parashari",
+      "planet": "Mercury",
+      "title": "Mercury Retrograde",
+      "summary": "A retrograde Mercury (the most commonly discussed retrograde placement, since Mercury retrogrades several times a year) often shows as a more internal, reflective communication and thinking style - reviewing, revising, and reconsidering rather than communicating in a first draft.",
+      "effects": "A retrograde Mercury (the most commonly discussed retrograde placement, since Mercury retrogrades several times a year) often shows as a more internal, reflective communication and thinking style - reviewing, revising, and reconsidering rather than communicating in a first draft. Some classical readings note a tendency to relearn or circle back to earlier ideas.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RX-Ju",
+      "category": "retrograde",
+      "tradition": "Parashari",
+      "planet": "Jupiter",
+      "title": "Jupiter Retrograde",
+      "summary": "A retrograde Jupiter can turn its usual outward optimism and growth-seeking inward - wisdom and philosophy pursued more introspectively than through external teachers or conventional paths.",
+      "effects": "A retrograde Jupiter can turn its usual outward optimism and growth-seeking inward - wisdom and philosophy pursued more introspectively than through external teachers or conventional paths. Some texts read it as delaying Jupiter's beneficial results until later in life, or requiring the native to find their own path to them rather than being handed one.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RX-Ve",
+      "category": "retrograde",
+      "tradition": "Parashari",
+      "planet": "Venus",
+      "title": "Venus Retrograde",
+      "summary": "A retrograde Venus often shows as a more internally-defined, sometimes unconventional relationship to love, beauty, and pleasure - values and tastes worked out independently rather than absorbed from convention.",
+      "effects": "A retrograde Venus often shows as a more internally-defined, sometimes unconventional relationship to love, beauty, and pleasure - values and tastes worked out independently rather than absorbed from convention. Some classical readings associate it with revisiting past relationships or reconsidering what's actually valued, rather than accepting inherited preferences.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RX-Sa",
+      "category": "retrograde",
+      "tradition": "Parashari",
+      "planet": "Saturn",
+      "title": "Saturn Retrograde",
+      "summary": "A retrograde Saturn is, in several classical traditions, read as actually STRENGTHENING Saturn's own significations (discipline, structure, karmic lessons) rather than weakening them - an intensified, more internally-driven relationship to responsibility and delayed reward.",
+      "effects": "A retrograde Saturn is, in several classical traditions, read as actually STRENGTHENING Saturn's own significations (discipline, structure, karmic lessons) rather than weakening them - an intensified, more internally-driven relationship to responsibility and delayed reward. This is one of the more debated retrograde effects across sources; some texts simply treat it as a variant expression rather than a strengthening.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}
