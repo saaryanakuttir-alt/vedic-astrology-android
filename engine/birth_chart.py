@@ -117,7 +117,26 @@ def compute_birth_chart(name, birth_date, birth_time, place_name,
                          country_hint=None, latitude=None, longitude=None, tz_name=None,
                          dasha_years_forward=120, sex=None):
     """See module docstring for parameters. Returns a plain dict (JSON-serializable
-    after passing datetimes through str() — see save_chart_json below)."""
+    after passing datetimes through str() — see save_chart_json below).
+
+    Wrapped in ephemeris.EPHEMERIS_LOCK: pyswisseph is not thread-safe (see
+    that module's own note) - this ensures no two calls into it ever
+    interleave, regardless of how many threads call compute_birth_chart
+    concurrently (the local web app's ThreadingHTTPServer is the one
+    caller in this project that actually can)."""
+    with ephemeris.EPHEMERIS_LOCK:
+        ephemeris.ensure_sidereal_mode()
+        return _compute_birth_chart_locked(
+            name, birth_date, birth_time, place_name, country_hint,
+            latitude, longitude, tz_name, dasha_years_forward, sex,
+        )
+
+
+def _compute_birth_chart_locked(name, birth_date, birth_time, place_name,
+                                 country_hint, latitude, longitude, tz_name,
+                                 dasha_years_forward, sex):
+    """The actual implementation - see compute_birth_chart above, which is
+    just this function wrapped in the ephemeris thread-safety lock."""
 
     lat, lon, tz_name, location_meta = _resolve_location(
         place_name, country_hint, latitude, longitude, tz_name)

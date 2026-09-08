@@ -15,12 +15,51 @@ The mean node moves smoothly; the true node oscillates slightly. Both are
 used in modern practice — mean node is the more traditional default and is
 what this module uses. To switch to the true node, change MEAN_NODE to
 swe.TRUE_NODE below.
+
+THREAD SAFETY: pyswisseph's sidereal mode (set_sid_mode) is THREAD-LOCAL in
+the underlying C library - confirmed by direct testing (2026-09-08).
+set_sid_mode(SIDM_LAHIRI) below runs once at import time, on whichever
+thread happens to import this module first (the main thread, in every
+caller this project has). Any OTHER thread that later calls swisseph
+directly - with NO error, warning, or exception of any kind - silently
+computes against THAT thread's own never-initialized sidereal mode
+instead, giving a wrong but perfectly deterministic ayanamsa (off by
+~0.88 degrees in the case tested), enough to shift a planet into the
+wrong divisional-chart sign or house boundary. This only bit the local
+web app (webapp/server.py's ThreadingHTTPServer genuinely runs each
+request's Python code on its own thread); the single-threaded desktop
+and Android UIs never call this module from more than one thread, so
+they were never at risk. The fix is ensure_sidereal_mode() below -
+call it at the very start of any function that will call into swisseph,
+on the CURRENT thread, every time (it's a cheap C call - safe and cheap
+to call unconditionally rather than trying to track "has this thread
+already set it"). EPHEMERIS_LOCK is kept as well, as ordinary good
+hygiene around a C extension with any shared mutable state, but it is
+NOT what fixes this specific bug (a lock only prevents two threads
+running at the SAME instant - this bug reproduces on a single, lone,
+non-main thread with no other thread running at all).
 """
+import threading
+
 import swisseph as swe
+
+EPHEMERIS_LOCK = threading.Lock()
+
+
+def ensure_sidereal_mode():
+    """Call at the start of every function that calls into swisseph,
+    before any other swe.* call, on whatever thread is actually running -
+    see the THREAD SAFETY note above for why this can't just be the
+    module-level call below."""
+    swe.set_sid_mode(swe.SIDM_LAHIRI)
+
 
 # ---------------------------------------------------------------------------
 # Ayanamsa
 # ---------------------------------------------------------------------------
+# Kept for the main thread's own first import (and any single-threaded
+# caller that never touches ensure_sidereal_mode itself) - NOT sufficient
+# on its own for multi-threaded callers, see THREAD SAFETY above.
 swe.set_sid_mode(swe.SIDM_LAHIRI)
 
 # ---------------------------------------------------------------------------
