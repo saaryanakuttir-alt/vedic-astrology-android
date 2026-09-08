@@ -23,6 +23,57 @@ import re
 
 _DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "world_cities.csv")
 
+# Country hints can be typed as a full name or common variant, not just the
+# ISO code the gazetteer stores. Without this, "Germany"/"USA"/"UK" fail to
+# disambiguate and a common city name (e.g. "London") can resolve to the
+# wrong country. Keyed by _normalize()'d text -> ISO 3166-1 alpha-2. Focused
+# on the countries with large Indian-expat populations, plus common aliases.
+_COUNTRY_ALIASES = {
+    "in": "IN", "india": "IN", "bharat": "IN",
+    "us": "US", "usa": "US", "united states": "US", "united states of america": "US",
+    "america": "US", "the us": "US",
+    "uk": "GB", "gb": "GB", "united kingdom": "GB", "great britain": "GB",
+    "britain": "GB", "england": "GB", "scotland": "GB", "wales": "GB",
+    "de": "DE", "germany": "DE", "deutschland": "DE",
+    "ca": "CA", "canada": "CA",
+    "au": "AU", "australia": "AU",
+    "ae": "AE", "uae": "AE", "united arab emirates": "AE", "dubai": "AE",
+    "sg": "SG", "singapore": "SG",
+    "nz": "NZ", "new zealand": "NZ",
+    "za": "ZA", "south africa": "ZA",
+    "ie": "IE", "ireland": "IE",
+    "nl": "NL", "netherlands": "NL", "holland": "NL",
+    "fr": "FR", "france": "FR",
+    "qa": "QA", "qatar": "QA",
+    "sa": "SA", "saudi arabia": "SA", "ksa": "SA",
+    "my": "MY", "malaysia": "MY",
+    "np": "NP", "nepal": "NP",
+    "bd": "BD", "bangladesh": "BD",
+    "lk": "LK", "sri lanka": "LK",
+    "pk": "PK", "pakistan": "PK",
+}
+
+# Renamed / alternately-spelled cities: map the older or alternate name the
+# user is likely to type -> the name the GeoNames-derived gazetteer stores.
+# Especially the major Indian renamings expats grew up with.
+_CITY_ALIASES = {
+    "bangalore": "bengaluru",
+    "bombay": "mumbai",
+    "calcutta": "kolkata",
+    "madras": "chennai",
+    "poona": "pune",
+    "baroda": "vadodara",
+    "trivandrum": "thiruvananthapuram",
+    "cochin": "kochi",
+    "mysore": "mysuru",
+    "gurgaon": "gurugram",
+    "pondicherry": "puducherry",
+    "benares": "varanasi", "banaras": "varanasi",
+    "mangalore": "mangaluru",
+    "belgaum": "belagavi",
+    "cawnpore": "kanpur",
+}
+
 
 def _normalize(name):
     """Lowercase, strip accents-ish punctuation, collapse whitespace, so
@@ -72,12 +123,29 @@ def lookup_place(place_name, country_hint=None):
     # before the first comma as the primary search term.
     primary = place_name.split(",")[0]
     norm = _normalize(primary)
+    # Fall back to a known alternate/old spelling if the literal name misses
+    # (e.g. "Bangalore" -> "bengaluru").
+    if norm not in _BY_NORM_NAME and norm in _CITY_ALIASES:
+        norm = _CITY_ALIASES[norm]
 
     candidates = _BY_NORM_NAME.get(norm, [])
 
+    # Prefix fallback for multi-word official names people shorten:
+    # "Frankfurt" -> "Frankfurt am Main", "Bengaluru" typed as part, etc.
+    # Word-boundary safe (requires a following space) so "London" does NOT
+    # match "Londonderry". Only used when the exact/alias lookup missed.
+    if not candidates:
+        prefix = norm + " "
+        candidates = [c for c in _CITIES
+                      if c["_norm"] == norm or c["_norm"].startswith(prefix)]
+
     if country_hint:
-        country_hint = country_hint.upper()
-        filtered = [c for c in candidates if c["country"] == country_hint]
+        # Accept full country names / common variants ("Germany", "USA",
+        # "UK", "Dubai"), not just the ISO code, so disambiguation works
+        # for how people actually type their country.
+        hint_norm = _normalize(country_hint)
+        code = _COUNTRY_ALIASES.get(hint_norm, country_hint.upper())
+        filtered = [c for c in candidates if c["country"] == code]
         if filtered:
             candidates = filtered
 

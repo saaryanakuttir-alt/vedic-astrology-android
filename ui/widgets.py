@@ -12,9 +12,12 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
-from kivy.graphics import Color, Rectangle
+from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.metrics import dp
 from kivy.clock import Clock
+
+from ui import theme
 
 # Border color shows through the 1dp gaps GridLayout leaves between cells
 # (see _make_cell_background below) - a plain medium gray reads as a grid
@@ -255,3 +258,122 @@ def field_row(label_text, widget, height=dp(40)):
     row.add_widget(label)
     row.add_widget(widget)
     return row
+
+
+class ChipButton(Button):
+    """A small rounded "filter chip" toggle - used for the Help & FAQ
+    tab's category filter row. Not a real ToggleButton (Kivy's default
+    toggle group styling is the same flat gray atlas as Button) - this
+    just tracks its own `active` flag and redraws its own canvas rounded-
+    rect so the selected chip visibly stands out in gold."""
+
+    def __init__(self, text, **kwargs):
+        kwargs.setdefault("background_normal", "")
+        kwargs.setdefault("background_down", "")
+        kwargs.setdefault("size_hint", (None, None))
+        kwargs.setdefault("height", dp(36))
+        kwargs.setdefault("padding", (dp(14), 0))
+        super().__init__(text=text, **kwargs)
+        self.active = False
+        self.font_size = "12.5sp"
+        self.bold = True
+        # Width follows the label's own text, plus side padding - a fixed
+        # width would either clip long category names or waste space on
+        # short ones.
+        self.bind(texture_size=lambda *_: setattr(self, "width", self.texture_size[0] + dp(28)))
+        with self.canvas.before:
+            self._bg_color = Color(*theme.PANEL_SOFT)
+            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(18)])
+        self.bind(pos=self._sync, size=self._sync)
+        self._apply_active()
+
+    def _sync(self, *_):
+        self._bg.pos = self.pos
+        self._bg.size = self.size
+
+    def set_active(self, active):
+        self.active = active
+        self._apply_active()
+
+    def _apply_active(self):
+        self._bg_color.rgba = theme.GOLD if self.active else theme.PANEL_SOFT
+        self.color = theme.GOLD_TEXT if self.active else theme.INK_SOFT
+
+
+class ExpandableCard(BoxLayout):
+    """One collapsible question/answer card for the Help & FAQ tab: a
+    tappable header (question + a caret) that shows/hides a wrapped
+    answer label beneath it - the mobile equivalent of the desktop app's
+    tk.Button-header FAQ card and the web app's .faq-card accordion."""
+
+    def __init__(self, question, answer, **kwargs):
+        kwargs.setdefault("orientation", "vertical")
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("padding", (0, 0))
+        kwargs.setdefault("spacing", 0)
+        super().__init__(**kwargs)
+        self._open = False
+
+        with self.canvas.before:
+            Color(*theme.PANEL_SOFT)
+            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(10)])
+        self.bind(pos=self._sync_bg, size=self._sync_bg)
+
+        self.header = Button(
+            text="▸  " + question, background_normal="", background_down="",
+            background_color=(0, 0, 0, 0), color=theme.INK, bold=True,
+            font_size="14sp", halign="left", valign="middle",
+            size_hint_y=None, height=dp(52), padding=(dp(14), dp(6)),
+        )
+        # A fixed dp(52) height clips any question long enough to wrap to
+        # two lines on a narrow phone (several of these questions run
+        # 60-80+ characters - see faq_data.py) - the same class of bug
+        # documented at length elsewhere in this file (CaptionLabel/
+        # LongText), so this uses the same fix: bind width -> text_size,
+        # then grow height to the real rendered texture_size, with the
+        # texture rebuild itself deferred a frame via Clock.
+        self.header.bind(width=self._on_header_width, texture_size=self._on_header_texture_size)
+        self.header.bind(on_release=lambda *_: self.toggle())
+        self.add_widget(self.header)
+
+        self.answer_label = Label(
+            text=answer, color=theme.INK_SOFT, font_size="13sp",
+            halign="left", valign="top", size_hint_y=None, height=0,
+            padding=(dp(14), dp(4)), opacity=0,
+        )
+        self.answer_label.bind(texture_size=self._resize_answer, width=self._update_answer_text_size)
+        self.add_widget(self.answer_label)
+
+        self.bind(minimum_height=self.setter("height"))
+
+    def _sync_bg(self, *_):
+        self._bg.pos = self.pos
+        self._bg.size = self.size
+
+    def _on_header_width(self, header, width):
+        header.text_size = (width - dp(20), None)
+        Clock.schedule_once(self._rebuild_header_texture, 0)
+
+    def _on_header_texture_size(self, header, texture_size):
+        header.height = max(dp(52), texture_size[1] + dp(20))
+
+    def _rebuild_header_texture(self, dt):
+        self.header.texture_update()
+        self.header.height = max(dp(52), self.header.texture_size[1] + dp(20))
+
+    def _update_answer_text_size(self, label, width):
+        label.text_size = (width - dp(20), None)
+
+    def _resize_answer(self, label, texture_size):
+        if self._open:
+            label.height = texture_size[1] + dp(16)
+
+    def toggle(self):
+        self._open = not self._open
+        self.header.text = ("▾  " if self._open else "▸  ") + self.header.text[3:]
+        if self._open:
+            self.answer_label.opacity = 1
+            self.answer_label.height = max(dp(1), self.answer_label.texture_size[1] + dp(16))
+        else:
+            self.answer_label.opacity = 0
+            self.answer_label.height = 0

@@ -16,8 +16,10 @@ from kivy.uix.popup import Popup
 from kivy.metrics import dp
 from kivy.clock import Clock
 
+from ui import theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.widgets import field_row
+from ui.theme import ThemedButton
 
 
 def _show_message(title, text):
@@ -39,10 +41,24 @@ def _show_message(title, text):
 
 
 class ProfileTab(BoxLayout):
+    # Distinct-but-valid sample births per profile, so a whole family can
+    # be populated and generated in seconds for quick testing - the same
+    # data gui_app.py's _EXAMPLE_BIRTHS and app.js's EXAMPLE_BIRTHS use.
+    _EXAMPLE_BIRTHS = {
+        "self":    ("Example Self",    "1990", "06", "15", "14", "30", "Mumbai",    "IN", "Male"),
+        "partner": ("Example Partner", "1992", "11", "03", "09", "15", "Delhi",     "IN", "Female"),
+        "child_1": ("Example Child 1", "2016", "04", "22", "07", "45", "Bengaluru", "IN", "Male"),
+        "child_2": ("Example Child 2", "2019", "09", "10", "18", "05", "Chennai",   "IN", "Female"),
+        "child_3": ("Example Child 3", "2021", "01", "27", "11", "20", "Pune",      "IN", "Male"),
+        "child_4": ("Example Child 4", "2023", "07", "08", "22", "50", "Kolkata",   "IN", "Female"),
+    }
+
     def __init__(self, store, on_chart_generated, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
         self.on_chart_generated = on_chart_generated
+
+        self.add_widget(theme.SectionHeader("\U0001FA90", "Birth Details"))
 
         self.profile_spinner = Spinner(
             text=PROFILE_LABELS[self.store.current_profile_id],
@@ -93,9 +109,18 @@ class ProfileTab(BoxLayout):
         ]:
             form.add_widget(field_row(label_text, widget))
 
-        generate_btn = Button(text="Generate Chart", size_hint_y=None, height=dp(50))
+        generate_btn = ThemedButton(text="Generate Chart", gold=True, size_hint_y=None, height=dp(50))
         generate_btn.bind(on_release=self._on_generate)
         self.add_widget(generate_btn)
+
+        quick_row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(44), spacing=dp(6))
+        example_btn = ThemedButton(text="Use example (this profile)", font_size="11.5sp")
+        example_btn.bind(on_release=lambda *_: self._fill_example())
+        example_all_btn = ThemedButton(text="Example family (fill + generate all)", font_size="11sp")
+        example_all_btn.bind(on_release=lambda *_: self._fill_example_all())
+        quick_row.add_widget(example_btn)
+        quick_row.add_widget(example_all_btn)
+        self.add_widget(quick_row)
 
         # text_size bound to width (not left unset) + height synced from
         # texture_size: without this, a long status string (the actual
@@ -194,6 +219,47 @@ class ProfileTab(BoxLayout):
         self._load_profile_into_form()
         self.on_chart_generated(profile_switch_only=True)
 
+    def _select_profile(self, profile_id):
+        """Programmatically switch to a profile (mirrors picking it in the
+        spinner) - used by _fill_example_all() below. Setting the
+        spinner's own text is enough: it fires _on_profile_change via the
+        binding already set up in __init__."""
+        self.profile_spinner.text = PROFILE_LABELS[profile_id]
+
+    def _fill_example(self):
+        """Fill the CURRENTLY selected profile with a sample birth (works
+        for Self, Life Partner, and every Child slot) - a fast way to
+        populate and test a whole family, mirroring gui_app.py's and
+        app.js's identically-named quick-fill feature."""
+        ex = self._EXAMPLE_BIRTHS.get(self.store.current_profile_id, self._EXAMPLE_BIRTHS["self"])
+        name, year, month, day, hour, minute, place, country, sex = ex
+        self.name_input.text = name
+        self.sex_spinner.text = sex
+        self.year_input.text = year
+        self.month_input.text = month
+        self.day_input.text = day
+        self.hour_input.text = hour
+        self.minute_input.text = minute
+        self.second_input.text = "0"
+        self.place_input.text = place
+        self.country_input.text = country
+        if self.manual_coords_check.active:
+            self.manual_coords_check.active = False
+
+    def _fill_example_all(self):
+        """Populate AND generate every profile from the sample births in
+        one tap - the fastest path to a full, testable family."""
+        current = self.store.current_profile_id
+        generated = []
+        for pid in PROFILE_IDS:
+            self._select_profile(pid)
+            self._fill_example()
+            if self._generate_current_profile():
+                generated.append(PROFILE_LABELS[pid])
+        self._select_profile(current)
+        _show_message("Example family generated",
+                       "Generated sample charts for:\n- " + "\n- ".join(generated))
+
     def _parse_int(self, text, field_name):
         text = (text or "").strip()
         if not text:
@@ -204,6 +270,14 @@ class ProfileTab(BoxLayout):
             raise ValueError(f"{field_name} must be a whole number, got '{text}'.")
 
     def _on_generate(self, button):
+        self._generate_current_profile()
+
+    def _generate_current_profile(self):
+        """Does the actual compute-and-store work for whichever profile is
+        currently selected. Returns True on success, False on a handled
+        error (already shown to the user via _show_message). Split out
+        from _on_generate so _fill_example_all() can call it silently in
+        a loop across every profile without a popup interrupting each one."""
         # Imported lazily: importing the chart engine triggers loading all
         # bundled kb/*.json files, which is somewhat expensive and not
         # needed until the very first Generate tap.
@@ -211,7 +285,6 @@ class ProfileTab(BoxLayout):
         from rule_engine import generate_reading
 
         profile_id = self.store.current_profile_id
-        inputs_snapshot = None
         try:
             name = self.name_input.text.strip() or PROFILE_LABELS[profile_id]
             birth_date = (
@@ -245,7 +318,7 @@ class ProfileTab(BoxLayout):
         except Exception as exc:  # noqa: BLE001 - surfaced to the user, not swallowed
             _show_message("Could not generate chart", str(exc))
             self._set_status("Error - see the message above. No chart was generated.")
-            return
+            return False
 
         self._save_form_into_profile(profile_id)
         self.store.profiles[profile_id]["chart"] = chart
@@ -256,3 +329,4 @@ class ProfileTab(BoxLayout):
             f"{chart['ascendant']['sign']} {chart['ascendant']['degree_in_sign']:.2f} degrees.{warn_note}"
         )
         self.on_chart_generated(profile_switch_only=False)
+        return True

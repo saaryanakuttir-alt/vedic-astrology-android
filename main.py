@@ -28,8 +28,11 @@ if _ENGINE_DIR not in sys.path:
     sys.path.insert(0, _ENGINE_DIR)
 
 from kivy.app import App
+from kivy.core.window import Window
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 
+from ui import theme
 from ui.app_state import ProfileStore
 from ui.tabs_profile import ProfileTab
 from ui.tabs_chart import ChartTab
@@ -38,14 +41,24 @@ from ui.tabs_tables import (
 )
 from ui.tabs_reports import KarmicTab, LifePredictionsTab, FullReadingTab
 from ui.tabs_family import FamilyTab
+from ui.tabs_help import HelpTab
 
 
 class VedicAstrologyApp(App):
     def build(self):
         self.title = "Vedic Astrology"
         self.store = ProfileStore()
+        Window.clearcolor = theme.BG
 
-        root = TabbedPanel(do_default_tab=False, tab_pos="top_mid", tab_height="40dp")
+        # A GradientBackground behind everything, so any sliver visible
+        # around/behind the TabbedPanel reads as the same deep-indigo
+        # "celestial" look the desktop/web apps use, not flat black.
+        root = FloatLayout()
+        root.add_widget(theme.GradientBackground(size_hint=(1, 1)))
+
+        tabs = TabbedPanel(do_default_tab=False, tab_pos="top_mid", tab_height="40dp",
+                            size_hint=(1, 1), pos_hint={"x": 0, "y": 0},
+                            background_color=(0.24, 0.27, 0.5, 1))
 
         self.profile_tab = ProfileTab(self.store, on_chart_generated=self._on_chart_generated)
         self.chart_tab = ChartTab(self.store)
@@ -60,6 +73,7 @@ class VedicAstrologyApp(App):
         self.life_predictions_tab = LifePredictionsTab(self.store)
         self.full_reading_tab = FullReadingTab(self.store)
         self.family_tab = FamilyTab(self.store)
+        self.help_tab = HelpTab()
 
         self._refreshable_tabs = [
             self.chart_tab, self.kundli_tab, self.planets_tab, self.houses_tab,
@@ -67,25 +81,29 @@ class VedicAstrologyApp(App):
             self.karmic_tab, self.life_predictions_tab, self.full_reading_tab,
         ]
 
+        # Icon-prefixed tab titles - zero image assets, but an immediate,
+        # low-risk step toward a more "graphical" tab strip than plain text.
         for title, content in [
-            ("Profile & Birth Data", self.profile_tab),
-            ("Chart", self.chart_tab),
-            ("Kundli Details", self.kundli_tab),
-            ("Planets", self.planets_tab),
-            ("Houses", self.houses_tab),
-            ("Yogas", self.yogas_tab),
-            ("Dasha", self.dasha_tab),
-            ("Ashtakvarga", self.ashtakvarga_tab),
-            ("Chalit", self.chalit_tab),
-            ("Karmic & Past Life", self.karmic_tab),
-            ("Life Predictions", self.life_predictions_tab),
-            ("Full Reading", self.full_reading_tab),
-            ("Family Compatibility", self.family_tab),
+            ("\U0001FA90  Profile & Birth Data", self.profile_tab),
+            ("\U0001F30C  Chart", self.chart_tab),
+            ("\U0001F4CB  Kundli Details", self.kundli_tab),
+            ("♇  Planets", self.planets_tab),
+            ("\U0001F3E0  Houses", self.houses_tab),
+            ("✨  Yogas", self.yogas_tab),
+            ("⏳  Dasha", self.dasha_tab),
+            ("\U0001F4CA  Ashtakvarga", self.ashtakvarga_tab),
+            ("\U0001F4D0  Chalit", self.chalit_tab),
+            ("\U0001F52E  Karmic & Past Life", self.karmic_tab),
+            ("\U0001F52D  Life Predictions", self.life_predictions_tab),
+            ("\U0001F4D6  Full Reading", self.full_reading_tab),
+            ("\U0001F46A  Family Compatibility", self.family_tab),
+            ("❓  Help & FAQ", self.help_tab),
         ]:
             item = TabbedPanelItem(text=title)
             item.add_widget(content)
-            root.add_widget(item)
+            tabs.add_widget(item)
 
+        root.add_widget(tabs)
         return root
 
     def _on_chart_generated(self, profile_switch_only):
