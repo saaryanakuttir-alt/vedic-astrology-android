@@ -49,6 +49,7 @@ _KB_FILENAMES = {
     "planet_in_house": "planet_in_house.json",
     "house_lord_placement": "house_lord_placement.json",
     "nakshatra": "nakshatra.json",
+    "nakshatra_pada": "nakshatra_pada.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -112,6 +113,29 @@ def _nakshatra_reading(nakshatra_name, warnings=None):
     entry = _load_nakshatra_kb().get(nakshatra_name)
     if entry is None and warnings is not None:
         warnings.append(f"No 'nakshatra' entry found for '{nakshatra_name}'.")
+    return entry
+
+
+_pada_by_key = None
+
+
+def _load_pada_kb():
+    """nakshatra_pada.json's natural join key is (nakshatra name, pada
+    number) - same reasoning as _load_nakshatra_kb above, its own tiny
+    cache rather than going through the generic id-based _load()."""
+    global _pada_by_key
+    if _pada_by_key is None:
+        path = os.path.join(KB_DIR, _KB_FILENAMES["nakshatra_pada"])
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        _pada_by_key = {(item["nakshatra"], item["pada"]): item for item in data["items"]}
+    return _pada_by_key
+
+
+def _pada_reading(nakshatra_name, pada, warnings=None):
+    entry = _load_pada_kb().get((nakshatra_name, pada))
+    if entry is None and warnings is not None:
+        warnings.append(f"No 'nakshatra_pada' entry found for '{nakshatra_name}' pada {pada}.")
     return entry
 
 
@@ -541,15 +565,29 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     # every table (Planets, Kundli Details) but never actually narrated
     # anywhere in the app until this KB file existed.
     moon_nakshatra_name = planets_reading["Moon"]["nakshatra"]
+    moon_nakshatra_pada = planets_reading["Moon"]["nakshatra_pada"]
     moon_nakshatra = _nakshatra_reading(moon_nakshatra_name)
+    moon_pada = _pada_reading(moon_nakshatra_name, moon_nakshatra_pada)
     if moon_nakshatra:
-        paragraphs.append(
+        janma_text = (
             f"Your Janma Nakshatra — the lunar mansion the Moon occupied at birth, and "
             f"traditionally read as foundational to personal identity in its own right — is "
             f"{moon_nakshatra['name']}, ruled by {moon_nakshatra['ruling_planet']} and "
             f"presided over by {moon_nakshatra['deity']}, symbolized by {moon_nakshatra['symbol'].lower()}. "
             f"{moon_nakshatra['effects']}"
         )
+        if moon_pada:
+            # Not splicing moon_pada['summary'] into a lowercase mid-sentence
+            # fragment: it starts with the nakshatra's own NAME (a proper
+            # noun, e.g. "Revati's core theme...") - lowercasing its first
+            # letter mangled that into "revati's" on the first pass. A colon
+            # break avoids needing to touch the KB text's own capitalization.
+            janma_text += (
+                f" More specifically, the Moon sits in pada {moon_nakshatra_pada} of "
+                f"{moon_nakshatra_name} (Navamsa: {moon_pada['navamsa_sign']}): "
+                f"{moon_pada['summary']}"
+            )
+        paragraphs.append(janma_text)
 
     # --- Paragraph 1: the soul's core nature (Atmakaraka) ---
     ak_text = (
@@ -745,6 +783,7 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
 
     return {
         "moon_nakshatra": moon_nakshatra,
+        "moon_nakshatra_pada": moon_pada,
         "atmakaraka": atmakaraka,
         "darakaraka": darakaraka,
         "putrakaraka": putrakaraka,
