@@ -1244,6 +1244,12 @@ def generate_reading(chart):
         "gemstone_candidates": upaya.suggest_gemstone_candidates(planets_reading),
         "gemstones": {p: upaya.gemstone_for(p) for p in planets_reading},
         "mantras": {p: upaya.mantra_for(p) for p in planets_reading},
+        "combinations_to_avoid": upaya.combinations_to_avoid(),
+        # Full 21-pair data, kept (not rendered as a table - see
+        # combinations_to_avoid above for what the UI actually displays)
+        # so the interactive combination checker can look up ANY pair the
+        # user picks, not just the ones graded "avoid".
+        "combination_matrix": upaya.full_combination_matrix(),
     }
 
     return {

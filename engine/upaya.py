@@ -67,6 +67,24 @@ def mantra_for(planet):
     return _load_mantras().get(planet)
 
 
+def _explain_pair(a, b, a_view, b_view):
+    """Plain-English reasoning behind one pair's grade, from the two
+    (possibly different - see maitri.py's own note on asymmetry)
+    directional natural-friendship views. Both UIs show this alongside the
+    bare grade rather than leaving 'avoid' unexplained."""
+    if a_view == b_view == "friend":
+        return f"{a} and {b} are mutual natural friends."
+    if a_view == b_view == "enemy":
+        return f"{a} and {b} regard each other as natural enemies."
+    if a_view == b_view == "neutral":
+        return f"{a} and {b} are naturally neutral toward each other - neither friends nor enemies."
+    # Asymmetric: the two planets' own natural dispositions genuinely
+    # differ (e.g. the Moon regards Mercury as a friend, but Mercury
+    # regards the Moon as an enemy) - state both directions rather than
+    # collapsing to one.
+    return f"{a} regards {b} as a natural {a_view}, but {b} regards {a} as a natural {b_view}."
+
+
 def check_gemstone_combination(planets):
     """planets: a list of 2+ planet names the user is considering wearing
     together. Returns {"pairs": [...], "verdict": "safe"|"caution"|"avoid",
@@ -94,6 +112,7 @@ def check_gemstone_combination(planets):
                 "a": a, "b": b,
                 "a_stone": gemstones[a]["stone"], "b_stone": gemstones[b]["stone"],
                 "a_regards_b": a_view, "b_regards_a": b_view, "grade": grade,
+                "why": _explain_pair(a, b, a_view, b_view),
             })
             if grade == "avoid":
                 worst = "avoid"
@@ -129,9 +148,11 @@ def check_gemstone_combination(planets):
 
 def full_combination_matrix():
     """Every pairwise combination among the 7 classical grahas' gemstones
-    (21 pairs), pre-computed - lets a UI show which combinations are safe
-    to wear together at a glance, not just check one pair on request. Same
-    grading as check_gemstone_combination's per-pair logic."""
+    (21 pairs), each with its grade and a plain-English 'why'. Kept as the
+    underlying data source, but a UI should generally show
+    combinations_to_avoid() below rather than all 21 - most of those pairs
+    are "safe" or "caution", which don't need a warning; the ones worth
+    surfacing are the ones actually worth avoiding."""
     gemstones = _load_gemstones()
     pairs = []
     for i in range(len(maitri.CLASSICAL_SEVEN)):
@@ -140,6 +161,13 @@ def full_combination_matrix():
             result = check_gemstone_combination([a, b])
             pairs.append(result["pairs"][0])
     return pairs
+
+
+def combinations_to_avoid():
+    """Just the pairs graded 'avoid', each with its 'why' - the short,
+    actionable list a UI should lead with instead of the full 21-pair
+    matrix (see full_combination_matrix)."""
+    return [p for p in full_combination_matrix() if p["grade"] == "avoid"]
 
 
 def suggest_gemstone_candidates(planets_reading):
