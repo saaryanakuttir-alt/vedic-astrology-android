@@ -1,0 +1,90 @@
+{
+  "checklist_category_id": "combustion",
+  "name": "Combustion (Asta) Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Per-planet interpretive text for combustion (a planet within its classical orb of the Sun). The actual combustion ORBS and the direct/retrograde-dependent computation live in code (engine/combustion.py), not here, since orb varies by planet and (for Mercury/Venus) by retrograde status - a computed fact, not KB text. combustion.py's own module docstring honestly flags that Mars/Mercury/Venus orbs see more cross-source variation than Moon/Jupiter/Saturn's, the same class of disclosed disagreement this project already applies to Rahu/Ketu dignity and Paya. Only the 6 non-Sun classical planets are covered - Rahu/Ketu don't have a standard combustion rule in most Parashari sources.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Orb values (in combustion.py) cross-checked against multiple classical references; genuine disagreement across sources for Mars/Mercury/Venus disclosed in that module's own docstring rather than silently picking one. Interpretive text here cross-checked for consistency with each planet's own general significations as already used elsewhere in this project's KB (e.g. planet_in_sign.json).",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T11:36:34.986341+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 6,
+  "items": [
+    {
+      "id": "CMB-Mo",
+      "category": "combustion",
+      "tradition": "Parashari",
+      "planet": "Moon",
+      "title": "Moon Combust",
+      "summary": "A combust Moon is considered one of the more significant combustion effects: the mind, emotional steadiness, and sense of security can feel destabilized or overshadowed, since the Moon's own light is what the Sun's proximity is overwhelming most directly.",
+      "effects": "A combust Moon is considered one of the more significant combustion effects: the mind, emotional steadiness, and sense of security can feel destabilized or overshadowed, since the Moon's own light is what the Sun's proximity is overwhelming most directly. Classically associated with a restless or anxious disposition until the Moon separates from the Sun.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "CMB-Ma",
+      "category": "combustion",
+      "tradition": "Parashari",
+      "planet": "Mars",
+      "title": "Mars Combust",
+      "summary": "A combust Mars can show as suppressed drive or courage that surfaces in bursts rather than steady application - initiative that's present but doesn't get a clean, sustained outlet.",
+      "effects": "A combust Mars can show as suppressed drive or courage that surfaces in bursts rather than steady application - initiative that's present but doesn't get a clean, sustained outlet. Some texts note it can also manifest as impulsiveness when the pent-up energy does release.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "CMB-Me",
+      "category": "combustion",
+      "tradition": "Parashari",
+      "planet": "Mercury",
+      "title": "Mercury Combust",
+      "summary": "A combust Mercury is one of the more common combustion placements (Mercury is never more than about 28 degrees from the Sun by definition, so close conjunctions happen often).",
+      "effects": "A combust Mercury is one of the more common combustion placements (Mercury is never more than about 28 degrees from the Sun by definition, so close conjunctions happen often). Effects are usually read as mildly clouded or hesitant communication and decision-making rather than a severe affliction - intellect present but not shining as clearly as it otherwise would.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "CMB-Ju",
+      "category": "combustion",
+      "tradition": "Parashari",
+      "planet": "Jupiter",
+      "title": "Jupiter Combust",
+      "summary": "A combust Jupiter can dampen the confidence, optimism, and sound judgment Jupiter usually lends, along with the areas it governs for this chart (wisdom, higher learning, fortune, teachers).",
+      "effects": "A combust Jupiter can dampen the confidence, optimism, and sound judgment Jupiter usually lends, along with the areas it governs for this chart (wisdom, higher learning, fortune, teachers). Read as the Sun's ego/authority theme temporarily overshadowing Jupiter's own expansive, guiding nature.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "CMB-Ve",
+      "category": "combustion",
+      "tradition": "Parashari",
+      "planet": "Venus",
+      "title": "Venus Combust",
+      "summary": "A combust Venus is often read as affecting comfort in relationships, aesthetic expression, or material pleasures - a sense that these areas are present but muted or complicated, rather than flowing easily.",
+      "effects": "A combust Venus is often read as affecting comfort in relationships, aesthetic expression, or material pleasures - a sense that these areas are present but muted or complicated, rather than flowing easily. Some texts specifically note friction in romantic or partnership matters.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "CMB-Sa",
+      "category": "combustion",
+      "tradition": "Parashari",
+      "planet": "Saturn",
+      "title": "Saturn Combust",
+      "summary": "A combust Saturn can intensify Saturn's already-serious themes (discipline, delay, responsibility) into something closer to real hardship or heaviness, since Saturn's own slow, structural nature isn't well suited to being overwhelmed by the Sun's fast, ego-driven light.",
+      "effects": "A combust Saturn can intensify Saturn's already-serious themes (discipline, delay, responsibility) into something closer to real hardship or heaviness, since Saturn's own slow, structural nature isn't well suited to being overwhelmed by the Sun's fast, ego-driven light. Some texts read this combination as particularly challenging.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

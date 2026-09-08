@@ -36,6 +36,7 @@ import os
 import datetime as _dt
 
 import chara_karaka
+import combustion
 import maitri
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
 from yogas import detect_all_yogas
@@ -44,7 +45,7 @@ _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Satur
 
 KB_DIR = os.path.join(os.path.dirname(__file__), "kb")
 
-# All 22 bundled KB files, keyed by the same name rule_engine uses internally.
+# All 23 bundled KB files, keyed by the same name rule_engine uses internally.
 _KB_FILENAMES = {
     "planet_in_sign": "planet_in_sign.json",
     "planet_in_house": "planet_in_house.json",
@@ -52,6 +53,7 @@ _KB_FILENAMES = {
     "nakshatra": "nakshatra.json",
     "nakshatra_pada": "nakshatra_pada.json",
     "panchadha_maitri": "panchadha_maitri.json",
+    "combustion": "combustion.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -200,6 +202,20 @@ def _sign_lord_relationship(chart, planet, sign, house, warnings):
     return {"lord": lord, **result, "reading": grade_entry}
 
 
+def _combustion_reading(chart, planet, warnings):
+    """None for the Sun itself and for Rahu/Ketu (no standard combustion
+    rule - see combustion.py's module docstring)."""
+    if planet not in combustion.ORB_DIRECT:
+        return None
+    detail = chart["planets"][planet]
+    sun_lon = chart["planets"]["Sun"]["longitude"]
+    sep = combustion.sun_separation(sun_lon, detail["longitude"])
+    orb = combustion.combustion_orb(planet, detail.get("retrograde", False))
+    combust = sep <= orb
+    entry = _lookup("combustion", f"CMB-{planet[:2]}", warnings) if combust else None
+    return {"combust": combust, "orb": orb, "separation": round(sep, 2), "reading": entry}
+
+
 def _planet_reading(chart, planet, warnings):
     detail = chart["planets"][planet]
     sign, house = detail["sign"], detail["house"]
@@ -212,6 +228,7 @@ def _planet_reading(chart, planet, warnings):
         "in_sign": _lookup("planet_in_sign", planet_in_sign_id(planet, sign), warnings),
         "in_house": _lookup("planet_in_house", planet_in_house_id(planet, house), warnings),
         "sign_lord_relationship": _sign_lord_relationship(chart, planet, sign, house, warnings),
+        "combustion": _combustion_reading(chart, planet, warnings),
         "vargas": {},
     }
     for n in DIVISIONAL_VARGAS:
