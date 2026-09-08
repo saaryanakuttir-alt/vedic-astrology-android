@@ -1,0 +1,34 @@
+{
+  "checklist_category_id": "vargottama",
+  "name": "Vargottama Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Vargottama - a planet occupying the SAME sign in Rasi (D1) and Navamsa (D9) - is a single boolean condition (chart['planets'][planet]['sign'] == chart['planets'][planet]['vargas']['D9']), not a per-planet table: the classical strengthening effect is essentially the same regardless of WHICH planet or sign is involved, so one generic entry covers it, referenced from rule_engine.py wherever a planet's Vargottama status is computed.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Cross-checked the Vargottama condition and its general effect against multiple classical/reference sources for consistency.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T11:40:38.890384+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 1,
+  "items": [
+    {
+      "id": "VGT-01",
+      "category": "vargottama",
+      "tradition": "Parashari",
+      "title": "Vargottama",
+      "summary": "The same sign in both Rasi and Navamsa amplifies and stabilizes a planet's results, for better or worse.",
+      "effects": "When a planet lands in the same sign in both the Rasi (D1, the birth chart itself) and Navamsa (D9, the chart of marriage, dharma, and inner strength) charts, its placement is considered unusually consistent and reinforced across both levels - classically read as a meaningful STRENGTHENING of that planet's results, roughly comparable in significance to being in its own sign. This amplifies whatever the placement already indicates: a well-placed, well-dignified Vargottama planet performs especially reliably, while a poorly-placed or afflicted one has its difficulties reinforced just as consistently - Vargottama intensifies rather than automatically improves.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

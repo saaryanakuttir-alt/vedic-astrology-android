@@ -45,7 +45,7 @@ _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Satur
 
 KB_DIR = os.path.join(os.path.dirname(__file__), "kb")
 
-# All 24 bundled KB files, keyed by the same name rule_engine uses internally.
+# All 25 bundled KB files, keyed by the same name rule_engine uses internally.
 _KB_FILENAMES = {
     "planet_in_sign": "planet_in_sign.json",
     "planet_in_house": "planet_in_house.json",
@@ -55,6 +55,7 @@ _KB_FILENAMES = {
     "panchadha_maitri": "panchadha_maitri.json",
     "combustion": "combustion.json",
     "retrograde": "retrograde.json",
+    "vargottama": "vargottama.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -220,6 +221,7 @@ def _combustion_reading(chart, planet, warnings):
 def _planet_reading(chart, planet, warnings):
     detail = chart["planets"][planet]
     sign, house = detail["sign"], detail["house"]
+    is_vargottama = detail["vargas"].get("D9") == sign
 
     reading = {
         "sign": sign,
@@ -230,6 +232,10 @@ def _planet_reading(chart, planet, warnings):
         "in_house": _lookup("planet_in_house", planet_in_house_id(planet, house), warnings),
         "sign_lord_relationship": _sign_lord_relationship(chart, planet, sign, house, warnings),
         "combustion": _combustion_reading(chart, planet, warnings),
+        "vargottama": (
+            {"is_vargottama": True, "reading": _lookup("vargottama", "VGT-01", warnings)}
+            if is_vargottama else {"is_vargottama": False, "reading": None}
+        ),
         # Rahu/Ketu are always flagged retrograde (their mean motion is
         # always regressive by definition - see ephemeris.py's own note),
         # so "retrograde" isn't a meaningful VARIABLE state for them and
