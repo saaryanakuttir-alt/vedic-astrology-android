@@ -1,0 +1,84 @@
+{
+  "checklist_category_id": "panchadha_maitri",
+  "name": "Panchadha Maitri (Five-Fold Planetary Friendship) Grades",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "The 5 combined grades of Panchadha Maitri (Naisargika/natural + Tatkalika/temporal friendship) - the GENERIC meaning of each grade, applicable to any pair of the 7 classical grahas. The actual natural-friendship table and the temporal-friendship computation (which needs each planet's real house position in a specific chart) live in code, not here - see engine/maitri.py - since Tatkalika Maitri is chart-dependent and can't be pre-computed into a static KB file the way the grade meanings below can. This file is the counterpart to planet_in_sign.json's dignity-status text (exalted/own/debilitated/neutral): dignity describes a planet's relationship to the SIGN it's in; Panchadha Maitri describes its relationship to whichever planet actually LORDS that sign (or to any other planet it's being compared against) - a separate, additional layer of strength/weakness, not a replacement for dignity.",
+  "verification_pass": {
+    "performed": true,
+    "method": "The natural-friendship table in engine/maitri.py (not this file) was checked row-by-row against a classical BPHS-derived reference table and passes an internal self-consistency assertion (every planet's row covers the other 6 grahas exactly once, no omissions or duplicates) that runs automatically on import. The 5 grade-meaning texts here were cross-checked for consistency with each other (grade severity ordering) and with how dignity-status text in planet_in_sign.json is worded, so the two layers read as complementary rather than contradictory.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T11:32:37.482911+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 5,
+  "items": [
+    {
+      "id": "PM-AdhiMitra",
+      "category": "panchadha_maitri",
+      "tradition": "Parashari",
+      "grade": "Adhi Mitra",
+      "grade_english": "Great Friend",
+      "title": "Great Friend (Adhi Mitra)",
+      "summary": "Natural friend and temporally well-placed — the warmest possible relationship between two planets.",
+      "effects": "Both the permanent (Naisargika) and the chart-specific (Tatkalika) friendship point the same way here, so a planet sitting in a Great Friend's sign is considered a welcome, supported guest: its significations tend to express with unusual ease, and it lends genuine strength to whatever it governs. Classically the strongest of the five Panchadha Maitri grades.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "PM-Mitra",
+      "category": "panchadha_maitri",
+      "tradition": "Parashari",
+      "grade": "Mitra",
+      "grade_english": "Friend",
+      "title": "Friend (Mitra)",
+      "summary": "Naturally neutral, but favorably placed in this chart — a working friendship, not an inborn one.",
+      "effects": "The two planets have no fixed natural bond, but their positions in THIS particular chart bring them into a cooperative relationship. A planet placed in such a sign is a comfortable, if not especially close, guest — its expression is generally supported without being amplified.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "PM-Sama",
+      "category": "panchadha_maitri",
+      "tradition": "Parashari",
+      "grade": "Sama",
+      "grade_english": "Neutral",
+      "title": "Neutral (Sama)",
+      "summary": "The natural and temporal readings pull in opposite directions and cancel out.",
+      "effects": "Either a natural friendship undercut by an unfavorable chart position, or natural dislike offset by a favorable one — the two effects balance each other. A planet here is neither especially helped nor hindered by its host; read its other dignities (exaltation, own sign, etc.) as the more decisive factor.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "PM-Shatru",
+      "category": "panchadha_maitri",
+      "tradition": "Parashari",
+      "grade": "Shatru",
+      "grade_english": "Enemy",
+      "title": "Enemy (Shatru)",
+      "summary": "Naturally neutral, but unfavorably placed in this chart.",
+      "effects": "No inborn hostility, but this chart's specific arrangement puts the two planets at odds. A planet placed in such a sign is a somewhat unwelcome guest — its expression can feel constrained or effortful, without being as severely undermined as under a Great Enemy.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "PM-AdhiShatru",
+      "category": "panchadha_maitri",
+      "tradition": "Parashari",
+      "grade": "Adhi Shatru",
+      "grade_english": "Great Enemy",
+      "title": "Great Enemy (Adhi Shatru)",
+      "summary": "Natural enemy and temporally poorly placed — the most difficult of the five grades.",
+      "effects": "Both the permanent and the chart-specific reading agree: this is real friction. A planet sitting in a Great Enemy's sign is considered an unwelcome guest in hostile territory — its significations tend to express with real difficulty, and classical texts treat this as a meaningful weakening factor, on top of (not instead of) whatever exaltation/own-sign/debilitation status already applies.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

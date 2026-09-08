@@ -36,6 +36,7 @@ import os
 import datetime as _dt
 
 import chara_karaka
+import maitri
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
 from yogas import detect_all_yogas
 
@@ -43,13 +44,14 @@ _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Satur
 
 KB_DIR = os.path.join(os.path.dirname(__file__), "kb")
 
-# All 20 bundled KB files, keyed by the same name rule_engine uses internally.
+# All 22 bundled KB files, keyed by the same name rule_engine uses internally.
 _KB_FILENAMES = {
     "planet_in_sign": "planet_in_sign.json",
     "planet_in_house": "planet_in_house.json",
     "house_lord_placement": "house_lord_placement.json",
     "nakshatra": "nakshatra.json",
     "nakshatra_pada": "nakshatra_pada.json",
+    "panchadha_maitri": "panchadha_maitri.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -181,6 +183,23 @@ def _lookup(kb_name, item_id, warnings):
     return item
 
 
+def _sign_lord_relationship(chart, planet, sign, house, warnings):
+    """Panchadha Maitri between `planet` and the lord of the sign it
+    occupies (in Rasi/D1) - how welcome a guest it is in that sign, a
+    layer ADDITIONAL to (not a replacement for) exaltation/own/
+    debilitation dignity. None when not computable: Rahu/Ketu aren't
+    covered by the natural-friendship table (see maitri.py's docstring),
+    and a planet in its OWN sign has no "relationship to the lord" to
+    speak of (it IS the lord)."""
+    lord = SIGN_LORD[sign]
+    if planet not in maitri.CLASSICAL_SEVEN or lord == planet:
+        return None
+    lord_house = chart["planets"][lord]["house"]
+    result = maitri.panchadha_maitri(planet, lord, house, lord_house)
+    grade_entry = _lookup("panchadha_maitri", f"PM-{result['grade'].replace(' ', '')}", warnings)
+    return {"lord": lord, **result, "reading": grade_entry}
+
+
 def _planet_reading(chart, planet, warnings):
     detail = chart["planets"][planet]
     sign, house = detail["sign"], detail["house"]
@@ -192,6 +211,7 @@ def _planet_reading(chart, planet, warnings):
         "nakshatra_pada": detail["nakshatra_pada"],
         "in_sign": _lookup("planet_in_sign", planet_in_sign_id(planet, sign), warnings),
         "in_house": _lookup("planet_in_house", planet_in_house_id(planet, house), warnings),
+        "sign_lord_relationship": _sign_lord_relationship(chart, planet, sign, house, warnings),
         "vargas": {},
     }
     for n in DIVISIONAL_VARGAS:
