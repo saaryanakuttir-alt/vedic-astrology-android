@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "name": "Sample Chart Profiles",
-  "note": "Real, publicly documented birth data for well-known figures, for the app's sample-chart browsing feature. Every entry here has a genuinely sourced birth TIME (not just date/place) - 20 names from the original confirmed list were excluded entirely because no reliably documented birth time could be found (see the project owner's explicit decision on this: exclude rather than show an approximate/guessed chart). time_confidence 'high' = birth certificate or equivalent official record; 'medium' = biography/family statement/reputable astrology database citing a specific source. source_note on each entry explains where the claimed time comes from and, where relevant, flags a competing claim found during research - see each entry's own note. Not yet reviewed by the project owner - drafted by research agents using live web search, cross-checked for internally consistent sourcing only.",
+  "note": "Real, publicly documented birth data for well-known figures, for the app's sample-chart browsing feature. Every entry here has a genuinely sourced birth TIME (not just date/place) - 20 names from the original confirmed list were excluded entirely because no reliably documented birth time could be found (see the project owner's explicit decision on this: exclude rather than show an approximate/guessed chart). time_confidence 'high' = birth certificate or equivalent official record; 'medium' = biography/family statement/reputable astrology database citing a specific source. source_note on each entry explains where the claimed time comes from and, where relevant, flags a competing claim found during research - see each entry's own note. Not yet reviewed by the project owner - drafted by research agents using live web search, cross-checked for internally consistent sourcing only. Each profile also carries a chart_description field - a short, computed-fact-based summary (ascendant, Moon, Atmakaraka, exalted/debilitated planets, lagna lord placement, and any triggered classical yogas) generated directly from this project's own engine, not freehand commentary.",
   "generated_at": "2026-09-08T19:34:10.726270+00:00",
   "total_profiles": 25,
   "profiles": [
@@ -24,7 +24,8 @@
       "sex": "Male",
       "notable_for": "American business magnate and co-founder of Microsoft.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank rates this 'A' ('from memory'), reportedly stated by Gates himself at a Microsoft function and recorded by Lois Rodden's network. Self-reported, not a certificate, but a specific first-person statement rather than a guess."
+      "source_note": "Astro-Databank rates this 'A' ('from memory'), reportedly stated by Gates himself at a Microsoft function and recorded by Lois Rodden's network. Self-reported, not a certificate, but a specific first-person statement rather than a guess.",
+      "chart_description": "Gemini rises, with the Moon in Pisces (Uttara Bhadrapada nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Saturn, in Libra, exalted there, house 5. Saturn is exalted in this chart. Sun is debilitated in this chart. The lagna lord Mercury sits in Virgo, house 4 from the ascendant. Classical yogas present: Bhadra Yoga (Panch Mahapurusha), Dhana Yoga (2nd-11th Lord Wealth Combination), Amala Yoga, Shakat Yoga, and 1 more."
     },
     {
       "id": "dhirubhai-ambani",
@@ -45,7 +46,8 @@
       "sex": "Male",
       "notable_for": "Founder of Reliance Industries, transforming it into one of India's largest conglomerates.",
       "time_confidence": "medium",
-      "source_note": "AstroSage cites the same published reference 'Astrology of Professions (Pathak)' (rated 'Reference') for 6:37 AM at Chorwad/Veraval; consistent across sources with no conflicting alternative found, though it rests on a published astrology reference rather than a birth certificate."
+      "source_note": "AstroSage cites the same published reference 'Astrology of Professions (Pathak)' (rated 'Reference') for 6:37 AM at Chorwad/Veraval; consistent across sources with no conflicting alternative found, though it rests on a published astrology reference rather than a birth certificate.",
+      "chart_description": "Sagittarius rises, with the Moon in Sagittarius (Purva Ashadha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mars, in Leo, house 9. The lagna lord Jupiter sits in Virgo, house 10 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Vipreet Raja Yoga - Harsha, Amala Yoga, and 1 more."
     },
     {
       "id": "elon-musk",
@@ -66,7 +68,8 @@
       "sex": "Male",
       "notable_for": "Entrepreneur and business executive; founder of SpaceX and CEO of Tesla.",
       "time_confidence": "high",
-      "source_note": "Astro-Databank rates this AA (birth certificate): born 7:30 AM in Pretoria, South Africa. Consistently reported with no conflicting time found."
+      "source_note": "Astro-Databank rates this AA (birth certificate): born 7:30 AM in Pretoria, South Africa. Consistently reported with no conflicting time found.",
+      "chart_description": "Gemini rises, with the Moon in Leo (Purva Phalguni nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mars, in Capricorn, exalted there, house 8. Mars is exalted in this chart. The lagna lord Mercury sits in Gemini, house 1 from the ascendant. Classical yogas present: Gajakesari Yoga, Bhadra Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), and 5 more."
     },
     {
       "id": "mukesh-ambani",
@@ -87,7 +90,8 @@
       "sex": "Male",
       "notable_for": "Chairman and largest shareholder of Reliance Industries, one of the world's wealthiest businessmen.",
       "time_confidence": "medium",
-      "source_note": "AstroSage cites 'Astrology of Professions (Pathak)' (rated 'Reference') for 7:53 PM; a near-identical alternate of 7:55 PM appears on one other site (likely rounding), and one database marks the time 'Unknown'. He is not listed in Astro.com's Astro-Databank (only his brother Anil Ambani is), so this rests on the Pathak reference book."
+      "source_note": "AstroSage cites 'Astrology of Professions (Pathak)' (rated 'Reference') for 7:53 PM; a near-identical alternate of 7:55 PM appears on one other site (likely rounding), and one database marks the time 'Unknown'. He is not listed in Astro.com's Astro-Databank (only his brother Anil Ambani is), so this rests on the Pathak reference book.",
+      "chart_description": "Scorpio rises, with the Moon in Sagittarius (Mula nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Jupiter, in Leo, house 10. Sun is exalted in this chart. The lagna lord Mars sits in Taurus, house 7 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Vipreet Raja Yoga - Sarala, Vipreet Raja Yoga - Vimala, and 3 more."
     },
     {
       "id": "ratan-tata",
@@ -108,7 +112,8 @@
       "sex": "Male",
       "notable_for": "Former chairman of Tata Sons who led major global expansion of the Tata Group.",
       "time_confidence": "medium",
-      "source_note": "Confirmed as still the best-documented figure available: AstroSage cites the published reference book 'Astrology of Professions (Pathak)' (rated 'Reference') for 6:30 AM, consistent across AstroSage, Astro-Seek, and other celebrity-astrology sites with no conflicting alternative found. He does not have an entry in Astro.com's Astro-Databank at all, so this rests solely on the Pathak reference book rather than a birth certificate or family statement."
+      "source_note": "Confirmed as still the best-documented figure available: AstroSage cites the published reference book 'Astrology of Professions (Pathak)' (rated 'Reference') for 6:30 AM, consistent across AstroSage, Astro-Seek, and other celebrity-astrology sites with no conflicting alternative found. He does not have an entry in Astro.com's Astro-Databank at all, so this rests solely on the Pathak reference book rather than a birth certificate or family statement.",
+      "chart_description": "Sagittarius rises, with the Moon in Libra (Vishakha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Moon, in Libra, house 11. Jupiter is debilitated in this chart. The lagna lord Jupiter sits in Capricorn, house 2 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Kemadruma Yoga, and 1 more."
     },
     {
       "id": "steve-jobs",
@@ -129,7 +134,8 @@
       "sex": "Male",
       "notable_for": "American entrepreneur and co-founder, chairman, and CEO of Apple Inc.",
       "time_confidence": "high",
-      "source_note": "Astro-Databank lists this as sourced from his birth certificate: born Feb 24, 1955 at 7:15 PM in San Francisco. Cited consistently across multiple astrology reference sites with no conflicting time found."
+      "source_note": "Astro-Databank lists this as sourced from his birth certificate: born Feb 24, 1955 at 7:15 PM in San Francisco. Cited consistently across multiple astrology reference sites with no conflicting time found.",
+      "chart_description": "Leo rises, with the Moon in Pisces (Uttara Bhadrapada nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Venus, in Sagittarius, house 5. Saturn is exalted in this chart. The lagna lord Sun sits in Aquarius, house 7 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Vipreet Raja Yoga - Vimala, and 1 more."
     },
     {
       "id": "a-r-rahman",
@@ -150,7 +156,8 @@
       "sex": "Male",
       "notable_for": "Oscar- and Grammy-winning film composer, one of India's most acclaimed music directors.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank's entry (mirrored on astro-charts.com) lists 5:50 AM with a Rodden Rating of 'A' (excellent), time credited to researcher 'Seth' who is described as having obtained it from Rahman directly/an interview. A separate lower-quality astrology aggregator listed an 'XX' (no time) rating tied to a different, likely erroneous, birth year (1966) sourced only from Wikipedia -- that entry appears to be a data-quality artifact of the aggregator, not a genuine conflict with the astro-databank record."
+      "source_note": "Astro-Databank's entry (mirrored on astro-charts.com) lists 5:50 AM with a Rodden Rating of 'A' (excellent), time credited to researcher 'Seth' who is described as having obtained it from Rahman directly/an interview. A separate lower-quality astrology aggregator listed an 'XX' (no time) rating tied to a different, likely erroneous, birth year (1966) sourced only from Wikipedia -- that entry appears to be a data-quality artifact of the aggregator, not a genuine conflict with the astro-databank record.",
+      "chart_description": "Sagittarius rises, with the Moon in Libra (Vishakha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mars, in Virgo, house 10. Jupiter is exalted in this chart. The lagna lord Jupiter sits in Cancer, house 8 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Amala Yoga, Grahan Yoga (Sun/Moon with Rahu-Ketu)."
     },
     {
       "id": "lata-mangeshkar",
@@ -171,7 +178,8 @@
       "sex": "Female",
       "notable_for": "Legendary playback singer known as the 'Nightingale of India', recorded songs in dozens of languages over eight decades.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank (credited to Sy Scholfield) gives 10:30 PM with a detailed quoted passage: 'At 10:30 p.m. on Saturday, the 28th of September 1929... The delivery took place at Shrimati's sister's house, in the Sikh Muhalla... of Indore,' indicating a biographical source. Rodden Rating shown varies between mirrors (one search surfaced 'AA', astro-charts.com's own page shows 'B') -- graded medium rather than high because the exact rating and underlying document could not be independently confirmed."
+      "source_note": "Astro-Databank (credited to Sy Scholfield) gives 10:30 PM with a detailed quoted passage: 'At 10:30 p.m. on Saturday, the 28th of September 1929... The delivery took place at Shrimati's sister's house, in the Sikh Muhalla... of Indore,' indicating a biographical source. Rodden Rating shown varies between mirrors (one search surfaced 'AA', astro-charts.com's own page shows 'B') -- graded medium rather than high because the exact rating and underlying document could not be independently confirmed.",
+      "chart_description": "Taurus rises, with the Moon in Cancer (Ashlesha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mercury, in Virgo, house 5. The lagna lord Venus sits in Leo, house 4 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Vipreet Raja Yoga - Vimala."
     },
     {
       "id": "oprah-winfrey",
@@ -192,7 +200,8 @@
       "sex": "Female",
       "notable_for": "American television host, media executive, actress, and philanthropist.",
       "time_confidence": "medium",
-      "source_note": "CONFLICTING SOURCES: Astro-Databank's better-attributed entry (Rodden 'A') states her producer Diane Hudson supplied 4:30 AM to astrologer Bob Marks, and this was reportedly confirmed with Oprah herself on-air. A separate, unsourced entry elsewhere (chartshop.com) lists 6:29 PM with no attribution given — the 4:30 AM figure was used as the better-sourced of the two, but flagged for human review."
+      "source_note": "CONFLICTING SOURCES: Astro-Databank's better-attributed entry (Rodden 'A') states her producer Diane Hudson supplied 4:30 AM to astrologer Bob Marks, and this was reportedly confirmed with Oprah herself on-air. A separate, unsourced entry elsewhere (chartshop.com) lists 6:29 PM with no attribution given — the 4:30 AM figure was used as the better-sourced of the two, but flagged for human review.",
+      "chart_description": "Scorpio rises, with the Moon in Scorpio (Anuradha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mercury, in Capricorn, house 3. Saturn is exalted in this chart. Moon is debilitated in this chart. The lagna lord Mars sits in Scorpio, house 1 from the ascendant. Classical yogas present: Gajakesari Yoga, Ruchaka Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), and 5 more."
     },
     {
       "id": "rajinikanth",
@@ -213,7 +222,8 @@
       "sex": "Male",
       "notable_for": "Iconic Tamil cinema superstar and one of the highest-paid actors in Indian film history.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank (via astro-charts.com) lists 9:45 PM with Rodden Rating 'B' (from biography), citing Sy Scholfield, who quotes Gayathri Sreekanth's biography 'The Name Is Rajinikanth' (Om Books International, 2008). FLAG: other astrology sites report conflicting times of 11:49 PM and 3:30 AM for the same date/place with no cited source -- the biography-sourced 9:45 PM was preferred as the only time with a named, checkable provenance."
+      "source_note": "Astro-Databank (via astro-charts.com) lists 9:45 PM with Rodden Rating 'B' (from biography), citing Sy Scholfield, who quotes Gayathri Sreekanth's biography 'The Name Is Rajinikanth' (Om Books International, 2008). FLAG: other astrology sites report conflicting times of 11:49 PM and 3:30 AM for the same date/place with no cited source -- the biography-sourced 9:45 PM was preferred as the only time with a named, checkable provenance.",
+      "chart_description": "Cancer rises, with the Moon in Capricorn (Shravana nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Sun, in Scorpio, house 5. Mars is exalted in this chart. The lagna lord Moon sits in Capricorn, house 7 from the ascendant. Classical yogas present: Ruchaka Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Vipreet Raja Yoga - Harsha, Vipreet Raja Yoga - Vimala, and 4 more."
     },
     {
       "id": "adolf-hitler",
@@ -234,7 +244,8 @@
       "sex": "Male",
       "notable_for": "German dictator; led Nazi Germany from 1933 to 1945 and instigated World War II in Europe.",
       "time_confidence": "high",
-      "source_note": "Astro-Databank rates this as sourced from his birth certificate: born 6:30 PM in Braunau am Inn, Austria. Widely and consistently reported across astrology references with no conflicting time found."
+      "source_note": "Astro-Databank rates this as sourced from his birth certificate: born 6:30 PM in Braunau am Inn, Austria. Widely and consistently reported across astrology references with no conflicting time found.",
+      "chart_description": "Libra rises, with the Moon in Sagittarius (Purva Ashadha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Venus, in Aries, house 7. Sun is exalted in this chart. The lagna lord Venus sits in Aries, house 7 from the ascendant. Classical yogas present: Gajakesari Yoga, Ruchaka Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), and 3 more."
     },
     {
       "id": "jeffrey-dahmer",
@@ -255,7 +266,8 @@
       "sex": "Male",
       "notable_for": "American serial killer and sex offender convicted of murdering seventeen men and boys between 1978 and 1991.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank rates this AA, listing 4:34 PM in Milwaukee, WI, with the source note attributing it to compiler Stephen Przybylowski quoting a record abbreviated 'B.R.' (likely 'birth record'). The precise underlying document could not be independently confirmed from available search results, so treat as medium rather than certificate-grade until spot-checked directly on astro.com."
+      "source_note": "Astro-Databank rates this AA, listing 4:34 PM in Milwaukee, WI, with the source note attributing it to compiler Stephen Przybylowski quoting a record abbreviated 'B.R.' (likely 'birth record'). The precise underlying document could not be independently confirmed from available search results, so treat as medium rather than certificate-grade until spot-checked directly on astro.com.",
+      "chart_description": "Virgo rises, with the Moon in Pisces (Revati nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Venus, in Aries, house 8. The lagna lord Mercury sits in Taurus, house 9 from the ascendant. Classical yogas present: Gajakesari Yoga, Hamsa Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Chandra-Mangal Yoga, and 1 more."
     },
     {
       "id": "ted-bundy",
@@ -276,7 +288,8 @@
       "sex": "Male",
       "notable_for": "American serial killer convicted of multiple murders of young women and girls in the 1970s.",
       "time_confidence": "high",
-      "source_note": "Astro-Databank rates this AA (from birth certificate/birth record), listing 10:35 PM in Burlington, Vermont. Consistently reported across astrology reference sites with no conflicting time found."
+      "source_note": "Astro-Databank rates this AA (from birth certificate/birth record), listing 10:35 PM in Burlington, Vermont. Consistently reported across astrology reference sites with no conflicting time found.",
+      "chart_description": "Leo rises, with the Moon in Scorpio (Jyeshtha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Venus, in Libra, house 3. Moon is debilitated in this chart. The lagna lord Sun sits in Scorpio, house 4 from the ascendant. Classical yogas present: Ruchaka Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Neecha Bhanga Raja Yoga, and 4 more."
     },
     {
       "id": "a-p-j-abdul-kalam",
@@ -297,7 +310,8 @@
       "sex": "Male",
       "notable_for": "Aerospace scientist and 11th President of India, known as the 'Missile Man of India'.",
       "time_confidence": "medium",
-      "source_note": "AstroSage cites the published reference book '765 Notable Horoscopes' (rated 'Reference') for a birth time of 1:15 AM; the same figure is repeated on other celebrity-astrology sites (e.g. ClickAstro) with no conflicting alternative found, though the ultimate primary source (hospital/family record) is not confirmed."
+      "source_note": "AstroSage cites the published reference book '765 Notable Horoscopes' (rated 'Reference') for a birth time of 1:15 AM; the same figure is repeated on other celebrity-astrology sites (e.g. ClickAstro) with no conflicting alternative found, though the ultimate primary source (hospital/family record) is not confirmed.",
+      "chart_description": "Cancer rises, with the Moon in Scorpio (Anuradha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Sun, in Virgo, house 3. Jupiter is exalted in this chart. Moon is debilitated in this chart. The lagna lord Moon sits in Scorpio, house 5 from the ascendant. Classical yogas present: Hamsa Yoga (Panch Mahapurusha), Malavya Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Neecha Bhanga Raja Yoga, and 3 more."
     },
     {
       "id": "indira-gandhi",
@@ -318,7 +332,8 @@
       "sex": "Female",
       "notable_for": "First and only female Prime Minister of India, serving 1966-1977 and 1980-1984.",
       "time_confidence": "medium",
-      "source_note": "AstroSage's cited reference 'Kundli Sangraha (Bhat)' (rated 'Accurate') gives 23:11. This is broadly corroborated by Katherine Frank's biography 'Indira: The Life of Indira Nehru Gandhi' (2002), which quotes a family account of 'around 11 PM', and by astrologers B.V. Raman/Zip Dobyns who cite 23:39. Sources cluster within about 30 minutes of 11 PM but do not agree to the minute -- worth a spot check."
+      "source_note": "AstroSage's cited reference 'Kundli Sangraha (Bhat)' (rated 'Accurate') gives 23:11. This is broadly corroborated by Katherine Frank's biography 'Indira: The Life of Indira Nehru Gandhi' (2002), which quotes a family account of 'around 11 PM', and by astrologers B.V. Raman/Zip Dobyns who cite 23:39. Sources cluster within about 30 minutes of 11 PM but do not agree to the minute -- worth a spot check.",
+      "chart_description": "Cancer rises, with the Moon in Capricorn (Uttara Ashadha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Saturn, in Cancer, house 1. The lagna lord Moon sits in Capricorn, house 7 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Kuja Dosha (Mangal Dosha)."
     },
     {
       "id": "jawaharlal-nehru",
@@ -339,7 +354,8 @@
       "sex": "Male",
       "notable_for": "First Prime Minister of India and a central leader of the Indian independence movement.",
       "time_confidence": "medium",
-      "source_note": "Shashi Tharoor's biography 'Nehru: The Invention of India' states he was born at 11:30 PM; AstroSage's cited reference 'Kundli Sangraha (Bhat)' (rated 'Accurate') also lists 23:30; Astro-Databank (astro.com) lists 23:36 LMT. Sources cluster within about 6-9 minutes of each other -- good agreement, unlikely to shift the Ascendant."
+      "source_note": "Shashi Tharoor's biography 'Nehru: The Invention of India' states he was born at 11:30 PM; AstroSage's cited reference 'Kundli Sangraha (Bhat)' (rated 'Accurate') also lists 23:30; Astro-Databank (astro.com) lists 23:36 LMT. Sources cluster within about 6-9 minutes of each other -- good agreement, unlikely to shift the Ascendant.",
+      "chart_description": "Leo rises, with the Moon in Cancer (Ashlesha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Moon, in Cancer, house 12. The lagna lord Sun sits in Scorpio, house 4 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Vipreet Raja Yoga - Vimala, Shakat Yoga, and 2 more."
     },
     {
       "id": "queen-elizabeth-ii",
@@ -360,7 +376,8 @@
       "sex": "Female",
       "notable_for": "Queen of the United Kingdom and the Commonwealth realms from 1952 until her death in 2022.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank cites The Times (London) of 22 April 1926, the day after her birth, reporting she was born at 2:40 AM at 17 Bruton Street. A contemporaneous press report rather than an official certificate, but specific, dated, and widely corroborated with no conflicting time found."
+      "source_note": "Astro-Databank cites The Times (London) of 22 April 1926, the day after her birth, reporting she was born at 2:40 AM at 17 Bruton Street. A contemporaneous press report rather than an official certificate, but specific, dated, and widely corroborated with no conflicting time found.",
+      "chart_description": "Sagittarius rises, with the Moon in Cancer (Ashlesha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Jupiter, in Capricorn, debilitated there, house 2. Sun and Mars are exalted in this chart. Mercury and Jupiter are debilitated in this chart. The lagna lord Jupiter sits in Capricorn, house 2 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Neecha Bhanga Raja Yoga, Vipreet Raja Yoga - Sarala, and 3 more."
     },
     {
       "id": "sardar-vallabhbhai-patel",
@@ -381,7 +398,8 @@
       "sex": "Male",
       "notable_for": "Indian independence leader and first Deputy Prime Minister, known for unifying India's princely states.",
       "time_confidence": "medium",
-      "source_note": "AstroSage cites the reference text 'Kundli Sangraha (Bhat)' (rated 'Accurate') for 19:23:32. An alternate, less-documented time of roughly 17:56 also circulates on some astrology sites without a traceable citation -- about a 90-minute discrepancy, which could shift the Ascendant, so worth a human spot check."
+      "source_note": "AstroSage cites the reference text 'Kundli Sangraha (Bhat)' (rated 'Accurate') for 19:23:32. An alternate, less-documented time of roughly 17:56 also circulates on some astrology sites without a traceable citation -- about a 90-minute discrepancy, which could shift the Ascendant, so worth a human spot check.",
+      "chart_description": "Taurus rises, with the Moon in Scorpio (Anuradha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Saturn, in Capricorn, house 9. Mars is exalted in this chart. Sun and Moon are debilitated in this chart. The lagna lord Venus sits in Libra, house 6 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Vipreet Raja Yoga - Harsha, Vipreet Raja Yoga - Sarala, and 1 more."
     },
     {
       "id": "winston-churchill",
@@ -402,7 +420,8 @@
       "sex": "Male",
       "notable_for": "British statesman who served as Prime Minister of the United Kingdom during World War II.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank rates this 'A', sourced from a same-day letter Churchill's father wrote stating the baby was 'safely born at 1.30 this morning after about 8 hrs labour,' quoted in Randolph S. Churchill's official biography (1967, p.2). Family/biographical record rather than an official certificate, but specific and well attributed. Note: do not confuse with grandson 'Winston S. Churchill' (b. 1940), whose Astro-Databank entry has conflicting times (~4:00-4:40 AM) — that is a different person."
+      "source_note": "Astro-Databank rates this 'A', sourced from a same-day letter Churchill's father wrote stating the baby was 'safely born at 1.30 this morning after about 8 hrs labour,' quoted in Randolph S. Churchill's official biography (1967, p.2). Family/biographical record rather than an official certificate, but specific and well attributed. Note: do not confuse with grandson 'Winston S. Churchill' (b. 1940), whose Astro-Databank entry has conflicting times (~4:00-4:40 AM) — that is a different person.",
+      "chart_description": "Virgo rises, with the Moon in Leo (Magha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Venus, in Scorpio, house 3. The lagna lord Mercury sits in Libra, house 2 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Kuja Dosha (Mangal Dosha), Guru Chandal Yoga."
     },
     {
       "id": "albert-einstein",
@@ -423,7 +442,8 @@
       "sex": "Male",
       "notable_for": "German-born theoretical physicist who developed the theory of relativity.",
       "time_confidence": "high",
-      "source_note": "Astro-Databank rates this AA (birth certificate). The certificate reportedly states he was born 'before noon at eleven and a half,' i.e. 11:30 AM in Ulm. Consistently reported across astrology reference sources with no conflicting claims found."
+      "source_note": "Astro-Databank rates this AA (birth certificate). The certificate reportedly states he was born 'before noon at eleven and a half,' i.e. 11:30 AM in Ulm. Consistently reported across astrology reference sources with no conflicting claims found.",
+      "chart_description": "Gemini rises, with the Moon in Scorpio (Jyeshtha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Venus, in Pisces, exalted there, house 10. Mars and Venus are exalted in this chart. Moon and Mercury are debilitated in this chart. The lagna lord Mercury sits in Pisces, house 10 from the ascendant. Classical yogas present: Gajakesari Yoga, Malavya Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Kemadruma Yoga, and 4 more."
     },
     {
       "id": "marie-curie",
@@ -444,7 +464,8 @@
       "sex": "Female",
       "notable_for": "Polish-French physicist and chemist, pioneer of radioactivity research and two-time Nobel laureate.",
       "time_confidence": "medium",
-      "source_note": "CONFLICTING SOURCES: Astro-Databank's primary entry (rated AA) gives 12:00 PM Warsaw time per a baptism certificate, quoted by researcher Dariusz Proskurnicki. However, an alternate source (Frances McEvoy quoting Grant Lewi, citing Eve Curie's biography of her mother) says only 'soon after sunrise.' The exact-noon time and the sunrise claim cannot both be right; flagged for human review before treating as high confidence."
+      "source_note": "CONFLICTING SOURCES: Astro-Databank's primary entry (rated AA) gives 12:00 PM Warsaw time per a baptism certificate, quoted by researcher Dariusz Proskurnicki. However, an alternate source (Frances McEvoy quoting Grant Lewi, citing Eve Curie's biography of her mother) says only 'soon after sunrise.' The exact-noon time and the sunrise claim cannot both be right; flagged for human review before treating as high confidence.",
+      "chart_description": "Sagittarius rises, with the Moon in Aquarius (Purva Bhadrapada nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Moon, in Aquarius, house 3. Sun is debilitated in this chart. The lagna lord Jupiter sits in Aquarius, house 3 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Neecha Bhanga Raja Yoga, and 5 more."
     },
     {
       "id": "sadhguru-jaggi-vasudev",
@@ -465,7 +486,8 @@
       "sex": "Male",
       "notable_for": "Indian yogi, mystic, and author; founder of the Isha Foundation.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank quotes: 'Jagadish was born on 3 September 1957, at eleven fifty four, six minutes before midnight,' citing the authorized biography 'Sadhguru: More Than a Life' by Arundhathi Subramaniam (Penguin, 2010), p. 30. This is a named, checkable biographical source, so graded medium confidence."
+      "source_note": "Astro-Databank quotes: 'Jagadish was born on 3 September 1957, at eleven fifty four, six minutes before midnight,' citing the authorized biography 'Sadhguru: More Than a Life' by Arundhathi Subramaniam (Penguin, 2010), p. 30. This is a named, checkable biographical source, so graded medium confidence.",
+      "chart_description": "Taurus rises, with the Moon in Sagittarius (Purva Ashadha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mercury, in Leo, house 4. Venus is debilitated in this chart. The lagna lord Venus sits in Virgo, house 5 from the ascendant. Classical yogas present: Gajakesari Yoga, Kendra-Trikona Raja Yoga, Neecha Bhanga Raja Yoga, Amala Yoga, and 1 more."
     },
     {
       "id": "swami-vivekananda",
@@ -486,7 +508,8 @@
       "sex": "Male",
       "notable_for": "Hindu monk and philosopher who introduced Vedanta and Yoga to the Western world at the 1893 Parliament of Religions.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank lists 6:33 AM sourced to the period journal 'Modern Astrology' (Nov 1908), with data from F.C. Dutt of Calcutta who in turn quotes an earlier source ('B.R.') -- i.e. a documented contemporary-era astrological record, not a modern guess. FLAG: this conflicts with other accounts -- Swami Nikhilananda's 1975 biography gives 6:49 AM ('a few minutes after sunrise'), and at least one other reference lists 6:45 AM as 'recorded.' All three cluster tightly around sunrise on Makar Sankranti day, but they are not identical. Graded medium (not high) because of this real conflict between named sources; a human should double-check before treating 6:33 as definitive."
+      "source_note": "Astro-Databank lists 6:33 AM sourced to the period journal 'Modern Astrology' (Nov 1908), with data from F.C. Dutt of Calcutta who in turn quotes an earlier source ('B.R.') -- i.e. a documented contemporary-era astrological record, not a modern guess. FLAG: this conflicts with other accounts -- Swami Nikhilananda's 1975 biography gives 6:49 AM ('a few minutes after sunrise'), and at least one other reference lists 6:45 AM as 'recorded.' All three cluster tightly around sunrise on Makar Sankranti day, but they are not identical. Graded medium (not high) because of this real conflict between named sources; a human should double-check before treating 6:33 as definitive.",
+      "chart_description": "Sagittarius rises, with the Moon in Virgo (Hasta nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Sun, in Sagittarius, house 1. The lagna lord Jupiter sits in Libra, house 11 from the ascendant. Classical yogas present: Kendra-Trikona Raja Yoga, Guru-Mangal Yoga, Shakat Yoga."
     },
     {
       "id": "muhammad-ali",
@@ -507,7 +530,8 @@
       "sex": "Male",
       "notable_for": "American professional boxer and three-time world heavyweight champion.",
       "time_confidence": "high",
-      "source_note": "Astro-Databank rates this AA, with the source credited to astrologer Edward Steinbrecher via Astro.com's records: born 6:35 PM in Louisville, KY. Consistently reported across astrology reference sites with no conflicting time found."
+      "source_note": "Astro-Databank rates this AA, with the source credited to astrologer Edward Steinbrecher via Astro.com's records: born 6:35 PM in Louisville, KY. Consistently reported across astrology reference sites with no conflicting time found.",
+      "chart_description": "Cancer rises, with the Moon in Capricorn (Shravana nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Saturn, in Aries, debilitated there, house 10. Saturn is debilitated in this chart. The lagna lord Moon sits in Capricorn, house 7 from the ascendant. Classical yogas present: Ruchaka Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Neecha Bhanga Raja Yoga."
     },
     {
       "id": "sachin-tendulkar",
@@ -528,7 +552,8 @@
       "sex": "Male",
       "notable_for": "Widely regarded as one of the greatest batsmen in cricket history; former holder of most international runs and centuries.",
       "time_confidence": "medium",
-      "source_note": "Astro-Databank (via astro-charts.com) lists 1:00 PM with Rodden Rating 'A' (excellent), credited to Scholfield; a separate account cites an interview with the doctor who delivered Tendulkar stating the birth was 'at 1 pm exactly,' consistent with this time. FLAG: several other astrology aggregators report conflicting, uncorroborated times (4:20 PM, 12:54 PM, 2:25 PM) with no named source -- the 1:00 PM figure was preferred as the only one backed by a named source (Scholfield / the delivering doctor's account)."
+      "source_note": "Astro-Databank (via astro-charts.com) lists 1:00 PM with Rodden Rating 'A' (excellent), credited to Scholfield; a separate account cites an interview with the doctor who delivered Tendulkar stating the birth was 'at 1 pm exactly,' consistent with this time. FLAG: several other astrology aggregators report conflicting, uncorroborated times (4:20 PM, 12:54 PM, 2:25 PM) with no named source -- the 1:00 PM figure was preferred as the only one backed by a named source (Scholfield / the delivering doctor's account).",
+      "chart_description": "Cancer rises, with the Moon in Sagittarius (Purva Ashadha nakshatra). The Atmakaraka (soul-significator, highest-degree planet) is Mars, in Capricorn, exalted there, house 7. Sun and Mars are exalted in this chart. Mercury and Jupiter are debilitated in this chart. The lagna lord Moon sits in Sagittarius, house 6 from the ascendant. Classical yogas present: Ruchaka Yoga (Panch Mahapurusha), Kendra-Trikona Raja Yoga, Dhana Yoga (2nd-11th Lord Wealth Combination), Neecha Bhanga Raja Yoga, and 5 more."
     }
   ]
 }
