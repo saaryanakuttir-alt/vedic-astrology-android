@@ -16,6 +16,7 @@ from kivy.uix.button import Button
 from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.metrics import dp
 from kivy.clock import Clock
+from kivy.logger import Logger
 
 from ui import theme
 
@@ -151,6 +152,14 @@ class LongText(ScrollView):
         self.label.height = max(dp(28), texture_size[1] + dp(20))
 
     def set_text(self, text):
+        # Diagnostic logging (grep logcat for "VedicAstro:LongText") - after
+        # several rounds of texture-timing fixes here that each looked
+        # right in code but couldn't be confirmed against real on-device
+        # behavior from this side, this records the hard numbers (text
+        # length, widget width at call time, and post-rebuild texture
+        # size/height below) so a still-blank report tells us WHERE it
+        # broke instead of us re-guessing blind again.
+        Logger.info(f"VedicAstro:LongText: set_text len={len(text or '')} width={self.width}")
         self.label.text = text or ""
         # Belt-and-suspenders, not just the width binding above: confirmed
         # via adb logcat + screenshot that the Karmic & Past Life and Life
@@ -191,6 +200,11 @@ class LongText(ScrollView):
     def _rebuild_texture(self, dt):
         self.label.texture_update()
         self.label.height = max(dp(28), self.label.texture_size[1] + dp(20))
+        Logger.info(
+            f"VedicAstro:LongText: rebuilt text_size={self.label.text_size} "
+            f"texture_size={self.label.texture_size} texture={self.label.texture} "
+            f"height={self.label.height}"
+        )
 
 
 class CaptionLabel(Label):
@@ -237,6 +251,10 @@ class CaptionLabel(Label):
     def _rebuild_texture(self, dt):
         self.texture_update()
         self.height = max(dp(28), self.texture_size[1] + dp(16))
+        Logger.info(
+            f"VedicAstro:CaptionLabel: rebuilt text_size={self.text_size} "
+            f"texture_size={self.texture_size} texture={self.texture} height={self.height}"
+        )
 
     def _on_texture_size(self, instance, texture_size):
         self.height = max(dp(28), texture_size[1] + dp(16))
