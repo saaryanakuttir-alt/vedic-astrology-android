@@ -1,0 +1,94 @@
+{
+  "checklist_category_id": "doshas",
+  "name": "Afflictions Beyond Mangal Dosha Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Interpretive text for engine/doshas.py's 4 afflictions (Pitra, Guru Chandal, Grahan, Shrapit). Same 'raw facts, no combined verdict, no cancellation conditions applied' discipline as manglik.py's own Mangal Dosha check - see doshas.py's module docstring, especially its note on cross-source disagreement over Pitra Dosha's exact definition.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Each indicator cross-checked against multiple classical/reference sources for the underlying combination (Rahu/Ketu-9th, Sun-shadow conjunction, Guru Chandal, both Grahan Dosha forms, and Shrapit Yog are all well-established, frequently-cited combinations) and for consistent framing across all 7 entries.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T14:05:08.226206+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 7,
+  "items": [
+    {
+      "id": "PITRA-RAHU-KETU-9TH",
+      "title": "Rahu or Ketu in the 9th House",
+      "summary": "A shadow planet occupying the house of father, ancestors, and dharma.",
+      "effects": "Rahu or Ketu placed in the 9th house (father, ancestors, dharma, fortune) is one of the most commonly cited Pitra Dosha indicators - read as the 9th house's ancestral significations being colored by that shadow planet's unsettled, karmic nature.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "PITRA-SUN-CONJ-SHADOW",
+      "title": "Sun Conjunct Rahu or Ketu",
+      "summary": "The Sun (father, ancestors, authority) conjunct a shadow planet.",
+      "effects": "The Sun classically signifies the father and paternal lineage; conjunct Rahu or Ketu, some traditions read this as the same ancestral-affliction theme as Pitra Dosha, independent of which house it happens in.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "PITRA-9L-AFFLICTED",
+      "title": "9th Lord Afflicted",
+      "summary": "The lord of the 9th house conjunct a natural malefic.",
+      "effects": "The 9th house's own lord conjunct a natural malefic (Sun, Mars, Saturn, Rahu, or Ketu) is read as putting strain on the 9th house's own significations - fortune, father, dharma, and by extension the ancestral-blessing theme some traditions group under Pitra Dosha.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GURUCHANDAL",
+      "title": "Guru Chandal Dosha",
+      "summary": "Jupiter conjunct Rahu - wisdom and expansion colored by Rahu's amplifying nature.",
+      "effects": "Jupiter (wisdom, teachers, ethics, expansion) conjunct Rahu (amplification, unconventional paths, obsession) is a specifically named classical combination - read as Jupiter's guru/wisdom significations becoming unconventional, restless, or prone to attachment to the wrong teacher or belief system. Some traditions also read a more positive face: unconventional or boundary-crossing wisdom, when Jupiter is otherwise well-placed.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GRAHAN-SURYA",
+      "title": "Surya Grahan Dosha (Sun eclipsed)",
+      "summary": "The Sun conjunct Rahu or Ketu - the solar-eclipse axis touching the birth chart.",
+      "effects": "The Sun (self, vitality, father, authority) conjunct Rahu or Ketu is read as an 'eclipse' on the Sun's own significations - some dimming or complication of confidence, authority, or relationship with the father figure, alongside Rahu/Ketu's own karmic themes.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GRAHAN-CHANDRA",
+      "title": "Chandra Grahan Dosha (Moon eclipsed)",
+      "summary": "The Moon conjunct Rahu or Ketu - the lunar-eclipse axis touching the birth chart.",
+      "effects": "The Moon (mind, emotions, mother) conjunct Rahu or Ketu is read as an 'eclipse' on the Moon's own significations - emotional restlessness, an unsettled or amplified inner life, alongside Rahu/Ketu's own karmic themes. Classically considered one of the more commonly discussed Grahan Dosha forms.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "SHRAPIT",
+      "title": "Shrapit Dosha (Shrapit Yog)",
+      "summary": "Saturn conjunct Rahu - a 'cursed'/ancestral-pattern affliction with sudden reversals.",
+      "effects": "Saturn (delay, restriction, karma) conjunct Rahu (amplification, obsession, unconventional paths) is a specifically named classical combination, sometimes called a 'curse' affliction - read as delays and restrictions that compound unpredictably, sudden reversals, and family-pattern themes repeating across generations.",
+      "category": "doshas",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

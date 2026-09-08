@@ -37,6 +37,7 @@ import dasha
 import divisional
 import ephemeris
 import geocode
+import graha_yuddha
 import houses
 import manglik
 import panchang_daily
@@ -95,12 +96,13 @@ def _local_datetime_to_utc(birth_date, birth_time, tz_name):
     return local_dt, utc_dt, utc_offset_hours
 
 
-def _planet_detail(longitude, ascendant_sign, is_retrograde, chalit_bhava=None):
+def _planet_detail(longitude, ascendant_sign, is_retrograde, chalit_bhava=None, ecliptic_latitude=None):
     sign, deg_in_sign = panchanga.get_sign(longitude)
     nak, pada, nak_lord, deg_in_nak = panchanga.get_nakshatra(longitude)
     house = houses.get_house_of_sign(ascendant_sign, sign)
     return {
         "longitude": round(longitude, 4),
+        "ecliptic_latitude": round(ecliptic_latitude, 4) if ecliptic_latitude is not None else None,
         "sign": sign,
         "degree_in_sign": round(deg_in_sign, 4),
         "house": house,
@@ -153,14 +155,18 @@ def _compute_birth_chart_locked(name, birth_date, birth_time, place_name,
 
     positions = ephemeris.get_all_positions(jd_ut)
     retro_flags = ephemeris.get_all_retrograde_flags(jd_ut)
+    war_eligible_latitudes = ephemeris.get_all_latitudes(jd_ut)
 
     chalit_table, chalit_planet_bhavas = chalit_module.compute_chalit_for_chart(
         ascendant_longitude, mc_longitude, positions)
 
     planets = {
-        p: _planet_detail(lon_p, ascendant_sign, retro_flags[p], chalit_planet_bhavas[p])
+        p: _planet_detail(lon_p, ascendant_sign, retro_flags[p], chalit_planet_bhavas[p],
+                           war_eligible_latitudes.get(p))
         for p, lon_p in positions.items()
     }
+
+    graha_yuddha_wars = graha_yuddha.find_wars(positions, war_eligible_latitudes)
 
     ascendant_vargas = divisional.compute_all_vargas(ascendant_longitude)
 
@@ -232,6 +238,7 @@ def _compute_birth_chart_locked(name, birth_date, birth_time, place_name,
         "panchang": panchang,
         "day_details": day_details,
         "mangal_dosha": mangal_dosha,
+        "graha_yuddha": graha_yuddha_wars,
         "ashtakavarga": ashtakavarga_result,
         "chalit": chalit_table,
         "caveats": {

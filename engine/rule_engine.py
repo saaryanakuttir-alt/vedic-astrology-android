@@ -40,6 +40,7 @@ import combustion
 import maitri
 import upaya
 import relationship_themes
+import doshas
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
 from yogas import detect_all_yogas
 
@@ -59,6 +60,7 @@ _KB_FILENAMES = {
     "retrograde": "retrograde.json",
     "vargottama": "vargottama.json",
     "relationship_themes": "relationship_themes.json",
+    "doshas": "doshas.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -258,6 +260,33 @@ def _relationship_themes_reading(chart, warnings):
     }
 
 
+def _doshas_reading(chart, warnings):
+    """Attaches KB reference text to each raw indicator doshas.py computes
+    (Pitra, Guru Chandal, both Grahan Dosha forms, Shrapit) - same
+    attach-KB-to-raw-fact shape as _relationship_themes_reading above."""
+    def attach(indicator, kb_id):
+        entry = _lookup("doshas", kb_id, warnings)
+        return dict(indicator, kb=entry)
+
+    pitra = doshas.assess_pitra_dosha(chart)
+    grahan = doshas.assess_grahan_dosha(chart)
+
+    return {
+        "pitra": {
+            "note": pitra["note"],
+            "rahu_ketu_in_9th": attach(pitra["rahu_ketu_in_9th"], "PITRA-RAHU-KETU-9TH"),
+            "sun_conjunct_rahu_ketu": attach(pitra["sun_conjunct_rahu_ketu"], "PITRA-SUN-CONJ-SHADOW"),
+            "ninth_lord_afflicted": attach(pitra["ninth_lord_afflicted"], "PITRA-9L-AFFLICTED"),
+        },
+        "guru_chandal": attach(doshas.assess_guru_chandal_dosha(chart), "GURUCHANDAL"),
+        "grahan": {
+            "surya_grahan": attach(grahan["surya_grahan"], "GRAHAN-SURYA"),
+            "chandra_grahan": attach(grahan["chandra_grahan"], "GRAHAN-CHANDRA"),
+        },
+        "shrapit": attach(doshas.assess_shrapit_dosha(chart), "SHRAPIT"),
+    }
+
+
 def _planet_reading(chart, planet, warnings):
     detail = chart["planets"][planet]
     sign, house = detail["sign"], detail["house"]
@@ -362,6 +391,11 @@ def _dasha_readings(chart, warnings):
         "running_at_birth": {
             "mahadasha_lord": running["mahadasha_lord"] if running else None,
             "antardasha_lord": running["antardasha_lord"] if running else None,
+            # No separate KB narrative for pratyantardasha (3rd level) -
+            # same Vimshottari math already running, just one level deeper
+            # timing precision; the mahadasha/antardasha readings above
+            # already cover the interpretive content.
+            "pratyantardasha_lord": running["pratyantardasha_lord"] if running else None,
             "mahadasha_reading": maha_reading,
             "antardasha_reading": antar_reading,
         },
@@ -1283,6 +1317,11 @@ def generate_reading(chart):
         "gemstone_candidates": upaya.suggest_gemstone_candidates(planets_reading),
         "gemstones": {p: upaya.gemstone_for(p) for p in planets_reading},
         "mantras": {p: upaya.mantra_for(p) for p in planets_reading},
+        "yantras": {p: upaya.yantra_for(p) for p in planets_reading},
+        "daan": {p: upaya.daan_for(p) for p in planets_reading},
+        "vrat": {p: upaya.vrat_for(p) for p in planets_reading},
+        "rudraksha": {p: upaya.rudraksha_for(p) for p in planets_reading},
+        "colors": {p: upaya.colors_for(p) for p in planets_reading},
         "combinations_to_avoid": upaya.combinations_to_avoid(),
         # Full 21-pair data, kept (not rendered as a table - see
         # combinations_to_avoid above for what the UI actually displays)
@@ -1292,6 +1331,7 @@ def generate_reading(chart):
     }
 
     relationship_themes_reading = _relationship_themes_reading(chart, warnings)
+    doshas_reading = _doshas_reading(chart, warnings)
 
     return {
         "name": chart.get("name"),
@@ -1310,6 +1350,7 @@ def generate_reading(chart):
         "life_predictions": life_predictions,
         "remedies": remedies,
         "relationship_themes": relationship_themes_reading,
+        "doshas": doshas_reading,
         "warnings": warnings,
     }
 

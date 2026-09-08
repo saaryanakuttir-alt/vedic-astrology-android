@@ -154,6 +154,23 @@ def get_all_positions(jd_ut):
     return positions
 
 
+WAR_ELIGIBLE_PLANETS = ["Mercury", "Venus", "Mars", "Jupiter", "Saturn"]  # Sun/Moon/Rahu/Ketu never fight a Graha Yuddha
+
+
+def get_all_latitudes(jd_ut):
+    """Returns {planet_name: ecliptic_latitude_degrees} for the 5 planets
+    that classically participate in Graha Yuddha (planetary war) - Sun,
+    Moon, Rahu, and Ketu are excluded by classical rule, not by an
+    oversight here. Latitude (index 1 of swe.calc_ut's result tuple,
+    degrees north/south of the ecliptic) is what BPHS uses to decide a
+    war's winner - see graha_yuddha.py for that logic."""
+    lats = {}
+    for name in WAR_ELIGIBLE_PLANETS:
+        result, _ = swe.calc_ut(jd_ut, PLANET_IDS[name], SIDEREAL_FLAG)
+        lats[name] = result[1]
+    return lats
+
+
 def get_ayanamsa(jd_ut):
     """The Lahiri ayanamsa value (degrees) applied for this date — useful
     for debugging / cross-checking against other software's displayed value."""

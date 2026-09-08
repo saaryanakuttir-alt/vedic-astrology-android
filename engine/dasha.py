@@ -48,29 +48,72 @@ def _next_lord(lord):
     return DASHA_SEQUENCE[(i + 1) % 9]
 
 
-def _build_antardashas(maha_lord, maha_start, maha_years, maha_end):
-    """9 antardashas for one mahadasha, starting from the mahadasha's own lord.
+def _build_sub_periods(parent_lord, parent_start, parent_years, parent_end):
+    """Generic ONE-LEVEL Vimshottari sub-division: 9 sub-periods within a
+    parent period, starting from the parent period's own lord and cycling
+    through DASHA_SEQUENCE, each sub-period's length = parent_years *
+    THAT_LORD's_mahadasha_years / 120. The formula is identical at every
+    level of the Vimshottari hierarchy (Mahadasha -> Antardasha ->
+    Pratyantardasha -> ...), so this one function backs both
+    _build_antardashas (Antardasha-within-Mahadasha) and
+    compute_pratyantardashas (Pratyantardasha-within-Antardasha) below,
+    rather than duplicating the loop at each level.
 
-    maha_end is the CALLER's independently-computed end of this mahadasha
-    (a single direct addition). We force the final antardasha's `end` to be
-    exactly this value rather than trusting the cumulative sum of 9
-    separately-rounded timedeltas, which can drift from it by a
+    parent_end is the CALLER's independently-computed end of the parent
+    period (a single direct addition). We force the final sub-period's
+    `end` to be exactly this value rather than trusting the cumulative sum
+    of 9 separately-rounded timedeltas, which can drift from it by a
     sub-microsecond amount due to floating-point rounding at each step.
-    Without this, exact-equality chaining checks (antardasha chain end ==
-    mahadasha end == next mahadasha start) could spuriously fail."""
-    antardashas = []
-    cursor = maha_start
-    lord = maha_lord
+    Without this, exact-equality chaining checks (sub-period chain end ==
+    parent end == next parent start) could spuriously fail."""
+    periods = []
+    cursor = parent_start
+    lord = parent_lord
     for i in range(9):
         if i == 8:
-            end = maha_end  # anchor the last antardasha to the exact mahadasha end
+            end = parent_end  # anchor the last sub-period to the exact parent end
         else:
-            antar_years = maha_years * MAHADASHA_YEARS[lord] / TOTAL_CYCLE_YEARS
-            end = cursor + _years_to_timedelta(antar_years)
-        antardashas.append({"lord": lord, "start": cursor, "end": end})
+            sub_years = parent_years * MAHADASHA_YEARS[lord] / TOTAL_CYCLE_YEARS
+            end = cursor + _years_to_timedelta(sub_years)
+        periods.append({"lord": lord, "start": cursor, "end": end})
         cursor = end
         lord = _next_lord(lord)
-    return antardashas
+    return periods
+
+
+def _build_antardashas(maha_lord, maha_start, maha_years, maha_end):
+    """9 antardashas for one mahadasha, starting from the mahadasha's own
+    lord. See _build_sub_periods above - this is just that generic
+    one-level division applied at the Mahadasha level."""
+    return _build_sub_periods(maha_lord, maha_start, maha_years, maha_end)
+
+
+def compute_pratyantardashas(antardasha):
+    """9 pratyantardashas (the 3rd Vimshottari level) within ONE
+    antardasha dict ({"lord", "start", "end"} - e.g. from a mahadasha's
+    "antardashas" list, or from find_running_dasha's antardasha lookup).
+
+    Computed ON DEMAND for a single antardasha rather than eagerly for the
+    whole 120-year timeline: eagerly expanding all 9 mahadashas x 9
+    antardashas x 9 pratyantardashas would be 729 stored periods per
+    chart for a level of detail most readings never need - this way a
+    caller (UI or rule_engine) asks for pratyantardashas only for
+    whichever antardasha it's actually displaying (usually just the one
+    currently running)."""
+    antar_years = (antardasha["end"] - antardasha["start"]).total_seconds() / (86400.0 * DAYS_PER_YEAR)
+    return _build_sub_periods(antardasha["lord"], antardasha["start"], antar_years, antardasha["end"])
+
+
+def find_running_pratyantardasha(antardasha, at_datetime):
+    """Given one antardasha dict and a datetime known to fall within it
+    (e.g. from find_running_dasha), returns the lord of the
+    pratyantardasha running at that moment, or the last one if float
+    rounding puts at_datetime a hair past the final boundary."""
+    pratyantardashas = compute_pratyantardashas(antardasha)
+    for p in pratyantardashas:
+        if p["start"] <= at_datetime < p["end"]:
+            return p["lord"]
+    return pratyantardashas[-1]["lord"]
 
 
 def compute_vimshottari_timeline(birth_datetime_utc, moon_longitude, years_forward=120):
@@ -148,16 +191,25 @@ def format_balance_at_birth(timeline, birth_datetime_utc):
 
 def find_running_dasha(timeline, at_datetime):
     """Given a timeline from compute_vimshottari_timeline(), find which
-    mahadasha and antardasha are running at a given datetime (e.g. 'now',
-    or the birth moment itself). Returns
-        {"mahadasha_lord": ..., "antardasha_lord": ...}
-    or None if at_datetime falls outside the computed timeline range."""
+    mahadasha, antardasha, AND pratyantardasha are running at a given
+    datetime (e.g. 'now', or the birth moment itself). Returns
+        {"mahadasha_lord": ..., "antardasha_lord": ..., "pratyantardasha_lord": ...}
+    or None if at_datetime falls outside the computed timeline range. The
+    pratyantardasha is computed lazily (see compute_pratyantardashas) only
+    for the one antardasha that matched - no eager 729-period expansion."""
     for maha in timeline:
         if maha["start"] <= at_datetime < maha["end"]:
             for antar in maha["antardashas"]:
                 if antar["start"] <= at_datetime < antar["end"]:
-                    return {"mahadasha_lord": maha["lord"], "antardasha_lord": antar["lord"]}
+                    return {
+                        "mahadasha_lord": maha["lord"], "antardasha_lord": antar["lord"],
+                        "pratyantardasha_lord": find_running_pratyantardasha(antar, at_datetime),
+                    }
             # Fell in the mahadasha but not any antardasha window (float
             # rounding at the very last instant) — treat as the last one.
-            return {"mahadasha_lord": maha["lord"], "antardasha_lord": maha["antardashas"][-1]["lord"]}
+            last_antar = maha["antardashas"][-1]
+            return {
+                "mahadasha_lord": maha["lord"], "antardasha_lord": last_antar["lord"],
+                "pratyantardasha_lord": find_running_pratyantardasha(last_antar, at_datetime),
+            }
     return None

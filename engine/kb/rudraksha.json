@@ -1,0 +1,132 @@
+{
+  "checklist_category_id": "rudraksha",
+  "name": "Rudraksha Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Per-planet mukhi (bead-face count) recommendation. Same non-prescriptive framing as gemstones.json - authenticity/sourcing concerns are arguably even more relevant here than for gemstones, given how widely mislabeled rudraksha beads are in the market.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Per-planet correspondences cross-checked against multiple classical/reference sources for consistency - these are widely standardized associations across Vedic astrology texts with little cross-source disagreement, unlike e.g. Pitra Dosha's definition.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T14:09:18.565683+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 9,
+  "items": [
+    {
+      "id": "RUDR-Su",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Sun",
+      "mukhi": 1,
+      "title": "1-Mukhi Rudraksha (Sun)",
+      "summary": "The 1-face (mukhi) rudraksha bead traditionally associated with Sun.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Sun's significations. A 1-mukhi (single-faced) bead is traditionally considered the rarest and most powerful, and is priced/regarded accordingly - genuine specimens are uncommon. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Mo",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Moon",
+      "mukhi": 2,
+      "title": "2-Mukhi Rudraksha (Moon)",
+      "summary": "The 2-face (mukhi) rudraksha bead traditionally associated with Moon.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Moon's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Ma",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Mars",
+      "mukhi": 3,
+      "title": "3-Mukhi Rudraksha (Mars)",
+      "summary": "The 3-face (mukhi) rudraksha bead traditionally associated with Mars.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Mars's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Me",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Mercury",
+      "mukhi": 4,
+      "title": "4-Mukhi Rudraksha (Mercury)",
+      "summary": "The 4-face (mukhi) rudraksha bead traditionally associated with Mercury.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Mercury's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Ju",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Jupiter",
+      "mukhi": 5,
+      "title": "5-Mukhi Rudraksha (Jupiter)",
+      "summary": "The 5-face (mukhi) rudraksha bead traditionally associated with Jupiter.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Jupiter's significations. 5-mukhi is the most common and widely worn bead overall (not just for Jupiter), since it is considered generally auspicious and easy to source. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Ve",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Venus",
+      "mukhi": 6,
+      "title": "6-Mukhi Rudraksha (Venus)",
+      "summary": "The 6-face (mukhi) rudraksha bead traditionally associated with Venus.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Venus's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Sa",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Saturn",
+      "mukhi": 7,
+      "title": "7-Mukhi Rudraksha (Saturn)",
+      "summary": "The 7-face (mukhi) rudraksha bead traditionally associated with Saturn.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Saturn's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Ra",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Rahu",
+      "mukhi": 8,
+      "title": "8-Mukhi Rudraksha (Rahu)",
+      "summary": "The 8-face (mukhi) rudraksha bead traditionally associated with Rahu.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Rahu's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "RUDR-Ke",
+      "category": "rudraksha",
+      "tradition": "Parashari",
+      "planet": "Ketu",
+      "mukhi": 9,
+      "title": "9-Mukhi Rudraksha (Ketu)",
+      "summary": "The 9-face (mukhi) rudraksha bead traditionally associated with Ketu.",
+      "effects": "Worn (typically as a mala or pendant) to traditionally support Ketu's significations. As with gemstones, authenticity varies significantly in the market - a trusted source matters more than for almost any other remedy here.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

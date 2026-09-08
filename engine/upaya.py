@@ -39,6 +39,15 @@ CAVEAT = (
 
 _gemstones_cache = None
 _mantras_cache = None
+# The 5 lighter-weight remedy categories (yantra/daan/vrat/rudraksha/
+# colors) all share the exact same {planet: item} loading shape as
+# gemstones/mantras above - one small cache dict + one generic loader,
+# rather than 5 near-identical copy-pasted functions.
+_extra_caches = {}
+_EXTRA_KB_FILES = {
+    "yantra": "yantras.json", "daan": "daan.json", "vrat": "vrat.json",
+    "rudraksha": "rudraksha.json", "colors": "colors_deities.json",
+}
 
 
 def _load_gemstones():
@@ -59,12 +68,53 @@ def _load_mantras():
     return _mantras_cache
 
 
+def _load_extra(kind):
+    if kind not in _extra_caches:
+        with open(os.path.join(KB_DIR, _EXTRA_KB_FILES[kind]), encoding="utf-8") as f:
+            data = json.load(f)
+        _extra_caches[kind] = {item["planet"]: item for item in data["items"]}
+    return _extra_caches[kind]
+
+
 def gemstone_for(planet):
     return _load_gemstones().get(planet)
 
 
 def mantra_for(planet):
     return _load_mantras().get(planet)
+
+
+def yantra_for(planet):
+    return _load_extra("yantra").get(planet)
+
+
+def daan_for(planet):
+    return _load_extra("daan").get(planet)
+
+
+def vrat_for(planet):
+    return _load_extra("vrat").get(planet)
+
+
+def rudraksha_for(planet):
+    return _load_extra("rudraksha").get(planet)
+
+
+def colors_for(planet):
+    return _load_extra("colors").get(planet)
+
+
+def all_remedies_for(planet):
+    """One convenience bundle of everything this module knows about a
+    single planet - gemstone, mantra, and the 5 lighter-weight remedies -
+    for a UI that wants a per-planet remedy card rather than 6 separate
+    per-category tables."""
+    return {
+        "gemstone": gemstone_for(planet), "mantra": mantra_for(planet),
+        "yantra": yantra_for(planet), "daan": daan_for(planet),
+        "vrat": vrat_for(planet), "rudraksha": rudraksha_for(planet),
+        "colors": colors_for(planet),
+    }
 
 
 def _explain_pair(a, b, a_view, b_view):
