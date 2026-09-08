@@ -17,6 +17,11 @@ use:
     divisional_charts          DIV-{Varga}                      e.g. DIV-D9
     divisional_*_planet_in_sign D{n}-PS-{PlanetAbbr}-{SignAbbr}  e.g. D9-PS-Su-Ari
     classical_yogas            YOGA-01 .. YOGA-24 (fixed IDs, from yogas.py)
+    nakshatra                  looked up by nakshatra NAME, not an id scheme
+                                (see _load_nakshatra_kb/_nakshatra_reading below) -
+                                every nakshatra name is already a unique, stable
+                                join key (matches panchanga.NAKSHATRAS exactly),
+                                so there's no need for a second ID convention here.
 
 USAGE:
     from birth_chart import compute_birth_chart
@@ -38,11 +43,12 @@ _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Satur
 
 KB_DIR = os.path.join(os.path.dirname(__file__), "kb")
 
-# All 19 bundled KB files, keyed by the same name rule_engine uses internally.
+# All 20 bundled KB files, keyed by the same name rule_engine uses internally.
 _KB_FILENAMES = {
     "planet_in_sign": "planet_in_sign.json",
     "planet_in_house": "planet_in_house.json",
     "house_lord_placement": "house_lord_placement.json",
+    "nakshatra": "nakshatra.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -82,6 +88,31 @@ def load_all_kb():
     """Eagerly loads every bundled KB file (useful to fail fast if kb/ is
     missing or a file is malformed, e.g. right after packaging a release)."""
     return {name: _load(name) for name in _KB_FILENAMES}
+
+
+_nakshatra_by_name = None
+
+
+def _load_nakshatra_kb():
+    """nakshatra.json's natural join key is each entry's own 'name' field
+    (Ashwini, Bharani, ...), which already matches panchanga.NAKSHATRAS
+    exactly - unlike every other KB file here, there's no need to build a
+    separate {Planet}-{Sign}/{House}-style id to look an entry up, so this
+    gets its own tiny name-keyed cache instead of going through _load()."""
+    global _nakshatra_by_name
+    if _nakshatra_by_name is None:
+        path = os.path.join(KB_DIR, _KB_FILENAMES["nakshatra"])
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        _nakshatra_by_name = {item["name"]: item for item in data["items"]}
+    return _nakshatra_by_name
+
+
+def _nakshatra_reading(nakshatra_name, warnings=None):
+    entry = _load_nakshatra_kb().get(nakshatra_name)
+    if entry is None and warnings is not None:
+        warnings.append(f"No 'nakshatra' entry found for '{nakshatra_name}'.")
+    return entry
 
 
 # ---------------------------------------------------------------------------
@@ -334,6 +365,50 @@ _SIGN_ELEMENT = {
     "Cancer": "Water", "Scorpio": "Water", "Pisces": "Water",
 }
 
+# Plain-English, jargon-free meaning of each of the 12 houses - used to
+# turn "the 10th lord sits in the 9th" into "your career is tied to luck,
+# higher learning and mentors". Deliberately everyday wording.
+_PLAIN_HOUSE = {
+    1: "yourself - your body, health and personality",
+    2: "money, family and what you say",
+    3: "courage, siblings and your own effort",
+    4: "home, your mother and inner peace",
+    5: "children, creativity and romance",
+    6: "work, health and overcoming obstacles",
+    7: "marriage and close partnerships",
+    8: "big changes, shared money and hidden things",
+    9: "luck, higher learning, teachers and father",
+    10: "career, status and public life",
+    11: "income, friendships and big goals",
+    12: "letting go, foreign lands and spiritual life",
+}
+_ORDINAL_HOUSE = {1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th", 6: "6th",
+                  7: "7th", 8: "8th", 9: "9th", 10: "10th", 11: "11th", 12: "12th"}
+# Houses whose lord being placed there is classically supportive vs. effortful.
+_STRONG_HOUSES = {1, 4, 5, 7, 9, 10, 11}
+_WEAK_HOUSES = {6, 8, 12}
+
+
+def _plain_life_gloss(house_lords, primary_house, area_word):
+    """A genuinely simplified reading of the KEY placement behind a life
+    area (not a description of the topic): which house rules it, where that
+    ruler sits in plain words, and whether that's classically easy or
+    effortful."""
+    hl = house_lords.get(primary_house) or house_lords.get(str(primary_house))
+    if not hl:
+        return ""
+    placed = hl["placed_in_house"]
+    where = _PLAIN_HOUSE.get(placed, "another part of life")
+    if placed in _STRONG_HOUSES:
+        senti = "That is usually a supportive, helpful placement for this part of life."
+    elif placed in _WEAK_HOUSES:
+        senti = ("That placement tends to ask for extra effort here, or brings some ups and "
+                 "downs before things settle.")
+    else:
+        senti = "That is a mixed, workable placement for this part of life."
+    return (f"In simple terms: the planet in charge of your {area_word} sits in the part of "
+            f"your life about {where}, so your {area_word} is closely tied to {where}. {senti}")
+
 
 def _past_life_identity(ketu):
     """From Ketu's house (the arena the past life centered on) and the
@@ -458,6 +533,23 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     putrakaraka = _karaka_snapshot(karakas, "PK", planets_reading)
 
     paragraphs = []
+
+    # --- Paragraph 0: the Janma Nakshatra (Moon's birth star) ---
+    # The single most foundational personal-identity placement in Vedic
+    # astrology alongside the Moon sign itself - and, per nakshatra.json's
+    # own note, the one gap where pada was already computed and shown in
+    # every table (Planets, Kundli Details) but never actually narrated
+    # anywhere in the app until this KB file existed.
+    moon_nakshatra_name = planets_reading["Moon"]["nakshatra"]
+    moon_nakshatra = _nakshatra_reading(moon_nakshatra_name)
+    if moon_nakshatra:
+        paragraphs.append(
+            f"Your Janma Nakshatra — the lunar mansion the Moon occupied at birth, and "
+            f"traditionally read as foundational to personal identity in its own right — is "
+            f"{moon_nakshatra['name']}, ruled by {moon_nakshatra['ruling_planet']} and "
+            f"presided over by {moon_nakshatra['deity']}, symbolized by {moon_nakshatra['symbol'].lower()}. "
+            f"{moon_nakshatra['effects']}"
+        )
 
     # --- Paragraph 1: the soul's core nature (Atmakaraka) ---
     ak_text = (
@@ -598,16 +690,27 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     karmic_actions = _karmic_actions(ketu, saturn, purva_punya)
     main_karmic_goal = _karmic_goal_statement(rahu, atmakaraka, dharma)
 
+    ketu_where = _PLAIN_HOUSE.get(ketu["house"], "a familiar part of life")
+    rahu_where = _PLAIN_HOUSE.get(rahu["house"], "a new part of life")
     paragraphs.append(
         "--- What you may have been (past-life imprint) ---\n"
         + past_life["summary"] + " " + past_life["detail"]
+        + f"\n\nIn simple terms: you seem to have come into this life already comfortable with "
+        f"{ketu_where}. It feels natural, even over-familiar - so it's a strength you can lean "
+        f"on, but not where your growth is meant to happen this time."
     )
     paragraphs.append(
         "--- What led here (the actions carried forward) ---\n" + karmic_actions
+        + "\n\nIn simple terms: these are the old habits and duties your chart suggests you're "
+        "still carrying - leaning too hard on what already came easily, which now has to be "
+        "balanced out."
     )
     if main_karmic_goal:
         paragraphs.append(
             "--- Your main karmic goal this life ---\n" + main_karmic_goal
+            + f"\n\nIn simple terms: your growth this life is mostly about {rahu_where}. Leaning "
+            f"into that - even when it feels new or uncomfortable - is where the real meaning and "
+            f"progress tend to come from."
         )
 
     # --- Closing synthesis ---
@@ -641,6 +744,7 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     short_synthesis = " ".join(short_bits)
 
     return {
+        "moon_nakshatra": moon_nakshatra,
         "atmakaraka": atmakaraka,
         "darakaraka": darakaraka,
         "putrakaraka": putrakaraka,
@@ -910,7 +1014,7 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
             + ", which colors the timing and flavor of this area for the corresponding period of life."
         )
 
-    def area(title, house_nums, planet_names, extra_yoga_ids=(), closing=""):
+    def area(title, house_nums, planet_names, extra_yoga_ids=(), closing="", area_word=""):
         bits = []
         for h in house_nums:
             t = _hl_text(house_lords, h)
@@ -926,6 +1030,13 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
         text = " ".join(bits)
         if closing:
             text = text + " " + closing
+        # A genuinely simplified reading of the key placement for this area
+        # (see _plain_life_gloss) - a plain-language explanation of what the
+        # dense classical text above actually means, not a topic description.
+        if area_word and house_nums:
+            gloss = _plain_life_gloss(house_lords, house_nums[0], area_word)
+            if gloss:
+                text = text + "\n\n" + gloss
         return {"title": title, "houses_considered": list(house_nums), "planets_considered": list(planet_names), "text": text.strip()}
 
     predictions = {
@@ -939,8 +1050,10 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
                 "classically read as the planet whose qualities most shape vocational direction."
                 + dasha_note
             ),
+            area_word="career",
         ),
-        "wealth_and_finances": area("Wealth & Finances", [2, 11, 9], ["Jupiter", "Venus"]),
+        "wealth_and_finances": area("Wealth & Finances", [2, 11, 9], ["Jupiter", "Venus"],
+            area_word="money and finances"),
         "marriage_and_relationships": area(
             "Marriage & Relationships",
             [7], ["Venus"],
@@ -952,10 +1065,14 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
                 "Family Compatibility for an actual two-chart comparison if a partner profile "
                 "has been generated."
             ),
+            area_word="marriage and partnerships",
         ),
-        "health_and_vitality": area("Health & Vitality", [1, 6, 8], []),
-        "education_and_learning": area("Education & Learning", [4, 5], ["Mercury", "Jupiter"]),
-        "family_and_home": area("Family & Home", [2, 4], ["Moon"]),
+        "health_and_vitality": area("Health & Vitality", [1, 6, 8], [],
+            area_word="health and vitality"),
+        "education_and_learning": area("Education & Learning", [4, 5], ["Mercury", "Jupiter"],
+            area_word="education and learning"),
+        "family_and_home": area("Family & Home", [2, 4], ["Moon"],
+            area_word="home and family"),
         "children": area(
             "Children",
             [5], ["Jupiter"],
@@ -964,9 +1081,12 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
                 f"{chara_karaka.get_karaka(karakas, 'PK')['planet']}, in "
                 f"{planets_reading[chara_karaka.get_karaka(karakas, 'PK')['planet']]['sign']}."
             ),
+            area_word="children",
         ),
-        "spirituality_and_inner_growth": area("Spirituality & Inner Growth", [9, 12], ["Jupiter", "Ketu"]),
-        "travel_and_foreign_connections": area("Travel & Foreign Connections", [3, 9, 12], []),
+        "spirituality_and_inner_growth": area("Spirituality & Inner Growth", [9, 12], ["Jupiter", "Ketu"],
+            area_word="spiritual life"),
+        "travel_and_foreign_connections": area("Travel & Foreign Connections", [3, 9, 12], [],
+            area_word="travel and foreign ties"),
         # Longevity is intentionally placed LAST so it reads after the
         # life-area predictions above, and carries its own strong caveat.
         "longevity_and_lifespan": _build_longevity(chart, planets_reading, house_lords, dasha),
