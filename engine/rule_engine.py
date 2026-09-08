@@ -39,6 +39,7 @@ import chara_karaka
 import combustion
 import maitri
 import upaya
+import relationship_themes
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
 from yogas import detect_all_yogas
 
@@ -57,6 +58,7 @@ _KB_FILENAMES = {
     "combustion": "combustion.json",
     "retrograde": "retrograde.json",
     "vargottama": "vargottama.json",
+    "relationship_themes": "relationship_themes.json",
     "classical_yogas": "classical_yogas.json",
     "vimshottari_mahadasha": "vimshottari_mahadasha.json",
     "vimshottari_antardasha": "vimshottari_antardasha.json",
@@ -217,6 +219,43 @@ def _combustion_reading(chart, planet, warnings):
     combust = sep <= orb
     entry = _lookup("combustion", f"CMB-{planet[:2]}", warnings) if combust else None
     return {"combust": combust, "orb": orb, "separation": round(sep, 2), "reading": entry}
+
+
+def _relationship_themes_reading(chart, warnings):
+    """Attaches KB reference text (title/summary/effects) to each raw
+    indicator relationship_themes.assess_relationship_themes() computes.
+    Deliberately mirrors the "raw facts + KB text, no combined verdict"
+    shape used everywhere else in this module - see that module's own
+    docstring for why this topic in particular avoids a single verdict."""
+    raw = relationship_themes.assess_relationship_themes(chart)
+
+    def attach(indicator, kb_id):
+        entry = _lookup("relationship_themes", kb_id, warnings)
+        return dict(indicator, kb=entry)
+
+    seventh = raw["seventh_house_lord"]
+    venus_mars = raw["venus_mars"]
+    rahu = raw["rahu"]
+
+    return {
+        "caveat": raw["caveat"],
+        "seventh_house_lord": {
+            "lord": seventh["lord"], "sign": seventh["sign"], "placed_in_house": seventh["placed_in_house"],
+            "in_dusthana": attach(seventh["in_dusthana"], "REL-7L-DUSTHANA"),
+            "malefic_conjunction": attach(seventh["malefic_conjunction"], "REL-7L-MALEFIC-CONJ"),
+            "malefic_aspect": attach(seventh["malefic_aspect"], "REL-7L-MALEFIC-ASPECT"),
+        },
+        "venus_mars": {
+            "conjunction": attach(venus_mars["conjunction"], "REL-VENUS-MARS-CONJ"),
+            "mutual_aspect": attach(venus_mars["mutual_aspect"], "REL-VENUS-MARS-ASPECT"),
+        },
+        "rahu": {
+            "conjunct_venus": attach(rahu["conjunct_venus"], "REL-RAHU-VENUS"),
+            "in_seventh_house": attach(rahu["in_seventh_house"], "REL-RAHU-7TH"),
+        },
+        "crowded_seventh_house": attach(raw["crowded_seventh_house"], "REL-CROWDED-7TH"),
+        "venus_afflicted": attach(raw["venus_afflicted"], "REL-VENUS-AFFLICTED"),
+    }
 
 
 def _planet_reading(chart, planet, warnings):
@@ -1252,6 +1291,8 @@ def generate_reading(chart):
         "combination_matrix": upaya.full_combination_matrix(),
     }
 
+    relationship_themes_reading = _relationship_themes_reading(chart, warnings)
+
     return {
         "name": chart.get("name"),
         "ascendant": {
@@ -1268,6 +1309,7 @@ def generate_reading(chart):
         "karmic_and_past_life": karmic_and_past_life,
         "life_predictions": life_predictions,
         "remedies": remedies,
+        "relationship_themes": relationship_themes_reading,
         "warnings": warnings,
     }
 

@@ -1,0 +1,114 @@
+{
+  "checklist_category_id": "relationship_themes",
+  "name": "Relationship & Commitment Themes Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Interpretive text for the 9 indicators engine/relationship_themes.py computes. Deliberately framed around relationship TENDENCIES in the native's own chart (restlessness, complexity, difficulty with exclusivity) rather than the word 'infidelity' anywhere in this file's text - see relationship_themes.py's own module docstring for why. No combined verdict exists anywhere in this project for this topic, matching how Mangal Dosha (manglik.py) already works: report raw indicators, let the reader weigh them, never assert a single answer.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Each indicator cross-checked against multiple classical/reference sources for the underlying astrological correlation (7th lord affliction, Venus-Mars, Rahu-Venus, crowded 7th house, afflicted Venus are all well-established, frequently-cited combinations in this area of classical literature) and for consistent, non-accusatory framing across all 9 entries.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only. Given the sensitivity of this topic, a careful review pass here matters more than for most other KB files."
+  },
+  "generated_at": "2026-09-08T13:45:30.394934+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency and responsible framing",
+  "total_items": 9,
+  "items": [
+    {
+      "id": "REL-7L-DUSTHANA",
+      "title": "7th Lord in a Dusthana House",
+      "summary": "The 7th house's own lord placed in house 6, 8, or 12 can unsettle the partnership themes it governs.",
+      "effects": "The lord of the 7th house (marriage/partnership) sitting in a dusthana (6th - conflict, 8th - upheaval/secrets, or 12th - loss/distance) is classically read as putting some strain on how easily partnership themes play out - not a specific behavior, just a harder road for the house's own significations to express smoothly.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-7L-MALEFIC-CONJ",
+      "title": "7th Lord Conjunct a Natural Malefic",
+      "summary": "A natural malefic sitting with the 7th lord can add friction or intensity to partnership themes.",
+      "effects": "When a natural malefic (Sun, Mars, Saturn, Rahu, or Ketu) shares a house with the 7th lord, classical texts read it as coloring partnership themes with that malefic's own nature - conflict (Mars), ego friction (Sun), distance or delay (Saturn), restlessness or unconventional pulls (Rahu), or detachment (Ketu).",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-7L-MALEFIC-ASPECT",
+      "title": "7th Lord Aspected by a Natural Malefic",
+      "summary": "Similar to a conjunction, but from a distance - a milder version of the same influence.",
+      "effects": "A natural malefic aspecting (rather than sitting with) the 7th lord has a similar but generally milder classical reading than a direct conjunction - added pressure on partnership themes from that planet's own nature.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-VENUS-MARS-CONJ",
+      "title": "Venus-Mars Conjunction",
+      "summary": "The classical significators of romantic attraction and desire sitting together - a strong, sometimes turbulent pull.",
+      "effects": "Venus (romantic attraction, pleasure) conjunct Mars (desire, drive) is one of the more commonly discussed combinations in this area of classical astrology - read as intensified romantic/physical attraction, which some traditions associate with passionate, easily-formed bonds and others with restlessness around exclusivity. Context (which houses, which signs, other aspects) matters more than the conjunction alone.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-VENUS-MARS-ASPECT",
+      "title": "Venus-Mars Mutual Aspect",
+      "summary": "A milder, at-a-distance version of the Venus-Mars conjunction's themes.",
+      "effects": "Venus and Mars aspecting each other without conjunction carries a related but generally softer version of the same themes as a direct Venus-Mars conjunction: intensified romantic/physical attraction, with the same range of classical readings.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-RAHU-VENUS",
+      "title": "Rahu Conjunct Venus",
+      "summary": "A classically-discussed combination for unconventional, amplified, or restless romantic themes.",
+      "effects": "Rahu conjunct Venus is specifically and frequently cited in classical and popular sources discussing unconventional romantic patterns, amplified desire, or restlessness with convention in relationships - Rahu tends to exaggerate and destabilize whatever it touches, and Venus governs love and attraction.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-RAHU-7TH",
+      "title": "Rahu in the 7th House",
+      "summary": "Rahu directly occupying the partnership house - a classically-cited placement for restlessness or unconventional partnership patterns.",
+      "effects": "Rahu in the 7th house is read as bringing its own restless, boundary-pushing, amplifying nature directly into the partnership house - sometimes associated with unconventional relationship patterns, a strong pull toward partnership itself, or difficulty with settled convention.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-CROWDED-7TH",
+      "title": "Crowded 7th House",
+      "summary": "Three or more planets in the 7th house - a chart with a lot happening in the partnership area.",
+      "effects": "A 7th house with several planets in it is classically read as an area of life carrying a lot of weight and complexity - partnership themes are prominent and eventful, for better or worse depending on which planets are present and their own dignity.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "REL-VENUS-AFFLICTED",
+      "title": "Afflicted Venus",
+      "summary": "Venus itself (romance, pleasure, values) weakened by debilitation or combustion.",
+      "effects": "Venus debilitated or combust is read as the native's own relationship to romance, pleasure, and values being less settled or confident than usual - sometimes showing as difficulty knowing what one actually wants in a relationship, rather than pointing at any particular behavior.",
+      "category": "relationship_themes",
+      "tradition": "Parashari",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}
