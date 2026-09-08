@@ -38,6 +38,7 @@ import datetime as _dt
 import chara_karaka
 import combustion
 import maitri
+import upaya
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity
 from yogas import detect_all_yogas
 
@@ -1238,6 +1239,13 @@ def generate_reading(chart):
     karmic_and_past_life = _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas)
     life_predictions = _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, karakas)
 
+    remedies = {
+        "caveat": upaya.CAVEAT,
+        "gemstone_candidates": upaya.suggest_gemstone_candidates(planets_reading),
+        "gemstones": {p: upaya.gemstone_for(p) for p in planets_reading},
+        "mantras": {p: upaya.mantra_for(p) for p in planets_reading},
+    }
+
     return {
         "name": chart.get("name"),
         "ascendant": {
@@ -1253,6 +1261,7 @@ def generate_reading(chart):
         "chara_karakas": karakas,
         "karmic_and_past_life": karmic_and_past_life,
         "life_predictions": life_predictions,
+        "remedies": remedies,
         "warnings": warnings,
     }
 

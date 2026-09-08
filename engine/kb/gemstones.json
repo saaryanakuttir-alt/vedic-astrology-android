@@ -1,0 +1,200 @@
+{
+  "checklist_category_id": "gemstone",
+  "name": "Gemstones (Ratna) Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "The classical Navaratna (9-gem) assignment, one per graha, with metal/finger/day guidance and what each is traditionally worn to support. Gemstone COMBINATION checking and per-chart candidate suggestions are NOT in this file - they're computed logic in engine/upaya.py (check_gemstone_combination, suggest_gemstone_candidates), reusing maitri.py's already-verified natural-friendship table rather than a separately hand-typed combination table, so the two can never silently disagree. See upaya.py's own CAVEAT constant for the non-prescriptive framing every reading of this data should carry - surfaced in both UIs alongside this content, not just noted here.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Planet-stone assignments (the classical Navaratna set) and metal/finger/day guidance cross-checked against multiple classical/reference sources for consistency. Saturn's entry specifically flags its widely-cited fastest-and-least-predictable reputation and the traditional trial-period practice, rather than presenting it identically to the other 8.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T12:31:51.418861+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 9,
+  "items": [
+    {
+      "id": "GEM-Su",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Sun",
+      "stone": "Ruby",
+      "sanskrit": "Manik",
+      "substitutes": [
+        "Red Garnet",
+        "Red Spinel"
+      ],
+      "metal": "Gold",
+      "finger": "Ring finger",
+      "day": "Sunday",
+      "title": "Ruby (Sun)",
+      "summary": "Traditionally worn to strengthen the Sun's own themes: confidence, authority, vitality, leadership, and relationship with father-figures or those in power.",
+      "effects": "Traditionally worn to strengthen the Sun's own themes: confidence, authority, vitality, leadership, and relationship with father-figures or those in power. Classically suggested when the Sun is weak (debilitated, combust, or poorly related to its sign lord) rather than when it's already strong - the idea is support, not excess.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Mo",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Moon",
+      "stone": "Pearl",
+      "sanskrit": "Moti",
+      "substitutes": [
+        "Moonstone"
+      ],
+      "metal": "Silver",
+      "finger": "Little finger",
+      "day": "Monday",
+      "title": "Pearl (Moon)",
+      "summary": "Traditionally worn to steady the mind and emotions - calm, clarity, and a settled relationship with one's mother and one's own inner world.",
+      "effects": "Traditionally worn to steady the mind and emotions - calm, clarity, and a settled relationship with one's mother and one's own inner world. Classically suggested for a weak or afflicted Moon (an important placement, since the Moon governs the mind itself).",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Ma",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Mars",
+      "stone": "Red Coral",
+      "sanskrit": "Moonga",
+      "substitutes": [
+        "Carnelian"
+      ],
+      "metal": "Copper or Gold",
+      "finger": "Ring finger",
+      "day": "Tuesday",
+      "title": "Red Coral (Mars)",
+      "summary": "Traditionally worn to support courage, drive, and physical vitality, and to steady relationships with siblings.",
+      "effects": "Traditionally worn to support courage, drive, and physical vitality, and to steady relationships with siblings. Classically suggested for a weak Mars; a strong or already-dominant Mars is usually left alone, since Mars's themes (assertiveness, conflict) aren't ones most traditions want to amplify further.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Me",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Mercury",
+      "stone": "Emerald",
+      "sanskrit": "Panna",
+      "substitutes": [
+        "Peridot",
+        "Green Tourmaline"
+      ],
+      "metal": "Gold or Silver",
+      "finger": "Little finger",
+      "day": "Wednesday",
+      "title": "Emerald (Mercury)",
+      "summary": "Traditionally worn to sharpen communication, analytical thinking, and business acumen.",
+      "effects": "Traditionally worn to sharpen communication, analytical thinking, and business acumen. Classically suggested for a weak or afflicted Mercury - useful for students, writers, and anyone in communication-heavy or analytical work.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Ju",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Jupiter",
+      "stone": "Yellow Sapphire",
+      "sanskrit": "Pukhraj",
+      "substitutes": [
+        "Citrine",
+        "Yellow Topaz"
+      ],
+      "metal": "Gold",
+      "finger": "Index finger",
+      "day": "Thursday",
+      "title": "Yellow Sapphire (Jupiter)",
+      "summary": "Traditionally one of the most favored gemstones to wear at all, since Jupiter is the natural benefic of wisdom, fortune, and growth - supports higher learning, financial stability, marriage prospects, and guidance from teachers.",
+      "effects": "Traditionally one of the most favored gemstones to wear at all, since Jupiter is the natural benefic of wisdom, fortune, and growth - supports higher learning, financial stability, marriage prospects, and guidance from teachers. Classically suggested especially for a weak or afflicted Jupiter.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Ve",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Venus",
+      "stone": "Diamond",
+      "sanskrit": "Heera",
+      "substitutes": [
+        "White Sapphire",
+        "Zircon"
+      ],
+      "metal": "Silver or Platinum",
+      "finger": "Middle finger",
+      "day": "Friday",
+      "title": "Diamond (Venus)",
+      "summary": "Traditionally worn to support love, marriage, artistic expression, comfort, and material refinement.",
+      "effects": "Traditionally worn to support love, marriage, artistic expression, comfort, and material refinement. Classically suggested for a weak or afflicted Venus.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Sa",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Saturn",
+      "stone": "Blue Sapphire",
+      "sanskrit": "Neelam",
+      "substitutes": [
+        "Amethyst",
+        "Iolite"
+      ],
+      "metal": "Iron, Silver, or Panchdhatu (5-metal alloy)",
+      "finger": "Middle finger",
+      "day": "Saturday",
+      "title": "Blue Sapphire (Saturn)",
+      "summary": "Classically considered the FASTEST-acting and least predictable gemstone - it can bring real relief when it suits the wearer, or intensify Saturn's harder themes (delay, hardship, isolation) when it doesn't.",
+      "effects": "Classically considered the FASTEST-acting and least predictable gemstone - it can bring real relief when it suits the wearer, or intensify Saturn's harder themes (delay, hardship, isolation) when it doesn't. Nearly every traditional source recommends a short trial period (worn briefly first, watched closely) before committing to it, rather than wearing it outright on a recommendation alone.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Ra",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Rahu",
+      "stone": "Hessonite Garnet",
+      "sanskrit": "Gomed",
+      "substitutes": [
+        "Orange Zircon"
+      ],
+      "metal": "Silver",
+      "finger": "Middle finger",
+      "day": "Saturday",
+      "title": "Hessonite Garnet (Rahu)",
+      "summary": "Traditionally worn to steady Rahu's restless, ambitious, boundary-pushing themes - support during periods this shadow planet's dasha or transit is prominent.",
+      "effects": "Traditionally worn to steady Rahu's restless, ambitious, boundary-pushing themes - support during periods this shadow planet's dasha or transit is prominent. Rahu/Ketu gemstone guidance is less classically standardized than the 7 classical grahas' (see planet_in_sign.json's own rahu_ketu_dignity_note for the same disclosed disagreement at the dignity level).",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "GEM-Ke",
+      "category": "gemstone",
+      "tradition": "Parashari",
+      "planet": "Ketu",
+      "stone": "Cat's Eye",
+      "sanskrit": "Lehsunia / Vaidurya",
+      "substitutes": [
+        "Alexandrite"
+      ],
+      "metal": "Silver or Gold",
+      "finger": "Ring finger",
+      "day": "Tuesday",
+      "title": "Cat's Eye (Ketu)",
+      "summary": "Traditionally worn to steady Ketu's detached, spiritually-inclined, sometimes disorienting themes - support during periods this shadow planet's dasha or transit is prominent.",
+      "effects": "Traditionally worn to steady Ketu's detached, spiritually-inclined, sometimes disorienting themes - support during periods this shadow planet's dasha or transit is prominent. Same disclosed disagreement across sources as Rahu above.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}

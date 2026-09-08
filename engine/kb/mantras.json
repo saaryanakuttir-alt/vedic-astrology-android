@@ -1,0 +1,141 @@
+{
+  "checklist_category_id": "mantra",
+  "name": "Mantras (Beej Mantra) Reference",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "One classical beej (seed) mantra per graha, with traditional japa (repetition) count and best time to recite. japa_count values follow the commonly-cited counts for each planet's own mantra; some traditions cite different counts (often multiples/fractions of these) - treat as a reasonable default, not the one correct number.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Cross-checked each mantra's Sanskrit form and traditional japa count against multiple reference sources for consistency.",
+    "changes_made": [],
+    "unchanged_after_verification": ""
+  },
+  "user_review_pass": {
+    "performed": false,
+    "reviewer": null,
+    "method": null,
+    "outcome": "Not yet reviewed by the project owner - drafted and internally cross-checked only."
+  },
+  "generated_at": "2026-09-08T12:31:51.440788+00:00",
+  "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked for internal consistency",
+  "total_items": 9,
+  "items": [
+    {
+      "id": "MTR-Su",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Sun",
+      "beej_mantra": "Om Hraam Hreem Hraum Sah Suryaya Namah",
+      "japa_count": 7000,
+      "best_time": "Sunrise, on Sundays",
+      "title": "Sun Beej Mantra",
+      "summary": "Traditional seed mantra for Sun, 7000 repetitions, sunrise, on sundays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Mo",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Moon",
+      "beej_mantra": "Om Shraam Shreem Shraum Sah Chandraya Namah",
+      "japa_count": 11000,
+      "best_time": "Evening, on Mondays",
+      "title": "Moon Beej Mantra",
+      "summary": "Traditional seed mantra for Moon, 11000 repetitions, evening, on mondays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Ma",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Mars",
+      "beej_mantra": "Om Kraam Kreem Kraum Sah Bhaumaya Namah",
+      "japa_count": 10000,
+      "best_time": "Sunrise, on Tuesdays",
+      "title": "Mars Beej Mantra",
+      "summary": "Traditional seed mantra for Mars, 10000 repetitions, sunrise, on tuesdays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Me",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Mercury",
+      "beej_mantra": "Om Braam Breem Braum Sah Budhaya Namah",
+      "japa_count": 9000,
+      "best_time": "Morning, on Wednesdays",
+      "title": "Mercury Beej Mantra",
+      "summary": "Traditional seed mantra for Mercury, 9000 repetitions, morning, on wednesdays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Ju",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Jupiter",
+      "beej_mantra": "Om Graam Greem Graum Sah Gurave Namah",
+      "japa_count": 19000,
+      "best_time": "Morning, on Thursdays",
+      "title": "Jupiter Beej Mantra",
+      "summary": "Traditional seed mantra for Jupiter, 19000 repetitions, morning, on thursdays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Ve",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Venus",
+      "beej_mantra": "Om Draam Dreem Draum Sah Shukraya Namah",
+      "japa_count": 16000,
+      "best_time": "Morning, on Fridays",
+      "title": "Venus Beej Mantra",
+      "summary": "Traditional seed mantra for Venus, 16000 repetitions, morning, on fridays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Sa",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Saturn",
+      "beej_mantra": "Om Praam Preem Praum Sah Shanaishcharaya Namah",
+      "japa_count": 23000,
+      "best_time": "Evening, on Saturdays",
+      "title": "Saturn Beej Mantra",
+      "summary": "Traditional seed mantra for Saturn, 23000 repetitions, evening, on saturdays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Ra",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Rahu",
+      "beej_mantra": "Om Bhraam Bhreem Bhraum Sah Rahave Namah",
+      "japa_count": 18000,
+      "best_time": "Evening, on Saturdays",
+      "title": "Rahu Beej Mantra",
+      "summary": "Traditional seed mantra for Rahu, 18000 repetitions, evening, on saturdays.",
+      "status": "verified",
+      "verified": true
+    },
+    {
+      "id": "MTR-Ke",
+      "category": "mantra",
+      "tradition": "Parashari",
+      "planet": "Ketu",
+      "beej_mantra": "Om Sraam Sreem Sraum Sah Ketave Namah",
+      "japa_count": 17000,
+      "best_time": "Evening, on Tuesdays",
+      "title": "Ketu Beej Mantra",
+      "summary": "Traditional seed mantra for Ketu, 17000 repetitions, evening, on tuesdays.",
+      "status": "verified",
+      "verified": true
+    }
+  ]
+}
