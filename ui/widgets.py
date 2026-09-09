@@ -17,6 +17,7 @@ from kivy.graphics import Color, Rectangle, RoundedRectangle
 from kivy.metrics import dp
 from kivy.clock import Clock
 from kivy.logger import Logger
+from kivy.core.window import Window
 
 from ui import theme
 
@@ -205,6 +206,18 @@ class LongText(ScrollView):
             f"texture_size={self.label.texture_size} texture={self.label.texture} "
             f"height={self.label.height}"
         )
+        # Every fix on this widget so far (see set_text's comment above)
+        # targeted FRAME TIMING - two texture rebuilds landing in the same
+        # frame. This targets a different, separately-documented Kivy-on-
+        # Android failure mode: texture_update() rebuilding the CPU-side
+        # texture data correctly (matching the "height/texture_size were
+        # always correct" observation already made here) without that new
+        # texture actually being re-uploaded/flushed to the GPU, so the
+        # OLD (blank) frame keeps being displayed. Forcing the whole
+        # window's canvas to redraw is a stronger hammer than hoping this
+        # one Rectangle instruction's own texture binding re-fires -
+        # cheap and harmless if it turns out unnecessary.
+        Window.canvas.ask_update()
 
 
 class CaptionLabel(Label):
@@ -255,6 +268,7 @@ class CaptionLabel(Label):
             f"VedicAstro:CaptionLabel: rebuilt text_size={self.text_size} "
             f"texture_size={self.texture_size} texture={self.texture} height={self.height}"
         )
+        Window.canvas.ask_update()  # see LongText._rebuild_texture's comment for why
 
     def _on_texture_size(self, instance, texture_size):
         self.height = max(dp(28), texture_size[1] + dp(16))

@@ -5,7 +5,10 @@ port of gui_app.py's _populate_karmic_tab / _populate_life_predictions_tab
 / _populate_reading_tab (pure string building, nothing tkinter-specific
 about it) onto the LongText widget instead of a tk.Text.
 """
+import traceback
+
 from kivy.uix.boxlayout import BoxLayout
+from kivy.logger import Logger
 
 from ui.widgets import LongText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
@@ -24,8 +27,35 @@ class _BaseReportTab(BoxLayout):
         self.text_view = LongText()
         self.add_widget(self.text_view)
 
-    def refresh(self):
+    def _build_text(self, reading):
+        """Subclasses implement this: return the report's full text for a
+        non-None reading, or raise on any bad assumption about its shape.
+        NOT wrapped in try/except here on purpose - refresh() below does
+        that, so a mistaken KeyError/AttributeError renders as visible
+        on-screen text instead of leaving the tab silently blank. This
+        exists specifically because this project's report tabs have a
+        history of going blank on Android with no way to tell WHY short of
+        pulling adb logcat, which isn't always available - a wrong
+        assumption here is now readable directly on the phone screen."""
         raise NotImplementedError
+
+    def refresh(self):
+        reading = self.store.current["reading"]
+        if reading is None:
+            self.text_view.set_text("No chart generated yet for this profile.")
+            return
+        try:
+            text = self._build_text(reading)
+        except Exception:  # noqa: BLE001 - deliberately broad, see _build_text's docstring
+            tb = traceback.format_exc()
+            Logger.error(f"VedicAstro:{type(self).__name__}: _build_text failed:\n{tb}")
+            self.text_view.set_text(
+                "This tab hit an error while building its text - showing the "
+                "details below instead of a blank screen so it can be reported:\n\n"
+                + tb
+            )
+            return
+        self.text_view.set_text(text)
 
 
 class KarmicTab(_BaseReportTab):
@@ -35,11 +65,7 @@ class KarmicTab(_BaseReportTab):
         "old patterns (Ketu) versus where you're being pulled to grow (Rahu)."
     )
 
-    def refresh(self):
-        reading = self.store.current["reading"]
-        if reading is None:
-            self.text_view.set_text("No chart generated yet for this profile.")
-            return
+    def _build_text(self, reading):
         k = reading["karmic_and_past_life"]
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
         lines = [f"=== Karmic & Past Life Perspective - {name} ===\n", k["caveat"] + "\n"]
@@ -63,7 +89,7 @@ class KarmicTab(_BaseReportTab):
             if h.get("effects") or h.get("summary"):
                 lines.append(h.get("effects") or h.get("summary"))
 
-        self.text_view.set_text("\n".join(lines))
+        return "\n".join(lines)
 
 
 class LifePredictionsTab(_BaseReportTab):
@@ -73,11 +99,7 @@ class LifePredictionsTab(_BaseReportTab):
         "broad themes to consider, not guaranteed events."
     )
 
-    def refresh(self):
-        reading = self.store.current["reading"]
-        if reading is None:
-            self.text_view.set_text("No chart generated yet for this profile.")
-            return
+    def _build_text(self, reading):
         lp = reading["life_predictions"]
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
         lines = [f"=== Life Predictions - {name} ===\n", lp["caveat"] + "\n"]
@@ -86,17 +108,13 @@ class LifePredictionsTab(_BaseReportTab):
                 continue
             lines.append(f"\n--- {entry['title']} ---")
             lines.append(entry["text"] or "(not enough KB data to synthesize this area for this chart)")
-        self.text_view.set_text("\n".join(lines))
+        return "\n".join(lines)
 
 
 class FullReadingTab(_BaseReportTab):
     caption = "Everything from the other tabs combined into one complete, readable report."
 
-    def refresh(self):
-        reading = self.store.current["reading"]
-        if reading is None:
-            self.text_view.set_text("No chart generated yet for this profile.")
-            return
+    def _build_text(self, reading):
         r = reading
         profile_label = PROFILE_LABELS[self.store.current_profile_id]
         lines = [f"=== {r['name'] or 'Birth Chart'} ({profile_label}) ===\n"]
@@ -137,4 +155,4 @@ class FullReadingTab(_BaseReportTab):
         lines.append("\n\n--- Karmic & Past Life: The Soul's Narrative ---")
         lines.append(r["karmic_and_past_life"]["soul_narrative"] or "(see the Karmic & Past Life tab)")
 
-        self.text_view.set_text("\n".join(lines))
+        return "\n".join(lines)

@@ -6,11 +6,14 @@ profile. Port of gui_app.py's _compute_family_compatibility, built on
 family_bonds.build_family_compatibility_report exactly as the desktop app
 uses it.
 """
+import traceback
+
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.metrics import dp
 from kivy.clock import Clock
+from kivy.logger import Logger
 
 from ui.widgets import SimpleTable, LongText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
@@ -89,9 +92,21 @@ class FamilyTab(BoxLayout):
         partner_reading = self.store.profiles["partner"]["reading"]
         children = self.store.generated_children()
 
-        report = fb.build_family_compatibility_report(
-            self_reading, self_chart, partner_reading, partner_chart, children=children,
-        )
+        try:
+            report = fb.build_family_compatibility_report(
+                self_reading, self_chart, partner_reading, partner_chart, children=children,
+            )
+        except Exception:  # noqa: BLE001 - see tabs_reports.py's _BaseReportTab for why this is deliberate
+            tb = traceback.format_exc()
+            Logger.error(f"VedicAstro:FamilyTab: build_family_compatibility_report failed:\n{tb}")
+            self._set_summary("This report hit an error - see details below.")
+            self.table.clear_rows()
+            self.report_text.set_text(
+                "This tab hit an error while building its report - showing the "
+                "details below instead of a blank screen so it can be reported:\n\n"
+                + tb
+            )
+            return
 
         result = report["ashtakoot"]
         if result:
