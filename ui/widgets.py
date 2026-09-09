@@ -8,6 +8,8 @@ plain scrollable GridLayout: a bold header row, then one row per data row.
 It's intentionally simple (no sorting/column-resize) — this app's tables
 are for reading, not manipulating.
 """
+import re
+
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
@@ -131,63 +133,104 @@ class SimpleTable(ScrollView):
             self._add_row(row, header=False)
 
 
+def _split_into_chunks(text, max_chars=400):
+    """Splits text into pieces no longer than max_chars, breaking first on
+    blank lines (paragraph boundaries), then, for any paragraph still over
+    the limit, on sentence boundaries, packing consecutive sentences up to
+    the limit. Needed because some of this project's own report sections
+    (rule_engine.py's life_predictions "area" text, in particular) are one
+    continuous run-on paragraph joined with plain spaces - NO newlines
+    anywhere inside them - so a "\\n\\n"-only split still leaves single
+    chunks of 3000-5500+ characters. See LongText.set_text's docstring for
+    why keeping every chunk small is the actual point here."""
+    chunks = []
+    for para in (text or "").split("\n\n"):
+        para = para.strip("\n")
+        if not para.strip():
+            continue
+        if len(para) <= max_chars:
+            chunks.append(para)
+            continue
+        sentences = re.split(r"(?<=[.!?])\s+", para)
+        current = ""
+        for sentence in sentences:
+            candidate = f"{current} {sentence}".strip() if current else sentence
+            if len(candidate) > max_chars and current:
+                chunks.append(current)
+                current = sentence
+            else:
+                current = candidate
+        if current:
+            chunks.append(current)
+    return chunks or [""]
+
+
 class LongText(ScrollView):
     """A big scrollable block of read-only wrapped text — the mobile
     equivalent of the desktop app's tk.Text widgets used for the Karmic,
-    Life Predictions, Full Reading, and Family Compatibility tabs."""
+    Life Predictions, Full Reading, and Family Compatibility tabs.
+
+    Renders as MANY SMALL per-paragraph Labels in a GridLayout, not one
+    single giant Label holding the whole report - see set_text's own
+    comment for why: this was the actual fix, after two prior full-APK-
+    build-and-device-test rounds (mutate .text in place with various
+    texture-rebuild-timing fixes; then rebuild one fresh Label per
+    set_text() call) both still rendered completely blank."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.label = None
-        self._make_label("")
+        self.grid = GridLayout(cols=1, size_hint_y=None, spacing=dp(2), padding=(0, dp(4)))
+        self.grid.bind(minimum_height=self.grid.setter("height"))
+        self.add_widget(self.grid)
 
-    def _make_label(self, text):
-        # REBUILDS the internal Label from scratch on every set_text() call
-        # instead of mutating .text on a Label that's already been laid out
-        # and rendered once - three separate rounds of texture-rebuild-
-        # timing fixes on the old mutate-in-place approach (synchronous
-        # texture_update, Clock-deferred texture_update, deferred update
-        # plus a forced Window.canvas.ask_update()) each looked right in
-        # code and each still left this widget blank on a real device,
-        # confirmed via actual APK builds, not just reasoning about it.
-        # Meanwhile SimpleTable (above in this file) has never been
-        # reported blank, and it does exactly this: clear_rows() discards
-        # every cell Label and _add_row() constructs brand new ones with
-        # text already set, every single refresh - it never mutates .text
-        # on an existing, already-rendered Label. That is the one concrete
-        # behavioral difference between the tabs that work and the tabs
-        # that don't, so this follows that pattern as closely as possible,
-        # including HOW SimpleTable sizes its labels: text_size starts
-        # unset and is applied reactively once Kivy assigns the label its
-        # own real width (bound to the LABEL's width, not read from this
-        # ScrollView's width and recomputed - the same reason
-        # SimpleTable._update_text_size binds per-label width rather than
-        # having every row read the shared GridLayout's width once), and
-        # height is likewise set reactively off texture_size rather than
-        # forced with an explicit texture_update() call. No manual
-        # texture_update() anywhere in SimpleTable's own working code -
-        # this doesn't add one either, letting Kivy's own property-change
-        # dispatch rebuild the texture the same way it does for every
-        # table cell that already renders correctly.
-        if self.label is not None:
-            self.remove_widget(self.label)
-        self.label = Label(
-            text=text or "", size_hint_y=None, height=dp(28), text_size=(None, None),
-            halign="left", valign="top", padding=(dp(10), dp(10)),
-        )
-        self.label.bind(texture_size=self._on_texture_size, width=self._on_label_width)
-        self.add_widget(self.label)
+    def set_text(self, text):
+        # Splits the report into per-paragraph Labels (blank-line
+        # boundaries - this project's own report-building code already
+        # joins its sections with "\n\n", so this recovers exactly the
+        # section/paragraph structure the text was assembled from) laid
+        # out one-per-row in a GridLayout, the SAME structure SimpleTable
+        # (above in this file) already uses successfully for every table
+        # in this app - many small Labels, never one huge one.
+        #
+        # Root-caused by elimination, not by ever seeing a device log:
+        # SimpleTable (many small per-cell textures) has never been
+        # reported blank on this project. LongText as ONE giant Label
+        # holding an entire multi-paragraph report (Life Predictions
+        # alone easily wraps to 100+ lines) was blank even after being
+        # rebuilt fresh every time with correct, non-zero texture_size and
+        # height (confirmed via this file's OWN prior diagnostic logging
+        # and a real on-device re-test) - the one thing that setup asked
+        # of the GPU that SimpleTable's cells never do is one enormous
+        # single glyph texture. Most Android GPUs cap a single texture's
+        # dimension (2048/4096/8192px depending on hardware), and a report
+        # this long, on a high-density display where Kivy's dp() scaling
+        # inflates the actual pixel height further, is a real candidate
+        # for quietly exceeding it - texture creation past that limit can
+        # silently produce nothing to draw rather than raising a Python
+        # exception, which matches every symptom seen: correct computed
+        # height/texture_size, a working scrollbar, zero glyphs, and no
+        # traceback anywhere. Capping each Label to one paragraph keeps
+        # every individual texture small regardless of how long the
+        # overall report is.
+        self.grid.clear_widgets()
+        paragraphs = _split_into_chunks(text)
+        for para in paragraphs:
+            label = Label(
+                text=para, size_hint_y=None, height=dp(28), text_size=(None, None),
+                halign="left", valign="top", padding=(dp(10), dp(6)),
+            )
+            label.bind(texture_size=self._make_resize_handler(label), width=self._on_label_width)
+            self.grid.add_widget(label)
         self.scroll_y = 1  # start scrolled to the top of the new content
-        Logger.info(f"VedicAstro:LongText: rebuilt len={len(text or '')} own_width={self.width}")
+        Logger.info(f"VedicAstro:LongText: set_text len={len(text or '')} paragraphs={len(paragraphs)}")
 
     def _on_label_width(self, label, width):
         label.text_size = (width, None)
 
-    def _on_texture_size(self, instance, texture_size):
-        self.label.height = max(dp(28), texture_size[1] + dp(20))
-
-    def set_text(self, text):
-        self._make_label(text)
+    def _make_resize_handler(self, label):
+        def _resize(instance, texture_size):
+            label.height = max(dp(28), texture_size[1] + dp(12))
+        return _resize
 
 
 class CaptionLabel(Label):
