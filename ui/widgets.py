@@ -138,86 +138,56 @@ class LongText(ScrollView):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.label = Label(
-            text="", size_hint_y=None, height=dp(28), halign="left", valign="top",
-            padding=(dp(10), dp(10)),
-        )
-        self.label.bind(texture_size=self._on_texture_size)
-        self.bind(width=self._on_width)
-        self.add_widget(self.label)
+        self.label = None
+        self._make_label("")
 
-    def _on_width(self, instance, width):
-        self.label.text_size = (width - dp(20), None)
+    def _make_label(self, text):
+        # REBUILDS the internal Label from scratch on every set_text() call
+        # instead of mutating .text on a Label that's already been laid out
+        # and rendered once - three separate rounds of texture-rebuild-
+        # timing fixes on the old mutate-in-place approach (synchronous
+        # texture_update, Clock-deferred texture_update, deferred update
+        # plus a forced Window.canvas.ask_update()) each looked right in
+        # code and each still left this widget blank on a real device,
+        # confirmed via actual APK builds, not just reasoning about it.
+        # Meanwhile SimpleTable (above in this file) has never been
+        # reported blank, and it does exactly this: clear_rows() discards
+        # every cell Label and _add_row() constructs brand new ones with
+        # text already set, every single refresh - it never mutates .text
+        # on an existing, already-rendered Label. That is the one concrete
+        # behavioral difference between the tabs that work and the tabs
+        # that don't, so this follows that pattern as closely as possible,
+        # including HOW SimpleTable sizes its labels: text_size starts
+        # unset and is applied reactively once Kivy assigns the label its
+        # own real width (bound to the LABEL's width, not read from this
+        # ScrollView's width and recomputed - the same reason
+        # SimpleTable._update_text_size binds per-label width rather than
+        # having every row read the shared GridLayout's width once), and
+        # height is likewise set reactively off texture_size rather than
+        # forced with an explicit texture_update() call. No manual
+        # texture_update() anywhere in SimpleTable's own working code -
+        # this doesn't add one either, letting Kivy's own property-change
+        # dispatch rebuild the texture the same way it does for every
+        # table cell that already renders correctly.
+        if self.label is not None:
+            self.remove_widget(self.label)
+        self.label = Label(
+            text=text or "", size_hint_y=None, height=dp(28), text_size=(None, None),
+            halign="left", valign="top", padding=(dp(10), dp(10)),
+        )
+        self.label.bind(texture_size=self._on_texture_size, width=self._on_label_width)
+        self.add_widget(self.label)
+        self.scroll_y = 1  # start scrolled to the top of the new content
+        Logger.info(f"VedicAstro:LongText: rebuilt len={len(text or '')} own_width={self.width}")
+
+    def _on_label_width(self, label, width):
+        label.text_size = (width, None)
 
     def _on_texture_size(self, instance, texture_size):
         self.label.height = max(dp(28), texture_size[1] + dp(20))
 
     def set_text(self, text):
-        # Diagnostic logging (grep logcat for "VedicAstro:LongText") - after
-        # several rounds of texture-timing fixes here that each looked
-        # right in code but couldn't be confirmed against real on-device
-        # behavior from this side, this records the hard numbers (text
-        # length, widget width at call time, and post-rebuild texture
-        # size/height below) so a still-blank report tells us WHERE it
-        # broke instead of us re-guessing blind again.
-        Logger.info(f"VedicAstro:LongText: set_text len={len(text or '')} width={self.width}")
-        self.label.text = text or ""
-        # Belt-and-suspenders, not just the width binding above: confirmed
-        # via adb logcat + screenshot that the Karmic & Past Life and Life
-        # Predictions tabs (both LongText) rendered completely blank after
-        # a real, exception-free chart generation (no traceback anywhere
-        # in the log) - and stayed blank even after navigating away and
-        # back, which rules out a "tab not laid out yet" one-time timing
-        # fluke. This tab's content is set once, immediately after
-        # construction, while the TabbedPanelItem holding it may not be
-        # the active tab yet - if self.width happened to already equal
-        # whatever it was at bind time with no further change, _on_width
-        # never fires again and text_size is left at its unset default,
-        # producing a degenerate (often invisible) render. Reapplying
-        # text_size here against whatever width is currently known
-        # removes the dependency on that binding having already fired
-        # with a valid value by the time text changes.
-        if self.width:
-            self.label.text_size = (self.width - dp(20), None)
-        # A synchronous texture_update() here (tried first) still left the
-        # ScrollView completely blank on-device (re-confirmed on the
-        # emulator with a real generated chart) - EXCEPT the scrollbar
-        # thumb DID show a real, scrollable content height and moved when
-        # swiped, proving the label's own height/texture_size are correct
-        # and non-zero; nothing simply fails to render. Only the actual
-        # glyph texture never made it on screen. This is the same
-        # "two GL updates land in the same frame" quirk already found and
-        # fixed for the Chart tab's label ghosting (see tabs_chart.py's
-        # ChartCanvas._schedule_redraw): every tab using LongText also
-        # constructs a CaptionLabel immediately above it, and that
-        # CaptionLabel does its OWN synchronous texture rebuild at
-        # construction time, in the same frame as this set_text() call -
-        # never reproducible on desktop's SDL2/GL backend despite direct
-        # attempts. Deferring this label's texture rebuild to the next
-        # frame via Clock, rather than forcing it synchronously in the
-        # same frame as CaptionLabel's own update, resolved it.
-        Clock.schedule_once(self._rebuild_texture, 0)
-
-    def _rebuild_texture(self, dt):
-        self.label.texture_update()
-        self.label.height = max(dp(28), self.label.texture_size[1] + dp(20))
-        Logger.info(
-            f"VedicAstro:LongText: rebuilt text_size={self.label.text_size} "
-            f"texture_size={self.label.texture_size} texture={self.label.texture} "
-            f"height={self.label.height}"
-        )
-        # Every fix on this widget so far (see set_text's comment above)
-        # targeted FRAME TIMING - two texture rebuilds landing in the same
-        # frame. This targets a different, separately-documented Kivy-on-
-        # Android failure mode: texture_update() rebuilding the CPU-side
-        # texture data correctly (matching the "height/texture_size were
-        # always correct" observation already made here) without that new
-        # texture actually being re-uploaded/flushed to the GPU, so the
-        # OLD (blank) frame keeps being displayed. Forcing the whole
-        # window's canvas to redraw is a stronger hammer than hoping this
-        # one Rectangle instruction's own texture binding re-fires -
-        # cheap and harmless if it turns out unnecessary.
-        Window.canvas.ask_update()
+        self._make_label(text)
 
 
 class CaptionLabel(Label):
@@ -268,7 +238,12 @@ class CaptionLabel(Label):
             f"VedicAstro:CaptionLabel: rebuilt text_size={self.text_size} "
             f"texture_size={self.texture_size} texture={self.texture} height={self.height}"
         )
-        Window.canvas.ask_update()  # see LongText._rebuild_texture's comment for why
+        # Forces a full window canvas redraw in case a texture rebuild's
+        # new data isn't otherwise re-flushed to the GPU promptly - cheap,
+        # harmless if unnecessary. (LongText above no longer needs this:
+        # it now rebuilds a fresh Label per set_text() call rather than
+        # mutating one in place - see its own _make_label docstring.)
+        Window.canvas.ask_update()
 
     def _on_texture_size(self, instance, texture_size):
         self.height = max(dp(28), texture_size[1] + dp(16))

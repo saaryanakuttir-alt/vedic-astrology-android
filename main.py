@@ -12,7 +12,7 @@ tkinter does not exist on Android).
 Root layout: one TabbedPanel, mirroring the desktop app's ttk.Notebook -
 Profile & Birth Data, Chart, Kundli Details, Planets, Houses, Yogas,
 Dasha, Ashtakvarga, Chalit, Karmic & Past Life, Life Predictions, Full
-Reading, Family Compatibility.
+Reading, Family Compatibility, Sample Charts.
 """
 import os
 import sys
@@ -41,6 +41,7 @@ from ui.tabs_tables import (
 )
 from ui.tabs_reports import KarmicTab, LifePredictionsTab, FullReadingTab
 from ui.tabs_family import FamilyTab
+from ui.tabs_sample import SampleChartsTab
 from ui.tabs_help import HelpTab
 
 
@@ -73,6 +74,7 @@ class VedicAstrologyApp(App):
         self.life_predictions_tab = LifePredictionsTab(self.store)
         self.full_reading_tab = FullReadingTab(self.store)
         self.family_tab = FamilyTab(self.store)
+        self.sample_tab = SampleChartsTab(self.store, on_chart_generated=self._on_chart_generated)
         self.help_tab = HelpTab()
 
         self._refreshable_tabs = [
@@ -97,6 +99,7 @@ class VedicAstrologyApp(App):
             ("\U0001F52D  Life Predictions", self.life_predictions_tab),
             ("\U0001F4D6  Full Reading", self.full_reading_tab),
             ("\U0001F46A  Family Compatibility", self.family_tab),
+            ("\U0001F31F  Sample Charts", self.sample_tab),
             ("❓  Help & FAQ", self.help_tab),
         ]:
             item = TabbedPanelItem(text=title)
@@ -116,7 +119,10 @@ class VedicAstrologyApp(App):
         # Family Compatibility is deliberately NOT auto-refreshed here (it
         # has its own "Compute" button, same as the desktop app) since it
         # can depend on THREE profiles at once (Self/Partner/Child) rather
-        # than just the currently selected one.
+        # than just the currently selected one. Sample Charts is also
+        # excluded - its own profile LIST never changes with the selected
+        # profile (only tapping a card there generates anything, and that
+        # already calls this same callback itself).
 
 
 if __name__ == "__main__":
