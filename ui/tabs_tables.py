@@ -8,11 +8,11 @@ method did, from the currently selected profile's chart/reading.
 import datetime
 
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.checkbox import CheckBox
 from kivy.uix.label import Label
 from kivy.metrics import dp
 
 from ui.widgets import SimpleTable, CaptionLabel
+from ui.theme import ThemedCheckBox as CheckBox
 from panchanga import SIGNS
 from astrology_tables import ordinal
 

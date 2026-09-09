@@ -7,7 +7,6 @@ graphics instructions instead of gui_app.py's tkinter Canvas calls.
 """
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
-from kivy.uix.spinner import Spinner
 from kivy.uix.label import Label
 from kivy.graphics import Color, Line, Rectangle
 from kivy.metrics import dp
@@ -17,6 +16,7 @@ import chart_geometry as cg
 from astrology_tables import SIGN_ABBR
 from panchanga import SIGNS
 from ui.widgets import CaptionLabel
+from ui.theme import ThemedSpinner as Spinner
 
 VARGA_CHOICES = [
     ("Rasi (D1)", "D1"), ("Hora (D2)", "D2"), ("Drekkana (D3)", "D3"),

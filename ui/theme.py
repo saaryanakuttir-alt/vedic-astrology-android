@@ -9,18 +9,27 @@ generated gradient texture, so it stays fully offline and adds no extra
 dependency or file size to the APK.
 
 Usage: put a GradientBackground as the very first child of the app's
-root layout (so it paints behind everything else), swap a plain
-kivy.uix.button.Button for ThemedButton where you want the gold/indigo
-pill look, and drop a SectionHeader at the top of a tab's content for a
-colored "hero" banner instead of a plain Label.
+root layout (so it paints behind everything else), drop a SectionHeader
+at the top of a tab's content for a colored "hero" banner instead of a
+plain Label, and swap Kivy's stock form controls for their Themed*
+equivalents below - ThemedButton, ThemedTextInput, ThemedSpinner (+ its
+own ThemedSpinnerOption dropdown-list rows), ThemedCheckBox - each a
+drop-in replacement with the same API as the widget it replaces, just
+re-skinned with this file's rounded indigo/gold pill look instead of
+Kivy's default flat gray atlas images (which is where this app's "looks
+like an old Windows toolbar" impression came from - those defaults never
+matched the celestial palette everything else here uses).
 """
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.textinput import TextInput
+from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.graphics import Color, RoundedRectangle, Rectangle
 from kivy.graphics.texture import Texture
 from kivy.metrics import dp
+from kivy.properties import BooleanProperty
 from kivy.utils import get_color_from_hex as hex_color
 
 # ---- Palette (mirrors webapp/static/style.css's :root variables) ----
@@ -107,7 +116,42 @@ class SectionHeader(BoxLayout):
         self._bg.size = self.size
 
 
-class ThemedButton(Button):
+class _PillMixin:
+    """Shared rounded border+fill canvas drawing, used by every "pill"-
+    style themed widget below (ThemedButton, ThemedSpinner/
+    ThemedSpinnerOption) - they're all Button subclasses in Kivy (Spinner
+    IS a Button), so they all share the same pos/size box model this
+    draws against. Pulled out once rather than copy-pasted per widget,
+    the same "one implementation, several call sites" approach this
+    project already uses elsewhere (e.g. engine/dasha.py's
+    _build_sub_periods) rather than letting near-identical drawing code
+    drift out of sync across widgets."""
+
+    def _init_pill(self, fill, border, radius=dp(10)):
+        self._pill_fill = fill
+        self._pill_border = border
+        with self.canvas.before:
+            self._border_color = Color(*border)
+            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[radius])
+            self._fill_color = Color(*fill)
+            self._fill_rect = RoundedRectangle(pos=self._inset_pos(), size=self._inset_size(),
+                                                radius=[radius - dp(1)])
+        self.bind(pos=self._sync_pill, size=self._sync_pill)
+
+    def _inset_pos(self, inset=dp(1.5)):
+        return self.pos[0] + inset, self.pos[1] + inset
+
+    def _inset_size(self, inset=dp(1.5)):
+        return self.size[0] - inset * 2, self.size[1] - inset * 2
+
+    def _sync_pill(self, *_):
+        self._border_rect.pos = self.pos
+        self._border_rect.size = self.size
+        self._fill_rect.pos = self._inset_pos()
+        self._fill_rect.size = self._inset_size()
+
+
+class ThemedButton(_PillMixin, Button):
     """A Button re-skinned with a rounded, bordered fill instead of
     Kivy's default gray atlas image - same text/on_release API as a
     plain Button, so it drops in anywhere. gold=True gives the solid
@@ -120,15 +164,63 @@ class ThemedButton(Button):
         kwargs.setdefault("color", GOLD_TEXT if gold else INK)
         kwargs.setdefault("bold", True)
         super().__init__(**kwargs)
-        fill = GOLD if gold else INDIGO
-        border = GOLD_SOFT if gold else INDIGO_2
+        self._init_pill(GOLD if gold else INDIGO, GOLD_SOFT if gold else INDIGO_2)
+
+
+class ThemedSpinnerOption(_PillMixin, SpinnerOption):
+    """The themed look for each row in a ThemedSpinner's dropdown list -
+    set as ThemedSpinner's own option_cls below, so opening any dropdown
+    in this app shows this instead of Kivy's default flat gray atlas
+    button list."""
+
+    def __init__(self, **kwargs):
+        kwargs.setdefault("background_normal", "")
+        kwargs.setdefault("background_down", "")
+        kwargs.setdefault("color", INK)
+        kwargs.setdefault("bold", False)
+        super().__init__(**kwargs)
+        self._init_pill(PANEL_SOFT, INDIGO_2, radius=dp(6))
+
+
+class ThemedSpinner(_PillMixin, Spinner):
+    """A Spinner (dropdown) re-skinned to match ThemedButton - same
+    rounded indigo pill, with its own dropdown list re-skinned via
+    ThemedSpinnerOption rather than Kivy's default gray atlas."""
+
+    def __init__(self, **kwargs):
+        kwargs.setdefault("background_normal", "")
+        kwargs.setdefault("background_down", "")
+        kwargs.setdefault("color", INK)
+        kwargs.setdefault("bold", True)
+        kwargs.setdefault("option_cls", ThemedSpinnerOption)
+        super().__init__(**kwargs)
+        self._init_pill(INDIGO, INDIGO_2)
+
+
+class ThemedTextInput(TextInput):
+    """A TextInput re-skinned with a rounded dark fill instead of Kivy's
+    default white input box (the single most "old Windows toolbar"-
+    looking stock widget in this app against a dark theme) - same
+    .text/hint_text/input_filter API as a plain TextInput. Border turns
+    gold while focused, for a lightweight "this field is active" cue."""
+
+    def __init__(self, **kwargs):
+        kwargs.setdefault("background_normal", "")
+        kwargs.setdefault("background_active", "")
+        kwargs.setdefault("background_color", (0, 0, 0, 0))
+        kwargs.setdefault("foreground_color", INK)
+        kwargs.setdefault("hint_text_color", MUTED)
+        kwargs.setdefault("cursor_color", GOLD)
+        kwargs.setdefault("selection_color", (GOLD[0], GOLD[1], GOLD[2], 0.35))
+        kwargs.setdefault("padding", (dp(10), dp(10), dp(10), dp(10)))
+        super().__init__(**kwargs)
         with self.canvas.before:
-            Color(*border)
-            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(10)])
-            Color(*fill)
+            self._border_color = Color(*PANEL_SOFT)
+            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(8)])
+            Color(*PANEL)
             self._fill_rect = RoundedRectangle(pos=self._inset_pos(), size=self._inset_size(),
-                                                radius=[dp(9)])
-        self.bind(pos=self._sync, size=self._sync)
+                                                radius=[dp(7)])
+        self.bind(pos=self._sync, size=self._sync, focus=self._on_focus, disabled=self._on_focus)
 
     def _inset_pos(self, inset=dp(1.5)):
         return self.pos[0] + inset, self.pos[1] + inset
@@ -141,3 +233,58 @@ class ThemedButton(Button):
         self._border_rect.size = self.size
         self._fill_rect.pos = self._inset_pos()
         self._fill_rect.size = self._inset_size()
+
+    def _on_focus(self, *_):
+        self._border_color.rgba = MUTED if self.disabled else (GOLD if self.focus else PANEL_SOFT)
+
+
+class ThemedCheckBox(Button):
+    """A checkbox re-skinned as a small square toggle (border normally,
+    gold-filled with a check mark when active) instead of Kivy's default
+    tiny checkbox atlas image, which doesn't restyle to a dark theme at
+    all. Exposes the same `active` BooleanProperty + change-event API as
+    the real kivy.uix.checkbox.CheckBox (bind(active=...), read/set
+    .active directly), so it's a drop-in replacement everywhere this app
+    used the stock one."""
+
+    active = BooleanProperty(False)
+
+    def __init__(self, active=False, **kwargs):
+        kwargs.setdefault("size_hint", (None, None))
+        kwargs.setdefault("size", (dp(30), dp(30)))
+        kwargs.setdefault("background_normal", "")
+        kwargs.setdefault("background_down", "")
+        kwargs.setdefault("text", "")
+        super().__init__(**kwargs)
+        with self.canvas.before:
+            self._border_color = Color(*INK_SOFT)
+            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(6)])
+            self._fill_color = Color(0, 0, 0, 0)
+            self._fill_rect = RoundedRectangle(pos=self._inset_pos(), size=self._inset_size(),
+                                                radius=[dp(5)])
+        self.bind(pos=self._sync, size=self._sync, on_release=self._toggle, active=self._apply)
+        self.active = active
+        self._apply()
+
+    def _inset_pos(self, inset=dp(2)):
+        return self.pos[0] + inset, self.pos[1] + inset
+
+    def _inset_size(self, inset=dp(2)):
+        return self.size[0] - inset * 2, self.size[1] - inset * 2
+
+    def _sync(self, *_):
+        self._border_rect.pos = self.pos
+        self._border_rect.size = self.size
+        self._fill_rect.pos = self._inset_pos()
+        self._fill_rect.size = self._inset_size()
+
+    def _toggle(self, *_):
+        self.active = not self.active
+
+    def _apply(self, *_):
+        self._fill_color.rgba = GOLD if self.active else (0, 0, 0, 0)
+        self._border_color.rgba = GOLD if self.active else INK_SOFT
+        self.text = "✓" if self.active else ""
+        self.color = GOLD_TEXT
+        self.bold = True
+        self.font_size = "16sp"

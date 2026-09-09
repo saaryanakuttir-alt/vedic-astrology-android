@@ -9,7 +9,6 @@ uses it.
 import traceback
 
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.metrics import dp
 from kivy.clock import Clock
@@ -17,6 +16,7 @@ from kivy.logger import Logger
 
 from ui.widgets import SimpleTable, LongText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
+from ui.theme import ThemedButton as Button
 
 
 class FamilyTab(BoxLayout):
@@ -34,7 +34,7 @@ class FamilyTab(BoxLayout):
         )
         self.add_widget(note)
 
-        compute_btn = Button(text="Compute Family Compatibility Report", size_hint_y=None, height=dp(48))
+        compute_btn = Button(text="Compute Family Compatibility Report", gold=True, size_hint_y=None, height=dp(48))
         compute_btn.bind(on_release=lambda *_: self.refresh())
         self.add_widget(compute_btn)
 

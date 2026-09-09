@@ -8,21 +8,20 @@ confirmed 45 names were left out for lacking a genuinely documented one).
 
 Every widget below is constructed fresh with its final text already set,
 the same "never mutate .text on an already-rendered widget" pattern
-widgets.py's SimpleTable and LongText both use - see LongText's own
-_make_label docstring for why that specifically matters on this project.
+widgets.py's SimpleTable and LongText both use.
 """
 import traceback
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.metrics import dp
 from kivy.logger import Logger
 
 from ui.widgets import CaptionLabel
 from ui.app_state import PROFILE_LABELS
+from ui.theme import ThemedButton as Button
 
 
 def _show_message(title, text):

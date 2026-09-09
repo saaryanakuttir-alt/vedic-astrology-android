@@ -8,10 +8,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
-from kivy.uix.spinner import Spinner
-from kivy.uix.checkbox import CheckBox
-from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.metrics import dp
 from kivy.clock import Clock
@@ -19,7 +15,15 @@ from kivy.clock import Clock
 from ui import theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.widgets import field_row
-from ui.theme import ThemedButton
+# Themed* re-skins aliased to the stock widget names they replace, so
+# every other line below (TextInput(...), Spinner(...), CheckBox(),
+# Button(...)) needs no further change - same API, just the rounded
+# indigo/gold pill look instead of Kivy's default flat gray atlas.
+# See theme.py's own module docstring for why.
+from ui.theme import (
+    ThemedButton, ThemedButton as Button, ThemedTextInput as TextInput,
+    ThemedSpinner as Spinner, ThemedCheckBox as CheckBox,
+)
 
 
 def _show_message(title, text):

@@ -8,12 +8,12 @@ filter chips rather than a flat wall of text.
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 from kivy.metrics import dp
 
 from ui import theme
 from ui.widgets import ChipButton, ExpandableCard
+from ui.theme import ThemedTextInput as TextInput
 from faq_data import FAQ_CATEGORIES
 
 
@@ -37,8 +37,6 @@ class HelpTab(BoxLayout):
         self.search_input = TextInput(
             hint_text="Search a question, e.g. 'dasha' or 'time zone'...",
             multiline=False, size_hint_y=None, height=dp(46),
-            background_color=theme.PANEL_SOFT, foreground_color=theme.INK,
-            hint_text_color=theme.MUTED, cursor_color=theme.GOLD,
             padding=(dp(12), dp(12)),
         )
         self.search_input.bind(text=lambda *_: self._refresh())
