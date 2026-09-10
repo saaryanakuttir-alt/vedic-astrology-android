@@ -346,11 +346,46 @@ def _bind_label_text_size(label, *_):
     label.text_size = (label.width, label.height)
 
 
-def field_row(label_text, widget, height=dp(40)):
-    row = BoxLayout(orientation="horizontal", size_hint_y=None, height=height, spacing=dp(6))
-    label = Label(text=label_text, size_hint_x=0.38, halign="right", valign="middle")
-    label.bind(size=_bind_label_text_size)
-    row.add_widget(label)
+def field_row(label_text, widget, height=dp(68)):
+    """One form field: a small caption ABOVE a full-width input, not a
+    cramped two-column "label | field" split (the original layout gave
+    the caption ~38% of the row and squeezed every TextInput into the
+    rest - fine on a desktop window, but on a phone-width column that
+    left barely enough room to see what you'd typed, and every field's
+    actual tap target was narrower than it needed to be). Stacking label-
+    over-input is the standard modern mobile form pattern (Material/iOS
+    settings-style) and, just as importantly here, it gives every input
+    the FULL row width to be tapped in rather than ~60% of it - a
+    concrete fix for "the buttons/fields don't work" reports that were
+    really "I tried to tap the field and missed."
+
+    CheckBox-like widgets (anything exposing a boolean `.active`, e.g.
+    ThemedCheckBox) are the one exception: those render as a normal
+    horizontal [box] then label row instead, since a caption stacked
+    above a tiny checkbox reads oddly and every other checkbox pattern
+    in mobile UI puts the label beside it, not above it.
+    """
+    if hasattr(widget, "active"):
+        row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(44), spacing=dp(10))
+        row.add_widget(widget)
+        label = Label(text=label_text, halign="left", valign="middle", color=theme.INK_SOFT)
+        label.bind(size=_bind_label_text_size)
+        row.add_widget(label)
+        return row
+
+    row = BoxLayout(orientation="vertical", size_hint_y=None, height=height, spacing=dp(4))
+    caption = Label(text=label_text, size_hint_y=None, height=dp(18), halign="left", valign="bottom",
+                     font_size="12.5sp", color=theme.MUTED)
+    caption.bind(size=_bind_label_text_size)
+    row.add_widget(caption)
+    # The input itself gets a fixed, comfortable touch height regardless
+    # of what size_hint_y it arrived with (Spinner/TextInput both default
+    # to size_hint_y=1, which would otherwise stretch to fill whatever's
+    # left in `row` after the caption - fine today since row's height is
+    # fixed, but pinning it explicitly makes every field the same
+    # thumb-friendly height without depending on that).
+    widget.size_hint_y = None
+    widget.height = dp(46)
     row.add_widget(widget)
     return row
 

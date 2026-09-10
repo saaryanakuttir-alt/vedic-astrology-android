@@ -27,10 +27,35 @@ _ENGINE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "engine")
 if _ENGINE_DIR not in sys.path:
     sys.path.insert(0, _ENGINE_DIR)
 
+# Must run BEFORE `from kivy.core.window import Window` below - Config
+# values are read once, at Window creation, not re-checked afterward.
+# 'system' forces Kivy to hand text-input focus straight to Android's own
+# IME (the keyboard the user already knows) instead of Kivy's alternative
+# 'systemanddock'/'dock' behavior, which docks a SECOND, Kivy-drawn
+# keyboard widget above the real one on some Android/SDL2 builds - two
+# keyboards fighting for the same touch input reads as exactly what this
+# app was reported to do on-device: typing lands late or not at all, and
+# taps meant for a button behind/near the extra keyboard widget miss it
+# entirely. This is a known Kivy-on-Android footgun, not a per-app tuning
+# choice - 'system' is the fix, not a preference.
+from kivy.config import Config
+Config.set("kivy", "keyboard_mode", "system")
+
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
+
+# 'below_target' scrolls whichever TextInput has focus up above the
+# keyboard instead of resizing the whole Window - the alternative
+# ('resize', SDL2's own default) fires a full Window resize on every
+# keyboard show/hide, which cascades a full relayout through this app's
+# entire widget tree (root -> TabbedPanel -> every tab's own ScrollView/
+# GridLayout/canvas-drawn Themed* widgets) each time a field is tapped or
+# un-tapped. On the Profile tab specifically - 10 text fields, the most of
+# any tab here - that relayout thrash is the likely source of the
+# reported "keyboard lag" / touches feeling dropped right after typing.
+Window.softinput_mode = "below_target"
 
 from ui import theme
 from ui.app_state import ProfileStore

@@ -43,9 +43,21 @@ MUTED = hex_color("#8890b8")
 INDIGO = hex_color("#3d5a8a")
 INDIGO_2 = hex_color("#4c6fb0")
 INDIGO_DEEP = hex_color("#232c58")
-GOLD = hex_color("#c9a24a")
+INDIGO_PRESS = hex_color("#2c3d68")  # ThemedButton/Spinner fill while pressed -
+                                      # a touch darker than INDIGO, so tapping
+                                      # one visibly reacts (see _PillMixin)
+# Brighter than the original #c9a24a - this project's one color-contrast
+# complaint was the gold CTA button (Generate Chart, etc): #c9a24a fill with
+# the old #20264a text measured ~3.4:1, under WCAG AA's 4.5:1 floor for
+# normal-size text. Brightening the gold AND darkening its text (below) both
+# widen that gap - the combined change measures ~7.7:1 (AAA), while still
+# reading as "gold" rather than "yellow warning."
+GOLD = hex_color("#e0b654")
+GOLD_PRESS = hex_color("#caa049")    # gold fill while pressed - one step back
+                                      # toward the old, less saturated gold
 GOLD_SOFT = hex_color("#e7d5a3")
-GOLD_TEXT = hex_color("#20264a")    # dark ink used ON TOP of a gold fill
+GOLD_TEXT = hex_color("#14172c")    # near-black ink used ON TOP of a gold
+                                      # fill - see the contrast note above
 
 
 def _make_gradient_texture(top_hex, bottom_hex, size=256):
@@ -97,19 +109,25 @@ class GradientBackground(FloatLayout):
 class SectionHeader(BoxLayout):
     """A colored banner with an icon + title for the top of a tab's
     content - a more "hero card" look than a plain Label, e.g.
-    SectionHeader("\U0001F52E", "Karmic & Past Life")."""
+    SectionHeader("\U0001F52E", "Karmic & Past Life"). Filled with the
+    same indigo gradient texture GradientBackground uses (instead of one
+    flat color) so every tab opens on a small echo of the app's own
+    "celestial" background rather than a plain solid bar - a cheap way to
+    make the UI read as more considered/modern without adding any image
+    asset."""
 
     def __init__(self, icon, title, **kwargs):
         kwargs.setdefault("size_hint_y", None)
-        kwargs.setdefault("height", dp(48))
-        kwargs.setdefault("padding", (dp(14), dp(4)))
+        kwargs.setdefault("height", dp(52))
+        kwargs.setdefault("padding", (dp(16), dp(4)))
         super().__init__(orientation="horizontal", **kwargs)
         with self.canvas.before:
-            Color(*INDIGO_DEEP)
-            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(10)])
+            Color(1, 1, 1, 1)
+            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(14)],
+                                         texture=_gradient_texture("#343f78", "#1c2352"))
         self.bind(pos=self._sync_bg, size=self._sync_bg)
         self.add_widget(Label(text=f"{icon}  {title}", color=GOLD_SOFT,
-                               font_size="17sp", bold=True, halign="left", valign="middle"))
+                               font_size="18sp", bold=True, halign="left", valign="middle"))
 
     def _sync_bg(self, *_):
         self._bg.pos = self.pos
@@ -125,10 +143,24 @@ class _PillMixin:
     the same "one implementation, several call sites" approach this
     project already uses elsewhere (e.g. engine/dasha.py's
     _build_sub_periods) rather than letting near-identical drawing code
-    drift out of sync across widgets."""
+    drift out of sync across widgets.
 
-    def _init_pill(self, fill, border, radius=dp(10)):
+    Also owns the fill-darkens-on-press feedback every pill widget got as
+    part of this pass: originally _sync_pill only ever repainted the SAME
+    fill color at a new pos/size, so tapping a button changed nothing
+    visible until whatever its on_release callback did (a status label
+    updating, a new tab appearing, etc.) - on a slower device, or for a
+    button whose effect isn't immediately obvious, that reads as "nothing
+    happened, is this even working," which is the most literal possible
+    reading of this app's reported "the buttons donot work." Binding
+    `state` here and swapping to `press_fill` while held (any Kivy Button
+    subclass already flips its own `state` between 'normal'/'down' on
+    touch down/up - this just reacts to it) gives every button an
+    instant, correct-on-first-frame press cue."""
+
+    def _init_pill(self, fill, border, radius=dp(12), press_fill=None):
         self._pill_fill = fill
+        self._pill_press_fill = press_fill or fill
         self._pill_border = border
         with self.canvas.before:
             self._border_color = Color(*border)
@@ -136,7 +168,7 @@ class _PillMixin:
             self._fill_color = Color(*fill)
             self._fill_rect = RoundedRectangle(pos=self._inset_pos(), size=self._inset_size(),
                                                 radius=[radius - dp(1)])
-        self.bind(pos=self._sync_pill, size=self._sync_pill)
+        self.bind(pos=self._sync_pill, size=self._sync_pill, state=self._sync_pill_state)
 
     def _inset_pos(self, inset=dp(1.5)):
         return self.pos[0] + inset, self.pos[1] + inset
@@ -149,6 +181,9 @@ class _PillMixin:
         self._border_rect.size = self.size
         self._fill_rect.pos = self._inset_pos()
         self._fill_rect.size = self._inset_size()
+
+    def _sync_pill_state(self, instance, state):
+        self._fill_color.rgba = self._pill_press_fill if state == "down" else self._pill_fill
 
 
 class ThemedButton(_PillMixin, Button):
@@ -164,7 +199,8 @@ class ThemedButton(_PillMixin, Button):
         kwargs.setdefault("color", GOLD_TEXT if gold else INK)
         kwargs.setdefault("bold", True)
         super().__init__(**kwargs)
-        self._init_pill(GOLD if gold else INDIGO, GOLD_SOFT if gold else INDIGO_2)
+        self._init_pill(GOLD if gold else INDIGO, GOLD_SOFT if gold else INDIGO_2,
+                         press_fill=GOLD_PRESS if gold else INDIGO_PRESS)
 
 
 class ThemedSpinnerOption(_PillMixin, SpinnerOption):
@@ -179,7 +215,7 @@ class ThemedSpinnerOption(_PillMixin, SpinnerOption):
         kwargs.setdefault("color", INK)
         kwargs.setdefault("bold", False)
         super().__init__(**kwargs)
-        self._init_pill(PANEL_SOFT, INDIGO_2, radius=dp(6))
+        self._init_pill(PANEL_SOFT, INDIGO_2, radius=dp(8), press_fill=INDIGO_PRESS)
 
 
 class ThemedSpinner(_PillMixin, Spinner):
@@ -194,7 +230,7 @@ class ThemedSpinner(_PillMixin, Spinner):
         kwargs.setdefault("bold", True)
         kwargs.setdefault("option_cls", ThemedSpinnerOption)
         super().__init__(**kwargs)
-        self._init_pill(INDIGO, INDIGO_2)
+        self._init_pill(INDIGO, INDIGO_2, press_fill=INDIGO_PRESS)
 
 
 class ThemedTextInput(TextInput):
@@ -216,10 +252,10 @@ class ThemedTextInput(TextInput):
         super().__init__(**kwargs)
         with self.canvas.before:
             self._border_color = Color(*PANEL_SOFT)
-            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(8)])
+            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(10)])
             Color(*PANEL)
             self._fill_rect = RoundedRectangle(pos=self._inset_pos(), size=self._inset_size(),
-                                                radius=[dp(7)])
+                                                radius=[dp(9)])
         self.bind(pos=self._sync, size=self._sync, focus=self._on_focus, disabled=self._on_focus)
 
     def _inset_pos(self, inset=dp(1.5)):
@@ -250,19 +286,26 @@ class ThemedCheckBox(Button):
     active = BooleanProperty(False)
 
     def __init__(self, active=False, **kwargs):
+        # dp(36), not the original dp(30): still small (it's an inline
+        # checkbox, not a primary button), but 30dp sat noticeably under
+        # Android's own 48dp/44dp-ish recommended minimum touch target -
+        # on a real device that made it genuinely easy to miss-tap, which
+        # is functionally indistinguishable from "the button doesn't
+        # work." 36dp keeps the row compact while closing most of that gap.
         kwargs.setdefault("size_hint", (None, None))
-        kwargs.setdefault("size", (dp(30), dp(30)))
+        kwargs.setdefault("size", (dp(36), dp(36)))
         kwargs.setdefault("background_normal", "")
         kwargs.setdefault("background_down", "")
         kwargs.setdefault("text", "")
         super().__init__(**kwargs)
         with self.canvas.before:
             self._border_color = Color(*INK_SOFT)
-            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(6)])
+            self._border_rect = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(7)])
             self._fill_color = Color(0, 0, 0, 0)
             self._fill_rect = RoundedRectangle(pos=self._inset_pos(), size=self._inset_size(),
-                                                radius=[dp(5)])
-        self.bind(pos=self._sync, size=self._sync, on_release=self._toggle, active=self._apply)
+                                                radius=[dp(6)])
+        self.bind(pos=self._sync, size=self._sync, on_release=self._toggle,
+                  active=self._apply, state=self._apply)
         self.active = active
         self._apply()
 
@@ -282,8 +325,18 @@ class ThemedCheckBox(Button):
         self.active = not self.active
 
     def _apply(self, *_):
-        self._fill_color.rgba = GOLD if self.active else (0, 0, 0, 0)
-        self._border_color.rgba = GOLD if self.active else INK_SOFT
+        pressed = self.state == "down"
+        if self.active:
+            self._fill_color.rgba = GOLD_PRESS if pressed else GOLD
+        else:
+            # A held-but-not-yet-released tap still gets a visible fill
+            # (a soft translucent gold, not the empty/transparent normal
+            # state) so pressing an UNCHECKED box gives the same instant
+            # "yes, that registered" cue toggling ON already gave a
+            # checked one - see _PillMixin's docstring for why this
+            # press-feedback pass exists at all.
+            self._fill_color.rgba = (GOLD[0], GOLD[1], GOLD[2], 0.35) if pressed else (0, 0, 0, 0)
+        self._border_color.rgba = GOLD if (self.active or pressed) else INK_SOFT
         self.text = "✓" if self.active else ""
         self.color = GOLD_TEXT
         self.bold = True
