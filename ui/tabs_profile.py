@@ -15,15 +15,32 @@ from kivy.clock import Clock
 from ui import theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.widgets import field_row
-# Themed* re-skins aliased to the stock widget names they replace, so
-# every other line below (TextInput(...), Spinner(...), CheckBox(),
-# Button(...)) needs no further change - same API, just the rounded
-# indigo/gold pill look instead of Kivy's default flat gray atlas.
-# See theme.py's own module docstring for why.
-from ui.theme import (
-    ThemedButton, ThemedButton as Button, ThemedTextInput as TextInput,
-    ThemedSpinner as Spinner, ThemedCheckBox as CheckBox,
-)
+
+# --- TEMPORARY DIAGNOSTIC SWITCH -----------------------------------------
+# Reported: on this tab specifically, typing and button taps register NO
+# visible response at all (tab-switching and scrolling - both handled by
+# STOCK, un-modified Kivy widgets - work fine). That split is the whole
+# clue: every widget that fails is one of this project's own Themed*
+# canvas-drawn re-skins (theme.py); every widget that still works is
+# stock Kivy. Rather than guess again at WHICH part of Themed* breaks
+# touch/focus dispatch, this swaps the whole tab back to plain stock
+# Button/TextInput/Spinner/CheckBox (losing the rounded-pill look here
+# ONLY, temporarily) so the next on-device test gives a clean yes/no:
+# if stock widgets respond normally, the bug is confirmed inside
+# theme.py's Themed* classes and this narrows exactly where to keep
+# looking; if they DON'T respond either, the bug is somewhere else
+# entirely (this tab's own construction, not the theming layer) and this
+# revert gets undone. See _show_message below for the temporary
+# ThemedButton(gold=...) shim this requires.
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.spinner import Spinner
+from kivy.uix.checkbox import CheckBox
+
+
+def ThemedButton(*args, gold=False, **kwargs):  # noqa: N802 - matches the real one's call sites
+    return Button(*args, **kwargs)
+# --- END TEMPORARY DIAGNOSTIC SWITCH --------------------------------------
 
 
 def _show_message(title, text):
@@ -94,6 +111,15 @@ class ProfileTab(BoxLayout):
         self.lat_input = TextInput(multiline=False, disabled=True)
         self.lon_input = TextInput(multiline=False, disabled=True)
         self.tz_input = TextInput(multiline=False, disabled=True, hint_text="e.g. Asia/Kolkata")
+
+        # TEMPORARY DIAGNOSTIC: mirrors every keystroke typed into Name
+        # straight into the status label at the bottom of this tab, live -
+        # gives an unambiguous on-screen answer (no need to describe what
+        # happened afterward) to whether text input is reaching this
+        # widget AT ALL. Remove once the real bug is confirmed/fixed.
+        self.name_input.bind(
+            text=lambda inst, val: self._set_status(f"[diagnostic] Name field now reads: '{val}'")
+        )
 
         for label_text, widget in [
             ("Name", self.name_input),
