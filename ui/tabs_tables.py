@@ -251,7 +251,15 @@ class YogasTab(BoxLayout):
         for y in reading["yogas"]:
             if only_present and not y["present"]:
                 continue
-            rows.append((y["id"], y["name"], "Yes" if y["present"] else "No", y["details"]))
+            # explanation (formation + classical effects + any cautions,
+            # from classical_yogas.json's own kb_entry) is the fuller
+            # "what does this yoga actually mean" text; details is just
+            # the short computed fact ("Jupiter is in house 4 from
+            # Moon..."). Show both - the fact first, then what it means.
+            text = y["details"]
+            if y.get("explanation"):
+                text = f"{text} — {y['explanation']}"
+            rows.append((y["id"], y["name"], "Yes" if y["present"] else "No", text))
         self.table.set_rows(rows)
 
 

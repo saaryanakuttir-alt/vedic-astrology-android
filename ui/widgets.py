@@ -233,6 +233,51 @@ class LongText(ScrollView):
         return _resize
 
 
+class ItalicSummaryLabel(BoxLayout):
+    """A single short paragraph rendered in italics - the mobile
+    equivalent of a section's closing "in simple words, here's what this
+    means" line (e.g. Karmic & Past Life's plain_section_summary). A thin
+    BoxLayout wrapper (not a Label subclass) so set_text() can rebuild a
+    fresh inner Label every call rather than mutate .text on an already-
+    rendered one - see LongText's own docstring for why this project
+    specifically avoids that pattern now.
+
+    markup=True on the inner Label ONLY (never turned on for LongText's
+    paragraph labels) because this project's own report text is now full
+    of literal [bracketed asides] (the plain-language gists this same
+    feedback round added elsewhere) - markup=True would make Kivy try to
+    parse every one of those brackets as BBCode. This widget only ever
+    shows one fully-controlled string (rule_engine.py's own composed
+    text, never user input, never containing a literal bracket), so
+    enabling markup here to get real italics is safe."""
+
+    def __init__(self, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("height", dp(28))
+        super().__init__(**kwargs)
+        self.label = None
+
+    def set_text(self, text):
+        self.clear_widgets()
+        if not text:
+            self.height = dp(0)
+            return
+        self.label = Label(
+            text=f"[i]{text}[/i]", markup=True, halign="left", valign="top",
+            padding=(dp(10), dp(10)), color=theme.GOLD_SOFT,
+            size_hint_y=None, height=dp(28), text_size=(None, None),
+        )
+        self.label.bind(texture_size=self._on_texture_size, width=self._on_label_width)
+        self.add_widget(self.label)
+
+    def _on_label_width(self, label, width):
+        label.text_size = (width, None)
+
+    def _on_texture_size(self, instance, texture_size):
+        self.label.height = max(dp(28), texture_size[1] + dp(20))
+        self.height = self.label.height
+
+
 class CaptionLabel(Label):
     """A short, plain-English one-to-three-line explainer shown at the top
     of a tab, above its table/report content - e.g. "Your planetary time-

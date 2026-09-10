@@ -288,23 +288,29 @@ def _doshas_reading(chart, warnings):
 
 
 def _plain_planet_gloss(planet, sign, house, in_sign, in_house):
-    """A single, plain-language sentence for this planet's placement -
-    what does 'Moon in Aries, 11th house' actually MEAN for the person,
-    without needing to already know what a sign/house/dignity is. Built
-    from the SAME planet_in_sign.json/planet_in_house.json `summary`
-    fields the denser Full Reading/Life Predictions prose already draws
-    on (already written as single plain sentences, verified against the
-    KB's own review discipline) rather than inventing new, separately-
-    maintained copy that could drift out of sync with them - this is a
-    surfacing/framing change, not new astrological content."""
-    bits = []
-    if in_sign and in_sign.get("summary"):
-        bits.append(in_sign["summary"])
-    if in_house and in_house.get("summary"):
-        bits.append(in_house["summary"])
-    if not bits:
+    """The full paragraph shown for one planet: the classical, denser
+    planet_in_sign.json/planet_in_house.json `effects` text (falling back
+    to `summary` if a KB entry has no `effects`) LEFT INTACT, followed by
+    a short plain-language gist in [brackets] at the end - never
+    replacing the professional writing, only adding an accessible
+    takeaway after it (explicit user feedback: keep the dense text, put
+    the gist in brackets at the end, not instead of it)."""
+    paragraph_bits, gist_bits = [], []
+    for entry in (in_sign, in_house):
+        if not entry:
+            continue
+        text = entry.get("effects") or entry.get("summary")
+        if text:
+            paragraph_bits.append(text)
+        if entry.get("summary"):
+            gist_bits.append(entry["summary"])
+    if not paragraph_bits:
         return None
-    return f"In plain terms: your {planet} in {sign} ({ordinal(house)} house) — " + " ".join(bits)
+    header = f"Your {planet} in {sign} ({ordinal(house)} house):"
+    professional = " ".join(paragraph_bits)
+    if gist_bits:
+        return f"{header} {professional} [In simple terms: {' '.join(gist_bits)}]"
+    return f"{header} {professional}"
 
 
 def _planet_reading(chart, planet, warnings):
@@ -387,11 +393,31 @@ def _yoga_readings(chart, warnings):
         kb_entry = yogas_kb.get(result["id"])
         if kb_entry is None:
             warnings.append(f"No 'classical_yogas' entry found for id '{result['id']}'.")
+        # `details` (from detect_all_yogas) is a short, per-CHART computed
+        # fact ("Jupiter is in house 4 from Moon, a kendra") - it was the
+        # only text ever shown for a yoga in any UI, even though classical_
+        # yogas.json's own `formation`/`effects`/`strength_modifiers_and_
+        # cautions` fields (verified, richer classical explanations of what
+        # the yoga actually MEANS) have been attached as `kb_entry` all
+        # along and never surfaced. `explanation` below is new: the
+        # computed fact plus that full classical explanation, additive
+        # (kept `details` unchanged so nothing already reading it breaks).
+        explanation = None
+        if kb_entry:
+            bits = []
+            if kb_entry.get("formation"):
+                bits.append(f"Classical formation: {kb_entry['formation']}")
+            if kb_entry.get("effects"):
+                bits.append(kb_entry["effects"])
+            if kb_entry.get("strength_modifiers_and_cautions"):
+                bits.append(f"Worth noting: {kb_entry['strength_modifiers_and_cautions']}")
+            explanation = " ".join(bits) or None
         readings.append({
             "id": result["id"],
             "name": kb_entry["name"] if kb_entry else result["id"],
             "present": result["present"],
             "details": result["details"],
+            "explanation": explanation,
             "kb_entry": kb_entry,
         })
     return readings
@@ -928,6 +954,23 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     )
     paragraphs.append(closing)
 
+    # --- Section-level plain-language closing (kept SEPARATE from, not a
+    # replacement for, the dense "Closing synthesis" paragraph just above -
+    # explicit user feedback: never erase the professional writing, add
+    # the simple version alongside it. Intended to render in ITALICS as
+    # the very last thing in this section - a UI-side formatting choice,
+    # so this field holds plain text and each UI applies its own italic
+    # styling to it (see gui_app.py/app.js/tabs_reports.py). ---
+    plain_section_summary = (
+        f"In simple words: you seem to arrive already comfortable with {ketu_where}, "
+        f"and this life is asking you to grow into {rahu_where}. Your sense of self "
+        f"centers on {atmakaraka['planet']} in {atmakaraka['sign']}, and your wider sense "
+        f"of purpose is shaped by the 5th, 9th, and 12th houses covered above. None of "
+        f"this is a literal past life - it's a traditional lens for noticing patterns "
+        f"that might be worth paying attention to, not a fact about who you were."
+    )
+    paragraphs.append(plain_section_summary)
+
     soul_narrative = "\n\n".join(paragraphs)
     # Backward-compatible short "synthesis" (single-sentence-per-significator
     # summary, as this field read before the expansion above) — some
@@ -962,6 +1005,7 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
         "main_karmic_goal": main_karmic_goal,
         "soul_narrative": soul_narrative,
         "synthesis": short_synthesis,
+        "plain_section_summary": plain_section_summary,
         "caveat": _KARMIC_CAVEAT,
     }
 
@@ -1235,17 +1279,15 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
             text = text + " " + closing
         # A genuinely simplified reading of the key placement for this area
         # (see _plain_life_gloss) - a plain-language explanation of what the
-        # dense classical text above actually means, not a topic description.
-        # Kept BOTH appended into `text` (so it still shows up in flat-text
-        # renders like Full Reading that just print `text` as one block -
-        # no regression there) AND exposed separately as `plain_gloss`, so a
-        # UI that wants to surface it prominently (e.g. a highlighted "in
-        # short" line ABOVE the dense classical prose, not buried at the
-        # end of a 3000+ character paragraph after it) doesn't have to
-        # parse it back out of the combined string.
+        # dense classical text above actually means, not a topic
+        # description. Appended in [brackets] at the END of the professional
+        # text, never replacing it (explicit user feedback: keep the dense
+        # writing intact, add the gist in brackets after it, not before it
+        # or instead of it). Also exposed separately as `plain_gloss` (the
+        # unbracketed sentence) in case a UI wants it on its own.
         gloss = _plain_life_gloss(house_lords, house_nums[0], area_word) if area_word and house_nums else ""
         if gloss:
-            text = text + "\n\n" + gloss
+            text = text + f"\n\n[{gloss}]"
         return {
             "title": title, "houses_considered": list(house_nums), "planets_considered": list(planet_names),
             "text": text.strip(), "plain_gloss": gloss or None,
@@ -1361,18 +1403,34 @@ def _relationship_themes_plain_summary(rel_reading):
     )
 
 
+def _first_sentence(text, max_chars=140):
+    """A short, one-sentence teaser from a longer KB `effects` paragraph -
+    used where space is tight (e.g. one line per yoga in a summary list)
+    and the full text is shown in full elsewhere anyway."""
+    if not text:
+        return ""
+    end = text.find(". ")
+    sentence = text[: end + 1] if end != -1 else text
+    if len(sentence) > max_chars:
+        sentence = sentence[:max_chars].rsplit(" ", 1)[0] + "..."
+    return sentence
+
+
 def _yogas_plain_summary(yogas_present):
     if not yogas_present:
         return (
             "In short: none of the 24 classical yogas this app checks are formed in this chart. "
             "That's common — most charts trigger only a few, if any; it isn't a deficiency."
         )
-    names = ", ".join(y["name"] for y in yogas_present)
-    return (
+    lines = [
         f"In short: {len(yogas_present)} classical yoga{'s' if len(yogas_present) != 1 else ''} "
-        f"{'are' if len(yogas_present) != 1 else 'is'} present in this chart — {names}. "
-        f"See below for what each one classically means."
-    )
+        f"{'are' if len(yogas_present) != 1 else 'is'} present in this chart:"
+    ]
+    for y in yogas_present:
+        kb = y.get("kb_entry") or {}
+        gist = _first_sentence(kb.get("effects"))
+        lines.append(f"  • {y['name']}" + (f" — {gist}" if gist else ""))
+    return "\n".join(lines)
 
 
 def generate_reading(chart):

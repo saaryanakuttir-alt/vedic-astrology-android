@@ -10,7 +10,7 @@ import traceback
 from kivy.uix.boxlayout import BoxLayout
 from kivy.logger import Logger
 
-from ui.widgets import LongText, CaptionLabel
+from ui.widgets import LongText, CaptionLabel, ItalicSummaryLabel
 from ui.app_state import PROFILE_LABELS
 
 
@@ -65,6 +65,15 @@ class KarmicTab(_BaseReportTab):
         "old patterns (Ketu) versus where you're being pulled to grow (Rahu)."
     )
 
+    def __init__(self, store, **kwargs):
+        super().__init__(store, **kwargs)
+        # The section's own closing "in simple words" line (rule_engine.py's
+        # plain_section_summary) rendered in italics, separate from the
+        # main report text - see ItalicSummaryLabel's own docstring for
+        # why this needs its own widget rather than markup on LongText.
+        self.summary_label = ItalicSummaryLabel()
+        self.add_widget(self.summary_label)
+
     def _build_text(self, reading):
         k = reading["karmic_and_past_life"]
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
@@ -78,7 +87,15 @@ class KarmicTab(_BaseReportTab):
             f"Putrakaraka (children): {pk['planet']} in {pk['sign']}, house {pk['house']} ({pk['nakshatra']})"
         )
         lines.append("\n\n--- The Soul's Narrative ---\n")
-        lines.append(k["soul_narrative"])
+        # soul_narrative ends with plain_section_summary (see
+        # rule_engine.py's _build_karmic_and_past_life) - stripped here
+        # since it's shown separately, in italics, via self.summary_label
+        # below rather than twice.
+        narrative = k["soul_narrative"]
+        summary = k.get("plain_section_summary")
+        if summary and narrative.endswith(summary):
+            narrative = narrative[: -len(summary)].rstrip("\n")
+        lines.append(narrative)
 
         for key, title in (("purva_punya_house_5", "5th House - Purva Punya (past-life merit)"),
                             ("dharma_house_9", "9th House - Dharma (fortune / higher purpose)"),
@@ -90,6 +107,12 @@ class KarmicTab(_BaseReportTab):
                 lines.append(h.get("effects") or h.get("summary"))
 
         return "\n".join(lines)
+
+    def refresh(self):
+        super().refresh()
+        reading = self.store.current["reading"]
+        summary = reading["karmic_and_past_life"].get("plain_section_summary") if reading else None
+        self.summary_label.set_text(summary or "")
 
 
 class LifePredictionsTab(_BaseReportTab):
@@ -107,19 +130,12 @@ class LifePredictionsTab(_BaseReportTab):
             if key == "caveat" or not isinstance(entry, dict):
                 continue
             lines.append(f"\n--- {entry['title']} ---")
+            # `text` already ends with the plain-language gist in
+            # [brackets] (see rule_engine.py's area()) - the professional
+            # classical writing stays intact and first; the gist is an
+            # addition at the end, not a replacement or a lead-in
+            # (explicit user feedback after an earlier pass led with it).
             text = entry["text"] or "(not enough KB data to synthesize this area for this chart)"
-            gloss = entry.get("plain_gloss")
-            if gloss:
-                # Lead with the plain-language reading (rule_engine.py's
-                # _plain_life_gloss) instead of burying it at the end of a
-                # dense, often 2000+ character classical paragraph - `text`
-                # still has it appended too (see rule_engine.py's area()),
-                # so strip that trailing copy here rather than showing it
-                # twice.
-                lines.append(gloss)
-                suffix = "\n\n" + gloss
-                if text.endswith(suffix):
-                    text = text[: -len(suffix)]
             lines.append(text)
         return "\n".join(lines)
 
