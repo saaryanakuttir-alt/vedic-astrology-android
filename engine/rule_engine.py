@@ -287,18 +287,41 @@ def _doshas_reading(chart, warnings):
     }
 
 
+def _plain_planet_gloss(planet, sign, house, in_sign, in_house):
+    """A single, plain-language sentence for this planet's placement -
+    what does 'Moon in Aries, 11th house' actually MEAN for the person,
+    without needing to already know what a sign/house/dignity is. Built
+    from the SAME planet_in_sign.json/planet_in_house.json `summary`
+    fields the denser Full Reading/Life Predictions prose already draws
+    on (already written as single plain sentences, verified against the
+    KB's own review discipline) rather than inventing new, separately-
+    maintained copy that could drift out of sync with them - this is a
+    surfacing/framing change, not new astrological content."""
+    bits = []
+    if in_sign and in_sign.get("summary"):
+        bits.append(in_sign["summary"])
+    if in_house and in_house.get("summary"):
+        bits.append(in_house["summary"])
+    if not bits:
+        return None
+    return f"In plain terms: your {planet} in {sign} ({ordinal(house)} house) — " + " ".join(bits)
+
+
 def _planet_reading(chart, planet, warnings):
     detail = chart["planets"][planet]
     sign, house = detail["sign"], detail["house"]
     is_vargottama = detail["vargas"].get("D9") == sign
+    in_sign_entry = _lookup("planet_in_sign", planet_in_sign_id(planet, sign), warnings)
+    in_house_entry = _lookup("planet_in_house", planet_in_house_id(planet, house), warnings)
 
     reading = {
         "sign": sign,
         "house": house,
         "nakshatra": detail["nakshatra"],
         "nakshatra_pada": detail["nakshatra_pada"],
-        "in_sign": _lookup("planet_in_sign", planet_in_sign_id(planet, sign), warnings),
-        "in_house": _lookup("planet_in_house", planet_in_house_id(planet, house), warnings),
+        "in_sign": in_sign_entry,
+        "in_house": in_house_entry,
+        "plain_gloss": _plain_planet_gloss(planet, sign, house, in_sign_entry, in_house_entry),
         "sign_lord_relationship": _sign_lord_relationship(chart, planet, sign, house, warnings),
         "combustion": _combustion_reading(chart, planet, warnings),
         "vargottama": (
@@ -1213,11 +1236,20 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
         # A genuinely simplified reading of the key placement for this area
         # (see _plain_life_gloss) - a plain-language explanation of what the
         # dense classical text above actually means, not a topic description.
-        if area_word and house_nums:
-            gloss = _plain_life_gloss(house_lords, house_nums[0], area_word)
-            if gloss:
-                text = text + "\n\n" + gloss
-        return {"title": title, "houses_considered": list(house_nums), "planets_considered": list(planet_names), "text": text.strip()}
+        # Kept BOTH appended into `text` (so it still shows up in flat-text
+        # renders like Full Reading that just print `text` as one block -
+        # no regression there) AND exposed separately as `plain_gloss`, so a
+        # UI that wants to surface it prominently (e.g. a highlighted "in
+        # short" line ABOVE the dense classical prose, not buried at the
+        # end of a 3000+ character paragraph after it) doesn't have to
+        # parse it back out of the combined string.
+        gloss = _plain_life_gloss(house_lords, house_nums[0], area_word) if area_word and house_nums else ""
+        if gloss:
+            text = text + "\n\n" + gloss
+        return {
+            "title": title, "houses_considered": list(house_nums), "planets_considered": list(planet_names),
+            "text": text.strip(), "plain_gloss": gloss or None,
+        }
 
     predictions = {
         "career_and_profession": area(
@@ -1273,6 +1305,74 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
     }
     predictions["caveat"] = _LIFE_PREDICTIONS_CAVEAT
     return predictions
+
+
+# ---------------------------------------------------------------------------
+# Plain-language "in short" digests for the sections that deliberately report
+# raw indicators with NO combined verdict (Doshas, Relationship Themes,
+# Yogas) - manglik.py's own design philosophy, followed by doshas.py and
+# relationship_themes.py too (see their module docstrings). A reader
+# unfamiliar with the classical framing still deserves an easy answer to
+# "so what am I actually looking at here", so these name what's PRESENT in
+# plain words without ever grading it good/bad or combining it into a
+# verdict - strictly descriptive, matching how a doctor's after-visit
+# summary lists findings without diagnosing a single "score" for the visit.
+# ---------------------------------------------------------------------------
+def _plain_list_summary(present_count, total_count, present_names, topic, absent_note):
+    if present_count == 0:
+        return f"In short: none of these {total_count} {topic} are present in this chart. {absent_note}"
+    names = ", ".join(present_names)
+    return (
+        f"In short: {present_count} of {total_count} {topic} {'is' if present_count == 1 else 'are'} "
+        f"present in this chart — {names}. See below for what each one means; they're reported "
+        f"separately on purpose, not combined into a single verdict."
+    )
+
+
+def _doshas_plain_summary(doshas_reading):
+    indicators = [
+        doshas_reading["pitra"]["rahu_ketu_in_9th"],
+        doshas_reading["pitra"]["sun_conjunct_rahu_ketu"],
+        doshas_reading["pitra"]["ninth_lord_afflicted"],
+        doshas_reading["guru_chandal"],
+        doshas_reading["grahan"]["surya_grahan"],
+        doshas_reading["grahan"]["chandra_grahan"],
+        doshas_reading["shrapit"],
+    ]
+    present = [i["kb"]["title"] for i in indicators if i["present"] and i.get("kb")]
+    return _plain_list_summary(
+        len(present), len(indicators), present, "affliction checks",
+        "That's a common, unremarkable result, not a gap in the chart.",
+    )
+
+
+def _relationship_themes_plain_summary(rel_reading):
+    s = rel_reading["seventh_house_lord"]
+    indicators = [
+        s["in_dusthana"], s["malefic_conjunction"], s["malefic_aspect"],
+        rel_reading["venus_mars"]["conjunction"], rel_reading["venus_mars"]["mutual_aspect"],
+        rel_reading["rahu"]["conjunct_venus"], rel_reading["rahu"]["in_seventh_house"],
+        rel_reading["crowded_seventh_house"], rel_reading["venus_afflicted"],
+    ]
+    present = [i["kb"]["title"] for i in indicators if i["present"] and i.get("kb")]
+    return _plain_list_summary(
+        len(present), len(indicators), present, "indicators",
+        "That's a common, unremarkable result, not a gap in the chart.",
+    )
+
+
+def _yogas_plain_summary(yogas_present):
+    if not yogas_present:
+        return (
+            "In short: none of the 24 classical yogas this app checks are formed in this chart. "
+            "That's common — most charts trigger only a few, if any; it isn't a deficiency."
+        )
+    names = ", ".join(y["name"] for y in yogas_present)
+    return (
+        f"In short: {len(yogas_present)} classical yoga{'s' if len(yogas_present) != 1 else ''} "
+        f"{'are' if len(yogas_present) != 1 else 'is'} present in this chart — {names}. "
+        f"See below for what each one classically means."
+    )
 
 
 def generate_reading(chart):
@@ -1344,7 +1444,10 @@ def generate_reading(chart):
     }
 
     relationship_themes_reading = _relationship_themes_reading(chart, warnings)
+    relationship_themes_reading["plain_summary"] = _relationship_themes_plain_summary(relationship_themes_reading)
     doshas_reading = _doshas_reading(chart, warnings)
+    doshas_reading["plain_summary"] = _doshas_plain_summary(doshas_reading)
+    yogas_present = [y for y in yogas if y["present"]]
 
     return {
         "name": chart.get("name"),
@@ -1355,7 +1458,8 @@ def generate_reading(chart):
         "planets": planets_reading,
         "house_lords": house_lords,
         "yogas": yogas,
-        "yogas_present": [y for y in yogas if y["present"]],
+        "yogas_present": yogas_present,
+        "yogas_plain_summary": _yogas_plain_summary(yogas_present),
         "dasha": dasha,
         "divisional_chart_overviews": divisional_overviews,
         "chara_karakas": karakas,

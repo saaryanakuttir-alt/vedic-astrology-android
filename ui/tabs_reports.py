@@ -107,7 +107,20 @@ class LifePredictionsTab(_BaseReportTab):
             if key == "caveat" or not isinstance(entry, dict):
                 continue
             lines.append(f"\n--- {entry['title']} ---")
-            lines.append(entry["text"] or "(not enough KB data to synthesize this area for this chart)")
+            text = entry["text"] or "(not enough KB data to synthesize this area for this chart)"
+            gloss = entry.get("plain_gloss")
+            if gloss:
+                # Lead with the plain-language reading (rule_engine.py's
+                # _plain_life_gloss) instead of burying it at the end of a
+                # dense, often 2000+ character classical paragraph - `text`
+                # still has it appended too (see rule_engine.py's area()),
+                # so strip that trailing copy here rather than showing it
+                # twice.
+                lines.append(gloss)
+                suffix = "\n\n" + gloss
+                if text.endswith(suffix):
+                    text = text[: -len(suffix)]
+            lines.append(text)
         return "\n".join(lines)
 
 
@@ -130,6 +143,8 @@ class FullReadingTab(_BaseReportTab):
                 lines.append(f"   {detail['in_house'].get('effects') or detail['in_house']['summary']}")
 
         lines.append("\n\n--- Yogas present ---")
+        if r.get("yogas_plain_summary"):
+            lines.append(r["yogas_plain_summary"])
         present = [y for y in r["yogas"] if y["present"]]
         if present:
             for y in present:

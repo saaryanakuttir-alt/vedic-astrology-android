@@ -11,8 +11,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.metrics import dp
 
-from ui.widgets import SimpleTable, CaptionLabel
+from ui.widgets import SimpleTable, CaptionLabel, LongText
 from ui.theme import ThemedCheckBox as CheckBox
+from ui import theme
 from panchanga import SIGNS
 from astrology_tables import ordinal
 
@@ -139,11 +140,25 @@ class PlanetsTab(_BaseTableTab):
         "comfortable the planet is in that sign."
     )
 
+    def __init__(self, store, **kwargs):
+        super().__init__(store, **kwargs)
+        # "What this means" - table above is raw placement data; this is
+        # the plain-language "so what does that actually affect" reading
+        # for each planet, pulled from reading["planets"][p]["plain_gloss"]
+        # (rule_engine.py's _plain_planet_gloss) rather than the chart's
+        # own raw dict the table above reads, which has no interpretive
+        # text at all. LongText (not a table) since this is prose, one
+        # paragraph per planet - already chunk-safe, see widgets.py.
+        self.add_widget(CaptionLabel("What this means for you, planet by planet:"))
+        self.gloss_text = LongText(size_hint_y=0.55)
+        self.add_widget(self.gloss_text)
+
     def refresh(self):
         from astrology_tables import get_dignity
         chart = self.store.current["chart"]
         if chart is None:
             self.table.set_rows([("No chart generated yet.", "", "", "", "", "", "", "", "")])
+            self.gloss_text.set_text("")
             return
         rows = []
         for planet, detail in chart["planets"].items():
@@ -155,6 +170,17 @@ class PlanetsTab(_BaseTableTab):
                 detail["nakshatra"], detail["nakshatra_pada"], dignity,
             ))
         self.table.set_rows(rows)
+
+        reading = self.store.current["reading"]
+        if reading is None:
+            self.gloss_text.set_text("")
+            return
+        glosses = [
+            reading["planets"][p]["plain_gloss"]
+            for p in chart["planets"]
+            if reading["planets"].get(p, {}).get("plain_gloss")
+        ]
+        self.gloss_text.set_text("\n\n".join(glosses))
 
 
 class HousesTab(_BaseTableTab):
@@ -188,6 +214,13 @@ class YogasTab(BoxLayout):
             "'Yogas' are specific planetary combinations that classical texts link to "
             "particular life themes (e.g. leadership, wealth, obstacles) when present."
         ))
+        # Rebuilt fresh each refresh() rather than mutated - same "never
+        # mutate .text on an already-rendered Label" pattern as widgets.py's
+        # LongText/SimpleTable (see LongText's own comment for why this
+        # project specifically avoids that).
+        self.summary_area = BoxLayout(orientation="vertical", size_hint_y=None, height=dp(28))
+        self.add_widget(self.summary_area)
+
         toggle_row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(40))
         self.only_present_check = CheckBox(active=True)
         self.only_present_check.bind(active=lambda *_: self.refresh())
@@ -197,11 +230,22 @@ class YogasTab(BoxLayout):
         self.table = SimpleTable(["ID", "Name", "Present", "Details"], [0.08, 0.22, 0.1, 0.6])
         self.add_widget(self.table)
 
+    def _set_summary(self, text):
+        self.summary_area.clear_widgets()
+        label = Label(text=text, size_hint_y=None, halign="left", valign="middle", bold=True,
+                      color=theme.GOLD_SOFT, text_size=(None, None))
+        label.bind(texture_size=lambda inst, ts: setattr(label, "height", max(dp(28), ts[1] + dp(8))))
+        label.bind(width=lambda inst, w: setattr(label, "text_size", (w, None)))
+        self.summary_area.add_widget(label)
+        self.summary_area.height = label.height
+
     def refresh(self):
         reading = self.store.current["reading"]
         if reading is None:
+            self._set_summary("")
             self.table.set_rows([("", "No chart generated yet.", "", "")])
             return
+        self._set_summary(reading.get("yogas_plain_summary", ""))
         only_present = self.only_present_check.active
         rows = []
         for y in reading["yogas"]:
