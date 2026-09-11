@@ -258,6 +258,7 @@ def _relationship_themes_reading(chart, warnings):
         },
         "crowded_seventh_house": attach(raw["crowded_seventh_house"], "REL-CROWDED-7TH"),
         "venus_afflicted": attach(raw["venus_afflicted"], "REL-VENUS-AFFLICTED"),
+        "marriage_count_tendency": relationship_themes.marriage_count_tendency(chart),
     }
 
 
@@ -473,13 +474,16 @@ def _divisional_chart_overviews(warnings):
 _CHART_DESCRIPTION_PLANET_ORDER = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
 
 # ---------------------------------------------------------------------------
-# Story-mode chart descriptions - the SAME facts as the dense text above
-# (sign, house, dignity), reworded as a short plain-language scene instead
-# of classical terminology. No new astrology, just a second, simpler
-# rendering of data already computed - jargon-free the way you'd explain it
-# to someone who has never read a birth chart before.
+# Plain-language chart explanations - the SAME facts as the dense text above
+# (sign, house, dignity), reworded in everyday language instead of classical
+# terminology. No new astrology, just a second, simpler rendering of data
+# already computed. NOTE: an earlier version of this framed it as a literal
+# "story" (planets as characters walking on stage) - explicit user feedback
+# was that this read as gimmicky, not simpler; what was actually wanted was
+# just clearer, jargon-free wording. Rewritten accordingly - plain
+# explanation, no theatrical framing.
 # ---------------------------------------------------------------------------
-_SIGN_STORY_FLAVOR = {
+_SIGN_PLAIN_FLAVOR = {
     "Aries": "bold and eager to go first",
     "Taurus": "steady, comfort-loving, and patient",
     "Gemini": "curious, chatty, and quick to learn",
@@ -494,44 +498,45 @@ _SIGN_STORY_FLAVOR = {
     "Pisces": "dreamy, compassionate, and imaginative",
 }
 
-_PLANET_STORY_ROLE = {
-    "Sun": "the hero of the story, your core sense of self",
+_PLANET_PLAIN_ROLE = {
+    "Sun": "your core sense of self",
     "Moon": "your inner feelings and what makes you comfortable",
     "Mars": "your drive, courage, and how you take action",
     "Mercury": "your voice, thinking, and how you communicate",
     "Jupiter": "your luck, wisdom, and how you grow",
     "Venus": "love, beauty, and what you enjoy",
-    "Saturn": "the hard lessons, patience, and discipline",
+    "Saturn": "the hard lessons, patience, and discipline in your life",
     "Rahu": "a hunger for something new and unfamiliar",
     "Ketu": "what you're already ready to let go of",
 }
 
-_DIGNITY_STORY_PHRASE = {
-    "exalted": "shining at its very best here",
+_DIGNITY_PLAIN_PHRASE = {
+    "exalted": "at its very best here",
     "own": "right at home here",
     "debilitated": "finding this a bit of a struggle here",
     "neutral": "doing okay here, nothing dramatic",
 }
 
 
-def _chart_story(chart_label, primary_use, asc_sign, planet_placements):
-    """planet_placements: list of (planet, sign, house, dignity). Builds a
-    short narrative retelling of the same D1/varga facts _build_chart_
-    descriptions already assembled, in plain words and story framing."""
-    asc_flavor = _SIGN_STORY_FLAVOR.get(asc_sign, "")
-    opening = f"Picture your {chart_label} as a short scene from your own story."
+def _chart_plain_explanation(chart_label, primary_use, asc_sign, planet_placements):
+    """planet_placements: list of (planet, sign, house, dignity). A plain-
+    language, jargon-free explanation of the same D1/varga facts
+    _build_chart_descriptions already assembled - everyday wording, no
+    classical terms, no theatrical framing (see note above)."""
+    asc_flavor = _SIGN_PLAIN_FLAVOR.get(asc_sign, "")
+    opening = f"In plain terms, this is your {chart_label}"
     if primary_use:
-        opening += f" This particular scene is all about {primary_use}."
-    opening += f" You walk on stage as {asc_sign} rising — {asc_flavor}."
+        opening += f", which is mainly about {primary_use}"
+    opening += f". Your rising sign here is {asc_sign} ({asc_flavor})."
     lines = [opening]
     for planet, sign, house, dignity in planet_placements:
-        role = _PLANET_STORY_ROLE.get(planet, planet)
-        flavor = _SIGN_STORY_FLAVOR.get(sign, "")
-        where = _PLAIN_HOUSE.get(house, "another part of the story")
-        dignity_phrase = _DIGNITY_STORY_PHRASE.get(dignity, "")
-        line = f"Then {planet} enters — {role}. It shows up dressed as {sign} ({flavor}), standing in the part of the story about {where}"
+        role = _PLANET_PLAIN_ROLE.get(planet, planet)
+        flavor = _SIGN_PLAIN_FLAVOR.get(sign, "")
+        where = _PLAIN_HOUSE.get(house, "another part of life")
+        dignity_phrase = _DIGNITY_PLAIN_PHRASE.get(dignity, "")
+        line = f"{planet} ({role}) is in {sign} ({flavor}), showing up mainly in the part of life about {where}"
         if dignity_phrase:
-            line += f", {dignity_phrase}"
+            line += f" - {dignity_phrase}"
         line += "."
         lines.append(line)
     return " ".join(lines)
@@ -580,7 +585,7 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
                        get_dignity(p, chart["planets"][p]["sign"])) for p in _CHART_DESCRIPTION_PLANET_ORDER]
     descriptions["D1"] = {
         "name": "Rasi (main birth chart)", "ascendant_sign": asc_sign, "text": " ".join(bits),
-        "story": _chart_story("main birth chart", None, asc_sign, d1_placements),
+        "plain_explanation": _chart_plain_explanation("main birth chart", None, asc_sign, d1_placements),
     }
 
     for n in DIVISIONAL_VARGAS:
@@ -613,7 +618,7 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
             placements.append((p, p_sign, house, dignity))
         descriptions[key] = {
             "name": name, "ascendant_sign": varga_asc, "text": " ".join(bits),
-            "story": _chart_story(f"{key} ({name}) chart", primary_use, varga_asc, placements),
+            "plain_explanation": _chart_plain_explanation(f"{key} ({name}) chart", primary_use, varga_asc, placements),
         }
 
     return descriptions
@@ -774,13 +779,52 @@ def _plain_life_gloss(house_lords, primary_house, area_word):
             f"your life about {where}, so your {area_word} is closely tied to {where}. {senti}")
 
 
-def _past_life_identity(ketu):
+# Archetypal past-life PROFESSIONS/deeds per house - deliberately plural and
+# archetypal ("a craftsperson, a builder, a guildmaster") rather than one
+# named occupation, since the classical signal here is an ARENA of life
+# (Ketu's house), not a job title - these are illustrative professions that
+# fit that arena, not a literal claim about a specific past occupation.
+_PAST_LIFE_PROFESSION = {
+    1: "a warrior, athlete, or someone whose whole identity was built through sheer physical presence and self-reliance",
+    2: "a merchant, treasurer, singer, or head of a family estate - someone who managed wealth, voice, or lineage",
+    3: "a craftsperson, messenger, scout, or performer - someone who lived by hands-on skill, courage, and initiative",
+    4: "a farmer, homemaker, landowner, or caretaker of a household - someone whose life centered on land, home, and family",
+    5: "a teacher, priest, artist, or advisor to rulers - someone whose gifts were creative, devotional, or intellectual",
+    6: "a soldier, healer, servant, or laborer - someone who lived through discipline, conflict, or care for others in need",
+    7: "a trader, diplomat, matchmaker, or business partner - someone whose life was built through dealing with other people",
+    8: "an occultist, researcher, undertaker, or inheritor of hidden knowledge - someone drawn to what lies beneath the surface",
+    9: "a pilgrim, scholar, judge, or religious teacher - someone whose life revolved around law, faith, or long journeys",
+    10: "a ruler, administrator, or person of public authority - someone whose identity was built through career and status",
+    11: "a guild member, trader's network organizer, or elder sibling managing a large household - someone who worked through community and alliance",
+    12: "a monk, exile, hospital worker, or someone who lived apart from ordinary society - a life of seclusion, service, or foreign lands",
+}
+
+# A short closing flavor, keyed by Atmakaraka (the planet with the highest
+# degree in-sign - Jaimini's significator of the soul's core drive across
+# lifetimes), added as a coda to root WHY that profession/arena mattered to
+# this particular soul, not just which house it was.
+_ATMAKARAKA_PAST_FLAVOR = {
+    "Sun": "and whatever the role, it was carried out in a way that sought recognition, authority, or being seen as the one in charge",
+    "Moon": "and whatever the role, it was carried out with strong emotional investment - care for others, or a deep need to belong",
+    "Mars": "and whatever the role, it was carried out with courage, competitiveness, and a willingness to fight for it",
+    "Mercury": "and whatever the role, it was carried out through cleverness, communication, and adaptability",
+    "Jupiter": "and whatever the role, it was carried out with a sense of purpose, teaching, or moral responsibility",
+    "Venus": "and whatever the role, it was carried out with an eye for beauty, relationship, and pleasure",
+    "Saturn": "and whatever the role, it was carried out through hard, patient, often thankless labor over a long stretch of time",
+}
+
+
+def _past_life_identity(ketu, atmakaraka=None):
     """From Ketu's house (the arena the past life centered on) and the
     element of Ketu's sign (its temperament), sketch WHAT the native may
-    have been — a symbolic arena + temperament, never a literal identity."""
+    have been — a symbolic arena + temperament + illustrative profession,
+    never a literal identity. atmakaraka (optional, from chara_karaka.py's
+    already-computed ranking) adds a short closing flavor on HOW that role
+    was carried out, rooted in the soul's core drive across lifetimes."""
     arena = _KETU_HOUSE_PAST_ARENA.get(ketu["house"], "an arena not cleanly captured by a single house theme")
     element = _SIGN_ELEMENT.get(ketu["sign"], None)
     nature = _ELEMENT_PAST_NATURE.get(element, "") if element else ""
+    profession = _PAST_LIFE_PROFESSION.get(ketu["house"])
     summary = (
         f"With Ketu in {ketu['sign']} (house {ketu['house']}, {ketu['nakshatra']} nakshatra), the "
         f"strongest past-life imprint points to {arena}"
@@ -795,7 +839,17 @@ def _past_life_identity(ketu):
         "life pulls in the opposite direction (see the main karmic goal below), toward the house "
         "and sign Rahu occupies."
     )
-    return {"house": ketu["house"], "sign": ketu["sign"], "summary": summary, "detail": detail}
+    profession_text = None
+    if profession:
+        profession_text = f"In that kind of life, you may have been {profession}."
+        atmakaraka_planet = atmakaraka.get("planet") if atmakaraka else None
+        flavor = _ATMAKARAKA_PAST_FLAVOR.get(atmakaraka_planet)
+        if flavor:
+            profession_text += f" Your Atmakaraka is {atmakaraka_planet}, {flavor}."
+    return {
+        "house": ketu["house"], "sign": ketu["sign"], "summary": summary, "detail": detail,
+        "profession": profession_text,
+    }
 
 
 def _karmic_actions(ketu, saturn, purva_punya):
@@ -1064,15 +1118,18 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     # --- Past-life identity, the actions that led here, and this life's
     #     main karmic goal (the three things the user specifically asked to
     #     see spelled out) ---
-    past_life = _past_life_identity(ketu)
+    past_life = _past_life_identity(ketu, atmakaraka)
     karmic_actions = _karmic_actions(ketu, saturn, purva_punya)
     main_karmic_goal = _karmic_goal_statement(rahu, atmakaraka, dharma)
 
     ketu_where = _PLAIN_HOUSE.get(ketu["house"], "a familiar part of life")
     rahu_where = _PLAIN_HOUSE.get(rahu["house"], "a new part of life")
+    past_life_text = past_life["summary"] + " " + past_life["detail"]
+    if past_life.get("profession"):
+        past_life_text += " " + past_life["profession"]
     paragraphs.append(
         "--- What you may have been (past-life imprint) ---\n"
-        + past_life["summary"] + " " + past_life["detail"]
+        + past_life_text
         + f"\n\nIn simple terms: you seem to have come into this life already comfortable with "
         f"{ketu_where}. It feels natural, even over-familiar - so it's a strength you can lean "
         f"on, but not where your growth is meant to happen this time."
@@ -1551,6 +1608,34 @@ _HOUSE_BODY_PART = {
     12: "the feet and the immune system",
 }
 
+# Ayurvedic constitution (Prakriti) by element - Jyotish and Ayurveda share
+# the same classical roots, and this is the standard bridge between them:
+# Fire signs -> Pitta, Earth -> Kapha, Air -> Vata, Water -> a Kapha/Vata
+# blend (some sources call water purely Kapha; the blend is the more widely
+# cited version and is flagged as such below rather than asserted flatly).
+_ELEMENT_DOSHA = {
+    "Fire": ("Pitta", "a fire-driven constitution - sharp digestion, strong drive, and a tendency "
+                       "toward heat, inflammation, or irritability when out of balance"),
+    "Earth": ("Kapha", "an earth-driven constitution - steady, well-built, and resilient, with a "
+                        "tendency toward sluggishness, weight gain, or congestion when out of balance"),
+    "Air": ("Vata", "an air-driven constitution - quick, light, and creative, with a tendency toward "
+                     "anxiety, dryness, or irregular digestion/sleep when out of balance"),
+    "Water": ("Kapha-Vata", "a water-driven constitution (sources vary between calling this Kapha or "
+                              "a Kapha-Vata blend) - emotionally sensitive and fluid-retentive, with a "
+                              "tendency toward congestion or emotional overwhelm when out of balance"),
+}
+
+_DOSHA_BALANCE_TIP = {
+    "Pitta": "Pitta-leaning constitutions are classically said to benefit from cooling foods, "
+             "moderation in heat/spice, and avoiding overexertion - general wellness framing, not a diet plan.",
+    "Kapha": "Kapha-leaning constitutions are classically said to benefit from regular movement, "
+             "lighter meals, and avoiding excess rest - general wellness framing, not a diet plan.",
+    "Vata": "Vata-leaning constitutions are classically said to benefit from routine, warmth, and "
+            "grounding habits - general wellness framing, not a diet plan.",
+    "Kapha-Vata": "This blended constitution is classically said to benefit from both routine/warmth "
+                  "(Vata) and regular movement (Kapha) - general wellness framing, not a diet plan.",
+}
+
 
 def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     birth_utc = _dt.datetime.fromisoformat(chart["resolved_datetime"]["utc"])
@@ -1583,6 +1668,22 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     first = house_lords[1]
     first_dignity = get_dignity(first["lord"], first["lord_sign"])
     ascendant_lord_text = _hl_text(house_lords, 1) or ""
+
+    # --- Ayurvedic constitution (Prakriti): Ascendant element = primary
+    #     (the body's baseline constitution), Moon element = secondary (the
+    #     mind's own temperament) - the standard Jyotish-Ayurveda bridge. ---
+    asc_element = _SIGN_ELEMENT.get(chart["ascendant"]["sign"])
+    moon_element = _SIGN_ELEMENT.get(planets["Moon"]["sign"])
+    primary_dosha = _ELEMENT_DOSHA.get(asc_element)
+    secondary_dosha = _ELEMENT_DOSHA.get(moon_element)
+    dosha = None
+    if primary_dosha:
+        dosha = {
+            "primary": primary_dosha[0], "primary_description": primary_dosha[1],
+            "secondary": secondary_dosha[0] if secondary_dosha else None,
+            "secondary_description": secondary_dosha[1] if secondary_dosha else None,
+            "balance_tip": _DOSHA_BALANCE_TIP.get(primary_dosha[0], ""),
+        }
 
     # --- Moon: mind and emotional wellbeing, read separately from the
     #     body-area table above since Jyotish/Ayurveda both treat mental
@@ -1648,6 +1749,13 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
             })
 
     text_bits = [_MEDICAL_OVERVIEW]
+    if dosha:
+        dosha_line = f"Ayurvedic constitution (Prakriti): primarily {dosha['primary']} - {dosha['primary_description']}."
+        if dosha["secondary"] and dosha["secondary"] != dosha["primary"]:
+            dosha_line += f" Your Moon adds a {dosha['secondary']} flavor - {dosha['secondary_description']}."
+        if dosha["balance_tip"]:
+            dosha_line += f" {dosha['balance_tip']}"
+        text_bits.append(dosha_line)
     text_bits.append(f"Ascendant lord (overall vitality): {ascendant_lord_text}" if ascendant_lord_text else
                       f"Ascendant lord {first['lord']} (overall vitality) is {first_dignity} in {first['lord_sign']}.")
     text_bits.append(moon_text)
@@ -1689,6 +1797,7 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     return {
         "title": "Medical Astrology",
         "overview": _MEDICAL_OVERVIEW,
+        "dosha": dosha,
         "ascendant_lord": first["lord"], "ascendant_lord_sign": first["lord_sign"],
         "ascendant_lord_dignity": first_dignity,
         "moon_sign": moon_detail["sign"], "moon_house": moon_detail["house"], "moon_dignity": moon_dignity,
@@ -1833,6 +1942,69 @@ def _doshas_plain_summary(doshas_reading):
     )
 
 
+def _relationship_deep_discussion(rel_reading, karmic_and_past_life):
+    """A single, detailed narrative combining every relationship_themes
+    indicator's own KB text with the marriage-count tendency and a karmic
+    read on WHY relationships take the shape they do for this person. Still
+    describes only the NATIVE's own chart - never a partner, and never
+    naming or implying infidelity (relationship_themes.py's own docstring
+    explains why that word is deliberately avoided throughout this app)."""
+    s = rel_reading["seventh_house_lord"]
+    present_texts = []
+    for indicator in (
+        s["in_dusthana"], s["malefic_conjunction"], s["malefic_aspect"],
+        rel_reading["venus_mars"]["conjunction"], rel_reading["venus_mars"]["mutual_aspect"],
+        rel_reading["rahu"]["conjunct_venus"], rel_reading["rahu"]["in_seventh_house"],
+        rel_reading["crowded_seventh_house"], rel_reading["venus_afflicted"],
+    ):
+        if indicator.get("present") and indicator.get("kb"):
+            text = indicator["kb"].get("effects") or indicator["kb"].get("summary")
+            if text:
+                present_texts.append(text)
+
+    bits = []
+    mct = rel_reading.get("marriage_count_tendency")
+    if mct:
+        bits.append(
+            "On how many significant relationships or marriages this chart tends toward: this "
+            f"reading leans toward {mct['tendency']}."
+            + (" Specifically: " + " ".join(mct["indicators"]) if mct["indicators"] else
+               " No strong classical multiplicity indicators (a dual-sign 7th lord, a crowded 7th "
+               "house, Rahu/Ketu sharing a house with the 7th lord, or Venus in a dual sign) are "
+               "present here.")
+        )
+
+    if present_texts:
+        bits.append(
+            "On commitment and exclusivity themes specifically - read only as tendencies in this "
+            "person's OWN chart, never as evidence about a partner (see the caveat above): "
+            + " ".join(present_texts)
+        )
+    else:
+        bits.append(
+            "None of this chart's checked commitment/exclusivity indicators (7th-lord affliction, "
+            "Venus-Mars combinations, Rahu on Venus or the 7th house, a crowded 7th house, or an "
+            "afflicted Venus) are present here - a common, unremarkable result, not a gap."
+        )
+
+    dk = (karmic_and_past_life or {}).get("darakaraka")
+    if dk and (dk.get("in_house_effects") or dk.get("in_sign_effects")):
+        bits.append(
+            f"Why relationships may take the shape they do (a karmic lens): the Darakaraka - "
+            f"Jaimini's significator of the spouse or life partner - is {dk['planet']} in "
+            f"{dk['sign']}, house {dk['house']}. Classically, the Darakaraka describes the KIND of "
+            "partner and partnership this soul is karmically drawn toward, prior to comparing "
+            "charts with anyone specific. " + (dk.get("in_sign_effects") or "")
+        )
+
+    bits.append(
+        "None of the above says anything about what a real partner has done, will do, or is like - "
+        "it describes tendencies in this person's OWN chart only, and free will always matters more "
+        "than any single placement."
+    )
+    return " ".join(bits)
+
+
 def _relationship_themes_plain_summary(rel_reading):
     s = rel_reading["seventh_house_lord"]
     indicators = [
@@ -1892,8 +2064,9 @@ def generate_reading(chart):
           "yogas_present": [...same, filtered to present == True...],
           "dasha": {"running_at_birth": {...}, "timeline": [...]},
           "divisional_chart_overviews": {"D2": {...KB DIV-D2...}, ...},  # generic "what this varga is for"
-          "chart_descriptions": {"D1": {"name", "ascendant_sign", "text", "story"}, "D2": {...}, ...},  # THIS
-                                # person's own placements in each chart (text = dense, story = plain-language)
+          "chart_descriptions": {"D1": {"name", "ascendant_sign", "text", "plain_explanation"}, "D2": {...}, ...},
+                                # THIS person's own placements in each chart (text = dense classical,
+                                # plain_explanation = same facts in everyday language)
           "medical_astrology": {"title", "sixth_house_lord", "eighth_house_lord", "body_areas": [...],
                                  "age_windows": [...], "text", "caveat"},
           "chara_karakas": [ {rank, karaka, abbr, domain, planet, ...}, ... ],  # 7, see chara_karaka.py
@@ -1901,7 +2074,7 @@ def generate_reading(chart):
                                     "ketu": {...}, "rahu": {...}, "saturn": {...},
                                     "purva_punya_house_5": {...}, "dharma_house_9": {...},
                                     "moksha_house_12": {...},
-                                    "past_life_identity": {"house", "sign", "summary", "detail"},
+                                    "past_life_identity": {"house", "sign", "summary", "detail", "profession"},
                                     "karmic_actions": "... (past actions that led here)",
                                     "main_karmic_goal": "... (this life's central karmic goal)",
                                     "soul_narrative": "... (long-form, includes the three above)",
@@ -1957,6 +2130,9 @@ def generate_reading(chart):
 
     relationship_themes_reading = _relationship_themes_reading(chart, warnings)
     relationship_themes_reading["plain_summary"] = _relationship_themes_plain_summary(relationship_themes_reading)
+    relationship_themes_reading["deep_discussion"] = _relationship_deep_discussion(
+        relationship_themes_reading, karmic_and_past_life
+    )
     doshas_reading = _doshas_reading(chart, warnings)
     doshas_reading["plain_summary"] = _doshas_plain_summary(doshas_reading)
     yogas_present = [y for y in yogas if y["present"]]

@@ -95,6 +95,19 @@ _MUNTHA_HOUSE_THEME = {
 }
 
 
+def age_for_date(chart, target_dt):
+    """Whole-number age this person is (or will be) on target_dt - used by
+    the combined Predictions UI to look up the matching entry in an
+    already-computed years[] list (compute_life_timeline's output) for
+    whatever specific date the user picks, without recomputing anything."""
+    birth_utc = _naive(_dt.datetime.fromisoformat(chart["resolved_datetime"]["utc"]))
+    target = _naive(target_dt)
+    age = target.year - birth_utc.year
+    if (target.month, target.day) < (birth_utc.month, birth_utc.day):
+        age -= 1
+    return max(0, age)
+
+
 def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
     """chart: from birth_chart.compute_birth_chart(). dasha_readings: the
     "dasha" dict rule_engine.generate_reading() already built (its
@@ -103,10 +116,11 @@ def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
     antardasha summary text the Dasha tab shows, not a fresh lookup).
 
     Returns {"years": [ {age, calendar_year, mahadasha_lord,
-    antardasha_lord, pratyantardasha_lord, houses_activated, muntha_sign,
-    muntha_theme, note}, ... ], "caveat": CAVEAT}.
+    antardasha_lord, pratyantardasha_lord, houses_activated, leaning,
+    muntha_sign, muntha_theme, note}, ... ], "caveat": CAVEAT}.
     """
-    from rule_engine import _PLAIN_HOUSE  # module-level import would be circular: rule_engine imports this module
+    # module-level import would be circular (rule_engine imports this module)
+    from rule_engine import _PLAIN_HOUSE, _STRONG_HOUSES, _WEAK_HOUSES
 
     # dasha.py's own timeline stores naive UTC datetimes (see dasha.py) while
     # chart["resolved_datetime"]["utc"] is an ISO string WITH a +00:00
@@ -135,28 +149,47 @@ def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
             continue  # past the computed timeline's horizon (dasha.py's own years_forward)
 
         maha_lord, antar_lord = running["mahadasha_lord"], running["antardasha_lord"]
+        pratyantar_lord = running.get("pratyantardasha_lord")
         houses_activated = sorted(set(_houses_ruled_by(maha_lord, houses)) | set(_houses_ruled_by(antar_lord, houses)))
-        from rule_engine import _PLAIN_HOUSE  # local import: avoids a circular import at module load
         house_themes = [_PLAIN_HOUSE[h] for h in houses_activated if h in _PLAIN_HOUSE]
+        # Whether the houses this year's rulers govern lean classically
+        # supportive (kendra/trikona) or effortful (dusthana) - the same
+        # _STRONG_HOUSES/_WEAK_HOUSES classification _plain_life_gloss
+        # already uses elsewhere, reused here for a genuine "is this an
+        # easier or harder year" signal rather than just naming the houses.
+        strong_hit = [h for h in houses_activated if h in _STRONG_HOUSES]
+        weak_hit = [h for h in houses_activated if h in _WEAK_HOUSES]
+        if strong_hit and not weak_hit:
+            leaning = "a classically supportive, easier-going stretch overall"
+        elif weak_hit and not strong_hit:
+            leaning = "a classically more effortful stretch - progress is still possible, just with more friction"
+        elif strong_hit and weak_hit:
+            leaning = "a mixed stretch - real support in some areas, real friction in others"
+        else:
+            leaning = "a fairly neutral, workable stretch"
 
         muntha_sign = SIGNS[(natal_asc_index + (age % 12)) % 12]
         muntha_theme = _MUNTHA_HOUSE_THEME.get((age % 12) + 1, "")
 
         antar_reading = antar_reading_by_pair.get((maha_lord, antar_lord))
         antar_gist = (antar_reading.get("summary") if antar_reading else None) or ""
+        antar_detail = (antar_reading.get("effects") if antar_reading else None) or ""
 
         note_bits = [
             f"Age {age} (around {birthday.year}) runs under your {maha_lord} Mahadasha / "
-            f"{antar_lord} Antardasha."
+            f"{antar_lord} Antardasha"
+            + (f" / {pratyantar_lord} Pratyantardasha" if pratyantar_lord else "") + "."
         ]
         if house_themes:
             note_bits.append(
                 f"{antar_lord} and {maha_lord} between them rule house"
                 + ("s " if len(houses_activated) != 1 else " ")
                 + ", ".join(str(h) for h in houses_activated)
-                + f" - so this year leans toward themes of {', and '.join(house_themes)}."
+                + f" - so this year leans toward themes of {', and '.join(house_themes)}, overall {leaning}."
             )
-        if antar_gist:
+        if antar_detail:
+            note_bits.append(antar_detail)
+        elif antar_gist:
             note_bits.append(antar_gist)
         note_bits.append(
             f"Muntha (the progressed Ascendant) falls in {muntha_sign} this year, adding a secondary "
@@ -168,8 +201,9 @@ def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
             "calendar_year": birthday.year,
             "mahadasha_lord": maha_lord,
             "antardasha_lord": antar_lord,
-            "pratyantardasha_lord": running.get("pratyantardasha_lord"),
+            "pratyantardasha_lord": pratyantar_lord,
             "houses_activated": houses_activated,
+            "leaning": leaning,
             "muntha_sign": muntha_sign,
             "muntha_theme": muntha_theme,
             "note": " ".join(note_bits),

@@ -44,6 +44,79 @@ RELATIONSHIP_CAVEAT = (
 )
 
 
+# Dual (mutable) signs - classically the multiplicity/duality signs.
+# Duplicated here rather than imported from divisional.py (which defines
+# the same set for a different purpose) since this is the only place in
+# this module that needs it - not worth a cross-module import for one set.
+_DUAL_SIGNS = {"Gemini", "Virgo", "Sagittarius", "Pisces"}
+
+
+def marriage_count_tendency(chart):
+    """A descriptive TENDENCY (never an exact count - no classical method
+    fixes one from a natal chart alone, the same honesty-over-false-
+    precision approach this project uses for Longevity and Children) for
+    whether this chart's classical multiple-relationship indicators lean
+    toward a single steady partnership or toward more complexity/
+    multiplicity. Uses: the 7th lord's sign (dual vs. fixed/movable), how
+    many planets share the 7th house, whether the 7th lord sits with
+    Rahu/Ketu, and Venus's sign - all standard classical multiplicity
+    markers, combined into ONE band rather than a fabricated digit."""
+    planets = chart["planets"]
+    houses = chart["houses"]
+    seventh_sign = houses[7]
+    seventh_lord = SIGN_LORD[seventh_sign]
+    seventh_lord_sign = planets[seventh_lord]["sign"]
+    seventh_lord_house = planets[seventh_lord]["house"]
+    seventh_house_occupants = [p for p, d in planets.items() if d["house"] == 7]
+
+    indicators = []
+    score = 0
+    if seventh_lord_sign in _DUAL_SIGNS:
+        indicators.append(
+            f"{seventh_lord} (7th lord) sits in {seventh_lord_sign}, a dual sign - classically "
+            "associated with more than one significant relationship theme."
+        )
+        score += 1
+    if len(seventh_house_occupants) >= 2:
+        indicators.append(
+            f"{len(seventh_house_occupants)} planets share the 7th house "
+            f"({', '.join(seventh_house_occupants)}) - classically read as more activity or "
+            "complexity around partnership."
+        )
+        score += 1
+    rahu_house = planets["Rahu"]["house"]
+    ketu_house = planets["Ketu"]["house"]
+    if seventh_lord_house in (rahu_house, ketu_house):
+        axis_planet = "Rahu" if seventh_lord_house == rahu_house else "Ketu"
+        indicators.append(
+            f"{seventh_lord} (7th lord) shares a house with {axis_planet} - a classical marker of "
+            "an unconventional or non-linear relationship path."
+        )
+        score += 1
+    venus_sign = planets["Venus"]["sign"]
+    if venus_sign in _DUAL_SIGNS:
+        indicators.append(f"Venus sits in {venus_sign}, a dual sign - another classical multiplicity marker.")
+        score += 1
+
+    if score >= 3:
+        tendency = "real complexity here - more than one significant relationship across life is a plausible reading"
+    elif score >= 1:
+        tendency = "some complexity, but nothing overwhelming - a mix of steadiness and change is more likely than either extreme"
+    else:
+        tendency = "a single, steady partnership rather than multiplicity"
+
+    return {
+        "seventh_lord": seventh_lord, "seventh_lord_sign": seventh_lord_sign,
+        "indicators": indicators, "score": score, "tendency": tendency,
+        "caveat": (
+            "This is a TENDENCY, not a count - no classical method fixes an exact number of "
+            "marriages or relationships from a natal chart alone. It also says nothing about a "
+            "partner's behavior or fidelity - only about complexity/multiplicity themes in the "
+            "native's own chart."
+        ),
+    }
+
+
 def _house_planets(chart):
     by_house = {h: [] for h in range(1, 13)}
     for planet, detail in chart["planets"].items():
