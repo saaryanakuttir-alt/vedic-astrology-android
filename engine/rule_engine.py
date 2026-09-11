@@ -470,6 +470,52 @@ def _divisional_chart_overviews(warnings):
     return {f"D{n}": _lookup("divisional_charts", divisional_chart_id(n), warnings) for n in DIVISIONAL_VARGAS}
 
 
+_CHART_DESCRIPTION_PLANET_ORDER = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
+
+
+def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
+    """Per-PERSON synthesis for D1 and every computed varga: THIS chart's own
+    Ascendant sign plus where each of the 9 planets actually sits in it
+    (sign + house counted from that varga's OWN Ascendant, whole-sign style -
+    the standard way divisional-chart houses are read). This is deliberately
+    separate from divisional_chart_overviews above, which is a generic "what
+    this varga chart is FOR" blurb (same for everyone) - this function
+    describes what THIS person's own chart looks like in it."""
+    from panchanga import SIGNS as _SIGNS
+
+    def house_from(asc_sign, planet_sign):
+        return (_SIGNS.index(planet_sign) - _SIGNS.index(asc_sign)) % 12 + 1
+
+    descriptions = {}
+
+    # D1 - the main Rasi chart itself, not a derived varga (not in
+    # DIVISIONAL_VARGAS), built straight from chart["ascendant"]/["planets"].
+    asc_sign = chart["ascendant"]["sign"]
+    bits = [f"Your Ascendant (Lagna) is {asc_sign}."]
+    for p in _CHART_DESCRIPTION_PLANET_ORDER:
+        detail = chart["planets"][p]
+        bits.append(f"{p} is in {detail['sign']}, your {ordinal(detail['house'])} house.")
+    descriptions["D1"] = {"name": "Rasi (main birth chart)", "ascendant_sign": asc_sign, "text": " ".join(bits)}
+
+    for n in DIVISIONAL_VARGAS:
+        key = f"D{n}"
+        varga_asc = chart["ascendant"]["vargas"].get(key)
+        if varga_asc is None:
+            continue
+        name = (divisional_overviews.get(key) or {}).get("name", key)
+        bits = [f"In your {key} ({name}) chart, your Ascendant falls in {varga_asc}."]
+        for p in _CHART_DESCRIPTION_PLANET_ORDER:
+            varga_entry = planets_reading[p]["vargas"].get(key)
+            if not varga_entry:
+                continue
+            p_sign = varga_entry["sign"]
+            house = house_from(varga_asc, p_sign)
+            bits.append(f"{p} sits in {p_sign}, your {ordinal(house)} house in this chart.")
+        descriptions[key] = {"name": name, "ascendant_sign": varga_asc, "text": " ".join(bits)}
+
+    return descriptions
+
+
 # ---------------------------------------------------------------------------
 # Karmic & Past-Life section
 # ---------------------------------------------------------------------------
@@ -1252,6 +1298,91 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
     }
 
 
+# ---------------------------------------------------------------------------
+# Children / Progeny prospects - deliberately DESCRIPTIVE, never a count or a
+# gender. Two reasons, stated openly rather than silently designed around:
+# (1) classical texts disagree on the counting methods (Jupiter's own house
+# from the Ascendant/Moon, the 5th-from-5th chain, D7 Saptamsha rules, etc.
+# routinely give different numbers for the same chart - there is no single
+# settled classical answer to reproduce), and (2) astrology-driven gender
+# prediction/preference is a real, serious harm in many cultural contexts
+# (India's own sex-selective-abortion history being the sharpest example) -
+# not a feature this app will build regardless of what any single classical
+# method claims to offer. What's below instead: the 5th house and its lord,
+# Jupiter (classical children-karaka), and the Putrakaraka (Jaimini's own
+# children-significator, already computed in chara_karaka.py) - read only
+# for qualitative THEMES (ease vs. effort, nurturing vs. independent), the
+# same "raw indicators, no combined verdict" approach this project already
+# uses for Doshas/Relationship Themes (see those modules' docstrings).
+# ---------------------------------------------------------------------------
+_CHILDREN_CAVEAT = (
+    "Classical methods for judging the NUMBER of children, or their gender, vary widely across texts "
+    "and routinely disagree with each other even for the same chart - there is no single settled "
+    "classical answer this app could faithfully reproduce. Astrology-driven gender prediction also "
+    "carries real, serious harms in many cultural contexts. For both reasons, this app deliberately "
+    "does not estimate a count or a gender here - only the qualitative themes below, drawn from the "
+    "5th house, its lord, Jupiter (the classical significator of children), and the Putrakaraka "
+    "(Jaimini's own children-significator). Read these as general TENDENCIES, not a verdict."
+)
+
+
+def _build_children_prospects(chart, planets_reading, house_lords, karakas):
+    hl5 = house_lords[5]
+    lord_dignity = get_dignity(hl5["lord"], hl5["lord_sign"])
+    jupiter_sign = planets_reading["Jupiter"]["sign"]
+    jupiter_dignity = get_dignity("Jupiter", jupiter_sign)
+    pk = chara_karaka.get_karaka(karakas, "PK")
+    fifth_house_occupants = [p for p, d in chart["planets"].items() if d["house"] == 5]
+    benefics_in_5th = [p for p in fifth_house_occupants if p in _BENEFICS]
+    malefics_in_5th = [p for p in fifth_house_occupants if p in _MALEFICS]
+
+    bits = [
+        f"The 5th house (children) is ruled by {hl5['lord']}, sitting in {hl5['lord_sign']} in your "
+        f"{ordinal(hl5['placed_in_house'])} house - classically {lord_dignity} there.",
+        f"Jupiter, the traditional significator of children, is {jupiter_dignity} in {jupiter_sign}.",
+        f"The Putrakaraka (Jaimini's own children-significator) is {pk['planet']}, in "
+        f"{planets_reading[pk['planet']]['sign']}.",
+    ]
+    if benefics_in_5th:
+        bits.append(
+            f"{', '.join(benefics_in_5th)} sitting directly in the 5th house is classically supportive "
+            "for warmth, nurturing, and relative ease in this area of life."
+        )
+    if malefics_in_5th:
+        bits.append(
+            f"{', '.join(malefics_in_5th)} in the 5th house classically suggests this area may call for "
+            "more patience, care, or deliberate effort - not a denial, just a theme worth attention."
+        )
+
+    ease_score = (
+        (1 if lord_dignity in ("exalted", "own") else -1 if lord_dignity == "debilitated" else 0)
+        + (1 if jupiter_dignity in ("exalted", "own") else -1 if jupiter_dignity == "debilitated" else 0)
+        + len(benefics_in_5th) - len(malefics_in_5th)
+    )
+    if ease_score >= 2:
+        theme = "Overall this area of the chart leans comfortable and supported."
+    elif ease_score <= -1:
+        theme = "Overall this area of the chart suggests more effort, patience, or timing sensitivity than ease."
+    else:
+        theme = "Overall this area of the chart is mixed - neither strongly eased nor strongly challenged."
+    bits.append(theme)
+    bits.append(_CHILDREN_CAVEAT)
+
+    return {
+        "title": "Children",
+        "fifth_house_lord": hl5["lord"],
+        "fifth_house_lord_sign": hl5["lord_sign"],
+        "fifth_house_lord_dignity": lord_dignity,
+        "jupiter_sign": jupiter_sign,
+        "jupiter_dignity": jupiter_dignity,
+        "putrakaraka": pk["planet"],
+        "benefics_in_5th_house": benefics_in_5th,
+        "malefics_in_5th_house": malefics_in_5th,
+        "text": " ".join(bits),
+        "caveat": _CHILDREN_CAVEAT,
+    }
+
+
 def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, karakas):
     running = dasha["running_at_birth"]
     dasha_note = ""
@@ -1328,16 +1459,7 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
             area_word="education and learning"),
         "family_and_home": area("Family & Home", [2, 4], ["Moon"],
             area_word="home and family"),
-        "children": area(
-            "Children",
-            [5], ["Jupiter"],
-            closing=(
-                f"The Putrakaraka (Jaimini's children significator) is "
-                f"{chara_karaka.get_karaka(karakas, 'PK')['planet']}, in "
-                f"{planets_reading[chara_karaka.get_karaka(karakas, 'PK')['planet']]['sign']}."
-            ),
-            area_word="children",
-        ),
+        "children": _build_children_prospects(chart, planets_reading, house_lords, karakas),
         "spirituality_and_inner_growth": area("Spirituality & Inner Growth", [9, 12], ["Jupiter", "Ketu"],
             area_word="spiritual life"),
         "travel_and_foreign_connections": area("Travel & Foreign Connections", [3, 9, 12], [],
@@ -1447,7 +1569,9 @@ def generate_reading(chart):
           "yogas": [{id, name, present, details, kb_entry}, ...],   # all 24
           "yogas_present": [...same, filtered to present == True...],
           "dasha": {"running_at_birth": {...}, "timeline": [...]},
-          "divisional_chart_overviews": {"D2": {...KB DIV-D2...}, ...},
+          "divisional_chart_overviews": {"D2": {...KB DIV-D2...}, ...},  # generic "what this varga is for"
+          "chart_descriptions": {"D1": {"name", "ascendant_sign", "text"}, "D2": {...}, ...},  # THIS person's
+                                # own placements in each chart, D1 + every DIVISIONAL_VARGAS entry
           "chara_karakas": [ {rank, karaka, abbr, domain, planet, ...}, ... ],  # 7, see chara_karaka.py
           "karmic_and_past_life": {"atmakaraka": {...}, "darakaraka": {...}, "putrakaraka": {...},
                                     "ketu": {...}, "rahu": {...}, "saturn": {...},
@@ -1483,6 +1607,7 @@ def generate_reading(chart):
     yogas = _yoga_readings(chart, warnings)
     dasha = _dasha_readings(chart, warnings)
     divisional_overviews = _divisional_chart_overviews(warnings)
+    chart_descriptions = _build_chart_descriptions(chart, planets_reading, divisional_overviews)
     karakas = _compute_chara_karakas(chart)
     karmic_and_past_life = _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas)
     life_predictions = _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, karakas)
@@ -1530,6 +1655,7 @@ def generate_reading(chart):
         "yogas_plain_summary": _yogas_plain_summary(yogas_present),
         "dasha": dasha,
         "divisional_chart_overviews": divisional_overviews,
+        "chart_descriptions": chart_descriptions,
         "chara_karakas": karakas,
         "karmic_and_past_life": karmic_and_past_life,
         "life_predictions": life_predictions,
