@@ -475,12 +475,17 @@ _CHART_DESCRIPTION_PLANET_ORDER = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", 
 
 def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
     """Per-PERSON synthesis for D1 and every computed varga: THIS chart's own
-    Ascendant sign plus where each of the 9 planets actually sits in it
-    (sign + house counted from that varga's OWN Ascendant, whole-sign style -
-    the standard way divisional-chart houses are read). This is deliberately
-    separate from divisional_chart_overviews above, which is a generic "what
-    this varga chart is FOR" blurb (same for everyone) - this function
-    describes what THIS person's own chart looks like in it."""
+    Ascendant sign, what the chart is classically used for, and for each of
+    the 9 planets - its sign, house (counted from that varga's OWN
+    Ascendant, whole-sign style), classical DIGNITY there, and a one-line
+    interpretive gist pulled from the already-verified KB entry for that
+    exact planet/sign/varga combination (divisional_D{n}_planet_in_sign.json,
+    already looked up once into planets_reading[p]["vargas"][key]["reading"]
+    by _planet_reading above - not a fresh lookup, just finally USING data
+    this app already computes but wasn't surfacing here). This is separate
+    from divisional_chart_overviews, which is a generic "what this varga
+    chart is FOR" blurb (same for everyone) - this function describes what
+    THIS person's own chart looks like in it, in more than just placement."""
     from panchanga import SIGNS as _SIGNS
 
     def house_from(asc_sign, planet_sign):
@@ -489,12 +494,24 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
     descriptions = {}
 
     # D1 - the main Rasi chart itself, not a derived varga (not in
-    # DIVISIONAL_VARGAS), built straight from chart["ascendant"]/["planets"].
+    # DIVISIONAL_VARGAS), built straight from chart["ascendant"]/["planets"]
+    # plus the base in_sign/in_house KB readings already in planets_reading.
     asc_sign = chart["ascendant"]["sign"]
-    bits = [f"Your Ascendant (Lagna) is {asc_sign}."]
+    bits = [f"Your Ascendant (Lagna) is {asc_sign} - this is your main birth chart, the foundation "
+            f"every other divisional chart below refines."]
     for p in _CHART_DESCRIPTION_PLANET_ORDER:
         detail = chart["planets"][p]
-        bits.append(f"{p} is in {detail['sign']}, your {ordinal(detail['house'])} house.")
+        pr = planets_reading[p]
+        dignity = get_dignity(p, detail["sign"])
+        gist_bits = []
+        for entry in (pr.get("in_sign"), pr.get("in_house")):
+            if entry and entry.get("summary"):
+                gist_bits.append(entry["summary"])
+        gist = " ".join(gist_bits)
+        line = f"{p} is in {detail['sign']}, your {ordinal(detail['house'])} house - {dignity} here."
+        if gist:
+            line += f" {gist}"
+        bits.append(line)
     descriptions["D1"] = {"name": "Rasi (main birth chart)", "ascendant_sign": asc_sign, "text": " ".join(bits)}
 
     for n in DIVISIONAL_VARGAS:
@@ -502,15 +519,27 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
         varga_asc = chart["ascendant"]["vargas"].get(key)
         if varga_asc is None:
             continue
-        name = (divisional_overviews.get(key) or {}).get("name", key)
-        bits = [f"In your {key} ({name}) chart, your Ascendant falls in {varga_asc}."]
+        overview = divisional_overviews.get(key) or {}
+        name = overview.get("name", key)
+        primary_use = overview.get("primary_use")
+        intro = f"In your {key} ({name}) chart"
+        if primary_use:
+            intro += f" - classically used for {primary_use}"
+        intro += f", your Ascendant falls in {varga_asc}."
+        bits = [intro]
         for p in _CHART_DESCRIPTION_PLANET_ORDER:
             varga_entry = planets_reading[p]["vargas"].get(key)
             if not varga_entry:
                 continue
             p_sign = varga_entry["sign"]
             house = house_from(varga_asc, p_sign)
-            bits.append(f"{p} sits in {p_sign}, your {ordinal(house)} house in this chart.")
+            kb = varga_entry.get("reading") or {}
+            dignity = kb.get("dignity") or get_dignity(p, p_sign)
+            gist = kb.get("summary") or ""
+            line = f"{p} sits in {p_sign}, your {ordinal(house)} house here - {dignity} in this chart."
+            if gist:
+                line += f" {gist}"
+            bits.append(line)
         descriptions[key] = {"name": name, "ascendant_sign": varga_asc, "text": " ".join(bits)}
 
     return descriptions
