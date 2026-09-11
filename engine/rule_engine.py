@@ -472,6 +472,70 @@ def _divisional_chart_overviews(warnings):
 
 _CHART_DESCRIPTION_PLANET_ORDER = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
 
+# ---------------------------------------------------------------------------
+# Story-mode chart descriptions - the SAME facts as the dense text above
+# (sign, house, dignity), reworded as a short plain-language scene instead
+# of classical terminology. No new astrology, just a second, simpler
+# rendering of data already computed - jargon-free the way you'd explain it
+# to someone who has never read a birth chart before.
+# ---------------------------------------------------------------------------
+_SIGN_STORY_FLAVOR = {
+    "Aries": "bold and eager to go first",
+    "Taurus": "steady, comfort-loving, and patient",
+    "Gemini": "curious, chatty, and quick to learn",
+    "Cancer": "caring, emotional, and protective",
+    "Leo": "proud, warm, and wanting to shine",
+    "Virgo": "careful, practical, and detail-focused",
+    "Libra": "fair, social, and looking for balance",
+    "Scorpio": "intense, private, and drawn to deep change",
+    "Sagittarius": "adventurous, honest, and big-picture",
+    "Capricorn": "disciplined, ambitious, and patient",
+    "Aquarius": "independent, original, and idea-driven",
+    "Pisces": "dreamy, compassionate, and imaginative",
+}
+
+_PLANET_STORY_ROLE = {
+    "Sun": "the hero of the story, your core sense of self",
+    "Moon": "your inner feelings and what makes you comfortable",
+    "Mars": "your drive, courage, and how you take action",
+    "Mercury": "your voice, thinking, and how you communicate",
+    "Jupiter": "your luck, wisdom, and how you grow",
+    "Venus": "love, beauty, and what you enjoy",
+    "Saturn": "the hard lessons, patience, and discipline",
+    "Rahu": "a hunger for something new and unfamiliar",
+    "Ketu": "what you're already ready to let go of",
+}
+
+_DIGNITY_STORY_PHRASE = {
+    "exalted": "shining at its very best here",
+    "own": "right at home here",
+    "debilitated": "finding this a bit of a struggle here",
+    "neutral": "doing okay here, nothing dramatic",
+}
+
+
+def _chart_story(chart_label, primary_use, asc_sign, planet_placements):
+    """planet_placements: list of (planet, sign, house, dignity). Builds a
+    short narrative retelling of the same D1/varga facts _build_chart_
+    descriptions already assembled, in plain words and story framing."""
+    asc_flavor = _SIGN_STORY_FLAVOR.get(asc_sign, "")
+    opening = f"Picture your {chart_label} as a short scene from your own story."
+    if primary_use:
+        opening += f" This particular scene is all about {primary_use}."
+    opening += f" You walk on stage as {asc_sign} rising — {asc_flavor}."
+    lines = [opening]
+    for planet, sign, house, dignity in planet_placements:
+        role = _PLANET_STORY_ROLE.get(planet, planet)
+        flavor = _SIGN_STORY_FLAVOR.get(sign, "")
+        where = _PLAIN_HOUSE.get(house, "another part of the story")
+        dignity_phrase = _DIGNITY_STORY_PHRASE.get(dignity, "")
+        line = f"Then {planet} enters — {role}. It shows up dressed as {sign} ({flavor}), standing in the part of the story about {where}"
+        if dignity_phrase:
+            line += f", {dignity_phrase}"
+        line += "."
+        lines.append(line)
+    return " ".join(lines)
+
 
 def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
     """Per-PERSON synthesis for D1 and every computed varga: THIS chart's own
@@ -512,7 +576,12 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
         if gist:
             line += f" {gist}"
         bits.append(line)
-    descriptions["D1"] = {"name": "Rasi (main birth chart)", "ascendant_sign": asc_sign, "text": " ".join(bits)}
+    d1_placements = [(p, chart["planets"][p]["sign"], chart["planets"][p]["house"],
+                       get_dignity(p, chart["planets"][p]["sign"])) for p in _CHART_DESCRIPTION_PLANET_ORDER]
+    descriptions["D1"] = {
+        "name": "Rasi (main birth chart)", "ascendant_sign": asc_sign, "text": " ".join(bits),
+        "story": _chart_story("main birth chart", None, asc_sign, d1_placements),
+    }
 
     for n in DIVISIONAL_VARGAS:
         key = f"D{n}"
@@ -527,6 +596,7 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
             intro += f" - classically used for {primary_use}"
         intro += f", your Ascendant falls in {varga_asc}."
         bits = [intro]
+        placements = []
         for p in _CHART_DESCRIPTION_PLANET_ORDER:
             varga_entry = planets_reading[p]["vargas"].get(key)
             if not varga_entry:
@@ -540,7 +610,11 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
             if gist:
                 line += f" {gist}"
             bits.append(line)
-        descriptions[key] = {"name": name, "ascendant_sign": varga_asc, "text": " ".join(bits)}
+            placements.append((p, p_sign, house, dignity))
+        descriptions[key] = {
+            "name": name, "ascendant_sign": varga_asc, "text": " ".join(bits),
+            "story": _chart_story(f"{key} ({name}) chart", primary_use, varga_asc, placements),
+        }
 
     return descriptions
 
@@ -1431,6 +1505,129 @@ def _build_children_prospects(chart, planets_reading, house_lords, karakas):
     }
 
 
+# ---------------------------------------------------------------------------
+# Medical Astrology - a SEPARATE section (its own tab), not folded into
+# Life Predictions' Health & Vitality card. Reuses _PLANET_HEALTH_THEME,
+# _MALEFICS/_BENEFICS (already defined above for Longevity), and the exact
+# maraka-style age-window derivation pattern from _build_longevity, just
+# flagging different significators (6th/8th lords + Saturn, not 2nd/7th).
+# Same strong "not medical advice" framing as Longevity.
+# ---------------------------------------------------------------------------
+_MEDICAL_CAVEAT = (
+    "IMPORTANT: This is a traditional, symbolic health-THEMES indication from classical Vedic "
+    "astrology - it is NOT a medical diagnosis, NOT medical advice, and NOT a substitute for a "
+    "doctor. Astrology can describe symbolic tendencies at best; it cannot detect, confirm, or "
+    "predict any actual medical condition. For any real health concern, please see a doctor."
+)
+
+# Personalized (house-from-Ascendant, not fixed-sign) Kalapurusha body map -
+# the standard way this is applied to an individual chart: house 1 is
+# always "the head" for THIS person regardless of which sign occupies it.
+_HOUSE_BODY_PART = {
+    1: "the head and brain",
+    2: "the face, mouth, and throat",
+    3: "the throat, arms, shoulders, and ears",
+    4: "the chest and lungs",
+    5: "the heart, upper back, and stomach",
+    6: "the lower abdomen and intestines (the classical 'disease house' itself)",
+    7: "the kidneys and lower back",
+    8: "the reproductive and excretory organs, and chronic or hidden conditions",
+    9: "the hips and thighs",
+    10: "the knees and joints",
+    11: "the calves and ankles",
+    12: "the feet and the immune system",
+}
+
+
+def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
+    birth_utc = _dt.datetime.fromisoformat(chart["resolved_datetime"]["utc"])
+    planets = chart["planets"]
+
+    body_areas = []
+    for house_num in range(1, 13):
+        occupants = [p for p, d in planets.items() if d["house"] == house_num]
+        benefic_occ = [p for p in occupants if p in _BENEFICS]
+        malefic_occ = [p for p in occupants if p in _MALEFICS]
+        body_areas.append({
+            "house": house_num,
+            "body_part": _HOUSE_BODY_PART[house_num],
+            "occupants": occupants,
+            "benefic_occupants": benefic_occ,
+            "malefic_occupants": malefic_occ,
+        })
+
+    sixth = house_lords[6]
+    eighth = house_lords[8]
+    sixth_dignity = get_dignity(sixth["lord"], sixth["lord_sign"])
+    eighth_dignity = get_dignity(eighth["lord"], eighth["lord_sign"])
+
+    # Age-window cautions - same pattern as _build_longevity's maraka
+    # windows, flagging the 6th lord (disease), 8th lord (chronic/hidden),
+    # and Saturn (chronic/slow-developing conditions) instead.
+    flagged = {sixth["lord"], eighth["lord"], "Saturn"}
+    age_windows = []
+    for maha in dasha["timeline"]:
+        if maha["lord"] in flagged:
+            start_age = _age_at(maha["start"], birth_utc)
+            end_age = _age_at(maha["end"], birth_utc)
+            if end_age < 0:
+                continue
+            roles = []
+            if maha["lord"] == sixth["lord"]:
+                roles.append("6th-house (disease) lord")
+            if maha["lord"] == eighth["lord"]:
+                roles.append("8th-house (chronic/hidden) lord")
+            if maha["lord"] == "Saturn":
+                roles.append("Saturn, classical significator of chronic conditions")
+            sa, ea = max(0, int(round(start_age))), int(round(end_age))
+            age_windows.append({
+                "lord": maha["lord"], "role": " / ".join(roles),
+                "start_age": sa, "end_age": ea,
+                "start_year": birth_utc.year + sa, "end_year": birth_utc.year + ea,
+                "theme": _PLANET_HEALTH_THEME.get(maha["lord"], ""),
+            })
+
+    text_bits = [
+        f"The 6th house (disease, daily health) is ruled by {sixth['lord']}, in {sixth['lord_sign']} "
+        f"- classically {sixth_dignity} there.",
+        f"The 8th house (chronic or hidden conditions, longevity) is ruled by {eighth['lord']}, in "
+        f"{eighth['lord_sign']} - classically {eighth_dignity} there.",
+    ]
+    for area in body_areas:
+        if not (area["benefic_occupants"] or area["malefic_occupants"]):
+            continue
+        clause_bits = []
+        if area["benefic_occupants"]:
+            clause_bits.append(f"{', '.join(area['benefic_occupants'])} here is classically supportive")
+        if area["malefic_occupants"]:
+            clause_bits.append(
+                f"{', '.join(area['malefic_occupants'])} here classically suggests this area may be "
+                "worth a little extra attention"
+            )
+        text_bits.append(f"Your {ordinal(area['house'])} house ({area['body_part']}): " + "; ".join(clause_bits) + ".")
+    if age_windows:
+        text_bits.append(
+            "Classically-flagged age windows worth being mindful during (not certainties): " +
+            "; ".join(
+                f"age {w['start_age']}-{w['end_age']} ({w['lord']} Mahadasha - {w['role']}; "
+                f"themes: {w['theme']})" for w in age_windows
+            ) + "."
+        )
+    text_bits.append(_MEDICAL_CAVEAT)
+
+    return {
+        "title": "Medical Astrology",
+        "sixth_house_lord": sixth["lord"], "sixth_house_lord_sign": sixth["lord_sign"],
+        "sixth_house_lord_dignity": sixth_dignity,
+        "eighth_house_lord": eighth["lord"], "eighth_house_lord_sign": eighth["lord_sign"],
+        "eighth_house_lord_dignity": eighth_dignity,
+        "body_areas": body_areas,
+        "age_windows": age_windows,
+        "text": " ".join(text_bits),
+        "caveat": _MEDICAL_CAVEAT,
+    }
+
+
 def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, karakas):
     running = dasha["running_at_birth"]
     dasha_note = ""
@@ -1618,8 +1815,10 @@ def generate_reading(chart):
           "yogas_present": [...same, filtered to present == True...],
           "dasha": {"running_at_birth": {...}, "timeline": [...]},
           "divisional_chart_overviews": {"D2": {...KB DIV-D2...}, ...},  # generic "what this varga is for"
-          "chart_descriptions": {"D1": {"name", "ascendant_sign", "text"}, "D2": {...}, ...},  # THIS person's
-                                # own placements in each chart, D1 + every DIVISIONAL_VARGAS entry
+          "chart_descriptions": {"D1": {"name", "ascendant_sign", "text", "story"}, "D2": {...}, ...},  # THIS
+                                # person's own placements in each chart (text = dense, story = plain-language)
+          "medical_astrology": {"title", "sixth_house_lord", "eighth_house_lord", "body_areas": [...],
+                                 "age_windows": [...], "text", "caveat"},
           "chara_karakas": [ {rank, karaka, abbr, domain, planet, ...}, ... ],  # 7, see chara_karaka.py
           "karmic_and_past_life": {"atmakaraka": {...}, "darakaraka": {...}, "putrakaraka": {...},
                                     "ketu": {...}, "rahu": {...}, "saturn": {...},
@@ -1659,6 +1858,7 @@ def generate_reading(chart):
     karakas = _compute_chara_karakas(chart)
     karmic_and_past_life = _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas)
     life_predictions = _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, karakas)
+    medical_astrology = _build_medical_astrology(chart, planets_reading, house_lords, dasha)
 
     remedies = {
         "caveat": upaya.CAVEAT,
@@ -1707,6 +1907,7 @@ def generate_reading(chart):
         "chara_karakas": karakas,
         "karmic_and_past_life": karmic_and_past_life,
         "life_predictions": life_predictions,
+        "medical_astrology": medical_astrology,
         "remedies": remedies,
         "relationship_themes": relationship_themes_reading,
         "doshas": doshas_reading,
