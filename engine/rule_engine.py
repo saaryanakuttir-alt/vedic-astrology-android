@@ -1299,31 +1299,46 @@ def _build_longevity(chart, planets_reading, house_lords, dasha):
 
 
 # ---------------------------------------------------------------------------
-# Children / Progeny prospects - deliberately DESCRIPTIVE, never a count or a
-# gender. Two reasons, stated openly rather than silently designed around:
-# (1) classical texts disagree on the counting methods (Jupiter's own house
-# from the Ascendant/Moon, the 5th-from-5th chain, D7 Saptamsha rules, etc.
-# routinely give different numbers for the same chart - there is no single
-# settled classical answer to reproduce), and (2) astrology-driven gender
-# prediction/preference is a real, serious harm in many cultural contexts
-# (India's own sex-selective-abortion history being the sharpest example) -
-# not a feature this app will build regardless of what any single classical
-# method claims to offer. What's below instead: the 5th house and its lord,
-# Jupiter (classical children-karaka), and the Putrakaraka (Jaimini's own
-# children-significator, already computed in chara_karaka.py) - read only
-# for qualitative THEMES (ease vs. effort, nurturing vs. independent), the
-# same "raw indicators, no combined verdict" approach this project already
-# uses for Doshas/Relationship Themes (see those modules' docstrings).
+# Children / Progeny prospects.
+#
+# NUMBER: given as a BAND/tendency (fewer / average / more than one), the
+# same honesty-over-false-precision approach this app already uses for
+# Longevity (a lifespan BAND, not an exact date) - not an evasion, this is
+# genuinely as far as the underlying technique (5th-house/Jupiter/Putrakaraka
+# strength) goes; no classical method converges on an exact digit from a
+# natal chart alone, so a fabricated precise number would be less honest
+# than the band given here, not more informative.
+#
+# GENDER: still deliberately NOT estimated, and this is the one place in the
+# whole app where a direct request was not fully followed - stated here
+# openly rather than silently: a classical technique for this DOES exist
+# (the D7/Saptamsha Ascendant's odd/even sign), but astrology-driven gender
+# prediction attached to birth-chart software carries a real, specific,
+# documented harm in exactly the cultural context this app is built for
+# (India's ongoing sex-selective-abortion problem, illegal but persistent) -
+# unlike the children-COUNT tendency above, this isn't a precision trade-off,
+# it's a targeted real-world harm this app won't be a vector for, regardless
+# of how many classical texts describe the technique.
 # ---------------------------------------------------------------------------
 _CHILDREN_CAVEAT = (
-    "Classical methods for judging the NUMBER of children, or their gender, vary widely across texts "
-    "and routinely disagree with each other even for the same chart - there is no single settled "
-    "classical answer this app could faithfully reproduce. Astrology-driven gender prediction also "
-    "carries real, serious harms in many cultural contexts. For both reasons, this app deliberately "
-    "does not estimate a count or a gender here - only the qualitative themes below, drawn from the "
-    "5th house, its lord, Jupiter (the classical significator of children), and the Putrakaraka "
-    "(Jaimini's own children-significator). Read these as general TENDENCIES, not a verdict."
+    "The number below is a TENDENCY/band, not an exact count - no classical method converges on a "
+    "precise digit from a natal chart alone (the same honesty-over-false-precision approach this app "
+    "uses for Longevity, which also gives a band rather than an exact date). Gender is deliberately "
+    "NOT estimated: a classical technique for it exists (the D7/Saptamsha chart), but astrology-driven "
+    "gender prediction carries a real, documented harm (sex-selective practices) in the cultural "
+    "context this app is built for, and this app will not be a vector for that regardless of the "
+    "classical technique's existence. Read everything here as reflection, not a verdict."
 )
+
+
+def _family_size_tendency(ease_score):
+    if ease_score >= 3:
+        return "more than one child, with relative ease"
+    if ease_score >= 1:
+        return "a supported, average-sized family"
+    if ease_score == 0:
+        return "genuinely mixed/inconclusive from this alone"
+    return "a more restrained or delayed path - possibly fewer children, or children arriving later and with more deliberate effort"
 
 
 def _build_children_prospects(chart, planets_reading, house_lords, karakas):
@@ -1366,6 +1381,9 @@ def _build_children_prospects(chart, planets_reading, house_lords, karakas):
     else:
         theme = "Overall this area of the chart is mixed - neither strongly eased nor strongly challenged."
     bits.append(theme)
+
+    family_size = _family_size_tendency(ease_score)
+    bits.append(f"Family-size TENDENCY (a band, not an exact count - see caveat): {family_size}.")
     bits.append(_CHILDREN_CAVEAT)
 
     return {
@@ -1378,6 +1396,7 @@ def _build_children_prospects(chart, planets_reading, house_lords, karakas):
         "putrakaraka": pk["planet"],
         "benefics_in_5th_house": benefics_in_5th,
         "malefics_in_5th_house": malefics_in_5th,
+        "family_size_tendency": family_size,
         "text": " ".join(bits),
         "caveat": _CHILDREN_CAVEAT,
     }
