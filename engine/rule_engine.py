@@ -1520,6 +1520,19 @@ _MEDICAL_CAVEAT = (
     "predict any actual medical condition. For any real health concern, please see a doctor."
 )
 
+_MEDICAL_OVERVIEW = (
+    "Classical Vedic 'medical astrology' (Ayurvedic/Jyotish health analysis) reads the body onto "
+    "the chart through the idea of the Kalapurusha, the 'cosmic body' - each of the 12 houses maps "
+    "to a body region (see the table below), so a planet sitting in a house classically colors that "
+    "body area. Four placements matter most: the Ascendant (Lagna) and its lord for overall "
+    "vitality and constitution; the 6th house and its lord for disease, immunity, and daily health "
+    "battles; the 8th house and its lord for chronic, hidden, or long-developing conditions; and "
+    "Saturn, the classical Ayushkaraka (significator of the body's endurance and of chronic, "
+    "slow-onset conditions) wherever it sits. The Moon is read separately as the significator of "
+    "the mind and emotional wellbeing, since Ayurveda and Jyotish both treat mental and physical "
+    "health as linked, not separate."
+)
+
 # Personalized (house-from-Ascendant, not fixed-sign) Kalapurusha body map -
 # the standard way this is applied to an individual chart: house 1 is
 # always "the head" for THIS person regardless of which sign occupies it.
@@ -1548,18 +1561,65 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
         occupants = [p for p, d in planets.items() if d["house"] == house_num]
         benefic_occ = [p for p in occupants if p in _BENEFICS]
         malefic_occ = [p for p in occupants if p in _MALEFICS]
+        # A short WHY for each occupant, not just a supportive/caution flag -
+        # the classical body/ailment theme that planet brings to this
+        # specific body area, plus its dignity here (which modulates how
+        # strongly that theme actually shows up).
+        occupant_notes = []
+        for p in occupants:
+            dignity = get_dignity(p, planets[p]["sign"])
+            theme = _PLANET_HEALTH_THEME.get(p, "")
+            occupant_notes.append({"planet": p, "dignity": dignity, "theme": theme})
         body_areas.append({
             "house": house_num,
             "body_part": _HOUSE_BODY_PART[house_num],
             "occupants": occupants,
             "benefic_occupants": benefic_occ,
             "malefic_occupants": malefic_occ,
+            "occupant_notes": occupant_notes,
         })
 
+    # --- 1st house/lord: overall vitality and constitution ---
+    first = house_lords[1]
+    first_dignity = get_dignity(first["lord"], first["lord_sign"])
+    ascendant_lord_text = _hl_text(house_lords, 1) or ""
+
+    # --- Moon: mind and emotional wellbeing, read separately from the
+    #     body-area table above since Jyotish/Ayurveda both treat mental
+    #     and physical health as linked, not separate. ---
+    moon_detail = planets["Moon"]
+    moon_dignity = get_dignity("Moon", moon_detail["sign"])
+    moon_house_mates = [p for p, d in planets.items() if d["house"] == moon_detail["house"] and p != "Moon"]
+    moon_afflicted = [p for p in moon_house_mates if p in _MALEFICS]
+    moon_supported = [p for p in moon_house_mates if p in _BENEFICS]
+    moon_text = (
+        f"Moon (mind and emotional wellbeing) is in {moon_detail['sign']}, your "
+        f"{ordinal(moon_detail['house'])} house - classically {moon_dignity} there."
+    )
+    if moon_afflicted:
+        moon_text += (
+            f" Sharing that house with {', '.join(moon_afflicted)} classically suggests the mind may "
+            "feel more pressure or restlessness at times - not a diagnosis, just a theme worth gentle awareness."
+        )
+    if moon_supported:
+        moon_text += f" {', '.join(moon_supported)} sharing that house is classically calming and supportive for it."
+
+    # --- Saturn: the Ayushkaraka, read on its own regardless of which
+    #     house it occupies, since it governs the body's endurance broadly. ---
+    saturn_detail = planets.get("Saturn")
+    saturn_dignity = get_dignity("Saturn", saturn_detail["sign"]) if saturn_detail else None
+    saturn_text = _planet_text(planets_reading, "Saturn") or ""
+
+    # --- 6th (disease) and 8th (chronic/hidden) house lords, with their
+    #     full classical placement reading (the same house_lord_placement
+    #     KB text _build_life_predictions's area() helper already uses),
+    #     not just a bare dignity word. ---
     sixth = house_lords[6]
     eighth = house_lords[8]
     sixth_dignity = get_dignity(sixth["lord"], sixth["lord_sign"])
     eighth_dignity = get_dignity(eighth["lord"], eighth["lord_sign"])
+    sixth_text = _hl_text(house_lords, 6) or ""
+    eighth_text = _hl_text(house_lords, 8) or ""
 
     # Age-window cautions - same pattern as _build_longevity's maraka
     # windows, flagging the 6th lord (disease), 8th lord (chronic/hidden),
@@ -1587,27 +1647,38 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
                 "theme": _PLANET_HEALTH_THEME.get(maha["lord"], ""),
             })
 
-    text_bits = [
-        f"The 6th house (disease, daily health) is ruled by {sixth['lord']}, in {sixth['lord_sign']} "
-        f"- classically {sixth_dignity} there.",
-        f"The 8th house (chronic or hidden conditions, longevity) is ruled by {eighth['lord']}, in "
-        f"{eighth['lord_sign']} - classically {eighth_dignity} there.",
-    ]
+    text_bits = [_MEDICAL_OVERVIEW]
+    text_bits.append(f"Ascendant lord (overall vitality): {ascendant_lord_text}" if ascendant_lord_text else
+                      f"Ascendant lord {first['lord']} (overall vitality) is {first_dignity} in {first['lord_sign']}.")
+    text_bits.append(moon_text)
+    if saturn_text:
+        text_bits.append(f"Saturn, the Ayushkaraka: {saturn_text}")
+    elif saturn_dignity:
+        text_bits.append(f"Saturn, the Ayushkaraka, is {saturn_dignity} in {saturn_detail['sign']}.")
+    text_bits.append(f"6th house (disease, daily health): {sixth_text}" if sixth_text else
+                      f"The 6th house is ruled by {sixth['lord']}, {sixth_dignity} in {sixth['lord_sign']}.")
+    text_bits.append(f"8th house (chronic or hidden conditions, longevity): {eighth_text}" if eighth_text else
+                      f"The 8th house is ruled by {eighth['lord']}, {eighth_dignity} in {eighth['lord_sign']}.")
+
+    body_bits = []
     for area in body_areas:
-        if not (area["benefic_occupants"] or area["malefic_occupants"]):
+        if not area["occupant_notes"]:
             continue
         clause_bits = []
-        if area["benefic_occupants"]:
-            clause_bits.append(f"{', '.join(area['benefic_occupants'])} here is classically supportive")
-        if area["malefic_occupants"]:
+        for note in area["occupant_notes"]:
+            tag = "supportive" if note["planet"] in _BENEFICS else "worth extra attention"
             clause_bits.append(
-                f"{', '.join(area['malefic_occupants'])} here classically suggests this area may be "
-                "worth a little extra attention"
+                f"{note['planet']} ({note['dignity']}, classically {tag}) points to {note['theme']}"
             )
-        text_bits.append(f"Your {ordinal(area['house'])} house ({area['body_part']}): " + "; ".join(clause_bits) + ".")
+        body_bits.append(f"Your {ordinal(area['house'])} house ({area['body_part']}): " + "; ".join(clause_bits) + ".")
+    if body_bits:
+        text_bits.append("Body areas where your own planets sit: " + " ".join(body_bits))
+
     if age_windows:
         text_bits.append(
-            "Classically-flagged age windows worth being mindful during (not certainties): " +
+            "Classically-flagged age windows worth being mindful during (a Mahadasha is a multi-year "
+            "planetary period; these are the ones ruled by a planet tied to health themes above - "
+            "not certainties, just windows classically worth a bit more attention): " +
             "; ".join(
                 f"age {w['start_age']}-{w['end_age']} ({w['lord']} Mahadasha - {w['role']}; "
                 f"themes: {w['theme']})" for w in age_windows
@@ -1617,13 +1688,19 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
 
     return {
         "title": "Medical Astrology",
+        "overview": _MEDICAL_OVERVIEW,
+        "ascendant_lord": first["lord"], "ascendant_lord_sign": first["lord_sign"],
+        "ascendant_lord_dignity": first_dignity,
+        "moon_sign": moon_detail["sign"], "moon_house": moon_detail["house"], "moon_dignity": moon_dignity,
+        "moon_afflicted_by": moon_afflicted, "moon_supported_by": moon_supported,
+        "saturn_sign": saturn_detail["sign"] if saturn_detail else None, "saturn_dignity": saturn_dignity,
         "sixth_house_lord": sixth["lord"], "sixth_house_lord_sign": sixth["lord_sign"],
         "sixth_house_lord_dignity": sixth_dignity,
         "eighth_house_lord": eighth["lord"], "eighth_house_lord_sign": eighth["lord_sign"],
         "eighth_house_lord_dignity": eighth_dignity,
         "body_areas": body_areas,
         "age_windows": age_windows,
-        "text": " ".join(text_bits),
+        "text": "\n\n".join(text_bits),
         "caveat": _MEDICAL_CAVEAT,
     }
 
