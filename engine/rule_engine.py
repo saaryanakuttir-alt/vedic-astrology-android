@@ -41,6 +41,7 @@ import maitri
 import upaya
 import relationship_themes
 import doshas
+import life_timeline
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity, ordinal
 from yogas import detect_all_yogas
 
@@ -1466,6 +1467,9 @@ def generate_reading(chart):
                                                             "most_likely_age", "maraka_planets",
                                                             "vulnerable_periods", "text"},
                                 "caveat": "..."},
+          "year_by_year": {"years": [{age, calendar_year, mahadasha_lord, antardasha_lord,
+                                       pratyantardasha_lord, houses_activated, muntha_sign,
+                                       muntha_theme, note}, ...], "caveat": "..."},
           "warnings": [ "..." ]   # any KB ids that couldn't be found
         }
 
@@ -1507,6 +1511,12 @@ def generate_reading(chart):
     doshas_reading["plain_summary"] = _doshas_plain_summary(doshas_reading)
     yogas_present = [y for y in yogas if y["present"]]
 
+    # Year-by-year life outlook (Dasha + Muntha) - see life_timeline.py's
+    # module docstring for exactly what technique this is/isn't. Reuses the
+    # "dasha" readings dict just built above so every year's note quotes the
+    # same already-verified antardasha text the Dasha tab itself shows.
+    year_by_year = life_timeline.compute_life_timeline(chart, dasha)
+
     return {
         "name": chart.get("name"),
         "ascendant": {
@@ -1526,6 +1536,7 @@ def generate_reading(chart):
         "remedies": remedies,
         "relationship_themes": relationship_themes_reading,
         "doshas": doshas_reading,
+        "year_by_year": year_by_year,
         "warnings": warnings,
     }
 
