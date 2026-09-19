@@ -170,3 +170,22 @@ def lookup_place(place_name, country_hint=None):
             for c in candidates[1:]
         ]
     return result
+
+
+def search_places(query, limit=8):
+    """Live-filter helper for the entry form's city suggestions: cities whose
+    normalized name STARTS WITH the typed text (aliases like 'bangalore' ->
+    'bengaluru' honoured), best-known-first is not attempted - the gazetteer
+    has no population column - so results keep file order, capped at `limit`.
+    Returns [{"name", "country", "lat", "lng"}, ...]."""
+    norm = _normalize(query or "")
+    if len(norm) < 2:
+        return []
+    norm = _CITY_ALIASES.get(norm, norm)
+    out = []
+    for c in _CITIES:
+        if c["_norm"].startswith(norm):
+            out.append({"name": c["name"], "country": c["country"], "lat": c["lat"], "lng": c["lng"]})
+            if len(out) >= limit:
+                break
+    return out
