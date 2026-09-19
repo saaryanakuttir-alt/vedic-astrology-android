@@ -11,7 +11,7 @@ a specific life domain, regardless of which planet it actually is:
     2     Amatyakaraka (AmK)  Amatya-karaka Career, vocation, counsel
     3     Bhratrukaraka(BK)   Bhratru-karaka Siblings, courage, effort
     4     Matrikaraka  (MK)   Matru-karaka  Mother, home, emotional foundation
-    5     Putrakaraka  (PK)   Putra-karaka  Children, intelligence, creativity
+    5     Putrakaraka  (PK)   Putra-karaka  Intelligence, creativity
     6     Gnatikaraka  (GK)   Gnati-karaka  Obstacles, extended relatives, disputes
     7     Darakaraka   (DK)   Dara-karaka   Spouse/life partner, partnerships
 
@@ -47,7 +47,7 @@ KARAKA_NAMES = [
     ("Amatyakaraka", "AmK", "Career, vocation, and counsel"),
     ("Bhratrukaraka", "BK", "Siblings, courage, and effort"),
     ("Matrikaraka", "MK", "Mother, home, and emotional foundation"),
-    ("Putrakaraka", "PK", "Children, intelligence, and creativity"),
+    ("Putrakaraka", "PK", "Intelligence, creativity, and self-expression"),
     ("Gnatikaraka", "GK", "Obstacles, extended relatives, and disputes"),
     ("Darakaraka", "DK", "Spouse, life partner, and close partnerships"),
 ]

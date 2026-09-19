@@ -87,12 +87,13 @@ FAQ_CATEGORIES = [
              "direction you're being pulled to grow (Rahu), not a literal "
              "historical record. Many people still find it useful for "
              "self-reflection."),
-            ("The Longevity section gives an age/year - is that a guarantee?",
-             "No. Ayurdaya (longevity estimation) is one of the oldest and "
-             "most debated branches of traditional astrology. Treat the "
-             "age/year and 'vulnerable period' output as a traditional "
-             "estimate to be aware of, never as a prediction to act on - "
-             "and always prioritise real medical advice over this."),
+            ("Does the app predict lifespan or how many children I will have?",
+             "No, deliberately. There is no lifespan, time-of-death or "
+             "number-of-children output anywhere in this app. Those are "
+             "the least reliable claims in traditional astrology, and a "
+             "wrong or frightening answer does real harm, so they were "
+             "left out. What remains is the chart itself and its "
+             "traditional themes, to be read as reflection rather than fact."),
             ("What's the difference between 'Concise' and 'Detailed' report mode?",
              "Concise keeps the short 'in simple terms' summary for each "
              "section; Detailed adds the full traditional reasoning "
@@ -118,12 +119,21 @@ FAQ_CATEGORIES = [
              "covering 8 separate factors: Varna, Vashya, Tara, Yoni, Graha "
              "Maitri, Gana, Bhakoot, and Nadi."),
             ("Can I generate charts for my children too?",
-             "Yes - use the Profile switcher to add a Life Partner and up "
-             "to four Child profiles, each with its own independent birth "
-             "details and full reading. The 'Example family' quick-fill "
-             "button can populate and generate sample charts for everyone "
-             "at once, so you can see how it all looks before entering "
-             "real data."),
+             "Yes - use the profile chips at the top of the New Chart "
+             "screen to add a Life Partner and up to four Child profiles, "
+             "each with its own independent birth details and full "
+             "reading."),
+            ("How do I save birth details so I can reload them quickly?",
+             "Every chart you generate is saved automatically on your "
+             "phone. Open Saved Charts (Library) and tap a person to load "
+             "their details into the profile you choose and regenerate the "
+             "chart in one step. Use the Delete button on a row to remove "
+             "someone. Saved details never leave your device."),
+            ("The phone keyboard does not appear when I tap a field. What now?",
+             "The New Chart screen has its own built-in keyboard, which is "
+             "the default and does not depend on your phone's keyboard app. "
+             "Use the Keyboard switch at the top of the form to choose "
+             "between the built-in keyboard and the phone keyboard."),
             ("Is my birth data ever sent anywhere?",
              "No. Place lookup, chart maths, and every reading run "
              "entirely offline on your own device. Nothing is uploaded, "

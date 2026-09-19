@@ -219,3 +219,39 @@ themed widgets responded correctly to touches on desktop, so the earlier
 classes; the new widgets deliberately stay behaviorally stock, and
 `scroll_timeout` is raised to 250ms in main.py so a slow or slightly jittery
 tap inside a ScrollView still reaches the widget under it.
+
+## Version 1.2 changes (2026-09-19)
+
+* **Typing works without the phone's keyboard.** The New Chart form now has a
+  built-in on-screen keyboard (`ui/keyboard.py`), the default, because tapping
+  a field never produced a working phone keyboard on the OnePlus 7T Pro (cause
+  never confirmed; it does not reproduce on desktop). A Built-in / Phone switch
+  at the top of the form chooses between the two and is remembered.
+* **Chart numbers no longer overlap** after choosing a different person or
+  style. Root cause (a real bug, reproducible on desktop, not an Android quirk):
+  the old chart created its `Label` widgets inside a `with self.canvas.before:`
+  block, which made Kivy register their canvases twice; the next
+  `canvas.before.clear()` orphaned them, so every redraw left the previous
+  chart's labels on screen. The chart is now drawn as text textures in one
+  canvas that is cleared on each redraw (`ui/tabs_chart.py`).
+* **Saved birth details** (`ui/persist.py`): every successful Generate saves the
+  details in the app's private folder; Saved Charts lists them for one-tap
+  recall (load into any profile slot and regenerate) with Delete.
+* **Sample charts removed** (the public-figure list and the "example family"
+  buttons), including `engine/sample_charts.py` and `sample_profiles.json`.
+* **No lifespan/longevity or children predictions.** The Longevity & Lifespan
+  and Children sections, the Saptamsa (D7) chart and its text, and the
+  "vulnerable period" output are gone from `engine/rule_engine.py`, and
+  `tools/scrub_kb.py` removes the same themes from `engine/kb/*.json`
+  (re-run it after re-copying the KB from chart_engine). **This Android
+  engine copy now intentionally differs from `chart_engine/`**; the PC and web
+  apps still have those sections. `tests/test_engine_content.py` guards this.
+* Other overlaps fixed: Classical Yogas summary printed over its caption; table
+  rows had uneven cell heights (grey bars, text spilling); the Place of birth
+  caption was overlapped; Help/FAQ and check marks used symbols Roboto lacks
+  (drawn as empty boxes).
+
+Tests (desktop, not shipped): `python -m pytest tests/test_engine_content.py`
+and `python tests/desktop_smoke.py` (needs kivy 2.3.1, pyswisseph, tzdata,
+filetype, pytest).
+

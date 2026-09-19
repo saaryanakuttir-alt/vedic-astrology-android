@@ -21,6 +21,9 @@ The old module-level palette names (BG, PANEL, INK, GOLD, ...) are kept as
 aliases mapped onto the new tokens, so tab modules that still reference them
 pick up the new look without edits.
 """
+import os
+
+import kivy
 from kivy.lang import Builder
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.button import Button
@@ -77,6 +80,11 @@ GOLD_SOFT = ACCENT_700                # text colour on parchment - dark enough t
 GOLD_TEXT = TEXT
 
 R = dp(4)                             # --radius-md
+
+# Kivy's default font (Roboto) has no arrows, check marks or backspace glyphs -
+# they draw as empty boxes. DejaVu Sans ships with Kivy and has them all, so
+# any label that shows such a symbol uses this font.
+SYMBOL_FONT = os.path.join(kivy.kivy_data_dir, "fonts", "DejaVuSans.ttf")
 
 # Default text colours: Kivy's Label/TextInput default to WHITE, which would
 # vanish on parchment. One global rule fixes every Label in the app that
@@ -348,9 +356,14 @@ class ThemedSpinner(_OutlineMixin, Spinner):
 
 class ThemedTextInput(TextInput):
     """Transparent field with a hairline outline that turns gold on focus
-    (the design's .input). Plain TextInput behaviour otherwise."""
+    (the design's .input). Plain TextInput behaviour otherwise, plus two
+    options for the built-in keyboard (ui/keyboard.py): kb_layout ("text",
+    "number" = digits only, "decimal" = digits . -) and kb_autocap (capitalise
+    the first letter of each word)."""
 
     def __init__(self, **kwargs):
+        self.kb_layout = kwargs.pop("kb_layout", "text")
+        self.kb_autocap = kwargs.pop("kb_autocap", True)
         kwargs.setdefault("background_normal", "")
         kwargs.setdefault("background_active", "")
         kwargs.setdefault("background_disabled_normal", "")
@@ -367,6 +380,8 @@ class ThemedTextInput(TextInput):
             self._c = Color(*DIVIDER)
             self._line = Line(rounded_rectangle=(self.x, self.y, self.width, self.height, R), width=1)
         self.bind(pos=self._sync, size=self._sync, focus=self._on_focus, disabled=self._on_focus)
+        from ui import keyboard   # late import: keyboard.py itself imports this module
+        keyboard.SERVICE.register(self)
 
     def _sync(self, *_):
         self._line.rounded_rectangle = (self.x, self.y, self.width, self.height, R)
@@ -391,6 +406,7 @@ class ThemedCheckBox(Button):
         kwargs.setdefault("bold", True)
         kwargs.setdefault("font_size", "18sp")
         kwargs.setdefault("color", ACCENT)
+        kwargs.setdefault("font_name", SYMBOL_FONT)     # the check mark is not in Roboto
         super().__init__(**kwargs)
         with self.canvas.after:
             self._c = Color(*DIVIDER)

@@ -69,7 +69,6 @@ _KB_FILENAMES = {
     "divisional_D2_planet_in_sign": "divisional_D2_planet_in_sign.json",
     "divisional_D3_planet_in_sign": "divisional_D3_planet_in_sign.json",
     "divisional_D4_planet_in_sign": "divisional_D4_planet_in_sign.json",
-    "divisional_D7_planet_in_sign": "divisional_D7_planet_in_sign.json",
     "divisional_D9_planet_in_sign": "divisional_D9_planet_in_sign.json",
     "divisional_D10_planet_in_sign": "divisional_D10_planet_in_sign.json",
     "divisional_D12_planet_in_sign": "divisional_D12_planet_in_sign.json",
@@ -80,7 +79,7 @@ _KB_FILENAMES = {
     "divisional_D60_planet_in_sign": "divisional_D60_planet_in_sign.json",
 }
 
-DIVISIONAL_VARGAS = [2, 3, 4, 7, 9, 10, 12, 16, 20, 24, 30, 60]
+DIVISIONAL_VARGAS = [2, 3, 4, 9, 10, 12, 16, 20, 24, 30, 60]   # D7 (Saptamsha, the children chart) intentionally omitted
 
 _cache = {}
 
@@ -362,8 +361,7 @@ def _house_lord_readings(chart, warnings):
     """BUG FIX (found by auditing a third-party report that made the exact
     same mistake): `lord_sign` must be the sign the LORD PLANET itself
     occupies, not the sign of the house being described. Every downstream
-    consumer of this dict (_hl_text, the Karmic/Longevity prose, and
-    dignity_points()'s longevity scoring) reads `lord_sign` expecting
+    consumer of this dict (_hl_text and the Karmic prose) reads `lord_sign` expecting
     "what sign is this lord actually sitting in" - e.g. "the 10th house's
     lord Jupiter (in {lord_sign}, placed in house {placed_in_house})" only
     makes sense if lord_sign is Jupiter's own sign (Leo), not Pisces (the
@@ -708,7 +706,7 @@ _KETU_HOUSE_PAST_ARENA = {
     2: "a life organized around family, lineage, accumulated wealth, and the spoken word — resources and belonging mastered, perhaps clung to",
     3: "a hands-on life of courage, skill, and effort — a craftsperson, communicator, sibling-among-many, or someone who lived by their own initiative and daring",
     4: "a life rooted in home, land, mother, and emotional belonging — deeply domestic, tied to a place, property, or the inner emotional world",
-    5: "a creative, devotional, or scholarly life — children, teaching, artistry, mantra, or speculative intelligence were the center of gravity",
+    5: "a creative, devotional, or scholarly life — teaching, artistry, mantra, or speculative intelligence were the center of gravity",
     6: "a life of service, discipline, conflict, or healing — a soldier, healer, servant, or someone defined by daily toil and the overcoming of obstacles",
     7: "a life centered on others — partnership, trade, diplomacy, or public dealings — identity built through relationship and the marketplace",
     8: "a life marked by the hidden, the transformative, and the sudden — occult knowledge, research, crises, inheritance, or a preoccupation with what lies beneath the surface",
@@ -742,7 +740,7 @@ _PLAIN_HOUSE = {
     2: "money, family and what you say",
     3: "courage, siblings and your own effort",
     4: "home, your mother and inner peace",
-    5: "children, creativity and romance",
+    5: "creativity, romance and learning",
     6: "work, health and overcoming obstacles",
     7: "marriage and close partnerships",
     8: "big changes, shared money and hidden things",
@@ -888,7 +886,7 @@ _RAHU_HOUSE_GROWTH_GOAL = {
     2: "developing a stable relationship with resources, family, and one's own voice — learning to value and articulate what one has rather than taking it for granted",
     3: "growing into courage, self-effort, and communication — reaching for skills and initiative that must be earned firsthand, not inherited",
     4: "cultivating genuine inner and domestic security — building a home, emotional foundation, or sense of belonging that had to be consciously created rather than assumed",
-    5: "developing creative, intellectual, or devotional expression — reaching toward legacy, children, or original ideas rather than simply repeating what already came easily",
+    5: "developing creative, intellectual, or devotional expression — reaching toward legacy or original ideas rather than simply repeating what already came easily",
     6: "mastering discipline, service, and the resolution of conflict — learning to face obstacles directly and build competence through daily effort",
     7: "learning genuine partnership and reciprocity — reaching outward into relationship and negotiation rather than staying self-contained",
     8: "engaging transformation, shared resources, and the hidden directly — learning to sit with crisis, depth, and change instead of avoiding it",
@@ -1085,7 +1083,7 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
             "Three houses classically frame this life's overarching purpose. " + " ".join(purpose_bits)
         )
 
-    # --- Paragraph 6: this soul's disposition toward partnership and children ---
+    # --- Paragraph 6: this soul's disposition toward partnership ---
     disposition_bits = []
     if darakaraka.get("in_house_effects") or darakaraka.get("in_sign_effects"):
         dk_text = (
@@ -1097,22 +1095,12 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
         if darakaraka.get("in_sign_effects"):
             dk_text += f" {darakaraka['in_sign_effects']}"
         disposition_bits.append(dk_text)
-    if putrakaraka.get("in_house_effects") or putrakaraka.get("in_sign_effects"):
-        pk_text = (
-            f"Putrakaraka — the significator of children, held here by {putrakaraka['planet']} in "
-            f"{putrakaraka['sign']}, house {putrakaraka['house']} ({putrakaraka['nakshatra']} "
-            f"nakshatra) — describes this soul's own disposition toward children and creative "
-            f"legacy."
-        )
-        if putrakaraka.get("in_sign_effects"):
-            pk_text += f" {putrakaraka['in_sign_effects']}"
-        disposition_bits.append(pk_text)
     if disposition_bits:
         paragraphs.append(
             " ".join(disposition_bits) +
-            " (A specific two-chart comparison with an actual partner or child's own Atmakaraka "
-            "and Moon placement — not just this soul's own disposition — is what the Family "
-            "Compatibility tab's Karmic Connection sections cover.)"
+            " (A specific two-chart comparison with an actual partner or family member's own "
+            "Atmakaraka and Moon placement — not just this soul's own disposition — is what the "
+            "Family Compatibility tab's Karmic Connection sections cover.)"
         )
 
     # --- Past-life identity, the actions that led here, and this life's
@@ -1257,38 +1245,13 @@ def _planet_text(planets_reading, planet, prefer="in_house"):
 
 
 # ---------------------------------------------------------------------------
-# Longevity / lifespan (Ayurdaya + Maraka) — the most sensitive section in
-# the whole app. Classical Vedic astrology DOES have longevity techniques,
-# but every serious text is emphatic that (a) they yield a BAND (Alpayu /
-# Madhyayu / Purnayu), not a precise date, (b) the three main calculation
-# schemes (Pindayu, Nisargayu, Amsayu) routinely disagree, and (c) longevity
-# is the single hardest thing to judge and should never be stated as a
-# certainty. What follows is therefore a deliberately TRANSPARENT, simplified
-# indication built from factors this project already computes — it is NOT a
-# medical opinion, NOT a certainty, and NOT a substitute for a doctor or a
-# qualified astrologer. The single "most likely age" figure is a midpoint
-# estimate the user explicitly asked to see, wrapped in that framing.
-_LONGEVITY_CAVEAT = (
-    "IMPORTANT: This is a traditional, symbolic longevity indication, not a medical assessment "
-    "and not a certainty. Classical astrology deliberately gives a lifespan BAND rather than an "
-    "exact date, its three main longevity methods routinely disagree, and every serious text "
-    "warns that longevity is the hardest judgment in the entire subject. The single 'most likely "
-    "age' below is only the midpoint of the indicated band, shown because it was asked for — it "
-    "is NOT a prediction of when anyone will actually die. If this raises real worry, or for any "
-    "health concern, please speak with a doctor. Read everything here as reflection, nothing more."
-)
-
-# Ayurdaya bands and the age RANGE this app shows for each. (Balarishta /
-# infant-mortality bands are deliberately omitted — they do not apply to
-# anyone old enough to be reading their own chart.)
-_LONGEVITY_BANDS = {
-    "Alpayu": (32, 55, "short span"),
-    "Madhyayu": (55, 78, "middle span"),
-    "Purnayu": (78, 100, "full span"),
-}
+# Shared health-theme tables and age helper, used by the Medical Astrology
+# section below. (This app deliberately has NO lifespan / longevity /
+# time-of-death output of any kind.)
+# ---------------------------------------------------------------------------
 
 # Classical body/ailment karaka themes per planet — used ONLY to describe the
-# symbolic "area" a maraka planet points at, never as a diagnosis.
+# symbolic "area" a planet points at, never as a diagnosis.
 _PLANET_HEALTH_THEME = {
     "Sun": "heart, bones, general vitality, and the eyes",
     "Moon": "the mind and emotions, blood, bodily fluids, and the chest/lungs",
@@ -1315,260 +1278,10 @@ def _age_at(dt_value, birth_utc):
     return (a - b).days / 365.25
 
 
-def _build_longevity(chart, planets_reading, house_lords, dasha):
-    birth_utc = _dt.datetime.fromisoformat(chart["resolved_datetime"]["utc"])
-    planets = chart["planets"]
-
-    # --- Longevity strength score (transparent, simplified) ---
-    # Strong 1st lord (vitality) and 8th lord (the house OF longevity), a
-    # dignified Saturn (ayushkaraka), and benefic vs malefic occupation of
-    # the 1st/8th are the factors that most consistently push the band up or
-    # down across sources. This is a heuristic, not a full Pindayu calc.
-    def dignity_points(lord, sign):
-        d = get_dignity(lord, sign)
-        if d in ("exalted", "moolatrikona", "own"):
-            return 2
-        if d in ("debilitated", "great enemy", "enemy"):
-            return -1
-        return 1  # friend / neutral
-
-    first = house_lords[1]
-    eighth = house_lords[8]
-    score = 0
-    score += dignity_points(first["lord"], first["lord_sign"])
-    score += dignity_points(eighth["lord"], eighth["lord_sign"])
-    if "Saturn" in planets:
-        score += 1 if get_dignity("Saturn", planets["Saturn"]["sign"]) in ("exalted", "moolatrikona", "own", "friend", "neutral") else -1
-    # 1st lord tucked away in a dusthana (6/8/12) weakens vitality.
-    if first["placed_in_house"] in (6, 8, 12):
-        score -= 1
-    # Benefic / malefic occupation of the 1st and 8th houses.
-    for planet, detail in planets.items():
-        if detail["house"] in (1, 8):
-            if planet in _BENEFICS:
-                score += 1
-            elif planet in _MALEFICS:
-                score -= 1
-
-    if score >= 3:
-        band = "Purnayu"
-    elif score >= 0:
-        band = "Madhyayu"
-    else:
-        band = "Alpayu"
-    low, high, band_desc = _LONGEVITY_BANDS[band]
-    # Most-likely age: midpoint of the band, nudged within the band by how
-    # strongly the score sits above/below that band's own entry threshold.
-    midpoint = (low + high) / 2
-    most_likely_age = int(round(max(low, min(high, midpoint))))
-    # Approximate calendar years, for readers who want a year rather than
-    # an age (birth year + age). Same heavy caveat applies - these are
-    # midpoint/band estimates, never a prediction of an actual date.
-    birth_year = birth_utc.year
-    most_likely_year = birth_year + most_likely_age
-    year_low = birth_year + low
-    year_high = birth_year + high
-
-    # --- Maraka (killer) significators: lords of the 2nd and 7th houses,
-    #     plus Saturn as a natural maraka/ayushkaraka. ---
-    maraka_lords = []
-    for h in (2, 7):
-        hl = house_lords[h]
-        ordinal = {2: "2nd", 7: "7th"}[h]
-        maraka_lords.append((hl["lord"], f"{ordinal}-house lord"))
-    maraka_planet_names = {p for p, _ in maraka_lords} | {"Saturn"}
-
-    # --- Maraka dasha periods: Mahadashas ruled by a maraka planet whose
-    #     age-span overlaps or follows the indicated band. These are the
-    #     classically-flagged 'vulnerable' windows. ---
-    vulnerable_periods = []
-    for maha in dasha["timeline"]:
-        if maha["lord"] in maraka_planet_names:
-            start_age = _age_at(maha["start"], birth_utc)
-            end_age = _age_at(maha["end"], birth_utc)
-            # Only windows that reach into or past the band's lower edge.
-            if end_age >= low - 5:
-                role = "natural maraka (Saturn)" if maha["lord"] == "Saturn" else \
-                    next((r for p, r in maraka_lords if p == maha["lord"]), "maraka")
-                sa = max(0, int(round(start_age)))
-                ea = int(round(end_age))
-                vulnerable_periods.append({
-                    "lord": maha["lord"], "role": role,
-                    "start_age": sa,
-                    "end_age": ea,
-                    "start_year": birth_year + sa,
-                    "end_year": birth_year + ea,
-                })
-
-    # --- Possible causes: the health themes of the maraka planets, plus the
-    #     6th (disease) and 8th (manner/chronic) house significations. ---
-    cause_themes = []
-    for planet in sorted(maraka_planet_names):
-        theme = _PLANET_HEALTH_THEME.get(planet)
-        if theme:
-            cause_themes.append(f"{planet} (a maraka here) classically signifies {theme}")
-    sixth = house_lords[6]
-    cause_themes.append(
-        f"the 6th house of illness is ruled by {sixth['lord']} (in {sixth['lord_sign']}), "
-        f"pointing broadly to {_PLANET_HEALTH_THEME.get(sixth['lord'], 'its own significations')}"
-    )
-
-    # --- Assemble the readable text ---
-    parts = []
-    parts.append(
-        f"Indicated longevity band: {band} — the classical '{band_desc}' — which this app maps to "
-        f"roughly age {low}-{high} (around the years {year_low}-{year_high}). Most likely age "
-        f"(midpoint estimate only): about {most_likely_age}, i.e. around the year {most_likely_year}."
-    )
-    parts.append(
-        f"This band comes from a simplified strength reading of the 1st house/lord (vitality: "
-        f"{first['lord']} in {first['lord_sign']}), the 8th house/lord (the house of longevity "
-        f"itself: {eighth['lord']} in {eighth['lord_sign']}), Saturn as the ayushkaraka "
-        f"(longevity significator), and the benefic vs. malefic planets occupying the 1st and 8th."
-    )
-    if vulnerable_periods:
-        period_bits = [
-            f"the {vp['lord']} Mahadasha ({vp['role']}), spanning roughly age {vp['start_age']}-{vp['end_age']} "
-            f"(years {vp['start_year']}-{vp['end_year']})"
-            for vp in vulnerable_periods
-        ]
-        parts.append(
-            "Classically-flagged vulnerable periods (Maraka Mahadashas — the 2nd- and 7th-house "
-            "lords and Saturn are the traditional 'markers of transition'): " + "; ".join(period_bits) + "."
-        )
-    parts.append(
-        "Possible symbolic health themes (NOT a diagnosis): " + "; ".join(cause_themes) + "."
-    )
-    parts.append(_LONGEVITY_CAVEAT)
-
-    return {
-        "title": "Longevity & Lifespan (Ayurdaya)",
-        "band": band,
-        "age_low": low,
-        "age_high": high,
-        "most_likely_age": most_likely_age,
-        "most_likely_year": most_likely_year,
-        "year_low": year_low,
-        "year_high": year_high,
-        "cause_themes": cause_themes,
-        "strength_score": score,
-        "maraka_planets": sorted(maraka_planet_names),
-        "vulnerable_periods": vulnerable_periods,
-        "text": "\n\n".join(parts),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Children / Progeny prospects.
-#
-# NUMBER: given as a BAND/tendency (fewer / average / more than one), the
-# same honesty-over-false-precision approach this app already uses for
-# Longevity (a lifespan BAND, not an exact date) - not an evasion, this is
-# genuinely as far as the underlying technique (5th-house/Jupiter/Putrakaraka
-# strength) goes; no classical method converges on an exact digit from a
-# natal chart alone, so a fabricated precise number would be less honest
-# than the band given here, not more informative.
-#
-# GENDER: still deliberately NOT estimated, and this is the one place in the
-# whole app where a direct request was not fully followed - stated here
-# openly rather than silently: a classical technique for this DOES exist
-# (the D7/Saptamsha Ascendant's odd/even sign), but astrology-driven gender
-# prediction attached to birth-chart software carries a real, specific,
-# documented harm in exactly the cultural context this app is built for
-# (India's ongoing sex-selective-abortion problem, illegal but persistent) -
-# unlike the children-COUNT tendency above, this isn't a precision trade-off,
-# it's a targeted real-world harm this app won't be a vector for, regardless
-# of how many classical texts describe the technique.
-# ---------------------------------------------------------------------------
-_CHILDREN_CAVEAT = (
-    "The number below is a TENDENCY/band, not an exact count - no classical method converges on a "
-    "precise digit from a natal chart alone (the same honesty-over-false-precision approach this app "
-    "uses for Longevity, which also gives a band rather than an exact date). Gender is deliberately "
-    "NOT estimated: a classical technique for it exists (the D7/Saptamsha chart), but astrology-driven "
-    "gender prediction carries a real, documented harm (sex-selective practices) in the cultural "
-    "context this app is built for, and this app will not be a vector for that regardless of the "
-    "classical technique's existence. Read everything here as reflection, not a verdict."
-)
-
-
-def _family_size_tendency(ease_score):
-    if ease_score >= 3:
-        return "more than one child, with relative ease"
-    if ease_score >= 1:
-        return "a supported, average-sized family"
-    if ease_score == 0:
-        return "genuinely mixed/inconclusive from this alone"
-    return "a more restrained or delayed path - possibly fewer children, or children arriving later and with more deliberate effort"
-
-
-def _build_children_prospects(chart, planets_reading, house_lords, karakas):
-    hl5 = house_lords[5]
-    lord_dignity = get_dignity(hl5["lord"], hl5["lord_sign"])
-    jupiter_sign = planets_reading["Jupiter"]["sign"]
-    jupiter_dignity = get_dignity("Jupiter", jupiter_sign)
-    pk = chara_karaka.get_karaka(karakas, "PK")
-    fifth_house_occupants = [p for p, d in chart["planets"].items() if d["house"] == 5]
-    benefics_in_5th = [p for p in fifth_house_occupants if p in _BENEFICS]
-    malefics_in_5th = [p for p in fifth_house_occupants if p in _MALEFICS]
-
-    bits = [
-        f"The 5th house (children) is ruled by {hl5['lord']}, sitting in {hl5['lord_sign']} in your "
-        f"{ordinal(hl5['placed_in_house'])} house - classically {lord_dignity} there.",
-        f"Jupiter, the traditional significator of children, is {jupiter_dignity} in {jupiter_sign}.",
-        f"The Putrakaraka (Jaimini's own children-significator) is {pk['planet']}, in "
-        f"{planets_reading[pk['planet']]['sign']}.",
-    ]
-    if benefics_in_5th:
-        bits.append(
-            f"{', '.join(benefics_in_5th)} sitting directly in the 5th house is classically supportive "
-            "for warmth, nurturing, and relative ease in this area of life."
-        )
-    if malefics_in_5th:
-        bits.append(
-            f"{', '.join(malefics_in_5th)} in the 5th house classically suggests this area may call for "
-            "more patience, care, or deliberate effort - not a denial, just a theme worth attention."
-        )
-
-    ease_score = (
-        (1 if lord_dignity in ("exalted", "own") else -1 if lord_dignity == "debilitated" else 0)
-        + (1 if jupiter_dignity in ("exalted", "own") else -1 if jupiter_dignity == "debilitated" else 0)
-        + len(benefics_in_5th) - len(malefics_in_5th)
-    )
-    if ease_score >= 2:
-        theme = "Overall this area of the chart leans comfortable and supported."
-    elif ease_score <= -1:
-        theme = "Overall this area of the chart suggests more effort, patience, or timing sensitivity than ease."
-    else:
-        theme = "Overall this area of the chart is mixed - neither strongly eased nor strongly challenged."
-    bits.append(theme)
-
-    family_size = _family_size_tendency(ease_score)
-    bits.append(f"Family-size TENDENCY (a band, not an exact count - see caveat): {family_size}.")
-    bits.append(_CHILDREN_CAVEAT)
-
-    return {
-        "title": "Children",
-        "fifth_house_lord": hl5["lord"],
-        "fifth_house_lord_sign": hl5["lord_sign"],
-        "fifth_house_lord_dignity": lord_dignity,
-        "jupiter_sign": jupiter_sign,
-        "jupiter_dignity": jupiter_dignity,
-        "putrakaraka": pk["planet"],
-        "benefics_in_5th_house": benefics_in_5th,
-        "malefics_in_5th_house": malefics_in_5th,
-        "family_size_tendency": family_size,
-        "text": " ".join(bits),
-        "caveat": _CHILDREN_CAVEAT,
-    }
-
-
 # ---------------------------------------------------------------------------
 # Medical Astrology - a SEPARATE section (its own tab), not folded into
-# Life Predictions' Health & Vitality card. Reuses _PLANET_HEALTH_THEME,
-# _MALEFICS/_BENEFICS (already defined above for Longevity), and the exact
-# maraka-style age-window derivation pattern from _build_longevity, just
-# flagging different significators (6th/8th lords + Saturn, not 2nd/7th).
-# Same strong "not medical advice" framing as Longevity.
+# Life Predictions' Health & Vitality card. Reuses _PLANET_HEALTH_THEME and
+# _MALEFICS/_BENEFICS (defined above). Strong "not medical advice" framing.
 # ---------------------------------------------------------------------------
 _MEDICAL_CAVEAT = (
     "IMPORTANT: This is a traditional, symbolic health-THEMES indication from classical Vedic "
@@ -1584,8 +1297,8 @@ _MEDICAL_OVERVIEW = (
     "body area. Four placements matter most: the Ascendant (Lagna) and its lord for overall "
     "vitality and constitution; the 6th house and its lord for disease, immunity, and daily health "
     "battles; the 8th house and its lord for chronic, hidden, or long-developing conditions; and "
-    "Saturn, the classical Ayushkaraka (significator of the body's endurance and of chronic, "
-    "slow-onset conditions) wherever it sits. The Moon is read separately as the significator of "
+    "Saturn, the classical significator of the body's endurance and of chronic, "
+    "slow-onset conditions, wherever it sits. The Moon is read separately as the significator of "
     "the mind and emotional wellbeing, since Ayurveda and Jyotish both treat mental and physical "
     "health as linked, not separate."
 )
@@ -1705,7 +1418,7 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     if moon_supported:
         moon_text += f" {', '.join(moon_supported)} sharing that house is classically calming and supportive for it."
 
-    # --- Saturn: the Ayushkaraka, read on its own regardless of which
+    # --- Saturn: significator of endurance, read on its own regardless of which
     #     house it occupies, since it governs the body's endurance broadly. ---
     saturn_detail = planets.get("Saturn")
     saturn_dignity = get_dignity("Saturn", saturn_detail["sign"]) if saturn_detail else None
@@ -1722,9 +1435,8 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     sixth_text = _hl_text(house_lords, 6) or ""
     eighth_text = _hl_text(house_lords, 8) or ""
 
-    # Age-window cautions - same pattern as _build_longevity's maraka
-    # windows, flagging the 6th lord (disease), 8th lord (chronic/hidden),
-    # and Saturn (chronic/slow-developing conditions) instead.
+    # Age-window cautions: Mahadashas ruled by the 6th lord (disease), the
+    # 8th lord (chronic/hidden) or Saturn (chronic/slow-developing conditions).
     flagged = {sixth["lord"], eighth["lord"], "Saturn"}
     age_windows = []
     for maha in dasha["timeline"]:
@@ -1760,12 +1472,12 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
                       f"Ascendant lord {first['lord']} (overall vitality) is {first_dignity} in {first['lord_sign']}.")
     text_bits.append(moon_text)
     if saturn_text:
-        text_bits.append(f"Saturn, the Ayushkaraka: {saturn_text}")
+        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions: {saturn_text}")
     elif saturn_dignity:
-        text_bits.append(f"Saturn, the Ayushkaraka, is {saturn_dignity} in {saturn_detail['sign']}.")
+        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions, is {saturn_dignity} in {saturn_detail['sign']}.")
     text_bits.append(f"6th house (disease, daily health): {sixth_text}" if sixth_text else
                       f"The 6th house is ruled by {sixth['lord']}, {sixth_dignity} in {sixth['lord_sign']}.")
-    text_bits.append(f"8th house (chronic or hidden conditions, longevity): {eighth_text}" if eighth_text else
+    text_bits.append(f"8th house (chronic or hidden conditions): {eighth_text}" if eighth_text else
                       f"The 8th house is ruled by {eighth['lord']}, {eighth_dignity} in {eighth['lord_sign']}.")
 
     body_bits = []
@@ -1890,14 +1602,10 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
             area_word="education and learning"),
         "family_and_home": area("Family & Home", [2, 4], ["Moon"],
             area_word="home and family"),
-        "children": _build_children_prospects(chart, planets_reading, house_lords, karakas),
         "spirituality_and_inner_growth": area("Spirituality & Inner Growth", [9, 12], ["Jupiter", "Ketu"],
             area_word="spiritual life"),
         "travel_and_foreign_connections": area("Travel & Foreign Connections", [3, 9, 12], [],
             area_word="travel and foreign ties"),
-        # Longevity is intentionally placed LAST so it reads after the
-        # life-area predictions above, and carries its own strong caveat.
-        "longevity_and_lifespan": _build_longevity(chart, planets_reading, house_lords, dasha),
     }
     predictions["caveat"] = _LIFE_PREDICTIONS_CAVEAT
     return predictions
@@ -2082,12 +1790,9 @@ def generate_reading(chart):
           "life_predictions": {"career_and_profession": {...}, "wealth_and_finances": {...},
                                 "marriage_and_relationships": {...}, "health_and_vitality": {...},
                                 "education_and_learning": {...}, "family_and_home": {...},
-                                "children": {...}, "spirituality_and_inner_growth": {...},
+                                "spirituality_and_inner_growth": {...},
                                 "travel_and_foreign_connections": {...},
-                                "longevity_and_lifespan": {"title", "band", "age_low", "age_high",
-                                                            "most_likely_age", "maraka_planets",
-                                                            "vulnerable_periods", "text"},
-                                "caveat": "..."},
+                                "caveat": "..."},   # (no children or lifespan/longevity sections)
           "year_by_year": {"years": [{age, calendar_year, mahadasha_lord, antardasha_lord,
                                        pratyantardasha_lord, houses_activated, muntha_sign,
                                        muntha_theme, note}, ...], "caveat": "..."},

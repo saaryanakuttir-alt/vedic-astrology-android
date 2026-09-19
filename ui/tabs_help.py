@@ -56,7 +56,7 @@ class HelpTab(BoxLayout):
         self.add_widget(chip_scroll)
 
         self._chips = {}
-        self._add_chip("all", "\U0001F5C2", "All topics")
+        self._add_chip("all", "", "All topics")
         for cat in FAQ_CATEGORIES:
             if cat["items"]:
                 self._add_chip(cat["id"], cat["icon"], cat["title"])
@@ -70,7 +70,7 @@ class HelpTab(BoxLayout):
         self._refresh()
 
     def _add_chip(self, cat_id, icon, title):
-        chip = ChipButton(f"{icon} {title}")
+        chip = ChipButton(title)
         chip.bind(on_release=lambda *_a, cid=cat_id: self._select_category(cid))
         self.chip_row.add_widget(chip)
         self._chips[cat_id] = chip
@@ -97,7 +97,7 @@ class HelpTab(BoxLayout):
                 continue
             any_shown = True
             head = Label(
-                text=f"{cat['icon']}  {cat['title'].upper()}", color=theme.GOLD,
+                text=cat["title"].upper(), color=theme.GOLD,
                 bold=True, font_size="12sp", size_hint_y=None, height=dp(30),
                 halign="left", valign="middle",
             )

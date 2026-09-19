@@ -236,6 +236,10 @@ class YogasTab(BoxLayout):
                       color=theme.GOLD_SOFT, text_size=(None, None))
         label.bind(texture_size=lambda inst, ts: setattr(label, "height", max(dp(28), ts[1] + dp(8))))
         label.bind(width=lambda inst, w: setattr(label, "text_size", (w, None)))
+        # The box must keep following the label's height as the text wraps at the
+        # real width; setting it once (before wrapping) let the label grow out of
+        # its box and print over the caption above and the checkbox below.
+        label.bind(height=lambda inst, h: setattr(self.summary_area, "height", h))
         self.summary_area.add_widget(label)
         self.summary_area.height = label.height
 

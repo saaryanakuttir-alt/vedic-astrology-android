@@ -84,7 +84,7 @@ _MUNTHA_HOUSE_THEME = {
     2: "money, family, and speech",
     3: "effort, courage, and siblings",
     4: "home, comfort, and inner peace",
-    5: "creativity, romance, and children",
+    5: "creativity, romance, and learning",
     6: "work, routine, and obstacles to push through",
     7: "partnerships and one-to-one dealings",
     8: "change, shared resources, and the unexpected",

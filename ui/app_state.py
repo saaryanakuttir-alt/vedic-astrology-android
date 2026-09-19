@@ -4,7 +4,15 @@ from the desktop app's gui_app.py (PROFILE_IDS / PROFILE_LABELS / the
 per-profile {"inputs", "chart", "reading"} dict) with all tkinter Variable
 plumbing removed. This is plain Python state; each screen reads/writes it
 directly and calls back into whatever needs to refresh.
+
+The store also owns the two things kept on the device between runs (see
+ui/persist.py): `saved` (birth details saved for quick recall) and `settings`.
 """
+import copy
+import os
+import tempfile
+
+from ui.persist import SavedBirths, Settings
 
 CHILD_SLOT_COUNT = 4
 
@@ -27,7 +35,10 @@ class ProfileStore:
     and reading (both None until Generate Chart succeeds for that profile).
     """
 
-    def __init__(self):
+    def __init__(self, data_dir=None):
+        data_dir = data_dir or tempfile.mkdtemp(prefix="vedic_astrology_")
+        self.saved = SavedBirths(os.path.join(data_dir, "saved_births.json"))
+        self.settings = Settings(os.path.join(data_dir, "settings.json"))
         self.profiles = {
             pid: {"inputs": dict(BLANK_INPUTS), "chart": None, "reading": None}
             for pid in PROFILE_IDS
@@ -39,6 +50,14 @@ class ProfileStore:
     @property
     def current(self):
         return self.profiles[self.current_profile_id]
+
+    def load_saved_into(self, slot_id, record):
+        """Put a saved person's birth details into a profile slot (no chart
+        yet - the caller generates it) and make that slot current."""
+        inputs = dict(BLANK_INPUTS)
+        inputs.update(copy.deepcopy(record["inputs"]))
+        self.profiles[slot_id] = {"inputs": inputs, "chart": None, "reading": None}
+        self.current_profile_id = slot_id
 
     def generated_children(self):
         """[(label, chart, reading), ...] for every Child slot that has a

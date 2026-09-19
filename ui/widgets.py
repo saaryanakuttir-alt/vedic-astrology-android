@@ -84,6 +84,7 @@ class SimpleTable(ScrollView):
         label._bg_rect.size = label.size
 
     def _add_row(self, values, header=False):
+        row_cells = []
         for value, hint in zip(values, self.col_hints):
             # height can't be None here even though _resize_label (bound
             # below) immediately recomputes it once the label's texture is
@@ -104,6 +105,9 @@ class SimpleTable(ScrollView):
                 shorten=False,
             )
             self._make_cell_background(lbl, _HEADER_BG if header else _DATA_BG)
+            lbl._row_cells = row_cells
+            lbl._need = lbl.height
+            row_cells.append(lbl)
             lbl.bind(texture_size=self._resize_label, width=self._update_text_size)
             self.grid.add_widget(lbl)
 
@@ -121,7 +125,16 @@ class SimpleTable(ScrollView):
         label.text_size = (width, None)
 
     def _resize_label(self, label, texture_size):
-        label.height = max(dp(28), texture_size[1] + dp(10))
+        # Every cell in a row takes the height of the row's tallest cell.
+        # Kivy's GridLayout gives a row the tallest child's height but leaves
+        # shorter cells at their own height, so the gaps between them showed
+        # the grid's grey border colour as stray bars and made cell text look
+        # like it spilled across rows.
+        label._need = max(dp(28), texture_size[1] + dp(10))
+        row_height = max(c._need for c in label._row_cells)
+        for cell in label._row_cells:
+            if cell.height != row_height:
+                cell.height = row_height
 
     def clear_rows(self):
         self.grid.clear_widgets()
@@ -449,7 +462,7 @@ class ExpandableCard(BoxLayout):
         self.bind(pos=self._sync_bg, size=self._sync_bg)
 
         self.header = Button(
-            text="▸  " + question, background_normal="", background_down="",
+            text="+  " + question, background_normal="", background_down="",
             background_color=(0, 0, 0, 0), color=theme.INK, bold=True,
             font_size="14sp", halign="left", valign="middle",
             size_hint_y=None, height=dp(52), padding=(dp(14), dp(6)),
@@ -498,7 +511,7 @@ class ExpandableCard(BoxLayout):
 
     def toggle(self):
         self._open = not self._open
-        self.header.text = ("▾  " if self._open else "▸  ") + self.header.text[3:]
+        self.header.text = ("−  " if self._open else "+  ") + self.header.text[3:]
         if self._open:
             self.answer_label.opacity = 1
             self.answer_label.height = max(dp(1), self.answer_label.texture_size[1] + dp(16))

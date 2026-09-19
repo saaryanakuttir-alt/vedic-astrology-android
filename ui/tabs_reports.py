@@ -84,7 +84,7 @@ class KarmicTab(_BaseReportTab):
             "\n--- Chara Karakas (Jaimini significators) ---\n"
             f"Atmakaraka (soul): {ak['planet']} in {ak['sign']}, house {ak['house']} ({ak['nakshatra']})\n"
             f"Darakaraka (spouse): {dk['planet']} in {dk['sign']}, house {dk['house']} ({dk['nakshatra']})\n"
-            f"Putrakaraka (children): {pk['planet']} in {pk['sign']}, house {pk['house']} ({pk['nakshatra']})"
+            f"Putrakaraka (intellect & creativity): {pk['planet']} in {pk['sign']}, house {pk['house']} ({pk['nakshatra']})"
         )
         lines.append("\n\n--- The Soul's Narrative ---\n")
         # soul_narrative ends with plain_section_summary (see

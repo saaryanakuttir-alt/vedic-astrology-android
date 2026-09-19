@@ -4,9 +4,10 @@ birth-data form (name, sex, date, known/unknown time, place with live city
 suggestions, chart style), a Generate button, and the "Chart generated"
 result card with the real Lagna / Moon / Sun signs.
 
-Replaces the old Profile tab. The generate / example / profile-switching
-logic is carried over from it unchanged in behaviour; only the presentation
-follows the Classical design. Widgets stay stock-behaviour (see theme.py).
+Replaces the old Profile tab. Every successful Generate also saves the birth
+details (ui/persist.py) so they can be recalled from Saved Charts in one tap.
+Typing goes through the built-in keyboard by default (ui/keyboard.py), with a
+switch to the phone keyboard. Widgets stay stock-behaviour (see theme.py).
 """
 import datetime
 
@@ -20,23 +21,13 @@ from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.behaviors import ButtonBehavior
 
-from ui import theme
+from ui import keyboard, theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.theme import (ThemedButton, ThemedSpinner, ThemedTextInput, ThemedCheckBox,
                       SegmentedControl, Divider, OutlineBox)
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
-
-_EXAMPLE_BIRTHS = {
-    "self":    ("Example Self",    "1990", "06", "15", "14", "30", "Mumbai",    "IN", "Male"),
-    "partner": ("Example Partner", "1992", "11", "03", "09", "15", "Delhi",     "IN", "Female"),
-    "child_1": ("Example Child 1", "2016", "04", "22", "07", "45", "Bengaluru", "IN", "Male"),
-    "child_2": ("Example Child 2", "2019", "09", "10", "18", "05", "Chennai",   "IN", "Female"),
-    "child_3": ("Example Child 3", "2021", "01", "27", "11", "20", "Pune",      "IN", "Male"),
-    "child_4": ("Example Child 4", "2023", "07", "08", "22", "50", "Kolkata",   "IN", "Female"),
-}
-
 
 def show_message(title, text):
     content = BoxLayout(orientation="vertical", spacing=dp(8), padding=dp(10))
@@ -131,6 +122,18 @@ class EntryScreen(BoxLayout):
         self.editing_label = _muted("", height=dp(18))
         form.add_widget(self.editing_label)
 
+        top_row = BoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=None, height=dp(38))
+        self.kb_seg = SegmentedControl(["Built-in", "Phone"],
+                                       selected="Built-in" if keyboard.SERVICE.builtin else "Phone",
+                                       on_select=self._on_keyboard_choice)
+        top_row.add_widget(self.kb_seg)
+        top_row.add_widget(BoxLayout())
+        saved_btn = ThemedButton(text="Saved people", variant="ghost", size_hint=(None, 1), width=dp(124),
+                                 font_size="13sp")
+        saved_btn.bind(on_release=lambda *_: self.goto("library"))
+        top_row.add_widget(saved_btn)
+        form.add_widget(self._field("Keyboard", top_row, height=dp(64)))
+
         self.name_input = ThemedTextInput(multiline=False, hint_text="e.g. Asha Rao", size_hint_y=None, height=dp(46))
         form.add_widget(self._field("Name", self.name_input))
 
@@ -142,7 +145,8 @@ class EntryScreen(BoxLayout):
         dob = BoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=None, height=dp(46))
         self.day_spinner = ThemedSpinner(text="Day", values=[str(i) for i in range(1, 32)], size_hint_x=1)
         self.month_spinner = ThemedSpinner(text="Month", values=MONTHS, size_hint_x=1.7)
-        self.year_input = ThemedTextInput(multiline=False, input_filter="int", hint_text="Year", size_hint_x=1.2)
+        self.year_input = ThemedTextInput(multiline=False, input_filter="int", hint_text="Year", size_hint_x=1.2,
+                                          kb_layout="number")
         for w in (self.day_spinner, self.month_spinner, self.year_input):
             dob.add_widget(w)
         form.add_widget(self._field("Date of birth", dob, height=dp(72)))
@@ -166,11 +170,15 @@ class EntryScreen(BoxLayout):
         # place of birth + live suggestions
         self.place_input = ThemedTextInput(multiline=False, hint_text="Search city", size_hint_y=None, height=dp(46))
         self.place_input.bind(text=self._on_place_text)
-        place_box = BoxLayout(orientation="vertical", spacing=dp(4), size_hint_y=None, height=dp(46))
+        # spacing=0 on purpose: the children have fixed heights, and BoxLayout spacing between
+        # the (usually zero-height) suggestion/confirm rows pushed the input up over its caption.
+        # The 4dp gaps live in those rows' own padding instead, and appear only when they show.
+        place_box = BoxLayout(orientation="vertical", spacing=0, size_hint_y=None, height=dp(46))
         place_box.add_widget(self.place_input)
-        self.suggest_box = BoxLayout(orientation="vertical", size_hint_y=None, height=0)
+        self.suggest_box = BoxLayout(orientation="vertical", size_hint_y=None, height=0, padding=(0, dp(4), 0, 0))
         place_box.add_widget(self.suggest_box)
-        self.place_confirm = BoxLayout(orientation="horizontal", size_hint_y=None, height=0, opacity=0)
+        self.place_confirm = BoxLayout(orientation="horizontal", size_hint_y=None, height=0, opacity=0,
+                                       padding=(0, dp(4), 0, 0))
         self.place_confirm_label = _muted("", height=dp(28), size="12sp")
         self.place_confirm.add_widget(self.place_confirm_label)
         change = ThemedButton(text="Change", variant="ghost", size_hint=(None, None), size=(dp(80), dp(28)), font_size="12sp")
@@ -191,9 +199,12 @@ class EntryScreen(BoxLayout):
         ml.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         manual_row.add_widget(ml)
         form.add_widget(manual_row)
-        self.lat_input = ThemedTextInput(multiline=False, disabled=True, hint_text="28.6139", size_hint_y=None, height=dp(46))
-        self.lon_input = ThemedTextInput(multiline=False, disabled=True, hint_text="77.2090", size_hint_y=None, height=dp(46))
-        self.tz_input = ThemedTextInput(multiline=False, disabled=True, hint_text="Asia/Kolkata", size_hint_y=None, height=dp(46))
+        self.lat_input = ThemedTextInput(multiline=False, disabled=True, hint_text="28.6139", size_hint_y=None, height=dp(46),
+                                         kb_layout="decimal", kb_autocap=False)
+        self.lon_input = ThemedTextInput(multiline=False, disabled=True, hint_text="77.2090", size_hint_y=None, height=dp(46),
+                                         kb_layout="decimal", kb_autocap=False)
+        self.tz_input = ThemedTextInput(multiline=False, disabled=True, hint_text="Asia/Kolkata", size_hint_y=None, height=dp(46),
+                                        kb_autocap=False)
         for cap, w in (("Latitude", self.lat_input), ("Longitude", self.lon_input), ("Time zone", self.tz_input)):
             form.add_widget(self._field(cap, w))
 
@@ -208,18 +219,14 @@ class EntryScreen(BoxLayout):
         self.generate_btn.bind(on_release=lambda *_: self._on_generate())
         form.add_widget(self.generate_btn)
 
+        self.save_btn = ThemedButton(text="Save these details", variant="ghost", size_hint_y=None, height=dp(40),
+                                     font_size="13sp")
+        self.save_btn.bind(on_release=lambda *_: self.save_details())
+        form.add_widget(self.save_btn)
+
         # result card (built on demand)
         self.result_holder = BoxLayout(orientation="vertical", size_hint_y=None, height=0)
         form.add_widget(self.result_holder)
-
-        quick = BoxLayout(orientation="vertical", size_hint_y=None, height=dp(88), spacing=dp(4))
-        b1 = ThemedButton(text="Use example (this profile)", variant="ghost", font_size="12.5sp")
-        b1.bind(on_release=lambda *_: self._fill_example(True))
-        b2 = ThemedButton(text="Example family (fill + generate all)", variant="ghost", font_size="12.5sp")
-        b2.bind(on_release=lambda *_: self._fill_example_all())
-        quick.add_widget(b1)
-        quick.add_widget(b2)
-        form.add_widget(quick)
 
         self.status_label = _muted("Enter birth details and tap Generate chart.", height=dp(24), size="12.5sp")
         form.add_widget(self.status_label)
@@ -243,8 +250,8 @@ class EntryScreen(BoxLayout):
 
     def refresh(self):
         """Called by main whenever this screen is (re)shown. Always reloads
-        the form from the store, since a Library tap or a Sample Charts load
-        may have changed which profile is current or what it contains."""
+        the form from the store, since a Saved Charts tap may have changed
+        which profile is current or what it contains."""
         self._load_profile_into_form()
         self._render_chips()
         self._render_result()
@@ -271,6 +278,27 @@ class EntryScreen(BoxLayout):
         self._render_chips()
         self._render_result()
         self.on_chart_generated(profile_switch_only=True)
+
+    # ------------------------------------------------------------------ keyboard / saving
+    def _on_keyboard_choice(self, choice):
+        builtin = choice == "Built-in"
+        keyboard.SERVICE.set_builtin(builtin)
+        self.store.settings.set("keyboard", "builtin" if builtin else "phone")
+
+    def save_details(self):
+        """Explicit 'Save these details' button (a successful Generate also saves)."""
+        self._save_form_into_profile(self.store.current_profile_id)
+        item = self.store.saved.save(self.store.current["inputs"])
+        if item is None:
+            show_message("Not saved yet", "Enter a date of birth and a place of birth (or exact coordinates) "
+                                          "first, then save.")
+            return
+        name = item["inputs"].get("name") or "these details"
+        self._set_status(f"Saved {name}. Find them under Saved people.")
+
+    def generate_now(self):
+        """Used by Saved Charts: the details are loaded, so generate straight away."""
+        self._on_generate()
 
     # ------------------------------------------------------------------ toggles
     def _on_time_toggle(self, choice):
@@ -325,9 +353,8 @@ class EntryScreen(BoxLayout):
             b.bind(on_release=lambda inst, city=c: self._pick_place(city))
             self.suggest_box.add_widget(b)
         h = dp(40) * len(results) if results else (dp(30) if rows else 0)
-        self.suggest_box.height = h
-        self.place_box.height = dp(46) + h + dp(4) * (1 if h else 0)
-        self.place_field_row.height = dp(26) + self.place_box.height
+        self.suggest_box.height = h + (dp(4) if h else 0)
+        self._resize_place_box()
 
     def _pick_place(self, c):
         self._setting_place = True
@@ -341,15 +368,15 @@ class EntryScreen(BoxLayout):
     def _set_confirm(self, meta):
         if meta:
             self.place_confirm_label.text = f"{meta['lat']:.2f}°, {meta['lng']:.2f}° · {meta['country']}"
-            self.place_confirm.height = dp(28)
+            self.place_confirm.height = dp(32)
             self.place_confirm.opacity = 1
-            extra = dp(32)
         else:
             self.place_confirm.height = 0
             self.place_confirm.opacity = 0
-            extra = 0
-        base = dp(46) + self.suggest_box.height
-        self.place_box.height = base + extra
+        self._resize_place_box()
+
+    def _resize_place_box(self):
+        self.place_box.height = dp(46) + self.suggest_box.height + self.place_confirm.height
         self.place_field_row.height = dp(26) + self.place_box.height
 
     def _clear_place(self):
@@ -427,33 +454,6 @@ class EntryScreen(BoxLayout):
     def _set_status(self, text):
         self.status_label.text = text
 
-    # ------------------------------------------------------------------ examples
-    def _fill_example(self, save=False):
-        ex = _EXAMPLE_BIRTHS.get(self.store.current_profile_id, _EXAMPLE_BIRTHS["self"])
-        name, year, month, day, hour, minute, place, country, sex = ex
-        inp = self.store.current["inputs"]
-        inp.update({"name": name, "sex": sex, "year": year, "month": str(int(month)), "day": str(int(day)),
-                    "hour": str(int(hour)), "minute": str(int(minute)), "second": "0", "place": place,
-                    "country": country, "use_manual_coords": False, "time_known": "yes", "place_meta": None})
-        self._load_profile_into_form()
-        self._render_chips()
-
-    def _fill_example_all(self):
-        current = self.store.current_profile_id
-        generated = []
-        for pid in PROFILE_IDS:
-            self._save_form_into_profile(self.store.current_profile_id)
-            self.store.current_profile_id = pid
-            self._fill_example()
-            if self._generate_current_profile(quiet=True):
-                generated.append(PROFILE_LABELS[pid])
-        self.store.current_profile_id = current
-        self._load_profile_into_form()
-        self._render_chips()
-        self._render_result()
-        self.on_chart_generated(profile_switch_only=False)
-        show_message("Example family generated", "Generated sample charts for:\n- " + "\n- ".join(generated))
-
     # ------------------------------------------------------------------ generate
     def _on_generate(self):
         if self._loading:
@@ -522,8 +522,10 @@ class EntryScreen(BoxLayout):
 
         self.store.profiles[pid]["chart"] = chart
         self.store.profiles[pid]["reading"] = reading
+        saved = self.store.saved.save(inp)
         self._set_status(f"Chart generated for {PROFILE_LABELS[pid]} ({name}) - Ascendant "
-                         f"{chart['ascendant']['sign']} {chart['ascendant']['degree_in_sign']:.2f} degrees.")
+                         f"{chart['ascendant']['sign']} {chart['ascendant']['degree_in_sign']:.2f} degrees."
+                         + (" Details saved." if saved else ""))
         if not quiet:
             self._render_chips()
             self._render_result()

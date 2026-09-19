@@ -6,6 +6,8 @@ Windows desktop app and the web app (see engine/, a bundled copy of
 chart_engine/*.py + kb/ + data/): chart math, knowledge-base lookups, Chara
 Karakas, Karmic & Past Life, Life Predictions, Medical Astrology, year-by-
 year predictions and Family Compatibility are the engine's own output.
+(This app has no lifespan/longevity or children predictions, and no sample
+charts - see README_ANDROID.md.)
 
 Navigation follows the Birth Chart App design handoff: a Home menu of cards,
 a header whose gold diamond mark always returns Home, and a 4-tab bottom bar
@@ -43,7 +45,7 @@ from kivy.uix.floatlayout import FloatLayout
 # resizing the whole Window on every keyboard show/hide.
 Window.softinput_mode = "below_target"
 
-from ui import theme
+from ui import keyboard, theme
 from ui.app_state import ProfileStore
 from ui.tabs_chart import ChartTab
 from ui.tabs_entry import EntryScreen
@@ -52,7 +54,6 @@ from ui.tabs_family import FamilyTab
 from ui.tabs_help import HelpTab
 from ui.tabs_home import HomeScreen, LibraryScreen
 from ui.tabs_reports import FullReadingTab, KarmicTab, LifePredictionsTab
-from ui.tabs_sample import SampleChartsTab
 from ui.tabs_tables import (
     AshtakvargaTab, ChalitTab, DashaTab, HousesTab, KundliDetailsTab, PlanetsTab, YogasTab,
 )
@@ -64,7 +65,11 @@ BOTTOM_NAV = [("entry", "Chart", "diamond"), ("dasha", "Dasha", "clock"),
 class VedicAstrologyApp(App):
     def build(self):
         self.title = "Vedic Astrology"
-        self.store = ProfileStore()
+        # VEDIC_DATA_DIR lets the desktop tests keep their files out of the real app folder.
+        self.store = ProfileStore(os.environ.get("VEDIC_DATA_DIR") or self.user_data_dir)
+        # Built-in keyboard unless the user switched to the phone keyboard. Must be set
+        # before any screen is built: text fields read it when they are created.
+        keyboard.SERVICE.builtin = self.store.settings.get("keyboard", "builtin") != "phone"
         Window.clearcolor = theme.BG
         self._screens = {}
         self.current_key = None
@@ -73,7 +78,7 @@ class VedicAstrologyApp(App):
         self._registry = {
             "home": ("Home", lambda: HomeScreen(self.store, self.goto)),
             "entry": ("New Chart", lambda: EntryScreen(self.store, self._on_chart_generated, self.goto)),
-            "library": ("Saved Charts", lambda: LibraryScreen(self.store, self.goto, self._open_profile)),
+            "library": ("Saved Charts", lambda: LibraryScreen(self.store, self.goto, self._load_saved)),
             "chart": ("Chart Diagram", lambda: ChartTab(self.store)),
             "kundli": ("Kundli Details", lambda: KundliDetailsTab(self.store)),
             "planets": ("Planets", lambda: PlanetsTab(self.store)),
@@ -89,19 +94,22 @@ class VedicAstrologyApp(App):
             "relationship": ("Relationship Themes", lambda: RelationshipTab(self.store)),
             "full": ("Full Reading", lambda: FullReadingTab(self.store)),
             "family": ("Family Compatibility", lambda: FamilyTab(self.store)),
-            "sample": ("Sample Charts", lambda: SampleChartsTab(self.store, on_chart_generated=self._on_chart_generated)),
             "help": ("Help & About", lambda: HelpTab()),
         }
 
         root = FloatLayout()
         root.add_widget(theme.GradientBackground(size_hint=(1, 1)))
-        shell = BoxLayout(orientation="vertical", size_hint=(1, 1), pos_hint={"x": 0, "y": 0})
+        shell = self._shell = BoxLayout(orientation="vertical", size_hint=(1, 1), pos_hint={"x": 0, "y": 0})
         self.header = theme.AppHeader(on_home=lambda: self.goto("home"))
         self.content = BoxLayout(orientation="vertical")
         self.bottom = theme.BottomNav(BOTTOM_NAV, on_select=lambda k: self.goto(k))
         shell.add_widget(self.header)
         shell.add_widget(self.content)
+        # The built-in keyboard is docked between the content and the bottom bar; while it is
+        # up, the bottom bar steps aside so the form keeps as much room as possible.
+        shell.add_widget(keyboard.SERVICE.make_panel())
         shell.add_widget(self.bottom)
+        keyboard.SERVICE.on_visibility = self._on_keyboard_visibility
         root.add_widget(shell)
 
         Window.bind(on_keyboard=self._on_keyboard)
@@ -112,6 +120,7 @@ class VedicAstrologyApp(App):
     def goto(self, key, preset=None):
         if key not in self._registry:
             key = "home"
+        keyboard.SERVICE.hide()
         # leaving the New Chart screen: keep whatever was typed
         leaving = self._screens.get(self.current_key)
         if leaving is not None and hasattr(leaving, "save_now"):
@@ -132,18 +141,37 @@ class VedicAstrologyApp(App):
         if hasattr(screen, "refresh"):
             screen.refresh()
 
-    def _open_profile(self, profile_id):
-        """Library row tapped: make that slot current and show it in New Chart."""
-        self.store.current_profile_id = profile_id
+    def _load_saved(self, saved_id, slot_id):
+        """A saved person was tapped in Saved Charts: put their details into
+        the chosen profile slot, show New Chart, and generate the chart."""
+        record = self.store.saved.get(saved_id)
+        if record is None:
+            return
+        self.store.load_saved_into(slot_id, record)
         self.goto("entry")
+        self._screens["entry"].generate_now()
 
     def _on_chart_generated(self, profile_switch_only):
         """Screens re-read the store in refresh() every time they are shown,
         so there is nothing to push here - kept as the callback the entry
-        and sample screens expect."""
+        screen expects."""
+
+    def _on_keyboard_visibility(self, visible):
+        # Take the bottom bar OUT of the layout while the keyboard is up (rather than
+        # shrinking it to zero height): its fixed-size icons and labels would still
+        # overhang the bottom of the screen and swallow touches meant for the
+        # keyboard's bottom row (space, Done, 0).
+        if visible and self.bottom.parent is self._shell:
+            self._shell.remove_widget(self.bottom)
+        elif not visible and self.bottom.parent is None:
+            self._shell.add_widget(self.bottom, index=0)
 
     def _on_keyboard(self, window, key, *args):
-        # Android back button: step back to Home, then let the OS exit.
+        # Android back button: close the built-in keyboard first, then step back to
+        # Home, then let the OS exit.
+        if key == 27 and keyboard.SERVICE.visible:
+            keyboard.SERVICE.hide()
+            return True
         if key == 27 and self.current_key != "home":
             self.goto("home")
             return True

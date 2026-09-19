@@ -65,27 +65,6 @@
       "verified": true
     },
     {
-      "id": "DIV-D7",
-      "category": "divisional_charts",
-      "tradition": "Parashari",
-      "varga": "D7",
-      "name": "Saptamsha",
-      "division_scheme": "Each sign is divided into 7 equal parts of approximately 4°17'8\" each.",
-      "primary_use": "children, progeny",
-      "priority": "medium",
-      "overview": "Used to assess matters of children and progeny in more detail than the main chart's 5th house alone provides, including the general prospects for having children, their wellbeing, and multi-generational (grandchildren) themes.",
-      "calculation_note": "The starting sign for the seven divisions depends on whether the birth sign is odd or even, following a fixed classical rule.",
-      "expansion_scope_note": "This entry is the reference/overview layer only (what this chart is, how it's derived, and what it's used for). Per the checklist's own phasing note ('Do not start until Phase 3 core categories are verified'), the full per-planet-per-sign interpretive expansion for this varga (9 planets x 12 signs, following the same pattern as the planet_in_sign category) is intentionally deferred to a later phase and is not included here.",
-      "keywords": [
-        "children",
-        "progeny",
-        "5th house refinement",
-        "generational themes"
-      ],
-      "status": "verified",
-      "verified": true
-    },
-    {
       "id": "DIV-D12",
       "category": "divisional_charts",
       "tradition": "Parashari",
