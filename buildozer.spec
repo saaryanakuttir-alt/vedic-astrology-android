@@ -5,11 +5,11 @@ package.name = vedicastrology
 package.domain = org.vedicastro
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,json,csv,tab,txt,ttf
+source.include_exts = py,png,jpg,kv,atlas,json,csv,tab,txt
 source.include_patterns = engine/kb/*.json,engine/data/*.csv,engine/data/*.tab
-source.exclude_dirs = tests,tools,ci,bin,.github,__pycache__
+source.exclude_dirs = tests,tools,ci,shelved_language_switch,bin,.github,__pycache__
 
-version = 1.5.1
+version = 1.5.2
 
 # pyswisseph: no official python-for-android recipe exists, so this project
 # ships one (see recipes/pyswisseph/__init__.py) via p4a.local_recipes below.

@@ -6,6 +6,8 @@ already unit-tested, GUI-independent) — this file just draws it with Kivy
 graphics instructions instead of gui_app.py's tkinter Canvas calls.
 """
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.core.text import Label as CoreLabel
@@ -17,7 +19,7 @@ import chart_geometry as cg
 from astrology_tables import SIGN_ABBR
 from panchanga import SIGNS
 from ui import theme
-from ui.widgets import CaptionLabel, LongText
+from ui.widgets import CaptionLabel, FlowText, LongText
 from ui.theme import ThemedSpinner as Spinner
 
 VARGA_CHOICES = [
@@ -269,7 +271,17 @@ class ChartTab(BoxLayout):
         controls.add_widget(self.varga_spinner)
         self.add_widget(controls)
 
-        self.add_widget(CaptionLabel(
+        # Everything below the two pickers is ONE scrolling page: caption, the chart at a
+        # comfortable square size, then this person's own explanation. Before, the chart was
+        # stretched to fill whatever height was left and the explanation had a small box of
+        # its own at the bottom; now the chart simply scrolls up as you read on.
+        self._scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
+        page = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        page.bind(minimum_height=page.setter("height"))
+        self._scroll.add_widget(page)
+        self.add_widget(self._scroll)
+
+        page.add_widget(CaptionLabel(
             "A visual diagram of your chart, showing which sign/house each planet falls "
             "in. 'D1' (Rasi) is your main birth chart; the other 'D' options are "
             "specialized zoom-ins classical texts use for specific life areas (e.g. D9 for "
@@ -277,15 +289,16 @@ class ChartTab(BoxLayout):
         ))
 
         self.info_label = Label(text="No chart generated yet.", size_hint_y=None, height=dp(28))
-        self.add_widget(self.info_label)
+        page.add_widget(self.info_label)
 
-        self.canvas_widget = ChartCanvas()
-        self.add_widget(self.canvas_widget)
+        self.canvas_widget = ChartCanvas(size_hint_y=None, height=dp(360))
+        page.bind(width=lambda inst, w: setattr(self.canvas_widget, "height", max(w, dp(300))))
+        page.add_widget(self.canvas_widget)
 
         # This person's own placements in the selected chart, in plain
         # language first and the denser classical wording after it.
-        self.explain = LongText(size_hint_y=None, height=dp(170))
-        self.add_widget(self.explain)
+        self.explain = FlowText()
+        page.add_widget(self.explain)
 
     def _varga_key(self):
         label = self.varga_spinner.text
@@ -326,6 +339,7 @@ class ChartTab(BoxLayout):
             self.explain.set_text("")
             return
         self.explain.set_text(self._explanation_text(self._varga_key()))
+        self._scroll.scroll_y = 1
         varga_key = self._varga_key()
         asc_sign = cg.ascendant_sign_for_varga(chart, varga_key)
         self.info_label.text = f"Ascendant ({varga_key}): {asc_sign}"

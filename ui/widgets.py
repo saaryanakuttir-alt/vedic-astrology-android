@@ -31,14 +31,12 @@ _HEADER_BG = theme.SURFACE
 _DATA_BG = theme.BG
 
 
-class SimpleTable(ScrollView):
-    """SimpleTable(columns=["A","B"], col_hints=[0.3,0.7]) then
-    .set_rows([("a1","b1"), ("a2","b2"), ...]). Pass font_size to shrink
-    text for tables with many columns (e.g. Ashtakvarga's 13) - the
-    default suits most of this app's tables (up to ~9 columns)."""
+class _TableMixin:
+    """The table itself (header row, cells, row-height sharing), used by both
+    SimpleTable (scrolls inside its own box) and FlowTable (grows to its full
+    height so an outer page can scroll it together with other content)."""
 
-    def __init__(self, columns, col_hints=None, font_size="13sp", **kwargs):
-        super().__init__(**kwargs)
+    def _init_table(self, columns, col_hints=None, font_size="13sp"):
         self.columns = columns
         self.col_hints = col_hints or [1.0 / len(columns)] * len(columns)
         self.font_size = font_size
@@ -51,8 +49,6 @@ class SimpleTable(ScrollView):
             Color(*_BORDER_COLOR)
             self._grid_bg = Rectangle(pos=self.grid.pos, size=self.grid.size)
         self.grid.bind(pos=self._update_grid_bg, size=self._update_grid_bg)
-        self.add_widget(self.grid)
-        self._add_row(self.columns, header=True)
 
     def _update_grid_bg(self, instance, value):
         self._grid_bg.pos = instance.pos
@@ -144,6 +140,32 @@ class SimpleTable(ScrollView):
         self.clear_rows()
         for row in rows:
             self._add_row(row, header=False)
+
+
+class SimpleTable(_TableMixin, ScrollView):
+    """SimpleTable(columns=["A","B"], col_hints=[0.3,0.7]) then
+    .set_rows([("a1","b1"), ("a2","b2"), ...]). Pass font_size to shrink
+    text for tables with many columns (e.g. Ashtakvarga's 13) - the
+    default suits most of this app's tables (up to ~9 columns)."""
+
+    def __init__(self, columns, col_hints=None, font_size="13sp", **kwargs):
+        super().__init__(**kwargs)
+        self._init_table(columns, col_hints, font_size)
+        self.add_widget(self.grid)
+        self._add_row(self.columns, header=True)
+
+
+class FlowTable(_TableMixin, BoxLayout):
+    """Same table, but as tall as its rows: it never scrolls on its own, so it can sit
+    inside a page (a ScrollView) followed by more content. Same API as SimpleTable."""
+
+    def __init__(self, columns, col_hints=None, font_size="13sp", **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        super().__init__(orientation="vertical", **kwargs)
+        self._init_table(columns, col_hints, font_size)
+        self.add_widget(self.grid)
+        self.grid.bind(height=lambda inst, h: setattr(self, "height", h))
+        self._add_row(self.columns, header=True)
 
 
 def _split_into_chunks(text, max_chars=400):

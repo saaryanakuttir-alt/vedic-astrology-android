@@ -37,6 +37,7 @@ class ProfileStore:
 
     def __init__(self, data_dir=None):
         data_dir = data_dir or tempfile.mkdtemp(prefix="vedic_astrology_")
+        self.data_dir = data_dir
         self.saved = SavedBirths(os.path.join(data_dir, "saved_births.json"))
         self.settings = Settings(os.path.join(data_dir, "settings.json"))
         self.profiles = {

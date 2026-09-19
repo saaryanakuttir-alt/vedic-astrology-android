@@ -290,22 +290,29 @@ filetype, pytest).
 ## Version 1.5 changes (2026-09-19)
 
 * **Year-by-year relationship outlook removed** (see 1.4 above).
-* **Language switch, stage 1 (English / हिन्दी / বাংলা)**, fully offline. Readable translations
-  live in `i18n_src/hi.py` and `bn.py`; `python tools/build_i18n.py` (needs `uharfbuzz` and
-  `fonttools`) generates `engine/i18n_hi.py`, `i18n_bn.py` and the fonts `fonts/IndicHi-*.ttf`,
-  `IndicBn-*.ttf`. Runtime is `engine/i18n.py` (`t()`; English text is the key, a missing
-  translation shows English) and `ui/fonts.py`. The switch is on the Home screen; the choice is
-  remembered and every screen is rebuilt on change. Stage 1 translates titles, bottom bar and
-  Home cards. Still to do: forms, tables, help/FAQ, "In simple terms" texts, and the long
-  classical text (~3,300 distinct sentences in the KB plus the text the engine composes).
-* **Why the tool pre-joins letters:** Kivy's text engine (SDL2_ttf, on desktop AND on the
-  OnePlus, confirmed on the device) does not shape Devanagari/Bengali - vowel signs land on the
-  wrong side and conjuncts do not form. The tool shapes every translated word with HarfBuzz
-  on the PC and bakes each syllable into the font as one glyph (private-use code point), so the
-  app draws plain characters. Generated i18n files therefore look unreadable; edit `i18n_src/`.
-* Original Noto fonts (build inputs) are in `tools/fonts_src/` (not shipped); licence:
-  `fonts/OFL-NotoSans.txt`.
+* **Language switch was built and then SHELVED** (see version 1.5.2): everything is in `shelved_language_switch/` (not shipped).
 * Signing: CI now exports ANDROID_PREFS_ROOT/USER_HOME/SDK_HOME so Gradle really uses
   `ci/debug.keystore` (verified: the APK's certificate SHA-256 matches). Updates from
   1.4.1 on install over the previous build and keep saved data.
+
+## Version 1.5.2 changes (2026-09-19)
+
+* **Hindi/Bengali buttons removed** and the whole language feature moved to `shelved_language_switch/`
+  (README inside explains it). The owner wanted ALL text, including the long classical readings,
+  in the chosen language; that needs a very large translation run plus proofreading, and a
+  half-translated app was not wanted. Confirmed on the OnePlus: Kivy's text engine cannot shape
+  Devanagari/Bengali; the shelved `tools/build_i18n.py` shows a workable pre-joining approach.
+* **Chart Diagram is one scrolling page** (`ui/tabs_chart.py`): caption, the chart at a square size,
+  then the explanation, instead of a stretched chart above a small text box.
+* **Planets (Planet in House / Planet in Sign) and Family Compatibility** are one scrolling page too,
+  using the new `FlowTable` / `FlowText` widgets (`ui/widgets.py`): the table is as tall as its rows
+  instead of a small self-scrolling box.
+* **Compact | Detailed reading** switch on every long reading (Life Predictions, Karmic, Full Reading,
+  Relationship, Medical, Predictions), remembered in settings (`ui/reading_mode.py`, `ui/compact.py`).
+  Compact keeps each section's heading and its "[In simple terms ...]" explanation.
+* **PDF report** (Full Reading > "Save PDF report"): `ui/pdf_writer.py` (dependency-free PDF writer),
+  `ui/pdf_report.py` (cover page, chart diagram as vector lines, planet table, readings; follows the
+  Compact/Detailed choice; credit and page numbers in the footer), `ui/export.py` (Android: saved to
+  Downloads/VedicAstrology through MediaStore, no permission needed, with an Open button; desktop:
+  <data folder>/reports). Tests: `tests/test_pdf.py` and the desktop smoke test.
 

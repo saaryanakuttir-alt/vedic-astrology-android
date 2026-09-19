@@ -7,9 +7,17 @@ about it) onto the LongText widget instead of a tk.Text.
 """
 import traceback
 
+from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.logger import Logger
 
+from kivy.metrics import dp
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+
+from ui import export, pdf_report, reading_mode, theme
+from ui.reading_mode import ReadingModeBar
+from ui.theme import ThemedButton
 from ui.widgets import LongText, CaptionLabel, ItalicSummaryLabel
 from ui.app_state import PROFILE_LABELS
 
@@ -24,8 +32,15 @@ class _BaseReportTab(BoxLayout):
         self.store = store
         if self.caption:
             self.add_widget(CaptionLabel(self.caption))
+        # Compact / Detailed switch (see ui/reading_mode.py); changing it redraws this report
+        self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
+        self.add_widget(self.mode_bar)
+        self.add_extra_controls()
         self.text_view = LongText()
         self.add_widget(self.text_view)
+
+    def add_extra_controls(self):
+        """Hook for a subclass that wants more controls under the Compact/Detailed switch."""
 
     def _build_text(self, reading):
         """Subclasses implement this: return the report's full text for a
@@ -40,12 +55,13 @@ class _BaseReportTab(BoxLayout):
         raise NotImplementedError
 
     def refresh(self):
+        self.mode_bar.sync()
         reading = self.store.current["reading"]
         if reading is None:
             self.text_view.set_text("No chart generated yet for this profile.")
             return
         try:
-            text = self._build_text(reading)
+            text = reading_mode.apply(self.store, self._build_text(reading))
         except Exception:  # noqa: BLE001 - deliberately broad, see _build_text's docstring
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:{type(self).__name__}: _build_text failed:\n{tb}")
@@ -141,7 +157,61 @@ class LifePredictionsTab(_BaseReportTab):
 
 
 class FullReadingTab(_BaseReportTab):
-    caption = "Everything from the other tabs combined into one complete, readable report."
+    caption = ("Everything from the other tabs combined into one complete, readable report. "
+               "Use 'Save PDF report' to keep it as a file you can open, print or share.")
+
+    def add_extra_controls(self):
+        row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(52), padding=(dp(10), dp(4)))
+        self.pdf_button = ThemedButton(text="Save PDF report", variant="primary")
+        self.pdf_button.bind(on_release=lambda *_: self._save_pdf())
+        row.add_widget(self.pdf_button)
+        self.add_widget(row)
+
+    def _save_pdf(self):
+        data = self.store.current
+        if data["chart"] is None or data["reading"] is None:
+            self._popup("No chart yet", "Generate a chart for this profile first, then save its PDF report.")
+            return
+        self.pdf_button.text = "Creating PDF..."
+        self.pdf_button.disabled = True
+        Clock.schedule_once(lambda dt: self._finish_pdf(data), 0.08)      # let the button repaint first
+
+    def _finish_pdf(self, data):
+        try:
+            pdf = pdf_report.build_pdf(data["chart"], data["reading"], style=self.store.chart_style,
+                                       mode=reading_mode.current(self.store))
+            saved = export.save_pdf(pdf, pdf_report.safe_filename(data["chart"].get("name")), self.store.data_dir)
+            self._popup("PDF saved", f"{saved.where}\n\nOpen it from your Files / Downloads app, or tap Open.",
+                        open_fn=saved.open_fn)
+        except Exception as exc:  # noqa: BLE001 - shown to the user
+            Logger.error(f"VedicAstro:FullReadingTab: PDF failed:\n{traceback.format_exc()}")
+            self._popup("Could not create the PDF", str(exc))
+        finally:
+            self.pdf_button.text = "Save PDF report"
+            self.pdf_button.disabled = False
+
+    def _popup(self, title, message, open_fn=None):
+        content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(12))
+        label = Label(text=message, halign="left", valign="top")
+        label.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+        content.add_widget(label)
+        buttons = BoxLayout(orientation="horizontal", spacing=dp(10), size_hint_y=None, height=dp(46))
+        popup = Popup(title=title, content=content, size_hint=(0.9, None), height=dp(300))
+        if open_fn is not None:
+            def _open(*_):
+                popup.dismiss()
+                try:
+                    open_fn()
+                except Exception as exc:  # noqa: BLE001 - e.g. no PDF viewer installed
+                    self._popup("Could not open it", f"{exc}\n\nThe file is saved; open it from your Files app.")
+            open_btn = ThemedButton(text="Open", variant="primary")
+            open_btn.bind(on_release=_open)
+            buttons.add_widget(open_btn)
+        ok = ThemedButton(text="OK", variant="secondary")
+        ok.bind(on_release=popup.dismiss)
+        buttons.add_widget(ok)
+        content.add_widget(buttons)
+        popup.open()
 
     def _build_text(self, reading):
         r = reading

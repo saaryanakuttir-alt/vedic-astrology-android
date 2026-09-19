@@ -8,10 +8,12 @@ method did, from the currently selected profile's chart/reading.
 import datetime
 
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
+from kivy.uix.scrollview import ScrollView
 from kivy.metrics import dp
 
-from ui.widgets import SimpleTable, CaptionLabel, LongText
+from ui.widgets import SimpleTable, FlowTable, FlowText, CaptionLabel, LongText
 from ui.theme import ThemedCheckBox as CheckBox
 from ui import theme
 from panchanga import SIGNS
@@ -125,7 +127,7 @@ class KundliDetailsTab(_BaseTableTab):
         self.table.set_rows(rows)
 
 
-class PlanetsTab(_BaseTableTab):
+class PlanetsTab(BoxLayout):
     columns = ["Planet", "Sign", "Deg", "Rx", "House", "Chalit Hs", "Nakshatra", "Pada", "Dignity"]
     col_hints = [0.13, 0.13, 0.09, 0.06, 0.09, 0.11, 0.17, 0.07, 0.15]
     # 9 columns including long values (nakshatra names, the "undetermined
@@ -141,17 +143,26 @@ class PlanetsTab(_BaseTableTab):
     )
 
     def __init__(self, store, **kwargs):
-        super().__init__(store, **kwargs)
-        # "What this means" - table above is raw placement data; this is
-        # the plain-language "so what does that actually affect" reading
-        # for each planet, pulled from reading["planets"][p]["plain_gloss"]
-        # (rule_engine.py's _plain_planet_gloss) rather than the chart's
-        # own raw dict the table above reads, which has no interpretive
-        # text at all. LongText (not a table) since this is prose, one
-        # paragraph per planet - already chunk-safe, see widgets.py.
-        self.add_widget(CaptionLabel("What this means for you, planet by planet:"))
-        self.gloss_text = LongText(size_hint_y=0.55)
-        self.add_widget(self.gloss_text)
+        super().__init__(orientation="vertical", **kwargs)
+        self.store = store
+        # ONE scrolling page: caption, the whole placement table at its full height, then the
+        # plain-language reading for each planet. (Before, the table was a small box that scrolled
+        # on its own above a second scrolling box for the text.)
+        scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
+        page = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        page.bind(minimum_height=page.setter("height"))
+        scroll.add_widget(page)
+        self.add_widget(scroll)
+        self._scroll = scroll
+        page.add_widget(CaptionLabel(self.caption))
+        self.table = FlowTable(self.columns, self.col_hints, font_size=self.font_size)
+        page.add_widget(self.table)
+        # "What this means" - the table is raw placement data; this is the plain-language "so what
+        # does that actually affect" reading for each planet, from reading["planets"][p]["plain_gloss"]
+        # (rule_engine.py's _plain_planet_gloss). One paragraph per planet.
+        page.add_widget(CaptionLabel("What this means for you, planet by planet:"))
+        self.gloss_text = FlowText()
+        page.add_widget(self.gloss_text)
 
     def refresh(self):
         from astrology_tables import get_dignity
@@ -170,6 +181,7 @@ class PlanetsTab(_BaseTableTab):
                 detail["nakshatra"], detail["nakshatra_pada"], dignity,
             ))
         self.table.set_rows(rows)
+        self._scroll.scroll_y = 1
 
         reading = self.store.current["reading"]
         if reading is None:

@@ -9,12 +9,14 @@ uses it.
 import traceback
 
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
+from kivy.uix.scrollview import ScrollView
 from kivy.metrics import dp
 from kivy.clock import Clock
 from kivy.logger import Logger
 
-from ui.widgets import SimpleTable, LongText, CaptionLabel
+from ui.widgets import FlowTable, FlowText, CaptionLabel
 from ui.app_state import PROFILE_LABELS
 from ui.theme import ThemedButton as Button
 
@@ -50,12 +52,17 @@ class FamilyTab(BoxLayout):
                                  texture_size=self._resize_summary_label)
         self.add_widget(self.summary_label)
 
-        self.table = SimpleTable(["Koota", "Points", "Max"], [0.5, 0.25, 0.25])
-        self.table.size_hint_y = 0.35
-        self.add_widget(self.table)
-
-        self.report_text = LongText(size_hint_y=0.65)
-        self.add_widget(self.report_text)
+        # the Koota table and the report below it are ONE scrolling page (the table used to be a
+        # small box that scrolled on its own, cutting rows off above a second box of text)
+        self._scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
+        page = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        page.bind(minimum_height=page.setter("height"))
+        self._scroll.add_widget(page)
+        self.add_widget(self._scroll)
+        self.table = FlowTable(["Koota", "Points", "Max"], [0.5, 0.25, 0.25])
+        page.add_widget(self.table)
+        self.report_text = FlowText()
+        page.add_widget(self.report_text)
 
     def _update_summary_text_size(self, label, width):
         label.text_size = (width, None)

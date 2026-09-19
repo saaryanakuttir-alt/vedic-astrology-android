@@ -15,7 +15,8 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
-from ui import theme
+from ui import reading_mode, theme
+from ui.reading_mode import ReadingModeBar
 from ui.app_state import PROFILE_LABELS
 from ui.tabs_reports import _BaseReportTab
 from ui.tabs_chart import BodyMapCanvas
@@ -78,6 +79,7 @@ class MedicalTab(BoxLayout):
         self.content.clear_widgets()
         self._chart = None
         self.content.add_widget(CaptionLabel(self.caption))
+        self.content.add_widget(ReadingModeBar(self.store, self.refresh))
         m = reading.get("medical_astrology") if reading else None
         if not m or chart is None:
             note = FlowText()
@@ -121,7 +123,7 @@ class MedicalTab(BoxLayout):
         self.content.add_widget(legend)
 
         body = FlowText()
-        body.set_text(m["caveat"] + "\n\n" + m["text"])
+        body.set_text(reading_mode.apply(self.store, m["caveat"] + "\n\n" + m["text"]))
         self.content.add_widget(body)
 
     def _on_style(self, choice):
@@ -193,6 +195,8 @@ class PredictionsTab(BoxLayout):
         buttons.add_widget(now_btn)
         buttons.add_widget(go)
         self.add_widget(buttons)
+        self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
+        self.add_widget(self.mode_bar)
         # picking a day/month, or finishing the year (keyboard closed), updates the prediction
         self.day_spinner.bind(text=lambda *_: self.refresh())
         self.month_spinner.bind(text=lambda *_: self.refresh())
@@ -212,7 +216,8 @@ class PredictionsTab(BoxLayout):
             self.text_view.set_text("No chart generated yet for this profile.")
             return
         try:
-            self.text_view.set_text(self._build(data["chart"], data["reading"]))
+            self.mode_bar.sync()
+            self.text_view.set_text(reading_mode.apply(self.store, self._build(data["chart"], data["reading"])))
         except Exception:  # noqa: BLE001 - show the error on screen rather than a blank tab
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:PredictionsTab: failed:\n{tb}")

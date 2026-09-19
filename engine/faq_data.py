@@ -94,11 +94,19 @@ FAQ_CATEGORIES = [
              "wrong or frightening answer does real harm, so they were "
              "left out. What remains is the chart itself and its "
              "traditional themes, to be read as reflection rather than fact."),
-            ("What's the difference between 'Concise' and 'Detailed' report mode?",
-             "Concise keeps the short 'in simple terms' summary for each "
-             "section; Detailed adds the full traditional reasoning "
-             "underneath it. Same underlying analysis either way - Concise "
-             "is just the same conclusions with less reading."),
+            ("What's the difference between 'Compact' and 'Detailed' reading?",
+             "Use the Compact | Detailed switch at the top of any long "
+             "reading. Compact keeps each section's heading and its short "
+             "'in simple terms' summary; Detailed adds the full traditional "
+             "wording underneath. Same analysis either way - Compact is just "
+             "the same conclusions with less reading. It also decides how long "
+             "your PDF report is."),
+            ("How do I get a PDF report?",
+             "Open Full Reading and tap 'Save PDF report'. It makes a PDF with "
+             "your birth details, the chart diagram, the planet table and the "
+             "readings (short or long, following the Compact | Detailed switch), "
+             "saves it in your phone's Downloads/VedicAstrology folder, and "
+             "offers to open it. Nothing is uploaded anywhere."),
             ("What do the Weekly & Monthly predictions use, if not AI?",
              "Classical Gochara (transit) astrology: where the real planets "
              "are positioned RIGHT NOW relative to your birth Moon, plus "

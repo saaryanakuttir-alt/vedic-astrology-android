@@ -242,6 +242,9 @@ ct.style_spinner.text = "South Indian"; pump(12)
 check(app.store.chart_style == "South Indian" and ct.style_spinner.text == "South Indian"
       and ct.canvas_widget.style == "South Indian", "Chart Diagram: choosing South Indian sticks")
 ct.style_spinner.text = "North Indian"; pump(12)
+check(ct.canvas_widget.height >= 300 and abs(ct.canvas_widget.height - ct._scroll.width) < 2, f"Chart Diagram: chart is a square block ({ct.canvas_widget.height:.0f}dp), not stretched")
+check(ct._scroll.children[0].height > ct._scroll.height, "Chart Diagram: page is taller than the screen, so the text below the chart scrolls into view")
+check(len(ct.explain.children) > 3, "Chart Diagram: explanation text is on the scrolling page")
 check(ct.canvas_widget.style == "North Indian" and app.store.chart_style == "North Indian", "...and back to North Indian")
 
 app.goto("medical"); pump(12)
@@ -278,19 +281,47 @@ tap(hp.search_input)
 check(panel.visible, "Help search box opens the keyboard without freezing")
 press("Done")
 
-print("== language switch (offline Hindi / Bengali)")
-import i18n
+print("== Compact / Detailed reading and the PDF report")
+from kivy.uix.popup import Popup
+def total_len(screen):
+    return sum(len(str(getattr(w, "text", ""))) for w in walk(screen.text_view))
+app.store.current_profile_id = "self"
+app.goto("life"); pump(12)
+life = app._screens["life"]
+detailed_len = total_len(life)
+life.mode_bar.seg.select("Compact"); pump(14)
+compact_len = total_len(life)
+check(compact_len < detailed_len / 2, f"Life Predictions: Compact is much shorter ({compact_len} vs {detailed_len} characters)")
+check(app.store.settings.get("reading_mode") == "compact", "the Compact choice is remembered")
+app.goto("karmic"); pump(10)
+check(app._screens["karmic"].mode_bar.seg.selected == "Compact", "another screen shows the same choice")
+app.goto("medical"); pump(12)
+mtxt = " ".join(texts(app._screens["medical"]))
+check("[In simple terms" in mtxt or "In simple terms" in mtxt, "Medical (Compact) keeps the plain-words explanations")
+app.goto("life"); pump(8)
+app._screens["life"].mode_bar.seg.select("Detailed"); pump(14)
+check(total_len(app._screens["life"]) > compact_len * 2, "back to Detailed restores the full text")
+
+app.goto("full"); pump(12)
+full = app._screens["full"]
+reports = os.path.join(os.environ["VEDIC_DATA_DIR"], "reports")
+tap(full.pdf_button); pump(30, 0.06)
+files = os.listdir(reports) if os.path.isdir(reports) else []
+check(len(files) == 1 and files[0].endswith(".pdf"), f"Save PDF report wrote a file ({files})")
+if files:
+    data = open(os.path.join(reports, files[0]), "rb").read()
+    check(data.startswith(b"%PDF") and len(data) > 5000, f"the file is a real PDF ({len(data)} bytes)")
+check(any(isinstance(w, Popup) for w in Window.children), "a 'PDF saved' message is shown")
+for w in list(Window.children):
+    if isinstance(w, Popup): w.dismiss()
+pump(6)
+check(full.pdf_button.text == "Save PDF report" and not full.pdf_button.disabled, "the PDF button is ready again")
+app._screens["full"].mode_bar.seg.select("Detailed"); app.store.settings.set("reading_mode", "detailed")
+
+print("== no language switch")
 app.goto("home"); pump(8)
-check(len([w for w in walk(app._screens["home"]) if type(w).__name__ == "LanguageBar"]) == 1, "Home has the language bar")
-app.set_language("hi"); pump(12)
-check(i18n.get_language() == "hi" and app.header.title_label.text == i18n.t("Home") != "Home", "Hindi: header title translated")
-check(any(x == i18n.t("Birth Chart") for x in texts(app._screens["home"])), "Hindi: Home cards translated")
-check(app.store.settings.get("language") == "hi", "the language choice is remembered")
-app.goto("entry"); pump(8); check(app.current_key == "entry", "screens still open in Hindi")
-app.set_language("bn"); pump(12)
-check(i18n.get_language() == "bn" and app.current_key == "entry", "Bengali: switching keeps you on the same screen")
-app.set_language("en"); pump(12)
-check(i18n.get_language() == "en" and app.header.title_label.text == "New Chart", "back to English")
+check(not [w for w in walk(app._screens["home"]) if type(w).__name__ == "LanguageBar"], "Home has no language buttons")
+check(not any(str(getattr(w, "text", "")) in ("English",) for w in walk(app._screens["home"])), "no English/Hindi/Bengali buttons on Home")
 
 print("\nRESULT:", "PASS" if not FAILS else f"{len(FAILS)} FAILURE(S)")
 for f in FAILS: print(" -", f)
