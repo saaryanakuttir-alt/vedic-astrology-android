@@ -271,3 +271,19 @@ filetype, pytest).
   Help search) hung the app - the keyboard's scroll-into-view search looped forever
   at the top of the widget tree. Now bounded; covered by `tests/desktop_smoke.py`.
 
+## Version 1.4 changes (2026-09-19)
+
+* **Relationship Themes: year-by-year outlook from age 6 to 80**
+  (`relationship_themes.yearly_relationship_outlook`). Each year gets a level
+  (Low / Moderate / High / Very high) from the Mahadasha/Antardasha/Pratyantardasha
+  lords (Venus, the 7th, 5th and 11th lords, the Moon), the Muntha in the
+  5th/7th/11th house, and Jupiter's transit that year over the 7th/5th house. The
+  levels compare the years of one chart with each other; they are NOT
+  probabilities. Ages 6-17 describe friendships and emotional bonds only, with
+  no romance/partnership/physical wording (enforced by a test); adult years
+  say "romance or partnership (emotional or physical)". Thresholds were
+  calibrated on 40 random charts (about 34% Low, 36% Moderate, 24% High, 5% Very high).
+* **Stable signing key** (`ci/debug.keystore`, used by the workflow): from 1.4 on,
+  a new build installs over the previous one and keeps its saved data. The step
+  from a build made before 1.4 needs one uninstall.
+

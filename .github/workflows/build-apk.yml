@@ -60,6 +60,16 @@ jobs:
           # produced a working, installable debug APK end to end.
           pip install "buildozer==1.5.0" "cython==0.29.36"
 
+      - name: Use the fixed debug signing key
+        run: |
+          # Without this every run generates a brand-new random debug key, and Android
+          # refuses to install a build over one signed with a different key (the old app
+          # must be uninstalled first, erasing its saved data). The key lives in
+          # ci/debug.keystore (standard Android debug key: alias androiddebugkey,
+          # password "android"); it is a debug key, not a secret.
+          mkdir -p ~/.android
+          cp ci/debug.keystore ~/.android/debug.keystore
+
       - name: Build debug APK with Buildozer
         run: |
           # This runner has several JDKs pre-installed (8/11/17/21/25), and

@@ -134,7 +134,8 @@ class RelationshipTab(_BaseReportTab):
     caption = (
         "Classical indicators of relationship TENDENCIES in your OWN chart - never predictions of behaviour and "
         "never evidence about a partner. Includes a marriage/relationship-count tendency (a band, not a number) "
-        "and a karmic read on why relationships take the shape they do."
+        "and a karmic read on why relationships take the shape they do. Ends with a year-by-year outlook from "
+        "age 6 showing when relationships are most emphasised in the chart."
     )
 
     def _build_text(self, reading):
@@ -154,7 +155,36 @@ class RelationshipTab(_BaseReportTab):
                 lines.append(f"- {i}")
         if rel.get("deep_discussion"):
             lines.append("\n\n--- Full discussion ---\n" + rel["deep_discussion"])
+        yearly = rel.get("yearly_outlook")
+        if yearly:
+            lines.append("\n\n" + self._yearly_text(yearly))
         return "\n".join(lines)
+
+    @staticmethod
+    def _yearly_text(y):
+        """The year-by-year section. Every year is its own paragraph (blank-line
+        separated) so the reader shows one small label per year."""
+        out = [f"--- Year by year from age {y['from_age']}: how strongly relationships are emphasised ---",
+               y["caveat"],
+               "[In simple terms: picture each year as having its own 'relationship weather'. Low is a quiet "
+               "year, Moderate is some movement, High is a lively year for relationships, and Very high is the "
+               "strongest stretch in this chart. It shows when the chart makes relationships more likely to "
+               "come into focus - it does not mean anything will happen, and it says nothing about anyone else.]"]
+        if y["standouts"]:
+            shown = ", ".join(str(a) for a in y["standouts"][:14])
+            more = f" (and {len(y['standouts']) - 14} more)" if len(y["standouts"]) > 14 else ""
+            out.append(f"Years that stand out most from age 18: ages {shown}{more}.")
+        else:
+            out.append("No year from age 18 reaches High in this chart - relationship themes stay fairly steady.")
+        groups = ((6, 12), (13, 17), (18, y["to_age"]))
+        for lo, hi in groups:
+            block = [e for e in y["years"] if lo <= e["age"] <= hi]
+            if not block:
+                continue
+            out.append(f"=== Ages {block[0]['age']}-{block[-1]['age']}: {block[0]['kind']} ===")
+            for e in block:
+                out.append(f"Age {e['age']} ({e['calendar_year']}) - {e['level'].upper()}: {e['plain']}")
+        return "\n\n".join(out)
 
 
 class PredictionsTab(BoxLayout):
