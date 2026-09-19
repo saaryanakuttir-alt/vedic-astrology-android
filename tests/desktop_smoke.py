@@ -81,7 +81,7 @@ check(app.header.title_label.text == "Home", "header title is Home")
 print("== Home cards navigate")
 home = app._screens["home"]
 cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 20, f"20 home cards (got {len(cards)})")
+check(len(cards) == 23, f"23 home cards (got {len(cards)})")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -317,6 +317,29 @@ for w in list(Window.children):
 pump(6)
 check(full.pdf_button.text == "Save PDF report" and not full.pdf_button.disabled, "the PDF button is ready again")
 app._screens["full"].mode_bar.seg.select("Detailed"); app.store.settings.set("reading_mode", "detailed")
+
+print("== Doshas, Planet by Planet and Shodashvarga screens")
+app.store.current_profile_id = "self"
+for key, expect in (("doshas", ["Manglik", "Kalsarpa", "Sade Sati", "Dhaiya"]),
+                    ("relations", ["Verdict", "What may happen", "Which planets get along", "Conjunction"]),
+                    ("shodashvarga", ["D27", "D40", "D45", "D60"])):
+    app.goto(key); pump(14)
+    blob = " ".join(texts(app._screens[key]))
+    check("hit an error" not in blob, f"{key}: no error text on screen")
+    for word in expect:
+        check(word in blob, f"{key}: shows '{word}'")
+    check("D7" not in blob.split() and "Saptamsha" not in blob, f"{key}: no Saptamsha / children chart")
+app.goto("doshas"); pump(6)
+app._screens["doshas"].mode_bar.seg.select("Compact"); pump(14)
+compact_doshas = " ".join(texts(app._screens["doshas"]))
+check("What may happen" not in compact_doshas and "In simple terms" in compact_doshas, "Doshas: Compact keeps the plain-words lines only")
+app._screens["doshas"].mode_bar.seg.select("Detailed"); pump(14)
+app.goto("chart"); pump(6)
+chart_screen = app._screens["chart"]
+for label in ("Saptavimsamsa (D27)", "Khavedamsa (D40)", "Akshavedamsa (D45)"):
+    chart_screen.varga_spinner.text = label; pump(8)
+    check(chart_screen.info_label.text.startswith("Ascendant ("), f"chart picker shows {label}")
+chart_screen.varga_spinner.text = "Rasi (D1)"; pump(4)
 
 print("== no language switch")
 app.goto("home"); pump(8)

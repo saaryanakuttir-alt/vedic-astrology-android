@@ -27,7 +27,8 @@ VARGA_CHOICES = [
     ("Chaturthamsa (D4)", "D4"), ("Navamsa (D9)", "D9"),
     ("Dasamsa (D10)", "D10"), ("Dwadasamsa (D12)", "D12"), ("Shodasamsa (D16)", "D16"),
     ("Vimsamsa (D20)", "D20"), ("Chaturvimsamsa (D24)", "D24"),
-    ("Trimsamsa (D30)", "D30"), ("Shashtiamsa (D60)", "D60"),
+    ("Saptavimsamsa (D27)", "D27"), ("Trimsamsa (D30)", "D30"), ("Khavedamsa (D40)", "D40"),
+    ("Akshavedamsa (D45)", "D45"), ("Shashtiamsa (D60)", "D60"),
 ]
 
 
@@ -325,6 +326,12 @@ class ChartTab(BoxLayout):
         reading = self.store.current["reading"]
         cd = ((reading or {}).get("chart_descriptions") or {}).get(varga_key)
         if not cd:
+            import extras
+            for key, name, purpose in extras.SHODASHVARGA:
+                if key == varga_key:
+                    return (f"[In simple terms: the {name} chart ({key}) is a 'zoom-in' on {purpose}. Read it like your "
+                            "main chart - see which sign each planet falls in and whether the planets look comfortable "
+                            "there. It adds detail to the main chart and never overrides it.]")
             return ""
         return "\n\n".join([cd.get("plain_explanation", ""), "In classical terms:", cd.get("text", "")]).strip()
 

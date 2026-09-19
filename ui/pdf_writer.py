@@ -93,6 +93,12 @@ class Pdf:
             op += b"%.2f %.2f %.2f %.2f re S Q" % (x, y, w, h)
         self._ops.append(op)
 
+    def polygon(self, points, fill):
+        """A filled polygon (no outline) through `points` [(x, y), ...]."""
+        r, g, b = fill
+        path = b" ".join(b"%.2f %.2f %s" % (x, y, b"m" if i == 0 else b"l") for i, (x, y) in enumerate(points))
+        self._ops.append(b"q %.3f %.3f %.3f rg " % (r, g, b) + path + b" f Q")
+
     # ---- serialise
     def output(self):
         objs = []                                    # index i holds object number i+1

@@ -1,14 +1,17 @@
 """
-pdf_report.py - builds the PDF report for one profile: cover page with the birth details, the
-chart diagram (drawn as vector lines), the planet table, then the readings. Pure Python (no Kivy);
-the readings follow the Compact / Detailed choice (ui/compact.py).
+pdf_report.py - builds the PDF report for one profile. DETAILED: cover and birth details, panchang,
+the birth chart, planet table, a good/mixed/needs-care verdict for every planet, doshas and Sade Sati,
+planet friendships and aspects, all 14 divisional charts plus the Shodashvarga table, Chalit,
+Ashtakvarga, the full Vimshottari table, the Medical Astrology body map and every reading. COMPACT: the
+same opening, doshas at a glance and the short readings. Pure Python (no Kivy); text follows the
+Compact / Detailed choice (ui/compact.py).
 
     data = build_pdf(chart, reading, style="North Indian", mode="detailed")   # -> bytes of a .pdf
 """
 import datetime
 
 import chart_geometry as cg
-from astrology_tables import SIGN_ABBR, get_dignity
+from astrology_tables import PLANET_ABBR, SIGN_ABBR, get_dignity
 from panchanga import SIGNS
 from ui.compact import compact_text
 from ui.pdf_writer import PAGE_H, PAGE_W, Pdf, text_width, wrap
@@ -135,44 +138,73 @@ class _Doc:
         self.y -= 8
 
 
-def _draw_chart(doc, chart, style, size=250):
-    pdf = doc.pdf
-    x0 = MARGIN + (doc.width - size) / 2
-    ytop = doc.y
+TINT = (0.96, 0.88, 0.72)          # shading for houses that hold a planet linked with strain (body map)
+STRAIN = {"Su", "Ma", "Sa", "Ra", "Ke"}
+
+
+def _draw_chart_at(pdf, chart, style, varga, x0, ytop, size, body=None):
+    """One chart with its top-left corner at (x0, ytop). `varga` is 'D1', 'D9', ...; `body` is
+    {house: short body-area name} for the Medical Astrology map (labels every house and shades
+    the houses holding Sun, Mars, Saturn, Rahu or Ketu)."""
     sy = ytop - size
-    house_planets = cg.build_house_planet_map(chart, "D1")
+    fs = 8 if size >= 220 else 6.8
+    asc = cg.ascendant_sign_for_varga(chart, varga)
     if style == "South Indian":
         cell = size / 4.0
+        sign_planets = cg.build_sign_planet_map(chart, varga)
+        for sign, (row, col) in cg.SOUTH_INDIAN_GRID.items():
+            if body and any(n in STRAIN for n in sign_planets[sign]):
+                pdf.rect(x0 + col * cell, sy + (3 - row) * cell, cell, cell, width=0, fill=TINT)
         for i in range(5):
             pdf.line(x0, sy + i * cell, x0 + size, sy + i * cell, width=0.8, color=GOLD)
             pdf.line(x0 + i * cell, sy, x0 + i * cell, sy + size, width=0.8, color=GOLD)
-        sign_planets = cg.build_sign_planet_map(chart, "D1")
-        asc = chart["ascendant"]["sign"]
         for sign, (row, col) in cg.SOUTH_INDIAN_GRID.items():
             cx0, cy0 = x0 + col * cell, sy + (3 - row) * cell
-            pdf.text(cx0 + 3, cy0 + cell - 9, SIGN_ABBR.get(sign, sign[:3]), size=6.5, color=MUTED)
+            house = (SIGNS.index(sign) - SIGNS.index(asc)) % 12 + 1
+            label = SIGN_ABBR.get(sign, sign[:3]) + (f" {house} {body.get(house, '')}" if body else "")
+            pdf.text(cx0 + 3, cy0 + cell - fs - 1, label, size=fs - 1.3, color=MUTED)
             names = (["ASC"] if sign == asc else []) + sign_planets[sign]
-            for n, line in enumerate(_pairs(names)):
-                pdf.text(cx0 + cell / 2 - text_width(line, 8, True) / 2, cy0 + cell / 2 + 6 - n * 10, line, size=8, bold=True)
-    else:
-        def pt(p):
-            return x0 + p[0] * size, ytop - p[1] * size
-        for a, b in cg.NORTH_INDIAN_FRAME_LINES:
-            (ax, ay), (bx, by) = pt(a), pt(b)
-            pdf.line(ax, ay, bx, by, width=0.8, color=GOLD)
-        sign_map = cg.north_indian_sign_map(chart["ascendant"]["sign"])
-        for house, hd in cg.NORTH_INDIAN_HOUSES.items():
-            cen = cg.polygon_centroid(hd["polygon"])
-            ov = hd["outer_vertex"]
-            nx, ny = pt((ov[0] + (cen[0] - ov[0]) * 0.4, ov[1] + (cen[1] - ov[1]) * 0.4))
-            num = str(SIGNS.index(sign_map[house]) + 1)
-            pdf.text(nx - text_width(num, 6.5) / 2, ny - 3, num, size=6.5, color=MUTED)
-            cx, cy = pt(cen)
-            names = (["ASC"] if house == 1 else []) + house_planets[house]
             lines = _pairs(names)
             for n, line in enumerate(lines):
-                pdf.text(cx - text_width(line, 8, True) / 2, cy + (len(lines) - 1) * 5 - n * 10 - 3, line, size=8, bold=True)
-    doc.y = sy - 10
+                pdf.text(cx0 + cell / 2 - text_width(line, fs, True) / 2,
+                         cy0 + cell / 2 + (len(lines) - 1) * fs * 0.6 - n * (fs + 2) - 3, line, size=fs, bold=True)
+        return
+    house_planets = cg.build_house_planet_map(chart, varga)
+
+    def pt(p):
+        return x0 + p[0] * size, ytop - p[1] * size
+
+    if body:
+        for house, hd in cg.NORTH_INDIAN_HOUSES.items():
+            if any(n in STRAIN for n in house_planets[house]):
+                pdf.polygon([pt(v) for v in hd["polygon"]], TINT)
+    for a, b in cg.NORTH_INDIAN_FRAME_LINES:
+        (ax, ay), (bx, by) = pt(a), pt(b)
+        pdf.line(ax, ay, bx, by, width=0.8, color=GOLD)
+    sign_map = cg.north_indian_sign_map(asc)
+    for house, hd in cg.NORTH_INDIAN_HOUSES.items():
+        cen = cg.polygon_centroid(hd["polygon"])
+        ov = hd["outer_vertex"]
+        nx, ny = pt((ov[0] + (cen[0] - ov[0]) * 0.4, ov[1] + (cen[1] - ov[1]) * 0.4))
+        num = str(SIGNS.index(sign_map[house]) + 1)
+        pdf.text(nx - text_width(num, fs - 1.3) / 2, ny - 3, num, size=fs - 1.3, color=MUTED)
+        cx, cy = pt(cen)
+        names = (["ASC"] if house == 1 else []) + house_planets[house]
+        lines = _pairs(names)
+        if body:
+            label = f"{house} {body.get(house, '')}".strip()
+            pdf.text(cx - text_width(label, fs - 1.5) / 2, cy + (len(lines) * (fs + 2)) / 2 + 1, label, size=fs - 1.5, color=MUTED)
+            cy -= 3
+        for n, line in enumerate(lines):
+            pdf.text(cx - text_width(line, fs, True) / 2, cy + (len(lines) - 1) * (fs + 2) / 2 - n * (fs + 2) - 3, line,
+                     size=fs, bold=True)
+
+
+def _draw_chart(doc, chart, style, size=250, varga="D1", body=None):
+    doc.ensure(size + 12)
+    x0 = MARGIN + (doc.width - size) / 2
+    _draw_chart_at(doc.pdf, chart, style, varga, x0, doc.y, size, body)
+    doc.y -= size + 10
 
 
 def _pairs(names):
@@ -182,11 +214,206 @@ def _pairs(names):
     return [" ".join(names[i:i + 2]) for i in range(0, len(names), 2)]
 
 
+# ---------------------------------------------------------------- the extra sections
+def _fmt_date(value):
+    if isinstance(value, str):
+        value = datetime.datetime.fromisoformat(value)
+    return f"{value:%d %b %Y}"
+
+
+def _heading_para(doc, text):
+    """A block in the '--- Heading ---' convention: heading, then its paragraphs."""
+    for para in text.split("\n\n"):
+        para = para.strip()
+        if not para:
+            continue
+        lines = para.split("\n")
+        if lines[0].startswith(("---", "===")):
+            doc.heading(lines[0].strip("-= ").strip())
+            para = "\n".join(lines[1:]).strip()
+            if not para:
+                continue
+        doc.paragraph(para)
+
+
+def _kundli_facts(doc, chart):
+    p, d, av = chart["panchang"], chart["day_details"], chart["avkahada_chakra"]
+    pairs = [
+        ("Weekday", chart["day_of_week"]), ("Tithi", f"{p['tithi']['name']} ({p['tithi']['paksha']} paksha)"),
+        ("Yoga", p["yoga"]["name"]), ("Karana", p["karana"]["name"]),
+        ("Sunrise / Sunset", f"{d['sunrise_local']} / {d['sunset_local']}"), ("Day length", d["day_duration"]),
+        ("Ayanamsa (Lahiri)", f"{chart['resolved_datetime']['ayanamsa_value_deg']:.4f} deg"),
+        ("Varna", av["varna"]), ("Vashya", av["vasya"]), ("Yoni", av["yoni"]), ("Gana", av["gana"]), ("Nadi", av["nadi"]),
+    ]
+    rows = []
+    for i in range(0, len(pairs), 2):
+        a, b = pairs[i], pairs[i + 1]
+        rows.append([a[0], str(a[1]), b[0], str(b[1])])
+    doc.heading("Panchang and birth classifications")
+    doc.table(["Item", "Value", "Item", "Value"], rows, [90, 157, 90, 158])
+
+
+def _age_span(r):
+    a, b = f"{max(r['start_age'], 0):.0f}", f"{r['end_age']:.0f}"
+    return a if a == b else f"{a} - {b}"
+
+
+def _sade_sati_rows(rows):
+    return [[r["kind"].split(" (")[0], r["phase"].replace("Saturn in the ", "Saturn "), r["sign"],
+             f"{r['start']:%d %b %Y}", f"{r['end']:%d %b %Y}", _age_span(r)]
+            for r in rows]
+
+
+def _doshas_section(doc, chart, mode, ex):
+    import extras
+    if mode == "compact":
+        doc.heading("Doshas at a glance")
+        doc.table(["Dosha", "Verdict", "Status"], [[d["name"], d["tone"], d["status"]] for d in ex["doshas"]], [200, 90, 205])
+        return
+    _heading_para(doc, "--- Doshas and Sade Sati ---\nDoshas are classical 'watch points'. Each one below says whether it is present, "
+                       "what it may mean, and what can help. They describe tendencies, not fixed fate - many people with a "
+                       "dosha live very happily, and the rest of the chart matters more.")
+    _heading_para(doc, extras.doshas_text(chart))
+    doc.heading("Sade Sati and Dhaiya through your life")
+    doc.paragraph("Sade Sati is Saturn's roughly 7.5-year walk over the sign before, the sign of and the sign after your Moon. "
+                  "Dhaiya (Small Panoti) is its 2.5-year stay in the 4th or 8th sign from your Moon. These are times that test "
+                  "patience and reward steady work - not fixed bad news. Saturn sometimes steps back into the earlier sign for a "
+                  "few months, so a phase can appear twice. Dates are approximate (a day or two either way).")
+    doc.table(["Type", "Phase", "Saturn in", "From", "To", "Age"], _sade_sati_rows(ex["sade_sati"]), [70, 130, 65, 78, 78, 74])
+
+
+def _friend_and_aspect_section(doc, chart, ex):
+    from astrology_tables import PLANET_ABBR
+    code = {"Adhi Mitra": "++", "Mitra": "+", "Sama": "=", "Shatru": "-", "Adhi Shatru": "--",
+            "friend": "+", "neutral": "=", "enemy": "-"}
+    fr = ex["friendship"]
+    seven = list(fr["compound"])
+    doc.heading("Which planets get along")
+    doc.paragraph("Each row shows how that planet feels about the planet in the column. Natural friendship is permanent; temporary "
+                  "friendship depends on how close the planets sit in YOUR chart; the combined table joins the two. Key: ++ great "
+                  "friend, + friend, = neutral, - enemy, -- great enemy. [In simple terms: it shows which planets help each other "
+                  "in your chart and which tend to work against each other.]")
+    for title, key in (("Natural friendship", "natural"), ("Temporary friendship (this chart)", "temporary"),
+                       ("Combined (five-fold) friendship", "compound")):
+        doc.paragraph(title, bold=True, color=GOLD)
+        rows = [[a] + ["." if a == b else code[fr[key][a][b]] for b in seven] for a in seven]
+        doc.table(["From"] + [PLANET_ABBR[p] for p in seven], rows, [59] + [62] * 7)
+    doc.heading("Angles between the planets (Western-style aspects)")
+    doc.paragraph("Conjunction (together) blends two planets, sextile and trine support each other, square and opposition pull "
+                  "against each other. A smaller orb means a stronger link. [In simple terms: 'easy' pairs tend to help you, "
+                  "'tense' pairs push you to act.]")
+    rows = [[f"{a['a']} - {a['b']}", a["aspect"], f"{a['orb']:.1f}", a["flow"].capitalize(), a["meaning"]] for a in ex["aspects"]]
+    doc.table(["Planets", "Angle", "Orb", "Feels", "What it means"], rows or [["None found", "", "", "", ""]], [90, 65, 35, 45, 260])
+
+
+def _divisional_section(doc, chart, style, reading):
+    import extras
+    doc.heading("All divisional charts (Shodashvarga)")
+    doc.paragraph("A divisional chart is a 'zoom-in' on one life area. Each is read like your main chart: see which sign every "
+                  "planet falls in and whether it looks comfortable there. They add detail to the main chart and never override it.")
+    size = 190
+    entries = [e for e in extras.SHODASHVARGA if e[0] != "D1"]
+    for i in range(0, len(entries), 2):
+        doc.ensure(size + 36)
+        top = doc.y
+        for col, (key, name, purpose) in enumerate(entries[i:i + 2]):
+            x0 = MARGIN + 27 + col * (size + 60)
+            doc.pdf.text(x0, top - 10, f"{key} {name}", size=9.5, bold=True, color=GOLD)
+            doc.pdf.text(x0, top - 21, purpose, size=7.5, color=MUTED)
+            _draw_chart_at(doc.pdf, chart, style, key, x0, top - 28, size)
+        doc.y = top - size - 36
+    doc.heading("Shodashvarga table - the sign of every planet in every chart")
+    head = ["Chart", "Asc"] + [PLANET_ABBR[p] for p in extras.BODIES]
+    rows = []
+    for r in extras.shodashvarga_table(chart):
+        s = r["signs"]
+        rows.append([f"{r['key']} {r['name']}", SIGN_ABBR[s["Lagna"]]] + [SIGN_ABBR[s[p]] for p in extras.BODIES])
+    doc.table(head, rows, [115, 34] + [38.5] * 9)
+    descs = (reading or {}).get("chart_descriptions") or {}
+    parts = ["--- What each divisional chart tells you ---"]
+    for key, name, purpose in extras.SHODASHVARGA:
+        if key == "D1":
+            continue
+        cd = descs.get(key)
+        parts.append(f"{key} {name} ({purpose}): " + ((cd.get("plain_explanation") or "").strip() if cd else
+                     "a zoom-in on this area of life; read the sign of each planet here like in your main chart."))
+    _heading_para(doc, "\n\n".join(parts))
+
+
+def _chalit_ashtak_section(doc, chart):
+    doc.heading("Bhava Chalit (house boundaries)")
+    by_house = {i: [] for i in range(1, 13)}
+    for planet, d in chart["planets"].items():
+        if d.get("chalit_house"):
+            by_house[d["chalit_house"]].append(PLANET_ABBR[planet])
+    rows = [[str(r["bhava"]), f"{r['begin_sign']} {r['begin_degree_in_sign']:.1f}", f"{r['madhya_sign']} {r['madhya_degree_in_sign']:.1f}",
+             ", ".join(by_house[r["bhava"]])] for r in chart["chalit"]]
+    doc.table(["House", "Begins", "Midpoint", "Planets"], rows, [50, 150, 150, 145])
+    doc.paragraph("[In simple terms: this is a finer map of where each house really starts and ends. If a planet sits close to a "
+                  "boundary, its results may be felt in the neighbouring house too.]", size=9)
+    doc.heading("Ashtakvarga (support points by sign)")
+    doc.paragraph("Each planet scores every sign from 0 to 8 - higher means that sign supports the planet more. 'Total' adds every "
+                  "planet's score for the sign. Signs with about 28 or more total points are usually the comfortable ones; "
+                  "under 25 the sign tends to need more effort. [In simple terms: when a planet or a period passes through a "
+                  "high-scoring sign, things tend to go easier; a low-scoring sign asks for more patience.]")
+    avk = chart["ashtakavarga"]
+    rows = []
+    for planet in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
+        rows.append([planet] + [str(avk["bhinnashtakavarga"][planet][s]) for s in SIGNS])
+    rows.append(["Total"] + [str(avk["sarvashtakavarga"][s]) for s in SIGNS])
+    doc.table(["Planet"] + [s[:3] for s in SIGNS], rows, [55] + [36.7] * 12)
+
+
+def _dasha_section(doc, chart):
+    birth = datetime.datetime.fromisoformat(chart["resolved_datetime"]["utc"]).replace(tzinfo=None)
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+    doc.heading("Vimshottari Dasha - the planetary periods of your life")
+    doc.paragraph("Life is divided into long periods (Mahadasha), each ruled by one planet, and each split into shorter "
+                  "sub-periods (Antardasha). The ruling planet colours that time: a well-placed planet tends to bring its good "
+                  "side, a stressed one may bring its lessons. [In simple terms: think of it as seasons of life - each planet's "
+                  "season has its own mood, and the sub-period is the weather within it.] Dates are approximate (a few days "
+                  "either way).")
+    rows = []
+    for m in chart["dasha"]["timeline"]:
+        s, e = _naive(m["start"]), _naive(m["end"])
+        rows.append([m["lord"] + (" (now)" if s <= now < e else ""), _fmt_date(s if s > birth else birth), _fmt_date(e),
+                     f"{max((s - birth).days, 0) / 365.25:.0f} - {(e - birth).days / 365.25:.0f}"])
+    doc.table(["Mahadasha", "From", "To", "Age"], rows, [150, 130, 130, 85])
+    for m in chart["dasha"]["timeline"]:
+        s, e = _naive(m["start"]), _naive(m["end"])
+        doc.paragraph(f"{m['lord']} Mahadasha ({_fmt_date(max(s, birth))} to {_fmt_date(e)}) - sub-periods", bold=True, color=GOLD)
+        ants = m["antardashas"]
+        half = (len(ants) + 1) // 2
+        rows = []
+        for i in range(half):
+            row = []
+            for a in (ants[i], ants[i + half] if i + half < len(ants) else None):
+                if a is None:
+                    row += ["", "", ""]
+                else:
+                    row += [a["lord"] + (" (now)" if _naive(a["start"]) <= now < _naive(a["end"]) else ""),
+                            _fmt_date(_naive(a["start"])), _fmt_date(_naive(a["end"]))]
+            rows.append(row)
+        doc.table(["Sub-period", "From", "To", "Sub-period", "From", "To"], rows, [70, 88, 88, 70, 88, 88], size=8)
+
+
+def _naive(v):
+    v = datetime.datetime.fromisoformat(v) if isinstance(v, str) else v
+    return v.replace(tzinfo=None) if v.tzinfo else v
+
+
 # ---------------------------------------------------------------- the report
 def build_pdf(chart, reading, style="North Indian", mode="detailed"):
+    import extras
     name = chart.get("name") or "Birth chart"
+    detailed = mode != "compact"
     doc = _Doc(f"Vedic Astrology report - {name}")
     pdf = doc.pdf
+    ex = {"considerations": None, "friendship": None, "aspects": None, "doshas": extras.assess_doshas(chart),
+          "sade_sati": None}
+    if detailed:
+        ex.update(friendship=extras.friendship_tables(chart), aspects=extras.western_aspects(chart),
+                  sade_sati=extras.sade_sati_table(chart))
 
     doc.y -= 6
     pdf.text(MARGIN, doc.y - 22, "Vedic Astrology Report", size=22, bold=True, color=GOLD)
@@ -213,6 +440,12 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
         pdf.text(MARGIN + 130, doc.y - 10, value, size=9.5, color=INK)
         doc.y -= 14
     doc.y -= 8
+    doc.paragraph("How to read this report: every section says whether something looks good, mixed or in need of care, what may "
+                  "happen because of it, and what usually helps. These are tendencies drawn from traditional Vedic astrology - "
+                  "never fixed results - and your own choices and effort matter more than any chart.", size=9, color=MUTED)
+
+    if detailed:
+        _kundli_facts(doc, chart)
 
     doc.heading(f"Birth chart (D1) - {style}")
     _draw_chart(doc, chart, style)
@@ -225,16 +458,41 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
     doc.table(["Planet", "Sign", "Deg", "House", "Nakshatra", "Pada", "Dignity"], rows,
               [58, 62, 38, 36, 82, 32, 187])
 
+    for block in (extras.period_text(chart), extras.houses_text(chart)):
+        if block:
+            _heading_para(doc, block if detailed else compact_text(block))
+    planets_text = extras.planet_considerations_text(chart)
+    _heading_para(doc, "--- Planet by planet: good, mixed or needs care? ---\nFor each planet: how well it is placed in your chart "
+                       "and what that may mean for you.")
+    _heading_para(doc, planets_text if detailed else compact_text(planets_text))
+    _doshas_section(doc, chart, mode, ex)
+
+    if detailed:
+        _friend_and_aspect_section(doc, chart, ex)
+        _divisional_section(doc, chart, style, reading)
+        _chalit_ashtak_section(doc, chart)
+        _dasha_section(doc, chart)
+
     text = document_text(reading)
-    if mode == "compact":
+    if not detailed:
         text = compact_text(text)
+    medical = (reading or {}).get("medical_astrology")
     for para in text.split("\n\n"):
         para = para.strip()
         if not para:
             continue
         lines = para.split("\n")
         if lines[0].startswith(("---", "===")):
-            doc.heading(lines[0].strip("-= ").strip())
+            heading = lines[0].strip("-= ").strip()
+            if heading.startswith("Medical Astrology") and medical:
+                doc.ensure(330)
+                doc.heading("Medical Astrology - body map")
+                doc.paragraph("Each house stands for a part of the body, from the head (house 1) to the feet (house 12). Shaded "
+                              "houses hold a planet that classical texts link with strain (Sun, Mars, Saturn, Rahu, Ketu). "
+                              "[In simple terms: a symbolic map of where astrology says to take a little extra care - not a "
+                              "scan, and nothing on it means something is wrong.]", size=9)
+                _draw_chart(doc, chart, style, size=260, body={a["house"]: a["short"] for a in medical["body_areas"]})
+            doc.heading(heading)
             para = "\n".join(lines[1:]).strip()
             if not para:
                 continue

@@ -1,0 +1,165 @@
+"""
+tabs_insights.py - three screens built from engine/extras.py: Doshas & Sade Sati, Planet Relations
+(a plain verdict for each planet, friendships and aspects) and the Shodashvarga table (the sign of
+every planet in all 15 divisional charts). Each is one scrolling page; long text follows the
+Compact | Detailed switch, tables always show everything.
+"""
+import traceback
+
+from kivy.logger import Logger
+from kivy.metrics import dp
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
+
+import extras
+from astrology_tables import PLANET_ABBR, SIGN_ABBR
+from ui import pdf_report, reading_mode
+from ui.app_state import PROFILE_LABELS
+from ui.reading_mode import ReadingModeBar
+from ui.widgets import CaptionLabel, FlowTable, FlowText
+
+
+class _InsightPage(BoxLayout):
+    """A scrolling page: caption, Compact/Detailed switch, then whatever `_build(chart, reading)` adds.
+    An error is shown on the screen instead of leaving it blank."""
+    caption = ""
+    uses_mode = True
+
+    def __init__(self, store, **kwargs):
+        super().__init__(orientation="vertical", **kwargs)
+        self.store = store
+        scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
+        self.page = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        self.page.bind(minimum_height=self.page.setter("height"))
+        scroll.add_widget(self.page)
+        self.add_widget(scroll)
+        self._scroll = scroll
+        self.mode_bar = None
+
+    def refresh(self):
+        self.page.clear_widgets()
+        self.page.add_widget(CaptionLabel(self.caption))
+        if self.uses_mode:
+            self.mode_bar = ReadingModeBar(self.store, self.refresh)
+            self.page.add_widget(self.mode_bar)
+        chart = self.store.current["chart"]
+        if chart is None:
+            self._text("No chart generated yet for this profile.")
+            return
+        try:
+            self._build(chart, self.store.current["reading"])
+        except Exception:  # noqa: BLE001 - show the problem on screen, never a blank page
+            tb = traceback.format_exc()
+            Logger.error(f"VedicAstro:{type(self).__name__}: failed:\n{tb}")
+            self._text("This screen hit an error while building - details below so it can be reported:\n\n" + tb)
+        self._scroll.scroll_y = 1
+
+    def _text(self, text, compactable=False):
+        widget = FlowText()
+        widget.set_text(reading_mode.apply(self.store, text) if compactable else text)
+        self.page.add_widget(widget)
+
+    def _table(self, columns, hints, rows, font_size="12sp"):
+        table = FlowTable(columns, hints, font_size=font_size)
+        table.set_rows(rows)
+        self.page.add_widget(table)
+        return table
+
+    def _name(self, reading):
+        return (reading or {}).get("name") or PROFILE_LABELS[self.store.current_profile_id]
+
+    def _build(self, chart, reading):
+        raise NotImplementedError
+
+
+class DoshaTab(_InsightPage):
+    caption = (
+        "Doshas are classical 'watch points' in a chart. Each one below says whether it is present, "
+        "what it may mean, and what can help. They describe tendencies, not fixed fate - many people "
+        "with a dosha live very happily, and the rest of the chart matters more."
+    )
+
+    def _build(self, chart, reading):
+        self._text(f"=== Doshas & Sade Sati - {self._name(reading)} ===")
+        self._text(extras.doshas_text(chart), compactable=True)
+        self._text("--- Sade Sati and Dhaiya through your life ---")
+        self._text("Sade Sati is Saturn's roughly 7.5-year walk over the sign before, the sign of and the sign after "
+                   "your Moon. Dhaiya (Small Panoti) is its 2.5-year stay in the 4th or 8th sign from your Moon. "
+                   "These are times that test patience and reward steady work - not fixed bad news. Saturn sometimes "
+                   "steps back into the earlier sign for a few months, so a phase can appear twice. Dates are approximate.")
+        rows = []
+        for r in extras.sade_sati_table(chart):
+            rows.append((r["kind"].split(" (")[0], r["phase"].replace("Saturn in the ", "Saturn "), r["sign"],
+                         f"{r['start']:%d %b %Y}", f"{r['end']:%d %b %Y}",
+                         pdf_report._age_span(r)))
+        self._table(["Type", "Phase", "Saturn in", "From", "To", "Age"], [0.14, 0.24, 0.14, 0.17, 0.17, 0.14], rows, "11sp")
+
+
+_FRIEND_CODE = {"Adhi Mitra": "++", "Mitra": "+", "Sama": "=", "Shatru": "-", "Adhi Shatru": "--",
+                "friend": "+", "neutral": "=", "enemy": "-"}
+
+
+class PlanetRelationsTab(_InsightPage):
+    caption = (
+        "For every planet: is it doing well in your chart (good, mixed or needs care?), what may happen "
+        "because of it, and why. Below that, which planets get along with each other and which angles "
+        "they make. All of this describes tendencies, never certainties."
+    )
+
+    def _build(self, chart, reading):
+        self._text(f"=== Planet by planet - {self._name(reading)} ===")
+        period = extras.period_text(chart)
+        if period:
+            self._text(period, compactable=True)
+        cons = extras.planet_considerations(chart)
+        self._table(["Planet", "Verdict", "Sign / house", "Ruler of", "Looks at"], [0.15, 0.24, 0.26, 0.17, 0.18],
+                    [(p, c["tone"], f"{c['sign']} / {c['house']}", ", ".join(map(str, c["lord_of"])) or "-",
+                      ", ".join(map(str, c["aspects_houses"]))) for p, c in cons.items()])
+        self._text(extras.planet_considerations_text(chart), compactable=True)
+
+        fr = extras.friendship_tables(chart)
+        seven = list(fr["compound"])
+        short = [PLANET_ABBR[p] for p in seven]
+        self._text("--- Which planets get along ---")
+        self._text("Read each row as: how this planet feels about the planet in the column. Natural friendship is "
+                   "permanent; temporary friendship depends on how close the planets sit in YOUR chart; the combined "
+                   "table joins the two into one of five grades. Key: ++ great friend, + friend, = neutral, - enemy, "
+                   "-- great enemy. [In simple terms: it shows which planets help each "
+                   "other in your chart and which tend to work against each other.]")
+        for title, key in (("Natural friendship", "natural"), ("Temporary friendship (this chart)", "temporary"),
+                           ("Combined (five-fold) friendship", "compound")):
+            self._text(f"--- {title} ---")
+            rows = []
+            for a in seven:
+                row = [a]
+                for b in seven:
+                    row.append("." if a == b else _FRIEND_CODE[fr[key][a][b]])
+                rows.append(tuple(row))
+            self._table(["From"] + short, [0.15] + [0.12] * 7, rows, "10sp")
+
+        self._text("--- Angles between the planets (Western-style aspects) ---")
+        self._text("Two planets at certain angles influence each other. Conjunction (together) blends them, sextile and "
+                   "trine support each other, square and opposition pull against each other. Smaller 'orb' means a "
+                   "stronger link. [In simple terms: 'easy' pairs tend to help you, 'tense' pairs push you to act.]")
+        rows = [(f"{a['a']} - {a['b']}", a["aspect"], f"{a['orb']:.1f}", a["flow"].capitalize()) for a in extras.western_aspects(chart)]
+        self._table(["Planets", "Angle", "Orb (deg)", "Feels"], [0.34, 0.26, 0.2, 0.2], rows or [("None found", "", "", "")])
+
+
+class ShodashvargaTab(_InsightPage):
+    caption = (
+        "The sign each planet occupies in all 15 divisional charts (each zoom-in looks at one life area). "
+        "Use it to spot planets that keep landing in comfortable or uncomfortable signs across charts."
+    )
+    uses_mode = False
+
+    def _build(self, chart, reading):
+        self._text(f"=== Shodashvarga table - {self._name(reading)} ===")
+        head = ["Chart", "Asc"] + [PLANET_ABBR[p] for p in extras.BODIES]
+        rows = []
+        for r in extras.shodashvarga_table(chart):
+            s = r["signs"]
+            rows.append((r["key"], SIGN_ABBR[s["Lagna"]]) + tuple(SIGN_ABBR[s[p]] for p in extras.BODIES))
+        self._table(head, [0.11, 0.09] + [0.088] * 9, rows, "10sp")
+        self._text("--- What each chart looks at ---")
+        self._text("\n\n".join(f"{r['key']} {r['name']}: {r['purpose']}." for r in extras.shodashvarga_table(chart)))

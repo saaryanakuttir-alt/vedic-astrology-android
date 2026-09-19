@@ -53,6 +53,7 @@ from ui.tabs_extra import MedicalTab, PredictionsTab, RelationshipTab
 from ui.tabs_family import FamilyTab
 from ui.tabs_help import HelpTab
 from ui.tabs_home import HomeScreen, LibraryScreen
+from ui.tabs_insights import DoshaTab, PlanetRelationsTab, ShodashvargaTab
 from ui.tabs_reports import FullReadingTab, KarmicTab, LifePredictionsTab
 from ui.tabs_tables import (
     AshtakvargaTab, ChalitTab, DashaTab, HousesTab, KundliDetailsTab, PlanetsTab, YogasTab,
@@ -100,6 +101,9 @@ class VedicAstrologyApp(App):
             "predictions": ("Predictions", lambda: PredictionsTab(self.store)),
             "medical": ("Medical Astrology", lambda: MedicalTab(self.store)),
             "relationship": ("Relationship Themes", lambda: RelationshipTab(self.store)),
+            "doshas": ("Doshas & Sade Sati", lambda: DoshaTab(self.store)),
+            "relations": ("Planet by Planet", lambda: PlanetRelationsTab(self.store)),
+            "shodashvarga": ("Shodashvarga Table", lambda: ShodashvargaTab(self.store)),
             "full": ("Full Reading", lambda: FullReadingTab(self.store)),
             "family": ("Family Compatibility", lambda: FamilyTab(self.store)),
             "help": ("Help & About", lambda: HelpTab()),

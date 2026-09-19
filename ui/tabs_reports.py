@@ -142,6 +142,10 @@ class LifePredictionsTab(_BaseReportTab):
         lp = reading["life_predictions"]
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
         lines = [f"=== Life Predictions - {name} ===\n", lp["caveat"] + "\n"]
+        chart = self.store.current["chart"]
+        if chart is not None:
+            import extras
+            lines.append("\n" + extras.period_text(chart) + "\n\n" + extras.houses_text(chart) + "\n")
         for key, entry in lp.items():
             if key == "caveat" or not isinstance(entry, dict):
                 continue

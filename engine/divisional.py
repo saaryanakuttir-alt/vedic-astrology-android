@@ -254,6 +254,38 @@ def d60_shashtiamsha(longitude):
 
 
 # ---------------------------------------------------------------------------
+# D27 - Bhamsha / Nakshatramsha (27 parts of 1 deg 06'40"), D40 - Khavedamsha
+# (40 parts of 0 deg 45') and D45 - Akshavedamsha (45 parts of 0 deg 40').
+# Parashara's rules: D27 counts from Aries for fire signs, Cancer for earth,
+# Libra for air, Capricorn for water; D40 counts from Aries for odd signs and
+# Libra for even signs; D45 counts from Aries for movable, Leo for fixed and
+# Sagittarius for dual signs. Checked against a published Shodashvarga table
+# for a real chart (all 10 points of each chart match).
+# ---------------------------------------------------------------------------
+_D27_START = {"Aries": "Aries", "Leo": "Aries", "Sagittarius": "Aries",
+              "Taurus": "Cancer", "Virgo": "Cancer", "Capricorn": "Cancer",
+              "Gemini": "Libra", "Libra": "Libra", "Aquarius": "Libra",
+              "Cancer": "Capricorn", "Scorpio": "Capricorn", "Pisces": "Capricorn"}
+
+
+def d27_bhamsha(longitude):
+    sign, deg = get_sign(longitude)
+    return _offset_sign(_D27_START[sign], int(deg * 27 / 30) % 12)
+
+
+def d40_khavedamsha(longitude):
+    sign, deg = get_sign(longitude)
+    start = "Aries" if _is_odd_sign(sign) else "Libra"
+    return _offset_sign(start, int(deg * 40 / 30) % 12)
+
+
+def d45_akshavedamsha(longitude):
+    sign, deg = get_sign(longitude)
+    start = "Aries" if sign in MOVABLE else "Leo" if sign in FIXED else "Sagittarius"
+    return _offset_sign(start, int(deg * 45 / 30) % 12)
+
+
+# ---------------------------------------------------------------------------
 VARGA_FUNCTIONS = {
     "D2": d2_hora,
     "D3": d3_drekkana,
@@ -265,7 +297,10 @@ VARGA_FUNCTIONS = {
     "D16": d16_shodashamsha,
     "D20": d20_vimshamsha,
     "D24": d24_chaturvimshamsha,
+    "D27": d27_bhamsha,
     "D30": d30_trimshamsha,
+    "D40": d40_khavedamsha,
+    "D45": d45_akshavedamsha,
     "D60": d60_shashtiamsha,
 }
 
@@ -273,5 +308,5 @@ NEEDS_CHECK_VARGAS = {"D60"}  # D16/D20/D24 confirmed via online verification pa
 
 
 def compute_all_vargas(d1_longitude):
-    """Returns {"D2": "Leo", "D3": "Scorpio", ...} for all 12 vargas."""
+    """Returns {"D2": "Leo", "D3": "Scorpio", ...} for all the vargas (D27/D40/D45 included)."""
     return {varga: fn(d1_longitude) for varga, fn in VARGA_FUNCTIONS.items()}

@@ -74,6 +74,16 @@ def test_report_builds_in_both_modes_and_styles(sample):
     assert len(compact) < len(detailed) / 2
 
 
+def test_compact_report_is_short_but_keeps_doshas_and_verdicts(sample):
+    pypdf = pytest.importorskip("pypdf")
+    import io
+    chart, reading = sample
+    r = pypdf.PdfReader(io.BytesIO(pdf_report.build_pdf(chart, reading, mode="compact")))
+    text = "\n".join(p.extract_text() for p in r.pages)
+    assert "Doshas at a glance" in text and "Planet by planet" in text
+    assert "All divisional charts" not in text and "Vimshottari Dasha" not in text
+
+
 def test_report_text_content(sample):
     pypdf = pytest.importorskip("pypdf")
     import io
@@ -82,5 +92,9 @@ def test_report_text_content(sample):
     text = "\n".join(p.extract_text() for p in r.pages)
     assert "Asha Rao" in text and "Created by Sammya Das" in text and f"Page 1 of {len(r.pages)}" in text
     assert "Planet positions" in text and "Life areas" in text
+    for section in ("Planet by planet", "Doshas and Sade Sati", "Sade Sati and Dhaiya", "Which planets get along",
+                    "All divisional charts", "Shodashvarga table", "D27 Saptavimshamsha", "D45 Akshavedamsha",
+                    "Bhava Chalit", "Ashtakvarga", "Vimshottari Dasha", "Medical Astrology - body map"):
+        assert section in text, section
     for forbidden in ("Longevity", "lifespan", "Children"):     # the removed sections must not come back via the PDF
         assert forbidden not in text

@@ -316,3 +316,29 @@ filetype, pytest).
   Downloads/VedicAstrology through MediaStore, no permission needed, with an Open button; desktop:
   <data folder>/reports). Tests: `tests/test_pdf.py` and the desktop smoke test.
 
+
+## Version 1.6.0 changes (2026-09-20) - AstroSage-report parity, phase 1
+
+Checked against an AstroSage report for the same birth (29 May 1992, 07:06, Howrah): planets, nakshatras,
+panchang, avakahada, Ashtakvarga totals, Manglik, Sade Sati dates (to the day) and 159/160 divisional-chart
+placements agree. Known differences: Moon in D7 (D7 is not shown in this app), Paya, and AstroSage lists
+Rahu/Ketu aspects on the 5th/7th/9th while this engine gives them only the 7th.
+
+* **`engine/extras.py`** (new): plain "Good / Mostly good / Mixed / Needs some care / Challenging" verdicts
+  with "what may happen" for every planet and each of the 12 houses, the running Mahadasha/Antardasha
+  outlook, doshas (Manglik, Kalsarpa with type, Pitra, Guru Chandal, Grahan, Shrapit, Sade Sati/Dhaiya now),
+  a lifetime Sade Sati / Dhaiya table (Saturn ingress scan), planetary friendships (natural, temporary,
+  five-fold), Western-style aspects, and the Shodashvarga table. Wording is deliberately non-definite.
+* **Divisional charts**: D27, D40 and D45 added (`engine/divisional.py`); the chart picker now offers 14
+  divisional charts (D7 stays out on purpose).
+* **New screens** (Home cards): Doshas & Sade Sati, Planet by Planet, Shodashvarga Table
+  (`ui/tabs_insights.py`). Life Predictions now opens with "Where you are right now" and "Your 12 houses at
+  a glance".
+* **Detailed PDF** now also carries: panchang/avakahada, period + houses verdicts, planet-by-planet,
+  doshas and the lifetime Sade Sati table, friendships, aspects, all 14 divisional charts + the
+  Shodashvarga table, Chalit, Ashtakvarga, the full Vimshottari table with sub-periods, and the Medical
+  body-map chart. Compact PDF stays short (doshas at a glance + plain-words lines).
+* Tests: `tests/test_extras.py` (new), `tests/test_pdf.py`, desktop smoke test (23 Home cards).
+* Not done yet (later phases): Varshaphal, Yogini/Char dasha, Jaimini Karakamsa/Swamsa, KP tables,
+  Shadbala/Bhavabala, Prastharashtakvarga, Lal Kitab, and the long life-prediction prose in the
+  AstroSage style.
