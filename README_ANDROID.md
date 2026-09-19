@@ -290,17 +290,21 @@ filetype, pytest).
 ## Version 1.5 changes (2026-09-19)
 
 * **Year-by-year relationship outlook removed** (see 1.4 above).
-* **Language switch, stage 1 (English / हिन्दी / বাংলা)**, fully offline: strings live in
-  `engine/i18n.py` + `i18n_hi.py` + `i18n_bn.py` (English text is the key; a missing
-  translation shows the English), fonts in `fonts/` (Noto Sans Devanagari and
-  Bengali, SIL OFL, generated as static Regular/Bold from Google Fonts' variable
-  fonts) applied by `ui/fonts.py`. The switch is on the Home screen; the choice is
-  remembered and every screen is rebuilt on change. Stage 1 translates the titles,
-  bottom bar and Home cards only. Still to do: forms, tables, help/FAQ, the
-  "In simple terms" texts and the ~3,300 distinct classical sentences.
-* Known limit found on desktop: Kivy's Windows text engine does not join Devanagari/Bengali
-  conjuncts (vowel signs land on the wrong side). The Android build compiles HarfBuzz
-  into SDL2_ttf, so the phone may shape correctly - checked on the device.
+* **Language switch, stage 1 (English / हिन्दी / বাংলা)**, fully offline. Readable translations
+  live in `i18n_src/hi.py` and `bn.py`; `python tools/build_i18n.py` (needs `uharfbuzz` and
+  `fonttools`) generates `engine/i18n_hi.py`, `i18n_bn.py` and the fonts `fonts/IndicHi-*.ttf`,
+  `IndicBn-*.ttf`. Runtime is `engine/i18n.py` (`t()`; English text is the key, a missing
+  translation shows English) and `ui/fonts.py`. The switch is on the Home screen; the choice is
+  remembered and every screen is rebuilt on change. Stage 1 translates titles, bottom bar and
+  Home cards. Still to do: forms, tables, help/FAQ, "In simple terms" texts, and the long
+  classical text (~3,300 distinct sentences in the KB plus the text the engine composes).
+* **Why the tool pre-joins letters:** Kivy's text engine (SDL2_ttf, on desktop AND on the
+  OnePlus, confirmed on the device) does not shape Devanagari/Bengali - vowel signs land on the
+  wrong side and conjuncts do not form. The tool shapes every translated word with HarfBuzz
+  on the PC and bakes each syllable into the font as one glyph (private-use code point), so the
+  app draws plain characters. Generated i18n files therefore look unreadable; edit `i18n_src/`.
+* Original Noto fonts (build inputs) are in `tools/fonts_src/` (not shipped); licence:
+  `fonts/OFL-NotoSans.txt`.
 * Signing: CI now exports ANDROID_PREFS_ROOT/USER_HOME/SDK_HOME so Gradle really uses
   `ci/debug.keystore` (verified: the APK's certificate SHA-256 matches). Updates from
   1.4.1 on install over the previous build and keep saved data.

@@ -60,9 +60,10 @@ class LanguageBar(BoxLayout):
         kwargs.setdefault("height", dp(42))
         kwargs.setdefault("spacing", dp(8))
         super().__init__(orientation="horizontal", **kwargs)
-        for code, label in i18n.LANGUAGES:
+        for code in i18n.LANGUAGE_CODES:
             selected = code == i18n.get_language()
-            btn = ThemedButton(text=label, variant="primary" if selected else "secondary", font_size="15sp")
+            btn = ThemedButton(text=i18n.native_name(code), variant="primary" if selected else "secondary",
+                               font_size="15sp")
             font = fonts.font_for_language(code)
             if font:
                 btn.font_name = font
