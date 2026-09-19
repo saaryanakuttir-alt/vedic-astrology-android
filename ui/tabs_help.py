@@ -24,6 +24,12 @@ class HelpTab(BoxLayout):
 
         self.add_widget(theme.SectionHeader("❓", "Help & FAQ"))
 
+        credit = Label(text="Vedic Astrology · Created by Sammya Das", color=theme.ACCENT_700, bold=True,
+                       font_size="13sp", size_hint_y=None, height=dp(30), halign="left", valign="middle",
+                       padding=(dp(4), 0))
+        credit.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+        self.add_widget(credit)
+
         caption = Label(
             text="Answers to the questions people ask most when they first open a "
                  "chart - no AI, no internet, just a searchable guide.",

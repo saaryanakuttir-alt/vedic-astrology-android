@@ -15,7 +15,8 @@ from kivy.clock import Clock
 import chart_geometry as cg
 from astrology_tables import SIGN_ABBR
 from panchanga import SIGNS
-from ui.widgets import CaptionLabel
+from ui import theme
+from ui.widgets import CaptionLabel, LongText
 from ui.theme import ThemedSpinner as Spinner
 
 VARGA_CHOICES = [
@@ -107,7 +108,7 @@ class ChartCanvas(Widget):
         self._sign_labels = []
         self._planet_labels = []
 
-    def _add_label(self, text, cx, cy, bold=False, small=False, color=(1, 1, 1, 1)):
+    def _add_label(self, text, cx, cy, bold=False, small=False, color=None):
         """cx, cy is the point the label should be CENTERED on (not a
         corner) - callers previously had to pre-offset by half the label
         size themselves, which only worked for cells on the left/top of
@@ -117,6 +118,7 @@ class ChartCanvas(Widget):
         emulator. halign="center" alone does nothing in Kivy without
         text_size also being set to constrain it - it was silently a
         no-op here before."""
+        color = color or theme.TEXT
         size = (dp(60), dp(28) if small else dp(40))
         lbl = Label(
             text=text, pos=(cx - size[0] / 2, cy - size[1] / 2), size=size,
@@ -145,9 +147,9 @@ class ChartCanvas(Widget):
             return ox + pt[0] * size, oy + (1 - pt[1]) * size
 
         with self.canvas.before:
-            Color(0.05, 0.05, 0.15, 1)
+            Color(*theme.SURFACE)
             Rectangle(pos=(ox, oy), size=(size, size))
-            Color(1, 1, 1, 1)
+            Color(*theme.ACCENT)
             if self.style == "North Indian":
                 self._draw_north_indian(to_canvas)
             else:
@@ -172,14 +174,14 @@ class ChartCanvas(Widget):
 
             sign = sign_map[house_num]
             self._add_label(str(_sign_number(sign)), lx, ly,
-                             small=True, color=(0.7, 0.7, 0.7, 1))
+                             small=True, color=theme.NEUTRAL_600)
 
             planets_here = house_planets[house_num]
             label = "\n".join(planets_here) if planets_here else ""
             if house_num == 1:
                 label = ("ASC\n" + label) if label else "ASC"
             self._add_label(label, cx, cy, bold=True,
-                             color=(0.6, 0.75, 1, 1))
+                             color=theme.TEXT)
 
     def _draw_south_indian(self, ox, oy, size):
         cell = size / 4.0
@@ -198,18 +200,18 @@ class ChartCanvas(Widget):
             cx, cy = x0 + cell / 2, y0 + cell / 2
             if sign == asc_sign:
                 with self.canvas.before:
-                    Color(0.75, 0.2, 0.15, 1)
+                    Color(*theme.ACCENT_700)
                     Line(rectangle=(x0 + 3, y0 + 3, cell - 6, cell - 6), width=2)
-                    Color(1, 1, 1, 1)
+                    Color(*theme.ACCENT)
             # Sign abbreviation sits in the cell's top-left corner
             # (classical South Indian style, not centered) - _add_label
             # now takes a CENTER point, so offset by half its own (small)
             # label size to land the same corner as before.
             self._add_label(_abbr_sign(sign), x0 + dp(4) + dp(30), y0 + cell - dp(20) + dp(14),
-                             small=True, color=(0.7, 0.7, 0.7, 1))
+                             small=True, color=theme.NEUTRAL_600)
             label = "\n".join(sign_planets[sign])
             self._add_label(label, cx, cy, bold=True,
-                             color=(0.6, 0.75, 1, 1))
+                             color=theme.TEXT)
 
 
 class ChartTab(BoxLayout):
@@ -217,7 +219,8 @@ class ChartTab(BoxLayout):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
 
-        controls = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(44), spacing=dp(6))
+        controls = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(56), spacing=dp(8),
+                             padding=(dp(12), dp(4), dp(12), dp(6)))
         self.style_spinner = Spinner(text="North Indian", values=["North Indian", "South Indian"])
         self.style_spinner.bind(text=self._on_control_change)
         self.varga_spinner = Spinner(text=VARGA_CHOICES[0][0], values=[lbl for lbl, _ in VARGA_CHOICES])
@@ -239,6 +242,11 @@ class ChartTab(BoxLayout):
         self.canvas_widget = ChartCanvas()
         self.add_widget(self.canvas_widget)
 
+        # This person's own placements in the selected chart, in plain
+        # language first and the denser classical wording after it.
+        self.explain = LongText(size_hint_y=None, height=dp(170))
+        self.add_widget(self.explain)
+
     def _varga_key(self):
         label = self.varga_spinner.text
         for lbl, key in VARGA_CHOICES:
@@ -249,12 +257,30 @@ class ChartTab(BoxLayout):
     def _on_control_change(self, spinner, value):
         self.refresh()
 
+    def preset_varga(self, key):
+        """Home's 'Divisional Charts' card opens this screen already on D9."""
+        for lbl, k in VARGA_CHOICES:
+            if k == key:
+                self.varga_spinner.text = lbl
+
+    def _explanation_text(self, varga_key):
+        reading = self.store.current["reading"]
+        cd = ((reading or {}).get("chart_descriptions") or {}).get(varga_key)
+        if not cd:
+            return ""
+        return "\n\n".join([cd.get("plain_explanation", ""), "In classical terms:", cd.get("text", "")]).strip()
+
     def refresh(self):
         chart = self.store.current["chart"]
+        style = getattr(self.store, "chart_style", None)
+        if style and self.style_spinner.text != style:
+            self.style_spinner.text = style
         if chart is None:
             self.info_label.text = "No chart generated yet for this profile."
             self.canvas_widget.set_chart(None, self._varga_key(), self.style_spinner.text)
+            self.explain.set_text("")
             return
+        self.explain.set_text(self._explanation_text(self._varga_key()))
         varga_key = self._varga_key()
         asc_sign = cg.ascendant_sign_for_varga(chart, varga_key)
         self.info_label.text = f"Ascendant ({varga_key}): {asc_sign}"

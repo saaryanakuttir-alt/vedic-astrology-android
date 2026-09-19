@@ -18,6 +18,7 @@ BLANK_INPUTS = {
     "hour": "", "minute": "", "second": "0",
     "place": "", "country": "",
     "use_manual_coords": False, "lat": "", "lon": "", "tz": "",
+    "time_known": "yes",
 }
 
 
@@ -32,6 +33,8 @@ class ProfileStore:
             for pid in PROFILE_IDS
         }
         self.current_profile_id = "self"
+        # Chart diagram style, chosen on the New Chart screen (North/South).
+        self.chart_style = "North Indian"
 
     @property
     def current(self):

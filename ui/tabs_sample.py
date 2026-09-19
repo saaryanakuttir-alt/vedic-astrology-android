@@ -21,6 +21,7 @@ from kivy.logger import Logger
 
 from ui.widgets import CaptionLabel
 from ui.app_state import PROFILE_LABELS
+from ui import theme
 from ui.theme import ThemedButton as Button
 
 
@@ -95,7 +96,7 @@ class SampleChartsTab(BoxLayout):
         for category in sorted(by_category):
             header = Label(
                 text=category, size_hint_y=None, height=dp(32), bold=True,
-                halign="left", valign="middle", color=(1, 0.85, 0.3, 1),
+                halign="left", valign="middle", color=theme.ACCENT_700,
             )
             header.bind(width=lambda inst, w: setattr(inst, "text_size", (w, None)))
             self.list_grid.add_widget(header)

@@ -198,3 +198,24 @@ Everything documented in `chart_engine/README.md`'s "Known limitations"
 and "Design decisions" sections still applies unchanged — Ayanamsa,
 house system, Ashtakoot sourcing-confidence notes, and so on — since the
 underlying engine is identical.
+
+
+## v1.1 - Classical redesign (Created by Sammya Das)
+
+The UI now follows the "Birth Chart App" design handoff (the same Classical
+system the web app uses): parchment ground, ink text, one gold accent,
+hairline outlines instead of filled buttons, a Home card menu, a gold diamond
+header mark that always returns Home, and a 4-tab bottom bar (Chart / Dasha /
+Yogas / Library). `main.py` no longer uses a TabbedPanel; screens are built
+lazily on first visit. New screens: Predictions (any date), Medical Astrology,
+Relationship Themes; the Chart Diagram screen shows a plain-language
+explanation of the selected chart. The credit "Created by Sammya Das" is on
+Home and Help & About.
+
+`tests/desktop_smoke.py` drives the real widget tree with synthetic touches on
+desktop Kivy (it is excluded from the APK). It found that the previous
+themed widgets responded correctly to touches on desktop, so the earlier
+"typing and buttons do nothing on device" report was not caused by the widget
+classes; the new widgets deliberately stay behaviorally stock, and
+`scroll_timeout` is raised to 250ms in main.py so a slow or slightly jittery
+tap inside a ScrollView still reaches the widget under it.
