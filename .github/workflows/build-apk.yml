@@ -67,8 +67,16 @@ jobs:
           # must be uninstalled first, erasing its saved data). The key lives in
           # ci/debug.keystore (standard Android debug key: alias androiddebugkey,
           # password "android"); it is a debug key, not a secret.
-          mkdir -p ~/.android
-          cp ci/debug.keystore ~/.android/debug.keystore
+          # Gradle/AGP finds its debug key through ANDROID_PREFS_ROOT, ANDROID_USER_HOME or
+          # ANDROID_SDK_HOME (in that order), else ~/.android - so put the key in ALL of
+          # those places and export the variables for the build step below.
+          for d in "$HOME/.android" "$HOME/vedic-prefs/.android"; do
+            mkdir -p "$d"
+            cp ci/debug.keystore "$d/debug.keystore"
+          done
+          echo "ANDROID_PREFS_ROOT=$HOME/vedic-prefs" >> "$GITHUB_ENV"
+          echo "ANDROID_USER_HOME=$HOME/vedic-prefs/.android" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_HOME=$HOME/vedic-prefs" >> "$GITHUB_ENV"
 
       - name: Build debug APK with Buildozer
         run: |
@@ -90,3 +98,13 @@ jobs:
           name: vedic-astrology-debug-apk
           path: bin/*.apk
           if-no-files-found: error
+
+      - name: Report which key signed the APK
+        if: always()
+        run: |
+          # Expected certificate SHA-256 of ci/debug.keystore:
+          #   1c692826bc37ae453e4fb76cceb190aa0070e844df9a055148f12ade712df7d7
+          APKSIGNER=$(ls "$HOME"/.buildozer/android/platform/android-sdk/build-tools/*/apksigner | tail -1)
+          "$APKSIGNER" verify --print-certs bin/*.apk | grep -E "SHA-256|DN" || true
+          find / -name debug.keystore -not -path "*/proc/*" 2>/dev/null | head || true
+
