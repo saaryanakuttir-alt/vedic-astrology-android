@@ -9,7 +9,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
 from kivy.core.text import Label as CoreLabel
-from kivy.graphics import Color, Line, Rectangle
+from kivy.graphics import Color, Line, Quad, Rectangle, Triangle
 from kivy.metrics import dp, sp
 from kivy.clock import Clock
 
@@ -180,6 +180,80 @@ class ChartCanvas(Widget):
                           x0 + cell / 2, y0 + cell / 2 - dp(5), 12.5, True, theme.TEXT)
 
 
+class BodyMapCanvas(ChartCanvas):
+    """The Medical Astrology chart: the same North/South Indian D1 diagram, but
+    every house also shows the body area it stands for (1 head ... 12 feet, the
+    Kalapurusha map applied to THIS person's Ascendant), and houses holding a
+    planet that classical texts link with strain (Sun, Mars, Saturn, Rahu, Ketu)
+    are shaded. `body_short` is {house_number: one-word body area} from the
+    engine's medical reading."""
+
+    STRAIN = {"Su", "Ma", "Sa", "Ra", "Ke"}      # abbreviations of the classical malefics
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.body_short = {}
+
+    def _tint(self):
+        return (theme.ACCENT[0], theme.ACCENT[1], theme.ACCENT[2], 0.22)
+
+    def _has_strain(self, names):
+        return any(n in self.STRAIN for n in names)
+
+    def _cell_text(self, house, names, cx, cy, is_asc):
+        """Body area (small, muted) over the planets (bold), stacked and centred on (cx, cy)."""
+        label = f"{house} {self.body_short.get(house, '')}".strip()
+        block = self._planet_block(names, "ASC" if is_asc else None)
+        t_label = self._texture(label, 9.5, False)
+        t_block = self._texture(block, 12.5, True) if block else None
+        gap = dp(2)
+        total = t_label.height + (gap + t_block.height if t_block else 0)
+        top = cy + total / 2
+        self._text_at(label, cx, top - t_label.height / 2, 9.5, False, theme.NEUTRAL_600)
+        if t_block:
+            color = theme.ACCENT_800 if self._has_strain(names) else theme.TEXT
+            self._text_at(block, cx, top - t_label.height - gap - t_block.height / 2, 12.5, True, color)
+
+    def _draw_north_indian(self, ox, oy, size):
+        def to_canvas(pt):
+            return ox + pt[0] * size, oy + (1 - pt[1]) * size
+
+        house_planets = cg.build_house_planet_map(self.chart, "D1")
+        for house_num, house_def in cg.NORTH_INDIAN_HOUSES.items():
+            if self._has_strain(house_planets[house_num]):
+                Color(*self._tint())
+                pts = [c for v in house_def["polygon"] for c in to_canvas(v)]
+                (Quad if len(house_def["polygon"]) == 4 else Triangle)(points=pts)
+        Color(*theme.ACCENT)
+        for p1, p2 in cg.NORTH_INDIAN_FRAME_LINES:
+            a, b = to_canvas(p1), to_canvas(p2)
+            Line(points=[a[0], a[1], b[0], b[1]], width=1.3)
+        for house_num, house_def in cg.NORTH_INDIAN_HOUSES.items():
+            cx, cy = to_canvas(cg.polygon_centroid(house_def["polygon"]))
+            self._cell_text(house_num, house_planets[house_num], cx, cy, house_num == 1)
+
+    def _draw_south_indian(self, ox, oy, size):
+        cell = size / 4.0
+        sign_planets = cg.build_sign_planet_map(self.chart, "D1")
+        asc_sign = cg.ascendant_sign_for_varga(self.chart, "D1")
+        asc_idx = SIGNS.index(asc_sign)
+        for sign, (row, col) in cg.SOUTH_INDIAN_GRID.items():
+            if self._has_strain(sign_planets[sign]):
+                Color(*self._tint())
+                Rectangle(pos=(ox + col * cell, oy + (3 - row) * cell), size=(cell, cell))
+        Color(*theme.ACCENT)
+        for i in range(5):
+            Line(points=[ox, oy + i * cell, ox + size, oy + i * cell], width=1)
+            Line(points=[ox + i * cell, oy, ox + i * cell, oy + size], width=1)
+        for sign, (row, col) in cg.SOUTH_INDIAN_GRID.items():
+            x0, y0 = ox + col * cell, oy + (3 - row) * cell
+            house = (SIGNS.index(sign) - asc_idx) % 12 + 1
+            if sign == asc_sign:
+                Color(*theme.ACCENT_700)
+                Line(rectangle=(x0 + 3, y0 + 3, cell - 6, cell - 6), width=2)
+            self._cell_text(house, sign_planets[sign], x0 + cell / 2, y0 + cell / 2, sign == asc_sign)
+
+
 class ChartTab(BoxLayout):
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
@@ -221,6 +295,11 @@ class ChartTab(BoxLayout):
         return "D1"
 
     def _on_control_change(self, spinner, value):
+        # Remember the style the user just picked. refresh() re-reads store.chart_style
+        # and puts the spinner back to it, so without this the choice was undone at once
+        # and North/South Indian could not be switched from this screen.
+        if spinner is self.style_spinner:
+            self.store.chart_style = value
         self.refresh()
 
     def preset_varga(self, key):

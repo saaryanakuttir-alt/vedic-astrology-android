@@ -21,6 +21,7 @@ How the pieces fit:
 import weakref
 
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
@@ -107,10 +108,15 @@ class BuiltinKeyboard(BoxLayout):
         field = self.target
         if field is None:
             return
+        # Bounded walk up to the nearest vertical ScrollView. Not every field has one
+        # (the Predictions date box, the Help search box), and the top of the tree is
+        # the Window, whose parent is itself - an unbounded `while` here froze the app.
         node = field.parent
-        while node is not None and not (isinstance(node, ScrollView) and node.do_scroll_y):
+        for _ in range(60):
+            if node is None or node is Window or (isinstance(node, ScrollView) and node.do_scroll_y):
+                break
             node = node.parent
-        if node is not None:
+        if isinstance(node, ScrollView):
             try:
                 node.scroll_to(field, padding=dp(28), animate=False)
             except Exception:  # noqa: BLE001 - scrolling is a nicety, never fatal

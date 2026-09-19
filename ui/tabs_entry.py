@@ -255,6 +255,7 @@ class EntryScreen(BoxLayout):
         self._load_profile_into_form()
         self._render_chips()
         self._render_result()
+        self.style_seg.select(self.store.chart_style, notify=False)   # may have been changed on Chart Diagram
 
     # ------------------------------------------------------------------ chips
     def _render_chips(self):

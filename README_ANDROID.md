@@ -255,3 +255,19 @@ Tests (desktop, not shipped): `python -m pytest tests/test_engine_content.py`
 and `python tests/desktop_smoke.py` (needs kivy 2.3.1, pyswisseph, tzdata,
 filetype, pytest).
 
+## Version 1.3 changes (2026-09-19)
+
+* **Medical Astrology body-map chart** (`BodyMapCanvas` in `ui/tabs_chart.py`): the
+  birth chart with each house labelled by its body area (1 Head ... 12 Feet) and
+  shaded where a Sun/Mars/Saturn/Rahu/Ketu sits; North or South Indian.
+* **Plain-words explanations**: every Medical paragraph, the Predictions year note
+  and transit outlooks now end with an "[In simple terms: ...]" sentence written
+  as you would tell a friend. The duplicated constitution paragraph is gone.
+* **Chart Diagram style switch works**: the North/South spinner used to be reset by
+  `refresh()` because it never updated `store.chart_style`.
+* **Predictions date**: day / month pickers plus a year box (number pad) replace
+  typing "YYYY-MM-DD".
+* **Freeze fixed**: tapping a text field that is not inside a ScrollView (Predictions,
+  Help search) hung the app - the keyboard's scroll-into-view search looped forever
+  at the top of the widget tree. Now bounded; covered by `tests/desktop_smoke.py`.
+

@@ -110,7 +110,8 @@ class SavedBirths:
         if not is_complete(inputs):
             return None
         birth = _birth_only(inputs)
-        now = time.time()
+        # strictly newer than everything saved so far, even within one clock tick
+        now = max(time.time(), max((p.get("saved_at", 0) for p in self._items), default=0) + 1e-6)
         for item in self._items:
             if same_person(item["inputs"], birth):
                 item["inputs"], item["saved_at"] = birth, now

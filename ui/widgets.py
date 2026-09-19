@@ -246,6 +246,37 @@ class LongText(ScrollView):
         return _resize
 
 
+class FlowText(GridLayout):
+    """LongText's paragraph-per-Label layout, but NOT a ScrollView: it grows to
+    its full height so a parent ScrollView can scroll it together with other
+    content (a chart above it, say). Same reasons for many small Labels as
+    LongText.set_text explains."""
+
+    def __init__(self, **kwargs):
+        kwargs.setdefault("cols", 1)
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("spacing", dp(2))
+        kwargs.setdefault("padding", (0, dp(4)))
+        super().__init__(**kwargs)
+        self.bind(minimum_height=self.setter("height"))
+
+    def set_text(self, text):
+        self.clear_widgets()
+        for para in _split_into_chunks(text):
+            label = Label(text=para, size_hint_y=None, height=dp(28), text_size=(None, None),
+                          halign="left", valign="top", padding=(dp(10), dp(6)))
+            label.bind(texture_size=self._resize, width=self._on_width)
+            self.add_widget(label)
+
+    @staticmethod
+    def _on_width(label, width):
+        label.text_size = (width, None)
+
+    @staticmethod
+    def _resize(label, texture_size):
+        label.height = max(dp(28), texture_size[1] + dp(12))
+
+
 class ItalicSummaryLabel(BoxLayout):
     """A single short paragraph rendered in italics - the mobile
     equivalent of a section's closing "in simple words, here's what this

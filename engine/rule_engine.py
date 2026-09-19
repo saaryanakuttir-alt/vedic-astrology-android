@@ -1321,6 +1321,61 @@ _HOUSE_BODY_PART = {
     12: "the feet and the immune system",
 }
 
+# One-word names for the body-map chart (the full wording above stays in the text).
+_HOUSE_BODY_SHORT = {
+    1: "Head", 2: "Face", 3: "Arms", 4: "Chest", 5: "Heart", 6: "Belly",
+    7: "Kidneys", 8: "Pelvis", 9: "Thighs", 10: "Knees", 11: "Calves", 12: "Feet",
+}
+
+# "How I'd say it to a friend" versions, appended in [brackets] after the classical wording.
+_DOSHA_FRIEND = {
+    "Pitta": "you run a bit 'hot' - lots of drive and a strong appetite, but when you are stressed it tends "
+             "to show up as irritability, heat or acidity",
+    "Kapha": "you are steady and sturdy, with good stamina, but you can get sluggish or put on weight if "
+             "you sit still for too long",
+    "Vata": "you are quick and creative with a lot of nervous energy, so worry, dry skin or uneven sleep "
+            "and eating are your usual signs that you are run down",
+    "Kapha-Vata": "you are a mix of calm-and-steady and light-and-restless, so both slowing down too much "
+                  "and overthinking can affect you",
+}
+_DOSHA_FRIEND_TOUCH = {"Pitta": "some heat and intensity", "Kapha": "some steadiness", "Vata": "some restlessness",
+                       "Kapha-Vata": "a mix of steadiness and restlessness"}
+_GOOD_DIGNITY = ("exalted", "own", "moolatrikona")
+_WEAK_DIGNITY = ("debilitated", "enemy", "great enemy")
+
+
+def _friend_asc_lord(dignity):
+    if dignity in _GOOD_DIGNITY:
+        return "it is well supported and bounces back quickly, so you tend to recover well."
+    if dignity in _WEAK_DIGNITY:
+        return ("it can dip more easily, so sleep, routine and not over-pushing yourself matter "
+                "a bit more for you than for most.")
+    return "it is ordinary and dependable - no big plus or minus."
+
+
+def _friend_moon(dignity, afflicted, supported):
+    if afflicted:
+        return ("your mind can feel busier or more pressured than most at times - calm routines, good sleep "
+                "and talking things through help.")
+    if supported:
+        return "your mind has some built-in support, so you tend to settle and calm down fairly easily."
+    if dignity in _GOOD_DIGNITY:
+        return "your emotional side is well supported, so you tend to stay level."
+    if dignity in _WEAK_DIGNITY:
+        return "your feelings can swing a bit more easily, so give your mind proper rest and downtime."
+    return "your emotional side is neither a strong point nor a weak spot."
+
+
+def _friend_saturn(dignity):
+    if dignity in _GOOD_DIGNITY:
+        return "Saturn is about staying power, and yours is strong, so you tend to wear well over the years."
+    if dignity in _WEAK_DIGNITY:
+        return ("Saturn is about staying power and it is a bit strained here, so bones, joints and slow-building "
+                "niggles deserve steady care and regular check-ups.")
+    return ("Saturn is about staying power and yours is average - just look after your joints and bones as you "
+            "get older, like anyone.")
+
+
 # Ayurvedic constitution (Prakriti) by element - Jyotish and Ayurveda share
 # the same classical roots, and this is the standard bridge between them:
 # Fire signs -> Pitta, Earth -> Kapha, Air -> Vata, Water -> a Kapha/Vata
@@ -1371,6 +1426,7 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
         body_areas.append({
             "house": house_num,
             "body_part": _HOUSE_BODY_PART[house_num],
+            "short": _HOUSE_BODY_SHORT[house_num],
             "occupants": occupants,
             "benefic_occupants": benefic_occ,
             "malefic_occupants": malefic_occ,
@@ -1460,27 +1516,56 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
                 "theme": _PLANET_HEALTH_THEME.get(maha["lord"], ""),
             })
 
-    text_bits = [_MEDICAL_OVERVIEW]
+    def friend(text):
+        return f" [In simple terms: {text}]"
+
+    text_bits = [_MEDICAL_OVERVIEW + friend(
+        "astrology lays your body over your birth chart like a map - each of the 12 houses is a body area, "
+        "from the head (1st house) down to the feet (12th), and the planets sitting in a house colour that "
+        "area. It is a way of spotting themes to look after, not a check-up.")]
     if dosha:
         dosha_line = f"Ayurvedic constitution (Prakriti): primarily {dosha['primary']} - {dosha['primary_description']}."
         if dosha["secondary"] and dosha["secondary"] != dosha["primary"]:
             dosha_line += f" Your Moon adds a {dosha['secondary']} flavor - {dosha['secondary_description']}."
         if dosha["balance_tip"]:
             dosha_line += f" {dosha['balance_tip']}"
-        text_bits.append(dosha_line)
-    text_bits.append(f"Ascendant lord (overall vitality): {ascendant_lord_text}" if ascendant_lord_text else
-                      f"Ascendant lord {first['lord']} (overall vitality) is {first_dignity} in {first['lord_sign']}.")
-    text_bits.append(moon_text)
+        gist = _DOSHA_FRIEND.get(dosha["primary"], "")
+        if dosha["secondary"] and dosha["secondary"] != dosha["primary"]:
+            gist += f". Your mind adds {_DOSHA_FRIEND_TOUCH.get(dosha['secondary'], 'its own flavour')}"
+        text_bits.append(dosha_line + friend(f"your body type is mostly {dosha['primary']}, which means {gist}."))
+    asc_text = (f"Ascendant lord (overall vitality): {ascendant_lord_text}" if ascendant_lord_text else
+                f"Ascendant lord {first['lord']} (overall vitality) is {first_dignity} in {first['lord_sign']}.")
+    text_bits.append(asc_text + friend("this is your overall energy, and " + _friend_asc_lord(first_dignity)))
+    text_bits.append(moon_text + friend("the Moon is your mind and mood - " +
+                                        _friend_moon(moon_dignity, moon_afflicted, moon_supported)))
     if saturn_text:
-        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions: {saturn_text}")
+        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions: {saturn_text}"
+                         + friend(_friend_saturn(saturn_dignity)))
     elif saturn_dignity:
-        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions, is {saturn_dignity} in {saturn_detail['sign']}.")
-    text_bits.append(f"6th house (disease, daily health): {sixth_text}" if sixth_text else
-                      f"The 6th house is ruled by {sixth['lord']}, {sixth_dignity} in {sixth['lord_sign']}.")
-    text_bits.append(f"8th house (chronic or hidden conditions): {eighth_text}" if eighth_text else
-                      f"The 8th house is ruled by {eighth['lord']}, {eighth_dignity} in {eighth['lord_sign']}.")
+        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions, is {saturn_dignity} "
+                         f"in {saturn_detail['sign']}." + friend(_friend_saturn(saturn_dignity)))
+    def health_gloss(house_num, area):
+        placed = house_lords[house_num]["placed_in_house"]
+        where = _PLAIN_HOUSE.get(placed, "another part of life")
+        if placed in _STRONG_HOUSES:
+            senti = "that is usually a helpful placement, so this area tends to be looked after."
+        elif placed in _WEAK_HOUSES:
+            senti = "that tends to ask for extra care here, with some ups and downs before things settle."
+        else:
+            senti = "that is a mixed, workable placement."
+        return (f"In simple terms: the planet that looks after your {area} sits in the part of your life about "
+                f"{where} - {senti}")
 
-    body_bits = []
+    sixth_gloss = health_gloss(6, "everyday health and immunity")
+    eighth_gloss = health_gloss(8, "long-running or hidden health matters")
+    text_bits.append((f"6th house (disease, daily health): {sixth_text}" if sixth_text else
+                      f"The 6th house is ruled by {sixth['lord']}, {sixth_dignity} in {sixth['lord_sign']}.")
+                     + (f" [{sixth_gloss}]" if sixth_gloss else ""))
+    text_bits.append((f"8th house (chronic or hidden conditions): {eighth_text}" if eighth_text else
+                      f"The 8th house is ruled by {eighth['lord']}, {eighth_dignity} in {eighth['lord_sign']}.")
+                     + (f" [{eighth_gloss}]" if eighth_gloss else ""))
+
+    body_bits, strain_parts, support_parts = [], [], []
     for area in body_areas:
         if not area["occupant_notes"]:
             continue
@@ -1491,8 +1576,22 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
                 f"{note['planet']} ({note['dignity']}, classically {tag}) points to {note['theme']}"
             )
         body_bits.append(f"Your {ordinal(area['house'])} house ({area['body_part']}): " + "; ".join(clause_bits) + ".")
+        if area["malefic_occupants"]:
+            strain_parts.append(area["short"].lower())
+        elif area["benefic_occupants"]:
+            support_parts.append(area["short"].lower())
     if body_bits:
-        text_bits.append("Body areas where your own planets sit: " + " ".join(body_bits))
+        friend_bits = []
+        if strain_parts:
+            friend_bits.append("the spots on your body map that carry a planet worth a little extra care are "
+                               + ", ".join(strain_parts))
+        if support_parts:
+            friend_bits.append(("and " if strain_parts else "") + "these have a friendly, supportive planet on them: "
+                               + ", ".join(support_parts))
+        friend_bits.append("every other area has nothing sitting on it, which is simply neutral")
+        text_bits.append("Body areas where your own planets sit: " + " ".join(body_bits)
+                         + friend("; ".join(friend_bits) + ". Think of shaded spots as 'keep an eye on this', "
+                                  "not 'something is wrong'."))
 
     if age_windows:
         text_bits.append(
@@ -1502,8 +1601,10 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
             "; ".join(
                 f"age {w['start_age']}-{w['end_age']} ({w['lord']} Mahadasha - {w['role']}; "
                 f"themes: {w['theme']})" for w in age_windows
-            ) + "."
-        )
+            ) + "." + friend(
+                "these are just stretches of life when it is smart to be a bit more mindful of your health - "
+                "book the check-up and keep your routine going. Think of it as a friendly nudge, not a warning "
+                "that something will happen."))
     text_bits.append(_MEDICAL_CAVEAT)
 
     return {

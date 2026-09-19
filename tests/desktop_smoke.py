@@ -233,6 +233,50 @@ for style in ("South Indian", "North Indian", "South Indian", "North Indian"):
     app._screens["chart"].style_spinner.text = style; pump(14)
 check(len(cv.canvas.children) == n_north, f"redraws do not accumulate canvas instructions ({len(cv.canvas.children)} vs {n_north})")
 
+print("== chart style switch, Medical body map, Predictions pickers, fields outside a ScrollView")
+app.store.current_profile_id = "self"
+app.goto("chart"); pump(10)
+ct = app._screens["chart"]
+ct.style_spinner.text = "South Indian"; pump(12)
+check(app.store.chart_style == "South Indian" and ct.style_spinner.text == "South Indian"
+      and ct.canvas_widget.style == "South Indian", "Chart Diagram: choosing South Indian sticks")
+ct.style_spinner.text = "North Indian"; pump(12)
+check(ct.canvas_widget.style == "North Indian" and app.store.chart_style == "North Indian", "...and back to North Indian")
+
+app.goto("medical"); pump(12)
+med = app._screens["medical"]
+canv = [w for w in walk(med) if type(w).__name__ == "BodyMapCanvas"]
+check(len(canv) == 1 and len(canv[0].children) == 0 and len(canv[0].canvas.children) > 5, "Medical shows a body-map chart")
+check(canv[0].body_short.get(1) == "Head" and canv[0].body_short.get(12) == "Feet", "body map knows the body areas")
+mtext = " ".join(texts(med))
+check(mtext.count("[In simple terms") >= 6, f"Medical paragraphs carry friendly explanations ({mtext.count('[In simple terms')})")
+check(mtext.count("Ayurvedic constitution (Prakriti)") == 1, "constitution appears once, not twice")
+mseg = [w for w in walk(med) if type(w).__name__ == "SegmentedControl"][0]
+mseg.select("South Indian"); pump(12)
+check(canv[0].style == "South Indian", "Medical: switch the body map to South Indian")
+mseg.select("North Indian"); pump(8)
+
+app.goto("predictions"); pump(10)
+pr = app._screens["predictions"]
+tap(pr.year_input)
+check(panel.visible and panel.mode == "number", "Predictions year field opens the number pad (and does not freeze)")
+pr.year_input.text = ""
+for ch in "2027":
+    press(ch)
+press("Done"); pump(8)
+pr.month_spinner.text = "March"; pr.day_spinner.text = "15"; pump(12)
+ptxt = " ".join(texts(pr.text_view))
+check("2027-03-15" in ptxt, "Predictions computed for the picked date")
+check(ptxt.count("[In simple terms") >= 3, f"Predictions carry friendly explanations ({ptxt.count('[In simple terms')})")
+pr.year_input.text = "3000"; pr.refresh(); pump(6)
+check("between 1900 and 2100" in " ".join(texts(pr.text_view)), "out-of-range year gives a message, not a crash")
+
+app.goto("help"); pump(8)
+hp = app._screens["help"]
+tap(hp.search_input)
+check(panel.visible, "Help search box opens the keyboard without freezing")
+press("Done")
+
 print("\nRESULT:", "PASS" if not FAILS else f"{len(FAILS)} FAILURE(S)")
 for f in FAILS: print(" -", f)
 sys.exit(0 if not FAILS else 1)
