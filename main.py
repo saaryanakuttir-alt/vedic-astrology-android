@@ -45,7 +45,8 @@ from kivy.uix.floatlayout import FloatLayout
 # resizing the whole Window on every keyboard show/hide.
 Window.softinput_mode = "below_target"
 
-from ui import keyboard, theme
+import i18n
+from ui import fonts, keyboard, theme
 from ui.app_state import ProfileStore
 from ui.tabs_chart import ChartTab
 from ui.tabs_entry import EntryScreen
@@ -70,13 +71,26 @@ class VedicAstrologyApp(App):
         # Built-in keyboard unless the user switched to the phone keyboard. Must be set
         # before any screen is built: text fields read it when they are created.
         keyboard.SERVICE.builtin = self.store.settings.get("keyboard", "builtin") != "phone"
+        # Interface language (offline: strings and fonts ship inside the APK). Also before any
+        # screen exists, since widgets read the default font when they are created.
+        language = self.store.settings.get("language", "en")
+        i18n.set_language(language)
+        fonts.apply(i18n.get_language())
         Window.clearcolor = theme.BG
+        root = self._root = FloatLayout()
+        self._build_ui(root)
+        Window.bind(on_keyboard=self._on_keyboard)
+        self.goto("home")
+        return root
+
+    def _build_ui(self, root):
+        """(Re)build everything under `root`. Called at start-up and whenever the language changes."""
         self._screens = {}
         self.current_key = None
 
-        # key -> (header title, factory)
+        # key -> (English header title, factory); titles are translated when shown
         self._registry = {
-            "home": ("Home", lambda: HomeScreen(self.store, self.goto)),
+            "home": ("Home", lambda: HomeScreen(self.store, self.goto, self.set_language)),
             "entry": ("New Chart", lambda: EntryScreen(self.store, self._on_chart_generated, self.goto)),
             "library": ("Saved Charts", lambda: LibraryScreen(self.store, self.goto, self._load_saved)),
             "chart": ("Chart Diagram", lambda: ChartTab(self.store)),
@@ -97,12 +111,12 @@ class VedicAstrologyApp(App):
             "help": ("Help & About", lambda: HelpTab()),
         }
 
-        root = FloatLayout()
         root.add_widget(theme.GradientBackground(size_hint=(1, 1)))
         shell = self._shell = BoxLayout(orientation="vertical", size_hint=(1, 1), pos_hint={"x": 0, "y": 0})
         self.header = theme.AppHeader(on_home=lambda: self.goto("home"))
         self.content = BoxLayout(orientation="vertical")
-        self.bottom = theme.BottomNav(BOTTOM_NAV, on_select=lambda k: self.goto(k))
+        self.bottom = theme.BottomNav([(k, i18n.t(label), icon) for k, label, icon in BOTTOM_NAV],
+                                      on_select=lambda k: self.goto(k))
         shell.add_widget(self.header)
         shell.add_widget(self.content)
         # The built-in keyboard is docked between the content and the bottom bar; while it is
@@ -112,9 +126,18 @@ class VedicAstrologyApp(App):
         keyboard.SERVICE.on_visibility = self._on_keyboard_visibility
         root.add_widget(shell)
 
-        Window.bind(on_keyboard=self._on_keyboard)
-        self.goto("home")
-        return root
+    def set_language(self, code):
+        """Switch the interface language (English / Hindi / Bengali) and rebuild every screen."""
+        if code == i18n.get_language():
+            return
+        self.store.settings.set("language", code)
+        i18n.set_language(code)
+        fonts.apply(i18n.get_language())
+        keyboard.SERVICE.hide()
+        stay_on = self.current_key or "home"
+        self._root.clear_widgets()
+        self._build_ui(self._root)
+        self.goto(stay_on)
 
     # ------------------------------------------------------------------ navigation
     def goto(self, key, preset=None):
@@ -134,7 +157,7 @@ class VedicAstrologyApp(App):
         self.content.clear_widgets()
         self.content.add_widget(screen)
         self.current_key = key
-        self.header.set_title(title)
+        self.header.set_title(i18n.t(title))
         self.bottom.set_active(key)
         if preset and hasattr(screen, "preset_varga"):
             screen.preset_varga(preset)

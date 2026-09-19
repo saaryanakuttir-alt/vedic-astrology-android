@@ -90,19 +90,3 @@ def test_everything_else_still_generates(readings):
         assert reading["karmic_and_past_life"]["soul_narrative"]
         assert reading["medical_astrology"]["text"]
         assert not reading["warnings"], reading["warnings"][:3]
-
-
-def test_yearly_relationship_outlook(readings):
-    import re
-    for _n, _c, reading in readings:
-        y = reading["relationship_themes"]["yearly_outlook"]
-        ages = [e["age"] for e in y["years"]]
-        assert ages == list(range(6, 81)), "one entry per year from age 6 to 80"
-        assert {e["level"] for e in y["years"]} <= {"Low", "Moderate", "High", "Very high"}
-        assert "not a real probability" in y["caveat"]
-        # childhood and teens: friendships / emotional bonds only - never romance, partnership or physical wording
-        for e in y["years"]:
-            if e["age"] < 18:
-                text = e["plain"] + " " + e["kind"]
-                assert not re.search(r"romance|romantic|partner|marriage|physical|intima|love and|attraction", text, re.I), (e["age"], text)
-        assert all(a >= 18 for a in y["standouts"])

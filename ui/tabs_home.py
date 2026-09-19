@@ -16,7 +16,9 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
 
-from ui import theme
+import i18n
+from i18n import t
+from ui import fonts, theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.theme import HomeCard, OutlineBox, ThemedButton, ThemedSpinner
 
@@ -49,8 +51,27 @@ HOME_MORE = [
 ]
 
 
+class LanguageBar(BoxLayout):
+    """English | हिन्दी | বাংলা. Each button draws its own name in a font that has those
+    letters, whatever language the rest of the app is currently in."""
+
+    def __init__(self, on_select, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("height", dp(42))
+        kwargs.setdefault("spacing", dp(8))
+        super().__init__(orientation="horizontal", **kwargs)
+        for code, label in i18n.LANGUAGES:
+            selected = code == i18n.get_language()
+            btn = ThemedButton(text=label, variant="primary" if selected else "secondary", font_size="15sp")
+            font = fonts.font_for_language(code)
+            if font:
+                btn.font_name = font
+            btn.bind(on_release=lambda inst, c=code: on_select(c))
+            self.add_widget(btn)
+
+
 class HomeScreen(BoxLayout):
-    def __init__(self, store, goto, **kwargs):
+    def __init__(self, store, goto, on_language=None, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.goto = goto
         scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
@@ -60,13 +81,15 @@ class HomeScreen(BoxLayout):
         scroll.add_widget(body)
         self.add_widget(scroll)
 
-        sub = Label(text="Your birth-chart engine and classical interpretive library.", font_size="13sp",
+        sub = Label(text=t("Your birth-chart engine and classical interpretive library."), font_size="13sp",
                     color=theme.MUTED, halign="left", valign="middle", size_hint_y=None, height=dp(24))
         sub.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         body.add_widget(sub)
+        if on_language:
+            body.add_widget(LanguageBar(on_language))
         body.add_widget(self._grid(HOME_CORE))
 
-        more = Label(text="MORE READINGS", font_size="11sp", color=theme.ACCENT, halign="left", valign="middle",
+        more = Label(text=t("MORE READINGS"), font_size="11sp", color=theme.ACCENT, halign="left", valign="middle",
                      size_hint_y=None, height=dp(28), bold=True)
         more.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         body.add_widget(more)
@@ -80,7 +103,7 @@ class HomeScreen(BoxLayout):
         rows = (len(items) + 1) // 2
         grid = GridLayout(cols=2, spacing=dp(10), size_hint_y=None, height=rows * dp(108) + (rows - 1) * dp(10))
         for key, title, desc, icon, preset in items:
-            grid.add_widget(HomeCard(icon, title, desc,
+            grid.add_widget(HomeCard(icon, t(title), t(desc),
                                      on_press_cb=lambda k=key, p=preset: self.goto(k, preset=p)))
         return grid
 

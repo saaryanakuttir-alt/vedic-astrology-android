@@ -1948,9 +1948,6 @@ def generate_reading(chart):
     # "dasha" readings dict just built above so every year's note quotes the
     # same already-verified antardasha text the Dasha tab itself shows.
     year_by_year = life_timeline.compute_life_timeline(chart, dasha)
-    relationship_themes_reading["yearly_outlook"] = relationship_themes.yearly_relationship_outlook(
-        chart, year_by_year["years"]
-    )
 
     return {
         "name": chart.get("name"),

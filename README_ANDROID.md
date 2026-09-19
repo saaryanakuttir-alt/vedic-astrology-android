@@ -273,7 +273,7 @@ filetype, pytest).
 
 ## Version 1.4 changes (2026-09-19)
 
-* **Relationship Themes: year-by-year outlook from age 6 to 80**
+* **(Removed again in 1.5 at the user's request - it was too much.) Relationship Themes: year-by-year outlook from age 6 to 80**
   (`relationship_themes.yearly_relationship_outlook`). Each year gets a level
   (Low / Moderate / High / Very high) from the Mahadasha/Antardasha/Pratyantardasha
   lords (Venus, the 7th, 5th and 11th lords, the Moon), the Muntha in the
@@ -286,4 +286,22 @@ filetype, pytest).
 * **Stable signing key** (`ci/debug.keystore`, used by the workflow): from 1.4 on,
   a new build installs over the previous one and keeps its saved data. The step
   from a build made before 1.4 needs one uninstall.
+
+## Version 1.5 changes (2026-09-19)
+
+* **Year-by-year relationship outlook removed** (see 1.4 above).
+* **Language switch, stage 1 (English / हिन्दी / বাংলা)**, fully offline: strings live in
+  `engine/i18n.py` + `i18n_hi.py` + `i18n_bn.py` (English text is the key; a missing
+  translation shows the English), fonts in `fonts/` (Noto Sans Devanagari and
+  Bengali, SIL OFL, generated as static Regular/Bold from Google Fonts' variable
+  fonts) applied by `ui/fonts.py`. The switch is on the Home screen; the choice is
+  remembered and every screen is rebuilt on change. Stage 1 translates the titles,
+  bottom bar and Home cards only. Still to do: forms, tables, help/FAQ, the
+  "In simple terms" texts and the ~3,300 distinct classical sentences.
+* Known limit found on desktop: Kivy's Windows text engine does not join Devanagari/Bengali
+  conjuncts (vowel signs land on the wrong side). The Android build compiles HarfBuzz
+  into SDL2_ttf, so the phone may shape correctly - checked on the device.
+* Signing: CI now exports ANDROID_PREFS_ROOT/USER_HOME/SDK_HOME so Gradle really uses
+  `ci/debug.keystore` (verified: the APK's certificate SHA-256 matches). Updates from
+  1.4.1 on install over the previous build and keep saved data.
 
