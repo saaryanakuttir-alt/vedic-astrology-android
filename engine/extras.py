@@ -550,7 +550,7 @@ def assess_doshas(chart, at=None):
                        "It can also make you a bold, original thinker.") if gc["present"] else "Jupiter and Rahu are not together.",
                       "Choosing guides carefully and checking advice against your own values helps." if gc["present"] else "",
                       "Mixed" if gc["present"] else "Good",
-                      "Your wisdom planet is mixed with a restless one - worth choosing teachers wisely." if gc["present"] else "Not present."))
+                      "Your wisdom planet is mixed with a restless one - worth choosing teachers wisely." if gc["present"] else "This does not apply to you - Jupiter and Rahu are not together."))
 
     # Grahan
     gr = assess_grahan_dosha(chart)
@@ -575,7 +575,7 @@ def assess_doshas(chart, at=None):
                        "It is a tendency that steady effort tends to soften.") if sp["present"] else "Saturn and Rahu are not together.",
                       "Discipline, honesty and service to others are the classic remedies." if sp["present"] else "",
                       "Needs some care" if sp["present"] else "Good",
-                      "Saturn and Rahu are together, so patience matters." if sp["present"] else "Not present."))
+                      "Saturn and Rahu are together, so patience matters." if sp["present"] else "This does not apply to you - Saturn and Rahu are not together."))
 
     # Saturn's current phase
     now = sade_sati_now(chart, at)
@@ -606,7 +606,7 @@ def assess_doshas(chart, at=None):
 def doshas_text(chart, at=None):
     parts = []
     for d in assess_doshas(chart, at):
-        body = (f"Verdict: {d['tone']} - {d['status']}.\n\nWhat it is: {d['what']}\n\nWhat may happen: {d['may_happen']}")
+        body = (f"Verdict: {d['tone']} - {d['status']}.\n\nWhat it is: {d['what']}\n\n{'What may happen' if d['present'] else 'What this means'}: {d['may_happen']}")
         if d["easing"]:
             body += f"\n\nWhat can help: {d['easing']}"
         body += f"\n\n[In simple terms: {d['plain']}]"

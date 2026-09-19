@@ -342,3 +342,8 @@ Rahu/Ketu aspects on the 5th/7th/9th while this engine gives them only the 7th.
 * Not done yet (later phases): Varshaphal, Yogini/Char dasha, Jaimini Karakamsa/Swamsa, KP tables,
   Shadbala/Bhavabala, Prastharashtakvarga, Lal Kitab, and the long life-prediction prose in the
   AstroSage style.
+
+## Version 1.6.1 (2026-09-20)
+
+* Doshas that are NOT present now say "What this means" instead of "What may happen", and the two
+  plain-words lines for Guru Chandal / Shrapit read "This does not apply to you ...".
