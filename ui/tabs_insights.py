@@ -202,12 +202,12 @@ class SectionLabel(Label):
         self.height = max(dp(30), self.texture_size[1] + dp(12))
 
 
-def planet_effect_widgets(store, chart, reading):
+def planet_effect_widgets(store, chart, reading, focus=None):
     """A banner and labelled sections for every planet (Compact keeps 'At a glance' and 'In simple terms')."""
     import planet_effects
     compact = reading_mode.current(store) == "compact"
     widgets = []
-    for e in planet_effects.planet_effects(chart, reading):
+    for e in planet_effects.planet_effects(chart, reading, focus):
         widgets.append(PlanetBanner(e["banner"]))
         for label, text in e["sections"]:
             if compact and label not in (planet_effects.GLANCE, planet_effects.SIMPLE):

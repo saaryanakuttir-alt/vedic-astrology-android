@@ -149,9 +149,29 @@ class PlanetsTab(BoxLayout):
         "comfortable the planet is in that sign."
     )
 
-    def __init__(self, store, **kwargs):
+    HOUSE_COLUMNS = ["Planet", "House", "Chalit Hs", "Rules house", "Looks at house"]
+    HOUSE_HINTS = [0.2, 0.14, 0.16, 0.25, 0.25]
+    HOUSE_CAPTION = (
+        "Which of your 12 houses (life areas, counted from your rising sign) each planet sits in. The house shows WHERE in life the "
+        "planet's effects are felt - for example the 10th house is career and the 7th is partnership. Chalit Hs is a more precise "
+        "recalculation of the house. 'Rules' and 'Looks at' show which other houses the planet governs and influences."
+    )
+    SIGN_COLUMNS = ["Planet", "Sign", "Deg", "Rx", "Nakshatra", "Pada", "Dignity"]
+    SIGN_HINTS = [0.14, 0.15, 0.09, 0.06, 0.2, 0.08, 0.28]
+    SIGN_CAPTION = (
+        "Which of the 12 zodiac signs each planet sits in. The sign shows HOW the planet behaves - its style and temperament, and "
+        "whether it is comfortable there. Deg = position within the sign (0-30), Rx = moving backwards, Nakshatra/Pada = the lunar "
+        "'constellation' and its quarter, Dignity = how strong the planet is in that sign."
+    )
+
+    def __init__(self, store, focus=None, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
+        self.focus = focus                       # None = both, "house" or "sign"
+        if focus == "house":
+            self.columns, self.col_hints, self.caption = self.HOUSE_COLUMNS, self.HOUSE_HINTS, self.HOUSE_CAPTION
+        elif focus == "sign":
+            self.columns, self.col_hints, self.caption = self.SIGN_COLUMNS, self.SIGN_HINTS, self.SIGN_CAPTION
         # ONE scrolling page: caption, the whole placement table at its full height, then the
         # plain-language reading for each planet. (Before, the table was a small box that scrolled
         # on its own above a second scrolling box for the text.)
@@ -167,8 +187,12 @@ class PlanetsTab(BoxLayout):
         # "What this means" - the table is raw placement data; this is the plain-language "so what
         # does that actually affect" reading for each planet, from reading["planets"][p]["plain_gloss"]
         # (rule_engine.py's _plain_planet_gloss). One paragraph per planet.
-        page.add_widget(CaptionLabel("How each planet affects your houses and signs - one section per planet, with a plain-words "
-                                     "verdict (good, mixed or needs care) and what may happen:"))
+        page.add_widget(CaptionLabel({"house": "How each planet affects the house it sits in - one section per planet, with a "
+                                                 "plain-words verdict (good, mixed or needs care) and what may happen:",
+                                      "sign": "How each planet behaves in the sign it sits in - one section per planet, with a "
+                                                "plain-words verdict (good, mixed or needs care) and what may happen:"}.get(
+            focus, "How each planet affects your houses and signs - one section per planet, with a plain-words "
+                   "verdict (good, mixed or needs care) and what may happen:")))
         self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
         page.add_widget(self.mode_bar)
         self.effects_box = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
@@ -179,11 +203,22 @@ class PlanetsTab(BoxLayout):
         from astrology_tables import get_dignity
         chart = self.store.current["chart"]
         if chart is None:
-            self.table.set_rows([("No chart generated yet.", "", "", "", "", "", "", "", "")])
+            self.table.set_rows([("No chart generated yet.",) + ("",) * (len(self.columns) - 1)])
             self.effects_box.clear_widgets()
             return
         rows = []
-        for planet, detail in chart["planets"].items():
+        if self.focus == "house":
+            import extras
+            cons = extras.planet_considerations(chart)
+            for planet, detail in chart["planets"].items():
+                c = cons[planet]
+                rows.append((planet, detail["house"], detail.get("chalit_house", ""), ", ".join(map(str, c["lord_of"])) or "-",
+                             ", ".join(map(str, c["aspects_houses"]))))
+        elif self.focus == "sign":
+            for planet, detail in chart["planets"].items():
+                rows.append((planet, detail["sign"], f"{detail['degree_in_sign']:.2f}", "Yes" if detail["retrograde"] else "",
+                             detail["nakshatra"], detail["nakshatra_pada"], get_dignity(planet, detail["sign"])))
+        for planet, detail in ([] if self.focus else chart["planets"].items()):
             dignity = get_dignity(planet, detail["sign"])
             rows.append((
                 planet, detail["sign"], f"{detail['degree_in_sign']:.2f}",
@@ -199,7 +234,7 @@ class PlanetsTab(BoxLayout):
         self.effects_box.clear_widgets()
         if reading is not None:
             from ui.tabs_insights import planet_effect_widgets
-            for w in planet_effect_widgets(self.store, chart, reading):
+            for w in planet_effect_widgets(self.store, chart, reading, self.focus):
                 self.effects_box.add_widget(w)
 
 

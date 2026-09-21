@@ -27,8 +27,8 @@ CREDIT = "Created by Sammya Das"
 HOME_CORE = [
     ("entry", "Birth Chart", "Generate and view a chart", "diamond", None),
     ("chart", "Divisional Charts", "D9, D10 and more", "grid", "D9"),
-    ("planets", "Planet in House", "Placement readings", "house", None),
-    ("planets", "Planet in Sign", "Sign-based readings", "sign", None),
+    ("planet_house", "Planet in House", "Which life area each planet is in", "house", None),
+    ("planet_sign", "Planet in Sign", "How each planet behaves in its sign", "sign", None),
     ("houses", "House Lord Placements", "Lordship analysis", "key", None),
     ("yogas", "Classical Yogas", "Yoga combinations", "rings", None),
     ("dasha", "Mahadasha & Antardasha", "Planetary periods", "clock", None),

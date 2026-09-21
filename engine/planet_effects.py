@@ -15,7 +15,16 @@ def _entry_text(entry, *fields):
     return "\n\n".join(str(entry[f]).strip() for f in fields if entry and entry.get(f))
 
 
-def planet_effects(chart, reading):
+def _wanted(label, planet, focus):
+    """Sections shared by both views, plus the house-only or sign-only ones (focus = None keeps everything)."""
+    if focus is None or label in (GLANCE, SIMPLE, "What may happen") or label.startswith("Why the verdict"):
+        return True
+    is_house = label.startswith(f"{planet} in the ") or label == "What it rules and looks at"
+    return is_house if focus == "house" else not is_house
+
+
+def planet_effects(chart, reading, focus=None):
+    """focus: None (everything), "house" (the house side only) or "sign" (the sign side only)."""
     cons = planet_considerations(chart)
     out = []
     for p in BODIES:
@@ -59,8 +68,9 @@ def planet_effects(chart, reading):
         secs.append(("What may happen", c["effects"]))
         gloss = (d.get("plain_gloss") or "").strip()
         secs.append((SIMPLE, gloss or c["summary"]))
-        out.append({"planet": p, "tone": c["tone"], "banner": f"{p.upper()}  -  {sign}, {ordinal(house)} house  -  {c['tone']}",
-                    "sections": [s for s in secs if s[1]]})
+        where = {"house": f"{ordinal(house)} house", "sign": sign}.get(focus, f"{sign}, {ordinal(house)} house")
+        out.append({"planet": p, "tone": c["tone"], "banner": f"{p.upper()}  -  {where}  -  {c['tone']}",
+                    "sections": [s for s in secs if s[1] and _wanted(s[0], p, focus)]})
     return out
 
 

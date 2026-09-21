@@ -396,6 +396,26 @@ check("hit an error" not in blob, "moredashas: no error text")
 for word in ("Yogini Dasha", "Char Dasha", "Atmakaraka", "Karakamsa", "Bhramari", "Gemini"):
     check(word in blob, f"moredashas: shows '{word}'")
 
+print("== Planet in House and Planet in Sign are separate screens")
+app.store.current_profile_id = "self"
+app.goto("planet_house"); pump(16)
+house_blob = " ".join(texts(app._screens["planet_house"]))
+app.goto("planet_sign"); pump(16)
+sign_blob = " ".join(texts(app._screens["planet_sign"]))
+check(app.header.title_label.text == "Planet in Sign", "header says Planet in Sign")
+check("Rules house" in house_blob and "Nakshatra" not in house_blob and "What it rules and looks at" in house_blob,
+      "Planet in House: house table and house sections only")
+check("Nakshatra" in sign_blob and "Rules house" not in sign_blob and "What it rules and looks at" not in sign_blob,
+      "Planet in Sign: sign table and sign sections only")
+check("hit an error" not in house_blob + sign_blob, "both screens build without error")
+check(any("Planet in House" in str(getattr(c, "text", "")) for c in walk(app._screens["home"])) and
+      any("Planet in Sign" in str(getattr(c, "text", "")) for c in walk(app._screens["home"])), "Home still lists both cards")
+app.goto("home"); pump(4)
+cards2 = [w for w in walk(app._screens["home"]) if type(w).__name__ == "HomeCard"][::-1]
+tap(cards2[2]); check(app.current_key == "planet_house", "Planet in House card opens its own screen")
+app.goto("home"); pump(4)
+tap(cards2[3]); check(app.current_key == "planet_sign", "Planet in Sign card opens its own screen")
+
 print("== no language switch")
 app.goto("home"); pump(8)
 check(not [w for w in walk(app._screens["home"]) if type(w).__name__ == "LanguageBar"], "Home has no language buttons")

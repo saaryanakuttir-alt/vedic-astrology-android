@@ -373,3 +373,7 @@ Checked against the AstroSage reference report (same birth data); AstroSage was 
 * **Sade Sati in detail** (`extras.sade_sati_detail_text`): personal reading - Saturn and Moon in your chart, where you are now, how each phase may go, per-stay Ashtakvarga points, all cycles.
 * Not done: Lal Kitab (not enough reliable knowledge to write it), KP Pratyantar pages, Bhavabala.
 * PDF (Detailed) now also has Your Nature, personal Sade Sati, Varshaphal, Planet strength, KP and Ashtakvarga detail; Compact has Your Nature and a short Sade Sati.
+
+## Version 1.7.1 (2026-09-21)
+
+* **Planet in House** and **Planet in Sign** are now two separate screens (before, both cards opened the same page). House: the house table (house, Chalit house, houses ruled, houses looked at) and the house-side sections. Sign: the sign table (sign, degree, nakshatra, dignity) and the sign-side sections (sign, ruler relationship, combust/retrograde/vargottama). The verdict, what may happen and the plain-words summary appear on both. The full combined view is still in the PDF.

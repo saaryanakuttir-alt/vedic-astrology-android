@@ -93,6 +93,8 @@ class VedicAstrologyApp(App):
             "chart": ("Chart Diagram", lambda: ChartTab(self.store)),
             "kundli": ("Kundli Details", lambda: KundliDetailsTab(self.store)),
             "planets": ("Planets", lambda: PlanetsTab(self.store)),
+            "planet_house": ("Planet in House", lambda: PlanetsTab(self.store, focus="house")),
+            "planet_sign": ("Planet in Sign", lambda: PlanetsTab(self.store, focus="sign")),
             "houses": ("Houses", lambda: HousesTab(self.store)),
             "yogas": ("Classical Yogas", lambda: YogasTab(self.store)),
             "dasha": ("Mahadasha & Antardasha", lambda: DashaTab(self.store)),

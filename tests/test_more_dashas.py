@@ -67,6 +67,17 @@ def test_mahadasha_text_rates_every_period(chart):
     assert FORBIDDEN.search(text + md.karakamsa_text(chart)) is None
 
 
+def test_house_and_sign_views_are_separate(chart, reading):
+    house = pe.planet_effects(chart, reading, "house")
+    sign = pe.planet_effects(chart, reading, "sign")
+    for h, s in zip(house, sign):
+        hl, sl = [l for l, _ in h["sections"]], [l for l, _ in s["sections"]]
+        assert any(l.startswith(h["planet"] + " in the ") for l in hl) and not any(l.startswith(h["planet"] + " in the ") for l in sl)
+        assert any(l.startswith(h["planet"] + " in ") and " in the " not in l for l in sl)
+        assert "What it rules and looks at" in hl and "What it rules and looks at" not in sl
+        assert hl[0] == pe.GLANCE == sl[0] and hl[-1] == pe.SIMPLE == sl[-1]
+
+
 def test_planet_effects_have_clear_sections_for_every_planet(chart, reading):
     effects = pe.planet_effects(chart, reading)
     assert [e["planet"] for e in effects] == ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
