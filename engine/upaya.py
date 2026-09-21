@@ -23,6 +23,7 @@ import json
 import os
 
 import maitri
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 KB_DIR = os.path.join(os.path.dirname(__file__), "kb")
 
@@ -123,16 +124,16 @@ def _explain_pair(a, b, a_view, b_view):
     directional natural-friendship views. Both UIs show this alongside the
     bare grade rather than leaving 'avoid' unexplained."""
     if a_view == b_view == "friend":
-        return f"{a} and {b} are mutual natural friends."
+        return tr('{0} and {1} are mutual natural friends.', a, b)
     if a_view == b_view == "enemy":
-        return f"{a} and {b} regard each other as natural enemies."
+        return tr('{0} and {1} regard each other as natural enemies.', a, b)
     if a_view == b_view == "neutral":
-        return f"{a} and {b} are naturally neutral toward each other - neither friends nor enemies."
+        return tr('{0} and {1} are naturally neutral toward each other - neither friends nor enemies.', a, b)
     # Asymmetric: the two planets' own natural dispositions genuinely
     # differ (e.g. the Moon regards Mercury as a friend, but Mercury
     # regards the Moon as an enemy) - state both directions rather than
     # collapsing to one.
-    return f"{a} regards {b} as a natural {a_view}, but {b} regards {a} as a natural {b_view}."
+    return tr('{0} regards {1} as a natural {2}, but {3} regards {4} as a natural {5}.', a, b, a_view, b, a, b_view)
 
 
 def check_gemstone_combination(planets):
@@ -172,9 +173,8 @@ def check_gemstone_combination(planets):
     notes = []
     if unknown:
         notes.append(
-            f"{', '.join(unknown)} not included in the pairwise check - Rahu/Ketu "
-            f"aren't covered by the natural-friendship table this check uses "
-            f"(see maitri.py)."
+            tr("{0} not included in the pairwise check - Rahu/Ketu aren't covered by the natural-friendship "
+               'table this check uses (see maitri.py).', ', '.join(unknown))
         )
     # The two most commonly-cited classical cautions, called out explicitly
     # even though the pairwise check above already catches them via the
@@ -183,15 +183,15 @@ def check_gemstone_combination(planets):
     stone_set = set(known)
     if "Saturn" in stone_set and stone_set & {"Sun", "Moon", "Mars"}:
         notes.append(
-            "Blue Sapphire (Saturn) with Ruby (Sun), Pearl (Moon), or Red Coral "
+            tx("Blue Sapphire (Saturn) with Ruby (Sun), Pearl (Moon), or Red Coral "
             "(Mars) is one of the most consistently warned-against combinations "
             "across classical sources - Saturn regards all three as natural "
-            "enemies."
+            "enemies.")
         )
     if "Venus" in stone_set and stone_set & {"Sun", "Moon"}:
         notes.append(
-            "Diamond (Venus) with Ruby (Sun) or Pearl (Moon) is another widely "
-            "cited caution - Venus regards both as natural enemies."
+            tx("Diamond (Venus) with Ruby (Sun) or Pearl (Moon) is another widely "
+            "cited caution - Venus regards both as natural enemies.")
         )
     return {"pairs": pairs, "verdict": worst, "notes": notes}
 
@@ -237,13 +237,13 @@ def suggest_gemstone_candidates(planets_reading):
         reasons = []
         in_sign = detail.get("in_sign") or {}
         if in_sign.get("dignity") == "debilitated":
-            reasons.append("debilitated by sign")
+            reasons.append(tx("debilitated by sign"))
         combustion = detail.get("combustion") or {}
         if combustion.get("combust"):
-            reasons.append("combust (too close to the Sun)")
+            reasons.append(tx("combust (too close to the Sun)"))
         rel = detail.get("sign_lord_relationship")
         if rel and rel.get("grade") == "Adhi Shatru":
-            reasons.append("Great Enemy relationship with its own sign's lord")
+            reasons.append(tx("Great Enemy relationship with its own sign's lord"))
         if reasons:
             g = gemstones[planet]
             candidates.append({

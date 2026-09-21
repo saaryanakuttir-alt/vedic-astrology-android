@@ -1,0 +1,122 @@
+# planet_in_house:PH-Ke-H1
+12081	As a shadow planet (chhaya graha), Ketu is generally treated similarly to Rahu regarding dignity, with many texts noting it functions best in upachaya houses (3, 6, 10, 11) and finds its most natural expression in the 12th house of liberation.
+12082	In houses ruling material significations (wealth, relationships, career), Ketu's detachment can reduce interest or create a sense of incompleteness in that area of life.
+# planet_in_house:PH-Ke-H2
+12083	Brings detachment from material wealth and conventional family values, along with reserved speech.
+12084	The native may show relatively little interest in accumulating wealth or maintaining family status, sometimes preferring simplicity over material display.
+12085	Speech patterns can be unusual, minimal, or reluctant, and family relationships may carry an unconventional or emotionally distant quality.
+12086	This placement can, however, indicate unexpected spiritual wisdom expressed through speech when Ketu is well-supported.
+# planet_in_house:PH-Ke-H3
+12087	Tends to reduce conventional effort-driven courage while sharpening intuitive skill and unconventional communication.
+12088	Since Ketu's detachment can work against the assertive, effort-based nature of the 3rd house, the native's initiative or courage in everyday efforts may be inconsistent or intuitively rather than deliberately driven.
+12089	Sibling relationships can be complex or emotionally distant, though there is often notable, sometimes unexpected, skill in intuitive or spiritually informed communication.
+12090	Self-effort works best when guided by inner conviction rather than external pressure.
+# planet_in_house:PH-Ke-H4
+12091	Creates detachment from home, property, or the mother, favoring inner peace over material domestic comfort.
+12092	The native may experience restlessness or emotional distance regarding home life, property, or the relationship with the mother, sometimes preferring a simple or unconventional living situation.
+12093	Material comforts at home may hold less appeal than the native's inner emotional or spiritual life.
+12094	When approached consciously, this placement can support deep inner peace independent of external domestic circumstances.
+# planet_in_house:PH-Ke-H5
+12095	Brings an unconventional, intuitive approach to education, and romance, with reduced interest in conventional speculation.
+12096	The native may show relatively little interest in traditional speculative gains, instead relying on intuitive insight when it does engage with such matters.
+12097	Romantic relationships may carry a detached, karmic, or spiritually significant quality.
+# planet_in_house:PH-Ke-H6
+12098	A favorable upachaya placement, supporting success against obstacles through unconventional or intuitive means.
+12099	Ketu performs relatively well here, granting intuitive problem-solving skill and often success in healing, research, or unconventional approaches to overcoming competitors and health challenges.
+12100	The native may find conventional treatments less effective than holistic or alternative methods, and disputes are often resolved through detachment rather than direct confrontation.
+12101	This placement favors careers in healing, research, or unconventional service fields.
+# planet_in_house:PH-Ke-H7
+12102	Brings detachment or a sense of incompleteness to marriage and partnerships, often carrying karmic undertones.
+12103	The native may find sustained emotional engagement in partnerships challenging, sometimes feeling an underlying detachment even in significant relationships.
+12104	Marriage or business partnerships often carry karmic or past-life significance, requiring conscious effort to remain present and committed.
+12105	Spiritual or unconventional approaches to partnership can help the native find meaning despite the placement's natural tendency toward emotional distance.
+# planet_in_house:PH-Ke-H8
+12106	Deepens intuitive and spiritual understanding of transformation, mystery, and life's hidden dimensions.
+12107	Crises or transformative life events frequently trigger genuine spiritual awakening rather than mere disruption.
+12108	This placement favors research, spiritual counseling, or work involving deep psychological or metaphysical inquiry.
+# planet_in_house:PH-Ke-H9
+12109	Brings an unconventional, intuitive relationship to dharma and philosophy, often reflecting strong past-life spiritual merit.
+12110	The native may feel detached from conventional religious or philosophical structures while developing unique, intuitively derived spiritual insight of their own.
+12111	The relationship with the father or gurus can be complex, sometimes involving distance or unconventional guidance.
+12112	This placement is often associated with significant past-life spiritual merit (purva punya) expressing itself in this lifetime's search for deeper truth.
+# planet_in_house:PH-Ke-H10
+12113	Reduces attachment to conventional career ambition, often favoring unconventional or spiritually meaningful work.
+12114	The native may show relatively little interest in public recognition or traditional career ladders, sometimes preferring unconventional, intuitive, or spiritually oriented professional paths.
+12115	Career trajectory can be non-linear, guided more by inner conviction than external validation.
+12116	When embraced consciously, this placement can lead to uniquely meaningful, if less conventionally visible, professional fulfillment.
+# planet_in_house:PH-Ke-H11
+12117	A favorable upachaya placement for gains, though material desires and attachments tend to be naturally moderate.
+12118	The native often experiences reasonably good material gains despite a natural lack of strong attachment to accumulating wealth or status.
+12119	The social circle may be smaller but tends to be meaningful, often involving spiritually or intuitively aligned connections rather than large networks.
+12120	Fulfillment comes more from inner satisfaction than from the scale of material or social achievement.
+# planet_in_house:PH-Ke-H12
+12121	Ketu's most natural house — excellent for spiritual liberation, intuition, and meaningful foreign or solitary pursuits.
+12122	This is traditionally considered one of Ketu's strongest and most comfortable placements, supporting deep intuitive or psychic ability, meditation, and genuine progress toward moksha (spiritual liberation).
+12123	The native often feels a strong pull toward foreign travel, spiritual retreats, or solitary research, finding worldly desires less compelling than inner growth.
+12124	This placement favors quiet, behind-the-scenes spiritual or research-oriented work over public recognition.
+# planet_in_sign:PS-Su-Ari
+12125	initiation, courage, self-assertion
+12126	Exalted — bold, pioneering confidence at its strongest.
+12127	The Sun's authority and vitality express with maximum directness here: courageous, self-reliant, and quick to initiate.
+12128	Leadership comes naturally and impatience with delay is common.
+12129	This is considered the Sun's single strongest sign, producing dynamic, achievement-oriented self-expression.
+# planet_in_sign:PS-Su-Tau
+12130	stability, material security, sensory pleasure
+12131	Grounds the ego in material security and steady, patient confidence.
+12132	Self-worth here is tied to stability, comfort, and reliability rather than dramatic display.
+12133	The native's leadership style is patient and persistent, valuing tangible results over recognition alone.
+12134	A tendency toward stubbornness about self-image can emerge when challenged.
+# planet_in_sign:PS-Su-Gem
+12135	communication, curiosity, adaptability
+12136	Gives a curious, communicative, intellectually restless sense of identity.
+12137	Ego and self-expression are closely tied to ideas, conversation, and versatility, with the native often identifying strongly with being knowledgeable or well-informed.
+12138	Confidence can fluctuate with mental stimulation, and sustained focus on a single identity or goal takes conscious effort.
+# planet_in_sign:PS-Su-Can
+12139	nurturing, emotional security, home
+12140	A comparatively softer expression, with identity tied closely to home and emotional security.
+12141	Because the Sun's outward, dry warmth sits somewhat uneasily in the Moon-ruled sign of Cancer, ego here often expresses through nurturing and protecting rather than assertive display.
+12142	Self-worth is bound up with family role and emotional bonds, and authority is exercised gently, through care rather than command.
+# planet_in_sign:PS-Su-Leo
+12143	self-expression, creativity, leadership
+12144	Own sign — the Sun's most natural and comfortable self-expression.
+12145	This is the Sun's home sign, giving dignified, warm-hearted confidence and a natural flair for leadership and creative self-expression.
+12146	The native thrives on legitimate recognition and generally leads with generosity rather than domination.
+12147	Pride is strong but tends to be earned rather than empty.
+# planet_in_sign:PS-Su-Vir
+12148	service, analysis, precision
+12149	Channels ego and authority into precise, humble, service-oriented expression.
+12150	Self-worth here is tied to competence, usefulness, and getting details right rather than to public display.
+12151	The native often underplays their own achievements, and leadership is exercised through careful, methodical example.
+12152	Self-criticism can undercut confidence if not balanced with self-acceptance.
+# planet_in_sign:PS-Su-Lib
+12153	partnership, balance, harmony
+12154	Debilitated — ego and self-worth seek external validation through partnership.
+12155	The Sun's independent self-assertion is at its weakest here, so identity often forms in relation to others rather than as a standalone conviction, and decisiveness about one's own path can be difficult.
+12156	Diplomacy and fairness are natural strengths, and this placement often does well when paired with a strong cause or partner, or when the native deliberately cultivates independent self-worth.
+# planet_in_sign:PS-Su-Sco
+12157	transformation, intensity, hidden depths
+12158	Gives an intense, private, deeply willed sense of self.
+12159	Identity and authority here are guarded rather than openly displayed, with real confidence expressed through quiet, magnetic intensity rather than performance.
+12160	The native often channels ego into transformation, research, or matters others avoid, and personal power tends to be considerable once self-mastery is achieved.
+# planet_in_sign:PS-Su-Sag
+12161	expansion, philosophy, higher truth
+12162	Expresses identity through expansive, philosophical, freedom-loving confidence.
+12163	The native's sense of self is tied to belief, ethics, and the pursuit of higher truth, and leadership style tends to be optimistic, generous, and teacher-like.
+12164	There is a strong need for freedom of thought and movement, and self-worth grows through exploration and principled conviction rather than routine.
+# planet_in_sign:PS-Su-Cap
+12165	discipline, ambition, structure
+12166	Grounds ego in disciplined ambition and long-term achievement.
+12167	Self-worth is closely tied to responsibility, status earned through effort, and practical accomplishment rather than natural charisma.
+12168	Leadership is serious, patient, and duty-bound, and the native's confidence tends to strengthen steadily with age and experience rather than appearing early.
+# planet_in_sign:PS-Su-Aqu
+12169	innovation, community, detachment
+12170	Expresses identity through individuality balanced against group ideals.
+12171	The native's sense of self is often tied to being different, visionary, or aligned with humanitarian or unconventional causes rather than to personal glory.
+12172	Leadership style is detached but genuinely progressive, and there can be inner tension between the desire for personal recognition and loyalty to the collective.
+# planet_in_sign:PS-Su-Pis
+12173	compassion, imagination, spiritual surrender
+12174	Gives a compassionate, imaginative, and somewhat fluid sense of identity.
+12175	Ego boundaries here are softer than usual, and self-worth is often tied to empathy, creativity, or spiritual connection rather than assertive self-definition.
+12176	The native's authority is gentle and inspirational rather than commanding, though clear personal boundaries can require conscious cultivation.
+# planet_in_sign:PS-Mo-Ari
+12177	Debilitated — quick, impulsive, reactive emotional nature.

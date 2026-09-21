@@ -43,3 +43,6 @@ Built on the remedy knowledge base already in the app plus these rules: a planet
 Bengali step 1 is built (interface and app-composed text). **Not translated yet**: the classical knowledge-base paragraphs (`engine/kb/*.json`
 and the text `engine/rule_engine.py` composes around them, about 155,000 words), the PDF report, and the Hindi language. These need a full
 translation with a native proofreader. Bengali numerals are not used (digits stay 0-9, except ordinals such as ১ম).
+
+## Languages (v2.0.0)
+Bengali is complete on screen (interface, knowledge base, composed text). Not yet: Bengali PDF report; Hindi (same route via `i18n_src/hi.py`). A few names/terms intentionally stay English (person names, FAQ, PDF, yoga ids like YOGA-24, the credit line). Open question for the owner: Bengali digits vs Latin digits for dates/years.

@@ -174,6 +174,7 @@ def build_language(code):
         fh.write('Indic letters are replaced by pre-shaped syllable glyphs in fonts/%s-*.ttf (private-use\n' % out_stem)
         fh.write('code points), because Kivy cannot shape Hindi/Bengali itself. Edit the source and re-run."""\n')
         fh.write(f"NAME = {name_enc!r}\n")
+        fh.write(f"DANDA = {encode(chr(0x964))!r}      # the shaped full stop of the language\n")
         if months_enc:
             fh.write(f"MONTHS = {months_enc!r}\nMONTHS_LONG = {months_long_enc!r}\n")
         fh.write("T = {\n")

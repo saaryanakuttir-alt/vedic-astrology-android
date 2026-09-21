@@ -1,0 +1,122 @@
+# classical_yogas:YOGA-16
+10086	The benefic quality of the placement is essential; if the 10th house benefic is heavily afflicted by malefic conjunction or aspect, the purity implied by this yoga is correspondingly reduced.
+# classical_yogas:YOGA-17
+10087	Adhi Yoga
+10088	Natural benefic planets (Jupiter, Venus, and/or Mercury) occupy the 6th, 7th, and 8th houses counted from the Moon (Chandra-Adhi Yoga, the classical default), whether individually spread across these houses or in combination.
+10089	Some traditions also recognize a Lagna-Adhi variant using the same 6th/7th/8th houses counted from the ascendant instead of the Moon.
+10090	Traditionally associated with a comfortable, prosperous, and influential life, often linked in classical texts with ministerial-level or high administrative status, along with protection from enemies, obstacles, and misfortune.
+10091	The yoga is considered stronger the more of the three houses (6th, 7th, and 8th from the Moon) are occupied by benefics, and stronger still when those benefics are themselves well-dignified.
+# classical_yogas:YOGA-18
+10092	Shakat Yoga
+10093	The Moon is placed in the 6th, 8th, or 12th house counted from Jupiter (equivalently, Jupiter is not in a kendra relationship to the Moon).
+10094	Classically associated with fluctuating fortune — periods of prosperity alternating with periods of hardship or setback, particularly regarding status, finances, or emotional stability.
+10095	This is a fairly commonly occurring configuration, and many classical commentators note its severity depends heavily on the underlying strength of the Moon and Jupiter and on other supporting or mitigating yogas present in the chart, rather than indicating uniform hardship on its own.
+# classical_yogas:YOGA-19
+10096	Kalasarpa Yoga
+10097	All seven classical planets (Sun through Saturn) are positioned within the 180-degree arc running from Rahu to Ketu on one side of the chart, with none of them crossing to the other side.
+10098	In popular modern practice, this configuration is widely associated with obstacles, delays, a sense of being constrained by fate or inherited (ancestral) karma, and a generally more difficult path to achieving one's goals.
+10099	It is worth noting for verification purposes that this yoga's popular framework is not extensively documented in the way it is discussed today within the oldest core classical texts (such as BPHS); several researchers who have reviewed the classical corpus note it appears to be a later (possibly medieval-era) addition rather than an ancient one.
+10100	It should also be distinguished from the classically-attested 'Sarpa Dosha' (a related but distinct affliction involving Rahu/Ketu that IS discussed in older sources) with which it is sometimes conflated in popular usage.
+10101	Many serious practitioners treat Kalasarpa Yoga itself with caution, evaluate it based on which specific houses Rahu and Ketu occupy, and weigh it alongside the chart's overall strength rather than as a standalone, uniformly negative indicator.
+# classical_yogas:YOGA-20
+10102	Grahan Yoga (Sun/Moon with Rahu-Ketu)
+10103	The Sun or the Moon is conjunct Rahu or Ketu in the same house (an 'eclipse-type' combination).
+10104	Classically understood as the node 'eclipsing' or obscuring the luminary's natural significations — a Sun-node conjunction can affect vitality, relationship with the father, self-confidence, or standing with authority; a Moon-node conjunction can affect emotional stability, the mind, or relationship with the mother.
+10105	Effects are considered particularly active during the dasha periods of the planets involved.
+10106	Some traditions distinguish Sun-Rahu/Moon-Rahu (often read as amplifying and obsessive) from Sun-Ketu/Moon-Ketu (often read as detaching and destabilizing) rather than treating all four combinations identically; house placement and sign strongly modify the specific area of life affected.
+# classical_yogas:YOGA-21
+10107	Angarak Yoga
+10108	Mars is conjunct Rahu in the same house.
+10109	Classically associated with amplified aggression, impulsiveness, and conflict-prone tendencies, and often linked with heightened risk of accidents, disputes, litigation, or blood-related health matters in the house or life area involved.
+10110	When the underlying chart is otherwise strong and well-supported, the same intensified energy can instead express as unusual courage, competitive drive, or willingness to pursue high-risk, high-reward ventures constructively.
+# classical_yogas:YOGA-22
+10111	Mars is placed in the 1st, 2nd, 4th, 7th, 8th, or 12th house from the lagna (specific lists of houses vary slightly by classical school, and some traditions also check Mars's placement from the Moon and from Venus for a fuller assessment).
+10112	Traditionally examined specifically in the context of marriage compatibility (kundali matching), and associated with potential friction, delay, or discord affecting marital harmony or the spouse's wellbeing.
+10113	Classical texts provide numerous cancellation (Dosha Bhanga) conditions that are essential to check before drawing conclusions — for example, when both prospective partners carry a matching Kuja Dosha (which cancels in most traditions), when Mars occupies its own or exalted sign, or when Mars receives supportive aspects or conjunctions from certain benefics.
+10114	A raw placement check without these cancellations is considered an incomplete assessment.
+# classical_yogas:YOGA-23
+10115	Guru Chandal Yoga
+10116	Jupiter is conjunct Rahu (and, in some interpretive traditions, conjunct Ketu) in the same house.
+10117	Classically associated with a clouding or distortion of Jupiter's natural wisdom, ethical clarity, and guidance-oriented significations, sometimes linked with unconventional belief systems, controversial teacher or mentor figures, or ethically ambiguous decision-making in the area of life involved.
+10118	The same combination can, depending on the rest of the chart, indicate unusually innovative or unconventional wisdom and teaching ability that constructively breaks from tradition rather than purely negative distortion — the outcome depends significantly on Jupiter's dignity and other supporting factors.
+# classical_yogas:YOGA-24
+10119	Saturn is conjunct Rahu in the same house (literally the 'poison combination').
+10120	Associated with a corrosive, undermining quality affecting the significations of the house involved, often manifesting as prolonged obstacles, chronic difficulties, or slow-burning conflicts in that area of life rather than sudden, dramatic events.
+10121	House and sign placement strongly shape which specific life area is most affected, and a careful, house-specific assessment is recommended rather than a blanket negative prediction whenever this combination is found.
+# combustion:CMB-Mo
+10122	A combust Moon is considered one of the more significant combustion effects: the mind, emotional steadiness, and sense of security can feel destabilized or overshadowed, since the Moon's own light is what the Sun's proximity is overwhelming most directly.
+10123	Classically associated with a restless or anxious disposition until the Moon separates from the Sun.
+# combustion:CMB-Ma
+10124	A combust Mars can show as suppressed drive or courage that surfaces in bursts rather than steady application - initiative that's present but doesn't get a clean, sustained outlet.
+10125	Some texts note it can also manifest as impulsiveness when the pent-up energy does release.
+# combustion:CMB-Me
+10126	A combust Mercury is one of the more common combustion placements (Mercury is never more than about 28 degrees from the Sun by definition, so close conjunctions happen often).
+10127	Effects are usually read as mildly clouded or hesitant communication and decision-making rather than a severe affliction - intellect present but not shining as clearly as it otherwise would.
+# combustion:CMB-Ju
+10128	A combust Jupiter can dampen the confidence, optimism, and sound judgment Jupiter usually lends, along with the areas it governs for this chart (wisdom, higher learning, fortune, teachers).
+10129	Read as the Sun's ego/authority theme temporarily overshadowing Jupiter's own expansive, guiding nature.
+# combustion:CMB-Ve
+10130	A combust Venus is often read as affecting comfort in relationships, aesthetic expression, or material pleasures - a sense that these areas are present but muted or complicated, rather than flowing easily.
+10131	Some texts specifically note friction in romantic or partnership matters.
+# combustion:CMB-Sa
+10132	A combust Saturn can intensify Saturn's already-serious themes (discipline, delay, responsibility) into something closer to real hardship or heaviness, since Saturn's own slow, structural nature isn't well suited to being overwhelmed by the Sun's fast, ego-driven light.
+10133	Some texts read this combination as particularly challenging.
+# divisional_D10_planet_in_sign:D10-PS-Su-Ari
+10134	exalted
+10135	Exalted — colors career and professional standing through Aries's initiation.
+# divisional_D10_planet_in_sign:D10-PS-Su-Tau
+10136	Neutral dignity — colors career and professional standing through Taurus's stability.
+# divisional_D10_planet_in_sign:D10-PS-Su-Gem
+10137	Neutral dignity — colors career and professional standing through Gemini's communication.
+# divisional_D10_planet_in_sign:D10-PS-Su-Can
+10138	Neutral dignity — colors career and professional standing through Cancer's nurturing.
+# divisional_D10_planet_in_sign:D10-PS-Su-Leo
+10139	own sign (moolatrikona)
+10140	Own sign — colors career and professional standing through Leo's self-expression.
+# divisional_D10_planet_in_sign:D10-PS-Su-Vir
+10141	Neutral dignity — colors career and professional standing through Virgo's service.
+# divisional_D10_planet_in_sign:D10-PS-Su-Lib
+10142	debilitated
+10143	Debilitated — colors career and professional standing through Libra's partnership.
+# divisional_D10_planet_in_sign:D10-PS-Su-Sco
+10144	Neutral dignity — colors career and professional standing through Scorpio's transformation.
+# divisional_D10_planet_in_sign:D10-PS-Su-Sag
+10145	Neutral dignity — colors career and professional standing through Sagittarius's expansion.
+# divisional_D10_planet_in_sign:D10-PS-Su-Cap
+10146	Neutral dignity — colors career and professional standing through Capricorn's discipline.
+# divisional_D10_planet_in_sign:D10-PS-Su-Aqu
+10147	Neutral dignity — colors career and professional standing through Aquarius's innovation.
+# divisional_D10_planet_in_sign:D10-PS-Su-Pis
+10148	Neutral dignity — colors career and professional standing through Pisces's compassion.
+# divisional_D10_planet_in_sign:D10-PS-Mo-Ari
+10149	Neutral dignity — colors career and professional standing through Aries's initiation.
+# divisional_D10_planet_in_sign:D10-PS-Mo-Tau
+10150	Exalted — colors career and professional standing through Taurus's stability.
+# divisional_D10_planet_in_sign:D10-PS-Mo-Can
+10151	Own sign — colors career and professional standing through Cancer's nurturing.
+# divisional_D10_planet_in_sign:D10-PS-Mo-Leo
+10152	Neutral dignity — colors career and professional standing through Leo's self-expression.
+# divisional_D10_planet_in_sign:D10-PS-Mo-Lib
+10153	Neutral dignity — colors career and professional standing through Libra's partnership.
+# divisional_D10_planet_in_sign:D10-PS-Mo-Sco
+10154	Debilitated — colors career and professional standing through Scorpio's transformation.
+# divisional_D10_planet_in_sign:D10-PS-Ma-Ari
+10155	Own sign — colors career and professional standing through Aries's initiation.
+# divisional_D10_planet_in_sign:D10-PS-Ma-Can
+10156	Debilitated — colors career and professional standing through Cancer's nurturing.
+# divisional_D10_planet_in_sign:D10-PS-Ma-Sco
+10157	own sign
+10158	Own sign — colors career and professional standing through Scorpio's transformation.
+# divisional_D10_planet_in_sign:D10-PS-Ma-Cap
+10159	Exalted — colors career and professional standing through Capricorn's discipline.
+# divisional_D10_planet_in_sign:D10-PS-Me-Gem
+10160	Own sign — colors career and professional standing through Gemini's communication.
+# divisional_D10_planet_in_sign:D10-PS-Me-Vir
+10161	exalted & own sign (moolatrikona)
+10162	Exalted — colors career and professional standing through Virgo's service.
+# divisional_D10_planet_in_sign:D10-PS-Me-Pis
+10163	Debilitated — colors career and professional standing through Pisces's compassion.
+# divisional_D10_planet_in_sign:D10-PS-Ju-Can
+10164	Exalted — colors career and professional standing through Cancer's nurturing.
+# divisional_D10_planet_in_sign:D10-PS-Ju-Sag
+10165	Own sign — colors career and professional standing through Sagittarius's expansion.

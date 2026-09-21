@@ -413,3 +413,11 @@ A language bar on Home switches the whole app between English and Bengali; the c
   English. Step 2 will translate the classical paragraphs; Hindi follows the same route (`tools/build_i18n.py` already supports it).
 * Bengali wording needs a native reader's proofreading pass: edit `i18n_todo/bn_NN.txt`, then run `python tools/merge_bn.py` and
   `python tools/build_i18n.py`.
+
+## 2.0.0 - Bengali (complete)
+Step 2 of the Bengali language: the classical knowledge-base paragraphs (planet in sign/house, houses, yogas, doshas,
+dashas, divisional charts, remedies ...) and every sentence the engine composes are now shown in Bengali as well
+(4,800+ texts, translated in parallel batches and checked with `tools/validate_wf.py`). Switching language re-writes the
+kept readings. The PDF report stays English for now. The app remains fully offline. Sources: `i18n_todo/` (translation
+files: `wf/out_NNN.txt`, `bn_vocab_*.txt`, `bn_fix_*.txt`), `tools/merge_bn.py` -> `i18n_src/bn.py` ->
+`tools/build_i18n.py` -> `engine/i18n_bn.py` + `fonts/IndicBn-*.ttf`.

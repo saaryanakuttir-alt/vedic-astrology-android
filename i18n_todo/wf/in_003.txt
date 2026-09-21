@@ -1,0 +1,230 @@
+# engine/rule_engine.py:988
+2184	 Traditionally, whatever this planet governs is treated as the soul's central preoccupation across lifetimes — the quality it keeps returning to develop, express, or master — rather than a peripheral trait.
+# engine/rule_engine.py:1235
+2185	heart, bones, general vitality, and the eyes
+# engine/rule_engine.py:1236
+2186	the mind and emotions, blood, bodily fluids, and the chest/lungs
+# engine/rule_engine.py:1237
+2187	blood, muscles, inflammation, accidents, wounds, and surgical events
+# engine/rule_engine.py:1238
+2188	the nervous system, skin, and speech
+# engine/rule_engine.py:1239
+2189	the liver, weight/metabolism, and sugar regulation
+# engine/rule_engine.py:1240
+2190	the reproductive and urinary systems and the kidneys
+# engine/rule_engine.py:1241
+2191	chronic and degenerative conditions, the joints, bones, and slow-developing ailments
+# engine/rule_engine.py:1242
+2192	hard-to-diagnose, toxic, or unusual conditions
+# engine/rule_engine.py:1243
+2193	sudden, undiagnosed, or accident-related conditions
+# engine/rule_engine.py:1289
+2194	the head and brain
+# engine/rule_engine.py:1290
+2195	the face, mouth, and throat
+# engine/rule_engine.py:1291
+2196	the throat, arms, shoulders, and ears
+# engine/rule_engine.py:1292
+2197	the chest and lungs
+# engine/rule_engine.py:1293
+2198	the heart, upper back, and stomach
+# engine/rule_engine.py:1294
+2199	the lower abdomen and intestines (the classical 'disease house' itself)
+# engine/rule_engine.py:1295
+2200	the kidneys and lower back
+# engine/rule_engine.py:1296
+2201	the reproductive and excretory organs, and chronic or hidden conditions
+# engine/rule_engine.py:1297
+2202	the hips and thighs
+# engine/rule_engine.py:1298
+2203	the knees and joints
+# engine/rule_engine.py:1299
+2204	the calves and ankles
+# engine/rule_engine.py:1300
+2205	the feet and the immune system
+# engine/rule_engine.py:1311
+2206	you run a bit 'hot' - lots of drive and a strong appetite, but when you are stressed it tends to show up as irritability, heat or acidity
+# engine/rule_engine.py:1313
+2207	you are steady and sturdy, with good stamina, but you can get sluggish or put on weight if you sit still for too long
+# engine/rule_engine.py:1315
+2208	you are quick and creative with a lot of nervous energy, so worry, dry skin or uneven sleep and eating are your usual signs that you are run down
+# engine/rule_engine.py:1317
+2209	you are a mix of calm-and-steady and light-and-restless, so both slowing down too much and overthinking can affect you
+# engine/rule_engine.py:1320
+2210	some heat and intensity
+2211	some steadiness
+2212	some restlessness
+# engine/rule_engine.py:1321
+2213	a mix of steadiness and restlessness
+# engine/rule_engine.py:1332
+2214	it is ordinary and dependable - no big plus or minus.
+# engine/rule_engine.py:1345
+2215	your emotional side is neither a strong point nor a weak spot.
+# engine/rule_engine.py:1354
+2216	Saturn is about staying power and yours is average - just look after your joints and bones as you get older, like anyone.
+# engine/rule_engine.py:1376
+2217	Pitta-leaning constitutions are classically said to benefit from cooling foods, moderation in heat/spice, and avoiding overexertion - general wellness framing, not a diet plan.
+# engine/rule_engine.py:1378
+2218	Kapha-leaning constitutions are classically said to benefit from regular movement, lighter meals, and avoiding excess rest - general wellness framing, not a diet plan.
+# engine/rule_engine.py:1380
+2219	Vata-leaning constitutions are classically said to benefit from routine, warmth, and grounding habits - general wellness framing, not a diet plan.
+# engine/rule_engine.py:1382
+2220	This blended constitution is classically said to benefit from both routine/warmth (Vata) and regular movement (Kapha) - general wellness framing, not a diet plan.
+# engine/rule_engine.py:586
+2221	Rasi (main birth chart)
+# engine/rule_engine.py:769
+2222	another part of life
+# engine/rule_engine.py:771
+2223	That is usually a supportive, helpful placement for this part of life.
+# engine/rule_engine.py:823
+2224	an arena not cleanly captured by a single house theme
+# engine/rule_engine.py:938
+2225	Purva Punya (past-life merit)
+# engine/rule_engine.py:939
+2226	Dharma (fortune / higher purpose)
+# engine/rule_engine.py:940
+2227	Moksha (endings / past attachments)
+# engine/rule_engine.py:1006
+2228	 Classically, a strong or prominent Ketu placement often shows up as an area where the native feels an odd, hard-to-explain fluency or detachment — as if this particular ground has already been covered before.
+# engine/rule_engine.py:1024
+2229	 Where Ketu describes what already feels familiar, Rahu describes what this incarnation is reaching to build — often the area of greatest ambition, restlessness, and eventual growth once its excesses are tempered by experience.
+# engine/rule_engine.py:1041
+2230	 Saturn's placement is traditionally read as showing exactly where patience, responsibility, and the slow, unglamorous accumulation of effort become the vehicle through which karma is actually resolved rather than merely felt.
+# engine/rule_engine.py:1328
+2231	it is well supported and bounces back quickly, so you tend to recover well.
+# engine/rule_engine.py:1330
+2232	it can dip more easily, so sleep, routine and not over-pushing yourself matter a bit more for you than for most.
+# engine/rule_engine.py:1337
+2233	your mind can feel busier or more pressured than most at times - calm routines, good sleep and talking things through help.
+# engine/rule_engine.py:1340
+2234	your mind has some built-in support, so you tend to settle and calm down fairly easily.
+# engine/rule_engine.py:1342
+2235	your emotional side is well supported, so you tend to stay level.
+# engine/rule_engine.py:1344
+2236	your feelings can swing a bit more easily, so give your mind proper rest and downtime.
+# engine/rule_engine.py:1350
+2237	Saturn is about staying power, and yours is strong, so you tend to wear well over the years.
+# engine/rule_engine.py:1352
+2238	Saturn is about staying power and it is a bit strained here, so bones, joints and slow-building niggles deserve steady care and regular check-ups.
+# engine/rule_engine.py:1364
+2239	a fire-driven constitution - sharp digestion, strong drive, and a tendency toward heat, inflammation, or irritability when out of balance
+# engine/rule_engine.py:1366
+2240	an earth-driven constitution - steady, well-built, and resilient, with a tendency toward sluggishness, weight gain, or congestion when out of balance
+# engine/rule_engine.py:1368
+2241	an air-driven constitution - quick, light, and creative, with a tendency toward anxiety, dryness, or irregular digestion/sleep when out of balance
+# engine/rule_engine.py:1370
+2242	a water-driven constitution (sources vary between calling this Kapha or a Kapha-Vata blend) - emotionally sensitive and fluid-retentive, with a tendency toward congestion or emotional overwhelm when out of balance
+# engine/rule_engine.py:1536
+2243	everyday health and immunity
+# engine/rule_engine.py:1537
+2244	long-running or hidden health matters
+# engine/rule_engine.py:1719
+2245	affliction checks
+# engine/rule_engine.py:1720
+2246	That's a common, unremarkable result, not a gap in the chart.
+# engine/rule_engine.py:1779
+2247	None of the above says anything about what a real partner has done, will do, or is like - it describes tendencies in this person's OWN chart only, and free will always matters more than any single placement.
+# engine/rule_engine.py:1817
+2248	In short: none of the 24 classical yogas this app checks are formed in this chart. That's common — most charts trigger only a few, if any; it isn't a deficiency.
+# engine/rule_engine.py:587
+2249	main birth chart
+# engine/rule_engine.py:773
+2250	That placement tends to ask for extra effort here, or brings some ups and downs before things settle.
+# engine/rule_engine.py:776
+2251	That is a mixed, workable placement for this part of life.
+# engine/rule_engine.py:1109
+2252	\n\nIn simple terms: these are the old habits and duties your chart suggests you're still carrying - leaning too hard on what already came easily, which now has to be balanced out.
+# engine/rule_engine.py:1528
+2253	that is usually a helpful placement, so this area tends to be looked after.
+# engine/rule_engine.py:1568
+2254	every other area has nothing sitting on it, which is simply neutral
+# engine/rule_engine.py:1613
+2255	, which colors the timing and flavor of this area for the corresponding period of life.
+# engine/rule_engine.py:1650
+2256	Career & Profession
+# engine/rule_engine.py:1659
+2257	Wealth & Finances
+# engine/rule_engine.py:1662
+2258	Marriage & Relationships
+# engine/rule_engine.py:1671
+2259	Health & Vitality
+# engine/rule_engine.py:1673
+2260	Education & Learning
+# engine/rule_engine.py:1675
+2261	Family & Home
+# engine/rule_engine.py:1677
+2262	Spirituality & Inner Growth
+# engine/rule_engine.py:1679
+2263	Travel & Foreign Connections
+# engine/rule_engine.py:1764
+2264	None of this chart's checked commitment/exclusivity indicators (7th-lord affliction, Venus-Mars combinations, Rahu on Venus or the 7th house, a crowded 7th house, or an afflicted Venus) are present here - a common, unremarkable result, not a gap.
+# engine/rule_engine.py:915
+2265	Concretely, that stretch plays out as: 
+# engine/rule_engine.py:1066
+2266	Three houses classically frame this life's overarching purpose. 
+# engine/rule_engine.py:1083
+2267	 (A specific two-chart comparison with an actual partner or family member's own Atmakaraka and Moon placement — not just this soul's own disposition — is what the Family Compatibility tab's Karmic Connection sections cover.)
+# engine/rule_engine.py:1101
+2268	--- What you may have been (past-life imprint) ---\n
+# engine/rule_engine.py:1108
+2269	--- What led here (the actions carried forward) ---\n
+# engine/rule_engine.py:1501
+2270	astrology lays your body over your birth chart like a map - each of the 12 houses is a body area, from the head (1st house) down to the feet (12th), and the planets sitting in a house colour that area. It is a way of spotting themes to look after, not a check-up.
+# engine/rule_engine.py:1530
+2271	that tends to ask for extra care here, with some ups and downs before things settle.
+# engine/rule_engine.py:1532
+2272	that is a mixed, workable placement.
+# engine/rule_engine.py:1551
+2273	worth extra attention
+# engine/rule_engine.py:1660
+2274	money and finances
+# engine/rule_engine.py:1672
+2275	health and vitality
+# engine/rule_engine.py:1676
+2276	home and family
+# engine/rule_engine.py:1678
+2277	spiritual life
+# engine/rule_engine.py:1680
+2278	travel and foreign ties
+# engine/rule_engine.py:1758
+2279	On commitment and exclusivity themes specifically - read only as tendencies in this person's OWN chart, never as evidence about a partner (see the caveat above): 
+# engine/rule_engine.py:1115
+2280	--- Your main karmic goal this life ---\n
+# engine/rule_engine.py:1484
+2281	6th-house (disease) lord
+# engine/rule_engine.py:1486
+2282	8th-house (chronic/hidden) lord
+# engine/rule_engine.py:1488
+2283	Saturn, classical significator of chronic conditions
+# engine/rule_engine.py:1516
+2284	this is your overall energy, and 
+# engine/rule_engine.py:1517
+2285	the Moon is your mind and mood - 
+# engine/rule_engine.py:1563
+2286	the spots on your body map that carry a planet worth a little extra care are 
+# engine/rule_engine.py:1569
+2287	Body areas where your own planets sit: 
+# engine/rule_engine.py:1581
+2288	these are just stretches of life when it is smart to be a bit more mindful of your health - book the check-up and keep your routine going. Think of it as a friendly nudge, not a warning that something will happen.
+# engine/rule_engine.py:1750
+2289	 Specifically: 
+# engine/rule_engine.py:1751
+2290	 No strong classical multiplicity indicators (a dual-sign 7th lord, a crowded 7th house, Rahu/Ketu sharing a house with the 7th lord, or Venus in a dual sign) are present here.
+# engine/rule_engine.py:1566
+2291	these have a friendly, supportive planet on them: 
+# engine/rule_engine.py:1570
+2292	. Think of shaded spots as 'keep an eye on this', not 'something is wrong'.
+# engine/rule_engine.py:1575
+2293	Classically-flagged age windows worth being mindful during (a Mahadasha is a multi-year planetary period; these are the ones ruled by a planet tied to health themes above - not certainties, just windows classically worth a bit more attention): 
+# engine/family_bonds.py:291
+2294	{0} and {1} — a mixed temperament pairing.   ## {0}=parent_gana, {1}=child_gana
+# engine/family_bonds.py:494
+2295	, and {0}   ## {0}=', '.join(c[0] for c in children)
+# engine/family_bonds.py:491
+2296	=== Family Compatibility Report ===\n\nThis report brings together everyone whose chart has been generated so far — {0}   ## {0}=self_label
+# engine/family_bonds.py:154
+2297	{0} ({1}/{2} points): {3} Between {4} and {5}, this pairing {6}   ## {0}=name, {1}=koota['points'], {2}=koota['max_points'], {3}=blurb, {4}=label_a, {5}=label_b, {6}=phrase
+# engine/family_bonds.py:549
+2298	--- Karmic Connection: {0} <-> {1} (past lives, goals & mutual support) ---\n{2}   ## {0}=self_label, {1}=child_label, {2}=child_karmic['narrative']
+# engine/family_bonds.py:542
+2299	--- Parent-Child Thematic Connection: {0} <-> {1} ---\n{2}\n\n{3}\n\n{4}\n\n{5}   ## {0}=self_label, {1}=child_label, {2}=pcc['methodology_note'], {3}=pcc['narrative'], {4}=pcc['reflection'], {5}=pcc['caveat']

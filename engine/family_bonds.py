@@ -44,8 +44,9 @@ history between the two specific people, and not a substitute for actually
 getting to know each other.
 """
 from astrology_tables import SIGN_LORD
+from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
-_KOOTA_DOMAIN_BLURBS = {
+_KOOTA_DOMAIN_BLURBS = tbl({
     "Varna": (
         "Varna reflects a broad spiritual/temperamental hierarchy between the two people — "
         "traditionally read as whether one partner's natural disposition can comfortably "
@@ -98,9 +99,9 @@ _KOOTA_DOMAIN_BLURBS = {
         "ease of having children together — its outsized weight reflects how seriously "
         "classical texts treat this particular dimension relative to the other seven."
     ),
-}
+})
 
-_KOOTA_CONFIDENCE_NOTES = {
+_KOOTA_CONFIDENCE_NOTES = tbl({
     "Varna": "Sourcing confidence: high — Varna's element-based derivation and its directional (higher-rank-should-not-be-lower) rule are described identically across every classical and contemporary source checked while building this project.",
     "Vashya": "Sourcing confidence: high for the whole-sign version used here — the one documented gap is that Sagittarius and Capricorn classically split at their midpoint into two different Vashya categories, which this project's whole-sign approach does not implement (see avkahada.py's own note).",
     "Tara": "Sourcing confidence: high — the nakshatra-count-modulo-9 method and which remainders count as unfavorable are consistently described across sources with no meaningful disagreement found.",
@@ -109,9 +110,9 @@ _KOOTA_CONFIDENCE_NOTES = {
     "Gana": "Sourcing confidence: high — the three Gana groups and their pairwise point values are stable across every source checked.",
     "Bhakoot": "Sourcing confidence: moderate-high — the three dosha-causing sign-distance pairs and the lord-friendship cancellation rule are cited consistently, though not verified here against a primary classical Sanskrit text directly.",
     "Nadi": "Sourcing confidence: high for the base same/different-Nadi score, but classical cancellation exceptions (e.g. same nakshatra with different pada) are described inconsistently across sources and are deliberately NOT auto-applied here.",
-}
+})
 
-_KOOTA_REFLECTION_PROMPTS = {
+_KOOTA_REFLECTION_PROMPTS = tbl({
     "Varna": "Worth reflecting on: do the two of you find it easy to agree on values and who takes the lead in which areas of shared life, without it feeling like a power struggle?",
     "Vashya": "Worth reflecting on: does the everyday pull toward each other feel mutual and comfortable, or does it feel more one-sided?",
     "Tara": "Worth reflecting on: do you tend to bring out steadiness and wellbeing in each other, especially during stressful periods?",
@@ -120,19 +121,19 @@ _KOOTA_REFLECTION_PROMPTS = {
     "Gana": "Worth reflecting on: do your baseline energy levels and emotional tempos match well, or does one of you regularly need to slow down (or speed up) for the other?",
     "Bhakoot": "Worth reflecting on: does building a shared life together — home, finances, family plans — feel like it flows, or does it take unusually deliberate coordination?",
     "Nadi": "Worth reflecting on: this specific koota is the one classical texts most flag for a conversation with a qualified astrologer rather than a DIY reading, given the cancellation-exception ambiguity documented in compatibility.py.",
-}
+})
 
 
 def _koota_score_phrase(koota):
     pts, mx = koota["points"], koota["max_points"]
     if pts == mx:
-        return "scores the full available points here"
+        return tx("scores the full available points here")
     if pts == 0:
-        return "scores zero here — the classical caution point for this specific koota"
-    return f"scores a partial {pts} of {mx} points here"
+        return tx("scores zero here — the classical caution point for this specific koota")
+    return tr('scores a partial {0} of {1} points here', pts, mx)
 
 
-def narrate_ashtakoot(result, label_a="Self", label_b="Life Partner"):
+def narrate_ashtakoot(result, label_a="Self", label_b=tx("Life Partner")):
     """
     result: the dict returned by compatibility.compute_ashtakoot().
     Returns result with two additions:
@@ -146,62 +147,58 @@ def narrate_ashtakoot(result, label_a="Self", label_b="Life Partner"):
         prompt = _KOOTA_REFLECTION_PROMPTS.get(name, "")
         confidence = _KOOTA_CONFIDENCE_NOTES.get(name, "")
         phrase = _koota_score_phrase(koota)
-        detail_bits = [f"{k.replace('_', ' ')}: {v}" for k, v in koota.items()
+        detail_bits = [tr('{0}: {1}', tx(k.replace('_', ' ')), v) for k, v in koota.items()
                         if k not in ("koota", "max_points", "points") and v is not None]
         detail_text = "; ".join(detail_bits)
         koota["narrative"] = (
-            f"{name} ({koota['points']}/{koota['max_points']} points): {blurb} Between "
-            f"{label_a} and {label_b}, this pairing {phrase}"
+            tr('{0} ({1}/{2} points): {3} Between {4} and {5}, this pairing {6}', name, koota['points'], koota['max_points'], blurb, label_a, label_b, phrase)
             + (f" — {detail_text}." if detail_text else ".")
-            + (f" {prompt}" if prompt else "")
-            + (f" {confidence}" if confidence else "")
+            + (tr(' {0}', prompt) if prompt else "")
+            + (tr(' {0}', confidence) if confidence else "")
         )
 
     total, mx = result["total_points"], result["max_points"]
     strong = [k["koota"] for k in result["kootas"] if k["points"] == k["max_points"]]
     weak = [k["koota"] for k in result["kootas"] if k["points"] == 0]
     overall = (
-        f"Across all eight kootas, {label_a} and {label_b} score {total:.1f} out of {mx} "
-        f"points — {result['verdict']}. "
+        tr('Across all eight kootas, {0} and {1} score {2:.1f} out of {3} points — {4}. ', label_a, label_b, total, mx, result['verdict'])
     )
     if strong:
-        overall += f"The strongest-scoring areas are {', '.join(strong)}, suggesting these are natural points of ease in the relationship. "
+        overall += tr('The strongest-scoring areas are {0}, suggesting these are natural points of ease in the '
+                      'relationship. ', ', '.join(strong))
     if weak:
         overall += (
-            f"The koota(s) scoring zero — {', '.join(weak)} — are the classical areas this "
-            f"system flags for conscious attention rather than automatic ease; this does not "
-            f"mean incompatibility, only that these specific dimensions may take more "
-            f"deliberate effort than others. "
+            tr('The koota(s) scoring zero — {0} — are the classical areas this system flags for conscious '
+               'attention rather than automatic ease; this does not mean incompatibility, only that these '
+               'specific dimensions may take more deliberate effort than others. ', ', '.join(weak))
         )
     if result.get("nadi_dosha_present"):
         overall += (
-            "Nadi Dosha (same Nadi group) is present — classically the most cautioned "
+            tx("Nadi Dosha (same Nadi group) is present — classically the most cautioned "
             "combination in this system, though traditional texts also describe cancellation "
-            "exceptions that a qualified astrologer should confirm rather than assuming either way. "
+            "exceptions that a qualified astrologer should confirm rather than assuming either way. ")
         )
     if result.get("bhakoot_dosha_present"):
         overall += (
-            "Bhakoot Dosha (an inauspicious Moon-sign distance not cancelled by lord-friendship) "
+            tx("Bhakoot Dosha (an inauspicious Moon-sign distance not cancelled by lord-friendship) "
             "is also present, traditionally read as worth attention for long-term family growth "
-            "and harmony specifically. "
+            "and harmony specifically. ")
         )
     overall += (
-        "As with every technique in this project, Ashtakoot is one traditional lens among "
-        "several a real relationship should be evaluated by — see compatibility.py's own "
-        "docstring for exactly which parts of this scoring are well-sourced versus documented "
-        "simplification. In practice, a high total score is best read as 'several structural "
-        "supports are already in place,' not as a guarantee, and a lower or partial score is "
-        "best read as 'certain dimensions may need more conscious attention,' not as a verdict "
-        "against the relationship — every long-term partnership, regardless of its Ashtakoot "
-        "total, still depends far more on how two specific people choose to treat each other "
-        "day to day than on any one classical calculation. The eight koota breakdowns below are "
-        "meant to be read as a map of WHERE to pay attention, not as a substitute for actually "
-        f"getting to know how {label_a} and {label_b} communicate, handle stress, and support "
-        "each other in practice."
+        tr('As with every technique in this project, Ashtakoot is one traditional lens among several a real '
+           "relationship should be evaluated by — see compatibility.py's own docstring for exactly which "
+           'parts of this scoring are well-sourced versus documented simplification. In practice, a high '
+           "total score is best read as 'several structural supports are already in place,' not as a "
+           "guarantee, and a lower or partial score is best read as 'certain dimensions may need more "
+           "conscious attention,' not as a verdict against the relationship — every long-term partnership, "
+           'regardless of its Ashtakoot total, still depends far more on how two specific people choose to '
+           'treat each other day to day than on any one classical calculation. The eight koota breakdowns '
+           'below are meant to be read as a map of WHERE to pay attention, not as a substitute for actually '
+           'getting to know how {0} and {1} communicate, handle stress, and support each other in practice.', label_a, label_b)
     )
     result["overall_narrative"] = overall
     result["methodology_note"] = (
-        "Ashtakoot Guna Milan compares eight dimensions ('kootas') of each partner's Moon "
+        tx("Ashtakoot Guna Milan compares eight dimensions ('kootas') of each partner's Moon "
         "sign and nakshatra, weighted from 1 to 8 points (36 total), and is the most widely "
         "used classical Vedic marriage-compatibility technique. Varna, Gana, Nadi, and the "
         "Tara counting method are consistently described identically across every classical "
@@ -209,7 +206,7 @@ def narrate_ashtakoot(result, label_a="Self", label_b="Life Partner"):
         "Yoni's finer middle tier and Graha Maitri's exact middle-combination point values are "
         "documented simplifications where sources genuinely disagree (see compatibility.py). "
         "The full breakdown below shows each koota's domain, this specific pairing's score, "
-        "and a reflection prompt — not a pass/fail judgment on the relationship itself."
+        "and a reflection prompt — not a pass/fail judgment on the relationship itself.")
     )
     return result
 
@@ -224,23 +221,23 @@ _ELEMENT_BY_SIGN = {
     "Cancer": "Water", "Scorpio": "Water", "Pisces": "Water",
 }
 
-_ELEMENT_RESONANCE = {
+_ELEMENT_RESONANCE = tbl({
     frozenset({"Fire", "Air"}): ("classically complementary", "fire and air traditionally sustain and energize each other"),
     frozenset({"Earth", "Water"}): ("classically complementary", "earth and water traditionally nurture and give shape to each other"),
     frozenset({"Fire", "Water"}): ("classically contrasting", "fire and water traditionally temper and challenge each other, needing conscious patience"),
     frozenset({"Earth", "Air"}): ("classically contrasting", "earth and air traditionally move at different paces, needing conscious patience"),
     frozenset({"Fire", "Earth"}): ("classically mixed", "fire and earth traditionally combine drive with practicality once aligned"),
     frozenset({"Air", "Water"}): ("classically mixed", "air and water traditionally combine ideas with feeling once aligned"),
-}
+})
 
-_GANA_RESONANCE = {
+_GANA_RESONANCE = tbl({
     frozenset({"Deva"}): "both share the Deva (refined/gentle) temperament group — an easy natural resonance",
     frozenset({"Manushya"}): "both share the Manushya (balanced/human) temperament group — a grounded natural resonance",
     frozenset({"Rakshasa"}): "both share the Rakshasa (intense/driven) temperament group — a high-energy natural resonance",
     frozenset({"Deva", "Manushya"}): "one Deva, one Manushya — a generally cooperative pairing classically considered mild and workable",
     frozenset({"Manushya", "Rakshasa"}): "one Manushya, one Rakshasa — a pairing classical texts suggest benefits from patience with differing paces and intensities",
     frozenset({"Deva", "Rakshasa"}): "one Deva, one Rakshasa — the temperamentally furthest-apart classical pairing, traditionally suggesting real value in deliberately meeting each other's very different natural styles",
-}
+})
 
 _PARENT_CHILD_CAVEAT = (
     "This is a thematic, symbolic exploration, not a scored compatibility test — Ashtakoot "
@@ -277,12 +274,13 @@ def build_parent_child_connection(parent_reading, parent_karakas, parent_avkahad
     if parent_element == child_element:
         elemental = {
             "parent_element": parent_element, "child_element": child_element,
-            "relation": "same element",
-            "note": f"Both Moon signs share the {parent_element} element — a natural, intuitive resonance in temperament and emotional pacing.",
+            "relation": tx("same element"),
+            "note": tr('Both Moon signs share the {0} element — a natural, intuitive resonance in temperament and '
+                       'emotional pacing.', parent_element),
         }
     else:
         key = frozenset({parent_element, child_element})
-        relation, note = _ELEMENT_RESONANCE.get(key, ("classically mixed", "these elements combine in varied ways depending on the rest of each chart"))
+        relation, note = _ELEMENT_RESONANCE.get(key, (tx("classically mixed"), tx("these elements combine in varied ways depending on the rest of each chart")))
         elemental = {"parent_element": parent_element, "child_element": child_element, "relation": relation, "note": note.capitalize() + "."}
 
     parent_gana = parent_avkahada["gana"]
@@ -290,65 +288,59 @@ def build_parent_child_connection(parent_reading, parent_karakas, parent_avkahad
     gana_key = frozenset({parent_gana, child_gana})
     temperament = {
         "parent_gana": parent_gana, "child_gana": child_gana,
-        "note": _GANA_RESONANCE.get(gana_key, f"{parent_gana} and {child_gana} — a mixed temperament pairing.").capitalize() + ".",
+        "note": _GANA_RESONANCE.get(gana_key, tr("{0} and {1} — a mixed temperament pairing.", parent_gana, child_gana)).capitalize() + ".",
     }
 
     pk = chara_karaka.get_karaka(parent_karakas, "PK")
     ak = chara_karaka.get_karaka(child_karakas, "AK")
     if pk["planet"] == ak["planet"]:
         pk_ak_relation = (
-            f"{parent_label}'s Putrakaraka (children significator) and {child_label}'s own "
-            f"Atmakaraka (soul significator) are the SAME planet ({pk['planet']}) — a notable "
-            f"classical resonance, traditionally read as an unusually direct thematic thread "
-            f"between what {parent_label} seeks through children and what {child_label}'s own "
-            f"chart centers its identity around."
+            tr("{0}'s Putrakaraka (children significator) and {1}'s own Atmakaraka (soul significator) are the "
+               'SAME planet ({2}) — a notable classical resonance, traditionally read as an unusually direct '
+               "thematic thread between what {3} seeks through children and what {4}'s own chart centers its "
+               'identity around.', parent_label, child_label, pk['planet'], parent_label, child_label)
         )
     else:
         rel_forward = _natural_relation(pk["planet"], ak["planet"])
         rel_backward = _natural_relation(ak["planet"], pk["planet"])
         if "friend" in (rel_forward, rel_backward):
-            tone = "a naturally cooperative classical relationship (at least one of the two planets calls the other a natural friend)"
+            tone = tx("a naturally cooperative classical relationship (at least one of the two planets calls the other a natural friend)")
         elif "enemy" in (rel_forward, rel_backward):
-            tone = "a classically effortful relationship (at least one of the two planets calls the other a natural enemy) — traditionally read as more growth-through-friction than automatic ease"
+            tone = tx("a classically effortful relationship (at least one of the two planets calls the other a natural enemy) — traditionally read as more growth-through-friction than automatic ease")
         else:
-            tone = "a classically neutral relationship — neither particularly easy nor particularly effortful by planetary temperament alone"
+            tone = tx("a classically neutral relationship — neither particularly easy nor particularly effortful by planetary temperament alone")
         pk_ak_relation = (
-            f"{parent_label}'s Putrakaraka is {pk['planet']}; {child_label}'s Atmakaraka is "
-            f"{ak['planet']}. By classical planetary friendship, {pk['planet']} and "
-            f"{ak['planet']} share {tone}."
+            tr("{0}'s Putrakaraka is {1}; {2}'s Atmakaraka is {3}. By classical planetary friendship, {4} and "
+               '{5} share {6}.', parent_label, pk['planet'], child_label, ak['planet'], pk['planet'], ak['planet'], tone)
         )
     putrakaraka_link = {"parent_putrakaraka": pk["planet"], "child_atmakaraka": ak["planet"], "note": pk_ak_relation}
 
     narrative = (
-        f"Three traditional threads, read together, sketch a symbolic picture of the "
-        f"{parent_label}-{child_label} bond. First, by Moon-sign element: {elemental['note']} "
-        f"Second, by temperament group (Gana): {temperament['note']} Third, by Jaimini "
-        f"significator: {putrakaraka_link['note']} None of this is a scored verdict the way "
-        f"Ashtakoot is for a marriage — it is a thematic lens for reflecting on natural "
-        f"tendencies in how {parent_label} and {child_label} may relate, not a prediction or a "
-        f"claim about a specific shared history."
+        tr('Three traditional threads, read together, sketch a symbolic picture of the {0}-{1} bond. First, '
+           'by Moon-sign element: {2} Second, by temperament group (Gana): {3} Third, by Jaimini '
+           'significator: {4} None of this is a scored verdict the way Ashtakoot is for a marriage — it is '
+           'a thematic lens for reflecting on natural tendencies in how {5} and {6} may relate, not a '
+           'prediction or a claim about a specific shared history.', parent_label, child_label, elemental['note'], temperament['note'], putrakaraka_link['note'], parent_label, child_label)
     )
 
     reflection = (
-        f"In practice, these three threads are most useful as a starting point for noticing "
-        f"patterns rather than as an explanation to lean on too heavily. An elemental match "
-        f"(or mismatch) between {parent_label} and {child_label} says something about natural "
-        f"pacing — how quickly each of you moves through emotions, decisions, or excitement — "
-        f"and mismatches here are common and workable, not a warning sign. The Gana comparison "
-        f"speaks to baseline temperament: a shared Gana often means {parent_label} and "
-        f"{child_label} 'get' each other's moods quickly, while a mixed Gana pairing (as with "
-        f"any two family members) simply means each may need to explain their own reactions a "
-        f"little more explicitly for the other to follow. The Putrakaraka-Atmakaraka thread is "
-        f"the most classically specific of the three: it points at what {parent_label}'s own "
-        f"chart says about parenting instinctively, set against what {child_label}'s own chart "
-        f"says about their core drive — where those two align, parenting can feel intuitive; "
-        f"where they differ, {parent_label} may find that supporting {child_label} well means "
-        f"consciously stepping outside a first instinct rather than assuming it will land the "
-        f"same way it would for a differently-wired child."
+        tr('In practice, these three threads are most useful as a starting point for noticing patterns '
+           'rather than as an explanation to lean on too heavily. An elemental match (or mismatch) between '
+           '{0} and {1} says something about natural pacing — how quickly each of you moves through '
+           'emotions, decisions, or excitement — and mismatches here are common and workable, not a warning '
+           'sign. The Gana comparison speaks to baseline temperament: a shared Gana often means {2} and {3} '
+           "'get' each other's moods quickly, while a mixed Gana pairing (as with any two family members) "
+           'simply means each may need to explain their own reactions a little more explicitly for the '
+           'other to follow. The Putrakaraka-Atmakaraka thread is the most classically specific of the '
+           "three: it points at what {4}'s own chart says about parenting instinctively, set against what "
+           "{5}'s own chart says about their core drive — where those two align, parenting can feel "
+           'intuitive; where they differ, {6} may find that supporting {7} well means consciously stepping '
+           'outside a first instinct rather than assuming it will land the same way it would for a '
+           'differently-wired child.', parent_label, child_label, parent_label, child_label, parent_label, child_label, parent_label, child_label)
     )
 
     methodology_note = (
-        "This parent-child thematic connection deliberately uses three DIFFERENT classical "
+        tx("This parent-child thematic connection deliberately uses three DIFFERENT classical "
         "tools than Ashtakoot, because Ashtakoot itself was designed and is taught exclusively "
         "as a marriage-compatibility system between prospective spouses — applying its scoring "
         "to a parent and child would misuse a technique outside its intended scope, not merely "
@@ -363,7 +355,7 @@ def build_parent_child_connection(parent_reading, parent_karakas, parent_avkahad
         "disposition toward children in general, while Atmakaraka describes a CHILD's own "
         "core identity — comparing the two speaks to how naturally that parent's instinctive "
         "parenting style may resonate with that particular child's nature, not a verdict on "
-        "the relationship's quality."
+        "the relationship's quality.")
     )
 
     return {
@@ -373,7 +365,7 @@ def build_parent_child_connection(parent_reading, parent_karakas, parent_avkahad
         "narrative": narrative,
         "reflection": reflection,
         "methodology_note": methodology_note,
-        "caveat": _PARENT_CHILD_CAVEAT,
+        "caveat": tx(_PARENT_CHILD_CAVEAT),
     }
 
 
@@ -391,24 +383,21 @@ def _individual_relational_disposition(reading, label):
     seventh = reading["house_lords"][7]
 
     bits = [
-        f"{label}'s Atmakaraka (soul-significator) is {ak['planet']} in {ak['sign']}, house "
-        f"{ak['house']} — the core drive this person's chart is organized around."
+        tr("{0}'s Atmakaraka (soul-significator) is {1} in {2}, house {3} — the core drive this person's "
+           'chart is organized around.', label, ak['planet'], ak['sign'], ak['house'])
     ]
     bits.append(
-        f"{label}'s Darakaraka (Jaimini's spouse-significator) is {dk['planet']}, placed in "
-        f"{dk['sign']}, house {dk['house']}."
+        tr("{0}'s Darakaraka (Jaimini's spouse-significator) is {1}, placed in {2}, house {3}.", label, dk['planet'], dk['sign'], dk['house'])
     )
     if dk.get("in_sign_effects"):
         bits.append(dk["in_sign_effects"])
     if seventh.get("reading"):
         bits.append(
-            f"By the older Parashari system, the 7th house (marriage/partnership) is ruled by "
-            f"{seventh['lord']} (in {seventh['lord_sign']}), placed in house "
-            f"{seventh['placed_in_house']}: {seventh['reading'].get('effects') or seventh['reading'].get('summary')}"
+            tr('By the older Parashari system, the 7th house (marriage/partnership) is ruled by {0} (in {1}), '
+               'placed in house {2}: {3}', seventh['lord'], seventh['lord_sign'], seventh['placed_in_house'], seventh['reading'].get('effects') or seventh['reading'].get('summary'))
         )
     bits.append(
-        f"{label}'s Putrakaraka (children-significator) is {pk['planet']}, placed in "
-        f"{pk['sign']}, house {pk['house']}."
+        tr("{0}'s Putrakaraka (children-significator) is {1}, placed in {2}, house {3}.", label, pk['planet'], pk['sign'], pk['house'])
     )
     if pk.get("in_sign_effects"):
         bits.append(pk["in_sign_effects"])
@@ -435,25 +424,24 @@ def build_karmic_family_connection(a_reading, a_label, b_reading, b_label):
     def past_life_line(k, label):
         pli = k.get("past_life_identity")
         if pli and pli.get("summary"):
-            return f"{label}: {pli['summary']}"
+            return tr('{0}: {1}', label, pli['summary'])
         ketu = k.get("ketu", {})
-        return (f"{label}: Ketu in {ketu.get('sign', '?')} (house {ketu.get('house', '?')}) marks "
-                f"the strongest past-life imprint.")
+        return (tr('{0}: Ketu in {1} (house {2}) marks the strongest past-life imprint.', label, ketu.get('sign', '?'), ketu.get('house', '?')))
 
     def goal_line(k, label):
         goal = k.get("main_karmic_goal")
         if goal:
-            return f"{label}'s main goal this life: {goal}"
+            return tr("{0}'s main goal this life: {1}", label, goal)
         rahu = k.get("rahu", {})
-        return (f"{label}'s growth this life pulls toward Rahu in {rahu.get('sign', '?')} "
-                f"(house {rahu.get('house', '?')}) — the unfamiliar direction the soul is here to develop.")
+        return (tr("{0}'s growth this life pulls toward Rahu in {1} (house {2}) — the unfamiliar direction the soul "
+                   'is here to develop.', label, rahu.get('sign', '?'), rahu.get('house', '?')))
 
     past_lives = (
-        "Past-life imprints each person carries into this bond:\n"
+        tx("Past-life imprints each person carries into this bond:\n")
         + past_life_line(ka, a_label) + "\n" + past_life_line(kb, b_label)
     )
     goals = (
-        "The main goals of this life for each:\n"
+        tx("The main goals of this life for each:\n")
         + goal_line(ka, a_label) + "\n" + goal_line(kb, b_label)
     )
 
@@ -463,31 +451,28 @@ def build_karmic_family_connection(a_reading, a_label, b_reading, b_label):
     a_rahu = ka.get("rahu", {})
     b_rahu = kb.get("rahu", {})
     support = (
-        "How each can support the other toward these goals:\n"
-        f"{a_label} grows by leaning into the themes of Rahu in {a_rahu.get('sign', '?')} "
-        f"(house {a_rahu.get('house', '?')}) — territory that feels unfamiliar at first, so "
-        f"{b_label} helps most by encouraging {a_label} there rather than letting them retreat to "
-        f"the old, over-comfortable Ketu pattern. "
-        f"Reciprocally, {b_label} grows by leaning into Rahu in {b_rahu.get('sign', '?')} "
-        f"(house {b_rahu.get('house', '?')}), and {a_label} helps most by steadying and "
-        f"encouraging {b_label} in exactly that direction. In practice, each person's natural "
-        f"past-life strengths (their Ketu arena) are often precisely what the other one is still "
-        f"reaching to build (their Rahu direction) — which is what makes family members such "
-        f"effective, if sometimes uncomfortable, mirrors for each other's growth."
+        tr('How each can support the other toward these goals:\n{0} grows by leaning into the themes of Rahu '
+           'in {1} (house {2}) — territory that feels unfamiliar at first, so {3} helps most by encouraging '
+           '{4} there rather than letting them retreat to the old, over-comfortable Ketu pattern. '
+           'Reciprocally, {5} grows by leaning into Rahu in {6} (house {7}), and {8} helps most by '
+           "steadying and encouraging {9} in exactly that direction. In practice, each person's natural "
+           'past-life strengths (their Ketu arena) are often precisely what the other one is still reaching '
+           'to build (their Rahu direction) — which is what makes family members such effective, if '
+           "sometimes uncomfortable, mirrors for each other's growth.", a_label, a_rahu.get('sign', '?'), a_rahu.get('house', '?'), b_label, a_label, b_label, b_rahu.get('sign', '?'), b_rahu.get('house', '?'), a_label, b_label)
     )
 
-    narrative = past_lives + "\n\n" + goals + "\n\n" + support + "\n\n" + _KARMIC_FAMILY_CAVEAT
+    narrative = past_lives + "\n\n" + goals + "\n\n" + support + "\n\n" + tx(_KARMIC_FAMILY_CAVEAT)
     return {
         "past_lives": past_lives,
         "goals": goals,
         "support": support,
         "narrative": narrative,
-        "caveat": _KARMIC_FAMILY_CAVEAT,
+        "caveat": tx(_KARMIC_FAMILY_CAVEAT),
     }
 
 
 def build_family_compatibility_report(self_reading, self_chart, partner_reading=None, partner_chart=None,
-                                       children=None, self_label="Self", partner_label="Life Partner"):
+                                       children=None, self_label="Self", partner_label=tx("Life Partner")):
     """
     Assembles the full, readable Family Compatibility report: each
     generated person's own relational disposition (from their individual
@@ -503,24 +488,23 @@ def build_family_compatibility_report(self_reading, self_chart, partner_reading=
     children = children or []
     sections = []
     sections.append(
-        f"=== Family Compatibility Report ===\n\n"
-        f"This report brings together everyone whose chart has been generated so far — "
-        f"{self_label}"
-        + (f", {partner_label}" if partner_chart else "")
-        + (f", and {', '.join(c[0] for c in children)}" if children else "")
-        + ". It starts with each person's own relational disposition (already computed on their "
+        tr('=== Family Compatibility Report ===\n\nThis report brings together everyone whose chart has been '
+           'generated so far — {0}', self_label)
+        + (tr(', {0}', partner_label) if partner_chart else "")
+        + (tr(', and {0}', ', '.join(c[0] for c in children)) if children else "")
+        + tx(". It starts with each person's own relational disposition (already computed on their "
         "individual Karmic & Past Life tab), then adds cross-chart comparisons: Ashtakoot Guna "
         "Milan for Self and Life Partner specifically (the classical marriage-compatibility "
         "technique), and a separately-scoped thematic connection for Self and each child (which "
-        "deliberately does NOT use Ashtakoot — see the Parent-Child section below for why)."
+        "deliberately does NOT use Ashtakoot — see the Parent-Child section below for why).")
     )
 
-    sections.append("--- " + self_label + "'s Own Relational Disposition ---\n" +
+    sections.append("--- " + self_label + tx("'s Own Relational Disposition ---\n") +
                      _individual_relational_disposition(self_reading, self_label))
 
     ashtakoot_result = None
     if partner_chart and partner_reading:
-        sections.append("--- " + partner_label + "'s Own Relational Disposition ---\n" +
+        sections.append("--- " + partner_label + tx("'s Own Relational Disposition ---\n") +
                          _individual_relational_disposition(partner_reading, partner_label))
 
         def person(chart):
@@ -535,15 +519,13 @@ def build_family_compatibility_report(self_reading, self_chart, partner_reading=
         )
         koota_lines = "\n\n".join(k["narrative"] for k in ashtakoot_result["kootas"])
         sections.append(
-            f"--- Ashtakoot Guna Milan: {self_label} <-> {partner_label} ---\n"
-            f"{ashtakoot_result['methodology_note']}\n\n{koota_lines}\n\n{ashtakoot_result['overall_narrative']}"
+            tr('--- Ashtakoot Guna Milan: {0} <-> {1} ---\n{2}\n\n{3}\n\n{4}', self_label, partner_label, ashtakoot_result['methodology_note'], koota_lines, ashtakoot_result['overall_narrative'])
         )
         # Karmic dimension for the couple: past-life imprints, each one's
         # main goal this life, and how they can support each other toward it.
         partner_karmic = build_karmic_family_connection(self_reading, self_label, partner_reading, partner_label)
         sections.append(
-            f"--- Karmic Connection: {self_label} <-> {partner_label} (past lives, goals & mutual support) ---\n"
-            f"{partner_karmic['narrative']}"
+            tr('--- Karmic Connection: {0} <-> {1} (past lives, goals & mutual support) ---\n{2}', self_label, partner_label, partner_karmic['narrative'])
         )
 
     parent_child_results = {}
@@ -557,16 +539,14 @@ def build_family_compatibility_report(self_reading, self_chart, partner_reading=
         )
         parent_child_results[child_label] = pcc
         sections.append(
-            f"--- Parent-Child Thematic Connection: {self_label} <-> {child_label} ---\n"
-            f"{pcc['methodology_note']}\n\n{pcc['narrative']}\n\n{pcc['reflection']}\n\n{pcc['caveat']}"
+            tr('--- Parent-Child Thematic Connection: {0} <-> {1} ---\n{2}\n\n{3}\n\n{4}\n\n{5}', self_label, child_label, pcc['methodology_note'], pcc['narrative'], pcc['reflection'], pcc['caveat'])
         )
         # Karmic dimension for the parent-child pair too: past-life imprints,
         # each one's main goal this life, and how they can support each other.
         child_karmic = build_karmic_family_connection(self_reading, self_label, child_reading, child_label)
         pcc["karmic_connection"] = child_karmic
         sections.append(
-            f"--- Karmic Connection: {self_label} <-> {child_label} (past lives, goals & mutual support) ---\n"
-            f"{child_karmic['narrative']}"
+            tr('--- Karmic Connection: {0} <-> {1} (past lives, goals & mutual support) ---\n{2}', self_label, child_label, child_karmic['narrative'])
         )
 
     sections = [s for s in sections if s]

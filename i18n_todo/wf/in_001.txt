@@ -1,0 +1,184 @@
+# engine/rule_engine.py:1579
+2001	age {0}-{1} ({2} Mahadasha - {3}; themes: {4})   ## {0}=w['start_age'], {1}=w['end_age'], {2}=w['lord'], {3}=w['role'], {4}=w['theme']
+# engine/rule_engine.py:1653
+2002	The Amatyakaraka (Jaimini's career significator) here is {0}, in {1} — classically read as the planet whose qualities most shape vocational direction.   ## {0}=chara_karaka.get_karaka(karakas, 'AmK')[, {1}=planets_reading[chara_karaka.get_karaka(
+# engine/rule_engine.py:1621
+2003	Through {0}   ## {0}=t
+# engine/rule_engine.py:1612
+2004	 / {0} Antardasha   ## {0}=running['antardasha_lord']
+# engine/rule_engine.py:1555
+2005	Your {0} house ({1}):    ## {0}=ordinal(area['house']), {1}=area['body_part']
+# engine/rule_engine.py:1523
+2006	Saturn, the classical significator of endurance and chronic conditions, is {0} in {1}.   ## {0}=saturn_dignity, {1}=saturn_detail['sign']
+# engine/rule_engine.py:1513
+2007	your body type is mostly {0}, which means {1}.   ## {0}=dosha['primary'], {1}=gist
+# engine/rule_engine.py:922
+2008	the qualities {0} classically signifies   ## {0}=atmakaraka['sign']
+# engine/rule_engine.py:414
+2009	Worth noting: {0}   ## {0}=kb_entry['strength_modifiers_and_caution
+# engine/rule_engine.py:410
+2010	Classical formation: {0}   ## {0}=kb_entry['formation']
+# engine/rule_engine.py:1772
+2011	Why relationships may take the shape they do (a karmic lens): the Darakaraka - Jaimini's significator of the spouse or life partner - is {0} in {1}, house {2}. Classically, the Darakaraka describes the KIND of partner and partnership this soul is karmically drawn toward, prior to comparing charts with anyone specific.    ## {0}=dk['planet'], {1}=dk['sign'], {2}=dk['house']
+# engine/rule_engine.py:1748
+2012	On how many significant relationships or marriages this chart tends toward: this reading leans toward {0}.   ## {0}=mct['tendency']
+# engine/rule_engine.py:1665
+2013	The Darakaraka (Jaimini's spouse significator) is {0}, in {1} — see the Karmic & Past Life tab for this soul's own relational disposition, and Family Compatibility for an actual two-chart comparison if a partner profile has been generated.   ## {0}=chara_karaka.get_karaka(karakas, 'DK')[', {1}=planets_reading[chara_karaka.get_karaka(
+# engine/rule_engine.py:1642
+2014	\n\n[{0}]   ## {0}=gloss
+# engine/rule_engine.py:1628
+2015	{0} is present in this chart: {1}   ## {0}=y['name'], {1}=y['details']
+# engine/rule_engine.py:1611
+2016	 The Mahadasha running at birth is {0}   ## {0}=running['mahadasha_lord']
+# engine/rule_engine.py:1553
+2017	{0} ({1}, classically {2}) points to {3}   ## {0}=note['planet'], {1}=note['dignity'], {2}=tag, {3}=note['theme']
+# engine/rule_engine.py:1543
+2018	 [{0}]   ## {0}=eighth_gloss
+# engine/rule_engine.py:1542
+2019	The 8th house is ruled by {0}, {1} in {2}.   ## {0}=eighth['lord'], {1}=eighth_dignity, {2}=eighth['lord_sign']
+# engine/rule_engine.py:1541
+2020	8th house (chronic or hidden conditions): {0}   ## {0}=eighth_text
+# engine/rule_engine.py:1539
+2021	The 6th house is ruled by {0}, {1} in {2}.   ## {0}=sixth['lord'], {1}=sixth_dignity, {2}=sixth['lord_sign']
+# engine/rule_engine.py:1538
+2022	6th house (disease, daily health): {0}   ## {0}=sixth_text
+# engine/rule_engine.py:1520
+2023	Saturn, the classical significator of endurance and chronic conditions: {0}   ## {0}=saturn_text
+# engine/rule_engine.py:1116
+2024	\n\nIn simple terms: your growth this life is mostly about {0}. Leaning into that - even when it feels new or uncomfortable - is where the real meaning and progress tend to come from.   ## {0}=rahu_where
+# engine/rule_engine.py:919
+2025	This growth is carried out through the lens of the Atmakaraka, {0} in {1} (house {2}) — the soul's central quality — meaning the goal is not simply to arrive in Rahu's territory, but to bring {3}'s own nature into it:    ## {0}=atmakaraka['planet'], {1}=atmakaraka['sign'], {2}=atmakaraka['house'], {3}=atmakaraka['planet']
+# engine/rule_engine.py:829
+2026	, {0}   ## {0}=nature
+# engine/rule_engine.py:620
+2027	{0} ({1}) chart   ## {0}=key, {1}=name
+# engine/rule_engine.py:615
+2028	 {0}   ## {0}=gist
+# engine/rule_engine.py:396
+2029	No 'classical_yogas' entry found for id '{0}'.   ## {0}=result['id']
+# engine/rule_engine.py:1952
+2030	Not JSON serializable: {0}   ## {0}=type(obj)
+# engine/rule_engine.py:1512
+2031	. Your mind adds {0}   ## {0}=_DOSHA_FRIEND_TOUCH.get(dosha['secondary
+# engine/rule_engine.py:1507
+2032	 Your Moon adds a {0} flavor - {1}.   ## {0}=dosha['secondary'], {1}=dosha['secondary_description']
+# engine/rule_engine.py:1162
+2033	12th house (Moksha): {0}   ## {0}=moksha['summary']
+# engine/rule_engine.py:1160
+2034	9th house (Dharma): {0}   ## {0}=dharma['summary']
+# engine/rule_engine.py:1158
+2035	5th house (Purva Punya): {0}   ## {0}=purva_punya['summary']
+# engine/rule_engine.py:1156
+2036	Rahu in {0} (house {1}): {2}   ## {0}=rahu['sign'], {1}=rahu['house'], {2}=rahu['in_house_summary']
+# engine/rule_engine.py:1154
+2037	Ketu in {0} (house {1}): {2}   ## {0}=ketu['sign'], {1}=ketu['house'], {2}=ketu['in_house_summary']
+# engine/rule_engine.py:1103
+2038	\n\nIn simple terms: you seem to have come into this life already comfortable with {0}. It feels natural, even over-familiar - so it's a strength you can lean on, but not where your growth is meant to happen this time.   ## {0}=ketu_where
+# engine/rule_engine.py:1061
+2039	The 12th house — Moksha, release and the letting-go of past attachments — is ruled by {0} (in {1}), placed in house {2}: {3}   ## {0}=moksha['lord'], {1}=moksha['lord_sign'], {2}=moksha['placed_in_house'], {3}=moksha.get('effects') or moksha['summary
+# engine/rule_engine.py:1056
+2040	The 9th house — Dharma, higher purpose and fortune — is ruled by {0} (in {1}), placed in house {2}: {3}   ## {0}=dharma['lord'], {1}=dharma['lord_sign'], {2}=dharma['placed_in_house'], {3}=dharma.get('effects') or dharma['summary
+# engine/rule_engine.py:1051
+2041	The 5th house — Purva Punya, the storehouse of past-life merit — is ruled by {0} (in {1}), placed in house {2}: {3}   ## {0}=purva_punya['lord'], {1}=purva_punya['lord_sign'], {2}=purva_punya['placed_in_house'], {3}=purva_punya.get('effects') or purva_puny
+# engine/rule_engine.py:1039
+2042	 In that house's domain: {0}   ## {0}=saturn['in_house_effects']
+# engine/rule_engine.py:1022
+2043	 In the domain of house {0}: {1}   ## {0}=rahu['house'], {1}=rahu['in_house_effects']
+# engine/rule_engine.py:1004
+2044	 In the domain of house {0} specifically: {1}   ## {0}=ketu['house'], {1}=ketu['in_house_effects']
+# engine/rule_engine.py:970
+2045	 More specifically, the Moon sits in pada {0} of {1} (Navamsa: {2}): {3}   ## {0}=moon_nakshatra_pada, {1}=moon_nakshatra_name, {2}=moon_pada['navamsa_sign'], {3}=moon_pada['summary']
+# engine/rule_engine.py:927
+2046	The 9th house (Dharma) frames why this matters beyond the individual: ruled by {0} in {1}, placed in house {2}, it points to {3} — the larger sense of purpose this life's karmic stretch is ultimately in service of.   ## {0}=dharma['lord'], {1}=dharma['lord_sign'], {2}=dharma['placed_in_house'], {3}=dharma.get('effects') or dharma['summary
+# engine/rule_engine.py:871
+2047	The 5th house — Purva Punya, the storehouse of merit EARNED by good past-life action — is ruled by {0} (in {1}, placed in house {2}), describing the credit balance carried forward: {3}   ## {0}=purva_punya['lord'], {1}=purva_punya['lord_sign'], {2}=purva_punya['placed_in_house'], {3}=purva_punya.get('effects') or purva_puny
+# engine/rule_engine.py:865
+2048	Saturn — the karaka of karma itself — sits in {0} (house {1}), marking where accumulated debts and consequences of past conduct are being steadily worked off through responsibility and delay in this life: {2}   ## {0}=saturn['sign'], {1}=saturn['house'], {2}=saturn.get('in_house_effects') or saturn
+# engine/rule_engine.py:846
+2049	 Your Atmakaraka is {0}, {1}.   ## {0}=atmakaraka_planet, {1}=flavor
+# engine/rule_engine.py:828
+2050	With Ketu in {0} (house {1}, {2} nakshatra), the strongest past-life imprint points to {3}   ## {0}=ketu['sign'], {1}=ketu['house'], {2}=ketu['nakshatra'], {3}=arena
+# engine/rule_engine.py:613
+2051	{0} sits in {1}, your {2} house here - {3} in this chart.   ## {0}=p, {1}=p_sign, {2}=ordinal(house), {3}=dignity
+# engine/rule_engine.py:600
+2052	 - classically used for {0}   ## {0}=primary_use
+# engine/rule_engine.py:192
+2053	No '{0}' entry found for id '{1}'.   ## {0}=kb_name, {1}=item_id
+# engine/rule_engine.py:150
+2054	No 'nakshatra_pada' entry found for '{0}' pada {1}.   ## {0}=nakshatra_name, {1}=pada
+# engine/rule_engine.py:127
+2055	No 'nakshatra' entry found for '{0}'.   ## {0}=nakshatra_name
+# engine/rule_engine.py:1821
+2056	In short: {0} classical yoga{1} {2} present in this chart:   ## {0}=len(yogas_present), {1}='s' if len(yogas_present) != 1 else '', {2}='are' if len(yogas_present) != 1 else 'i
+# engine/rule_engine.py:1699
+2057	In short: none of these {0} {1} are present in this chart. {2}   ## {0}=total_count, {1}=topic, {2}=absent_note
+# engine/rule_engine.py:1533
+2058	In simple terms: the planet that looks after your {0} sits in the part of your life about {1} - {2}   ## {0}=area, {1}=where, {2}=senti
+# engine/rule_engine.py:1515
+2059	Ascendant lord {0} (overall vitality) is {1} in {2}.   ## {0}=first['lord'], {1}=first_dignity, {2}=first['lord_sign']
+# engine/rule_engine.py:1514
+2060	Ascendant lord (overall vitality): {0}   ## {0}=ascendant_lord_text
+# engine/rule_engine.py:1505
+2061	Ayurvedic constitution (Prakriti): primarily {0} - {1}.   ## {0}=dosha['primary'], {1}=dosha['primary_description']
+# engine/rule_engine.py:1498
+2062	 [In simple terms: {0}]   ## {0}=text
+# engine/rule_engine.py:1453
+2063	 {0} sharing that house is classically calming and supportive for it.   ## {0}=', '.join(moon_supported)
+# engine/rule_engine.py:1449
+2064	 Sharing that house with {0} classically suggests the mind may feel more pressure or restlessness at times - not a diagnosis, just a theme worth gentle awareness.   ## {0}=', '.join(moon_afflicted)
+# engine/rule_engine.py:1073
+2065	Darakaraka — the Jaimini significator of the spouse/life partner, held here by {0} in {1}, house {2} ({3} nakshatra) — describes this soul's own disposition toward partnership, prior to comparing charts with anyone specific.   ## {0}=darakaraka['planet'], {1}=darakaraka['sign'], {2}=darakaraka['house'], {3}=darakaraka['nakshatra']
+# engine/rule_engine.py:1033
+2066	Saturn is the classical karaka for karma itself — structure, discipline, delay, and the working-out of consequence over time. It sits in {0} in house {1} ({2} nakshatra).   ## {0}=saturn['sign'], {1}=saturn['house'], {2}=saturn['nakshatra']
+# engine/rule_engine.py:1015
+2067	Rahu sits opposite Ketu by definition and is read as the direction this life's karmic growth pulls toward — unfamiliar territory the soul is drawn to reach for, often with more hunger than comfort at first. It is placed in {0} in house {1} ({2} nakshatra).   ## {0}=rahu['sign'], {1}=rahu['house'], {2}=rahu['nakshatra']
+# engine/rule_engine.py:997
+2068	Ketu is the classical significator of past-life imprint — skills, instincts, and unfinished business already carried into this birth, experienced less as something learned and more as something simply KNOWN. It sits in {0} in house {1} ({2} nakshatra).   ## {0}=ketu['sign'], {1}=ketu['house'], {2}=ketu['nakshatra']
+# engine/rule_engine.py:984
+2069	 By house, its themes play out through the domain it occupies: {0}   ## {0}=atmakaraka['in_house_effects']
+# engine/rule_engine.py:982
+2070	 By sign, this classically reads as: {0}   ## {0}=atmakaraka['in_sign_effects']
+# engine/rule_engine.py:959
+2071	Your Janma Nakshatra — the lunar mansion the Moon occupied at birth, and traditionally read as foundational to personal identity in its own right — is {0}, ruled by {1} and presided over by {2}, symbolized by {3}. {4}   ## {0}=moon_nakshatra['name'], {1}=moon_nakshatra['ruling_planet'], {2}=moon_nakshatra['deity'], {3}=moon_nakshatra['symbol'].lower(), {4}=moon_nakshatra['effects']
+# engine/rule_engine.py:909
+2072	This life's main karmic goal centers on {0} — the territory Rahu occupies in {1} (house {2}, {3} nakshatra), read as the direction the soul is here to stretch toward, however unfamiliar or effortful it may feel at first.   ## {0}=goal_arena, {1}=rahu['sign'], {2}=rahu['house'], {3}=rahu['nakshatra']
+# engine/rule_engine.py:859
+2073	The over-reliance shown by Ketu in house {0} ({1}) is read as the past-life pattern most in need of release now — the very competence that once served the soul became a groove too deep, a comfort clung to past its usefulness.   ## {0}=ketu['house'], {1}=ketu['sign']
+# engine/rule_engine.py:842
+2074	In that kind of life, you may have been {0}.   ## {0}=profession
+# engine/rule_engine.py:601
+2075	, your Ascendant falls in {0}.   ## {0}=varga_asc
+# engine/rule_engine.py:598
+2076	In your {0} ({1}) chart   ## {0}=key, {1}=name
+# engine/rule_engine.py:579
+2077	{0} is in {1}, your {2} house - {3} here.   ## {0}=p, {1}=detail['sign'], {2}=ordinal(detail['house']), {3}=dignity
+# engine/rule_engine.py:568
+2078	Your Ascendant (Lagna) is {0} - this is your main birth chart, the foundation every other divisional chart below refines.   ## {0}=asc_sign
+# engine/rule_engine.py:536
+2079	{0} ({1}) is in {2} ({3}), showing up mainly in the part of life about {4}   ## {0}=planet, {1}=role, {2}=sign, {3}=flavor, {4}=where
+# engine/rule_engine.py:528
+2080	, which is mainly about {0}   ## {0}=primary_use
+# engine/rule_engine.py:314
+2081	{0} {1} [In simple terms: {2}]   ## {0}=header, {1}=professional, {2}=' '.join(gist_bits)
+# engine/rule_engine.py:1702
+2082	In short: {0} of {1} {2} {3} present in this chart — {4}. See below for what each one means; they're reported separately on purpose, not combined into a single verdict.   ## {0}=present_count, {1}=total_count, {2}=topic, {3}='is' if present_count == 1 else 'are', {4}=names
+# engine/rule_engine.py:1445
+2083	Moon (mind and emotional wellbeing) is in {0}, your {1} house - classically {2} there.   ## {0}=moon_detail['sign'], {1}=ordinal(moon_detail['house']), {2}=moon_dignity
+# engine/rule_engine.py:1223
+2084	{0} in {1} (house {2}): {3}   ## {0}=planet, {1}=r['sign'], {2}=r['house'], {3}=entry.get('effects') or entry.get('summa
+# engine/rule_engine.py:1213
+2085	the {0} house's lord {1} (in {2}, placed in house {3}): {4}   ## {0}=ordinal(house_num), {1}=hl['lord'], {2}=hl['lord_sign'], {3}=hl['placed_in_house'], {4}=text
+# engine/rule_engine.py:1140
+2086	In simple words: you seem to arrive already comfortable with {0}, and this life is asking you to grow into {1}. Your sense of self centers on {2} in {3}, and your wider sense of purpose is shaped by the 5th, 9th, and 12th houses covered above. None of this is a literal past life - it's a traditional lens for noticing patterns that might be worth paying attention to, not a fact about who you were.   ## {0}=ketu_where, {1}=rahu_where, {2}=atmakaraka['planet'], {3}=atmakaraka['sign']
+# engine/rule_engine.py:1122
+2087	Read together, these significators sketch one coherent traditional narrative: a soul whose defining focus (Atmakaraka in {0}, house {1}) arrives already carrying the imprint described by Ketu, is pulled to grow in the direction Rahu points toward, works through consequence via Saturn's placement, and orients its deeper purpose around the 5th/9th/12th houses described above. None of this specifies a literal former life, era, or identity — it is a symbolic framework this project's own verified KB entries already support, reassembled under a traditional karmic lens for reflection.   ## {0}=atmakaraka['sign'], {1}=atmakaraka['house']
+# engine/rule_engine.py:976
+2088	In Jaimini astrology, the planet holding the highest degree among the seven classical grahas is the Atmakaraka — literally the 'significator of the soul' — read as the planet whose themes the soul itself is most identified with in this incarnation. Here that planet is {0}, placed in {1} in house {2} ({3} nakshatra, pada {4}).   ## {0}=atmakaraka['planet'], {1}=atmakaraka['sign'], {2}=atmakaraka['house'], {3}=atmakaraka['nakshatra'], {4}=atmakaraka['nakshatra_pada']
+# engine/rule_engine.py:777
+2089	In simple terms: the planet in charge of your {0} sits in the part of your life about {1}, so your {2} is closely tied to {3}. {4}   ## {0}=area_word, {1}=where, {2}=area_word, {3}=where, {4}=senti
+# engine/rule_engine.py:529
+2090	. Your rising sign here is {0} ({1}).   ## {0}=asc_sign, {1}=asc_flavor
+# engine/rule_engine.py:526
+2091	In plain terms, this is your {0}   ## {0}=chart_label
+# engine/rule_engine.py:311
+2092	Your {0} in {1} ({2} house):   ## {0}=planet, {1}=sign, {2}=ordinal(house)

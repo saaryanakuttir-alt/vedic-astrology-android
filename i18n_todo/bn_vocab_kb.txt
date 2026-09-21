@@ -87,3 +87,13 @@ Sun is not conjunct Rahu or Ketu.	সূর্য রাহু বা কেত�
 {0}, {1} house	{0}, {1} ভাব
 {0} {1}Y {2}M {3}D	{0} {1} বছর {2} মাস {3} দিন
 {0:.6f} deg	{0:.6f} ডিগ্রি
+Friend	মিত্র
+Great Friend	অধিমিত্র
+Neutral	সম
+Enemy	শত্রু
+Great Enemy	অধিশত্রু
+{0} in {1} - {2}	{1} রাশিতে {0} - {2}
+{0} in {1}	{1} রাশিতে {0}
+How each planet affects your houses and signs - one section per planet, with a plain-words verdict (good, mixed or needs care) and what may happen:	প্রতিটি গ্রহ আপনার ভাব ও রাশিকে কীভাবে প্রভাবিত করে - প্রতি গ্রহের জন্য একটি অংশ, সহজ ভাষায় রায় (ভালো, মিশ্র বা যত্ন প্রয়োজন) এবং যা ঘটতে পারে সহ:
+Saturn 4th from Moon	চন্দ্র থেকে ৪র্থে শনি
+Saturn 8th from Moon	চন্দ্র থেকে ৮মে শনি

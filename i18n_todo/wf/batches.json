@@ -1,0 +1,303 @@
+[
+ {
+  "n": 1,
+  "in": "in_001.txt",
+  "out": "out_001.txt",
+  "ids": 92,
+  "words": 1486
+ },
+ {
+  "n": 2,
+  "in": "in_002.txt",
+  "out": "out_002.txt",
+  "ids": 91,
+  "words": 1493
+ },
+ {
+  "n": 3,
+  "in": "in_003.txt",
+  "out": "out_003.txt",
+  "ids": 116,
+  "words": 1499
+ },
+ {
+  "n": 4,
+  "in": "in_004.txt",
+  "out": "out_004.txt",
+  "ids": 34,
+  "words": 1497
+ },
+ {
+  "n": 5,
+  "in": "in_005.txt",
+  "out": "out_005.txt",
+  "ids": 103,
+  "words": 1496
+ },
+ {
+  "n": 6,
+  "in": "in_006.txt",
+  "out": "out_006.txt",
+  "ids": 77,
+  "words": 1482
+ },
+ {
+  "n": 7,
+  "in": "in_007.txt",
+  "out": "out_007.txt",
+  "ids": 66,
+  "words": 1487
+ },
+ {
+  "n": 8,
+  "in": "in_008.txt",
+  "out": "out_008.txt",
+  "ids": 54,
+  "words": 1495
+ },
+ {
+  "n": 9,
+  "in": "in_009.txt",
+  "out": "out_009.txt",
+  "ids": 80,
+  "words": 1500
+ },
+ {
+  "n": 10,
+  "in": "in_010.txt",
+  "out": "out_010.txt",
+  "ids": 143,
+  "words": 1496
+ },
+ {
+  "n": 11,
+  "in": "in_011.txt",
+  "out": "out_011.txt",
+  "ids": 156,
+  "words": 1496
+ },
+ {
+  "n": 12,
+  "in": "in_012.txt",
+  "out": "out_012.txt",
+  "ids": 138,
+  "words": 1495
+ },
+ {
+  "n": 13,
+  "in": "in_013.txt",
+  "out": "out_013.txt",
+  "ids": 108,
+  "words": 1472
+ },
+ {
+  "n": 14,
+  "in": "in_014.txt",
+  "out": "out_014.txt",
+  "ids": 59,
+  "words": 1475
+ },
+ {
+  "n": 15,
+  "in": "in_015.txt",
+  "out": "out_015.txt",
+  "ids": 58,
+  "words": 1587
+ },
+ {
+  "n": 16,
+  "in": "in_016.txt",
+  "out": "out_016.txt",
+  "ids": 59,
+  "words": 1525
+ },
+ {
+  "n": 17,
+  "in": "in_017.txt",
+  "out": "out_017.txt",
+  "ids": 59,
+  "words": 1550
+ },
+ {
+  "n": 18,
+  "in": "in_018.txt",
+  "out": "out_018.txt",
+  "ids": 60,
+  "words": 1498
+ },
+ {
+  "n": 19,
+  "in": "in_019.txt",
+  "out": "out_019.txt",
+  "ids": 58,
+  "words": 1511
+ },
+ {
+  "n": 20,
+  "in": "in_020.txt",
+  "out": "out_020.txt",
+  "ids": 60,
+  "words": 1560
+ },
+ {
+  "n": 21,
+  "in": "in_021.txt",
+  "out": "out_021.txt",
+  "ids": 59,
+  "words": 1550
+ },
+ {
+  "n": 22,
+  "in": "in_022.txt",
+  "out": "out_022.txt",
+  "ids": 59,
+  "words": 1577
+ },
+ {
+  "n": 23,
+  "in": "in_023.txt",
+  "out": "out_023.txt",
+  "ids": 59,
+  "words": 1551
+ },
+ {
+  "n": 24,
+  "in": "in_024.txt",
+  "out": "out_024.txt",
+  "ids": 59,
+  "words": 1523
+ },
+ {
+  "n": 25,
+  "in": "in_025.txt",
+  "out": "out_025.txt",
+  "ids": 58,
+  "words": 1563
+ },
+ {
+  "n": 26,
+  "in": "in_026.txt",
+  "out": "out_026.txt",
+  "ids": 87,
+  "words": 1497
+ },
+ {
+  "n": 27,
+  "in": "in_027.txt",
+  "out": "out_027.txt",
+  "ids": 127,
+  "words": 1489
+ },
+ {
+  "n": 28,
+  "in": "in_028.txt",
+  "out": "out_028.txt",
+  "ids": 100,
+  "words": 1499
+ },
+ {
+  "n": 29,
+  "in": "in_029.txt",
+  "out": "out_029.txt",
+  "ids": 85,
+  "words": 1518
+ },
+ {
+  "n": 30,
+  "in": "in_030.txt",
+  "out": "out_030.txt",
+  "ids": 90,
+  "words": 1491
+ },
+ {
+  "n": 31,
+  "in": "in_031.txt",
+  "out": "out_031.txt",
+  "ids": 87,
+  "words": 1492
+ },
+ {
+  "n": 32,
+  "in": "in_032.txt",
+  "out": "out_032.txt",
+  "ids": 87,
+  "words": 1478
+ },
+ {
+  "n": 33,
+  "in": "in_033.txt",
+  "out": "out_033.txt",
+  "ids": 97,
+  "words": 1487
+ },
+ {
+  "n": 34,
+  "in": "in_034.txt",
+  "out": "out_034.txt",
+  "ids": 87,
+  "words": 1485
+ },
+ {
+  "n": 35,
+  "in": "in_035.txt",
+  "out": "out_035.txt",
+  "ids": 92,
+  "words": 1496
+ },
+ {
+  "n": 36,
+  "in": "in_036.txt",
+  "out": "out_036.txt",
+  "ids": 91,
+  "words": 1507
+ },
+ {
+  "n": 37,
+  "in": "in_037.txt",
+  "out": "out_037.txt",
+  "ids": 62,
+  "words": 1468
+ },
+ {
+  "n": 38,
+  "in": "in_038.txt",
+  "out": "out_038.txt",
+  "ids": 44,
+  "words": 1495
+ },
+ {
+  "n": 39,
+  "in": "in_039.txt",
+  "out": "out_039.txt",
+  "ids": 46,
+  "words": 1500
+ },
+ {
+  "n": 40,
+  "in": "in_040.txt",
+  "out": "out_040.txt",
+  "ids": 44,
+  "words": 1468
+ },
+ {
+  "n": 41,
+  "in": "in_041.txt",
+  "out": "out_041.txt",
+  "ids": 43,
+  "words": 1470
+ },
+ {
+  "n": 42,
+  "in": "in_042.txt",
+  "out": "out_042.txt",
+  "ids": 44,
+  "words": 1490
+ },
+ {
+  "n": 43,
+  "in": "in_043.txt",
+  "out": "out_043.txt",
+  "ids": 31,
+  "words": 899
+ }
+]

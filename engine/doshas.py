@@ -10,7 +10,7 @@ PITRA_NOTE below) - this module picks one commonly-cited formulation and
 says so plainly rather than presenting it as the single correct rule.
 """
 from astrology_tables import SIGN_LORD, NATURAL_MALEFICS
-from i18n import tr, tx
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 RAHU_KETU = {"Rahu", "Ketu"}
 
@@ -49,7 +49,7 @@ def assess_pitra_dosha(chart):
     ]
 
     return {
-        "note": PITRA_NOTE,
+        "note": tx(PITRA_NOTE),
         "rahu_ketu_in_9th": {
             "present": bool(rahu_ketu_in_9th), "planets": rahu_ketu_in_9th,
             "detail": (tr("{0} in the 9th house.", ", ".join(rahu_ketu_in_9th)) if rahu_ketu_in_9th
@@ -79,8 +79,8 @@ def assess_guru_chandal_dosha(chart):
     return {
         "present": present,
         "jupiter_house": jup_house, "rahu_house": rahu_house,
-        "detail": ("Jupiter is conjunct Rahu." if present
-                   else f"Jupiter (house {jup_house}) and Rahu (house {rahu_house}) are not conjunct."),
+        "detail": (tx("Jupiter is conjunct Rahu.") if present
+                   else tr('Jupiter (house {0}) and Rahu (house {1}) are not conjunct.', jup_house, rahu_house)),
     }
 
 
@@ -95,8 +95,8 @@ def assess_grahan_dosha(chart):
         shadow = [p for p in by_house[house] if p in RAHU_KETU]
         return {
             "present": bool(shadow), "planets": shadow,
-            "detail": (f"{luminary} is conjunct {', '.join(shadow)}." if shadow
-                       else f"{luminary} is not conjunct Rahu or Ketu."),
+            "detail": (tr('{0} is conjunct {1}.', luminary, ', '.join(shadow)) if shadow
+                       else tr('{0} is not conjunct Rahu or Ketu.', luminary)),
         }
 
     return {"surya_grahan": check("Sun"), "chandra_grahan": check("Moon")}
@@ -113,6 +113,6 @@ def assess_shrapit_dosha(chart):
     return {
         "present": present,
         "saturn_house": sat_house, "rahu_house": rahu_house,
-        "detail": ("Saturn is conjunct Rahu." if present
-                   else f"Saturn (house {sat_house}) and Rahu (house {rahu_house}) are not conjunct."),
+        "detail": (tx("Saturn is conjunct Rahu.") if present
+                   else tr('Saturn (house {0}) and Rahu (house {1}) are not conjunct.', sat_house, rahu_house)),
     }

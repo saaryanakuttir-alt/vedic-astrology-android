@@ -1,0 +1,106 @@
+# house_lord_placement:HL-12-in-8
+11418	Connects loss, spirituality, and liberation with transformation and shared resources.
+11419	The lord of the 12th house — governing loss, expenditure, foreign lands, spirituality, and liberation (moksha) — is placed in the 8th house, the house of transformation, occult matters, inheritance, and sudden events.
+11420	Counted from the 12th house itself, the 8th house falls in a trikona (trine) relationship to it.
+11421	This is a classically auspicious connection, often linking loss, expenditure, foreign lands, spirituality, and liberation (moksha) with good fortune, grace, and support flowing in through transformation, occult matters, inheritance, and sudden events.
+11422	In practice, this placement tends to channel the native's experience of loss, spirituality, and liberation through the lens of transformation and shared resources, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-12-in-9
+11423	Connects loss, spirituality, and liberation with fortune and higher wisdom.
+11424	The lord of the 12th house — governing loss, expenditure, foreign lands, spirituality, and liberation (moksha) — is placed in the 9th house, the house of fortune, dharma, the father, higher learning, and long journeys.
+11425	Counted from the 12th house itself, the 9th house falls in a kendra (angular) relationship to it.
+11426	This is a stabilizing, mutually supportive functional connection, meaning matters of loss, expenditure, foreign lands, spirituality, and liberation (moksha) tend to find a firm, action-oriented outlet through fortune, dharma, the father, higher learning, and long journeys.
+11427	In practice, this placement tends to channel the native's experience of loss, spirituality, and liberation through the lens of fortune and higher wisdom, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-12-in-10
+11428	Connects loss, spirituality, and liberation with career and status.
+11429	The lord of the 12th house — governing loss, expenditure, foreign lands, spirituality, and liberation (moksha) — is placed in the 10th house, the house of career, status, authority, and public reputation.
+11430	Counted from the 12th house itself, the 10th house falls in an upachaya (growth) relationship to it.
+11431	Matters of loss, expenditure, foreign lands, spirituality, and liberation (moksha) tend to develop and strengthen gradually through career, status, authority, and public reputation, typically improving with sustained effort and time.
+11432	In practice, this placement tends to channel the native's experience of loss, spirituality, and liberation through the lens of career and status, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-12-in-11
+11433	Connects loss, spirituality, and liberation with gains and aspirations.
+11434	The lord of the 12th house — governing loss, expenditure, foreign lands, spirituality, and liberation (moksha) — is placed in the 11th house, the house of gains, income, friendships, elder siblings, and aspirations.
+11435	Counted from the 12th house itself, the 11th house falls in a dusthana (6th/8th/12th) relationship to it.
+11436	This classically indicates that matters of loss, expenditure, foreign lands, spirituality, and liberation (moksha) may encounter obstacles, delay, loss, or significant transformation as they pass through gains, income, friendships, elder siblings, and aspirations, unless other factors in the chart provide relief.
+11437	In practice, this placement tends to channel the native's experience of loss, spirituality, and liberation through the lens of gains and aspirations, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-12-in-12
+11438	The lord of the 12th house sits in its own house, directly reinforcing loss, spirituality, and liberation.
+11439	The lord of the 12th house — governing loss, expenditure, foreign lands, spirituality, and liberation (moksha) — is placed in the 12th house, the house of loss, expenditure, foreign lands, spirituality, and liberation (moksha).
+11440	This is a Swakshetra-style placement: the lord of the 12th house sits within its own house.
+11441	A house lord placed in its own house generally reinforces and stabilizes its own significations directly, strengthening loss, expenditure, foreign lands, spirituality, and liberation (moksha), provided the lord itself is reasonably well placed by sign and is not heavily afflicted by malefic influences.
+11442	In practice, this placement tends to channel the native's experience of loss, spirituality, and liberation through the lens of loss, spirituality, and liberation, and the two areas of life should be read together rather than in isolation.
+# nakshatra:NK-ASW
+11443	The Ashwini Kumaras (twin divine physician-horsemen)
+11444	A horse's head
+11445	The zodiac's first nakshatra, and it behaves like one: quick to start, quick to heal, impatient for results.
+11446	The Ashwini Kumaras are the gods' physicians, so there's a natural gift for fast, practical remedies — fixing what's broken and moving on before it's fully understood.
+11447	The horse-head symbol fits: forward motion, a burst of energy rather than a sustained one.
+# nakshatra:NK-BHA
+11448	Yama (god of death, judgment, and dharma)
+11449	The yoni (womb) — a triangle
+11450	Bharani carries the weight Ashwini's burst of energy doesn't have to: seeing a difficult, often transformative process all the way through, under Yama's watch rather than by impulse.
+11451	Fertility, endurance, and a strong (sometimes severe) internal sense of right and wrong all sit here — creative or generative power that insists on being earned.
+# nakshatra:NK-KRI
+11452	Agni (god of fire)
+11453	A razor or a flame
+11454	Agni's fire both purifies and cuts, and Krittika does both: a sharp, sometimes blunt clarity that separates what's useful from what isn't.
+11455	Nurturing (the symbol is also linked to the Pleiades, the 'six nurses' who raised the war-god Skanda), but nurturing that doesn't flinch from honest criticism.
+# nakshatra:NK-ROH
+11456	Brahma (or, in some tellings, Prajapati) / presided over by growth itself
+11457	An ox-cart, or a sprouting shoot
+11458	Classically the Moon's favorite wife among the 27 nakshatra-consorts, and the association fits: Rohini is about things ripening — beauty, sensual pleasure, land, and material comfort that grows steadily rather than arrives suddenly.
+11459	A magnetic, aesthetically-inclined nakshatra with a strong pull toward stability once it takes root.
+# nakshatra:NK-MRG
+11460	Soma (the Moon, as a nourishing deity)
+11461	A deer's head
+11462	The deer-head symbol is literal: always turned slightly further, sensing something not quite in view yet.
+11463	Mrigashira natives tend toward restless, exploratory curiosity — happiest mid-search, and prone to losing interest once a thing is actually caught.
+11464	Gentle rather than forceful in how it pursues.
+# nakshatra:NK-ARD
+11465	Rudra (the fierce storm-form of Shiva)
+11466	A teardrop, or a diamond
+11467	Rudra's domain, and it reads that way: a nakshatra of storms that clear rather than merely destroy.
+11468	Ardra often correlates with periods of real upheaval — grief, breakdown, sharp change — that, classically, are the necessary weather before genuine renewal.
+11469	Intense, sometimes turbulent, rarely gentle about it.
+# nakshatra:NK-PNV
+11470	Aditi (mother of the gods, goddess of boundlessness)
+11471	A bow and quiver, or a house
+11472	The name literally means 'return of the light' — after Ardra's storm, a homecoming.
+11473	Aditi's boundless, unconditionally nurturing nature colors this nakshatra with resilience and optimism: whatever was lost or scattered can be gathered again.
+11474	A restorative, safety-making energy, good at starting over without bitterness.
+# nakshatra:NK-PSY
+11475	Brihaspati (Jupiter, guru of the gods)
+11476	A cow's udder, a lotus, or an arrow
+11477	Widely held as the single most auspicious nakshatra for undertakings of real consequence, under the guru-planet's own guidance.
+11478	Pushya nourishes — literally (the udder symbol), and through steady, disciplined care rather than dramatic gesture.
+11479	A dependable, protective, quietly authoritative energy.
+# nakshatra:NK-ASL
+11480	The Nagas (serpent deities)
+11481	A coiled serpent
+11482	Serpent symbolism throughout: a sharp, perceptive, sometimes unsettling intelligence that can coil close and hold on.
+11483	Ashlesha's gift is the same faculty that can heal (classical medicine's association with serpents/venom-as-remedy) or harm — penetrating insight used well or used to manipulate, with the nakshatra itself agnostic about which.
+# nakshatra:NK-MAG
+11484	The Pitris (ancestors)
+11485	A royal throne, or a palanquin
+11486	Magha means 'the mighty one,' and its rulership by the ancestors gives it a strong pull toward legacy — position, inheritance, and a felt duty to those who came before.
+11487	A regal, lineage-conscious nakshatra: comfortable with authority, and inclined to measure success partly by what it passes on.
+# nakshatra:NK-PPH
+11488	Bhaga (god of fortune and marital bliss)
+11489	The front legs of a bed, or a hammock
+11490	Under Bhaga's rulership this is a nakshatra of enjoyed reward: romance, creative pleasure, and a genuine talent for rest that isn't idleness so much as recovery.
+11491	Warm, sociable, drawn toward beauty and comfort — the part of the cycle that gets to enjoy what's been earned.
+# nakshatra:NK-UPH
+11492	Aryaman (god of patronage, contracts, and favorable unions)
+11493	The back legs of a bed, or a small cot
+11494	Where Purva Phalguni enjoys, Uttara Phalguni extends that generosity outward: helpful partnership, fair contracts, and a steady, patron-like kindness.
+11495	Aryaman is also the deity most associated with marriage in its social/contractual sense — reliability and follow-through in commitments made to others.
+# nakshatra:NK-HAS
+11496	Savitar (a solar deity, patron of skillful action)
+11497	A hand, or a closed fist
+11498	The hand symbol says it plainly: Hasta is about making things happen through skilled, practical action, not abstraction.
+11499	Craftsmanship, manual dexterity, and a talent for 'getting the job done' with whatever's actually available.
+11500	A grounded, capable, results-oriented energy.
+# nakshatra:NK-CHI
+11501	Tvashtar / Vishwakarma (the divine architect and craftsman)
+11502	A bright jewel, or a pearl
+11503	Named for brilliance ('the bright one'), and ruled by the gods' own master-builder — Chitra combines Hasta's practical skill with a strong aesthetic and charismatic sense of design.
+11504	Good at making something that stands out: striking, well-crafted, and hard to look away from.

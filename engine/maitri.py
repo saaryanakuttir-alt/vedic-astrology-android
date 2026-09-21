@@ -27,6 +27,7 @@ Combining the two gives one of five grades (Panchadha Maitri):
     natural enemy + temporal enemy    -> Adhi Shatru  (Great Enemy)
 """
 from astrology_tables import house_distance
+from i18n import tr  # noqa: E402 - translation helpers (engine/i18n.py)
 
 CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]
 
@@ -52,7 +53,7 @@ assert set(NATURAL_FRIENDSHIP) == set(CLASSICAL_SEVEN)
 for _p, _row in NATURAL_FRIENDSHIP.items():
     _others = _row["friends"] + _row["neutral"] + _row["enemies"]
     assert sorted(_others) == sorted(o for o in CLASSICAL_SEVEN if o != _p), \
-        f"{_p}'s natural-friendship row doesn't cover the other 6 grahas exactly once"
+        tr("{0}'s natural-friendship row doesn't cover the other 6 grahas exactly once", _p)
 
 _TEMPORAL_FRIEND_DISTANCES = {2, 3, 4, 10, 11, 12}
 

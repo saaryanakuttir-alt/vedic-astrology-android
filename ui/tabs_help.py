@@ -106,7 +106,7 @@ class HelpTab(BoxLayout):
             head.bind(size=lambda l, s: setattr(l, "text_size", s))
             self.list_grid.add_widget(head)
             for question, answer in items:
-                self.list_grid.add_widget(ExpandableCard(question, answer))
+                self.list_grid.add_widget(ExpandableCard(tx(question), tx(answer)))
         if not any_shown:
             msg = Label(
                 text=tr('No questions match "{0}" - try a different word.', self.search_input.text),

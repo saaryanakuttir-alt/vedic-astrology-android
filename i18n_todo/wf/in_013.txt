@@ -1,0 +1,194 @@
+# divisional_D60_planet_in_sign:D60-PS-Me-Gem
+10603	Own sign — colors fine-grained results and past-life karma through Gemini's communication.
+# divisional_D60_planet_in_sign:D60-PS-Me-Vir
+10604	Exalted — colors fine-grained results and past-life karma through Virgo's service.
+# divisional_D60_planet_in_sign:D60-PS-Me-Pis
+10605	Debilitated — colors fine-grained results and past-life karma through Pisces's compassion.
+# divisional_D60_planet_in_sign:D60-PS-Ju-Can
+10606	Exalted — colors fine-grained results and past-life karma through Cancer's nurturing.
+# divisional_D60_planet_in_sign:D60-PS-Ju-Sag
+10607	Own sign — colors fine-grained results and past-life karma through Sagittarius's expansion.
+# divisional_D60_planet_in_sign:D60-PS-Ju-Cap
+10608	Debilitated — colors fine-grained results and past-life karma through Capricorn's discipline.
+# divisional_D60_planet_in_sign:D60-PS-Ju-Pis
+10609	Own sign — colors fine-grained results and past-life karma through Pisces's compassion.
+# divisional_D60_planet_in_sign:D60-PS-Ve-Tau
+10610	Own sign — colors fine-grained results and past-life karma through Taurus's stability.
+# divisional_D60_planet_in_sign:D60-PS-Ve-Vir
+10611	Debilitated — colors fine-grained results and past-life karma through Virgo's service.
+# divisional_D60_planet_in_sign:D60-PS-Ve-Lib
+10612	Own sign — colors fine-grained results and past-life karma through Libra's partnership.
+# divisional_D60_planet_in_sign:D60-PS-Ve-Pis
+10613	Exalted — colors fine-grained results and past-life karma through Pisces's compassion.
+# divisional_D60_planet_in_sign:D60-PS-Sa-Ari
+10614	Debilitated — colors fine-grained results and past-life karma through Aries's initiation.
+# divisional_D60_planet_in_sign:D60-PS-Sa-Lib
+10615	Exalted — colors fine-grained results and past-life karma through Libra's partnership.
+# divisional_D60_planet_in_sign:D60-PS-Sa-Cap
+10616	Own sign — colors fine-grained results and past-life karma through Capricorn's discipline.
+# divisional_D60_planet_in_sign:D60-PS-Sa-Aqu
+10617	Own sign — colors fine-grained results and past-life karma through Aquarius's innovation.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Ari
+10618	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Aries's initiation.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Tau
+10619	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Taurus's stability.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Gem
+10620	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Gemini's communication.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Can
+10621	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Cancer's nurturing.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Leo
+10622	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Leo's self-expression.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Vir
+10623	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Virgo's service.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Lib
+10624	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Libra's partnership.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Sco
+10625	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Scorpio's transformation.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Sag
+10626	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Sagittarius's expansion.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Cap
+10627	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Capricorn's discipline.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Aqu
+10628	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Aquarius's innovation.
+# divisional_D60_planet_in_sign:D60-PS-Ra-Pis
+10629	Shadow planet (no fixed dignity) — colors fine-grained results and past-life karma through Pisces's compassion.
+# divisional_D9_planet_in_sign:D9-PS-Su-Ari
+10630	Exalted — colors marriage and dharma through Aries's initiation.
+# divisional_D9_planet_in_sign:D9-PS-Su-Tau
+10631	Neutral dignity — colors marriage and dharma through Taurus's stability.
+# divisional_D9_planet_in_sign:D9-PS-Su-Gem
+10632	Neutral dignity — colors marriage and dharma through Gemini's communication.
+# divisional_D9_planet_in_sign:D9-PS-Su-Can
+10633	Neutral dignity — colors marriage and dharma through Cancer's nurturing.
+# divisional_D9_planet_in_sign:D9-PS-Su-Leo
+10634	Own sign — colors marriage and dharma through Leo's self-expression.
+# divisional_D9_planet_in_sign:D9-PS-Su-Vir
+10635	Neutral dignity — colors marriage and dharma through Virgo's service.
+# divisional_D9_planet_in_sign:D9-PS-Su-Lib
+10636	Debilitated — colors marriage and dharma through Libra's partnership.
+# divisional_D9_planet_in_sign:D9-PS-Su-Sco
+10637	Neutral dignity — colors marriage and dharma through Scorpio's transformation.
+# divisional_D9_planet_in_sign:D9-PS-Su-Sag
+10638	Neutral dignity — colors marriage and dharma through Sagittarius's expansion.
+# divisional_D9_planet_in_sign:D9-PS-Su-Cap
+10639	Neutral dignity — colors marriage and dharma through Capricorn's discipline.
+# divisional_D9_planet_in_sign:D9-PS-Su-Aqu
+10640	Neutral dignity — colors marriage and dharma through Aquarius's innovation.
+# divisional_D9_planet_in_sign:D9-PS-Su-Pis
+10641	Neutral dignity — colors marriage and dharma through Pisces's compassion.
+# divisional_D9_planet_in_sign:D9-PS-Mo-Ari
+10642	Neutral dignity — colors marriage and dharma through Aries's initiation.
+# divisional_D9_planet_in_sign:D9-PS-Mo-Tau
+10643	Exalted — colors marriage and dharma through Taurus's stability.
+# divisional_D9_planet_in_sign:D9-PS-Mo-Can
+10644	Own sign — colors marriage and dharma through Cancer's nurturing.
+# divisional_D9_planet_in_sign:D9-PS-Mo-Leo
+10645	Neutral dignity — colors marriage and dharma through Leo's self-expression.
+# divisional_D9_planet_in_sign:D9-PS-Mo-Lib
+10646	Neutral dignity — colors marriage and dharma through Libra's partnership.
+# divisional_D9_planet_in_sign:D9-PS-Mo-Sco
+10647	Debilitated — colors marriage and dharma through Scorpio's transformation.
+# divisional_D9_planet_in_sign:D9-PS-Ma-Ari
+10648	Own sign — colors marriage and dharma through Aries's initiation.
+# divisional_D9_planet_in_sign:D9-PS-Ma-Can
+10649	Debilitated — colors marriage and dharma through Cancer's nurturing.
+# divisional_D9_planet_in_sign:D9-PS-Ma-Sco
+10650	Own sign — colors marriage and dharma through Scorpio's transformation.
+# divisional_D9_planet_in_sign:D9-PS-Ma-Cap
+10651	Exalted — colors marriage and dharma through Capricorn's discipline.
+# divisional_D9_planet_in_sign:D9-PS-Me-Gem
+10652	Own sign — colors marriage and dharma through Gemini's communication.
+# divisional_D9_planet_in_sign:D9-PS-Me-Vir
+10653	Exalted — colors marriage and dharma through Virgo's service.
+# divisional_D9_planet_in_sign:D9-PS-Me-Pis
+10654	Debilitated — colors marriage and dharma through Pisces's compassion.
+# divisional_D9_planet_in_sign:D9-PS-Ju-Can
+10655	Exalted — colors marriage and dharma through Cancer's nurturing.
+# divisional_D9_planet_in_sign:D9-PS-Ju-Sag
+10656	Own sign — colors marriage and dharma through Sagittarius's expansion.
+# divisional_D9_planet_in_sign:D9-PS-Ju-Cap
+10657	Debilitated — colors marriage and dharma through Capricorn's discipline.
+# divisional_D9_planet_in_sign:D9-PS-Ju-Pis
+10658	Own sign — colors marriage and dharma through Pisces's compassion.
+# divisional_D9_planet_in_sign:D9-PS-Ve-Tau
+10659	Own sign — colors marriage and dharma through Taurus's stability.
+# divisional_D9_planet_in_sign:D9-PS-Ve-Vir
+10660	Debilitated — colors marriage and dharma through Virgo's service.
+# divisional_D9_planet_in_sign:D9-PS-Ve-Lib
+10661	Own sign — colors marriage and dharma through Libra's partnership.
+# divisional_D9_planet_in_sign:D9-PS-Ve-Pis
+10662	Exalted — colors marriage and dharma through Pisces's compassion.
+# divisional_D9_planet_in_sign:D9-PS-Sa-Ari
+10663	Debilitated — colors marriage and dharma through Aries's initiation.
+# divisional_D9_planet_in_sign:D9-PS-Sa-Lib
+10664	Exalted — colors marriage and dharma through Libra's partnership.
+# divisional_D9_planet_in_sign:D9-PS-Sa-Cap
+10665	Own sign — colors marriage and dharma through Capricorn's discipline.
+# divisional_D9_planet_in_sign:D9-PS-Sa-Aqu
+10666	Own sign — colors marriage and dharma through Aquarius's innovation.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Ari
+10667	Shadow planet (no fixed dignity) — colors marriage and dharma through Aries's initiation.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Tau
+10668	Shadow planet (no fixed dignity) — colors marriage and dharma through Taurus's stability.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Gem
+10669	Shadow planet (no fixed dignity) — colors marriage and dharma through Gemini's communication.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Can
+10670	Shadow planet (no fixed dignity) — colors marriage and dharma through Cancer's nurturing.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Leo
+10671	Shadow planet (no fixed dignity) — colors marriage and dharma through Leo's self-expression.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Vir
+10672	Shadow planet (no fixed dignity) — colors marriage and dharma through Virgo's service.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Lib
+10673	Shadow planet (no fixed dignity) — colors marriage and dharma through Libra's partnership.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Sco
+10674	Shadow planet (no fixed dignity) — colors marriage and dharma through Scorpio's transformation.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Sag
+10675	Shadow planet (no fixed dignity) — colors marriage and dharma through Sagittarius's expansion.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Cap
+10676	Shadow planet (no fixed dignity) — colors marriage and dharma through Capricorn's discipline.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Aqu
+10677	Shadow planet (no fixed dignity) — colors marriage and dharma through Aquarius's innovation.
+# divisional_D9_planet_in_sign:D9-PS-Ra-Pis
+10678	Shadow planet (no fixed dignity) — colors marriage and dharma through Pisces's compassion.
+# divisional_charts:DIV-D9
+10679	Navamsa
+10680	marriage, dharma, overall strength
+10681	Considered the second most important chart after the main birth chart (Rasi/D1), the Navamsa is used to assess the strength of a planet's true underlying nature, the quality and timing of marriage, the spouse's characteristics, and the native's inner dharmic disposition.
+10682	A planet occupying the same sign in both D1 and D9 is called Vargottama, a condition that significantly reinforces that planet's strength and reliability of results.
+10683	Navamsa divisions are assigned to signs following a fixed classical starting-sign scheme based on the element (fire/earth/air/water) of the birth sign; the resulting D9 sign for a given birth-chart degree should be computed with a verified calculation method or ephemeris library rather than derived manually in the app.
+# divisional_charts:DIV-D10
+10684	career, profession
+10685	Used specifically to assess career direction, professional status, public achievement, and the general trajectory of the native's working life.
+10686	Planets and house lords are examined in the D10 much as in the main chart, but with the questions reframed specifically around profession, authority, and public standing.
+10687	The starting sign for the ten divisions alternates by odd/even birth sign per classical rule; as with all vargas, exact division boundaries should be computed programmatically from precise birth data rather than approximated.
+# divisional_charts:DIV-D12
+10688	parents, lineage
+10689	Used to examine matters relating to parents in more depth than the main chart's 4th (mother) and 9th (father) houses alone, including ancestral heritage, family lineage patterns, and the native's inherited circumstances.
+10690	The twelve divisions of a sign map onto the twelve signs of the zodiac in fixed forward order starting from the birth sign itself.
+# divisional_charts:DIV-D3
+10691	siblings, courage
+10692	Used to examine siblings (particularly the nature of the relationship with them) and the native's courage, valor, and capacity for self-initiated effort in more depth than the main chart's 3rd house alone provides.
+10693	The three divisions of a sign are classically assigned to the sign itself, the 5th sign from it, and the 9th sign from it (a trikona-based scheme), though some later systems use alternate assignment rules.
+# divisional_charts:DIV-D4
+10694	property, fortune
+10695	Used to examine matters of property, fixed assets, homes, and general fortune or luck in more depth than the main chart's 4th house alone provides.
+10696	The four divisions of a sign are classically assigned to the sign itself and the 4th, 7th, and 10th signs from it (a kendra-based scheme).
+# divisional_charts:DIV-D2
+10697	wealth
+10698	Used to examine wealth and financial resources specifically, refining the main chart's 2nd and 11th house indications.
+10699	Each half of a sign is classically assigned to either the Sun or the Moon (via their traditional rulership of Leo and Cancer), depending on whether the sign is odd or even and which half of the sign is involved.
+10700	The exact Sun/Moon assignment rule differs slightly for odd versus even signs and should be implemented per the classical formula rather than approximated.
+# divisional_charts:DIV-D24
+10701	education, learning
+10702	Used to examine formal and informal education, academic achievement, and the depth of learning or mastery (siddhi) the native attains in various fields of knowledge.
+10703	The starting sign for the twenty-four divisions depends on whether the birth sign is odd or even, following a fixed classical rule.
+# divisional_charts:DIV-D16
+10704	vehicles, comforts
+10705	Used to examine vehicles, general material comforts, and overall quality-of-life pleasures beyond the essentials, refining themes touched on by the main chart's 4th house.
+10706	The starting sign for the sixteen divisions follows a fixed classical rule based on the movable/fixed/dual nature (modality) of the birth sign.
+# divisional_charts:DIV-D20
+10707	spiritual pursuits
+10708	Used to examine spiritual inclination, religious or devotional practice, and the native's capacity for and progress toward initiation into a spiritual path or discipline.
+10709	The starting sign for the twenty divisions follows a fixed classical rule based on the modality (movable/fixed/dual) of the birth sign.
+# divisional_charts:DIV-D30
+10710	misfortunes, weaknesses

@@ -1,0 +1,285 @@
+# divisional_D10_planet_in_sign:D10-PS-Ju-Cap
+10166	Debilitated — colors career and professional standing through Capricorn's discipline.
+# divisional_D10_planet_in_sign:D10-PS-Ju-Pis
+10167	Own sign — colors career and professional standing through Pisces's compassion.
+# divisional_D10_planet_in_sign:D10-PS-Ve-Tau
+10168	Own sign — colors career and professional standing through Taurus's stability.
+# divisional_D10_planet_in_sign:D10-PS-Ve-Vir
+10169	Debilitated — colors career and professional standing through Virgo's service.
+# divisional_D10_planet_in_sign:D10-PS-Ve-Lib
+10170	Own sign — colors career and professional standing through Libra's partnership.
+# divisional_D10_planet_in_sign:D10-PS-Ve-Pis
+10171	Exalted — colors career and professional standing through Pisces's compassion.
+# divisional_D10_planet_in_sign:D10-PS-Sa-Ari
+10172	Debilitated — colors career and professional standing through Aries's initiation.
+# divisional_D10_planet_in_sign:D10-PS-Sa-Lib
+10173	Exalted — colors career and professional standing through Libra's partnership.
+# divisional_D10_planet_in_sign:D10-PS-Sa-Cap
+10174	Own sign — colors career and professional standing through Capricorn's discipline.
+# divisional_D10_planet_in_sign:D10-PS-Sa-Aqu
+10175	Own sign — colors career and professional standing through Aquarius's innovation.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Ari
+10176	shadow planet — no fixed dignity asserted
+10177	Shadow planet (no fixed dignity) — colors career and professional standing through Aries's initiation.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Tau
+10178	Shadow planet (no fixed dignity) — colors career and professional standing through Taurus's stability.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Gem
+10179	Shadow planet (no fixed dignity) — colors career and professional standing through Gemini's communication.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Can
+10180	Shadow planet (no fixed dignity) — colors career and professional standing through Cancer's nurturing.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Leo
+10181	Shadow planet (no fixed dignity) — colors career and professional standing through Leo's self-expression.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Vir
+10182	Shadow planet (no fixed dignity) — colors career and professional standing through Virgo's service.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Lib
+10183	Shadow planet (no fixed dignity) — colors career and professional standing through Libra's partnership.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Sco
+10184	Shadow planet (no fixed dignity) — colors career and professional standing through Scorpio's transformation.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Sag
+10185	Shadow planet (no fixed dignity) — colors career and professional standing through Sagittarius's expansion.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Cap
+10186	Shadow planet (no fixed dignity) — colors career and professional standing through Capricorn's discipline.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Aqu
+10187	Shadow planet (no fixed dignity) — colors career and professional standing through Aquarius's innovation.
+# divisional_D10_planet_in_sign:D10-PS-Ra-Pis
+10188	Shadow planet (no fixed dignity) — colors career and professional standing through Pisces's compassion.
+# divisional_D12_planet_in_sign:D12-PS-Su-Ari
+10189	Exalted — colors parents and lineage through Aries's initiation.
+# divisional_D12_planet_in_sign:D12-PS-Su-Tau
+10190	Neutral dignity — colors parents and lineage through Taurus's stability.
+# divisional_D12_planet_in_sign:D12-PS-Su-Gem
+10191	Neutral dignity — colors parents and lineage through Gemini's communication.
+# divisional_D12_planet_in_sign:D12-PS-Su-Can
+10192	Neutral dignity — colors parents and lineage through Cancer's nurturing.
+# divisional_D12_planet_in_sign:D12-PS-Su-Leo
+10193	Own sign — colors parents and lineage through Leo's self-expression.
+# divisional_D12_planet_in_sign:D12-PS-Su-Vir
+10194	Neutral dignity — colors parents and lineage through Virgo's service.
+# divisional_D12_planet_in_sign:D12-PS-Su-Lib
+10195	Debilitated — colors parents and lineage through Libra's partnership.
+# divisional_D12_planet_in_sign:D12-PS-Su-Sco
+10196	Neutral dignity — colors parents and lineage through Scorpio's transformation.
+# divisional_D12_planet_in_sign:D12-PS-Su-Sag
+10197	Neutral dignity — colors parents and lineage through Sagittarius's expansion.
+# divisional_D12_planet_in_sign:D12-PS-Su-Cap
+10198	Neutral dignity — colors parents and lineage through Capricorn's discipline.
+# divisional_D12_planet_in_sign:D12-PS-Su-Aqu
+10199	Neutral dignity — colors parents and lineage through Aquarius's innovation.
+# divisional_D12_planet_in_sign:D12-PS-Su-Pis
+10200	Neutral dignity — colors parents and lineage through Pisces's compassion.
+# divisional_D12_planet_in_sign:D12-PS-Mo-Ari
+10201	Neutral dignity — colors parents and lineage through Aries's initiation.
+# divisional_D12_planet_in_sign:D12-PS-Mo-Tau
+10202	Exalted — colors parents and lineage through Taurus's stability.
+# divisional_D12_planet_in_sign:D12-PS-Mo-Can
+10203	Own sign — colors parents and lineage through Cancer's nurturing.
+# divisional_D12_planet_in_sign:D12-PS-Mo-Leo
+10204	Neutral dignity — colors parents and lineage through Leo's self-expression.
+# divisional_D12_planet_in_sign:D12-PS-Mo-Lib
+10205	Neutral dignity — colors parents and lineage through Libra's partnership.
+# divisional_D12_planet_in_sign:D12-PS-Mo-Sco
+10206	Debilitated — colors parents and lineage through Scorpio's transformation.
+# divisional_D12_planet_in_sign:D12-PS-Ma-Ari
+10207	Own sign — colors parents and lineage through Aries's initiation.
+# divisional_D12_planet_in_sign:D12-PS-Ma-Can
+10208	Debilitated — colors parents and lineage through Cancer's nurturing.
+# divisional_D12_planet_in_sign:D12-PS-Ma-Sco
+10209	Own sign — colors parents and lineage through Scorpio's transformation.
+# divisional_D12_planet_in_sign:D12-PS-Ma-Cap
+10210	Exalted — colors parents and lineage through Capricorn's discipline.
+# divisional_D12_planet_in_sign:D12-PS-Me-Gem
+10211	Own sign — colors parents and lineage through Gemini's communication.
+# divisional_D12_planet_in_sign:D12-PS-Me-Vir
+10212	Exalted — colors parents and lineage through Virgo's service.
+# divisional_D12_planet_in_sign:D12-PS-Me-Pis
+10213	Debilitated — colors parents and lineage through Pisces's compassion.
+# divisional_D12_planet_in_sign:D12-PS-Ju-Can
+10214	Exalted — colors parents and lineage through Cancer's nurturing.
+# divisional_D12_planet_in_sign:D12-PS-Ju-Sag
+10215	Own sign — colors parents and lineage through Sagittarius's expansion.
+# divisional_D12_planet_in_sign:D12-PS-Ju-Cap
+10216	Debilitated — colors parents and lineage through Capricorn's discipline.
+# divisional_D12_planet_in_sign:D12-PS-Ju-Pis
+10217	Own sign — colors parents and lineage through Pisces's compassion.
+# divisional_D12_planet_in_sign:D12-PS-Ve-Tau
+10218	Own sign — colors parents and lineage through Taurus's stability.
+# divisional_D12_planet_in_sign:D12-PS-Ve-Vir
+10219	Debilitated — colors parents and lineage through Virgo's service.
+# divisional_D12_planet_in_sign:D12-PS-Ve-Lib
+10220	Own sign — colors parents and lineage through Libra's partnership.
+# divisional_D12_planet_in_sign:D12-PS-Ve-Pis
+10221	Exalted — colors parents and lineage through Pisces's compassion.
+# divisional_D12_planet_in_sign:D12-PS-Sa-Ari
+10222	Debilitated — colors parents and lineage through Aries's initiation.
+# divisional_D12_planet_in_sign:D12-PS-Sa-Lib
+10223	Exalted — colors parents and lineage through Libra's partnership.
+# divisional_D12_planet_in_sign:D12-PS-Sa-Cap
+10224	Own sign — colors parents and lineage through Capricorn's discipline.
+# divisional_D12_planet_in_sign:D12-PS-Sa-Aqu
+10225	Own sign — colors parents and lineage through Aquarius's innovation.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Ari
+10226	Shadow planet (no fixed dignity) — colors parents and lineage through Aries's initiation.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Tau
+10227	Shadow planet (no fixed dignity) — colors parents and lineage through Taurus's stability.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Gem
+10228	Shadow planet (no fixed dignity) — colors parents and lineage through Gemini's communication.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Can
+10229	Shadow planet (no fixed dignity) — colors parents and lineage through Cancer's nurturing.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Leo
+10230	Shadow planet (no fixed dignity) — colors parents and lineage through Leo's self-expression.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Vir
+10231	Shadow planet (no fixed dignity) — colors parents and lineage through Virgo's service.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Lib
+10232	Shadow planet (no fixed dignity) — colors parents and lineage through Libra's partnership.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Sco
+10233	Shadow planet (no fixed dignity) — colors parents and lineage through Scorpio's transformation.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Sag
+10234	Shadow planet (no fixed dignity) — colors parents and lineage through Sagittarius's expansion.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Cap
+10235	Shadow planet (no fixed dignity) — colors parents and lineage through Capricorn's discipline.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Aqu
+10236	Shadow planet (no fixed dignity) — colors parents and lineage through Aquarius's innovation.
+# divisional_D12_planet_in_sign:D12-PS-Ra-Pis
+10237	Shadow planet (no fixed dignity) — colors parents and lineage through Pisces's compassion.
+# divisional_D16_planet_in_sign:D16-PS-Su-Ari
+10238	Exalted — colors vehicles and comforts through Aries's initiation.
+# divisional_D16_planet_in_sign:D16-PS-Su-Tau
+10239	Neutral dignity — colors vehicles and comforts through Taurus's stability.
+# divisional_D16_planet_in_sign:D16-PS-Su-Gem
+10240	Neutral dignity — colors vehicles and comforts through Gemini's communication.
+# divisional_D16_planet_in_sign:D16-PS-Su-Can
+10241	Neutral dignity — colors vehicles and comforts through Cancer's nurturing.
+# divisional_D16_planet_in_sign:D16-PS-Su-Leo
+10242	Own sign — colors vehicles and comforts through Leo's self-expression.
+# divisional_D16_planet_in_sign:D16-PS-Su-Vir
+10243	Neutral dignity — colors vehicles and comforts through Virgo's service.
+# divisional_D16_planet_in_sign:D16-PS-Su-Lib
+10244	Debilitated — colors vehicles and comforts through Libra's partnership.
+# divisional_D16_planet_in_sign:D16-PS-Su-Sco
+10245	Neutral dignity — colors vehicles and comforts through Scorpio's transformation.
+# divisional_D16_planet_in_sign:D16-PS-Su-Sag
+10246	Neutral dignity — colors vehicles and comforts through Sagittarius's expansion.
+# divisional_D16_planet_in_sign:D16-PS-Su-Cap
+10247	Neutral dignity — colors vehicles and comforts through Capricorn's discipline.
+# divisional_D16_planet_in_sign:D16-PS-Su-Aqu
+10248	Neutral dignity — colors vehicles and comforts through Aquarius's innovation.
+# divisional_D16_planet_in_sign:D16-PS-Su-Pis
+10249	Neutral dignity — colors vehicles and comforts through Pisces's compassion.
+# divisional_D16_planet_in_sign:D16-PS-Mo-Ari
+10250	Neutral dignity — colors vehicles and comforts through Aries's initiation.
+# divisional_D16_planet_in_sign:D16-PS-Mo-Tau
+10251	Exalted — colors vehicles and comforts through Taurus's stability.
+# divisional_D16_planet_in_sign:D16-PS-Mo-Can
+10252	Own sign — colors vehicles and comforts through Cancer's nurturing.
+# divisional_D16_planet_in_sign:D16-PS-Mo-Leo
+10253	Neutral dignity — colors vehicles and comforts through Leo's self-expression.
+# divisional_D16_planet_in_sign:D16-PS-Mo-Lib
+10254	Neutral dignity — colors vehicles and comforts through Libra's partnership.
+# divisional_D16_planet_in_sign:D16-PS-Mo-Sco
+10255	Debilitated — colors vehicles and comforts through Scorpio's transformation.
+# divisional_D16_planet_in_sign:D16-PS-Ma-Ari
+10256	Own sign — colors vehicles and comforts through Aries's initiation.
+# divisional_D16_planet_in_sign:D16-PS-Ma-Can
+10257	Debilitated — colors vehicles and comforts through Cancer's nurturing.
+# divisional_D16_planet_in_sign:D16-PS-Ma-Sco
+10258	Own sign — colors vehicles and comforts through Scorpio's transformation.
+# divisional_D16_planet_in_sign:D16-PS-Ma-Cap
+10259	Exalted — colors vehicles and comforts through Capricorn's discipline.
+# divisional_D16_planet_in_sign:D16-PS-Me-Gem
+10260	Own sign — colors vehicles and comforts through Gemini's communication.
+# divisional_D16_planet_in_sign:D16-PS-Me-Vir
+10261	Exalted — colors vehicles and comforts through Virgo's service.
+# divisional_D16_planet_in_sign:D16-PS-Me-Pis
+10262	Debilitated — colors vehicles and comforts through Pisces's compassion.
+# divisional_D16_planet_in_sign:D16-PS-Ju-Can
+10263	Exalted — colors vehicles and comforts through Cancer's nurturing.
+# divisional_D16_planet_in_sign:D16-PS-Ju-Sag
+10264	Own sign — colors vehicles and comforts through Sagittarius's expansion.
+# divisional_D16_planet_in_sign:D16-PS-Ju-Cap
+10265	Debilitated — colors vehicles and comforts through Capricorn's discipline.
+# divisional_D16_planet_in_sign:D16-PS-Ju-Pis
+10266	Own sign — colors vehicles and comforts through Pisces's compassion.
+# divisional_D16_planet_in_sign:D16-PS-Ve-Tau
+10267	Own sign — colors vehicles and comforts through Taurus's stability.
+# divisional_D16_planet_in_sign:D16-PS-Ve-Vir
+10268	Debilitated — colors vehicles and comforts through Virgo's service.
+# divisional_D16_planet_in_sign:D16-PS-Ve-Lib
+10269	Own sign — colors vehicles and comforts through Libra's partnership.
+# divisional_D16_planet_in_sign:D16-PS-Ve-Pis
+10270	Exalted — colors vehicles and comforts through Pisces's compassion.
+# divisional_D16_planet_in_sign:D16-PS-Sa-Ari
+10271	Debilitated — colors vehicles and comforts through Aries's initiation.
+# divisional_D16_planet_in_sign:D16-PS-Sa-Lib
+10272	Exalted — colors vehicles and comforts through Libra's partnership.
+# divisional_D16_planet_in_sign:D16-PS-Sa-Cap
+10273	Own sign — colors vehicles and comforts through Capricorn's discipline.
+# divisional_D16_planet_in_sign:D16-PS-Sa-Aqu
+10274	Own sign — colors vehicles and comforts through Aquarius's innovation.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Ari
+10275	Shadow planet (no fixed dignity) — colors vehicles and comforts through Aries's initiation.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Tau
+10276	Shadow planet (no fixed dignity) — colors vehicles and comforts through Taurus's stability.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Gem
+10277	Shadow planet (no fixed dignity) — colors vehicles and comforts through Gemini's communication.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Can
+10278	Shadow planet (no fixed dignity) — colors vehicles and comforts through Cancer's nurturing.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Leo
+10279	Shadow planet (no fixed dignity) — colors vehicles and comforts through Leo's self-expression.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Vir
+10280	Shadow planet (no fixed dignity) — colors vehicles and comforts through Virgo's service.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Lib
+10281	Shadow planet (no fixed dignity) — colors vehicles and comforts through Libra's partnership.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Sco
+10282	Shadow planet (no fixed dignity) — colors vehicles and comforts through Scorpio's transformation.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Sag
+10283	Shadow planet (no fixed dignity) — colors vehicles and comforts through Sagittarius's expansion.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Cap
+10284	Shadow planet (no fixed dignity) — colors vehicles and comforts through Capricorn's discipline.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Aqu
+10285	Shadow planet (no fixed dignity) — colors vehicles and comforts through Aquarius's innovation.
+# divisional_D16_planet_in_sign:D16-PS-Ra-Pis
+10286	Shadow planet (no fixed dignity) — colors vehicles and comforts through Pisces's compassion.
+# divisional_D20_planet_in_sign:D20-PS-Su-Ari
+10287	Exalted — colors spiritual life through Aries's initiation.
+# divisional_D20_planet_in_sign:D20-PS-Su-Tau
+10288	Neutral dignity — colors spiritual life through Taurus's stability.
+# divisional_D20_planet_in_sign:D20-PS-Su-Gem
+10289	Neutral dignity — colors spiritual life through Gemini's communication.
+# divisional_D20_planet_in_sign:D20-PS-Su-Can
+10290	Neutral dignity — colors spiritual life through Cancer's nurturing.
+# divisional_D20_planet_in_sign:D20-PS-Su-Leo
+10291	Own sign — colors spiritual life through Leo's self-expression.
+# divisional_D20_planet_in_sign:D20-PS-Su-Vir
+10292	Neutral dignity — colors spiritual life through Virgo's service.
+# divisional_D20_planet_in_sign:D20-PS-Su-Lib
+10293	Debilitated — colors spiritual life through Libra's partnership.
+# divisional_D20_planet_in_sign:D20-PS-Su-Sco
+10294	Neutral dignity — colors spiritual life through Scorpio's transformation.
+# divisional_D20_planet_in_sign:D20-PS-Su-Sag
+10295	Neutral dignity — colors spiritual life through Sagittarius's expansion.
+# divisional_D20_planet_in_sign:D20-PS-Su-Cap
+10296	Neutral dignity — colors spiritual life through Capricorn's discipline.
+# divisional_D20_planet_in_sign:D20-PS-Su-Aqu
+10297	Neutral dignity — colors spiritual life through Aquarius's innovation.
+# divisional_D20_planet_in_sign:D20-PS-Su-Pis
+10298	Neutral dignity — colors spiritual life through Pisces's compassion.
+# divisional_D20_planet_in_sign:D20-PS-Mo-Ari
+10299	Neutral dignity — colors spiritual life through Aries's initiation.
+# divisional_D20_planet_in_sign:D20-PS-Mo-Tau
+10300	Exalted — colors spiritual life through Taurus's stability.
+# divisional_D20_planet_in_sign:D20-PS-Mo-Can
+10301	Own sign — colors spiritual life through Cancer's nurturing.
+# divisional_D20_planet_in_sign:D20-PS-Mo-Leo
+10302	Neutral dignity — colors spiritual life through Leo's self-expression.
+# divisional_D20_planet_in_sign:D20-PS-Mo-Lib
+10303	Neutral dignity — colors spiritual life through Libra's partnership.
+# divisional_D20_planet_in_sign:D20-PS-Mo-Sco
+10304	Debilitated — colors spiritual life through Scorpio's transformation.
+# divisional_D20_planet_in_sign:D20-PS-Ma-Ari
+10305	Own sign — colors spiritual life through Aries's initiation.
+# divisional_D20_planet_in_sign:D20-PS-Ma-Can
+10306	Debilitated — colors spiritual life through Cancer's nurturing.
+# divisional_D20_planet_in_sign:D20-PS-Ma-Sco
+10307	Own sign — colors spiritual life through Scorpio's transformation.
+# divisional_D20_planet_in_sign:D20-PS-Ma-Cap
+10308	Exalted — colors spiritual life through Capricorn's discipline.

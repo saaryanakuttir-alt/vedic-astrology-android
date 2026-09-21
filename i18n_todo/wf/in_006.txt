@@ -1,0 +1,152 @@
+# engine/relationship_themes.py:182
+2437	{0} (7th lord) has no natural malefic conjunction.   ## {0}=seventh_lord
+# engine/relationship_themes.py:181
+2438	{0} (7th lord) is conjunct {1}.   ## {0}=seventh_lord, {1}=', '.join(malefics_conjunct_7th_lord)
+# engine/relationship_themes.py:216
+2439	{0} planet{1} in the 7th house ({2}).   ## {0}=len(seventh_house_occupants), {1}='s' if len(seventh_house_occupants) != 1, {2}=', '.join(seventh_house_occupants)
+# engine/relationship_themes.py:176
+2440	{0} (7th lord) is placed in house {1}.   ## {0}=seventh_lord, {1}=seventh_lord_house
+# engine/relationship_themes.py:98
+2441	Venus sits in {0}, a dual sign - another classical multiplicity marker.   ## {0}=venus_sign
+# engine/relationship_themes.py:92
+2442	{0} (7th lord) shares a house with {1} - a classical marker of an unconventional or non-linear relationship path.   ## {0}=seventh_lord, {1}=axis_planet
+# engine/relationship_themes.py:83
+2443	{0} planets share the 7th house ({1}) - classically read as more activity or complexity around partnership.   ## {0}=len(seventh_house_occupants), {1}=', '.join(seventh_house_occupants)
+# engine/relationship_themes.py:77
+2444	{0} (7th lord) sits in {1}, a dual sign - classically associated with more than one significant relationship theme.   ## {0}=seventh_lord, {1}=seventh_lord_sign
+# engine/relationship_themes.py:36
+2445	These are classical correlations with relationship TENDENCIES in the native's OWN chart - restlessness, difficulty with exclusivity, turbulence in partnership - not a prediction of behavior, not a character judgment, and not evidence about any specific event. A chart belongs to one person: it cannot show what a partner did or will do, and should never be used as evidence against someone else. Classical texts themselves treat these as tendencies to be conscious of, not a fate to submit to - free will matters more than any single placement. No combined verdict is given below, deliberately: read each indicator on its own, the same way this project's Mangal Dosha check works.
+# engine/relationship_themes.py:102
+2446	real complexity here - more than one significant relationship across life is a plausible reading
+# engine/relationship_themes.py:112
+2447	This is a TENDENCY, not a count - no classical method fixes an exact number of marriages or relationships from a natal chart alone. It also says nothing about a partner's behavior or fidelity - only about complexity/multiplicity themes in the native's own chart.
+# engine/relationship_themes.py:104
+2448	some complexity, but nothing overwhelming - a mix of steadiness and change is more likely than either extreme
+# engine/relationship_themes.py:106
+2449	a single, steady partnership rather than multiplicity
+# engine/relationship_themes.py:217
+2450	No planets in the 7th house.
+# engine/relationship_themes.py:222
+2451	 in this chart.
+# engine/relationship_themes.py:199
+2452	Venus and Mars aspect each other.
+# engine/relationship_themes.py:200
+2453	Venus and Mars do not aspect each other.
+# engine/relationship_themes.py:206
+2454	Rahu is conjunct Venus.
+2455	Rahu is not conjunct Venus.
+# engine/relationship_themes.py:210
+2456	Rahu occupies the 7th house.
+# engine/relationship_themes.py:195
+2457	 are conjunct.
+2458	 are not conjunct.
+# engine/relationship_themes.py:222
+2459	, and combust
+# engine/life_timeline.py:185
+2460	{0} and {1} between them rule house   ## {0}=antar_lord, {1}=maha_lord
+# engine/life_timeline.py:188
+2461	 - so this year leans toward themes of {0}, overall {1}.   ## {0}=', and '.join(house_themes), {1}=leaning
+# engine/life_timeline.py:180
+2462	Age {0} (around {1}) runs under your {2} Mahadasha / {3} Antardasha   ## {0}=age, {1}=birthday.year, {2}=maha_lord, {3}=antar_lord
+# engine/life_timeline.py:195
+2463	Muntha (the progressed Ascendant) falls in {0} this year, adding a secondary emphasis on {1}.   ## {0}=muntha_sign, {1}=muntha_theme
+# engine/life_timeline.py:39
+2464	This year-by-year outlook is built from two classical, well-established techniques: which Vimshottari Dasha period (Mahadasha/Antardasha) governs each age, and Muntha (the natal Ascendant progressed one sign per year of age). It is NOT a true Varshphal (solar-return) chart - a more elaborate classical system this app does not yet compute. Read every year's note as a general TENDENCY for that stretch of life, not a guarantee that a specific event happens in that specific year - classical timing techniques indicate THEMES and windows of likelihood, not a fixed calendar of events.
+# engine/life_timeline.py:84
+2465	the self, health, and how you come across
+# engine/life_timeline.py:85
+2466	money, family, and speech
+# engine/life_timeline.py:86
+2467	effort, courage, and siblings
+# engine/life_timeline.py:87
+2468	home, comfort, and inner peace
+# engine/life_timeline.py:88
+2469	creativity, romance, and learning
+# engine/life_timeline.py:89
+2470	work, routine, and obstacles to push through
+# engine/life_timeline.py:90
+2471	partnerships and one-to-one dealings
+# engine/life_timeline.py:91
+2472	change, shared resources, and the unexpected
+# engine/life_timeline.py:92
+2473	fortune, learning, and long journeys
+# engine/life_timeline.py:93
+2474	career and public standing
+# engine/life_timeline.py:94
+2475	income, goals, and your wider circle
+# engine/life_timeline.py:95
+2476	rest, release, and things winding down
+# engine/life_timeline.py:164
+2477	a classically supportive, easier-going stretch overall
+# engine/life_timeline.py:166
+2478	a classically more effortful stretch - progress is still possible, just with more friction
+# engine/life_timeline.py:168
+2479	a mixed stretch - real support in some areas, real friction in others
+# engine/life_timeline.py:170
+2480	a fairly neutral, workable stretch
+# engine/upaya.py:176
+2481	{0} not included in the pairwise check - Rahu/Ketu aren't covered by the natural-friendship table this check uses (see maitri.py).   ## {0}=', '.join(unknown)
+# engine/upaya.py:131
+2482	{0} and {1} are naturally neutral toward each other - neither friends nor enemies.   ## {0}=a, {1}=b
+# engine/upaya.py:129
+2483	{0} and {1} regard each other as natural enemies.   ## {0}=a, {1}=b
+# engine/upaya.py:127
+2484	{0} and {1} are mutual natural friends.   ## {0}=a, {1}=b
+# engine/upaya.py:136
+2485	{0} regards {1} as a natural {2}, but {3} regards {4} as a natural {5}.   ## {0}=a, {1}=b, {2}=a_view, {3}=b, {4}=a, {5}=b_view
+# engine/upaya.py:31
+2486	Gemstone and mantra recommendations here are traditional guidance, not a medical, financial, or psychological prescription, and not a guarantee of any outcome. Full classical gemstone selection also weighs a planet's FUNCTIONAL status for this specific ascendant (which houses it rules here, not just its natural tendencies) and current dasha timing - real factors this module does not fully resolve on its own. Treat this as a starting point for a conversation with a qualified astrologer and, for anything worn on the body, a jeweler you trust - not a final answer.
+# engine/upaya.py:186
+2487	Blue Sapphire (Saturn) with Ruby (Sun), Pearl (Moon), or Red Coral (Mars) is one of the most consistently warned-against combinations across classical sources - Saturn regards all three as natural enemies.
+# engine/upaya.py:193
+2488	Diamond (Venus) with Ruby (Sun) or Pearl (Moon) is another widely cited caution - Venus regards both as natural enemies.
+# engine/upaya.py:240
+2489	debilitated by sign
+# engine/upaya.py:243
+2490	combust (too close to the Sun)
+# engine/upaya.py:246
+2491	Great Enemy relationship with its own sign's lord
+# engine/chara_karaka.py:76
+2492	compute_chara_karakas needs all 7 classical planets; missing: {0}   ## {0}=sorted(missing)
+# engine/chara_karaka.py:105
+2493	No karaka with abbr '{0}'   ## {0}=abbr
+# engine/chara_karaka.py:2
+2494	\nchara_karaka.py — the classical Jaimini "Chara Karaka" (movable significator)\nscheme: ranking the 7 physical grahas (Sun through Saturn — Rahu/Ketu\nexcluded, see below) by their exact degree WITHIN their own sign, highest\nto lowest. The planet at each rank becomes the significator ("karaka") for\na specific life domain, regardless of which planet it actually is:\n\n    Rank  Karaka name         Sanskrit      Domain\n    1     Atmakaraka   (AK)   Atma-karaka   The soul itself — its core drive,\n                                             temperament, and evolutionary focus\n    2     Amatyakaraka (AmK)  Amatya-karaka Career, vocation, counsel\n    3     Bhratrukaraka(BK)   Bhratru-karaka Siblings, courage, effort\n    4     Matrikaraka  (MK)   Matru-karaka  Mother, home, emotional foundation\n    5     Putrakaraka  (PK)   Putra-karaka  Intelligence, creativity\n    6     Gnatikaraka  (GK)   Gnati-karaka  Obstacles, extended relatives, disputes\n    7     Darakaraka   (DK)   Dara-karaka   Spouse/life partner, partnerships\n\nThis is a well-established, widely-taught Jaimini technique — the ranking\nRULE itself (sort by degree-in-sign, descending) is not seriously disputed.\nTwo scoping choices are worth being explicit about:\n\n  - **7 karakas (this module) vs. 8 karakas.** Some traditions add Rahu as\n    an 8th contender (ranked by its degree measured RETROGRADE, since Rahu\n    always moves backward), which shifts every rank below Atmakaraka down\n    by one and drops Gnatikaraka. Both the 7- and 8-karaka schemes are in\n    active use; this module implements the 7-karaka version (Sun..Saturn\n    only) as it's the simpler and more commonly taught starting point, and\n    does not include Rahu here.\n  - **Tie-breaking.** Classical texts describe tie-break rules (by\n    nakshatra, then navamsa) for when two planets land on the exact same\n    degree. With real ephemeris data (continuous floating-point degrees)\n    an exact tie is astronomically negligible, so this module does not\n    implement those tie-break rules — if a tie somehow occurs it falls back\n    to a fixed planet-priority order, which is flagged in the result via\n    `tie_broken`.\n\nAtmakaraka in particular is the classical basis for "what is this soul\nhere to do" style analysis: whichever planet is Atmakaraka, its sign/house/\nnakshatra placement is read as the soul's dominant quality and direction —\nthis module supplies the ranking; rule_engine.py supplies the interpretive\ntext (reusing the same verified planet_in_sign/planet_in_house KB entries\nused everywhere else in this project, not a new invented layer).\n
+# engine/chara_karaka.py:47
+2495	The soul's core drive, temperament, and evolutionary focus
+# engine/chara_karaka.py:48
+2496	Career, vocation, and counsel
+# engine/chara_karaka.py:49
+2497	Siblings, courage, and effort
+# engine/chara_karaka.py:50
+2498	Mother, home, and emotional foundation
+# engine/chara_karaka.py:51
+2499	Intelligence, creativity, and self-expression
+# engine/chara_karaka.py:52
+2500	Obstacles, extended relatives, and disputes
+# engine/chara_karaka.py:53
+2501	Spouse, life partner, and close partnerships
+# engine/graha_yuddha.py:58
+2502	 By the greater-latitude rule, {0} wins and {1} is considered defeated.   ## {0}=winner, {1}=loser
+# engine/graha_yuddha.py:57
+2503	{0} and {1} are in Graha Yuddha ({2:.2f}° apart).   ## {0}=a, {1}=b, {2}=sep
+# engine/graha_yuddha.py:59
+2504	 Latitudes are effectively tied - no clear winner by this rule.
+# engine/maitri.py:56
+2505	{0}'s natural-friendship row doesn't cover the other 6 grahas exactly once   ## {0}=_p
+# engine/maitri.py:61
+2506	Adhi Mitra
+# engine/maitri.py:66
+2507	Adhi Shatru
+# engine/combustion.py:34
+2508	Classical sources broadly agree on Moon (12deg), Jupiter (11deg) and Saturn (15deg); Mars, Mercury, and Venus orbs are cited with more variation across texts (Mars is sometimes given as 17deg for both direct and retrograde rather than a single fixed value; some sources give Mercury 14deg/12deg and Venus 10deg/8deg the other way around from the direct/retrograde split used here). This project uses the most commonly-cited figures rather than asserting one text as definitive - the same approach already taken for other genuinely disputed classical points (see avkahada.py's Paya note).
+# engine/manglik.py:30
+2509	This checks raw house placement only. Classical cancellation conditions (Mangal Dosha Nivarana) — e.g. Mars in its own sign (Aries/Scorpio) or exaltation (Capricorn), or a benefic aspect on Mars — are NOT evaluated here and can nullify a dosha shown as present below.
+# engine/avkahada.py:31
+2510	Vashya is computed from the Moon's whole sign only. Fuller classical treatments split Sagittarius and Capricorn at their midpoint into a different Vashya category for each half (front-Sagittarius is Manava, back-Sagittarius is Chatushpada; front-Capricorn is Chatushpada, back-Capricorn is Jalachara) — not implemented here, so those two signs use their more commonly-cited whole-sign default instead.
+# engine/avkahada.py:39
+2511	Paya (the lucky metal — Gold/Silver/Copper/Iron — associated with the Moon's nakshatra pada) is not computed: sources disagree on whether it keys off the nakshatra's ruling planet or its rashi lord, and the two give different answers for a meaningful minority of padas.
+# engine/faq_data.py:157
+2512	Questions I Get Asked
+# engine/faq_data.py:24
+2513	What do I actually need to enter for an accurate chart?

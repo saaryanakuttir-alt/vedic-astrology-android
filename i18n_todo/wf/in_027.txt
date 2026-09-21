@@ -1,0 +1,216 @@
+# nakshatra:NK-SWA
+11505	Vayu (god of wind)
+11506	A young shoot bending in the wind, or coral
+11507	Vayu's domain is movement without a fixed path, and Swati carries that: independence, adaptability, and a preference for self-direction over instruction.
+11508	Flexible rather than rigid — like the young shoot in the symbol, it bends with pressure instead of breaking, and keeps moving on its own terms.
+# nakshatra:NK-VIS
+11509	Indra and Agni (jointly)
+11510	A triumphal archway, or a potter's wheel
+11511	The name means 'forked branch,' and the dual rulership (Indra's ambition, Agni's drive) fits a nakshatra defined by determined, sometimes single-minded pursuit of a goal — with a real choice-point along the way about which branch to commit to.
+11512	Driven, competitive, and effective once the fork is resolved.
+# nakshatra:NK-ANU
+11513	Mitra (god of friendship and alliance)
+11514	A lotus flower, or a triumphal archway
+11515	Mitra rules alliance itself, and Anuradha reflects it: success that comes through cooperation, loyalty, and disciplined devotion to a shared goal or person rather than solo ambition.
+11516	Warm and relationship-oriented, with real staying power once committed.
+# nakshatra:NK-JYE
+11517	Indra (king of the gods)
+11518	A circular amulet, an umbrella, or an earring
+11519	The name means 'the eldest/most senior,' and under Indra's kingly rulership this nakshatra carries real authority — along with the isolation and responsibility that often comes with being the one others lean on.
+11520	Protective, capable of command, but prone to feeling the weight of that position.
+# nakshatra:NK-MUL
+11521	Nirriti (goddess of destruction and dissolution)
+11522	A bunch of roots, or a lion's tail
+11523	Mula literally means 'root,' and Nirriti's rulership makes this a nakshatra of getting to the bottom of things — sometimes by tearing down what's built on a false foundation first.
+11524	Investigative, unafraid of destruction when it's in service of finding what's actually true underneath.
+# nakshatra:NK-PAS
+11525	Apas (goddess of the cosmic waters)
+11526	An elephant's tusk, or a fan/winnowing basket
+11527	The name means 'the early/invincible one,' and Apas's water rulership gives it a purifying, unstoppable-early-momentum quality — conviction that clears obstacles the way water wears down stone.
+11528	Strong-willed, persuasive, and quick to gain ground once committed to a direction.
+# nakshatra:NK-UAS
+11529	The Vishvadevas (the universal/all-gods)
+11530	An elephant's tusk, or the back legs of a small bed
+11531	Where Purva Ashadha is early and forceful, Uttara Ashadha is the victory that lasts — earned slowly, through integrity, and recognized broadly (the universal-gods rulership) rather than won by force alone.
+11532	Principled, patient, and durable in what it achieves.
+# nakshatra:NK-SHR
+11533	Vishnu
+11534	An ear, or three footprints
+11535	The name means 'hearing,' and the ear symbol is direct: this is a nakshatra of learning by listening — to teachers, to tradition, to what others have to say — and of connecting people through communication.
+11536	Under Vishnu's preserving rulership, it favors continuity: passing knowledge on rather than inventing from scratch.
+# nakshatra:NK-DHA
+11537	The eight Vasus (gods of the elements and material wealth)
+11538	A drum, or a flute
+11539	The Vasus rule material abundance, and Dhanishta channels it through rhythm and shared celebration — music, group recognition, and a prosperity that's often public rather than private.
+11540	Adaptable and socially attuned, with a real talent for timing.
+# nakshatra:NK-SHT
+11541	Varuna (god of the cosmic waters and cosmic law)
+11542	An empty circle, or a hundred stars/flowers
+11543	The name means 'a hundred physicians,' and Varuna's rulership over the unseen deep gives this nakshatra a secretive, investigative healing quality — comfortable working alone, drawn to what's hidden or not yet understood, and skeptical of anything too easily explained.
+# nakshatra:NK-PBH
+11544	Aja Ekapada (the one-footed goat/serpent, a fierce form of Rudra)
+11545	A funeral cot's front legs, or a two-edged sword
+11546	A fierce, intense nakshatra under a fierce, intense deity — spiritual or psychological transformation that comes through burning away what's false rather than gentle unlearning.
+11547	Passionate, penetrating, sometimes uncomfortable to be near, but genuinely purifying in effect.
+# nakshatra:NK-UBH
+11548	Ahir Budhnya (the serpent of the deep)
+11549	A funeral cot's back legs, or twin serpents
+11550	Where Purva Bhadrapada burns, Uttara Bhadrapada settles — deep, restrained, and still, like the serpent coiled at the bottom of the cosmic ocean.
+11551	Wisdom that comes from patience and depth rather than intensity; quiet endurance more than dramatic transformation.
+# nakshatra:NK-REV
+11552	Pushan (nourisher and protector of travelers and livestock)
+11553	A fish, or a drum
+11554	The zodiac's final nakshatra, and it plays the part: safe arrival, gentle completion, and a nourishing, protective quality especially toward those still in transit — literally Pushan's own domain.
+11555	A soft landing after everything Ashwini through Uttara Bhadrapada has moved through.
+# nakshatra_pada:NKP-ASW-1
+11556	Ashwini's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-ASW-2
+11557	Ashwini's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-ASW-3
+11558	Ashwini's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-ASW-4
+11559	Ashwini's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-BHA-1
+11560	Bharani's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-BHA-2
+11561	Bharani's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-BHA-3
+11562	Bharani's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-BHA-4
+11563	Bharani's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-KRI-1
+11564	Krittika's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-KRI-2
+11565	Krittika's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-KRI-3
+11566	Krittika's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-KRI-4
+11567	Krittika's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-ROH-1
+11568	Rohini's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-ROH-2
+11569	Rohini's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-ROH-3
+11570	Rohini's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-ROH-4
+11571	Rohini's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-MRG-1
+11572	Mrigashira's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-MRG-2
+11573	Mrigashira's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-MRG-3
+11574	Mrigashira's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-MRG-4
+11575	Mrigashira's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-ARD-1
+11576	Ardra's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-ARD-2
+11577	Ardra's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-ARD-3
+11578	Ardra's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-ARD-4
+11579	Ardra's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-PNV-1
+11580	Punarvasu's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-PNV-2
+11581	Punarvasu's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-PNV-3
+11582	Punarvasu's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-PNV-4
+11583	Punarvasu's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-PSY-1
+11584	Pushya's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-PSY-2
+11585	Pushya's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-PSY-3
+11586	Pushya's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-PSY-4
+11587	Pushya's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-ASL-1
+11588	Ashlesha's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-ASL-2
+11589	Ashlesha's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-ASL-3
+11590	Ashlesha's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-ASL-4
+11591	Ashlesha's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-MAG-1
+11592	Magha's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-MAG-2
+11593	Magha's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-MAG-3
+11594	Magha's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-MAG-4
+11595	Magha's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-PPH-1
+11596	Purva Phalguni's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-PPH-2
+11597	Purva Phalguni's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-PPH-3
+11598	Purva Phalguni's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-PPH-4
+11599	Purva Phalguni's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-UPH-1
+11600	Uttara Phalguni's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-UPH-2
+11601	Uttara Phalguni's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-UPH-3
+11602	Uttara Phalguni's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-UPH-4
+11603	Uttara Phalguni's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-HAS-1
+11604	Hasta's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-HAS-2
+11605	Hasta's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-HAS-3
+11606	Hasta's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-HAS-4
+11607	Hasta's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-CHI-1
+11608	Chitra's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-CHI-2
+11609	Chitra's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-CHI-3
+11610	Chitra's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-CHI-4
+11611	Chitra's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-SWA-1
+11612	Swati's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-SWA-2
+11613	Swati's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-SWA-3
+11614	Swati's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-SWA-4
+11615	Swati's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-VIS-1
+11616	Vishakha's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-VIS-2
+11617	Vishakha's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-VIS-3
+11618	Vishakha's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-VIS-4
+11619	Vishakha's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-ANU-1
+11620	Anuradha's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-ANU-2
+11621	Anuradha's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-ANU-3
+11622	Anuradha's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-ANU-4
+11623	Anuradha's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-JYE-1
+11624	Jyeshtha's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-JYE-2
+11625	Jyeshtha's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-JYE-3
+11626	Jyeshtha's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-JYE-4
+11627	Jyeshtha's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-MUL-1
+11628	Mula's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-MUL-2
+11629	Mula's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-MUL-3
+11630	Mula's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-MUL-4
+11631	Mula's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).

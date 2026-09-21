@@ -22,6 +22,7 @@ only) already handles this. No cancellation conditions are checked; that
 is called out explicitly in the returned dict.
 """
 from houses import get_house_of_sign
+from i18n import tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 DOSHA_HOUSES = {1, 2, 4, 7, 8, 12}
 
@@ -50,7 +51,7 @@ def compute_manglik_dosha(mars_sign, ascendant_sign, moon_sign, venus_sign=None)
         "from_moon": {"house": from_moon, "dosha_present": from_moon in DOSHA_HOUSES},
         "from_venus": None,
         "cancellation_conditions_checked": False,
-        "note": CANCELLATION_NOTE,
+        "note": tx(CANCELLATION_NOTE),
     }
     if venus_sign is not None:
         from_venus = _mars_house_from(mars_sign, venus_sign)

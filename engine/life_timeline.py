@@ -33,6 +33,7 @@ import datetime as _dt
 
 from dasha import find_running_dasha
 from panchanga import SIGNS
+from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 CAVEAT = (
     "This year-by-year outlook is built from two classical, well-established techniques: which "
@@ -79,7 +80,7 @@ def _houses_ruled_by(planet, sign_of_house):
 # rule_engine.py's _PLAIN_HOUSE) - duplicated here in short form rather
 # than importing rule_engine (which imports the KB loader and a great deal
 # else this module has no use for) for one small dict.
-_MUNTHA_HOUSE_THEME = {
+_MUNTHA_HOUSE_THEME = tbl({
     1: "the self, health, and how you come across",
     2: "money, family, and speech",
     3: "effort, courage, and siblings",
@@ -92,7 +93,7 @@ _MUNTHA_HOUSE_THEME = {
     10: "career and public standing",
     11: "income, goals, and your wider circle",
     12: "rest, release, and things winding down",
-}
+})
 
 
 def age_for_date(chart, target_dt):
@@ -160,13 +161,13 @@ def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
         strong_hit = [h for h in houses_activated if h in _STRONG_HOUSES]
         weak_hit = [h for h in houses_activated if h in _WEAK_HOUSES]
         if strong_hit and not weak_hit:
-            leaning = "a classically supportive, easier-going stretch overall"
+            leaning = tx("a classically supportive, easier-going stretch overall")
         elif weak_hit and not strong_hit:
-            leaning = "a classically more effortful stretch - progress is still possible, just with more friction"
+            leaning = tx("a classically more effortful stretch - progress is still possible, just with more friction")
         elif strong_hit and weak_hit:
-            leaning = "a mixed stretch - real support in some areas, real friction in others"
+            leaning = tx("a mixed stretch - real support in some areas, real friction in others")
         else:
-            leaning = "a fairly neutral, workable stretch"
+            leaning = tx("a fairly neutral, workable stretch")
 
         muntha_sign = SIGNS[(natal_asc_index + (age % 12)) % 12]
         muntha_theme = _MUNTHA_HOUSE_THEME.get((age % 12) + 1, "")
@@ -176,24 +177,22 @@ def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
         antar_detail = (antar_reading.get("effects") if antar_reading else None) or ""
 
         note_bits = [
-            f"Age {age} (around {birthday.year}) runs under your {maha_lord} Mahadasha / "
-            f"{antar_lord} Antardasha"
-            + (f" / {pratyantar_lord} Pratyantardasha" if pratyantar_lord else "") + "."
+            tr('Age {0} (around {1}) runs under your {2} Mahadasha / {3} Antardasha', age, birthday.year, maha_lord, antar_lord)
+            + (tr(' / {0} Pratyantardasha', pratyantar_lord) if pratyantar_lord else "") + "."
         ]
         if house_themes:
             note_bits.append(
-                f"{antar_lord} and {maha_lord} between them rule house"
+                tr('{0} and {1} between them rule house', antar_lord, maha_lord)
                 + ("s " if len(houses_activated) != 1 else " ")
                 + ", ".join(str(h) for h in houses_activated)
-                + f" - so this year leans toward themes of {', and '.join(house_themes)}, overall {leaning}."
+                + tr(' - so this year leans toward themes of {0}, overall {1}.', ', and '.join(house_themes), leaning)
             )
         if antar_detail:
             note_bits.append(antar_detail)
         elif antar_gist:
             note_bits.append(antar_gist)
         note_bits.append(
-            f"Muntha (the progressed Ascendant) falls in {muntha_sign} this year, adding a secondary "
-            f"emphasis on {muntha_theme}."
+            tr('Muntha (the progressed Ascendant) falls in {0} this year, adding a secondary emphasis on {1}.', muntha_sign, muntha_theme)
         )
 
         years.append({
@@ -209,4 +208,4 @@ def compute_life_timeline(chart, dasha_readings, start_age=0, end_age=100):
             "note": " ".join(note_bits),
         })
 
-    return {"years": years, "caveat": CAVEAT}
+    return {"years": years, "caveat": tx(CAVEAT)}

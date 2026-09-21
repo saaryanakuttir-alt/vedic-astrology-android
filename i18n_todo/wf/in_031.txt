@@ -1,0 +1,109 @@
+# planet_in_house:PH-Ju-H6
+11907	A mixed placement where Jupiter's generosity meets the competitive demands of the 6th house.
+11908	The native tends to show fairness and generosity even toward rivals or competitors, and success in service-oriented or advisory roles is common.
+11909	However, this dusthana/upachaya house can dilute some of Jupiter's protective benefits, occasionally leading to weight, liver, or metabolic sensitivity, or a tendency toward overgenerosity that strains finances.
+11910	Ethical conduct in competitive situations still tends to bring eventual victory over obstacles.
+# planet_in_house:PH-Ju-H7
+11911	Favors a fortunate, ethically grounded marriage and dharmic business partnerships.
+11912	The native often attracts a wise, educated, or spiritually inclined spouse, and marriage tends to bring genuine happiness, guidance, and mutual growth.
+11913	Business partnerships benefit from the native's fair, principled approach, building trust and long-term success.
+11914	Public reputation in relationships and joint ventures is generally favorable under this placement.
+# planet_in_house:PH-Ju-H8
+11915	Wisdom gained through adversity becomes a defining life theme.
+# planet_in_house:PH-Ju-H9
+11916	One of the most auspicious placements in the entire chart — strong fortune, dharma, and wisdom.
+11917	The native tends to be highly fortunate, principled, and naturally drawn to philosophy, law, teaching, or religious life, often with a distinguished or spiritually significant father or guru figure.
+11918	Higher education, publishing, and long-distance travel for learning or pilgrimage are strongly favored.
+11919	Ethical conduct and generosity bring lasting good fortune throughout life.
+# planet_in_house:PH-Ju-H10
+11920	Supports a respected, principled career, often in teaching, law, counseling, or advisory roles.
+11921	The native builds a professional reputation around wisdom, integrity, and fair dealing, thriving in education, law, religious or philosophical work, consulting, or public administration.
+11922	Career growth tends to be steady and well-regarded, with authority earned through ethical conduct rather than aggression.
+11923	Public status generally reflects the native's genuine character and knowledge.
+# planet_in_house:PH-Ju-H11
+11924	An excellent placement for gains, ethical wealth, and a broad, influential circle of friends.
+11925	The native tends to fulfill long-term goals and accumulate wealth through generous, principled means, often supported by a wide network of influential or like-minded friends.
+11926	Income through teaching, consulting, philanthropy, or advisory work is favored, and social connections bring both material and personal fulfillment.
+11927	This is considered one of Jupiter's strongest houses for material and social success.
+# planet_in_house:PH-Ju-H12
+11928	Channels Jupiter's expansiveness toward spirituality, foreign connections, and generous, moksha-oriented pursuits.
+11929	The native often shows a strong pull toward spiritual practice, foreign travel or residence, and philanthropic or religious giving, sometimes at the expense of material accumulation.
+11930	This placement is traditionally favorable for liberation-oriented growth, higher wisdom, and meaningful foreign education or charitable work.
+11931	Generosity should be balanced with practical financial planning to avoid excessive loss of resources.
+# planet_in_house:PH-Ve-H1
+11932	Gives an attractive, charming, diplomatically graceful personality with refined tastes.
+11933	The native has an appealing appearance or manner, along with a natural diplomatic charm that eases social interactions.
+11934	Life is oriented around relationships, comfort, and aesthetics, with a genuine appreciation for beauty, art, or fine living.
+11935	When Venus occupies its own or exalted sign here, this can produce Malavya Yoga, indicating exceptional charm, comfort, and refined success.
+11936	Effects strengthen when Venus is exalted (Pisces) or in its own signs (Taurus, Libra) and in its directional-strength (dig bala) house, the 4th.
+11937	Debilitation (Virgo) or affliction can turn the relationship-oriented themes below into indulgence, vanity, or relationship instability rather than genuine harmony.
+# planet_in_house:PH-Ve-H2
+11938	Favors wealth through beauty, luxury goods, or the arts, along with sweet, pleasant speech.
+11939	The native speaks in a gentle, agreeable manner and often builds wealth connected to aesthetics, fashion, cosmetics, hospitality, or the arts.
+11940	Family life emphasizes comfort, good food, and shared enjoyment, and material values center on quality and refinement rather than mere accumulation.
+11941	Close, affectionate family relationships are generally supported.
+# planet_in_house:PH-Ve-H3
+11942	Brings artistic, diplomatic communication, though effort-driven initiative may be gentler than assertive.
+11943	The native shows a creative, sociable communication style, often expressed through art, music, or aesthetically pleasing writing, and enjoys warm relationships with sisters or close friends.
+11944	Because Venus is not naturally suited to the effort-driven 3rd house, personal initiative may lean toward collaborative or diplomatic approaches rather than bold self-assertion.
+11945	Short journeys and everyday efforts are generally pleasant and socially enriching.
+# planet_in_house:PH-Ve-H4
+11946	Venus's directional-strength (dig bala) house — excellent for domestic comfort, harmony, and property.
+11947	This is one of Venus's strongest placements, granting a beautiful, comfortable, and emotionally harmonious home environment along with an affectionate bond with the mother.
+11948	Property, vehicles, and material comforts tend to come readily, and domestic life is generally a source of genuine happiness.
+11949	Aesthetic sensibility often shapes the native's approach to home and family life.
+# planet_in_house:PH-Ve-H5
+11950	The native is drawn to romance, the arts, and creative self-expression, often finding fulfillment through entertainment, design, music, or aesthetic pursuits.
+11951	Intelligence here often expresses through emotional and aesthetic sensitivity.
+# planet_in_house:PH-Ve-H6
+11952	Can bring relationship complications alongside opportunities in beauty, wellness, or service industries.
+11953	This dusthana/upachaya placement can create friction or complications in romantic matters, along with a need for attention to reproductive or kidney-related health.
+11954	Positively, the native often finds professional success in beauty, wellness, fashion, or hospitality service industries, applying aesthetic sensibility within a competitive or service-oriented context.
+11955	Disputes involving romantic or partnership matters may require patient, diplomatic resolution.
+# planet_in_house:PH-Ve-H7
+11956	Venus's own natural house of significance — excellent for marriage, love, and harmonious partnerships.
+11957	The native tends to attract an attractive, loving, and refined spouse or business partner, and this placement strongly favors marital happiness, diplomacy, and social charm in all partnerships.
+11958	Business ventures involving beauty, art, luxury, or public relations benefit particularly well.
+11959	This is considered one of Venus's most favorable placements for relationship fulfillment.
+# planet_in_house:PH-Ve-H8
+11960	Brings intense, transformative romantic experiences and an interest in hidden or mystical arts.
+11961	The native may experience deep, emotionally intense relationships, along with possible inheritance or gains connected to a spouse or in-laws.
+11962	There is often a fascination with mystical, occult, or unconventional aesthetic and romantic interests, and reproductive health deserves attentive care.
+11963	Relationships here tend to be transformative rather than superficial, often marking significant turning points in life.
+# planet_in_house:PH-Ve-H9
+11964	Brings fortune through relationships, the arts, and a refined, ethical approach to philosophy and travel.
+11965	The native often experiences good fortune connected to marriage, artistic pursuits, or travel for pleasure and higher learning, and approaches philosophy or religion with an appreciation for beauty and harmony.
+11966	Relationships with father figures or teachers tend to be warm and supportive, and foreign travel connected to comfort or aesthetic interests is favored.
+11967	Marriage prospects and general life fortune are generally blessed under this placement.
+# planet_in_house:PH-Ve-H10
+11968	Favors a public career in the arts, fashion, beauty, diplomacy, or hospitality industries.
+11969	The native builds a professional reputation around charm, aesthetic sensibility, and relationship-building skill, thriving in fields such as entertainment, fashion, design, public relations, or luxury goods.
+11970	Diplomacy and likability often open doors professionally, and public image tends to emphasize refinement and grace.
+11971	Career success is closely tied to the native's ability to create harmonious, appealing experiences for others.
+# planet_in_house:PH-Ve-H11
+11972	Supports gains through the arts, relationships, and a socially pleasant, well-connected circle.
+11973	The native often earns income through creative, aesthetic, or partnership-based ventures, and enjoys a wide social circle marked by warmth and mutual enjoyment.
+11974	Long-term desires connected to comfort, love, or luxury tend to be fulfilled favorably.
+11975	Friendships and networking frequently bring both material gains and genuine personal satisfaction.
+# planet_in_house:PH-Ve-H12
+11976	Favors comfort and romantic fulfillment in private, foreign, or secluded settings.
+11977	The native often finds pleasure and relationship fulfillment away from public view, sometimes through foreign travel, quiet retreats, or discreet romantic connections.
+11978	Expenditure tends to flow toward comfort, luxury, or relationship-related matters, and there can be an artistic or spiritual dimension to the native's private enjoyments.
+11979	This placement can also favor a peaceful, aesthetically rich life in a foreign or secluded setting.
+# planet_in_house:PH-Sa-H1
+11980	Gives a serious, disciplined, and enduring personality that achieves success through patience.
+11981	The native tends to be reserved, responsible, and hardworking, often appearing more mature than their age or facing early hardships that build lasting resilience.
+11982	Success and recognition typically come later in life but tend to be stable and enduring once achieved.
+11983	When Saturn is in its own or exalted sign here, this can produce Sasa Yoga, indicating disciplined authority and long-term achievement.
+11984	Effects strengthen when Saturn is exalted (Libra) or in its own signs (Capricorn, Aquarius) and in its directional-strength (dig bala) house, the 7th.
+11985	Debilitation (Aries) or affliction tends to turn the disciplined themes below into excessive delay, pessimism, or hardship rather than earned, lasting stability.
+# planet_in_house:PH-Sa-H2
+11986	Brings cautious, reserved speech and wealth that builds slowly but steadily over time.
+11987	The native may experience early financial struggles or family responsibility burdens, but disciplined saving and thrift generally lead to eventual stability.
+11988	Speech tends to be measured and careful rather than expressive, and family life may carry a sense of duty or restraint.
+11989	Long-term financial security is favored more than quick or easy gains.
+# planet_in_house:PH-Sa-H3
+11990	A favorable upachaya placement, giving disciplined courage and steady, hard-won self-effort.
+11991	Saturn performs well in this house, granting persistence, patience, and a structured approach to communication, skill-building, and short-term goals.
+11992	The relationship with siblings may be dutiful or somewhat distant rather than emotionally close, but reliable when needed.
+11993	Consistent, disciplined effort in this placement tends to produce durable, well-earned results.

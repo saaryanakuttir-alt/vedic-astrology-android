@@ -1,0 +1,60 @@
+# vimshottari_antardasha:AD-Ra-Ma
+12687	During the Rahu Mahadasha, the Mars Antardasha brings a sub-period of roughly 12.6 months in which the themes of energy, courage, property, siblings, and competition come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+12688	Mars is a natural enemy of Rahu (per classical Naisargika Maitri), so this sub-period can introduce friction, contradiction, or competing priorities between the two planets' themes; outcomes depend significantly on how well each planet is otherwise placed and supported elsewhere in the chart.
+# vimshottari_antardasha:AD-Ra-Me
+12689	Brings Mercury's themes (intellect, etc.) into focus within the Rahu Mahadasha (friend relationship).
+12690	During the Rahu Mahadasha, the Mercury Antardasha brings a sub-period of roughly 30.6 months in which the themes of intellect, communication, business, and education come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+12691	Mercury is a natural friend of Rahu (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ra-Ju
+12692	Brings Jupiter's themes (wisdom, etc.) into focus within the Rahu Mahadasha (neutral relationship).
+12693	During the Rahu Mahadasha, the Jupiter Antardasha brings a sub-period of roughly 28.8 months in which the themes of wisdom, expansion, wealth, and higher learning come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+12694	Jupiter is naturally neutral toward Rahu, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ra-Ve
+12695	Brings Venus's themes (relationships, etc.) into focus within the Rahu Mahadasha (friend relationship).
+12696	During the Rahu Mahadasha, the Venus Antardasha brings a sub-period of roughly 36.0 months in which the themes of relationships, comfort, beauty, finances, and the arts come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+12697	Venus is a natural friend of Rahu (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ra-Sa
+12698	Brings Saturn's themes (discipline, etc.) into focus within the Rahu Mahadasha (friend relationship).
+12699	During the Rahu Mahadasha, the Saturn Antardasha brings a sub-period of roughly 34.2 months in which the themes of discipline, hard work, delay, structure, and karmic responsibility come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+12700	Saturn is a natural friend of Rahu (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ra-Ra
+12701	Rahu's own sub-period within its own Rahu Mahadasha — a consolidating, high-point phase.
+12702	During the Rahu Mahadasha, the Rahu Antardasha brings a sub-period of roughly 32.4 months in which the themes of unconventional ambition, sudden change, material desire, and foreign connections come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+# vimshottari_antardasha:AD-Ra-Ke
+12703	Brings Ketu's themes (detachment, etc.) into focus within the Rahu Mahadasha (neutral relationship).
+12704	During the Rahu Mahadasha, the Ketu Antardasha brings a sub-period of roughly 12.6 months in which the themes of detachment, spirituality, introspection, and intuition come into active focus, expressed within the broader, ongoing context of unconventional ambition, sudden change, material desire, and foreign connections that characterizes the overall Rahu Mahadasha.
+12705	Ketu is naturally neutral toward Rahu, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ke-Su
+12706	Brings Sun's themes (authority, etc.) into focus within the Ketu Mahadasha (enemy relationship).
+12707	During the Ketu Mahadasha, the Sun Antardasha brings a sub-period of roughly 4.2 months in which the themes of authority, self-confidence, vitality, the father, and government or official matters come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12708	Sun is a natural enemy of Ketu (per classical Naisargika Maitri), so this sub-period can introduce friction, contradiction, or competing priorities between the two planets' themes; outcomes depend significantly on how well each planet is otherwise placed and supported elsewhere in the chart.
+# vimshottari_antardasha:AD-Ke-Mo
+12709	Brings Moon's themes (the mind, etc.) into focus within the Ketu Mahadasha (enemy relationship).
+12710	During the Ketu Mahadasha, the Moon Antardasha brings a sub-period of roughly 7.0 months in which the themes of the mind, emotions, the mother, public life, and adaptability come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12711	Moon is a natural enemy of Ketu (per classical Naisargika Maitri), so this sub-period can introduce friction, contradiction, or competing priorities between the two planets' themes; outcomes depend significantly on how well each planet is otherwise placed and supported elsewhere in the chart.
+# vimshottari_antardasha:AD-Ke-Ma
+12712	Brings Mars's themes (energy, etc.) into focus within the Ketu Mahadasha (enemy relationship).
+12713	During the Ketu Mahadasha, the Mars Antardasha brings a sub-period of roughly 4.9 months in which the themes of energy, courage, property, siblings, and competition come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12714	Mars is a natural enemy of Ketu (per classical Naisargika Maitri), so this sub-period can introduce friction, contradiction, or competing priorities between the two planets' themes; outcomes depend significantly on how well each planet is otherwise placed and supported elsewhere in the chart.
+# vimshottari_antardasha:AD-Ke-Me
+12715	Brings Mercury's themes (intellect, etc.) into focus within the Ketu Mahadasha (friend relationship).
+12716	During the Ketu Mahadasha, the Mercury Antardasha brings a sub-period of roughly 11.9 months in which the themes of intellect, communication, business, and education come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12717	Mercury is a natural friend of Ketu (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ke-Ju
+12718	Brings Jupiter's themes (wisdom, etc.) into focus within the Ketu Mahadasha (neutral relationship).
+12719	During the Ketu Mahadasha, the Jupiter Antardasha brings a sub-period of roughly 11.2 months in which the themes of wisdom, expansion, wealth, and higher learning come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12720	Jupiter is naturally neutral toward Ketu, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ke-Ve
+12721	Brings Venus's themes (relationships, etc.) into focus within the Ketu Mahadasha (friend relationship).
+12722	During the Ketu Mahadasha, the Venus Antardasha brings a sub-period of roughly 14.0 months in which the themes of relationships, comfort, beauty, finances, and the arts come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12723	Venus is a natural friend of Ketu (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ke-Sa
+12724	Brings Saturn's themes (discipline, etc.) into focus within the Ketu Mahadasha (friend relationship).
+12725	During the Ketu Mahadasha, the Saturn Antardasha brings a sub-period of roughly 13.3 months in which the themes of discipline, hard work, delay, structure, and karmic responsibility come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12726	Saturn is a natural friend of Ketu (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ke-Ra
+12727	Brings Rahu's themes (unconventional ambition, etc.) into focus within the Ketu Mahadasha (neutral relationship).
+12728	During the Ketu Mahadasha, the Rahu Antardasha brings a sub-period of roughly 12.6 months in which the themes of unconventional ambition, sudden change, material desire, and foreign connections come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+12729	Rahu is naturally neutral toward Ketu, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ke-Ke
+12730	Ketu's own sub-period within its own Ketu Mahadasha — a consolidating, high-point phase.

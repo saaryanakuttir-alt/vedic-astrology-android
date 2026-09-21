@@ -1,3 +1,4 @@
+from i18n import tbl, tr  # noqa: E402 - translation helpers (engine/i18n.py)
 """
 chara_karaka.py — the classical Jaimini "Chara Karaka" (movable significator)
 scheme: ranking the 7 physical grahas (Sun through Saturn — Rahu/Ketu
@@ -42,7 +43,7 @@ text (reusing the same verified planet_in_sign/planet_in_house KB entries
 used everywhere else in this project, not a new invented layer).
 """
 
-KARAKA_NAMES = [
+KARAKA_NAMES = tbl([
     ("Atmakaraka", "AK", "The soul's core drive, temperament, and evolutionary focus"),
     ("Amatyakaraka", "AmK", "Career, vocation, and counsel"),
     ("Bhratrukaraka", "BK", "Siblings, courage, and effort"),
@@ -50,7 +51,7 @@ KARAKA_NAMES = [
     ("Putrakaraka", "PK", "Intelligence, creativity, and self-expression"),
     ("Gnatikaraka", "GK", "Obstacles, extended relatives, and disputes"),
     ("Darakaraka", "DK", "Spouse, life partner, and close partnerships"),
-]
+])
 
 # Fixed planet-priority order used ONLY as a tie-break fallback (see
 # module docstring) — classical dignity/precedence ordering.
@@ -72,7 +73,7 @@ def compute_chara_karakas(planet_degrees):
     entries = [(planet_degrees[p], p) for p in _KARAKA_PLANETS if p in planet_degrees]
     if len(entries) != 7:
         missing = set(_KARAKA_PLANETS) - set(planet_degrees)
-        raise ValueError(f"compute_chara_karakas needs all 7 classical planets; missing: {sorted(missing)}")
+        raise ValueError(tr('compute_chara_karakas needs all 7 classical planets; missing: {0}', sorted(missing)))
 
     # Sort by degree descending; break exact ties by the fixed priority
     # order (see module docstring) rather than leaving Python's sort to
@@ -101,4 +102,4 @@ def get_karaka(chara_karakas, abbr):
     for entry in chara_karakas:
         if entry["abbr"] == abbr:
             return entry
-    raise KeyError(f"No karaka with abbr '{abbr}'")
+    raise KeyError(tr("No karaka with abbr '{0}'", abbr))

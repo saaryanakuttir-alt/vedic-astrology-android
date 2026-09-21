@@ -59,6 +59,7 @@ from avkahada import (
 )
 from astrology_tables import SIGN_LORD
 from panchanga import NAKSHATRAS, SIGNS
+from i18n import tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 # ---------------------------------------------------------------------------
 # Naisargika Maitri — classical NATURAL planetary friendship (asymmetric by
@@ -130,7 +131,7 @@ def _score_varna(person_a, person_b):
         higher, lower = varna_a, varna_b
     else:
         higher, lower = varna_a, varna_b
-        assumption = "Sex not given for both people — compared person_a's Varna against person_b's (classical rule is normally groom-vs-bride directional)."
+        assumption = tx("Sex not given for both people — compared person_a's Varna against person_b's (classical rule is normally groom-vs-bride directional).")
     points = KOOTA_MAX_POINTS["varna"] if VARNA_RANK[higher] >= VARNA_RANK[lower] else 0
     return {
         "koota": "Varna", "max_points": KOOTA_MAX_POINTS["varna"], "points": points,
@@ -145,8 +146,8 @@ def _score_vashya(person_a, person_b):
     return {
         "koota": "Vashya", "max_points": KOOTA_MAX_POINTS["vashya"], "points": points,
         "person_a_vashya": vashya_a, "person_b_vashya": vashya_b,
-        "note": "Same-category only (2 or 0) — the classical middle tier "
-                "('one is Vashya of the other', 1 point) is not implemented; see module docstring.",
+        "note": tx("Same-category only (2 or 0) — the classical middle tier "
+                "('one is Vashya of the other', 1 point) is not implemented; see module docstring."),
     }
 
 
@@ -176,7 +177,7 @@ def _score_yoni(person_a, person_b):
     elif frozenset({animal_a, animal_b}) in _YONI_ENEMY_PAIRS:
         points, relation = 0, "enemy"
     else:
-        points, relation = 2, "neutral (simplified — see module docstring)"
+        points, relation = 2, tx("neutral (simplified — see module docstring)")
     return {
         "koota": "Yoni", "max_points": KOOTA_MAX_POINTS["yoni"], "points": points,
         "person_a_yoni": animal_a, "person_b_yoni": animal_b, "relation": relation,
@@ -202,7 +203,7 @@ def _score_graha_maitri(person_a, person_b):
     else:  # {"enemy"}
         points = 0
     return {
-        "koota": "Graha Maitri", "max_points": KOOTA_MAX_POINTS["graha_maitri"], "points": points,
+        "koota": tx("Graha Maitri"), "max_points": KOOTA_MAX_POINTS["graha_maitri"], "points": points,
         "person_a_moon_lord": lord_a, "person_b_moon_lord": lord_b,
         "a_sees_b_as": rel_ab, "b_sees_a_as": rel_ba,
     }
@@ -254,10 +255,10 @@ def _score_nadi(person_a, person_b):
         "koota": "Nadi", "max_points": KOOTA_MAX_POINTS["nadi"], "points": points,
         "person_a_nadi": nadi_a, "person_b_nadi": nadi_b, "same_nadi": same,
         "note": (
-            "Nadi Dosha (0 points) shown as-is with no automatic cancellation applied. "
+            tx("Nadi Dosha (0 points) shown as-is with no automatic cancellation applied. "
             "Classical texts describe exception cases (e.g. identical nakshatra but "
             "different pada) inconsistently across sources — have an astrologer confirm "
-            "whether an exception applies rather than assuming either way."
+            "whether an exception applies rather than assuming either way.")
         ) if same else None,
     }
 
@@ -284,13 +285,13 @@ def compute_ashtakoot(person_a, person_b):
     total = sum(k["points"] for k in kootas)
 
     if total >= 33:
-        verdict = "Excellent match (traditional threshold: 33-36)"
+        verdict = tx("Excellent match (traditional threshold: 33-36)")
     elif total >= 25:
-        verdict = "Very good match (traditional threshold: 25-32)"
+        verdict = tx("Very good match (traditional threshold: 25-32)")
     elif total >= 18:
-        verdict = "Acceptable — commonly cited as the minimum workable score (18-24); consider other factors too"
+        verdict = tx("Acceptable — commonly cited as the minimum workable score (18-24); consider other factors too")
     else:
-        verdict = "Below the commonly-cited minimum (18) — traditionally considered a weak match on this method alone"
+        verdict = tx("Below the commonly-cited minimum (18) — traditionally considered a weak match on this method alone")
 
     nadi_dosha = any(k["koota"] == "Nadi" and k["points"] == 0 for k in kootas)
     bhakoot_dosha = any(k["koota"] == "Bhakoot" and k["points"] == 0 for k in kootas)

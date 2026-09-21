@@ -1,0 +1,88 @@
+# planet_in_sign:PS-Ke-Lib
+12448	Reduces attachment to conventional partnership and social harmony-seeking.
+12449	The native may feel a degree of ambivalence or detachment in close relationships, sometimes finding balance through inner reflection rather than through relational compromise.
+12450	This placement can indicate a need to develop fairness and equilibrium independently, rather than relying solely on partnership for a sense of completeness.
+# planet_in_sign:PS-Ke-Sco
+12451	Considered one of Ketu's most naturally comfortable placements — deep intuitive mastery of transformation.
+12452	The native often shows genuine detachment from material power struggles or possessiveness, paired with profound, sometimes uncanny insight into psychology, the occult, or life's hidden dimensions.
+12453	This placement frequently reflects significant past-life spiritual work around intensity and transformation, now expressed as natural depth rather than turmoil.
+# planet_in_sign:PS-Ke-Sag
+12454	Reduces attachment to conventional, doctrinal belief systems.
+12455	The native may feel restless with organized religion or fixed philosophy, trusting an innate, largely unspoken sense of truth over external doctrine.
+12456	This placement can reflect past-life mastery of wisdom, now expressed as quiet, intuitive understanding rather than active teaching or preaching.
+# planet_in_sign:PS-Ke-Cap
+12457	Reduces attachment to conventional ambition, status, and career achievement.
+12458	The native may feel genuinely indifferent to climbing social or professional hierarchies, exercising authority and responsibility effortlessly rather than through visible striving.
+12459	This placement can reflect past-life mastery of discipline, now expressed as natural, unforced capability.
+# planet_in_sign:PS-Ke-Aqu
+12460	Reduces attachment to group identity and collective social causes.
+12461	The native may feel detached from group belonging even while intellectually sympathetic to humanitarian or reformist ideals, preferring an independent, sometimes solitary path even among the unconventional.
+12462	This placement favors an intuitive, personally derived sense of vision rather than adherence to any collective ideology.
+# planet_in_sign:PS-Ke-Pis
+12463	Considered one of Ketu's most naturally resonant placements — deep spiritual intuition and compassion.
+12464	This mirrors Ketu's comfortable dignity in the 12th house of liberation, giving profound imagination, empathy, and a strong pull toward dissolving the ego in service of something greater.
+12465	The native often shows a natural, largely effortless spiritual sensitivity, with worldly ambition holding relatively little pull compared to inner or transcendent concerns.
+# relationship_themes:REL-7L-DUSTHANA
+12466	7th Lord in a Dusthana House
+12467	The lord of the 7th house (marriage/partnership) sitting in a dusthana (6th - conflict, 8th - upheaval/secrets, or 12th - loss/distance) is classically read as putting some strain on how easily partnership themes play out - not a specific behavior, just a harder road for the house's own significations to express smoothly.
+# relationship_themes:REL-7L-MALEFIC-CONJ
+12468	7th Lord Conjunct a Natural Malefic
+12469	When a natural malefic (Sun, Mars, Saturn, Rahu, or Ketu) shares a house with the 7th lord, classical texts read it as coloring partnership themes with that malefic's own nature - conflict (Mars), ego friction (Sun), distance or delay (Saturn), restlessness or unconventional pulls (Rahu), or detachment (Ketu).
+# relationship_themes:REL-7L-MALEFIC-ASPECT
+12470	7th Lord Aspected by a Natural Malefic
+12471	A natural malefic aspecting (rather than sitting with) the 7th lord has a similar but generally milder classical reading than a direct conjunction - added pressure on partnership themes from that planet's own nature.
+# relationship_themes:REL-VENUS-MARS-CONJ
+12472	Venus-Mars Conjunction
+12473	Venus (romantic attraction, pleasure) conjunct Mars (desire, drive) is one of the more commonly discussed combinations in this area of classical astrology - read as intensified romantic/physical attraction, which some traditions associate with passionate, easily-formed bonds and others with restlessness around exclusivity.
+12474	Context (which houses, which signs, other aspects) matters more than the conjunction alone.
+# relationship_themes:REL-VENUS-MARS-ASPECT
+12475	Venus-Mars Mutual Aspect
+12476	Venus and Mars aspecting each other without conjunction carries a related but generally softer version of the same themes as a direct Venus-Mars conjunction: intensified romantic/physical attraction, with the same range of classical readings.
+# relationship_themes:REL-RAHU-VENUS
+12477	Rahu Conjunct Venus
+12478	Rahu conjunct Venus is specifically and frequently cited in classical and popular sources discussing unconventional romantic patterns, amplified desire, or restlessness with convention in relationships - Rahu tends to exaggerate and destabilize whatever it touches, and Venus governs love and attraction.
+# relationship_themes:REL-RAHU-7TH
+12479	Rahu in the 7th House
+12480	Rahu in the 7th house is read as bringing its own restless, boundary-pushing, amplifying nature directly into the partnership house - sometimes associated with unconventional relationship patterns, a strong pull toward partnership itself, or difficulty with settled convention.
+# relationship_themes:REL-CROWDED-7TH
+12481	Crowded 7th House
+12482	A 7th house with several planets in it is classically read as an area of life carrying a lot of weight and complexity - partnership themes are prominent and eventful, for better or worse depending on which planets are present and their own dignity.
+# relationship_themes:REL-VENUS-AFFLICTED
+12483	Afflicted Venus
+12484	Venus debilitated or combust is read as the native's own relationship to romance, pleasure, and values being less settled or confident than usual - sometimes showing as difficulty knowing what one actually wants in a relationship, rather than pointing at any particular behavior.
+# retrograde:RX-Ma
+12485	A retrograde Mars often reads as drive and assertiveness turned inward rather than outward - action that's more deliberated, sometimes delayed or second-guessed, rather than the direct, immediate expression Mars usually shows.
+12486	Frustration can build when that inward-turned energy has no outlet, then release in a sudden burst.
+# retrograde:RX-Me
+12487	A retrograde Mercury (the most commonly discussed retrograde placement, since Mercury retrogrades several times a year) often shows as a more internal, reflective communication and thinking style - reviewing, revising, and reconsidering rather than communicating in a first draft.
+12488	Some classical readings note a tendency to relearn or circle back to earlier ideas.
+# retrograde:RX-Ju
+12489	A retrograde Jupiter can turn its usual outward optimism and growth-seeking inward - wisdom and philosophy pursued more introspectively than through external teachers or conventional paths.
+12490	Some texts read it as delaying Jupiter's beneficial results until later in life, or requiring the native to find their own path to them rather than being handed one.
+# retrograde:RX-Ve
+12491	A retrograde Venus often shows as a more internally-defined, sometimes unconventional relationship to love, beauty, and pleasure - values and tastes worked out independently rather than absorbed from convention.
+12492	Some classical readings associate it with revisiting past relationships or reconsidering what's actually valued, rather than accepting inherited preferences.
+# retrograde:RX-Sa
+12493	A retrograde Saturn is, in several classical traditions, read as actually STRENGTHENING Saturn's own significations (discipline, structure, karmic lessons) rather than weakening them - an intensified, more internally-driven relationship to responsibility and delayed reward.
+12494	This is one of the more debated retrograde effects across sources; some texts simply treat it as a variant expression rather than a strengthening.
+# vargottama:VGT-01
+12495	The same sign in both Rasi and Navamsa amplifies and stabilizes a planet's results, for better or worse.
+# vimshottari_antardasha:AD-Su-Su
+12496	Sun's own sub-period within its own Sun Mahadasha — a consolidating, high-point phase.
+12497	During the Sun Mahadasha, the Sun Antardasha brings a sub-period of roughly 3.6 months in which the themes of authority, self-confidence, vitality, the father, and government or official matters come into active focus, expressed within the broader, ongoing context of authority, self-confidence, vitality, the father, and government or official matters that characterizes the overall Sun Mahadasha.
+12498	This is the planet's own sub-period within its own main period (Swabhukti).
+12499	Classically, this tends to consolidate and intensify the Mahadasha's core themes rather than introducing a new direction, and often marks a notable turning point or high point within the period.
+# vimshottari_antardasha:AD-Su-Mo
+12500	Brings Moon's themes (the mind, etc.) into focus within the Sun Mahadasha (friend relationship).
+12501	During the Sun Mahadasha, the Moon Antardasha brings a sub-period of roughly 6.0 months in which the themes of the mind, emotions, the mother, public life, and adaptability come into active focus, expressed within the broader, ongoing context of authority, self-confidence, vitality, the father, and government or official matters that characterizes the overall Sun Mahadasha.
+12502	Moon is a natural friend of Sun (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Su-Ma
+12503	Brings Mars's themes (energy, etc.) into focus within the Sun Mahadasha (friend relationship).
+12504	During the Sun Mahadasha, the Mars Antardasha brings a sub-period of roughly 4.2 months in which the themes of energy, courage, property, siblings, and competition come into active focus, expressed within the broader, ongoing context of authority, self-confidence, vitality, the father, and government or official matters that characterizes the overall Sun Mahadasha.
+12505	Mars is a natural friend of Sun (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Su-Me
+12506	Brings Mercury's themes (intellect, etc.) into focus within the Sun Mahadasha (neutral relationship).
+12507	During the Sun Mahadasha, the Mercury Antardasha brings a sub-period of roughly 10.2 months in which the themes of intellect, communication, business, and education come into active focus, expressed within the broader, ongoing context of authority, self-confidence, vitality, the father, and government or official matters that characterizes the overall Sun Mahadasha.
+12508	Mercury is naturally neutral toward Sun, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Su-Ju
+12509	Brings Jupiter's themes (wisdom, etc.) into focus within the Sun Mahadasha (friend relationship).

@@ -1,0 +1,117 @@
+# planet_in_sign:PS-Mo-Ari
+12178	Emotional responses arise fast and fade fast, favoring direct expression of feeling over patient reflection, which can read as impatience or a short temper.
+12179	The native needs an outlet for immediate emotional action, and learns emotional maturity by pausing before reacting rather than suppressing the underlying courage this placement provides.
+# planet_in_sign:PS-Mo-Tau
+12180	Exalted — calm, stable, deeply contented emotional nature.
+12181	This is considered the Moon's strongest sign, giving a steady, sensuous temperament that finds genuine comfort in routine, physical comforts, and reliable relationships.
+12182	Emotional security is built through consistency and tangible signs of care, and the native is generally even-tempered unless their sense of stability is directly threatened.
+# planet_in_sign:PS-Mo-Gem
+12183	Gives a curious, communicative, changeable emotional temperament.
+12184	Feelings are processed and expressed verbally, and emotional satisfaction depends heavily on mental engagement and variety.
+12185	Moods can shift quickly with new information or conversation, and the native often needs to talk through emotions to fully understand them.
+# planet_in_sign:PS-Mo-Can
+12186	Own sign — the Moon's most natural, deeply nurturing emotional expression.
+12187	This is the Moon's home sign, producing profound emotional sensitivity, strong intuition, and a natural gift for nurturing and protecting others.
+12188	Home and family are central to emotional wellbeing, and the native's empathy runs deep, sometimes to the point of absorbing others' feelings as their own.
+# planet_in_sign:PS-Mo-Leo
+12189	Gives a warm, dramatic, generous emotional temperament that thrives on appreciation.
+12190	Feelings are expressed openly and with flair, and emotional wellbeing depends significantly on being genuinely seen and valued by others.
+12191	The native's nurturing style is warm and encouraging, though pride can make it hard to admit vulnerability or ask for support.
+# planet_in_sign:PS-Mo-Vir
+12192	Gives an analytical, practical, service-oriented emotional temperament.
+12193	The native tends to process feelings through analysis rather than pure sensation, often expressing care through practical help rather than open sentiment.
+12194	There can be a tendency to worry or to hold overly high emotional standards for oneself, and emotional peace comes through order, routine, and useful activity.
+# planet_in_sign:PS-Mo-Lib
+12195	Ties emotional wellbeing closely to harmony, fairness, and partnership.
+12196	The native seeks emotional balance through pleasant, cooperative relationships and can feel genuinely unsettled by conflict or disharmony.
+12197	Diplomacy comes naturally, though there can be difficulty identifying or asserting one's own feelings when they might disrupt peace with others.
+# planet_in_sign:PS-Mo-Sco
+12198	Debilitated — intense, deep, sometimes turbulent emotional nature.
+12199	Feelings here run extremely deep and are often kept private, with strong undercurrents of passion, suspicion, or possessiveness that can surface unexpectedly.
+12200	This placement grants formidable emotional resilience and intuition once the native learns to manage intensity constructively rather than letting it become secrecy or control.
+# planet_in_sign:PS-Mo-Sag
+12201	Gives an optimistic, freedom-loving, philosophically minded emotional temperament.
+12202	Emotional wellbeing depends on a sense of freedom, adventure, and meaning, and the native tends to process difficult feelings by seeking a bigger-picture perspective.
+12203	Generosity of spirit is natural, though commitment to emotionally demanding situations can feel restrictive if not framed as personally meaningful.
+# planet_in_sign:PS-Mo-Cap
+12204	Gives a reserved, disciplined, achievement-oriented emotional temperament.
+12205	The native often manages feelings through practical responsibility rather than open expression, and emotional security is tied to achievement, structure, and reliability.
+12206	There can be difficulty accessing or showing vulnerability, especially early in life, though emotional depth and warmth tend to grow with maturity and earned trust.
+# planet_in_sign:PS-Mo-Aqu
+12207	Gives a detached, intellectually oriented, community-minded emotional temperament.
+12208	Feelings are often processed with some emotional distance, filtered through ideas and principles rather than pure sentiment, and the native values friendship and belonging within groups.
+12209	Emotional needs can be unconventional, favoring independence and shared ideals over close, intimate dependency.
+# planet_in_sign:PS-Mo-Pis
+12210	Gives a highly sensitive, compassionate, imaginative emotional temperament.
+12211	The native's empathy and intuition run very deep, often to the point of absorbing the emotional atmosphere around them, and emotional life is rich with imagination, art, or spiritual feeling.
+12212	Clear boundaries and grounding practices help prevent escapism or emotional overwhelm from this profoundly receptive placement.
+# planet_in_sign:PS-Ma-Ari
+12213	Own sign (moolatrikona) — Mars at its most direct and powerful.
+12214	This is Mars's strongest sign, giving bold, pioneering, highly competitive energy expressed with total directness.
+12215	The native acts first and asks questions later, showing natural courage and leadership in action, though patience with slower processes or people can be limited.
+# planet_in_sign:PS-Ma-Tau
+12216	Gives determined, persistent energy applied to material goals.
+12217	Drive here builds slowly but steadily, favoring practical, patient effort over quick bursts of action, and the native tends to be stubborn once a course of action is chosen.
+12218	Possessiveness or resistance to change can surface when the native's sense of security or resources feels threatened.
+# planet_in_sign:PS-Ma-Gem
+12219	Directs energy toward communication, ideas, and versatile action.
+12220	The native's assertiveness often shows up verbally, through debate, wit, or quick mental engagement, rather than through physical confrontation.
+12221	Energy can scatter across multiple interests at once, and sustained focus on a single course of action benefits from conscious discipline.
+# planet_in_sign:PS-Ma-Can
+12222	Debilitated — energy is directed inward or through emotional, protective channels.
+12223	Direct confrontation feels uncomfortable here, so drive and even anger are often expressed indirectly, through moodiness or protective behavior toward family rather than open assertion.
+12224	This placement's real strength lies in tenacious, quiet protectiveness once the native learns to act from emotional security rather than defensiveness.
+# planet_in_sign:PS-Ma-Leo
+12225	Gives confident, dramatic, leadership-oriented courage.
+12226	The native acts boldly and visibly, enjoying competition and recognition for their achievements, with a proud, passionate approach to pursuing goals.
+12227	Leadership through decisive action comes naturally, though ego can make it hard to back down once a position is taken.
+# planet_in_sign:PS-Ma-Vir
+12228	Applies energy with precision, discipline, and a critical eye for detail.
+12229	Drive here is methodical and service-oriented rather than flashy, and the native works efficiently toward practical improvement in whatever they undertake.
+12230	Irritability or perfectionism can surface under pressure, especially when standards are not met by self or others.
+# planet_in_sign:PS-Ma-Lib
+12231	Channels assertiveness through diplomacy, fairness, and partnership.
+12232	Because Mars's direct assertiveness sits somewhat uneasily in harmony-seeking Libra, the native may hesitate before confrontation, preferring negotiation or waiting for the right moment to act.
+12233	Energy is often best applied to causes involving justice or balanced partnership, where conviction and diplomacy can work together.
+# planet_in_sign:PS-Ma-Sco
+12234	Own sign — intense, strategic, deeply powerful drive.
+12235	This is one of Mars's strongest signs, giving formidable willpower, resourcefulness, and the capacity for sustained, focused intensity toward whatever the native is determined to achieve.
+12236	The native fights hardest for causes they believe in, sometimes with a secretive or all-or-nothing approach that others find difficult to read.
+# planet_in_sign:PS-Ma-Sag
+12237	Directs energy toward adventure, exploration, and principled action.
+12238	The native pursues goals with enthusiasm, directness, and a strong sense of conviction, often connected to travel, belief systems, or expanding horizons.
+12239	Courage here is optimistic and freedom-loving, though commitment to slow, detailed follow-through can be a weaker point.
+# planet_in_sign:PS-Ma-Cap
+12240	Exalted — highly disciplined, strategic, and effective drive.
+12241	This is considered Mars's strongest placement for practical achievement, combining raw drive with patience, structure, and long-term ambition.
+12242	The native accomplishes significant, lasting results through sustained, methodical effort rather than impulsive bursts of energy, making this excellent for leadership and executive action.
+# planet_in_sign:PS-Ma-Aqu
+12243	Applies energy toward group causes, innovation, and unconventional action.
+12244	The native's assertiveness often serves collective or reformist goals rather than purely personal ones, and courage shows up in willingness to challenge convention.
+12245	There can be tension between individual drive and loyalty to group consensus, and action is most effective when tied to a clear, principled cause.
+# planet_in_sign:PS-Ma-Pis
+12246	Debilitated — energy is diffused, intuitive, and best expressed through compassion.
+12247	Direct, forceful action does not come naturally here, and the native's drive is more easily expressed through creative, spiritual, or self-sacrificing channels than through open assertiveness.
+12248	Clear boundaries and concrete goals help prevent energy from dissipating into vagueness, escapism, or passive avoidance of conflict.
+# planet_in_sign:PS-Me-Ari
+12249	Gives quick, direct, sometimes impulsive thinking and speech.
+12250	The native's mind moves fast and favors decisive statements over prolonged deliberation, learning most effectively through direct experience and action.
+12251	Communication is candid and assertive, occasionally at the cost of tact or patience for detail.
+# planet_in_sign:PS-Me-Tau
+12252	Gives practical, deliberate, and steady thinking.
+12253	The native's mind favors concrete, tangible knowledge over abstract theory, and opinions, once formed, tend to be held firmly.
+12254	Communication is measured and reliable rather than quick, and patience allows for thorough, dependable understanding of practical matters.
+# planet_in_sign:PS-Me-Gem
+12255	Own sign (moolatrikona) — Mercury at its most versatile and communicative.
+12256	This is Mercury's home sign, giving exceptionally quick, curious, and adaptable intellect well suited to multitasking, networking, and the exchange of information.
+12257	The native learns rapidly across many subjects, though sustained depth in a single area requires deliberate focus.
+# planet_in_sign:PS-Me-Can
+12258	Gives intuitive, emotionally colored thinking and nurturing communication.
+12259	Thoughts and memory here are closely tied to feeling, and the native often reasons through emotional context rather than pure logic.
+12260	Communication style is protective and empathetic, particularly regarding family or close relationships, sometimes making objectivity harder to maintain.
+# planet_in_sign:PS-Me-Leo
+12261	Gives confident, expressive, and creatively engaging communication.
+12262	The native shares ideas with flair and conviction, enjoying an audience and often expressing intellect through storytelling, teaching, or creative work.
+12263	Strong self-belief in one's own opinions can make it harder to accept differing viewpoints gracefully.
+# planet_in_sign:PS-Me-Vir
+12264	Exalted & own sign — Mercury at its most precise and analytically capable.

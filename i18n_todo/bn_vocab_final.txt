@@ -1,0 +1,14 @@
+Vata	বাত
+Pitta	পিত্ত
+Kapha	কফ
+Kapha-Vata	কফ-বাত
+Pitta-Vata	পিত্ত-বাত
+Pitta-Kapha	পিত্ত-কফ
+Matrikaraka	মাতৃকারক
+Bhratrikaraka	ভ্রাতৃকারক
+Jupiter is conjunct Rahu.	বৃহস্পতি রাহুর সঙ্গে যুক্ত।
+Jupiter (house {0}) and Rahu (house {1}) are not conjunct.	বৃহস্পতি ({0} নম্বর ভাব) ও রাহু ({1} নম্বর ভাব) যুক্ত নয়।
+Saturn is conjunct Rahu.	শনি রাহুর সঙ্গে যুক্ত।
+Saturn (house {0}) and Rahu (house {1}) are not conjunct.	শনি ({0} নম্বর ভাব) ও রাহু ({1} নম্বর ভাব) যুক্ত নয়।
+{0} is conjunct {1}.	{0} {1}-এর সঙ্গে যুক্ত।
+{0} is not conjunct Rahu or Ketu.	{0} রাহু বা কেতুর সঙ্গে যুক্ত নয়।

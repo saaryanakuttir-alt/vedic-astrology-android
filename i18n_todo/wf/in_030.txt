@@ -1,0 +1,112 @@
+# planet_in_house:PH-Ma-H8
+11817	A challenging dusthana and Kuja Dosha house linked to accidents, intensity, and sudden transformation.
+11818	The native should exercise care regarding injuries, surgery, or accident-prone situations, and property or inheritance matters may involve disputes requiring careful handling.
+11819	There is often an intense, investigative interest in the occult, research, or hidden matters, with sudden, transformative events shaping key life turns.
+11820	With supportive chart factors, this placement can grant notable resilience and the courage to recover from crises.
+# planet_in_house:PH-Ma-H9
+11821	Brings energetic, sometimes assertive conviction to belief systems, higher learning, and the father.
+11822	The native pursues dharma, philosophy, or higher education with courage and initiative, though an assertive approach can create occasional friction with the father or traditional authorities.
+11823	Technical, military, or competitive fields of higher study are well favored, as is travel undertaken for competitive or professional reasons.
+11824	Fortune generally supports the native's bold pursuit of principled goals.
+# planet_in_house:PH-Ma-H10
+11825	An excellent upachaya placement for driven, ambitious career success, especially in technical or leadership fields.
+11826	The native is ambitious, hardworking, and unafraid of competition, excelling in engineering, the military, sports, entrepreneurship, or executive leadership roles.
+11827	Career advancement often comes through decisive, bold action rather than patient waiting, though clashes with authority figures are possible if assertiveness is not tempered with diplomacy.
+11828	Public reputation tends to reflect strength and capability.
+# planet_in_house:PH-Ma-H11
+11829	A favorable upachaya placement bringing strong gains through competitive effort and an energetic social circle.
+11830	The native achieves ambitious goals through direct action and determination, often gaining income through technical, competitive, or entrepreneurial ventures.
+11831	Friendships and networks tend to be dynamic and action-oriented, sometimes including close bonds with brothers or fellow competitors.
+11832	Fulfillment of desires comes readily when the native's energy is applied consistently toward clear goals.
+# planet_in_house:PH-Ma-H12
+11833	Turns Mars's energy inward, favoring disciplined technical or spiritual work over open conflict.
+11834	The native may suppress anger or channel competitive drive into private, research-oriented, or foreign-based technical work rather than public confrontation.
+11835	Health matters connected to blood or minor accidents deserve attention, and expenditure often relates to property or technical pursuits abroad.
+11836	This placement can favor martial arts, disciplined physical practice, or covert/behind-the-scenes technical roles that constructively channel Mars's energy.
+# planet_in_house:PH-Me-H1
+11837	Mercury's directional-strength (dig bala) house — gives a witty, articulate, quick-thinking personality.
+11838	The native is intellectually curious, communicative, and adaptable, often appearing youthful and quick-witted regardless of age.
+11839	Analytical skill and versatility support success in business, writing, or any field requiring sharp thinking, and the native learns new subjects with ease.
+11840	Nervous-system sensitivity benefits from calm routines, and the overall personality is friendly, logical, and socially engaging.
+11841	Effects strengthen when Mercury is exalted or in its own sign (Virgo, and to a lesser degree Gemini) and in its directional-strength (dig bala) house, the 1st.
+11842	Combustion (close conjunction with the Sun) or affliction can make the analytical themes below manifest as scattered thinking, nervousness, or overly sharp/critical speech.
+# planet_in_house:PH-Me-H2
+11843	Favors eloquent speech and wealth built through trade, writing, or analytical business skill.
+11844	The native speaks persuasively and precisely, often excelling in negotiation, accounting, writing, or any communication-based trade.
+11845	Wealth tends to accumulate through calculated business decisions, and the family environment often values education and intellectual achievement.
+11846	This placement supports a sharp memory for figures and a witty, engaging conversational style.
+# planet_in_house:PH-Me-H3
+11847	An excellent upachaya placement for communication, writing, and skillful self-effort.
+11848	The native shows strong aptitude for writing, marketing, media, or any communication-driven effort, along with an intellectually close bond with siblings.
+11849	Short journeys and business travel tend to be productive, and manual or technical dexterity often pairs well with analytical thinking.
+11850	Courage here expresses through clever strategy rather than brute force.
+# planet_in_house:PH-Me-H4
+11851	Creates an intellectually engaged home life and an analytical approach to comfort and property.
+11852	The native grows up in, or creates, a home environment that values learning and communication, often maintaining a close, conversational bond with the mother.
+11853	Property and vehicle decisions tend to be approached analytically, and the native may show particular interest in gadgets, technology, or intellectual hobbies at home.
+11854	Educational attainment is generally favored by this placement.
+# planet_in_house:PH-Me-H5
+11855	Sharpens intelligence, memory, and analytical creativity, favoring education and calculated speculation.
+11856	The native demonstrates strong memory, mathematical or analytical aptitude, and creative intelligence well suited to writing, teaching, or research.
+11857	Speculative or investment decisions benefit from the native's calculated, detail-oriented approach rather than pure chance.
+# planet_in_house:PH-Me-H6
+11858	Brings analytical precision to work, health matters, and resolving disputes through negotiation.
+11859	The native excels in detail-oriented service roles such as accounting, administration, medicine, or analysis, and tends to resolve conflicts through clever negotiation rather than confrontation.
+11860	Health sensitivity often centers on the nervous or digestive system, benefiting from routine and mental calm.
+11861	Competitive intellectual environments generally bring out the native's problem-solving strengths.
+# planet_in_house:PH-Me-H7
+11862	Favors communicative, intellectually compatible partnerships and success in trade-based business.
+11863	The native often finds a witty, articulate spouse or business partner, and marriage or partnership benefits significantly from open, honest communication and shared intellectual interests.
+11864	This placement is well suited to business partnerships in trade, consulting, or commerce, where negotiation skill and adaptability are key assets.
+11865	Diplomatic handling of disagreements helps sustain long-term partnership harmony.
+# planet_in_house:PH-Me-H8
+11866	Sharpens intuitive, investigative thinking around hidden, transformative, or research-oriented matters.
+11867	The native shows a keen analytical interest in mysteries, psychology, or occult subjects, often possessing sharp intuition about hidden truths and shared resources.
+11868	Nervous tension or overthinking can arise during periods of major transformation, so calming mental practices are helpful.
+11869	This placement suits investigative work, research, or fields requiring careful analysis of complex, sensitive information.
+# planet_in_house:PH-Me-H9
+11870	Supports an intellectual, communicative approach to philosophy, higher learning, and teaching.
+11871	The native is drawn to studying, writing about, or teaching philosophy, law, or dharma, often communicating complex ideas in an accessible way.
+11872	Relationships with the father or gurus benefit from open intellectual exchange, and this placement favors publishing, foreign study, or higher education tied to communication skills.
+11873	Fortune tends to follow disciplined, well-reasoned pursuit of knowledge.
+# planet_in_house:PH-Me-H10
+11874	Favors a versatile, communication-driven career in business, writing, or education.
+11875	The native builds a professional reputation around intelligence, adaptability, and effective communication, thriving in trade, consulting, writing, teaching, or entrepreneurial ventures.
+11876	Career paths often show versatility, sometimes involving more than one field simultaneously, and public image reflects wit and competence.
+11877	Networking and clear communication play a key role in professional advancement.
+# planet_in_house:PH-Me-H11
+11878	Brings gains through networking, communication, and analytically planned ventures.
+11879	The native builds a wide, intellectually stimulating social circle and often earns income through trade, writing, consulting, or communication-based ventures.
+11880	Long-term goals are approached with careful planning and analysis, increasing the likelihood of their fulfillment.
+11881	Friendships frequently involve productive exchange of ideas or business opportunities.
+# planet_in_house:PH-Me-H12
+11882	Turns analytical ability inward, favoring research, foreign communication, or introspective study.
+11883	The native often shows a reflective, sometimes overthinking mind, well suited to research, foreign languages, writing in solitude, or spiritual and philosophical study.
+11884	Expenditure may flow toward education, communication technology, or foreign-linked ventures.
+11885	Behind-the-scenes analytical work, translation, or foreign trade can bring quiet but meaningful success.
+# planet_in_house:PH-Ju-H1
+11886	Jupiter's directional-strength (dig bala) house — gives a wise, optimistic, and respected personality.
+11887	The native carries a naturally philosophical, generous, and optimistic outlook, often serving as a guide or teacher figure to others.
+11888	Physical constitution and overall life fortune tend to be favorable, and ethical conduct comes relatively naturally.
+11889	When Jupiter is in its own or exalted sign here, this can produce Hamsa Yoga, indicating exceptional wisdom, dignity, and life success.
+11890	Effects strengthen when Jupiter is exalted (Cancer) or in its own signs (Sagittarius, Pisces) and in its directional-strength (dig bala) house, the 1st.
+11891	Debilitation (Capricorn) or heavy affliction can turn the expansive themes below into overconfidence, excess, or misplaced idealism rather than genuine wisdom.
+# planet_in_house:PH-Ju-H2
+11892	Supports steady wealth accumulation, generous family values, and wise, pleasant speech.
+11893	The native tends to accumulate wealth through ethical means and shows generosity toward family, often coming from or building a large, well-provided-for household.
+11894	Speech is truthful, encouraging, and often carries a teaching or advisory quality.
+11895	Values around food, resources, and family life reflect abundance and a broad, principled perspective.
+# planet_in_house:PH-Ju-H3
+11896	Applies wisdom to communication and self-effort, though this upachaya house can temper Jupiter's natural expansiveness.
+11897	The native communicates with thoughtful, principled insight, often taking a philosophical or teaching approach to writing and self-expression.
+11898	Because Jupiter's growth-oriented nature can conflict with the assertive, effort-driven quality of the 3rd house, sibling relationships or personal initiative may develop more slowly or thoughtfully than boldly.
+11899	Courage here tends to be measured and ethically grounded rather than impulsive.
+# planet_in_house:PH-Ju-H4
+11900	Brings domestic happiness, ethical upbringing, and comfort through wisdom and generosity at home.
+11901	The native typically experiences a nurturing, principled home environment with a wise, generous, or spiritually inclined mother.
+11902	This placement favors real estate gains, educational attainment, and a generally contented, secure domestic life.
+11903	Emotional and material fulfillment both benefit from the native's naturally optimistic, big-picture perspective on family matters.
+# planet_in_house:PH-Ju-H5
+11904	An excellent trikona placement for higher intelligence, and ethically grounded creativity.
+11905	Wisdom and moral clarity guide decision-making in education, romance, and speculative matters, generally leading to favorable outcomes.
+11906	This is considered one of the most auspicious placements for Jupiter, supporting both intellectual and spiritual growth.

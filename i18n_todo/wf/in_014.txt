@@ -1,0 +1,76 @@
+# divisional_charts:DIV-D30
+10711	Used to examine vulnerabilities, misfortunes, moral or characterological weaknesses, and areas where the native may be prone to difficulty or poor judgment, complementing the generally more fortune-oriented focus of most other divisional charts.
+10712	Because the five planetary divisions within each sign have unequal degree spans (unlike the other vargas listed here, which divide each sign into equal parts) and the assignment order differs for odd versus even signs, this chart requires particularly careful, rule-verified implementation.
+# divisional_charts:DIV-D60
+10713	past-life karma, fine-grained results
+10714	Considered by many classical authorities (including Brihat Parashara Hora Shastra) to be the single most sensitive and important divisional chart for fine-grained confirmation of results and for understanding past-life karma (purva janma) carried into the current birth.
+10715	Because of its extremely fine 0.5-degree resolution, it is highly sensitive to birth time accuracy.
+10716	Given the 0.5-degree resolution, an accurate birth time (ideally verified/rectified) is essential; small birth-time errors of only a minute or two can shift the D60 sign, so this chart's reliability depends more heavily on precise input data than any other varga listed here.
+# doshas:PITRA-RAHU-KETU-9TH
+10717	Rahu or Ketu in the 9th House
+# doshas:PITRA-SUN-CONJ-SHADOW
+10718	Sun Conjunct Rahu or Ketu
+# doshas:PITRA-9L-AFFLICTED
+10719	9th Lord Afflicted
+# doshas:GRAHAN-SURYA
+10720	Surya Grahan Dosha (Sun eclipsed)
+# doshas:GRAHAN-CHANDRA
+10721	Chandra Grahan Dosha (Moon eclipsed)
+# doshas:SHRAPIT
+10722	Shrapit Dosha (Shrapit Yog)
+# house_lord_placement:HL-1-in-1
+10723	The lord of the 1st house sits in its own house, directly reinforcing self and vitality.
+10724	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 1st house, the house of self, physical body, personality, general vitality, and appearance.
+10725	This is a Swakshetra-style placement: the lord of the 1st house sits within its own house.
+10726	A house lord placed in its own house generally reinforces and stabilizes its own significations directly, strengthening self, physical body, personality, general vitality, and appearance, provided the lord itself is reasonably well placed by sign and is not heavily afflicted by malefic influences.
+10727	In practice, this placement tends to channel the native's experience of self and vitality through the lens of self and vitality, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-2
+10728	Connects self and vitality with wealth and family.
+10729	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 2nd house, the house of wealth, family, speech, food, and accumulated resources.
+10730	The 2nd house is primarily a house of accumulated resources and family,, so this placement carries that house's general character in addition to the specific effects below.
+10731	Counted from the 1st house itself, the 2nd house is the 2nd from it — a house of accumulation and continuation, suggesting that matters of self, physical body, personality, general vitality, and appearance become bound up with sustaining or consolidating resources through wealth, family, speech, food, and accumulated resources.
+10732	In practice, this placement tends to channel the native's experience of self and vitality through the lens of wealth and family, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-3
+10733	Connects self and vitality with courage and self-effort.
+10734	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 3rd house, the house of courage, siblings, self-effort, short journeys, and communication.
+10735	The 3rd house is an upachaya house, favoring growth and gain through sustained self-effort over time, so this placement carries that house's general character in addition to the specific effects below.
+10736	Counted from the 1st house itself, the 3rd house falls in an upachaya (growth) relationship to it.
+10737	Matters of self, physical body, personality, general vitality, and appearance tend to develop and strengthen gradually through courage, siblings, self-effort, short journeys, and communication, typically improving with sustained effort and time.
+10738	In practice, this placement tends to channel the native's experience of self and vitality through the lens of courage and self-effort, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-4
+10739	Connects self and vitality with home and inner comfort.
+10740	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 4th house, the house of home, mother, property, vehicles, and emotional comfort.
+10741	The 4th house is a kendra house — angular, stabilizing, and central to the native's foundation, so this placement carries that house's general character in addition to the specific effects below.
+10742	Counted from the 1st house itself, the 4th house falls in a kendra (angular) relationship to it.
+10743	This is a stabilizing, mutually supportive functional connection, meaning matters of self, physical body, personality, general vitality, and appearance tend to find a firm, action-oriented outlet through home, mother, property, vehicles, and emotional comfort.
+10744	In practice, this placement tends to channel the native's experience of self and vitality through the lens of home and inner comfort, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-5
+10745	Connects self and vitality with creativity.
+10746	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 5th house, the house of intelligence, creativity, romance, and speculation.
+10747	The 5th house is a trikona house — one of the most fortunate and grace-bestowing houses in the chart, so this placement carries that house's general character in addition to the specific effects below.
+10748	Counted from the 1st house itself, the 5th house falls in a trikona (trine) relationship to it.
+10749	This is a classically auspicious connection, often linking self, physical body, personality, general vitality, and appearance with good fortune, grace, and support flowing in through intelligence, creativity, romance, and speculation.
+10750	In practice, this placement tends to channel the native's experience of self and vitality through the lens of creativity, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-6
+10751	Connects self and vitality with service and obstacles.
+10752	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 6th house, the house of obstacles, disease, debts, service, daily work, and competitors.
+10753	The 6th house is a dusthana house that is also upachaya — challenging at first, but capable of real improvement through discipline and effort, so this placement carries that house's general character in addition to the specific effects below.
+10754	Counted from the 1st house itself, the 6th house falls in a dusthana (6th/8th/12th) relationship to it.
+10755	This classically indicates that matters of self, physical body, personality, general vitality, and appearance may encounter obstacles, delay, loss, or significant transformation as they pass through obstacles, disease, debts, service, daily work, and competitors, unless other factors in the chart provide relief.
+10756	In practice, this placement tends to channel the native's experience of self and vitality through the lens of service and obstacles, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-7
+10757	Connects self and vitality with marriage and partnership.
+10758	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 7th house, the house of marriage, business partnership, public dealings, and the spouse.
+10759	The 7th house is a kendra house — angular and central to partnership matters, so this placement carries that house's general character in addition to the specific effects below.
+10760	Counted from the 1st house itself, the 7th house falls in a kendra (angular) relationship to it.
+10761	This is a stabilizing, mutually supportive functional connection, meaning matters of self, physical body, personality, general vitality, and appearance tend to find a firm, action-oriented outlet through marriage, business partnership, public dealings, and the spouse.
+10762	In practice, this placement tends to channel the native's experience of self and vitality through the lens of marriage and partnership, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-8
+10763	Connects self and vitality with transformation and shared resources.
+10764	The lord of the 1st house — governing self, physical body, personality, general vitality, and appearance — is placed in the 8th house, the house of transformation, occult matters, inheritance, and sudden events.
+10765	The 8th house is a dusthana house — often associated with sudden change, hidden difficulty, and transformation, so this placement carries that house's general character in addition to the specific effects below.
+10766	Counted from the 1st house itself, the 8th house falls in a dusthana (6th/8th/12th) relationship to it.
+10767	This classically indicates that matters of self, physical body, personality, general vitality, and appearance may encounter obstacles, delay, loss, or significant transformation as they pass through transformation, occult matters, inheritance, and sudden events, unless other factors in the chart provide relief.
+10768	In practice, this placement tends to channel the native's experience of self and vitality through the lens of transformation and shared resources, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-1-in-9
+10769	Connects self and vitality with fortune and higher wisdom.

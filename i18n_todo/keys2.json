@@ -1,0 +1,4034 @@
+[
+ {
+  "kind": "template",
+  "en": "age {0}-{1} ({2} Mahadasha - {3}; themes: {4})",
+  "args": [
+   "w['start_age']",
+   "w['end_age']",
+   "w['lord']",
+   "w['role']",
+   "w['theme']"
+  ],
+  "where": "engine/rule_engine.py:1579",
+  "id": 2001
+ },
+ {
+  "kind": "template",
+  "en": "The Amatyakaraka (Jaimini's career significator) here is {0}, in {1} — classically read as the planet whose qualities most shape vocational direction.",
+  "args": [
+   "chara_karaka.get_karaka(karakas, 'AmK')['planet']",
+   "planets_reading[chara_karaka.get_karaka(karakas, 'AmK')['planet']]['sign']"
+  ],
+  "where": "engine/rule_engine.py:1653",
+  "id": 2002
+ },
+ {
+  "kind": "template",
+  "en": "Through {0}",
+  "args": [
+   "t"
+  ],
+  "where": "engine/rule_engine.py:1621",
+  "id": 2003
+ },
+ {
+  "kind": "template",
+  "en": " / {0} Antardasha",
+  "args": [
+   "running['antardasha_lord']"
+  ],
+  "where": "engine/rule_engine.py:1612",
+  "id": 2004
+ },
+ {
+  "kind": "template",
+  "en": "Your {0} house ({1}): ",
+  "args": [
+   "ordinal(area['house'])",
+   "area['body_part']"
+  ],
+  "where": "engine/rule_engine.py:1555",
+  "id": 2005
+ },
+ {
+  "kind": "template",
+  "en": "Saturn, the classical significator of endurance and chronic conditions, is {0} in {1}.",
+  "args": [
+   "saturn_dignity",
+   "saturn_detail['sign']"
+  ],
+  "where": "engine/rule_engine.py:1523",
+  "id": 2006
+ },
+ {
+  "kind": "template",
+  "en": "your body type is mostly {0}, which means {1}.",
+  "args": [
+   "dosha['primary']",
+   "gist"
+  ],
+  "where": "engine/rule_engine.py:1513",
+  "id": 2007
+ },
+ {
+  "kind": "template",
+  "en": "the qualities {0} classically signifies",
+  "args": [
+   "atmakaraka['sign']"
+  ],
+  "where": "engine/rule_engine.py:922",
+  "id": 2008
+ },
+ {
+  "kind": "template",
+  "en": "Worth noting: {0}",
+  "args": [
+   "kb_entry['strength_modifiers_and_cautions']"
+  ],
+  "where": "engine/rule_engine.py:414",
+  "id": 2009
+ },
+ {
+  "kind": "template",
+  "en": "Classical formation: {0}",
+  "args": [
+   "kb_entry['formation']"
+  ],
+  "where": "engine/rule_engine.py:410",
+  "id": 2010
+ },
+ {
+  "kind": "template",
+  "en": "Why relationships may take the shape they do (a karmic lens): the Darakaraka - Jaimini's significator of the spouse or life partner - is {0} in {1}, house {2}. Classically, the Darakaraka describes the KIND of partner and partnership this soul is karmically drawn toward, prior to comparing charts with anyone specific. ",
+  "args": [
+   "dk['planet']",
+   "dk['sign']",
+   "dk['house']"
+  ],
+  "where": "engine/rule_engine.py:1772",
+  "id": 2011
+ },
+ {
+  "kind": "template",
+  "en": "On how many significant relationships or marriages this chart tends toward: this reading leans toward {0}.",
+  "args": [
+   "mct['tendency']"
+  ],
+  "where": "engine/rule_engine.py:1748",
+  "id": 2012
+ },
+ {
+  "kind": "template",
+  "en": "The Darakaraka (Jaimini's spouse significator) is {0}, in {1} — see the Karmic & Past Life tab for this soul's own relational disposition, and Family Compatibility for an actual two-chart comparison if a partner profile has been generated.",
+  "args": [
+   "chara_karaka.get_karaka(karakas, 'DK')['planet']",
+   "planets_reading[chara_karaka.get_karaka(karakas, 'DK')['planet']]['sign']"
+  ],
+  "where": "engine/rule_engine.py:1665",
+  "id": 2013
+ },
+ {
+  "kind": "template",
+  "en": "\n\n[{0}]",
+  "args": [
+   "gloss"
+  ],
+  "where": "engine/rule_engine.py:1642",
+  "id": 2014
+ },
+ {
+  "kind": "template",
+  "en": "{0} is present in this chart: {1}",
+  "args": [
+   "y['name']",
+   "y['details']"
+  ],
+  "where": "engine/rule_engine.py:1628",
+  "id": 2015
+ },
+ {
+  "kind": "template",
+  "en": " The Mahadasha running at birth is {0}",
+  "args": [
+   "running['mahadasha_lord']"
+  ],
+  "where": "engine/rule_engine.py:1611",
+  "id": 2016
+ },
+ {
+  "kind": "template",
+  "en": "{0} ({1}, classically {2}) points to {3}",
+  "args": [
+   "note['planet']",
+   "note['dignity']",
+   "tag",
+   "note['theme']"
+  ],
+  "where": "engine/rule_engine.py:1553",
+  "id": 2017
+ },
+ {
+  "kind": "template",
+  "en": " [{0}]",
+  "args": [
+   "eighth_gloss"
+  ],
+  "where": "engine/rule_engine.py:1543",
+  "id": 2018
+ },
+ {
+  "kind": "template",
+  "en": "The 8th house is ruled by {0}, {1} in {2}.",
+  "args": [
+   "eighth['lord']",
+   "eighth_dignity",
+   "eighth['lord_sign']"
+  ],
+  "where": "engine/rule_engine.py:1542",
+  "id": 2019
+ },
+ {
+  "kind": "template",
+  "en": "8th house (chronic or hidden conditions): {0}",
+  "args": [
+   "eighth_text"
+  ],
+  "where": "engine/rule_engine.py:1541",
+  "id": 2020
+ },
+ {
+  "kind": "template",
+  "en": "The 6th house is ruled by {0}, {1} in {2}.",
+  "args": [
+   "sixth['lord']",
+   "sixth_dignity",
+   "sixth['lord_sign']"
+  ],
+  "where": "engine/rule_engine.py:1539",
+  "id": 2021
+ },
+ {
+  "kind": "template",
+  "en": "6th house (disease, daily health): {0}",
+  "args": [
+   "sixth_text"
+  ],
+  "where": "engine/rule_engine.py:1538",
+  "id": 2022
+ },
+ {
+  "kind": "template",
+  "en": "Saturn, the classical significator of endurance and chronic conditions: {0}",
+  "args": [
+   "saturn_text"
+  ],
+  "where": "engine/rule_engine.py:1520",
+  "id": 2023
+ },
+ {
+  "kind": "template",
+  "en": "\n\nIn simple terms: your growth this life is mostly about {0}. Leaning into that - even when it feels new or uncomfortable - is where the real meaning and progress tend to come from.",
+  "args": [
+   "rahu_where"
+  ],
+  "where": "engine/rule_engine.py:1116",
+  "id": 2024
+ },
+ {
+  "kind": "template",
+  "en": "This growth is carried out through the lens of the Atmakaraka, {0} in {1} (house {2}) — the soul's central quality — meaning the goal is not simply to arrive in Rahu's territory, but to bring {3}'s own nature into it: ",
+  "args": [
+   "atmakaraka['planet']",
+   "atmakaraka['sign']",
+   "atmakaraka['house']",
+   "atmakaraka['planet']"
+  ],
+  "where": "engine/rule_engine.py:919",
+  "id": 2025
+ },
+ {
+  "kind": "template",
+  "en": ", {0}",
+  "args": [
+   "nature"
+  ],
+  "where": "engine/rule_engine.py:829",
+  "id": 2026
+ },
+ {
+  "kind": "template",
+  "en": "{0} ({1}) chart",
+  "args": [
+   "key",
+   "name"
+  ],
+  "where": "engine/rule_engine.py:620",
+  "id": 2027
+ },
+ {
+  "kind": "template",
+  "en": " {0}",
+  "args": [
+   "gist"
+  ],
+  "where": "engine/rule_engine.py:615",
+  "id": 2028
+ },
+ {
+  "kind": "template",
+  "en": "No 'classical_yogas' entry found for id '{0}'.",
+  "args": [
+   "result['id']"
+  ],
+  "where": "engine/rule_engine.py:396",
+  "id": 2029
+ },
+ {
+  "kind": "template",
+  "en": "Not JSON serializable: {0}",
+  "args": [
+   "type(obj)"
+  ],
+  "where": "engine/rule_engine.py:1952",
+  "id": 2030
+ },
+ {
+  "kind": "template",
+  "en": ". Your mind adds {0}",
+  "args": [
+   "_DOSHA_FRIEND_TOUCH.get(dosha['secondary'], 'its own flavour')"
+  ],
+  "where": "engine/rule_engine.py:1512",
+  "id": 2031
+ },
+ {
+  "kind": "template",
+  "en": " Your Moon adds a {0} flavor - {1}.",
+  "args": [
+   "dosha['secondary']",
+   "dosha['secondary_description']"
+  ],
+  "where": "engine/rule_engine.py:1507",
+  "id": 2032
+ },
+ {
+  "kind": "template",
+  "en": "12th house (Moksha): {0}",
+  "args": [
+   "moksha['summary']"
+  ],
+  "where": "engine/rule_engine.py:1162",
+  "id": 2033
+ },
+ {
+  "kind": "template",
+  "en": "9th house (Dharma): {0}",
+  "args": [
+   "dharma['summary']"
+  ],
+  "where": "engine/rule_engine.py:1160",
+  "id": 2034
+ },
+ {
+  "kind": "template",
+  "en": "5th house (Purva Punya): {0}",
+  "args": [
+   "purva_punya['summary']"
+  ],
+  "where": "engine/rule_engine.py:1158",
+  "id": 2035
+ },
+ {
+  "kind": "template",
+  "en": "Rahu in {0} (house {1}): {2}",
+  "args": [
+   "rahu['sign']",
+   "rahu['house']",
+   "rahu['in_house_summary']"
+  ],
+  "where": "engine/rule_engine.py:1156",
+  "id": 2036
+ },
+ {
+  "kind": "template",
+  "en": "Ketu in {0} (house {1}): {2}",
+  "args": [
+   "ketu['sign']",
+   "ketu['house']",
+   "ketu['in_house_summary']"
+  ],
+  "where": "engine/rule_engine.py:1154",
+  "id": 2037
+ },
+ {
+  "kind": "template",
+  "en": "\n\nIn simple terms: you seem to have come into this life already comfortable with {0}. It feels natural, even over-familiar - so it's a strength you can lean on, but not where your growth is meant to happen this time.",
+  "args": [
+   "ketu_where"
+  ],
+  "where": "engine/rule_engine.py:1103",
+  "id": 2038
+ },
+ {
+  "kind": "template",
+  "en": "The 12th house — Moksha, release and the letting-go of past attachments — is ruled by {0} (in {1}), placed in house {2}: {3}",
+  "args": [
+   "moksha['lord']",
+   "moksha['lord_sign']",
+   "moksha['placed_in_house']",
+   "moksha.get('effects') or moksha['summary']"
+  ],
+  "where": "engine/rule_engine.py:1061",
+  "id": 2039
+ },
+ {
+  "kind": "template",
+  "en": "The 9th house — Dharma, higher purpose and fortune — is ruled by {0} (in {1}), placed in house {2}: {3}",
+  "args": [
+   "dharma['lord']",
+   "dharma['lord_sign']",
+   "dharma['placed_in_house']",
+   "dharma.get('effects') or dharma['summary']"
+  ],
+  "where": "engine/rule_engine.py:1056",
+  "id": 2040
+ },
+ {
+  "kind": "template",
+  "en": "The 5th house — Purva Punya, the storehouse of past-life merit — is ruled by {0} (in {1}), placed in house {2}: {3}",
+  "args": [
+   "purva_punya['lord']",
+   "purva_punya['lord_sign']",
+   "purva_punya['placed_in_house']",
+   "purva_punya.get('effects') or purva_punya['summary']"
+  ],
+  "where": "engine/rule_engine.py:1051",
+  "id": 2041
+ },
+ {
+  "kind": "template",
+  "en": " In that house's domain: {0}",
+  "args": [
+   "saturn['in_house_effects']"
+  ],
+  "where": "engine/rule_engine.py:1039",
+  "id": 2042
+ },
+ {
+  "kind": "template",
+  "en": " In the domain of house {0}: {1}",
+  "args": [
+   "rahu['house']",
+   "rahu['in_house_effects']"
+  ],
+  "where": "engine/rule_engine.py:1022",
+  "id": 2043
+ },
+ {
+  "kind": "template",
+  "en": " In the domain of house {0} specifically: {1}",
+  "args": [
+   "ketu['house']",
+   "ketu['in_house_effects']"
+  ],
+  "where": "engine/rule_engine.py:1004",
+  "id": 2044
+ },
+ {
+  "kind": "template",
+  "en": " More specifically, the Moon sits in pada {0} of {1} (Navamsa: {2}): {3}",
+  "args": [
+   "moon_nakshatra_pada",
+   "moon_nakshatra_name",
+   "moon_pada['navamsa_sign']",
+   "moon_pada['summary']"
+  ],
+  "where": "engine/rule_engine.py:970",
+  "id": 2045
+ },
+ {
+  "kind": "template",
+  "en": "The 9th house (Dharma) frames why this matters beyond the individual: ruled by {0} in {1}, placed in house {2}, it points to {3} — the larger sense of purpose this life's karmic stretch is ultimately in service of.",
+  "args": [
+   "dharma['lord']",
+   "dharma['lord_sign']",
+   "dharma['placed_in_house']",
+   "dharma.get('effects') or dharma['summary']"
+  ],
+  "where": "engine/rule_engine.py:927",
+  "id": 2046
+ },
+ {
+  "kind": "template",
+  "en": "The 5th house — Purva Punya, the storehouse of merit EARNED by good past-life action — is ruled by {0} (in {1}, placed in house {2}), describing the credit balance carried forward: {3}",
+  "args": [
+   "purva_punya['lord']",
+   "purva_punya['lord_sign']",
+   "purva_punya['placed_in_house']",
+   "purva_punya.get('effects') or purva_punya['summary']"
+  ],
+  "where": "engine/rule_engine.py:871",
+  "id": 2047
+ },
+ {
+  "kind": "template",
+  "en": "Saturn — the karaka of karma itself — sits in {0} (house {1}), marking where accumulated debts and consequences of past conduct are being steadily worked off through responsibility and delay in this life: {2}",
+  "args": [
+   "saturn['sign']",
+   "saturn['house']",
+   "saturn.get('in_house_effects') or saturn.get('in_sign_effects')"
+  ],
+  "where": "engine/rule_engine.py:865",
+  "id": 2048
+ },
+ {
+  "kind": "template",
+  "en": " Your Atmakaraka is {0}, {1}.",
+  "args": [
+   "atmakaraka_planet",
+   "flavor"
+  ],
+  "where": "engine/rule_engine.py:846",
+  "id": 2049
+ },
+ {
+  "kind": "template",
+  "en": "With Ketu in {0} (house {1}, {2} nakshatra), the strongest past-life imprint points to {3}",
+  "args": [
+   "ketu['sign']",
+   "ketu['house']",
+   "ketu['nakshatra']",
+   "arena"
+  ],
+  "where": "engine/rule_engine.py:828",
+  "id": 2050
+ },
+ {
+  "kind": "template",
+  "en": "{0} sits in {1}, your {2} house here - {3} in this chart.",
+  "args": [
+   "p",
+   "p_sign",
+   "ordinal(house)",
+   "dignity"
+  ],
+  "where": "engine/rule_engine.py:613",
+  "id": 2051
+ },
+ {
+  "kind": "template",
+  "en": " - classically used for {0}",
+  "args": [
+   "primary_use"
+  ],
+  "where": "engine/rule_engine.py:600",
+  "id": 2052
+ },
+ {
+  "kind": "template",
+  "en": "No '{0}' entry found for id '{1}'.",
+  "args": [
+   "kb_name",
+   "item_id"
+  ],
+  "where": "engine/rule_engine.py:192",
+  "id": 2053
+ },
+ {
+  "kind": "template",
+  "en": "No 'nakshatra_pada' entry found for '{0}' pada {1}.",
+  "args": [
+   "nakshatra_name",
+   "pada"
+  ],
+  "where": "engine/rule_engine.py:150",
+  "id": 2054
+ },
+ {
+  "kind": "template",
+  "en": "No 'nakshatra' entry found for '{0}'.",
+  "args": [
+   "nakshatra_name"
+  ],
+  "where": "engine/rule_engine.py:127",
+  "id": 2055
+ },
+ {
+  "kind": "template",
+  "en": "In short: {0} classical yoga{1} {2} present in this chart:",
+  "args": [
+   "len(yogas_present)",
+   "'s' if len(yogas_present) != 1 else ''",
+   "'are' if len(yogas_present) != 1 else 'is'"
+  ],
+  "where": "engine/rule_engine.py:1821",
+  "id": 2056
+ },
+ {
+  "kind": "template",
+  "en": "In short: none of these {0} {1} are present in this chart. {2}",
+  "args": [
+   "total_count",
+   "topic",
+   "absent_note"
+  ],
+  "where": "engine/rule_engine.py:1699",
+  "id": 2057
+ },
+ {
+  "kind": "template",
+  "en": "In simple terms: the planet that looks after your {0} sits in the part of your life about {1} - {2}",
+  "args": [
+   "area",
+   "where",
+   "senti"
+  ],
+  "where": "engine/rule_engine.py:1533",
+  "id": 2058
+ },
+ {
+  "kind": "template",
+  "en": "Ascendant lord {0} (overall vitality) is {1} in {2}.",
+  "args": [
+   "first['lord']",
+   "first_dignity",
+   "first['lord_sign']"
+  ],
+  "where": "engine/rule_engine.py:1515",
+  "id": 2059
+ },
+ {
+  "kind": "template",
+  "en": "Ascendant lord (overall vitality): {0}",
+  "args": [
+   "ascendant_lord_text"
+  ],
+  "where": "engine/rule_engine.py:1514",
+  "id": 2060
+ },
+ {
+  "kind": "template",
+  "en": "Ayurvedic constitution (Prakriti): primarily {0} - {1}.",
+  "args": [
+   "dosha['primary']",
+   "dosha['primary_description']"
+  ],
+  "where": "engine/rule_engine.py:1505",
+  "id": 2061
+ },
+ {
+  "kind": "template",
+  "en": " [In simple terms: {0}]",
+  "args": [
+   "text"
+  ],
+  "where": "engine/rule_engine.py:1498",
+  "id": 2062
+ },
+ {
+  "kind": "template",
+  "en": " {0} sharing that house is classically calming and supportive for it.",
+  "args": [
+   "', '.join(moon_supported)"
+  ],
+  "where": "engine/rule_engine.py:1453",
+  "id": 2063
+ },
+ {
+  "kind": "template",
+  "en": " Sharing that house with {0} classically suggests the mind may feel more pressure or restlessness at times - not a diagnosis, just a theme worth gentle awareness.",
+  "args": [
+   "', '.join(moon_afflicted)"
+  ],
+  "where": "engine/rule_engine.py:1449",
+  "id": 2064
+ },
+ {
+  "kind": "template",
+  "en": "Darakaraka — the Jaimini significator of the spouse/life partner, held here by {0} in {1}, house {2} ({3} nakshatra) — describes this soul's own disposition toward partnership, prior to comparing charts with anyone specific.",
+  "args": [
+   "darakaraka['planet']",
+   "darakaraka['sign']",
+   "darakaraka['house']",
+   "darakaraka['nakshatra']"
+  ],
+  "where": "engine/rule_engine.py:1073",
+  "id": 2065
+ },
+ {
+  "kind": "template",
+  "en": "Saturn is the classical karaka for karma itself — structure, discipline, delay, and the working-out of consequence over time. It sits in {0} in house {1} ({2} nakshatra).",
+  "args": [
+   "saturn['sign']",
+   "saturn['house']",
+   "saturn['nakshatra']"
+  ],
+  "where": "engine/rule_engine.py:1033",
+  "id": 2066
+ },
+ {
+  "kind": "template",
+  "en": "Rahu sits opposite Ketu by definition and is read as the direction this life's karmic growth pulls toward — unfamiliar territory the soul is drawn to reach for, often with more hunger than comfort at first. It is placed in {0} in house {1} ({2} nakshatra).",
+  "args": [
+   "rahu['sign']",
+   "rahu['house']",
+   "rahu['nakshatra']"
+  ],
+  "where": "engine/rule_engine.py:1015",
+  "id": 2067
+ },
+ {
+  "kind": "template",
+  "en": "Ketu is the classical significator of past-life imprint — skills, instincts, and unfinished business already carried into this birth, experienced less as something learned and more as something simply KNOWN. It sits in {0} in house {1} ({2} nakshatra).",
+  "args": [
+   "ketu['sign']",
+   "ketu['house']",
+   "ketu['nakshatra']"
+  ],
+  "where": "engine/rule_engine.py:997",
+  "id": 2068
+ },
+ {
+  "kind": "template",
+  "en": " By house, its themes play out through the domain it occupies: {0}",
+  "args": [
+   "atmakaraka['in_house_effects']"
+  ],
+  "where": "engine/rule_engine.py:984",
+  "id": 2069
+ },
+ {
+  "kind": "template",
+  "en": " By sign, this classically reads as: {0}",
+  "args": [
+   "atmakaraka['in_sign_effects']"
+  ],
+  "where": "engine/rule_engine.py:982",
+  "id": 2070
+ },
+ {
+  "kind": "template",
+  "en": "Your Janma Nakshatra — the lunar mansion the Moon occupied at birth, and traditionally read as foundational to personal identity in its own right — is {0}, ruled by {1} and presided over by {2}, symbolized by {3}. {4}",
+  "args": [
+   "moon_nakshatra['name']",
+   "moon_nakshatra['ruling_planet']",
+   "moon_nakshatra['deity']",
+   "moon_nakshatra['symbol'].lower()",
+   "moon_nakshatra['effects']"
+  ],
+  "where": "engine/rule_engine.py:959",
+  "id": 2071
+ },
+ {
+  "kind": "template",
+  "en": "This life's main karmic goal centers on {0} — the territory Rahu occupies in {1} (house {2}, {3} nakshatra), read as the direction the soul is here to stretch toward, however unfamiliar or effortful it may feel at first.",
+  "args": [
+   "goal_arena",
+   "rahu['sign']",
+   "rahu['house']",
+   "rahu['nakshatra']"
+  ],
+  "where": "engine/rule_engine.py:909",
+  "id": 2072
+ },
+ {
+  "kind": "template",
+  "en": "The over-reliance shown by Ketu in house {0} ({1}) is read as the past-life pattern most in need of release now — the very competence that once served the soul became a groove too deep, a comfort clung to past its usefulness.",
+  "args": [
+   "ketu['house']",
+   "ketu['sign']"
+  ],
+  "where": "engine/rule_engine.py:859",
+  "id": 2073
+ },
+ {
+  "kind": "template",
+  "en": "In that kind of life, you may have been {0}.",
+  "args": [
+   "profession"
+  ],
+  "where": "engine/rule_engine.py:842",
+  "id": 2074
+ },
+ {
+  "kind": "template",
+  "en": ", your Ascendant falls in {0}.",
+  "args": [
+   "varga_asc"
+  ],
+  "where": "engine/rule_engine.py:601",
+  "id": 2075
+ },
+ {
+  "kind": "template",
+  "en": "In your {0} ({1}) chart",
+  "args": [
+   "key",
+   "name"
+  ],
+  "where": "engine/rule_engine.py:598",
+  "id": 2076
+ },
+ {
+  "kind": "template",
+  "en": "{0} is in {1}, your {2} house - {3} here.",
+  "args": [
+   "p",
+   "detail['sign']",
+   "ordinal(detail['house'])",
+   "dignity"
+  ],
+  "where": "engine/rule_engine.py:579",
+  "id": 2077
+ },
+ {
+  "kind": "template",
+  "en": "Your Ascendant (Lagna) is {0} - this is your main birth chart, the foundation every other divisional chart below refines.",
+  "args": [
+   "asc_sign"
+  ],
+  "where": "engine/rule_engine.py:568",
+  "id": 2078
+ },
+ {
+  "kind": "template",
+  "en": "{0} ({1}) is in {2} ({3}), showing up mainly in the part of life about {4}",
+  "args": [
+   "planet",
+   "role",
+   "sign",
+   "flavor",
+   "where"
+  ],
+  "where": "engine/rule_engine.py:536",
+  "id": 2079
+ },
+ {
+  "kind": "template",
+  "en": ", which is mainly about {0}",
+  "args": [
+   "primary_use"
+  ],
+  "where": "engine/rule_engine.py:528",
+  "id": 2080
+ },
+ {
+  "kind": "template",
+  "en": "{0} {1} [In simple terms: {2}]",
+  "args": [
+   "header",
+   "professional",
+   "' '.join(gist_bits)"
+  ],
+  "where": "engine/rule_engine.py:314",
+  "id": 2081
+ },
+ {
+  "kind": "template",
+  "en": "In short: {0} of {1} {2} {3} present in this chart — {4}. See below for what each one means; they're reported separately on purpose, not combined into a single verdict.",
+  "args": [
+   "present_count",
+   "total_count",
+   "topic",
+   "'is' if present_count == 1 else 'are'",
+   "names"
+  ],
+  "where": "engine/rule_engine.py:1702",
+  "id": 2082
+ },
+ {
+  "kind": "template",
+  "en": "Moon (mind and emotional wellbeing) is in {0}, your {1} house - classically {2} there.",
+  "args": [
+   "moon_detail['sign']",
+   "ordinal(moon_detail['house'])",
+   "moon_dignity"
+  ],
+  "where": "engine/rule_engine.py:1445",
+  "id": 2083
+ },
+ {
+  "kind": "template",
+  "en": "{0} in {1} (house {2}): {3}",
+  "args": [
+   "planet",
+   "r['sign']",
+   "r['house']",
+   "entry.get('effects') or entry.get('summary')"
+  ],
+  "where": "engine/rule_engine.py:1223",
+  "id": 2084
+ },
+ {
+  "kind": "template",
+  "en": "the {0} house's lord {1} (in {2}, placed in house {3}): {4}",
+  "args": [
+   "ordinal(house_num)",
+   "hl['lord']",
+   "hl['lord_sign']",
+   "hl['placed_in_house']",
+   "text"
+  ],
+  "where": "engine/rule_engine.py:1213",
+  "id": 2085
+ },
+ {
+  "kind": "template",
+  "en": "In simple words: you seem to arrive already comfortable with {0}, and this life is asking you to grow into {1}. Your sense of self centers on {2} in {3}, and your wider sense of purpose is shaped by the 5th, 9th, and 12th houses covered above. None of this is a literal past life - it's a traditional lens for noticing patterns that might be worth paying attention to, not a fact about who you were.",
+  "args": [
+   "ketu_where",
+   "rahu_where",
+   "atmakaraka['planet']",
+   "atmakaraka['sign']"
+  ],
+  "where": "engine/rule_engine.py:1140",
+  "id": 2086
+ },
+ {
+  "kind": "template",
+  "en": "Read together, these significators sketch one coherent traditional narrative: a soul whose defining focus (Atmakaraka in {0}, house {1}) arrives already carrying the imprint described by Ketu, is pulled to grow in the direction Rahu points toward, works through consequence via Saturn's placement, and orients its deeper purpose around the 5th/9th/12th houses described above. None of this specifies a literal former life, era, or identity — it is a symbolic framework this project's own verified KB entries already support, reassembled under a traditional karmic lens for reflection.",
+  "args": [
+   "atmakaraka['sign']",
+   "atmakaraka['house']"
+  ],
+  "where": "engine/rule_engine.py:1122",
+  "id": 2087
+ },
+ {
+  "kind": "template",
+  "en": "In Jaimini astrology, the planet holding the highest degree among the seven classical grahas is the Atmakaraka — literally the 'significator of the soul' — read as the planet whose themes the soul itself is most identified with in this incarnation. Here that planet is {0}, placed in {1} in house {2} ({3} nakshatra, pada {4}).",
+  "args": [
+   "atmakaraka['planet']",
+   "atmakaraka['sign']",
+   "atmakaraka['house']",
+   "atmakaraka['nakshatra']",
+   "atmakaraka['nakshatra_pada']"
+  ],
+  "where": "engine/rule_engine.py:976",
+  "id": 2088
+ },
+ {
+  "kind": "template",
+  "en": "In simple terms: the planet in charge of your {0} sits in the part of your life about {1}, so your {2} is closely tied to {3}. {4}",
+  "args": [
+   "area_word",
+   "where",
+   "area_word",
+   "where",
+   "senti"
+  ],
+  "where": "engine/rule_engine.py:777",
+  "id": 2089
+ },
+ {
+  "kind": "template",
+  "en": ". Your rising sign here is {0} ({1}).",
+  "args": [
+   "asc_sign",
+   "asc_flavor"
+  ],
+  "where": "engine/rule_engine.py:529",
+  "id": 2090
+ },
+ {
+  "kind": "template",
+  "en": "In plain terms, this is your {0}",
+  "args": [
+   "chart_label"
+  ],
+  "where": "engine/rule_engine.py:526",
+  "id": 2091
+ },
+ {
+  "kind": "template",
+  "en": "Your {0} in {1} ({2} house):",
+  "args": [
+   "planet",
+   "sign",
+   "ordinal(house)"
+  ],
+  "where": "engine/rule_engine.py:311",
+  "id": 2092
+ },
+ {
+  "kind": "text",
+  "en": "Karmic/past-life analysis has no single agreed classical formula, and none of what follows is a factual claim about a literal past incarnation. This section reuses this project's own verified planet, house-lord, and Chara Karaka (Jaimini) readings — Ketu, Rahu, Saturn, the 5th/9th/12th houses, and the Atmakaraka/Darakaraka/Putrakaraka significators — the combination most consistently cited for this lens across classical and traditional sources — and presents them together as a traditional, symbolic perspective for reflection, not a unique, definitive, or literal reading.",
+  "where": "engine/rule_engine.py:650",
+  "id": 2093
+ },
+ {
+  "kind": "text",
+  "en": "These are classical tendencies read from house/planet significations and the current dasha — general traditional themes to consider, not guaranteed or literal predictions of specific events.",
+  "where": "engine/rule_engine.py:1197",
+  "id": 2094
+ },
+ {
+  "kind": "text",
+  "en": "IMPORTANT: This is a traditional, symbolic health-THEMES indication from classical Vedic astrology - it is NOT a medical diagnosis, NOT medical advice, and NOT a substitute for a doctor. Astrology can describe symbolic tendencies at best; it cannot detect, confirm, or predict any actual medical condition. For any real health concern, please see a doctor.",
+  "where": "engine/rule_engine.py:1266",
+  "id": 2095
+ },
+ {
+  "kind": "text",
+  "en": "Classical Vedic 'medical astrology' (Ayurvedic/Jyotish health analysis) reads the body onto the chart through the idea of the Kalapurusha, the 'cosmic body' - each of the 12 houses maps to a body region (see the table below), so a planet sitting in a house classically colors that body area. Four placements matter most: the Ascendant (Lagna) and its lord for overall vitality and constitution; the 6th house and its lord for disease, immunity, and daily health battles; the 8th house and its lord for chronic, hidden, or long-developing conditions; and Saturn, the classical significator of the body's endurance and of chronic, slow-onset conditions, wherever it sits. The Moon is read separately as the significator of the mind and emotional wellbeing, since Ayurveda and Jyotish both treat mental and physical health as linked, not separate.",
+  "where": "engine/rule_engine.py:1273",
+  "id": 2096
+ },
+ {
+  "kind": "text",
+  "en": "moolatrikona",
+  "where": "engine/rule_engine.py:1322",
+  "id": 2097
+ },
+ {
+  "kind": "text",
+  "en": "great enemy",
+  "where": "engine/rule_engine.py:1323",
+  "id": 2098
+ },
+ {
+  "kind": "text",
+  "en": "bold and eager to go first",
+  "where": "engine/rule_engine.py:486",
+  "id": 2099
+ },
+ {
+  "kind": "text",
+  "en": "steady, comfort-loving, and patient",
+  "where": "engine/rule_engine.py:487",
+  "id": 2100
+ },
+ {
+  "kind": "text",
+  "en": "curious, chatty, and quick to learn",
+  "where": "engine/rule_engine.py:488",
+  "id": 2101
+ },
+ {
+  "kind": "text",
+  "en": "caring, emotional, and protective",
+  "where": "engine/rule_engine.py:489",
+  "id": 2102
+ },
+ {
+  "kind": "text",
+  "en": "proud, warm, and wanting to shine",
+  "where": "engine/rule_engine.py:490",
+  "id": 2103
+ },
+ {
+  "kind": "text",
+  "en": "careful, practical, and detail-focused",
+  "where": "engine/rule_engine.py:491",
+  "id": 2104
+ },
+ {
+  "kind": "text",
+  "en": "fair, social, and looking for balance",
+  "where": "engine/rule_engine.py:492",
+  "id": 2105
+ },
+ {
+  "kind": "text",
+  "en": "intense, private, and drawn to deep change",
+  "where": "engine/rule_engine.py:493",
+  "id": 2106
+ },
+ {
+  "kind": "text",
+  "en": "adventurous, honest, and big-picture",
+  "where": "engine/rule_engine.py:494",
+  "id": 2107
+ },
+ {
+  "kind": "text",
+  "en": "disciplined, ambitious, and patient",
+  "where": "engine/rule_engine.py:495",
+  "id": 2108
+ },
+ {
+  "kind": "text",
+  "en": "independent, original, and idea-driven",
+  "where": "engine/rule_engine.py:496",
+  "id": 2109
+ },
+ {
+  "kind": "text",
+  "en": "dreamy, compassionate, and imaginative",
+  "where": "engine/rule_engine.py:497",
+  "id": 2110
+ },
+ {
+  "kind": "text",
+  "en": "your core sense of self",
+  "where": "engine/rule_engine.py:501",
+  "id": 2111
+ },
+ {
+  "kind": "text",
+  "en": "your inner feelings and what makes you comfortable",
+  "where": "engine/rule_engine.py:502",
+  "id": 2112
+ },
+ {
+  "kind": "text",
+  "en": "your drive, courage, and how you take action",
+  "where": "engine/rule_engine.py:503",
+  "id": 2113
+ },
+ {
+  "kind": "text",
+  "en": "your voice, thinking, and how you communicate",
+  "where": "engine/rule_engine.py:504",
+  "id": 2114
+ },
+ {
+  "kind": "text",
+  "en": "your luck, wisdom, and how you grow",
+  "where": "engine/rule_engine.py:505",
+  "id": 2115
+ },
+ {
+  "kind": "text",
+  "en": "love, beauty, and what you enjoy",
+  "where": "engine/rule_engine.py:506",
+  "id": 2116
+ },
+ {
+  "kind": "text",
+  "en": "the hard lessons, patience, and discipline in your life",
+  "where": "engine/rule_engine.py:507",
+  "id": 2117
+ },
+ {
+  "kind": "text",
+  "en": "a hunger for something new and unfamiliar",
+  "where": "engine/rule_engine.py:508",
+  "id": 2118
+ },
+ {
+  "kind": "text",
+  "en": "what you're already ready to let go of",
+  "where": "engine/rule_engine.py:509",
+  "id": 2119
+ },
+ {
+  "kind": "text",
+  "en": "at its very best here",
+  "where": "engine/rule_engine.py:513",
+  "id": 2120
+ },
+ {
+  "kind": "text",
+  "en": "right at home here",
+  "where": "engine/rule_engine.py:514",
+  "id": 2121
+ },
+ {
+  "kind": "text",
+  "en": "finding this a bit of a struggle here",
+  "where": "engine/rule_engine.py:515",
+  "id": 2122
+ },
+ {
+  "kind": "text",
+  "en": "doing okay here, nothing dramatic",
+  "where": "engine/rule_engine.py:516",
+  "id": 2123
+ },
+ {
+  "kind": "text",
+  "en": "a life turned intensely inward on the self, the body, or a strongly individual identity — self-reliance developed to the point of over-identification with 'I' and 'my own way'",
+  "where": "engine/rule_engine.py:706",
+  "id": 2124
+ },
+ {
+  "kind": "text",
+  "en": "a life organized around family, lineage, accumulated wealth, and the spoken word — resources and belonging mastered, perhaps clung to",
+  "where": "engine/rule_engine.py:707",
+  "id": 2125
+ },
+ {
+  "kind": "text",
+  "en": "a hands-on life of courage, skill, and effort — a craftsperson, communicator, sibling-among-many, or someone who lived by their own initiative and daring",
+  "where": "engine/rule_engine.py:708",
+  "id": 2126
+ },
+ {
+  "kind": "text",
+  "en": "a life rooted in home, land, mother, and emotional belonging — deeply domestic, tied to a place, property, or the inner emotional world",
+  "where": "engine/rule_engine.py:709",
+  "id": 2127
+ },
+ {
+  "kind": "text",
+  "en": "a creative, devotional, or scholarly life — teaching, artistry, mantra, or speculative intelligence were the center of gravity",
+  "where": "engine/rule_engine.py:710",
+  "id": 2128
+ },
+ {
+  "kind": "text",
+  "en": "a life of service, discipline, conflict, or healing — a soldier, healer, servant, or someone defined by daily toil and the overcoming of obstacles",
+  "where": "engine/rule_engine.py:711",
+  "id": 2129
+ },
+ {
+  "kind": "text",
+  "en": "a life centered on others — partnership, trade, diplomacy, or public dealings — identity built through relationship and the marketplace",
+  "where": "engine/rule_engine.py:712",
+  "id": 2130
+ },
+ {
+  "kind": "text",
+  "en": "a life marked by the hidden, the transformative, and the sudden — occult knowledge, research, crises, inheritance, or a preoccupation with what lies beneath the surface",
+  "where": "engine/rule_engine.py:713",
+  "id": 2131
+ },
+ {
+  "kind": "text",
+  "en": "a philosophical, religious, or wandering life — a teacher, priest, pilgrim, or seeker of higher meaning, law, and distant horizons",
+  "where": "engine/rule_engine.py:714",
+  "id": 2132
+ },
+ {
+  "kind": "text",
+  "en": "a life of authority, duty, and public standing — governance, command, career, or a strong preoccupation with status and worldly achievement",
+  "where": "engine/rule_engine.py:715",
+  "id": 2133
+ },
+ {
+  "kind": "text",
+  "en": "a life of gains, networks, and community — commerce, alliances, elder siblings, and the pursuit of ambitions through the collective",
+  "where": "engine/rule_engine.py:716",
+  "id": 2134
+ },
+ {
+  "kind": "text",
+  "en": "a secluded, foreign, or otherworldly life — monastery, exile, distant lands, imagination, or a withdrawal from the visible world toward the inner or the beyond",
+  "where": "engine/rule_engine.py:717",
+  "id": 2135
+ },
+ {
+  "kind": "text",
+  "en": "with a zealous, assertive, leadership-driven temperament (fire signs)",
+  "where": "engine/rule_engine.py:723",
+  "id": 2136
+ },
+ {
+  "kind": "text",
+  "en": "with a practical, material, endurance-driven temperament (earth signs)",
+  "where": "engine/rule_engine.py:724",
+  "id": 2137
+ },
+ {
+  "kind": "text",
+  "en": "with an intellectual, social, communicative temperament (air signs)",
+  "where": "engine/rule_engine.py:725",
+  "id": 2138
+ },
+ {
+  "kind": "text",
+  "en": "with an emotional, intuitive, devotional temperament (water signs)",
+  "where": "engine/rule_engine.py:726",
+  "id": 2139
+ },
+ {
+  "kind": "text",
+  "en": "yourself - your body, health and personality",
+  "where": "engine/rule_engine.py:740",
+  "id": 2140
+ },
+ {
+  "kind": "text",
+  "en": "money, family and what you say",
+  "where": "engine/rule_engine.py:741",
+  "id": 2141
+ },
+ {
+  "kind": "text",
+  "en": "courage, siblings and your own effort",
+  "where": "engine/rule_engine.py:742",
+  "id": 2142
+ },
+ {
+  "kind": "text",
+  "en": "home, your mother and inner peace",
+  "where": "engine/rule_engine.py:743",
+  "id": 2143
+ },
+ {
+  "kind": "text",
+  "en": "creativity, romance and learning",
+  "where": "engine/rule_engine.py:744",
+  "id": 2144
+ },
+ {
+  "kind": "text",
+  "en": "work, health and overcoming obstacles",
+  "where": "engine/rule_engine.py:745",
+  "id": 2145
+ },
+ {
+  "kind": "text",
+  "en": "marriage and close partnerships",
+  "where": "engine/rule_engine.py:746",
+  "id": 2146
+ },
+ {
+  "kind": "text",
+  "en": "big changes, shared money and hidden things",
+  "where": "engine/rule_engine.py:747",
+  "id": 2147
+ },
+ {
+  "kind": "text",
+  "en": "luck, higher learning, teachers and father",
+  "where": "engine/rule_engine.py:748",
+  "id": 2148
+ },
+ {
+  "kind": "text",
+  "en": "career, status and public life",
+  "where": "engine/rule_engine.py:749",
+  "id": 2149
+ },
+ {
+  "kind": "text",
+  "en": "income, friendships and big goals",
+  "where": "engine/rule_engine.py:750",
+  "id": 2150
+ },
+ {
+  "kind": "text",
+  "en": "letting go, foreign lands and spiritual life",
+  "where": "engine/rule_engine.py:751",
+  "id": 2151
+ },
+ {
+  "kind": "text",
+  "en": "a warrior, athlete, or someone whose whole identity was built through sheer physical presence and self-reliance",
+  "where": "engine/rule_engine.py:787",
+  "id": 2152
+ },
+ {
+  "kind": "text",
+  "en": "a merchant, treasurer, singer, or head of a family estate - someone who managed wealth, voice, or lineage",
+  "where": "engine/rule_engine.py:788",
+  "id": 2153
+ },
+ {
+  "kind": "text",
+  "en": "a craftsperson, messenger, scout, or performer - someone who lived by hands-on skill, courage, and initiative",
+  "where": "engine/rule_engine.py:789",
+  "id": 2154
+ },
+ {
+  "kind": "text",
+  "en": "a farmer, homemaker, landowner, or caretaker of a household - someone whose life centered on land, home, and family",
+  "where": "engine/rule_engine.py:790",
+  "id": 2155
+ },
+ {
+  "kind": "text",
+  "en": "a teacher, priest, artist, or advisor to rulers - someone whose gifts were creative, devotional, or intellectual",
+  "where": "engine/rule_engine.py:791",
+  "id": 2156
+ },
+ {
+  "kind": "text",
+  "en": "a soldier, healer, servant, or laborer - someone who lived through discipline, conflict, or care for others in need",
+  "where": "engine/rule_engine.py:792",
+  "id": 2157
+ },
+ {
+  "kind": "text",
+  "en": "a trader, diplomat, matchmaker, or business partner - someone whose life was built through dealing with other people",
+  "where": "engine/rule_engine.py:793",
+  "id": 2158
+ },
+ {
+  "kind": "text",
+  "en": "an occultist, researcher, undertaker, or inheritor of hidden knowledge - someone drawn to what lies beneath the surface",
+  "where": "engine/rule_engine.py:794",
+  "id": 2159
+ },
+ {
+  "kind": "text",
+  "en": "a pilgrim, scholar, judge, or religious teacher - someone whose life revolved around law, faith, or long journeys",
+  "where": "engine/rule_engine.py:795",
+  "id": 2160
+ },
+ {
+  "kind": "text",
+  "en": "a ruler, administrator, or person of public authority - someone whose identity was built through career and status",
+  "where": "engine/rule_engine.py:796",
+  "id": 2161
+ },
+ {
+  "kind": "text",
+  "en": "a guild member, trader's network organizer, or elder sibling managing a large household - someone who worked through community and alliance",
+  "where": "engine/rule_engine.py:797",
+  "id": 2162
+ },
+ {
+  "kind": "text",
+  "en": "a monk, exile, hospital worker, or someone who lived apart from ordinary society - a life of seclusion, service, or foreign lands",
+  "where": "engine/rule_engine.py:798",
+  "id": 2163
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out in a way that sought recognition, authority, or being seen as the one in charge",
+  "where": "engine/rule_engine.py:806",
+  "id": 2164
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out with strong emotional investment - care for others, or a deep need to belong",
+  "where": "engine/rule_engine.py:807",
+  "id": 2165
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out with courage, competitiveness, and a willingness to fight for it",
+  "where": "engine/rule_engine.py:808",
+  "id": 2166
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out through cleverness, communication, and adaptability",
+  "where": "engine/rule_engine.py:809",
+  "id": 2167
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out with a sense of purpose, teaching, or moral responsibility",
+  "where": "engine/rule_engine.py:810",
+  "id": 2168
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out with an eye for beauty, relationship, and pleasure",
+  "where": "engine/rule_engine.py:811",
+  "id": 2169
+ },
+ {
+  "kind": "text",
+  "en": "and whatever the role, it was carried out through hard, patient, often thankless labor over a long stretch of time",
+  "where": "engine/rule_engine.py:812",
+  "id": 2170
+ },
+ {
+  "kind": "text",
+  "en": "Classically, Ketu marks what the soul had already 'finished' — a mastery so complete it was carried in as instinct rather than learned again. Wherever Ketu sits is therefore read as the life-arena that was over-developed to the point of diminishing returns: familiar, even effortless, but no longer where growth lies. That is precisely why this life pulls in the opposite direction (see the main karmic goal below), toward the house and sign Rahu occupies.",
+  "where": "engine/rule_engine.py:833",
+  "id": 2171
+ },
+ {
+  "kind": "text",
+  "en": "building a confident, self-directed identity — learning to stand on one's own initiative rather than leaning on old, over-familiar support",
+  "where": "engine/rule_engine.py:882",
+  "id": 2172
+ },
+ {
+  "kind": "text",
+  "en": "developing a stable relationship with resources, family, and one's own voice — learning to value and articulate what one has rather than taking it for granted",
+  "where": "engine/rule_engine.py:883",
+  "id": 2173
+ },
+ {
+  "kind": "text",
+  "en": "growing into courage, self-effort, and communication — reaching for skills and initiative that must be earned firsthand, not inherited",
+  "where": "engine/rule_engine.py:884",
+  "id": 2174
+ },
+ {
+  "kind": "text",
+  "en": "cultivating genuine inner and domestic security — building a home, emotional foundation, or sense of belonging that had to be consciously created rather than assumed",
+  "where": "engine/rule_engine.py:885",
+  "id": 2175
+ },
+ {
+  "kind": "text",
+  "en": "developing creative, intellectual, or devotional expression — reaching toward legacy or original ideas rather than simply repeating what already came easily",
+  "where": "engine/rule_engine.py:886",
+  "id": 2176
+ },
+ {
+  "kind": "text",
+  "en": "mastering discipline, service, and the resolution of conflict — learning to face obstacles directly and build competence through daily effort",
+  "where": "engine/rule_engine.py:887",
+  "id": 2177
+ },
+ {
+  "kind": "text",
+  "en": "learning genuine partnership and reciprocity — reaching outward into relationship and negotiation rather than staying self-contained",
+  "where": "engine/rule_engine.py:888",
+  "id": 2178
+ },
+ {
+  "kind": "text",
+  "en": "engaging transformation, shared resources, and the hidden directly — learning to sit with crisis, depth, and change instead of avoiding it",
+  "where": "engine/rule_engine.py:889",
+  "id": 2179
+ },
+ {
+  "kind": "text",
+  "en": "reaching for higher meaning, belief, and far horizons — building a personal philosophy or sense of purpose rather than inheriting one unexamined",
+  "where": "engine/rule_engine.py:890",
+  "id": 2180
+ },
+ {
+  "kind": "text",
+  "en": "stepping into public responsibility, career, and authority — building a reputation and standing earned through visible effort, not granted by birthright",
+  "where": "engine/rule_engine.py:891",
+  "id": 2181
+ },
+ {
+  "kind": "text",
+  "en": "growing through community, ambition, and long-term gain — learning to work toward goals through networks and collective effort rather than solitary comfort",
+  "where": "engine/rule_engine.py:892",
+  "id": 2182
+ },
+ {
+  "kind": "text",
+  "en": "developing surrender, imagination, and release — reaching toward the unseen, the spiritual, or the foreign, rather than clinging to the visible and familiar",
+  "where": "engine/rule_engine.py:893",
+  "id": 2183
+ },
+ {
+  "kind": "text",
+  "en": " Traditionally, whatever this planet governs is treated as the soul's central preoccupation across lifetimes — the quality it keeps returning to develop, express, or master — rather than a peripheral trait.",
+  "where": "engine/rule_engine.py:988",
+  "id": 2184
+ },
+ {
+  "kind": "text",
+  "en": "heart, bones, general vitality, and the eyes",
+  "where": "engine/rule_engine.py:1235",
+  "id": 2185
+ },
+ {
+  "kind": "text",
+  "en": "the mind and emotions, blood, bodily fluids, and the chest/lungs",
+  "where": "engine/rule_engine.py:1236",
+  "id": 2186
+ },
+ {
+  "kind": "text",
+  "en": "blood, muscles, inflammation, accidents, wounds, and surgical events",
+  "where": "engine/rule_engine.py:1237",
+  "id": 2187
+ },
+ {
+  "kind": "text",
+  "en": "the nervous system, skin, and speech",
+  "where": "engine/rule_engine.py:1238",
+  "id": 2188
+ },
+ {
+  "kind": "text",
+  "en": "the liver, weight/metabolism, and sugar regulation",
+  "where": "engine/rule_engine.py:1239",
+  "id": 2189
+ },
+ {
+  "kind": "text",
+  "en": "the reproductive and urinary systems and the kidneys",
+  "where": "engine/rule_engine.py:1240",
+  "id": 2190
+ },
+ {
+  "kind": "text",
+  "en": "chronic and degenerative conditions, the joints, bones, and slow-developing ailments",
+  "where": "engine/rule_engine.py:1241",
+  "id": 2191
+ },
+ {
+  "kind": "text",
+  "en": "hard-to-diagnose, toxic, or unusual conditions",
+  "where": "engine/rule_engine.py:1242",
+  "id": 2192
+ },
+ {
+  "kind": "text",
+  "en": "sudden, undiagnosed, or accident-related conditions",
+  "where": "engine/rule_engine.py:1243",
+  "id": 2193
+ },
+ {
+  "kind": "text",
+  "en": "the head and brain",
+  "where": "engine/rule_engine.py:1289",
+  "id": 2194
+ },
+ {
+  "kind": "text",
+  "en": "the face, mouth, and throat",
+  "where": "engine/rule_engine.py:1290",
+  "id": 2195
+ },
+ {
+  "kind": "text",
+  "en": "the throat, arms, shoulders, and ears",
+  "where": "engine/rule_engine.py:1291",
+  "id": 2196
+ },
+ {
+  "kind": "text",
+  "en": "the chest and lungs",
+  "where": "engine/rule_engine.py:1292",
+  "id": 2197
+ },
+ {
+  "kind": "text",
+  "en": "the heart, upper back, and stomach",
+  "where": "engine/rule_engine.py:1293",
+  "id": 2198
+ },
+ {
+  "kind": "text",
+  "en": "the lower abdomen and intestines (the classical 'disease house' itself)",
+  "where": "engine/rule_engine.py:1294",
+  "id": 2199
+ },
+ {
+  "kind": "text",
+  "en": "the kidneys and lower back",
+  "where": "engine/rule_engine.py:1295",
+  "id": 2200
+ },
+ {
+  "kind": "text",
+  "en": "the reproductive and excretory organs, and chronic or hidden conditions",
+  "where": "engine/rule_engine.py:1296",
+  "id": 2201
+ },
+ {
+  "kind": "text",
+  "en": "the hips and thighs",
+  "where": "engine/rule_engine.py:1297",
+  "id": 2202
+ },
+ {
+  "kind": "text",
+  "en": "the knees and joints",
+  "where": "engine/rule_engine.py:1298",
+  "id": 2203
+ },
+ {
+  "kind": "text",
+  "en": "the calves and ankles",
+  "where": "engine/rule_engine.py:1299",
+  "id": 2204
+ },
+ {
+  "kind": "text",
+  "en": "the feet and the immune system",
+  "where": "engine/rule_engine.py:1300",
+  "id": 2205
+ },
+ {
+  "kind": "text",
+  "en": "you run a bit 'hot' - lots of drive and a strong appetite, but when you are stressed it tends to show up as irritability, heat or acidity",
+  "where": "engine/rule_engine.py:1311",
+  "id": 2206
+ },
+ {
+  "kind": "text",
+  "en": "you are steady and sturdy, with good stamina, but you can get sluggish or put on weight if you sit still for too long",
+  "where": "engine/rule_engine.py:1313",
+  "id": 2207
+ },
+ {
+  "kind": "text",
+  "en": "you are quick and creative with a lot of nervous energy, so worry, dry skin or uneven sleep and eating are your usual signs that you are run down",
+  "where": "engine/rule_engine.py:1315",
+  "id": 2208
+ },
+ {
+  "kind": "text",
+  "en": "you are a mix of calm-and-steady and light-and-restless, so both slowing down too much and overthinking can affect you",
+  "where": "engine/rule_engine.py:1317",
+  "id": 2209
+ },
+ {
+  "kind": "text",
+  "en": "some heat and intensity",
+  "where": "engine/rule_engine.py:1320",
+  "id": 2210
+ },
+ {
+  "kind": "text",
+  "en": "some steadiness",
+  "where": "engine/rule_engine.py:1320",
+  "id": 2211
+ },
+ {
+  "kind": "text",
+  "en": "some restlessness",
+  "where": "engine/rule_engine.py:1320",
+  "id": 2212
+ },
+ {
+  "kind": "text",
+  "en": "a mix of steadiness and restlessness",
+  "where": "engine/rule_engine.py:1321",
+  "id": 2213
+ },
+ {
+  "kind": "text",
+  "en": "it is ordinary and dependable - no big plus or minus.",
+  "where": "engine/rule_engine.py:1332",
+  "id": 2214
+ },
+ {
+  "kind": "text",
+  "en": "your emotional side is neither a strong point nor a weak spot.",
+  "where": "engine/rule_engine.py:1345",
+  "id": 2215
+ },
+ {
+  "kind": "text",
+  "en": "Saturn is about staying power and yours is average - just look after your joints and bones as you get older, like anyone.",
+  "where": "engine/rule_engine.py:1354",
+  "id": 2216
+ },
+ {
+  "kind": "text",
+  "en": "Pitta-leaning constitutions are classically said to benefit from cooling foods, moderation in heat/spice, and avoiding overexertion - general wellness framing, not a diet plan.",
+  "where": "engine/rule_engine.py:1376",
+  "id": 2217
+ },
+ {
+  "kind": "text",
+  "en": "Kapha-leaning constitutions are classically said to benefit from regular movement, lighter meals, and avoiding excess rest - general wellness framing, not a diet plan.",
+  "where": "engine/rule_engine.py:1378",
+  "id": 2218
+ },
+ {
+  "kind": "text",
+  "en": "Vata-leaning constitutions are classically said to benefit from routine, warmth, and grounding habits - general wellness framing, not a diet plan.",
+  "where": "engine/rule_engine.py:1380",
+  "id": 2219
+ },
+ {
+  "kind": "text",
+  "en": "This blended constitution is classically said to benefit from both routine/warmth (Vata) and regular movement (Kapha) - general wellness framing, not a diet plan.",
+  "where": "engine/rule_engine.py:1382",
+  "id": 2220
+ },
+ {
+  "kind": "text",
+  "en": "Rasi (main birth chart)",
+  "where": "engine/rule_engine.py:586",
+  "id": 2221
+ },
+ {
+  "kind": "text",
+  "en": "another part of life",
+  "where": "engine/rule_engine.py:769",
+  "id": 2222
+ },
+ {
+  "kind": "text",
+  "en": "That is usually a supportive, helpful placement for this part of life.",
+  "where": "engine/rule_engine.py:771",
+  "id": 2223
+ },
+ {
+  "kind": "text",
+  "en": "an arena not cleanly captured by a single house theme",
+  "where": "engine/rule_engine.py:823",
+  "id": 2224
+ },
+ {
+  "kind": "text",
+  "en": "Purva Punya (past-life merit)",
+  "where": "engine/rule_engine.py:938",
+  "id": 2225
+ },
+ {
+  "kind": "text",
+  "en": "Dharma (fortune / higher purpose)",
+  "where": "engine/rule_engine.py:939",
+  "id": 2226
+ },
+ {
+  "kind": "text",
+  "en": "Moksha (endings / past attachments)",
+  "where": "engine/rule_engine.py:940",
+  "id": 2227
+ },
+ {
+  "kind": "text",
+  "en": " Classically, a strong or prominent Ketu placement often shows up as an area where the native feels an odd, hard-to-explain fluency or detachment — as if this particular ground has already been covered before.",
+  "where": "engine/rule_engine.py:1006",
+  "id": 2228
+ },
+ {
+  "kind": "text",
+  "en": " Where Ketu describes what already feels familiar, Rahu describes what this incarnation is reaching to build — often the area of greatest ambition, restlessness, and eventual growth once its excesses are tempered by experience.",
+  "where": "engine/rule_engine.py:1024",
+  "id": 2229
+ },
+ {
+  "kind": "text",
+  "en": " Saturn's placement is traditionally read as showing exactly where patience, responsibility, and the slow, unglamorous accumulation of effort become the vehicle through which karma is actually resolved rather than merely felt.",
+  "where": "engine/rule_engine.py:1041",
+  "id": 2230
+ },
+ {
+  "kind": "text",
+  "en": "it is well supported and bounces back quickly, so you tend to recover well.",
+  "where": "engine/rule_engine.py:1328",
+  "id": 2231
+ },
+ {
+  "kind": "text",
+  "en": "it can dip more easily, so sleep, routine and not over-pushing yourself matter a bit more for you than for most.",
+  "where": "engine/rule_engine.py:1330",
+  "id": 2232
+ },
+ {
+  "kind": "text",
+  "en": "your mind can feel busier or more pressured than most at times - calm routines, good sleep and talking things through help.",
+  "where": "engine/rule_engine.py:1337",
+  "id": 2233
+ },
+ {
+  "kind": "text",
+  "en": "your mind has some built-in support, so you tend to settle and calm down fairly easily.",
+  "where": "engine/rule_engine.py:1340",
+  "id": 2234
+ },
+ {
+  "kind": "text",
+  "en": "your emotional side is well supported, so you tend to stay level.",
+  "where": "engine/rule_engine.py:1342",
+  "id": 2235
+ },
+ {
+  "kind": "text",
+  "en": "your feelings can swing a bit more easily, so give your mind proper rest and downtime.",
+  "where": "engine/rule_engine.py:1344",
+  "id": 2236
+ },
+ {
+  "kind": "text",
+  "en": "Saturn is about staying power, and yours is strong, so you tend to wear well over the years.",
+  "where": "engine/rule_engine.py:1350",
+  "id": 2237
+ },
+ {
+  "kind": "text",
+  "en": "Saturn is about staying power and it is a bit strained here, so bones, joints and slow-building niggles deserve steady care and regular check-ups.",
+  "where": "engine/rule_engine.py:1352",
+  "id": 2238
+ },
+ {
+  "kind": "text",
+  "en": "a fire-driven constitution - sharp digestion, strong drive, and a tendency toward heat, inflammation, or irritability when out of balance",
+  "where": "engine/rule_engine.py:1364",
+  "id": 2239
+ },
+ {
+  "kind": "text",
+  "en": "an earth-driven constitution - steady, well-built, and resilient, with a tendency toward sluggishness, weight gain, or congestion when out of balance",
+  "where": "engine/rule_engine.py:1366",
+  "id": 2240
+ },
+ {
+  "kind": "text",
+  "en": "an air-driven constitution - quick, light, and creative, with a tendency toward anxiety, dryness, or irregular digestion/sleep when out of balance",
+  "where": "engine/rule_engine.py:1368",
+  "id": 2241
+ },
+ {
+  "kind": "text",
+  "en": "a water-driven constitution (sources vary between calling this Kapha or a Kapha-Vata blend) - emotionally sensitive and fluid-retentive, with a tendency toward congestion or emotional overwhelm when out of balance",
+  "where": "engine/rule_engine.py:1370",
+  "id": 2242
+ },
+ {
+  "kind": "text",
+  "en": "everyday health and immunity",
+  "where": "engine/rule_engine.py:1536",
+  "id": 2243
+ },
+ {
+  "kind": "text",
+  "en": "long-running or hidden health matters",
+  "where": "engine/rule_engine.py:1537",
+  "id": 2244
+ },
+ {
+  "kind": "text",
+  "en": "affliction checks",
+  "where": "engine/rule_engine.py:1719",
+  "id": 2245
+ },
+ {
+  "kind": "text",
+  "en": "That's a common, unremarkable result, not a gap in the chart.",
+  "where": "engine/rule_engine.py:1720",
+  "id": 2246
+ },
+ {
+  "kind": "text",
+  "en": "None of the above says anything about what a real partner has done, will do, or is like - it describes tendencies in this person's OWN chart only, and free will always matters more than any single placement.",
+  "where": "engine/rule_engine.py:1779",
+  "id": 2247
+ },
+ {
+  "kind": "text",
+  "en": "In short: none of the 24 classical yogas this app checks are formed in this chart. That's common — most charts trigger only a few, if any; it isn't a deficiency.",
+  "where": "engine/rule_engine.py:1817",
+  "id": 2248
+ },
+ {
+  "kind": "text",
+  "en": "main birth chart",
+  "where": "engine/rule_engine.py:587",
+  "id": 2249
+ },
+ {
+  "kind": "text",
+  "en": "That placement tends to ask for extra effort here, or brings some ups and downs before things settle.",
+  "where": "engine/rule_engine.py:773",
+  "id": 2250
+ },
+ {
+  "kind": "text",
+  "en": "That is a mixed, workable placement for this part of life.",
+  "where": "engine/rule_engine.py:776",
+  "id": 2251
+ },
+ {
+  "kind": "text",
+  "en": "\n\nIn simple terms: these are the old habits and duties your chart suggests you're still carrying - leaning too hard on what already came easily, which now has to be balanced out.",
+  "where": "engine/rule_engine.py:1109",
+  "id": 2252
+ },
+ {
+  "kind": "text",
+  "en": "that is usually a helpful placement, so this area tends to be looked after.",
+  "where": "engine/rule_engine.py:1528",
+  "id": 2253
+ },
+ {
+  "kind": "text",
+  "en": "every other area has nothing sitting on it, which is simply neutral",
+  "where": "engine/rule_engine.py:1568",
+  "id": 2254
+ },
+ {
+  "kind": "text",
+  "en": ", which colors the timing and flavor of this area for the corresponding period of life.",
+  "where": "engine/rule_engine.py:1613",
+  "id": 2255
+ },
+ {
+  "kind": "text",
+  "en": "Career & Profession",
+  "where": "engine/rule_engine.py:1650",
+  "id": 2256
+ },
+ {
+  "kind": "text",
+  "en": "Wealth & Finances",
+  "where": "engine/rule_engine.py:1659",
+  "id": 2257
+ },
+ {
+  "kind": "text",
+  "en": "Marriage & Relationships",
+  "where": "engine/rule_engine.py:1662",
+  "id": 2258
+ },
+ {
+  "kind": "text",
+  "en": "Health & Vitality",
+  "where": "engine/rule_engine.py:1671",
+  "id": 2259
+ },
+ {
+  "kind": "text",
+  "en": "Education & Learning",
+  "where": "engine/rule_engine.py:1673",
+  "id": 2260
+ },
+ {
+  "kind": "text",
+  "en": "Family & Home",
+  "where": "engine/rule_engine.py:1675",
+  "id": 2261
+ },
+ {
+  "kind": "text",
+  "en": "Spirituality & Inner Growth",
+  "where": "engine/rule_engine.py:1677",
+  "id": 2262
+ },
+ {
+  "kind": "text",
+  "en": "Travel & Foreign Connections",
+  "where": "engine/rule_engine.py:1679",
+  "id": 2263
+ },
+ {
+  "kind": "text",
+  "en": "None of this chart's checked commitment/exclusivity indicators (7th-lord affliction, Venus-Mars combinations, Rahu on Venus or the 7th house, a crowded 7th house, or an afflicted Venus) are present here - a common, unremarkable result, not a gap.",
+  "where": "engine/rule_engine.py:1764",
+  "id": 2264
+ },
+ {
+  "kind": "text",
+  "en": "Concretely, that stretch plays out as: ",
+  "where": "engine/rule_engine.py:915",
+  "id": 2265
+ },
+ {
+  "kind": "text",
+  "en": "Three houses classically frame this life's overarching purpose. ",
+  "where": "engine/rule_engine.py:1066",
+  "id": 2266
+ },
+ {
+  "kind": "text",
+  "en": " (A specific two-chart comparison with an actual partner or family member's own Atmakaraka and Moon placement — not just this soul's own disposition — is what the Family Compatibility tab's Karmic Connection sections cover.)",
+  "where": "engine/rule_engine.py:1083",
+  "id": 2267
+ },
+ {
+  "kind": "text",
+  "en": "--- What you may have been (past-life imprint) ---\n",
+  "where": "engine/rule_engine.py:1101",
+  "id": 2268
+ },
+ {
+  "kind": "text",
+  "en": "--- What led here (the actions carried forward) ---\n",
+  "where": "engine/rule_engine.py:1108",
+  "id": 2269
+ },
+ {
+  "kind": "text",
+  "en": "astrology lays your body over your birth chart like a map - each of the 12 houses is a body area, from the head (1st house) down to the feet (12th), and the planets sitting in a house colour that area. It is a way of spotting themes to look after, not a check-up.",
+  "where": "engine/rule_engine.py:1501",
+  "id": 2270
+ },
+ {
+  "kind": "text",
+  "en": "that tends to ask for extra care here, with some ups and downs before things settle.",
+  "where": "engine/rule_engine.py:1530",
+  "id": 2271
+ },
+ {
+  "kind": "text",
+  "en": "that is a mixed, workable placement.",
+  "where": "engine/rule_engine.py:1532",
+  "id": 2272
+ },
+ {
+  "kind": "text",
+  "en": "worth extra attention",
+  "where": "engine/rule_engine.py:1551",
+  "id": 2273
+ },
+ {
+  "kind": "text",
+  "en": "money and finances",
+  "where": "engine/rule_engine.py:1660",
+  "id": 2274
+ },
+ {
+  "kind": "text",
+  "en": "health and vitality",
+  "where": "engine/rule_engine.py:1672",
+  "id": 2275
+ },
+ {
+  "kind": "text",
+  "en": "home and family",
+  "where": "engine/rule_engine.py:1676",
+  "id": 2276
+ },
+ {
+  "kind": "text",
+  "en": "spiritual life",
+  "where": "engine/rule_engine.py:1678",
+  "id": 2277
+ },
+ {
+  "kind": "text",
+  "en": "travel and foreign ties",
+  "where": "engine/rule_engine.py:1680",
+  "id": 2278
+ },
+ {
+  "kind": "text",
+  "en": "On commitment and exclusivity themes specifically - read only as tendencies in this person's OWN chart, never as evidence about a partner (see the caveat above): ",
+  "where": "engine/rule_engine.py:1758",
+  "id": 2279
+ },
+ {
+  "kind": "text",
+  "en": "--- Your main karmic goal this life ---\n",
+  "where": "engine/rule_engine.py:1115",
+  "id": 2280
+ },
+ {
+  "kind": "text",
+  "en": "6th-house (disease) lord",
+  "where": "engine/rule_engine.py:1484",
+  "id": 2281
+ },
+ {
+  "kind": "text",
+  "en": "8th-house (chronic/hidden) lord",
+  "where": "engine/rule_engine.py:1486",
+  "id": 2282
+ },
+ {
+  "kind": "text",
+  "en": "Saturn, classical significator of chronic conditions",
+  "where": "engine/rule_engine.py:1488",
+  "id": 2283
+ },
+ {
+  "kind": "text",
+  "en": "this is your overall energy, and ",
+  "where": "engine/rule_engine.py:1516",
+  "id": 2284
+ },
+ {
+  "kind": "text",
+  "en": "the Moon is your mind and mood - ",
+  "where": "engine/rule_engine.py:1517",
+  "id": 2285
+ },
+ {
+  "kind": "text",
+  "en": "the spots on your body map that carry a planet worth a little extra care are ",
+  "where": "engine/rule_engine.py:1563",
+  "id": 2286
+ },
+ {
+  "kind": "text",
+  "en": "Body areas where your own planets sit: ",
+  "where": "engine/rule_engine.py:1569",
+  "id": 2287
+ },
+ {
+  "kind": "text",
+  "en": "these are just stretches of life when it is smart to be a bit more mindful of your health - book the check-up and keep your routine going. Think of it as a friendly nudge, not a warning that something will happen.",
+  "where": "engine/rule_engine.py:1581",
+  "id": 2288
+ },
+ {
+  "kind": "text",
+  "en": " Specifically: ",
+  "where": "engine/rule_engine.py:1750",
+  "id": 2289
+ },
+ {
+  "kind": "text",
+  "en": " No strong classical multiplicity indicators (a dual-sign 7th lord, a crowded 7th house, Rahu/Ketu sharing a house with the 7th lord, or Venus in a dual sign) are present here.",
+  "where": "engine/rule_engine.py:1751",
+  "id": 2290
+ },
+ {
+  "kind": "text",
+  "en": "these have a friendly, supportive planet on them: ",
+  "where": "engine/rule_engine.py:1566",
+  "id": 2291
+ },
+ {
+  "kind": "text",
+  "en": ". Think of shaded spots as 'keep an eye on this', not 'something is wrong'.",
+  "where": "engine/rule_engine.py:1570",
+  "id": 2292
+ },
+ {
+  "kind": "text",
+  "en": "Classically-flagged age windows worth being mindful during (a Mahadasha is a multi-year planetary period; these are the ones ruled by a planet tied to health themes above - not certainties, just windows classically worth a bit more attention): ",
+  "where": "engine/rule_engine.py:1575",
+  "id": 2293
+ },
+ {
+  "kind": "template",
+  "en": "{0} and {1} — a mixed temperament pairing.",
+  "args": [
+   "parent_gana",
+   "child_gana"
+  ],
+  "where": "engine/family_bonds.py:291",
+  "id": 2294
+ },
+ {
+  "kind": "template",
+  "en": ", and {0}",
+  "args": [
+   "', '.join(c[0] for c in children)"
+  ],
+  "where": "engine/family_bonds.py:494",
+  "id": 2295
+ },
+ {
+  "kind": "template",
+  "en": "=== Family Compatibility Report ===\n\nThis report brings together everyone whose chart has been generated so far — {0}",
+  "args": [
+   "self_label"
+  ],
+  "where": "engine/family_bonds.py:491",
+  "id": 2296
+ },
+ {
+  "kind": "template",
+  "en": "{0} ({1}/{2} points): {3} Between {4} and {5}, this pairing {6}",
+  "args": [
+   "name",
+   "koota['points']",
+   "koota['max_points']",
+   "blurb",
+   "label_a",
+   "label_b",
+   "phrase"
+  ],
+  "where": "engine/family_bonds.py:154",
+  "id": 2297
+ },
+ {
+  "kind": "template",
+  "en": "--- Karmic Connection: {0} <-> {1} (past lives, goals & mutual support) ---\n{2}",
+  "args": [
+   "self_label",
+   "child_label",
+   "child_karmic['narrative']"
+  ],
+  "where": "engine/family_bonds.py:549",
+  "id": 2298
+ },
+ {
+  "kind": "template",
+  "en": "--- Parent-Child Thematic Connection: {0} <-> {1} ---\n{2}\n\n{3}\n\n{4}\n\n{5}",
+  "args": [
+   "self_label",
+   "child_label",
+   "pcc['methodology_note']",
+   "pcc['narrative']",
+   "pcc['reflection']",
+   "pcc['caveat']"
+  ],
+  "where": "engine/family_bonds.py:542",
+  "id": 2299
+ },
+ {
+  "kind": "template",
+  "en": "--- Ashtakoot Guna Milan: {0} <-> {1} ---\n{2}\n\n{3}\n\n{4}",
+  "args": [
+   "self_label",
+   "partner_label",
+   "ashtakoot_result['methodology_note']",
+   "koota_lines",
+   "ashtakoot_result['overall_narrative']"
+  ],
+  "where": "engine/family_bonds.py:522",
+  "id": 2300
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s main goal this life: {1}",
+  "args": [
+   "label",
+   "goal"
+  ],
+  "where": "engine/family_bonds.py:434",
+  "id": 2301
+ },
+ {
+  "kind": "template",
+  "en": "By the older Parashari system, the 7th house (marriage/partnership) is ruled by {0} (in {1}), placed in house {2}: {3}",
+  "args": [
+   "seventh['lord']",
+   "seventh['lord_sign']",
+   "seventh['placed_in_house']",
+   "seventh['reading'].get('effects') or seventh['reading'].get('summary')"
+  ],
+  "where": "engine/family_bonds.py:396",
+  "id": 2302
+ },
+ {
+  "kind": "template",
+  "en": "Both Moon signs share the {0} element — a natural, intuitive resonance in temperament and emotional pacing.",
+  "args": [
+   "parent_element"
+  ],
+  "where": "engine/family_bonds.py:278",
+  "id": 2303
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s growth this life pulls toward Rahu in {1} (house {2}) — the unfamiliar direction the soul is here to develop.",
+  "args": [
+   "label",
+   "rahu.get('sign', '?')",
+   "rahu.get('house', '?')"
+  ],
+  "where": "engine/family_bonds.py:436",
+  "id": 2304
+ },
+ {
+  "kind": "template",
+  "en": "{0}: Ketu in {1} (house {2}) marks the strongest past-life imprint.",
+  "args": [
+   "label",
+   "ketu.get('sign', '?')",
+   "ketu.get('house', '?')"
+  ],
+  "where": "engine/family_bonds.py:429",
+  "id": 2305
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s Putrakaraka (children-significator) is {1}, placed in {2}, house {3}.",
+  "args": [
+   "label",
+   "pk['planet']",
+   "pk['sign']",
+   "pk['house']"
+  ],
+  "where": "engine/family_bonds.py:400",
+  "id": 2306
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s Darakaraka (Jaimini's spouse-significator) is {1}, placed in {2}, house {3}.",
+  "args": [
+   "label",
+   "dk['planet']",
+   "dk['sign']",
+   "dk['house']"
+  ],
+  "where": "engine/family_bonds.py:390",
+  "id": 2307
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s Atmakaraka (soul-significator) is {1} in {2}, house {3} — the core drive this person's chart is organized around.",
+  "args": [
+   "label",
+   "ak['planet']",
+   "ak['sign']",
+   "ak['house']"
+  ],
+  "where": "engine/family_bonds.py:386",
+  "id": 2308
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s Putrakaraka is {1}; {2}'s Atmakaraka is {3}. By classical planetary friendship, {4} and {5} share {6}.",
+  "args": [
+   "parent_label",
+   "pk['planet']",
+   "child_label",
+   "ak['planet']",
+   "pk['planet']",
+   "ak['planet']",
+   "tone"
+  ],
+  "where": "engine/family_bonds.py:313",
+  "id": 2309
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s Putrakaraka (children significator) and {1}'s own Atmakaraka (soul significator) are the SAME planet ({2}) — a notable classical resonance, traditionally read as an unusually direct thematic thread between what {3} seeks through children and what {4}'s own chart centers its identity around.",
+  "args": [
+   "parent_label",
+   "child_label",
+   "pk['planet']",
+   "parent_label",
+   "child_label"
+  ],
+  "where": "engine/family_bonds.py:298",
+  "id": 2310
+ },
+ {
+  "kind": "template",
+  "en": "The koota(s) scoring zero — {0} — are the classical areas this system flags for conscious attention rather than automatic ease; this does not mean incompatibility, only that these specific dimensions may take more deliberate effort than others. ",
+  "args": [
+   "', '.join(weak)"
+  ],
+  "where": "engine/family_bonds.py:171",
+  "id": 2311
+ },
+ {
+  "kind": "template",
+  "en": "The strongest-scoring areas are {0}, suggesting these are natural points of ease in the relationship. ",
+  "args": [
+   "', '.join(strong)"
+  ],
+  "where": "engine/family_bonds.py:167",
+  "id": 2312
+ },
+ {
+  "kind": "template",
+  "en": "How each can support the other toward these goals:\n{0} grows by leaning into the themes of Rahu in {1} (house {2}) — territory that feels unfamiliar at first, so {3} helps most by encouraging {4} there rather than letting them retreat to the old, over-comfortable Ketu pattern. Reciprocally, {5} grows by leaning into Rahu in {6} (house {7}), and {8} helps most by steadying and encouraging {9} in exactly that direction. In practice, each person's natural past-life strengths (their Ketu arena) are often precisely what the other one is still reaching to build (their Rahu direction) — which is what makes family members such effective, if sometimes uncomfortable, mirrors for each other's growth.",
+  "args": [
+   "a_label",
+   "a_rahu.get('sign', '?')",
+   "a_rahu.get('house', '?')",
+   "b_label",
+   "a_label",
+   "b_label",
+   "b_rahu.get('sign', '?')",
+   "b_rahu.get('house', '?')",
+   "a_label",
+   "b_label"
+  ],
+  "where": "engine/family_bonds.py:454",
+  "id": 2313
+ },
+ {
+  "kind": "template",
+  "en": "In practice, these three threads are most useful as a starting point for noticing patterns rather than as an explanation to lean on too heavily. An elemental match (or mismatch) between {0} and {1} says something about natural pacing — how quickly each of you moves through emotions, decisions, or excitement — and mismatches here are common and workable, not a warning sign. The Gana comparison speaks to baseline temperament: a shared Gana often means {2} and {3} 'get' each other's moods quickly, while a mixed Gana pairing (as with any two family members) simply means each may need to explain their own reactions a little more explicitly for the other to follow. The Putrakaraka-Atmakaraka thread is the most classically specific of the three: it points at what {4}'s own chart says about parenting instinctively, set against what {5}'s own chart says about their core drive — where those two align, parenting can feel intuitive; where they differ, {6} may find that supporting {7} well means consciously stepping outside a first instinct rather than assuming it will land the same way it would for a differently-wired child.",
+  "args": [
+   "parent_label",
+   "child_label",
+   "parent_label",
+   "child_label",
+   "parent_label",
+   "child_label",
+   "parent_label",
+   "child_label"
+  ],
+  "where": "engine/family_bonds.py:327",
+  "id": 2314
+ },
+ {
+  "kind": "template",
+  "en": "Three traditional threads, read together, sketch a symbolic picture of the {0}-{1} bond. First, by Moon-sign element: {2} Second, by temperament group (Gana): {3} Third, by Jaimini significator: {4} None of this is a scored verdict the way Ashtakoot is for a marriage — it is a thematic lens for reflecting on natural tendencies in how {5} and {6} may relate, not a prediction or a claim about a specific shared history.",
+  "args": [
+   "parent_label",
+   "child_label",
+   "elemental['note']",
+   "temperament['note']",
+   "putrakaraka_link['note']",
+   "parent_label",
+   "child_label"
+  ],
+  "where": "engine/family_bonds.py:319",
+  "id": 2315
+ },
+ {
+  "kind": "template",
+  "en": "As with every technique in this project, Ashtakoot is one traditional lens among several a real relationship should be evaluated by — see compatibility.py's own docstring for exactly which parts of this scoring are well-sourced versus documented simplification. In practice, a high total score is best read as 'several structural supports are already in place,' not as a guarantee, and a lower or partial score is best read as 'certain dimensions may need more conscious attention,' not as a verdict against the relationship — every long-term partnership, regardless of its Ashtakoot total, still depends far more on how two specific people choose to treat each other day to day than on any one classical calculation. The eight koota breakdowns below are meant to be read as a map of WHERE to pay attention, not as a substitute for actually getting to know how {0} and {1} communicate, handle stress, and support each other in practice.",
+  "args": [
+   "label_a",
+   "label_b"
+  ],
+  "where": "engine/family_bonds.py:188",
+  "id": 2316
+ },
+ {
+  "kind": "template",
+  "en": "Across all eight kootas, {0} and {1} score {2:.1f} out of {3} points — {4}. ",
+  "args": [
+   "label_a",
+   "label_b",
+   "total",
+   "mx",
+   "result['verdict']"
+  ],
+  "where": "engine/family_bonds.py:164",
+  "id": 2317
+ },
+ {
+  "kind": "template",
+  "en": "scores a partial {0} of {1} points here",
+  "args": [
+   "pts",
+   "mx"
+  ],
+  "where": "engine/family_bonds.py:133",
+  "id": 2318
+ },
+ {
+  "kind": "text",
+  "en": "This is a thematic, symbolic exploration, not a scored compatibility test — Ashtakoot Guna Milan is a classical MARRIAGE-compatibility system and is deliberately not applied here to a parent/child pair, which it was never designed to evaluate. Nothing below describes a literal past-life history between these two specific people; it reads classical significators symbolically, the same way the Karmic & Past Life tab does for an individual chart.",
+  "where": "engine/family_bonds.py:243",
+  "id": 2319
+ },
+ {
+  "kind": "text",
+  "en": "This karmic view is a symbolic, traditional lens — it reads each person's own Ketu (past-life imprint), Rahu (this-life growth direction), and Atmakaraka (soul focus), then reflects on how the two might support each other. It is NOT a claim about a literal shared past life between these two specific people, and NOT a verdict on the relationship.",
+  "where": "engine/family_bonds.py:408",
+  "id": 2320
+ },
+ {
+  "kind": "text",
+  "en": "Varna reflects a broad spiritual/temperamental hierarchy between the two people — traditionally read as whether one partner's natural disposition can comfortably 'lead' the household's spiritual and ethical tone without friction. Classically it's considered the lightest-weighted koota (1 of 36 points) precisely because it captures such a broad, background quality rather than a decisive one on its own.",
+  "where": "engine/family_bonds.py:51",
+  "id": 2321
+ },
+ {
+  "kind": "text",
+  "en": "Vashya describes mutual magnetism and the capacity for each partner to hold the other's attention and cooperation — literally 'the ability to be drawn toward and stay attracted to' one another. It is traditionally read alongside Yoni as one of the more instinctive, less consciously-controlled dimensions of a relationship's day-to-day chemistry.",
+  "where": "engine/family_bonds.py:58",
+  "id": 2322
+ },
+ {
+  "kind": "text",
+  "en": "Tara (via each partner's nakshatra count from the other's) is read as an indicator of general wellbeing each partner brings to the other — health, safety, and everyday good fortune within the relationship. Because it's calculated bidirectionally (each partner counted from the other), it can score a partial result even when only one direction of the count lands favorably.",
+  "where": "engine/family_bonds.py:65",
+  "id": 2323
+ },
+ {
+  "kind": "text",
+  "en": "Yoni, keyed to the symbolic animal of each partner's nakshatra, is the koota most associated with physical and instinctive compatibility — the bodily, non-verbal register of the relationship, sometimes described as how naturally two people's underlying temperaments 'move' alongside each other outside of conscious effort.",
+  "where": "engine/family_bonds.py:72",
+  "id": 2324
+ },
+ {
+  "kind": "text",
+  "en": "Graha Maitri compares the natural classical friendship between the planetary rulers of each partner's Moon sign — read as mental and intellectual compatibility, how naturally the two minds cooperate on ideas, values, and everyday decisions. It carries real weight (5 of 36 points) because classical texts treat a shared or friendly mental wavelength as foundational to a lasting partnership.",
+  "where": "engine/family_bonds.py:78",
+  "id": 2325
+ },
+ {
+  "kind": "text",
+  "en": "Gana (Deva/divine, Manushya/human, or Rakshasa/turbulent temperament) is read as basic temperament compatibility — how naturally the two personalities' underlying dispositions, energy levels, and emotional styles coexist day to day, independent of how much either partner consciously tries.",
+  "where": "engine/family_bonds.py:85",
+  "id": 2326
+ },
+ {
+  "kind": "text",
+  "en": "Bhakoot, based on the angular distance between the two Moon signs, is traditionally tied to the relationship's capacity for love, family growth, and long-term prosperity together — several classical texts specifically connect it to the ease of building a shared household and raising a family over time.",
+  "where": "engine/family_bonds.py:91",
+  "id": 2327
+ },
+ {
+  "kind": "text",
+  "en": "Nadi is the single highest-weighted koota (8 of 36 points) and is traditionally read as a genetic/constitutional compatibility marker most associated with the health and ease of having children together — its outsized weight reflects how seriously classical texts treat this particular dimension relative to the other seven.",
+  "where": "engine/family_bonds.py:97",
+  "id": 2328
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high — Varna's element-based derivation and its directional (higher-rank-should-not-be-lower) rule are described identically across every classical and contemporary source checked while building this project.",
+  "where": "engine/family_bonds.py:105",
+  "id": 2329
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high for the whole-sign version used here — the one documented gap is that Sagittarius and Capricorn classically split at their midpoint into two different Vashya categories, which this project's whole-sign approach does not implement (see avkahada.py's own note).",
+  "where": "engine/family_bonds.py:106",
+  "id": 2330
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high — the nakshatra-count-modulo-9 method and which remainders count as unfavorable are consistently described across sources with no meaningful disagreement found.",
+  "where": "engine/family_bonds.py:107",
+  "id": 2331
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high for same-animal and the 7 classical enemy pairs, but a documented simplification for everything else — no source found spells out a complete, consistent friendly/neutral/unfriendly matrix for every remaining animal pair, so this project scores those as a flat neutral rather than guessing at finer distinctions.",
+  "where": "engine/family_bonds.py:108",
+  "id": 2332
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high for the underlying planetary friendship table itself (cross-checked against its well-known asymmetric quirks), but the exact numeric point values for the two 'middle' friend/neutral/enemy combinations follow the best-supported convention rather than a single directly-cited numeric source.",
+  "where": "engine/family_bonds.py:109",
+  "id": 2333
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high — the three Gana groups and their pairwise point values are stable across every source checked.",
+  "where": "engine/family_bonds.py:110",
+  "id": 2334
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: moderate-high — the three dosha-causing sign-distance pairs and the lord-friendship cancellation rule are cited consistently, though not verified here against a primary classical Sanskrit text directly.",
+  "where": "engine/family_bonds.py:111",
+  "id": 2335
+ },
+ {
+  "kind": "text",
+  "en": "Sourcing confidence: high for the base same/different-Nadi score, but classical cancellation exceptions (e.g. same nakshatra with different pada) are described inconsistently across sources and are deliberately NOT auto-applied here.",
+  "where": "engine/family_bonds.py:112",
+  "id": 2336
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: do the two of you find it easy to agree on values and who takes the lead in which areas of shared life, without it feeling like a power struggle?",
+  "where": "engine/family_bonds.py:116",
+  "id": 2337
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: does the everyday pull toward each other feel mutual and comfortable, or does it feel more one-sided?",
+  "where": "engine/family_bonds.py:117",
+  "id": 2338
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: do you tend to bring out steadiness and wellbeing in each other, especially during stressful periods?",
+  "where": "engine/family_bonds.py:118",
+  "id": 2339
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: does physical and instinctive rapport come naturally, or does it need more deliberate attention than other parts of the relationship?",
+  "where": "engine/family_bonds.py:119",
+  "id": 2340
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: when you disagree, does it feel like two compatible minds working through a problem, or two very different operating systems?",
+  "where": "engine/family_bonds.py:120",
+  "id": 2341
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: do your baseline energy levels and emotional tempos match well, or does one of you regularly need to slow down (or speed up) for the other?",
+  "where": "engine/family_bonds.py:121",
+  "id": 2342
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: does building a shared life together — home, finances, family plans — feel like it flows, or does it take unusually deliberate coordination?",
+  "where": "engine/family_bonds.py:122",
+  "id": 2343
+ },
+ {
+  "kind": "text",
+  "en": "Worth reflecting on: this specific koota is the one classical texts most flag for a conversation with a qualified astrologer rather than a DIY reading, given the cancellation-exception ambiguity documented in compatibility.py.",
+  "where": "engine/family_bonds.py:123",
+  "id": 2344
+ },
+ {
+  "kind": "text",
+  "en": "Life Partner",
+  "where": "engine/family_bonds.py:136",
+  "id": 2345
+ },
+ {
+  "kind": "text",
+  "en": "Ashtakoot Guna Milan compares eight dimensions ('kootas') of each partner's Moon sign and nakshatra, weighted from 1 to 8 points (36 total), and is the most widely used classical Vedic marriage-compatibility technique. Varna, Gana, Nadi, and the Tara counting method are consistently described identically across every classical and contemporary source checked while building this project — high confidence. Yoni's finer middle tier and Graha Maitri's exact middle-combination point values are documented simplifications where sources genuinely disagree (see compatibility.py). The full breakdown below shows each koota's domain, this specific pairing's score, and a reflection prompt — not a pass/fail judgment on the relationship itself.",
+  "where": "engine/family_bonds.py:201",
+  "id": 2346
+ },
+ {
+  "kind": "text",
+  "en": "both share the Deva (refined/gentle) temperament group — an easy natural resonance",
+  "where": "engine/family_bonds.py:234",
+  "id": 2347
+ },
+ {
+  "kind": "text",
+  "en": "both share the Manushya (balanced/human) temperament group — a grounded natural resonance",
+  "where": "engine/family_bonds.py:235",
+  "id": 2348
+ },
+ {
+  "kind": "text",
+  "en": "both share the Rakshasa (intense/driven) temperament group — a high-energy natural resonance",
+  "where": "engine/family_bonds.py:236",
+  "id": 2349
+ },
+ {
+  "kind": "text",
+  "en": "one Deva, one Manushya — a generally cooperative pairing classically considered mild and workable",
+  "where": "engine/family_bonds.py:237",
+  "id": 2350
+ },
+ {
+  "kind": "text",
+  "en": "one Manushya, one Rakshasa — a pairing classical texts suggest benefits from patience with differing paces and intensities",
+  "where": "engine/family_bonds.py:238",
+  "id": 2351
+ },
+ {
+  "kind": "text",
+  "en": "one Deva, one Rakshasa — the temperamentally furthest-apart classical pairing, traditionally suggesting real value in deliberately meeting each other's very different natural styles",
+  "where": "engine/family_bonds.py:239",
+  "id": 2352
+ },
+ {
+  "kind": "text",
+  "en": "This parent-child thematic connection deliberately uses three DIFFERENT classical tools than Ashtakoot, because Ashtakoot itself was designed and is taught exclusively as a marriage-compatibility system between prospective spouses — applying its scoring to a parent and child would misuse a technique outside its intended scope, not merely simplify it. Moon-sign element (Tattva) theory groups the 12 signs into Fire (Agni), Earth (Prithvi), Air (Vayu), and Water (Jala) — a broad classical temperament framework used across both marriage and family analysis, not marriage-specific. Gana (Deva/Manushya/Rakshasa) is the same nakshatra-based temperament classification Ashtakoot itself draws on for its own Gana koota, reused here purely as a temperament descriptor with no marriage-specific scoring attached. The Putrakaraka (Jaimini's children-significator) and Atmakaraka (soul-significator) comparison is the most classically specific of the three: Putrakaraka describes a PARENT's own disposition toward children in general, while Atmakaraka describes a CHILD's own core identity — comparing the two speaks to how naturally that parent's instinctive parenting style may resonate with that particular child's nature, not a verdict on the relationship's quality.",
+  "where": "engine/family_bonds.py:343",
+  "id": 2353
+ },
+ {
+  "kind": "text",
+  "en": "scores the full available points here",
+  "where": "engine/family_bonds.py:130",
+  "id": 2354
+ },
+ {
+  "kind": "text",
+  "en": "scores zero here — the classical caution point for this specific koota",
+  "where": "engine/family_bonds.py:132",
+  "id": 2355
+ },
+ {
+  "kind": "text",
+  "en": "Nadi Dosha (same Nadi group) is present — classically the most cautioned combination in this system, though traditional texts also describe cancellation exceptions that a qualified astrologer should confirm rather than assuming either way. ",
+  "where": "engine/family_bonds.py:177",
+  "id": 2356
+ },
+ {
+  "kind": "text",
+  "en": "Bhakoot Dosha (an inauspicious Moon-sign distance not cancelled by lord-friendship) is also present, traditionally read as worth attention for long-term family growth and harmony specifically. ",
+  "where": "engine/family_bonds.py:183",
+  "id": 2357
+ },
+ {
+  "kind": "text",
+  "en": "classically complementary",
+  "where": "engine/family_bonds.py:225",
+  "id": 2358
+ },
+ {
+  "kind": "text",
+  "en": "fire and air traditionally sustain and energize each other",
+  "where": "engine/family_bonds.py:225",
+  "id": 2359
+ },
+ {
+  "kind": "text",
+  "en": "earth and water traditionally nurture and give shape to each other",
+  "where": "engine/family_bonds.py:226",
+  "id": 2360
+ },
+ {
+  "kind": "text",
+  "en": "classically contrasting",
+  "where": "engine/family_bonds.py:227",
+  "id": 2361
+ },
+ {
+  "kind": "text",
+  "en": "fire and water traditionally temper and challenge each other, needing conscious patience",
+  "where": "engine/family_bonds.py:227",
+  "id": 2362
+ },
+ {
+  "kind": "text",
+  "en": "earth and air traditionally move at different paces, needing conscious patience",
+  "where": "engine/family_bonds.py:228",
+  "id": 2363
+ },
+ {
+  "kind": "text",
+  "en": "classically mixed",
+  "where": "engine/family_bonds.py:229",
+  "id": 2364
+ },
+ {
+  "kind": "text",
+  "en": "fire and earth traditionally combine drive with practicality once aligned",
+  "where": "engine/family_bonds.py:229",
+  "id": 2365
+ },
+ {
+  "kind": "text",
+  "en": "air and water traditionally combine ideas with feeling once aligned",
+  "where": "engine/family_bonds.py:230",
+  "id": 2366
+ },
+ {
+  "kind": "text",
+  "en": "same element",
+  "where": "engine/family_bonds.py:277",
+  "id": 2367
+ },
+ {
+  "kind": "text",
+  "en": "a naturally cooperative classical relationship (at least one of the two planets calls the other a natural friend)",
+  "where": "engine/family_bonds.py:307",
+  "id": 2368
+ },
+ {
+  "kind": "text",
+  "en": ". It starts with each person's own relational disposition (already computed on their individual Karmic & Past Life tab), then adds cross-chart comparisons: Ashtakoot Guna Milan for Self and Life Partner specifically (the classical marriage-compatibility technique), and a separately-scoped thematic connection for Self and each child (which deliberately does NOT use Ashtakoot — see the Parent-Child section below for why).",
+  "where": "engine/family_bonds.py:495",
+  "id": 2369
+ },
+ {
+  "kind": "text",
+  "en": "these elements combine in varied ways depending on the rest of each chart",
+  "where": "engine/family_bonds.py:283",
+  "id": 2370
+ },
+ {
+  "kind": "text",
+  "en": "a classically effortful relationship (at least one of the two planets calls the other a natural enemy) — traditionally read as more growth-through-friction than automatic ease",
+  "where": "engine/family_bonds.py:309",
+  "id": 2371
+ },
+ {
+  "kind": "text",
+  "en": "a classically neutral relationship — neither particularly easy nor particularly effortful by planetary temperament alone",
+  "where": "engine/family_bonds.py:311",
+  "id": 2372
+ },
+ {
+  "kind": "text",
+  "en": "Past-life imprints each person carries into this bond:\n",
+  "where": "engine/family_bonds.py:440",
+  "id": 2373
+ },
+ {
+  "kind": "text",
+  "en": "The main goals of this life for each:\n",
+  "where": "engine/family_bonds.py:444",
+  "id": 2374
+ },
+ {
+  "kind": "text",
+  "en": "'s Own Relational Disposition ---\n",
+  "where": "engine/family_bonds.py:502",
+  "id": 2375
+ },
+ {
+  "kind": "template",
+  "en": "{0} is in its own/exaltation sign ({1}) in the D9 despite D1 debilitation",
+  "args": [
+   "planet",
+   "d9_sign"
+  ],
+  "where": "engine/yogas.py:247",
+  "id": 2376
+ },
+ {
+  "kind": "template",
+  "en": "{0} (exalted in {1}) is in a kendra from lagna/Moon",
+  "args": [
+   "exalted_here",
+   "debil_sign"
+  ],
+  "where": "engine/yogas.py:245",
+  "id": 2377
+ },
+ {
+  "kind": "template",
+  "en": "debilitation-dispositor {0} is in a kendra from lagna/Moon",
+  "args": [
+   "dispositor"
+  ],
+  "where": "engine/yogas.py:243",
+  "id": 2378
+ },
+ {
+  "kind": "template",
+  "en": "{0}th-lord {1} <-> {2}th-lord {3}",
+  "args": [
+   "k",
+   "lord_k",
+   "t",
+   "lord_t"
+  ],
+  "where": "engine/yogas.py:162",
+  "id": 2379
+ },
+ {
+  "kind": "template",
+  "en": "10th from {0} (house {1}) holds unafflicted benefic(s): {2}",
+  "args": [
+   "house_label",
+   "house_num",
+   "', '.join(benefics_here)"
+  ],
+  "where": "engine/yogas.py:316",
+  "id": 2380
+ },
+ {
+  "kind": "template",
+  "en": "{0} debilitated in {1}, cancelled because: {2}.",
+  "args": [
+   "planet",
+   "debil_sign",
+   "'; '.join(reasons)"
+  ],
+  "where": "engine/yogas.py:248",
+  "id": 2381
+ },
+ {
+  "kind": "template",
+  "en": "Moon is {0} houses from Jupiter (not a dusthana relationship).",
+  "args": [
+   "dist"
+  ],
+  "where": "engine/yogas.py:344",
+  "id": 2382
+ },
+ {
+  "kind": "template",
+  "en": "Moon is {0} houses from Jupiter.",
+  "args": [
+   "dist"
+  ],
+  "where": "engine/yogas.py:344",
+  "id": 2383
+ },
+ {
+  "kind": "template",
+  "en": "house {0} (from Moon): {1}",
+  "args": [
+   "h",
+   "per_house[h] or 'none'"
+  ],
+  "where": "engine/yogas.py:331",
+  "id": 2384
+ },
+ {
+  "kind": "template",
+  "en": "Moon and Mars are both in house {0}.",
+  "args": [
+   "_planet_house(chart, 'Moon')"
+  ],
+  "where": "engine/yogas.py:275",
+  "id": 2385
+ },
+ {
+  "kind": "template",
+  "en": "Lord of house {0} is in house {1} (not a dusthana).",
+  "args": [
+   "house",
+   "lord_house"
+  ],
+  "where": "engine/yogas.py:264",
+  "id": 2386
+ },
+ {
+  "kind": "template",
+  "en": "The same planet ({0}) rules both the 2nd (wealth) and 11th (gains) houses — a direct wealth-combination in its own right.",
+  "args": [
+   "lord2"
+  ],
+  "where": "engine/yogas.py:176",
+  "id": 2387
+ },
+ {
+  "kind": "template",
+  "en": "{0} in {1}, house {2}: {3}.",
+  "args": [
+   "planet",
+   "sign",
+   "house",
+   "'own/exalted sign but not a kendra house' if well_dignified else 'not in own/exaltation sign'"
+  ],
+  "where": "engine/yogas.py:146",
+  "id": 2388
+ },
+ {
+  "kind": "template",
+  "en": "{0} is in {1} (own/exaltation) and in house {2} (a kendra) — {3} Yoga formed.",
+  "args": [
+   "planet",
+   "sign",
+   "house",
+   "label"
+  ],
+  "where": "engine/yogas.py:145",
+  "id": 2389
+ },
+ {
+  "kind": "template",
+  "en": "Jupiter is not in a kendra from the Moon (distance {0}).",
+  "args": [
+   "dist"
+  ],
+  "where": "engine/yogas.py:124",
+  "id": 2390
+ },
+ {
+  "kind": "template",
+  "en": "Jupiter is {0} houses from the Moon (house {1} vs Moon's house {2}).",
+  "args": [
+   "dist",
+   "jup_h",
+   "moon_h"
+  ],
+  "where": "engine/yogas.py:123",
+  "id": 2391
+ },
+ {
+  "kind": "template",
+  "en": "Mars is in house {0} from the lagna.",
+  "args": [
+   "mars_house"
+  ],
+  "where": "engine/yogas.py:396",
+  "id": 2392
+ },
+ {
+  "kind": "template",
+  "en": "All 7 classical planets fall within the {0} arc.",
+  "args": [
+   "side"
+  ],
+  "where": "engine/yogas.py:367",
+  "id": 2393
+ },
+ {
+  "kind": "template",
+  "en": "Jupiter and Mars are conjunct in house {0}.",
+  "args": [
+   "_planet_house(chart, 'Jupiter')"
+  ],
+  "where": "engine/yogas.py:288",
+  "id": 2394
+ },
+ {
+  "kind": "template",
+  "en": "{0}: lord of house {1} is in house {2} — {3}.",
+  "args": [
+   "label",
+   "house",
+   "lord_house",
+   "form"
+  ],
+  "where": "engine/yogas.py:266",
+  "id": 2395
+ },
+ {
+  "kind": "template",
+  "en": "The Moon is supported by: {0} — not isolated, so Kemadruma is not formed.",
+  "args": [
+   "', '.join(supporting)"
+  ],
+  "where": "engine/yogas.py:203",
+  "id": 2396
+ },
+ {
+  "kind": "template",
+  "en": "2nd lord {0} and 11th lord {1} {2}",
+  "args": [
+   "lord2",
+   "lord11",
+   "'are connected (conjunction/aspect/parivartana).' if connected else 'have no direct connection.'"
+  ],
+  "where": "engine/yogas.py:180",
+  "id": 2397
+ },
+ {
+  "kind": "text",
+  "en": "Rahu-to-Ketu",
+  "where": "engine/yogas.py:366",
+  "id": 2398
+ },
+ {
+  "kind": "text",
+  "en": "No kendra lord forms a conjunction/aspect/parivartana with a trikona lord.",
+  "where": "engine/yogas.py:165",
+  "id": 2399
+ },
+ {
+  "kind": "text",
+  "en": "No classical planet occupies the 2nd/12th from the Moon, and none conjoins or aspects it — the Moon is isolated.",
+  "where": "engine/yogas.py:200",
+  "id": 2400
+ },
+ {
+  "kind": "text",
+  "en": "No debilitated classical planet meets the checked cancellation conditions.",
+  "where": "engine/yogas.py:250",
+  "id": 2401
+ },
+ {
+  "kind": "text",
+  "en": "self-placement (weaker classical form)",
+  "where": "engine/yogas.py:265",
+  "id": 2402
+ },
+ {
+  "kind": "text",
+  "en": "different dusthana (stronger classical form)",
+  "where": "engine/yogas.py:265",
+  "id": 2403
+ },
+ {
+  "kind": "text",
+  "en": "Ketu-to-Rahu",
+  "where": "engine/yogas.py:366",
+  "id": 2404
+ },
+ {
+  "kind": "text",
+  "en": "The 7 classical planets are not all confined to one node-to-node arc.",
+  "where": "engine/yogas.py:368",
+  "id": 2405
+ },
+ {
+  "kind": "text",
+  "en": "Jupiter and Rahu are conjunct (the primary classical form).",
+  "where": "engine/yogas.py:408",
+  "id": 2406
+ },
+ {
+  "kind": "text",
+  "en": "Kendra-trikona lord connection(s): ",
+  "where": "engine/yogas.py:164",
+  "id": 2407
+ },
+ {
+  "kind": "text",
+  "en": "are connected (conjunction/aspect/parivartana).",
+  "where": "engine/yogas.py:180",
+  "id": 2408
+ },
+ {
+  "kind": "text",
+  "en": "have no direct connection.",
+  "where": "engine/yogas.py:180",
+  "id": 2409
+ },
+ {
+  "kind": "text",
+  "en": "Moon and Mars are not conjunct.",
+  "where": "engine/yogas.py:276",
+  "id": 2410
+ },
+ {
+  "kind": "text",
+  "en": "Jupiter and Mars are in mutual kendra aspect.",
+  "where": "engine/yogas.py:290",
+  "id": 2411
+ },
+ {
+  "kind": "text",
+  "en": "Jupiter and Mars are neither conjunct nor in mutual aspect.",
+  "where": "engine/yogas.py:292",
+  "id": 2412
+ },
+ {
+  "kind": "text",
+  "en": "No unafflicted benefic occupies the 10th from lagna or Moon.",
+  "where": "engine/yogas.py:318",
+  "id": 2413
+ },
+ {
+  "kind": "text",
+  "en": "No Sun/Moon-node conjunction.",
+  "where": "engine/yogas.py:379",
+  "id": 2414
+ },
+ {
+  "kind": "text",
+  "en": "Mars and Rahu are conjunct.",
+  "where": "engine/yogas.py:387",
+  "id": 2415
+ },
+ {
+  "kind": "text",
+  "en": "Mars and Rahu are not conjunct.",
+  "where": "engine/yogas.py:387",
+  "id": 2416
+ },
+ {
+  "kind": "text",
+  "en": "Jupiter and Ketu are conjunct (a secondary form recognized by some traditions).",
+  "where": "engine/yogas.py:410",
+  "id": 2417
+ },
+ {
+  "kind": "text",
+  "en": "Jupiter is not conjunct either node.",
+  "where": "engine/yogas.py:412",
+  "id": 2418
+ },
+ {
+  "kind": "text",
+  "en": "Saturn and Rahu are conjunct.",
+  "where": "engine/yogas.py:421",
+  "id": 2419
+ },
+ {
+  "kind": "text",
+  "en": "Saturn and Rahu are not conjunct.",
+  "where": "engine/yogas.py:421",
+  "id": 2420
+ },
+ {
+  "kind": "text",
+  "en": "own/exalted sign but not a kendra house",
+  "where": "engine/yogas.py:146",
+  "id": 2421
+ },
+ {
+  "kind": "text",
+  "en": "not in own/exaltation sign",
+  "where": "engine/yogas.py:146",
+  "id": 2422
+ },
+ {
+  "kind": "text",
+  "en": "Conjunctions found: ",
+  "where": "engine/yogas.py:379",
+  "id": 2423
+ },
+ {
+  "kind": "text",
+  "en": "Same-category only (2 or 0) — the classical middle tier ('one is Vashya of the other', 1 point) is not implemented; see module docstring.",
+  "where": "engine/compatibility.py:149",
+  "id": 2424
+ },
+ {
+  "kind": "text",
+  "en": "Excellent match (traditional threshold: 33-36)",
+  "where": "engine/compatibility.py:288",
+  "id": 2425
+ },
+ {
+  "kind": "text",
+  "en": "Sex not given for both people — compared person_a's Varna against person_b's (classical rule is normally groom-vs-bride directional).",
+  "where": "engine/compatibility.py:134",
+  "id": 2426
+ },
+ {
+  "kind": "text",
+  "en": "Nadi Dosha (0 points) shown as-is with no automatic cancellation applied. Classical texts describe exception cases (e.g. identical nakshatra but different pada) inconsistently across sources — have an astrologer confirm whether an exception applies rather than assuming either way.",
+  "where": "engine/compatibility.py:258",
+  "id": 2427
+ },
+ {
+  "kind": "text",
+  "en": "Very good match (traditional threshold: 25-32)",
+  "where": "engine/compatibility.py:290",
+  "id": 2428
+ },
+ {
+  "kind": "text",
+  "en": "neutral (simplified — see module docstring)",
+  "where": "engine/compatibility.py:180",
+  "id": 2429
+ },
+ {
+  "kind": "text",
+  "en": "Acceptable — commonly cited as the minimum workable score (18-24); consider other factors too",
+  "where": "engine/compatibility.py:292",
+  "id": 2430
+ },
+ {
+  "kind": "text",
+  "en": "Below the commonly-cited minimum (18) — traditionally considered a weak match on this method alone",
+  "where": "engine/compatibility.py:294",
+  "id": 2431
+ },
+ {
+  "kind": "template",
+  "en": "Venus is {0}",
+  "args": [
+   "venus_dignity"
+  ],
+  "where": "engine/relationship_themes.py:222",
+  "id": 2432
+ },
+ {
+  "kind": "template",
+  "en": "Rahu occupies house {0}, not the 7th.",
+  "args": [
+   "rahu_house"
+  ],
+  "where": "engine/relationship_themes.py:210",
+  "id": 2433
+ },
+ {
+  "kind": "template",
+  "en": "Venus (house {0}) and Mars (house {1})",
+  "args": [
+   "venus_house",
+   "mars_house"
+  ],
+  "where": "engine/relationship_themes.py:194",
+  "id": 2434
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) has no natural malefic aspect.",
+  "args": [
+   "seventh_lord"
+  ],
+  "where": "engine/relationship_themes.py:188",
+  "id": 2435
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) is aspected by {1}.",
+  "args": [
+   "seventh_lord",
+   "', '.join(malefics_aspecting_7th_lord)"
+  ],
+  "where": "engine/relationship_themes.py:187",
+  "id": 2436
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) has no natural malefic conjunction.",
+  "args": [
+   "seventh_lord"
+  ],
+  "where": "engine/relationship_themes.py:182",
+  "id": 2437
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) is conjunct {1}.",
+  "args": [
+   "seventh_lord",
+   "', '.join(malefics_conjunct_7th_lord)"
+  ],
+  "where": "engine/relationship_themes.py:181",
+  "id": 2438
+ },
+ {
+  "kind": "template",
+  "en": "{0} planet{1} in the 7th house ({2}).",
+  "args": [
+   "len(seventh_house_occupants)",
+   "'s' if len(seventh_house_occupants) != 1 else ''",
+   "', '.join(seventh_house_occupants)"
+  ],
+  "where": "engine/relationship_themes.py:216",
+  "id": 2439
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) is placed in house {1}.",
+  "args": [
+   "seventh_lord",
+   "seventh_lord_house"
+  ],
+  "where": "engine/relationship_themes.py:176",
+  "id": 2440
+ },
+ {
+  "kind": "template",
+  "en": "Venus sits in {0}, a dual sign - another classical multiplicity marker.",
+  "args": [
+   "venus_sign"
+  ],
+  "where": "engine/relationship_themes.py:98",
+  "id": 2441
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) shares a house with {1} - a classical marker of an unconventional or non-linear relationship path.",
+  "args": [
+   "seventh_lord",
+   "axis_planet"
+  ],
+  "where": "engine/relationship_themes.py:92",
+  "id": 2442
+ },
+ {
+  "kind": "template",
+  "en": "{0} planets share the 7th house ({1}) - classically read as more activity or complexity around partnership.",
+  "args": [
+   "len(seventh_house_occupants)",
+   "', '.join(seventh_house_occupants)"
+  ],
+  "where": "engine/relationship_themes.py:83",
+  "id": 2443
+ },
+ {
+  "kind": "template",
+  "en": "{0} (7th lord) sits in {1}, a dual sign - classically associated with more than one significant relationship theme.",
+  "args": [
+   "seventh_lord",
+   "seventh_lord_sign"
+  ],
+  "where": "engine/relationship_themes.py:77",
+  "id": 2444
+ },
+ {
+  "kind": "text",
+  "en": "These are classical correlations with relationship TENDENCIES in the native's OWN chart - restlessness, difficulty with exclusivity, turbulence in partnership - not a prediction of behavior, not a character judgment, and not evidence about any specific event. A chart belongs to one person: it cannot show what a partner did or will do, and should never be used as evidence against someone else. Classical texts themselves treat these as tendencies to be conscious of, not a fate to submit to - free will matters more than any single placement. No combined verdict is given below, deliberately: read each indicator on its own, the same way this project's Mangal Dosha check works.",
+  "where": "engine/relationship_themes.py:36",
+  "id": 2445
+ },
+ {
+  "kind": "text",
+  "en": "real complexity here - more than one significant relationship across life is a plausible reading",
+  "where": "engine/relationship_themes.py:102",
+  "id": 2446
+ },
+ {
+  "kind": "text",
+  "en": "This is a TENDENCY, not a count - no classical method fixes an exact number of marriages or relationships from a natal chart alone. It also says nothing about a partner's behavior or fidelity - only about complexity/multiplicity themes in the native's own chart.",
+  "where": "engine/relationship_themes.py:112",
+  "id": 2447
+ },
+ {
+  "kind": "text",
+  "en": "some complexity, but nothing overwhelming - a mix of steadiness and change is more likely than either extreme",
+  "where": "engine/relationship_themes.py:104",
+  "id": 2448
+ },
+ {
+  "kind": "text",
+  "en": "a single, steady partnership rather than multiplicity",
+  "where": "engine/relationship_themes.py:106",
+  "id": 2449
+ },
+ {
+  "kind": "text",
+  "en": "No planets in the 7th house.",
+  "where": "engine/relationship_themes.py:217",
+  "id": 2450
+ },
+ {
+  "kind": "text",
+  "en": " in this chart.",
+  "where": "engine/relationship_themes.py:222",
+  "id": 2451
+ },
+ {
+  "kind": "text",
+  "en": "Venus and Mars aspect each other.",
+  "where": "engine/relationship_themes.py:199",
+  "id": 2452
+ },
+ {
+  "kind": "text",
+  "en": "Venus and Mars do not aspect each other.",
+  "where": "engine/relationship_themes.py:200",
+  "id": 2453
+ },
+ {
+  "kind": "text",
+  "en": "Rahu is conjunct Venus.",
+  "where": "engine/relationship_themes.py:206",
+  "id": 2454
+ },
+ {
+  "kind": "text",
+  "en": "Rahu is not conjunct Venus.",
+  "where": "engine/relationship_themes.py:206",
+  "id": 2455
+ },
+ {
+  "kind": "text",
+  "en": "Rahu occupies the 7th house.",
+  "where": "engine/relationship_themes.py:210",
+  "id": 2456
+ },
+ {
+  "kind": "text",
+  "en": " are conjunct.",
+  "where": "engine/relationship_themes.py:195",
+  "id": 2457
+ },
+ {
+  "kind": "text",
+  "en": " are not conjunct.",
+  "where": "engine/relationship_themes.py:195",
+  "id": 2458
+ },
+ {
+  "kind": "text",
+  "en": ", and combust",
+  "where": "engine/relationship_themes.py:222",
+  "id": 2459
+ },
+ {
+  "kind": "template",
+  "en": "{0} and {1} between them rule house",
+  "args": [
+   "antar_lord",
+   "maha_lord"
+  ],
+  "where": "engine/life_timeline.py:185",
+  "id": 2460
+ },
+ {
+  "kind": "template",
+  "en": " - so this year leans toward themes of {0}, overall {1}.",
+  "args": [
+   "', and '.join(house_themes)",
+   "leaning"
+  ],
+  "where": "engine/life_timeline.py:188",
+  "id": 2461
+ },
+ {
+  "kind": "template",
+  "en": "Age {0} (around {1}) runs under your {2} Mahadasha / {3} Antardasha",
+  "args": [
+   "age",
+   "birthday.year",
+   "maha_lord",
+   "antar_lord"
+  ],
+  "where": "engine/life_timeline.py:180",
+  "id": 2462
+ },
+ {
+  "kind": "template",
+  "en": "Muntha (the progressed Ascendant) falls in {0} this year, adding a secondary emphasis on {1}.",
+  "args": [
+   "muntha_sign",
+   "muntha_theme"
+  ],
+  "where": "engine/life_timeline.py:195",
+  "id": 2463
+ },
+ {
+  "kind": "text",
+  "en": "This year-by-year outlook is built from two classical, well-established techniques: which Vimshottari Dasha period (Mahadasha/Antardasha) governs each age, and Muntha (the natal Ascendant progressed one sign per year of age). It is NOT a true Varshphal (solar-return) chart - a more elaborate classical system this app does not yet compute. Read every year's note as a general TENDENCY for that stretch of life, not a guarantee that a specific event happens in that specific year - classical timing techniques indicate THEMES and windows of likelihood, not a fixed calendar of events.",
+  "where": "engine/life_timeline.py:39",
+  "id": 2464
+ },
+ {
+  "kind": "text",
+  "en": "the self, health, and how you come across",
+  "where": "engine/life_timeline.py:84",
+  "id": 2465
+ },
+ {
+  "kind": "text",
+  "en": "money, family, and speech",
+  "where": "engine/life_timeline.py:85",
+  "id": 2466
+ },
+ {
+  "kind": "text",
+  "en": "effort, courage, and siblings",
+  "where": "engine/life_timeline.py:86",
+  "id": 2467
+ },
+ {
+  "kind": "text",
+  "en": "home, comfort, and inner peace",
+  "where": "engine/life_timeline.py:87",
+  "id": 2468
+ },
+ {
+  "kind": "text",
+  "en": "creativity, romance, and learning",
+  "where": "engine/life_timeline.py:88",
+  "id": 2469
+ },
+ {
+  "kind": "text",
+  "en": "work, routine, and obstacles to push through",
+  "where": "engine/life_timeline.py:89",
+  "id": 2470
+ },
+ {
+  "kind": "text",
+  "en": "partnerships and one-to-one dealings",
+  "where": "engine/life_timeline.py:90",
+  "id": 2471
+ },
+ {
+  "kind": "text",
+  "en": "change, shared resources, and the unexpected",
+  "where": "engine/life_timeline.py:91",
+  "id": 2472
+ },
+ {
+  "kind": "text",
+  "en": "fortune, learning, and long journeys",
+  "where": "engine/life_timeline.py:92",
+  "id": 2473
+ },
+ {
+  "kind": "text",
+  "en": "career and public standing",
+  "where": "engine/life_timeline.py:93",
+  "id": 2474
+ },
+ {
+  "kind": "text",
+  "en": "income, goals, and your wider circle",
+  "where": "engine/life_timeline.py:94",
+  "id": 2475
+ },
+ {
+  "kind": "text",
+  "en": "rest, release, and things winding down",
+  "where": "engine/life_timeline.py:95",
+  "id": 2476
+ },
+ {
+  "kind": "text",
+  "en": "a classically supportive, easier-going stretch overall",
+  "where": "engine/life_timeline.py:164",
+  "id": 2477
+ },
+ {
+  "kind": "text",
+  "en": "a classically more effortful stretch - progress is still possible, just with more friction",
+  "where": "engine/life_timeline.py:166",
+  "id": 2478
+ },
+ {
+  "kind": "text",
+  "en": "a mixed stretch - real support in some areas, real friction in others",
+  "where": "engine/life_timeline.py:168",
+  "id": 2479
+ },
+ {
+  "kind": "text",
+  "en": "a fairly neutral, workable stretch",
+  "where": "engine/life_timeline.py:170",
+  "id": 2480
+ },
+ {
+  "kind": "template",
+  "en": "{0} not included in the pairwise check - Rahu/Ketu aren't covered by the natural-friendship table this check uses (see maitri.py).",
+  "args": [
+   "', '.join(unknown)"
+  ],
+  "where": "engine/upaya.py:176",
+  "id": 2481
+ },
+ {
+  "kind": "template",
+  "en": "{0} and {1} are naturally neutral toward each other - neither friends nor enemies.",
+  "args": [
+   "a",
+   "b"
+  ],
+  "where": "engine/upaya.py:131",
+  "id": 2482
+ },
+ {
+  "kind": "template",
+  "en": "{0} and {1} regard each other as natural enemies.",
+  "args": [
+   "a",
+   "b"
+  ],
+  "where": "engine/upaya.py:129",
+  "id": 2483
+ },
+ {
+  "kind": "template",
+  "en": "{0} and {1} are mutual natural friends.",
+  "args": [
+   "a",
+   "b"
+  ],
+  "where": "engine/upaya.py:127",
+  "id": 2484
+ },
+ {
+  "kind": "template",
+  "en": "{0} regards {1} as a natural {2}, but {3} regards {4} as a natural {5}.",
+  "args": [
+   "a",
+   "b",
+   "a_view",
+   "b",
+   "a",
+   "b_view"
+  ],
+  "where": "engine/upaya.py:136",
+  "id": 2485
+ },
+ {
+  "kind": "text",
+  "en": "Gemstone and mantra recommendations here are traditional guidance, not a medical, financial, or psychological prescription, and not a guarantee of any outcome. Full classical gemstone selection also weighs a planet's FUNCTIONAL status for this specific ascendant (which houses it rules here, not just its natural tendencies) and current dasha timing - real factors this module does not fully resolve on its own. Treat this as a starting point for a conversation with a qualified astrologer and, for anything worn on the body, a jeweler you trust - not a final answer.",
+  "where": "engine/upaya.py:31",
+  "id": 2486
+ },
+ {
+  "kind": "text",
+  "en": "Blue Sapphire (Saturn) with Ruby (Sun), Pearl (Moon), or Red Coral (Mars) is one of the most consistently warned-against combinations across classical sources - Saturn regards all three as natural enemies.",
+  "where": "engine/upaya.py:186",
+  "id": 2487
+ },
+ {
+  "kind": "text",
+  "en": "Diamond (Venus) with Ruby (Sun) or Pearl (Moon) is another widely cited caution - Venus regards both as natural enemies.",
+  "where": "engine/upaya.py:193",
+  "id": 2488
+ },
+ {
+  "kind": "text",
+  "en": "debilitated by sign",
+  "where": "engine/upaya.py:240",
+  "id": 2489
+ },
+ {
+  "kind": "text",
+  "en": "combust (too close to the Sun)",
+  "where": "engine/upaya.py:243",
+  "id": 2490
+ },
+ {
+  "kind": "text",
+  "en": "Great Enemy relationship with its own sign's lord",
+  "where": "engine/upaya.py:246",
+  "id": 2491
+ },
+ {
+  "kind": "template",
+  "en": "compute_chara_karakas needs all 7 classical planets; missing: {0}",
+  "args": [
+   "sorted(missing)"
+  ],
+  "where": "engine/chara_karaka.py:76",
+  "id": 2492
+ },
+ {
+  "kind": "template",
+  "en": "No karaka with abbr '{0}'",
+  "args": [
+   "abbr"
+  ],
+  "where": "engine/chara_karaka.py:105",
+  "id": 2493
+ },
+ {
+  "kind": "text",
+  "en": "\nchara_karaka.py — the classical Jaimini \"Chara Karaka\" (movable significator)\nscheme: ranking the 7 physical grahas (Sun through Saturn — Rahu/Ketu\nexcluded, see below) by their exact degree WITHIN their own sign, highest\nto lowest. The planet at each rank becomes the significator (\"karaka\") for\na specific life domain, regardless of which planet it actually is:\n\n    Rank  Karaka name         Sanskrit      Domain\n    1     Atmakaraka   (AK)   Atma-karaka   The soul itself — its core drive,\n                                             temperament, and evolutionary focus\n    2     Amatyakaraka (AmK)  Amatya-karaka Career, vocation, counsel\n    3     Bhratrukaraka(BK)   Bhratru-karaka Siblings, courage, effort\n    4     Matrikaraka  (MK)   Matru-karaka  Mother, home, emotional foundation\n    5     Putrakaraka  (PK)   Putra-karaka  Intelligence, creativity\n    6     Gnatikaraka  (GK)   Gnati-karaka  Obstacles, extended relatives, disputes\n    7     Darakaraka   (DK)   Dara-karaka   Spouse/life partner, partnerships\n\nThis is a well-established, widely-taught Jaimini technique — the ranking\nRULE itself (sort by degree-in-sign, descending) is not seriously disputed.\nTwo scoping choices are worth being explicit about:\n\n  - **7 karakas (this module) vs. 8 karakas.** Some traditions add Rahu as\n    an 8th contender (ranked by its degree measured RETROGRADE, since Rahu\n    always moves backward), which shifts every rank below Atmakaraka down\n    by one and drops Gnatikaraka. Both the 7- and 8-karaka schemes are in\n    active use; this module implements the 7-karaka version (Sun..Saturn\n    only) as it's the simpler and more commonly taught starting point, and\n    does not include Rahu here.\n  - **Tie-breaking.** Classical texts describe tie-break rules (by\n    nakshatra, then navamsa) for when two planets land on the exact same\n    degree. With real ephemeris data (continuous floating-point degrees)\n    an exact tie is astronomically negligible, so this module does not\n    implement those tie-break rules — if a tie somehow occurs it falls back\n    to a fixed planet-priority order, which is flagged in the result via\n    `tie_broken`.\n\nAtmakaraka in particular is the classical basis for \"what is this soul\nhere to do\" style analysis: whichever planet is Atmakaraka, its sign/house/\nnakshatra placement is read as the soul's dominant quality and direction —\nthis module supplies the ranking; rule_engine.py supplies the interpretive\ntext (reusing the same verified planet_in_sign/planet_in_house KB entries\nused everywhere else in this project, not a new invented layer).\n",
+  "where": "engine/chara_karaka.py:2",
+  "id": 2494
+ },
+ {
+  "kind": "text",
+  "en": "The soul's core drive, temperament, and evolutionary focus",
+  "where": "engine/chara_karaka.py:47",
+  "id": 2495
+ },
+ {
+  "kind": "text",
+  "en": "Career, vocation, and counsel",
+  "where": "engine/chara_karaka.py:48",
+  "id": 2496
+ },
+ {
+  "kind": "text",
+  "en": "Siblings, courage, and effort",
+  "where": "engine/chara_karaka.py:49",
+  "id": 2497
+ },
+ {
+  "kind": "text",
+  "en": "Mother, home, and emotional foundation",
+  "where": "engine/chara_karaka.py:50",
+  "id": 2498
+ },
+ {
+  "kind": "text",
+  "en": "Intelligence, creativity, and self-expression",
+  "where": "engine/chara_karaka.py:51",
+  "id": 2499
+ },
+ {
+  "kind": "text",
+  "en": "Obstacles, extended relatives, and disputes",
+  "where": "engine/chara_karaka.py:52",
+  "id": 2500
+ },
+ {
+  "kind": "text",
+  "en": "Spouse, life partner, and close partnerships",
+  "where": "engine/chara_karaka.py:53",
+  "id": 2501
+ },
+ {
+  "kind": "template",
+  "en": " By the greater-latitude rule, {0} wins and {1} is considered defeated.",
+  "args": [
+   "winner",
+   "loser"
+  ],
+  "where": "engine/graha_yuddha.py:58",
+  "id": 2502
+ },
+ {
+  "kind": "template",
+  "en": "{0} and {1} are in Graha Yuddha ({2:.2f}° apart).",
+  "args": [
+   "a",
+   "b",
+   "sep"
+  ],
+  "where": "engine/graha_yuddha.py:57",
+  "id": 2503
+ },
+ {
+  "kind": "text",
+  "en": " Latitudes are effectively tied - no clear winner by this rule.",
+  "where": "engine/graha_yuddha.py:59",
+  "id": 2504
+ },
+ {
+  "kind": "template",
+  "en": "{0}'s natural-friendship row doesn't cover the other 6 grahas exactly once",
+  "args": [
+   "_p"
+  ],
+  "where": "engine/maitri.py:56",
+  "id": 2505
+ },
+ {
+  "kind": "text",
+  "en": "Adhi Mitra",
+  "where": "engine/maitri.py:61",
+  "id": 2506
+ },
+ {
+  "kind": "text",
+  "en": "Adhi Shatru",
+  "where": "engine/maitri.py:66",
+  "id": 2507
+ },
+ {
+  "kind": "text",
+  "en": "Classical sources broadly agree on Moon (12deg), Jupiter (11deg) and Saturn (15deg); Mars, Mercury, and Venus orbs are cited with more variation across texts (Mars is sometimes given as 17deg for both direct and retrograde rather than a single fixed value; some sources give Mercury 14deg/12deg and Venus 10deg/8deg the other way around from the direct/retrograde split used here). This project uses the most commonly-cited figures rather than asserting one text as definitive - the same approach already taken for other genuinely disputed classical points (see avkahada.py's Paya note).",
+  "where": "engine/combustion.py:34",
+  "id": 2508
+ },
+ {
+  "kind": "text",
+  "en": "This checks raw house placement only. Classical cancellation conditions (Mangal Dosha Nivarana) — e.g. Mars in its own sign (Aries/Scorpio) or exaltation (Capricorn), or a benefic aspect on Mars — are NOT evaluated here and can nullify a dosha shown as present below.",
+  "where": "engine/manglik.py:30",
+  "id": 2509
+ },
+ {
+  "kind": "text",
+  "en": "Vashya is computed from the Moon's whole sign only. Fuller classical treatments split Sagittarius and Capricorn at their midpoint into a different Vashya category for each half (front-Sagittarius is Manava, back-Sagittarius is Chatushpada; front-Capricorn is Chatushpada, back-Capricorn is Jalachara) — not implemented here, so those two signs use their more commonly-cited whole-sign default instead.",
+  "where": "engine/avkahada.py:31",
+  "id": 2510
+ },
+ {
+  "kind": "text",
+  "en": "Paya (the lucky metal — Gold/Silver/Copper/Iron — associated with the Moon's nakshatra pada) is not computed: sources disagree on whether it keys off the nakshatra's ruling planet or its rashi lord, and the two give different answers for a meaningful minority of padas.",
+  "where": "engine/avkahada.py:39",
+  "id": 2511
+ },
+ {
+  "kind": "text",
+  "en": "Questions I Get Asked",
+  "where": "engine/faq_data.py:157",
+  "id": 2512
+ },
+ {
+  "kind": "text",
+  "en": "What do I actually need to enter for an accurate chart?",
+  "where": "engine/faq_data.py:24",
+  "id": 2513
+ },
+ {
+  "kind": "text",
+  "en": "Your birth date, birth TIME (as exact as possible - even 15 minutes off can shift the Ascendant and house placements), and birth place. Time is the single biggest source of error - check a birth certificate or hospital record if you have one.",
+  "where": "engine/faq_data.py:25",
+  "id": 2514
+ },
+ {
+  "kind": "text",
+  "en": "Why does the app ask for a country hint along with the city?",
+  "where": "engine/faq_data.py:29",
+  "id": 2515
+ },
+ {
+  "kind": "text",
+  "en": "Many city names repeat around the world (there are Londons in the UK, Canada, and the US). The country hint tells the offline place lookup which one you mean - especially useful for expat families searching for a city outside India.",
+  "where": "engine/faq_data.py:30",
+  "id": 2516
+ },
+ {
+  "kind": "text",
+  "en": "I don't know the exact birth time. What should I do?",
+  "where": "engine/faq_data.py:34",
+  "id": 2517
+ },
+ {
+  "kind": "text",
+  "en": "Use the closest estimate you have (a birth certificate, hospital paperwork, or a family member's memory). The chart still computes, but treat Ascendant-dependent results (house placements, some yogas) as approximate rather than exact.",
+  "where": "engine/faq_data.py:35",
+  "id": 2518
+ },
+ {
+  "kind": "text",
+  "en": "What does 'sidereal' / Lahiri ayanamsa mean?",
+  "where": "engine/faq_data.py:39",
+  "id": 2519
+ },
+ {
+  "kind": "text",
+  "en": "Vedic astrology measures planets against the fixed stars (the sidereal zodiac), not the seasons (the tropical zodiac used in Western astrology). Lahiri is the most widely used sidereal reference point in Indian astrology, and it's what this app uses throughout.",
+  "where": "engine/faq_data.py:40",
+  "id": 2520
+ },
+ {
+  "kind": "text",
+  "en": "What's the difference between North Indian and South Indian chart styles?",
+  "where": "engine/faq_data.py:52",
+  "id": 2521
+ },
+ {
+  "kind": "text",
+  "en": "Same information, two traditional drawing conventions. North Indian charts keep the Ascendant fixed in a diamond shape and the signs rotate around it; South Indian charts keep the signs fixed in a grid and the planets move between boxes. Pick whichever you're used to reading - the maths behind both is identical.",
+  "where": "engine/faq_data.py:53",
+  "id": 2522
+ },
+ {
+  "kind": "text",
+  "en": "What is a Varga / divisional chart (D9, D10...)?",
+  "where": "engine/faq_data.py:59",
+  "id": 2523
+ },
+ {
+  "kind": "text",
+  "en": "Traditional Vedic astrology doesn't stop at the main birth chart (D1) - it re-divides each sign into smaller slices for specific life areas: D9 (Navamsa) for marriage and inner strength, D10 (Dashamsha) for career, and so on. They refine the D1 picture rather than replace it.",
+  "where": "engine/faq_data.py:60",
+  "id": 2524
+ },
+ {
+  "kind": "text",
+  "en": "What is a Yoga?",
+  "where": "engine/faq_data.py:65",
+  "id": 2525
+ },
+ {
+  "kind": "text",
+  "en": "A Yoga is a specific, named combination of planets and houses that classical texts treat as significant - some favourable, some challenging. Think of it as a recognisable 'pattern' astrologers look for, similar to a doctor looking for a specific cluster of symptoms.",
+  "where": "engine/faq_data.py:66",
+  "id": 2526
+ },
+ {
+  "kind": "text",
+  "en": "What is Dasha / Antardasha?",
+  "where": "engine/faq_data.py:71",
+  "id": 2527
+ },
+ {
+  "kind": "text",
+  "en": "The Vimshottari Dasha is a traditional timeline that assigns different life periods to different planets (a Mahadasha, further divided into Antardasha sub-periods). It's the system's main tool for timing WHEN a theme is more active, not just whether it exists in the chart at all.",
+  "where": "engine/faq_data.py:72",
+  "id": 2528
+ },
+ {
+  "kind": "text",
+  "en": "How literally should I take the Karmic & Past Life section?",
+  "where": "engine/faq_data.py:84",
+  "id": 2529
+ },
+ {
+  "kind": "text",
+  "en": "As a symbolic, reflective lens - Rahu/Ketu placements are a traditional way to talk about old patterns (Ketu) versus the direction you're being pulled to grow (Rahu), not a literal historical record. Many people still find it useful for self-reflection.",
+  "where": "engine/faq_data.py:85",
+  "id": 2530
+ },
+ {
+  "kind": "text",
+  "en": "Does the app predict lifespan or how many children I will have?",
+  "where": "engine/faq_data.py:90",
+  "id": 2531
+ },
+ {
+  "kind": "text",
+  "en": "No, deliberately. There is no lifespan, time-of-death or number-of-children output anywhere in this app. Those are the least reliable claims in traditional astrology, and a wrong or frightening answer does real harm, so they were left out. What remains is the chart itself and its traditional themes, to be read as reflection rather than fact.",
+  "where": "engine/faq_data.py:91",
+  "id": 2532
+ },
+ {
+  "kind": "text",
+  "en": "What's the difference between 'Compact' and 'Detailed' reading?",
+  "where": "engine/faq_data.py:97",
+  "id": 2533
+ },
+ {
+  "kind": "text",
+  "en": "Use the Compact | Detailed switch at the top of any long reading. Compact keeps each section's heading and its short 'in simple terms' summary; Detailed adds the full traditional wording underneath. Same analysis either way - Compact is just the same conclusions with less reading. It also decides how long your PDF report is.",
+  "where": "engine/faq_data.py:98",
+  "id": 2534
+ },
+ {
+  "kind": "text",
+  "en": "How do I get a PDF report?",
+  "where": "engine/faq_data.py:104",
+  "id": 2535
+ },
+ {
+  "kind": "text",
+  "en": "Open Full Reading and tap 'Save PDF report'. It makes a PDF with your birth details, the chart diagram, the planet table and the readings (short or long, following the Compact | Detailed switch), saves it in your phone's Downloads/VedicAstrology folder, and offers to open it. Nothing is uploaded anywhere.",
+  "where": "engine/faq_data.py:105",
+  "id": 2536
+ },
+ {
+  "kind": "text",
+  "en": "What do the Weekly & Monthly predictions use, if not AI?",
+  "where": "engine/faq_data.py:110",
+  "id": 2537
+ },
+ {
+  "kind": "text",
+  "en": "Classical Gochara (transit) astrology: where the real planets are positioned RIGHT NOW relative to your birth Moon, plus your currently running Dasha period. It's fully offline and recalculated instantly using the same ephemeris as your birth chart - just applied to today's date instead of your birth date.",
+  "where": "engine/faq_data.py:111",
+  "id": 2538
+ },
+ {
+  "kind": "text",
+  "en": "What is Ashtakoot Guna Milan?",
+  "where": "engine/faq_data.py:124",
+  "id": 2539
+ },
+ {
+  "kind": "text",
+  "en": "A traditional 36-point compatibility scoring system compared between two birth charts (classically for marriage matching), covering 8 separate factors: Varna, Vashya, Tara, Yoni, Graha Maitri, Gana, Bhakoot, and Nadi.",
+  "where": "engine/faq_data.py:125",
+  "id": 2540
+ },
+ {
+  "kind": "text",
+  "en": "Can I generate charts for my children too?",
+  "where": "engine/faq_data.py:129",
+  "id": 2541
+ },
+ {
+  "kind": "text",
+  "en": "Yes - use the profile chips at the top of the New Chart screen to add a Life Partner and up to four Child profiles, each with its own independent birth details and full reading.",
+  "where": "engine/faq_data.py:130",
+  "id": 2542
+ },
+ {
+  "kind": "text",
+  "en": "How do I save birth details so I can reload them quickly?",
+  "where": "engine/faq_data.py:134",
+  "id": 2543
+ },
+ {
+  "kind": "text",
+  "en": "Every chart you generate is saved automatically on your phone. Open Saved Charts (Library) and tap a person to load their details into the profile you choose and regenerate the chart in one step. Use the Delete button on a row to remove someone. Saved details never leave your device.",
+  "where": "engine/faq_data.py:135",
+  "id": 2544
+ },
+ {
+  "kind": "text",
+  "en": "The phone keyboard does not appear when I tap a field. What now?",
+  "where": "engine/faq_data.py:140",
+  "id": 2545
+ },
+ {
+  "kind": "text",
+  "en": "The New Chart screen has its own built-in keyboard, which is the default and does not depend on your phone's keyboard app. Use the Keyboard switch at the top of the form to choose between the built-in keyboard and the phone keyboard.",
+  "where": "engine/faq_data.py:141",
+  "id": 2546
+ },
+ {
+  "kind": "text",
+  "en": "Is my birth data ever sent anywhere?",
+  "where": "engine/faq_data.py:145",
+  "id": 2547
+ },
+ {
+  "kind": "text",
+  "en": "No. Place lookup, chart maths, and every reading run entirely offline on your own device. Nothing is uploaded, and there's no internet connection involved at any point.",
+  "where": "engine/faq_data.py:146",
+  "id": 2548
+ }
+]

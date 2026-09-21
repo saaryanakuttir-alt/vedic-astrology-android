@@ -1,0 +1,123 @@
+# planet_in_sign:PS-Me-Vir
+12265	This is considered Mercury's strongest placement, giving exceptional attention to detail, methodical reasoning, and a natural gift for analysis, editing, or organization.
+12266	The native's thinking is highly practical and thorough, though a tendency toward over-criticism or excessive worry about small errors needs conscious balance.
+# planet_in_sign:PS-Me-Lib
+12267	Gives diplomatic, balanced thinking oriented toward fairness.
+12268	The native naturally sees multiple sides of an issue and communicates with tact, often seeking consensus or aesthetic harmony in how ideas are expressed.
+12269	Weighing options carefully can sometimes tip into indecisiveness when a clear, timely choice is needed.
+# planet_in_sign:PS-Me-Sco
+12270	Gives penetrating, investigative, strategically minded thinking.
+12271	The native's mind is drawn to uncovering hidden truths, psychology, or complex systems, and communication can be guarded or strategic rather than openly revealing.
+12272	Once genuinely interested in a subject, focus and depth of understanding are considerable.
+# planet_in_sign:PS-Me-Sag
+12273	Gives big-picture, philosophical, enthusiastically direct thinking.
+12274	The native's intellect gravitates toward broad truths, ethics, and higher meaning rather than fine detail, and communication is candid, often blunt, but generally well-intentioned.
+12275	Enthusiasm for ideas can outpace patience for the finer points of implementation.
+# planet_in_sign:PS-Me-Cap
+12276	Gives practical, disciplined, long-term-oriented thinking.
+12277	The native's mind favors structure, planning, and realistic assessment over abstract speculation, and communication is measured, serious, and purposeful.
+12278	This placement suits organizational, strategic, or administrative thinking that benefits from patience and methodical follow-through.
+# planet_in_sign:PS-Me-Aqu
+12279	Gives innovative, independent, systems-oriented thinking.
+12280	The native's intellect is drawn to original ideas, technology, and group ideals, often approaching problems from an unconventional or theoretical angle.
+12281	Communication values authenticity and principle over convention, sometimes appearing detached from immediate emotional context.
+# planet_in_sign:PS-Me-Pis
+12282	Debilitated — imaginative, intuitive, sometimes scattered thinking.
+12283	The native absorbs and processes information impressionistically, through feeling and imagination rather than strict logical sequence, which can make precise communication or decision-making more challenging.
+12284	This placement's real strength lies in creative, symbolic, or intuitive understanding once grounding practices support clearer expression.
+# planet_in_sign:PS-Ju-Ari
+12285	Gives enthusiastic, pioneering, expansive optimism.
+12286	The native approaches new ventures with confidence and generosity, believing strongly in their own capacity to succeed through direct action.
+12287	Wisdom here is gained through bold experience rather than careful study, and impulsive over-optimism is the main pitfall to watch for.
+# planet_in_sign:PS-Ju-Tau
+12288	Grounds expansive wisdom in practical, material security.
+12289	The native's generosity and growth are tied to steady accumulation of resources, comfort, and reliable long-term value rather than risk-taking.
+12290	Wisdom here is patient and grounded, valuing tangible abundance and ethical, unhurried prosperity.
+# planet_in_sign:PS-Ju-Gem
+12291	Expands wisdom through communication, learning, and versatile curiosity.
+12292	The native tends to grow through gathering and sharing knowledge across many subjects, often functioning well as a teacher, communicator, or broad generalist.
+12293	Depth of philosophical conviction can be diluted by the sheer breadth of interests unless the native chooses to specialize.
+# planet_in_sign:PS-Ju-Can
+12294	Exalted — deeply nurturing, generous, and protective wisdom.
+12295	This is considered one of Jupiter's most auspicious sign placements, expressing expansive generosity through care for family, home, and emotional wellbeing.
+12296	The native's ethical instincts are strongly protective, and growth in life often comes through nurturing others as much as through personal ambition.
+# planet_in_sign:PS-Ju-Leo
+12297	Gives confident, warm-hearted, dramatically generous wisdom.
+12298	The native's philosophy of life is expressed with warmth and magnanimity, often taking on a natural teaching or mentoring role that others find inspiring.
+12299	Growth and good fortune tend to follow generous, big-hearted leadership rather than cautious restraint.
+# planet_in_sign:PS-Ju-Vir
+12300	Applies expansive wisdom through careful, service-oriented, practical means.
+12301	Because Jupiter's natural breadth sits somewhat uneasily in detail-oriented Virgo, growth here tends to come through methodical, disciplined effort rather than natural, easy abundance.
+12302	The native's generosity is expressed through genuinely useful help and precise, well-considered advice rather than grand gestures.
+# planet_in_sign:PS-Ju-Lib
+12303	Expresses wisdom through fairness, diplomacy, and beneficial partnerships.
+12304	The native's ethical instincts strongly favor justice and balance, often finding good fortune through law, advisory roles, or harmonious relationships.
+12305	Growth comes through cooperative rather than solitary effort, and a genuinely generous, fair-minded reputation tends to open doors.
+# planet_in_sign:PS-Ju-Sco
+12306	Gives deep, intense wisdom about transformation and life's hidden dimensions.
+12307	The native's philosophical growth often comes through facing crisis, loss, or intensity directly rather than avoiding it, developing considerable resilience and psychological insight as a result.
+12308	Generosity here can be understated but is genuinely profound, especially in times of others' difficulty.
+# planet_in_sign:PS-Ju-Sag
+12309	Own sign (moolatrikona) — Jupiter at its most naturally wise and expansive.
+12310	This is Jupiter's home sign, producing natural optimism, strong ethical conviction, and a genuine love of higher learning, travel, and philosophical exploration.
+12311	The native tends to be a natural teacher or guide, and good fortune follows a life lived according to sincere, generously held principles.
+# planet_in_sign:PS-Ju-Cap
+12312	Debilitated — wisdom and growth come slowly, through discipline rather than natural ease.
+12313	The native's optimism is tempered by caution or a tendency toward self-doubt about their own luck or generosity, requiring patient, structured effort to achieve the growth that comes more easily to other placements.
+12314	Once earned through sustained discipline, the wisdom and stability gained here tend to be exceptionally solid and lasting.
+# planet_in_sign:PS-Ju-Aqu
+12315	Expands wisdom through humanitarian ideals and vision for collective progress.
+12316	The native's generosity and ethical instincts extend readily to causes, communities, and long-term social vision rather than purely personal or family concerns.
+12317	Growth is often unconventional, favoring innovative or reformist approaches to bettering the wider world.
+# planet_in_sign:PS-Ju-Pis
+12318	Own sign — deeply spiritual, compassionate, and idealistic wisdom.
+12319	This is one of Jupiter's most naturally comfortable placements, expressing profound compassion, faith, and intuitive understanding of universal or spiritual truths.
+12320	The native's generosity is boundless and genuinely selfless, though practical discernment helps ensure idealism translates into real, grounded benefit.
+# planet_in_sign:PS-Ve-Ari
+12321	Gives passionate, direct, spontaneous approach to love and enjoyment.
+12322	The native is drawn to the thrill of pursuit and enjoys bold, straightforward romantic expression rather than subtlety or prolonged courtship.
+12323	Relationships benefit from the native's genuine enthusiasm, though patience with a partner's slower pace can require conscious effort.
+# planet_in_sign:PS-Ve-Tau
+12324	Own sign (moolatrikona) — Venus at its most sensuous, loyal, and stable.
+12325	This is Venus's home sign, giving deep appreciation for beauty, comfort, and physical pleasure alongside genuine loyalty and steadiness in relationships.
+12326	The native values security and consistency in love, and once committed, tends to remain devoted and dependable.
+# planet_in_sign:PS-Ve-Gem
+12327	Gives a playful, communicative, mentally stimulating approach to love.
+12328	The native is drawn to wit, conversation, and variety in relationships, needing genuine mental connection to sustain romantic interest over time.
+12329	Charm comes easily, though a need for novelty can create restlessness if a relationship becomes too routine.
+# planet_in_sign:PS-Ve-Can
+12330	Gives a nurturing, emotionally deep approach to love and comfort.
+12331	The native seeks emotional security and genuine tenderness in relationships, often expressing affection through care, protection, and creating a comfortable home.
+12332	Sentimentality runs deep, and the native tends to hold onto meaningful relationships and memories closely.
+# planet_in_sign:PS-Ve-Leo
+12333	Gives a warm, generous, dramatically affectionate approach to love.
+12334	The native enjoys grand romantic gestures and appreciates being genuinely admired, expressing love with warmth, loyalty, and passion once truly committed.
+12335	Relationships benefit from mutual recognition and generosity, though a need for admiration can occasionally overshadow a partner's needs.
+# planet_in_sign:PS-Ve-Vir
+12336	Debilitated — a practical, sometimes reserved approach to love and affection.
+12337	The native may find open emotional expression harder here, often showing love through practical acts of service rather than overt sentiment, and can be unduly self-critical about their own worthiness in relationships.
+12338	Learning to relax perfectionistic standards, in both self and partner, allows this placement's genuine devotion to come through more freely.
+# planet_in_sign:PS-Ve-Lib
+12339	Own sign — Venus at its most naturally charming, fair, and relationship-oriented.
+12340	This is Venus's home sign, giving natural grace, diplomacy, and a deep commitment to harmony and fairness in relationships.
+12341	The native has a refined aesthetic sense and excels at creating balanced, pleasant partnerships, generally making this one of the most favorable placements for love and cooperation.
+# planet_in_sign:PS-Ve-Sco
+12342	Gives an intense, passionate, deeply transformative approach to love.
+12343	The native seeks profound emotional and physical bonding rather than superficial connection, and relationships here tend to be all-or-nothing in intensity.
+12344	Possessiveness or secrecy can surface, but genuine loyalty and depth of feeling run remarkably strong once trust is established.
+# planet_in_sign:PS-Ve-Sag
+12345	Gives a freedom-loving, adventurous, philosophically minded approach to love.
+12346	The native is drawn to relationships that allow independence, shared exploration, or cross-cultural connection, and enjoys love as an extension of life's broader adventure.
+12347	Commitment can feel restrictive unless the relationship itself is framed as expansive and growth-oriented.
+# planet_in_sign:PS-Ve-Cap
+12348	Gives a practical, committed, sometimes reserved approach to love.
+12349	The native values stability, loyalty, and long-term partnership, expressing affection through responsibility and consistent action rather than overt displays of emotion.
+12350	Relationships tend to deepen and improve with time, as trust is earned through demonstrated reliability.
+# planet_in_sign:PS-Ve-Aqu
+12351	Gives a friendship-based, unconventional approach to love and connection.
+12352	The native values intellectual and ideological compatibility as much as romantic feeling, often building relationships on shared ideals or genuine friendship first.
+12353	Independence within the relationship is important, and conventional romantic expectations may feel less appealing than an unconventional, equal partnership.
+# planet_in_sign:PS-Ve-Pis
+12354	Exalted — deeply compassionate, romantic, and idealistic approach to love.
+12355	This is considered Venus's strongest placement, giving profound empathy, artistic sensibility, and a self-sacrificing devotion in relationships.
+12356	The native's capacity for unconditional love and creative or spiritual romantic expression is considerable, though discernment helps prevent idealization of unsuitable partners.

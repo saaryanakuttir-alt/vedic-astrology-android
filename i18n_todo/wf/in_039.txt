@@ -1,0 +1,63 @@
+# vimshottari_antardasha:AD-Ma-Mo
+12554	During the Mars Mahadasha, the Moon Antardasha brings a sub-period of roughly 7.0 months in which the themes of the mind, emotions, the mother, public life, and adaptability come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12555	Moon is a natural friend of Mars (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ma-Ma
+12556	Mars's own sub-period within its own Mars Mahadasha — a consolidating, high-point phase.
+12557	During the Mars Mahadasha, the Mars Antardasha brings a sub-period of roughly 4.9 months in which the themes of energy, courage, property, siblings, and competition come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+# vimshottari_antardasha:AD-Ma-Me
+12558	Brings Mercury's themes (intellect, etc.) into focus within the Mars Mahadasha (enemy relationship).
+12559	During the Mars Mahadasha, the Mercury Antardasha brings a sub-period of roughly 11.9 months in which the themes of intellect, communication, business, and education come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12560	Mercury is a natural enemy of Mars (per classical Naisargika Maitri), so this sub-period can introduce friction, contradiction, or competing priorities between the two planets' themes; outcomes depend significantly on how well each planet is otherwise placed and supported elsewhere in the chart.
+# vimshottari_antardasha:AD-Ma-Ju
+12561	Brings Jupiter's themes (wisdom, etc.) into focus within the Mars Mahadasha (friend relationship).
+12562	During the Mars Mahadasha, the Jupiter Antardasha brings a sub-period of roughly 11.2 months in which the themes of wisdom, expansion, wealth, and higher learning come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12563	Jupiter is a natural friend of Mars (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Ma-Ve
+12564	Brings Venus's themes (relationships, etc.) into focus within the Mars Mahadasha (neutral relationship).
+12565	During the Mars Mahadasha, the Venus Antardasha brings a sub-period of roughly 14.0 months in which the themes of relationships, comfort, beauty, finances, and the arts come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12566	Venus is naturally neutral toward Mars, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ma-Sa
+12567	Brings Saturn's themes (discipline, etc.) into focus within the Mars Mahadasha (neutral relationship).
+12568	During the Mars Mahadasha, the Saturn Antardasha brings a sub-period of roughly 13.3 months in which the themes of discipline, hard work, delay, structure, and karmic responsibility come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12569	Saturn is naturally neutral toward Mars, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ma-Ra
+12570	Brings Rahu's themes (unconventional ambition, etc.) into focus within the Mars Mahadasha (neutral relationship).
+12571	During the Mars Mahadasha, the Rahu Antardasha brings a sub-period of roughly 12.6 months in which the themes of unconventional ambition, sudden change, material desire, and foreign connections come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12572	Rahu is naturally neutral toward Mars, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Ma-Ke
+12573	Brings Ketu's themes (detachment, etc.) into focus within the Mars Mahadasha (neutral relationship).
+12574	During the Mars Mahadasha, the Ketu Antardasha brings a sub-period of roughly 4.9 months in which the themes of detachment, spirituality, introspection, and intuition come into active focus, expressed within the broader, ongoing context of energy, courage, property, siblings, and competition that characterizes the overall Mars Mahadasha.
+12575	Ketu is naturally neutral toward Mars, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Me-Su
+12576	Brings Sun's themes (authority, etc.) into focus within the Mercury Mahadasha (friend relationship).
+12577	During the Mercury Mahadasha, the Sun Antardasha brings a sub-period of roughly 10.2 months in which the themes of authority, self-confidence, vitality, the father, and government or official matters come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12578	Sun is a natural friend of Mercury (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Me-Mo
+12579	Brings Moon's themes (the mind, etc.) into focus within the Mercury Mahadasha (enemy relationship).
+12580	During the Mercury Mahadasha, the Moon Antardasha brings a sub-period of roughly 17.0 months in which the themes of the mind, emotions, the mother, public life, and adaptability come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12581	Moon is a natural enemy of Mercury (per classical Naisargika Maitri), so this sub-period can introduce friction, contradiction, or competing priorities between the two planets' themes; outcomes depend significantly on how well each planet is otherwise placed and supported elsewhere in the chart.
+# vimshottari_antardasha:AD-Me-Ma
+12582	Brings Mars's themes (energy, etc.) into focus within the Mercury Mahadasha (neutral relationship).
+12583	During the Mercury Mahadasha, the Mars Antardasha brings a sub-period of roughly 11.9 months in which the themes of energy, courage, property, siblings, and competition come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12584	Mars is naturally neutral toward Mercury, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Me-Me
+12585	Mercury's own sub-period within its own Mercury Mahadasha — a consolidating, high-point phase.
+12586	During the Mercury Mahadasha, the Mercury Antardasha brings a sub-period of roughly 28.9 months in which the themes of intellect, communication, business, and education come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+# vimshottari_antardasha:AD-Me-Ju
+12587	Brings Jupiter's themes (wisdom, etc.) into focus within the Mercury Mahadasha (neutral relationship).
+12588	During the Mercury Mahadasha, the Jupiter Antardasha brings a sub-period of roughly 27.2 months in which the themes of wisdom, expansion, wealth, and higher learning come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12589	Jupiter is naturally neutral toward Mercury, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Me-Ve
+12590	Brings Venus's themes (relationships, etc.) into focus within the Mercury Mahadasha (friend relationship).
+12591	During the Mercury Mahadasha, the Venus Antardasha brings a sub-period of roughly 34.0 months in which the themes of relationships, comfort, beauty, finances, and the arts come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12592	Venus is a natural friend of Mercury (per classical Naisargika Maitri), so this sub-period generally supports and harmonizes with the Mahadasha's themes, tending to produce smoother, more cooperative results — provided both planets are reasonably well-placed in the individual chart.
+# vimshottari_antardasha:AD-Me-Sa
+12593	Brings Saturn's themes (discipline, etc.) into focus within the Mercury Mahadasha (neutral relationship).
+12594	During the Mercury Mahadasha, the Saturn Antardasha brings a sub-period of roughly 32.3 months in which the themes of discipline, hard work, delay, structure, and karmic responsibility come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12595	Saturn is naturally neutral toward Mercury, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Me-Ra
+12596	Brings Rahu's themes (unconventional ambition, etc.) into focus within the Mercury Mahadasha (neutral relationship).
+12597	During the Mercury Mahadasha, the Rahu Antardasha brings a sub-period of roughly 30.6 months in which the themes of unconventional ambition, sudden change, material desire, and foreign connections come into active focus, expressed within the broader, ongoing context of intellect, communication, business, and education that characterizes the overall Mercury Mahadasha.
+12598	Rahu is naturally neutral toward Mercury, so results during this sub-period depend heavily on each planet's specific dignity, house placement, and aspects in the individual chart, rather than on their mutual relationship alone.
+# vimshottari_antardasha:AD-Me-Ke
+12599	Brings Ketu's themes (detachment, etc.) into focus within the Mercury Mahadasha (neutral relationship).

@@ -1,0 +1,205 @@
+{
+ "planet_in_sign": [
+  "dignity",
+  "effects",
+  "id",
+  "items",
+  "sign_theme",
+  "summary"
+ ],
+ "planet_in_house": [
+  "dignity_note",
+  "effects",
+  "house_theme",
+  "id",
+  "items",
+  "summary"
+ ],
+ "panchadha_maitri": [
+  "effects",
+  "grade_english",
+  "id",
+  "items",
+  "summary"
+ ],
+ "vargottama": [
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D2_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D3_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D4_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D9_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D10_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D12_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D16_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D20_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D24_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D30_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_D60_planet_in_sign": [
+  "dignity",
+  "id",
+  "items",
+  "summary"
+ ],
+ "combustion": [
+  "effects",
+  "id",
+  "items",
+  "summary"
+ ],
+ "retrograde": [
+  "effects",
+  "id",
+  "items",
+  "summary"
+ ],
+ "house_lord_placement": [
+  "effects",
+  "id",
+  "items",
+  "summary"
+ ],
+ "classical_yogas": [
+  "effects",
+  "formation",
+  "id",
+  "items",
+  "name",
+  "strength_modifiers_and_cautions"
+ ],
+ "vimshottari_mahadasha": [
+  "id",
+  "items"
+ ],
+ "vimshottari_antardasha": [
+  "effects",
+  "id",
+  "items",
+  "summary"
+ ],
+ "divisional_charts": [
+  "id",
+  "items",
+  "name",
+  "primary_use"
+ ],
+ "nakshatra": [
+  "deity",
+  "effects",
+  "items",
+  "name",
+  "ruling_planet",
+  "symbol"
+ ],
+ "nakshatra_pada": [
+  "items",
+  "nakshatra",
+  "navamsa_sign",
+  "pada",
+  "summary"
+ ],
+ "gemstones": [
+  "day",
+  "finger",
+  "items",
+  "metal",
+  "planet",
+  "sanskrit",
+  "stone",
+  "substitutes"
+ ],
+ "mantras": [
+  "beej_mantra",
+  "best_time",
+  "items",
+  "japa_count",
+  "planet"
+ ],
+ "yantras": [
+  "items",
+  "planet"
+ ],
+ "daan": [
+  "articles",
+  "items",
+  "planet"
+ ],
+ "vrat": [
+  "items",
+  "method",
+  "planet"
+ ],
+ "rudraksha": [
+  "items",
+  "mukhi",
+  "planet"
+ ],
+ "colors_deities": [
+  "favorable_colors",
+  "items",
+  "planet"
+ ],
+ "relationship_themes": [
+  "effects",
+  "id",
+  "items",
+  "title"
+ ],
+ "doshas": [
+  "id",
+  "items",
+  "title"
+ ]
+}

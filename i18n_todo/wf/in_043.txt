@@ -1,0 +1,41 @@
+# vimshottari_antardasha:AD-Ke-Ke
+12731	During the Ketu Mahadasha, the Ketu Antardasha brings a sub-period of roughly 4.9 months in which the themes of detachment, spirituality, introspection, and intuition come into active focus, expressed within the broader, ongoing context of detachment, spirituality, introspection, and intuition that characterizes the overall Ketu Mahadasha.
+# vimshottari_mahadasha:MD-Su
+12732	A Sun mahadasha typically brings focus to self-identity, authority, status, career, government or official dealings, and the relationship with the father.
+12733	It is a period where the native's confidence, leadership, and public standing are tested and, when supported, come to the fore.
+12734	When the Sun is well-dignified (exalted, in its own sign, or otherwise well placed and unafflicted) and occupies a favorable house for the native's ascendant, this period tends to bring recognition, rise in authority or government favor, improved health and vitality, and leadership opportunities.
+12735	When the Sun is debilitated, combust, or heavily afflicted, this period can instead bring ego conflicts, friction with authority figures or the father, setbacks to status or reputation, and health concerns connected to vitality, the heart, or bones.
+# vimshottari_mahadasha:MD-Mo
+12736	A Moon mahadasha emphasizes the mind, emotions, the mother, domestic life, public perception, and matters requiring adaptability.
+12737	Because the Moon changes phase and sign quickly, this period's tone can vary noticeably depending on the Moon's strength at birth and by transit.
+12738	When the Moon is strong (waxing, exalted, in its own sign, or otherwise well placed and unafflicted), this period tends to bring emotional stability, public popularity, domestic happiness, and success in fields involving the public, hospitality, or care-giving.
+12739	When the Moon is weak (waning, debilitated, or afflicted), this period can bring emotional instability, anxiety, fluctuating health (particularly fluid-related), and difficulties connected to the mother or domestic peace.
+# vimshottari_mahadasha:MD-Ma
+12740	A Mars mahadasha brings heightened energy, courage, and drive, typically activating matters of property, siblings, technical or competitive pursuits, and assertive action.
+12741	This period often marks a phase of decisive initiative in the native's life.
+12742	When Mars is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period favors achievement through bold, direct action, gains in property or land, success in technical, athletic, or competitive fields, and courageous leadership.
+12743	When Mars is debilitated or heavily afflicted, this period can bring conflict, disputes, accidents or injuries, impulsive decisions, and friction with siblings or through legal/property matters.
+# vimshottari_mahadasha:MD-Me
+12744	A Mercury mahadasha, being one of the longer periods, tends to shape a substantial phase of intellectual, communicative, and commercial development — emphasizing education, business, analytical work, and versatile skill-building.
+12745	When Mercury is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period favors success in trade, writing, education, or analytical professions, sharp intellect, and effective, persuasive communication.
+12746	When Mercury is debilitated, combust, or heavily afflicted, this period can bring nervous anxiety, communication misunderstandings, indecisiveness, and setbacks in business or academic matters.
+# vimshottari_mahadasha:MD-Ju
+12747	A Jupiter mahadasha, also a long period, generally emphasizes expansion, wisdom, ethical and spiritual growth, higher education, and overall good fortune, often marking a phase of significant life development.
+12748	When Jupiter is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period tends to bring prosperity, respect, favorable developments regarding education, and marked spiritual or philosophical growth.
+12749	When Jupiter is debilitated or heavily afflicted, this period can bring overconfidence, excess, misplaced idealism, or delays in the growth and opportunities the native expects.
+# vimshottari_mahadasha:MD-Ve
+12750	A Venus mahadasha, the longest of the nine, tends to define a major phase of life centered on relationships, marriage, comfort, artistic or aesthetic pursuits, and material prosperity.
+12751	When Venus is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period favors happy relationships or marriage, material comfort and luxury, success in artistic, creative, or luxury-related fields, and general enjoyment of life.
+12752	When Venus is debilitated or heavily afflicted, this period can bring relationship discord, overindulgence, financial extravagance, and health concerns connected to the reproductive or urinary systems.
+# vimshottari_mahadasha:MD-Sa
+12753	A Saturn mahadasha, the second-longest period, generally brings discipline, hard work, karmic lessons, and long-term structural change, often requiring patience before results become visible.
+12754	When Saturn is well-dignified (own sign, exalted, or otherwise well placed and unafflicted), this period rewards sustained, disciplined effort with steady, long-term achievement and authority earned through patience and responsibility.
+12755	When Saturn is debilitated or heavily afflicted, this period can bring prolonged hardship, health concerns, isolation, and financial struggle, with delays that may not resolve favorably without other mitigating factors in the chart.
+# vimshottari_mahadasha:MD-Ra
+12756	A Rahu mahadasha typically brings unconventional ambition, sudden changes, intensified material desire, and often a connection to foreign lands, technology, or unconventional paths to status.
+12757	When Rahu is favorably placed (in a supportive house, not heavily afflicted, and well-disposed by its sign lord), this period can bring unconventional but substantial success, sudden rises in career or status, and gains connected to foreign or innovative ventures.
+12758	When Rahu is poorly placed or heavily afflicted, this period can bring confusion, obsession, scandal, instability, or anxiety, particularly regarding the specific life area (house) Rahu occupies and rules.
+# vimshottari_mahadasha:MD-Ke
+12759	A Ketu mahadasha typically brings detachment, introspection, and a turning away from material focus in whichever life area Ketu occupies, often accompanied by heightened intuition or a spiritual/psychic dimension to experience.
+12760	When Ketu is favorably placed, this period can bring genuine spiritual growth, liberation from unhelpful attachments, and valuable, sometimes unexpected, intuitive insight or past-life talent surfacing.
+12761	When Ketu is poorly placed or heavily afflicted, this period can bring isolation, confusion, sudden and hard-to-explain losses, and health concerns connected to vitality or the nervous system.

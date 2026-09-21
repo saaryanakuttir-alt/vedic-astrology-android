@@ -1,0 +1,121 @@
+# planet_in_sign:PS-Sa-Ari
+12357	Debilitated — discipline sits uneasily against Aries's impulsive nature.
+12358	The native often feels frustrated by delays or restrictions on independent action, learning patience and structure through repeated, sometimes hard-won experience.
+12359	Genuine achievement here comes from gradually tempering impulsiveness with realistic planning rather than suppressing initiative altogether.
+# planet_in_sign:PS-Sa-Tau
+12360	Gives a practical, patient, materially disciplined temperament.
+12361	The native values steady, long-term security and builds material stability through persistent, unglamorous effort rather than quick gains.
+12362	There can be resistance to change once a stable routine or possession is established, but reliability and follow-through are genuine strengths.
+# planet_in_sign:PS-Sa-Gem
+12363	Gives a disciplined, structured approach to communication and learning.
+12364	The native may feel initially restricted in self-expression, but develops serious, methodical intellectual capacity over time through patient study and careful, well-organized communication.
+12365	Ideas here are fewer but more thoroughly considered than in more naturally scattered placements.
+# planet_in_sign:PS-Sa-Can
+12366	Brings emotional reserve to a naturally sensitive sign.
+12367	The native may find it difficult to express vulnerability openly, often taking a disciplined, responsible approach to family duty rather than open emotional display.
+12368	Genuine emotional maturity and a capacity for structured, protective caretaking tend to develop through the hardships this placement can bring.
+# planet_in_sign:PS-Sa-Leo
+12369	Restrains natural self-expression, requiring patient effort to build genuine confidence.
+12370	The native may struggle with self-doubt or feel unseen early in life, since Saturn's caution sits uneasily with Leo's need for open recognition.
+12371	Authority and respect, once achieved here, tend to be earned through humble, sustained effort rather than natural charisma, making later-life confidence particularly solid.
+# planet_in_sign:PS-Sa-Vir
+12372	Gives a highly disciplined, methodical, detail-oriented temperament.
+12373	The native excels at structured, analytical work and takes a patient, thorough approach to responsibilities and problem-solving.
+12374	Perfectionism or excessive self-criticism can become a burden if not balanced with reasonable expectations and self-compassion.
+# planet_in_sign:PS-Sa-Lib
+12375	Exalted — disciplined fairness and structured commitment to relationships.
+12376	This is considered Saturn's strongest placement, combining a strong sense of justice with the patience and responsibility to build long-term, well-balanced partnerships.
+12377	The native excels in roles requiring impartial judgment, such as law or diplomacy, and takes relationship commitments seriously and reliably.
+# planet_in_sign:PS-Sa-Sco
+12378	Gives a disciplined, intense approach to transformation and hidden matters.
+12379	The native shows considerable patience and endurance when facing crisis or deep psychological material, often developing significant resilience through direct confrontation with fear or loss.
+12380	A structured, investigative mindset suits research, strategy, or any field requiring sustained focus on complex, sensitive matters.
+# planet_in_sign:PS-Sa-Sag
+12381	Gives a disciplined, structured approach to belief systems and higher learning.
+12382	The native's natural optimism is tempered by caution, and genuine philosophical conviction develops slowly through patient study and lived experience rather than quick faith.
+12383	Over time, this produces a serious, well-grounded, and durable personal philosophy rather than a superficial one.
+# planet_in_sign:PS-Sa-Cap
+12384	Own sign (moolatrikona) — Saturn at its most naturally disciplined and effective.
+12385	This is Saturn's home sign, giving exceptional patience, responsibility, and capacity for long-term achievement, particularly in career and administrative matters.
+12386	The native's authority is earned through sustained, methodical effort and tends to be genuinely respected rather than merely feared.
+# planet_in_sign:PS-Sa-Aqu
+12387	Own sign — disciplined structure applied to humanitarian and unconventional goals.
+12388	The native brings genuine responsibility and staying power to group causes, systemic reform, or unconventional long-term projects, valuing principle and structure over personal glory.
+12389	Detachment can sometimes read as coldness, but the native's commitment to collective progress tends to be sincere and enduring.
+# planet_in_sign:PS-Sa-Pis
+12390	Gives a disciplined approach to compassion, spirituality, and sacrifice.
+12391	The native may feel emotionally restricted or prone to melancholy, but develops genuine spiritual maturity through patient, humble service to others over time.
+12392	Structure and realistic boundaries help channel this placement's natural compassion into sustainable, effective support rather than self-depleting sacrifice.
+# planet_in_sign:PS-Ra-Ari
+12393	see dignity_note (classical texts disagree for the lunar nodes)
+12394	Amplifies bold, pioneering ambition, sometimes to the point of recklessness.
+12395	The native feels an intense, sometimes obsessive drive to be first, best, or most independent, taking unconventional or bold approaches to self-assertion.
+12396	This placement rewards channeling that drive into genuine achievement rather than impulsive risk for its own sake.
+# planet_in_sign:PS-Ra-Tau
+12397	Intensifies material ambition and desire for wealth, comfort, and sensory security.
+12398	The native feels a strong, sometimes insatiable pull toward accumulating resources, luxury, or physical pleasure, which can become a defining life focus.
+12399	Many practitioners consider this a materially favorable placement for Rahu, provided the native manages a tendency toward excess or overattachment to possessions.
+# planet_in_sign:PS-Ra-Gem
+12400	Amplifies communicative ambition and hunger for information and networking.
+12401	The native shows an intense, restless curiosity and a strong drive to master communication, media, or unconventional ideas, often functioning as an innovator in how information is shared.
+12402	Many texts consider this a favorable placement for Rahu's expression, particularly when the native's networking instincts are put to constructive use.
+# planet_in_sign:PS-Ra-Can
+12403	Amplifies emotional intensity and unconventional patterns around home and security.
+12404	The native may feel a strong, sometimes obsessive pull regarding domestic status, emotional security, or the mother's role, occasionally creating restlessness about one's own roots or nurturing style.
+12405	Working consciously with this placement can turn an unsettled inner sense of home into a genuinely expanded, unconventional form of emotional belonging.
+# planet_in_sign:PS-Ra-Leo
+12406	Amplifies the desire for recognition, status, and dramatic self-expression.
+12407	The native feels an intense, sometimes obsessive need for validation and visibility, approaching leadership or creative self-expression in bold, unconventional ways.
+12408	Real fulfillment here comes from channeling this hunger for recognition into genuinely earned achievement rather than status-seeking alone.
+# planet_in_sign:PS-Ra-Vir
+12409	Amplifies analytical ambition and unconventional approaches to work and service.
+12410	The native may develop an intense, sometimes anxious perfectionism, driven to innovate within practical, technical, or health-related fields.
+12411	This placement rewards disciplined channeling of Rahu's restless energy into genuinely useful expertise rather than obsessive worry over details.
+# planet_in_sign:PS-Ra-Lib
+12412	Amplifies desire for status and validation through relationships and partnership.
+12413	The native may idealize partnership or approach fairness and diplomacy in unconventional, intense ways, sometimes creating instability in close relationships through excessive expectation.
+12414	Genuine growth here comes from grounding the drive for partnership in realistic, mutual understanding rather than idealized fantasy.
+# planet_in_sign:PS-Ra-Sco
+12415	Intensifies fascination with hidden, taboo, or transformative matters.
+12416	The native often feels a magnetic, sometimes destabilizing pull toward power, secrecy, or the occult, and many classical conventions consider this a more difficult placement for Rahu requiring conscious self-awareness.
+12417	When channeled constructively, this placement can produce genuinely penetrating insight into psychology, research, or transformative work.
+# planet_in_sign:PS-Ra-Sag
+12418	Amplifies unconventional belief systems and hunger for foreign or nontraditional wisdom.
+12419	The native often feels a restless pull to question inherited tradition, seeking unconventional philosophies, foreign teachings, or unusual paths to higher truth.
+12420	This placement rewards embracing an authentic, self-derived belief system rather than either blindly following convention or restlessly rejecting all structure.
+# planet_in_sign:PS-Ra-Cap
+12421	Amplifies ambition for status, authority, and material achievement.
+12422	The native feels an intense drive to rise within social or professional hierarchies, sometimes taking unconventional or unorthodox routes to establish authority and structure.
+12423	Real success here comes from pairing this ambition with genuine discipline rather than shortcuts that undermine long-term stability.
+# planet_in_sign:PS-Ra-Aqu
+12424	Amplifies futuristic, unconventional ambition tied to technology and group causes.
+12425	The native often feels strongly drawn to innovation, reform, or unconventional social causes, sometimes to the point of detachment from more traditional personal ties.
+12426	This placement favors visionary, forward-thinking work, particularly when the native's individuality is channeled toward genuinely constructive collective progress.
+# planet_in_sign:PS-Ra-Pis
+12427	Amplifies spiritual or escapist longing and unconventional imagination.
+12428	The native may feel an intense, sometimes confusing pull toward the unseen, foreign spiritual paths, or idealized fantasy, occasionally blurring the line between genuine intuition and escapism.
+12429	Grounding this placement's imaginative hunger in concrete, compassionate action helps transform confusion into genuine spiritual or creative insight.
+# planet_in_sign:PS-Ke-Ari
+12430	Reduces attachment to assertive self-interest and personal ambition.
+12431	The native may feel a subtle disconnect from ordinary competitive drive, acting with quiet, intuitive confidence rather than aggressive self-assertion.
+12432	This placement often reflects past-life mastery of independent courage, now expressed as understated rather than showy strength.
+# planet_in_sign:PS-Ke-Tau
+12433	Reduces attachment to material comfort, security, and sensory pleasure.
+12434	The native often shows genuine indifference toward accumulating wealth or possessions, finding material attachment less compelling than most people do.
+12435	This placement supports a naturally simple, spiritually oriented relationship with resources and physical comfort.
+# planet_in_sign:PS-Ke-Gem
+12436	Reduces attachment to conventional communication and intellectual curiosity.
+12437	The native may feel scattered or restless with ordinary information-gathering, sometimes preferring intuitive knowing over analytical study.
+12438	Speech tends to be selective and minimal rather than expansive, occasionally masking a deep, quietly held understanding.
+# planet_in_sign:PS-Ke-Can
+12439	Reduces attachment to conventional home life and emotional dependency on family.
+12440	The native may feel a degree of emotional distance from domestic roots or the nurturing role expected by family, seeking security through inner rather than external means.
+12441	This placement often reflects a need to find belonging that is not dependent on conventional home or family structures.
+# planet_in_sign:PS-Ke-Leo
+12442	Reduces attachment to recognition and dramatic self-expression.
+12443	The native often feels genuinely indifferent to public validation or being the center of attention, exercising quiet rather than showy authority.
+12444	This placement can reflect past-life mastery of leadership, now expressed through understated, humble influence.
+# planet_in_sign:PS-Ke-Vir
+12445	Reduces attachment to perfectionistic analysis and rigid daily routine.
+12446	The native may feel scattered regarding health habits or meticulous work, preferring intuitive shortcuts over methodical, step-by-step process.
+12447	This placement can reflect past-life mastery of service or skill, now expressed as effortless, sometimes unexplainable competence.

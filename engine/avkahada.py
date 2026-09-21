@@ -25,6 +25,7 @@ than guessing (see divisional.py's D60 note for the precedent):
     VASHYA_SIMPLIFICATION_NOTE below).
 """
 from panchanga import SIGNS, NAKSHATRAS
+from i18n import tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 VASHYA_SIMPLIFICATION_NOTE = (
     "Vashya is computed from the Moon's whole sign only. Fuller classical "
@@ -149,5 +150,5 @@ def compute_avkahada(moon_sign, moon_nakshatra):
         "gana": _GANA_BY_NAKSHATRA[moon_nakshatra],
         "nadi": _NADI_BY_NAKSHATRA[moon_nakshatra],
         "paya": None,
-        "notes": [VASHYA_SIMPLIFICATION_NOTE, PAYA_NOTE],
+        "notes": [tx(VASHYA_SIMPLIFICATION_NOTE), tx(PAYA_NOTE)],
     }

@@ -95,10 +95,23 @@ class VedicAstrologyApp(App):
         """The user picked a language on Home: remember it and rebuild every screen in it."""
         code = self._apply_language(code)
         self.store.settings.set("language", code)
+        self._regenerate_readings()
         keyboard.SERVICE.hide()
         self._root.clear_widgets()
         self._build_ui(self._root)
         self.goto("home")
+
+    def _regenerate_readings(self):
+        """A reading is written (in the current language) when a chart is generated and then kept, so after a language
+        change every kept reading is written again from its chart - otherwise it would stay in the old language."""
+        from kivy.logger import Logger
+        from rule_engine import generate_reading
+        for data in self.store.profiles.values():
+            if data.get("chart") is not None and data.get("reading") is not None:
+                try:
+                    data["reading"] = generate_reading(data["chart"])
+                except Exception:                       # keep the old reading rather than lose the screen
+                    Logger.exception("VedicAstro: could not rewrite the reading in the new language")
 
     def _build_ui(self, root):
         """(Re)build everything under `root`. Called at start-up and whenever the language changes."""

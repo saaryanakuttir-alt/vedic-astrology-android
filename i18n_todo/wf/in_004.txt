@@ -1,0 +1,68 @@
+# engine/family_bonds.py:522
+2300	--- Ashtakoot Guna Milan: {0} <-> {1} ---\n{2}\n\n{3}\n\n{4}   ## {0}=self_label, {1}=partner_label, {2}=ashtakoot_result['methodology_note'], {3}=koota_lines, {4}=ashtakoot_result['overall_narrative']
+# engine/family_bonds.py:434
+2301	{0}'s main goal this life: {1}   ## {0}=label, {1}=goal
+# engine/family_bonds.py:396
+2302	By the older Parashari system, the 7th house (marriage/partnership) is ruled by {0} (in {1}), placed in house {2}: {3}   ## {0}=seventh['lord'], {1}=seventh['lord_sign'], {2}=seventh['placed_in_house'], {3}=seventh['reading'].get('effects') or sev
+# engine/family_bonds.py:278
+2303	Both Moon signs share the {0} element — a natural, intuitive resonance in temperament and emotional pacing.   ## {0}=parent_element
+# engine/family_bonds.py:436
+2304	{0}'s growth this life pulls toward Rahu in {1} (house {2}) — the unfamiliar direction the soul is here to develop.   ## {0}=label, {1}=rahu.get('sign', '?'), {2}=rahu.get('house', '?')
+# engine/family_bonds.py:429
+2305	{0}: Ketu in {1} (house {2}) marks the strongest past-life imprint.   ## {0}=label, {1}=ketu.get('sign', '?'), {2}=ketu.get('house', '?')
+# engine/family_bonds.py:400
+2306	{0}'s Putrakaraka (children-significator) is {1}, placed in {2}, house {3}.   ## {0}=label, {1}=pk['planet'], {2}=pk['sign'], {3}=pk['house']
+# engine/family_bonds.py:390
+2307	{0}'s Darakaraka (Jaimini's spouse-significator) is {1}, placed in {2}, house {3}.   ## {0}=label, {1}=dk['planet'], {2}=dk['sign'], {3}=dk['house']
+# engine/family_bonds.py:386
+2308	{0}'s Atmakaraka (soul-significator) is {1} in {2}, house {3} — the core drive this person's chart is organized around.   ## {0}=label, {1}=ak['planet'], {2}=ak['sign'], {3}=ak['house']
+# engine/family_bonds.py:313
+2309	{0}'s Putrakaraka is {1}; {2}'s Atmakaraka is {3}. By classical planetary friendship, {4} and {5} share {6}.   ## {0}=parent_label, {1}=pk['planet'], {2}=child_label, {3}=ak['planet'], {4}=pk['planet'], {5}=ak['planet'], {6}=tone
+# engine/family_bonds.py:298
+2310	{0}'s Putrakaraka (children significator) and {1}'s own Atmakaraka (soul significator) are the SAME planet ({2}) — a notable classical resonance, traditionally read as an unusually direct thematic thread between what {3} seeks through children and what {4}'s own chart centers its identity around.   ## {0}=parent_label, {1}=child_label, {2}=pk['planet'], {3}=parent_label, {4}=child_label
+# engine/family_bonds.py:171
+2311	The koota(s) scoring zero — {0} — are the classical areas this system flags for conscious attention rather than automatic ease; this does not mean incompatibility, only that these specific dimensions may take more deliberate effort than others.    ## {0}=', '.join(weak)
+# engine/family_bonds.py:167
+2312	The strongest-scoring areas are {0}, suggesting these are natural points of ease in the relationship.    ## {0}=', '.join(strong)
+# engine/family_bonds.py:454
+2313	How each can support the other toward these goals:\n{0} grows by leaning into the themes of Rahu in {1} (house {2}) — territory that feels unfamiliar at first, so {3} helps most by encouraging {4} there rather than letting them retreat to the old, over-comfortable Ketu pattern. Reciprocally, {5} grows by leaning into Rahu in {6} (house {7}), and {8} helps most by steadying and encouraging {9} in exactly that direction. In practice, each person's natural past-life strengths (their Ketu arena) are often precisely what the other one is still reaching to build (their Rahu direction) — which is what makes family members such effective, if sometimes uncomfortable, mirrors for each other's growth.   ## {0}=a_label, {1}=a_rahu.get('sign', '?'), {2}=a_rahu.get('house', '?'), {3}=b_label, {4}=a_label, {5}=b_label, {6}=b_rahu.get('sign', '?'), {7}=b_rahu.get('house', '?'), {8}=a_label, {9}=b_label
+# engine/family_bonds.py:327
+2314	In practice, these three threads are most useful as a starting point for noticing patterns rather than as an explanation to lean on too heavily. An elemental match (or mismatch) between {0} and {1} says something about natural pacing — how quickly each of you moves through emotions, decisions, or excitement — and mismatches here are common and workable, not a warning sign. The Gana comparison speaks to baseline temperament: a shared Gana often means {2} and {3} 'get' each other's moods quickly, while a mixed Gana pairing (as with any two family members) simply means each may need to explain their own reactions a little more explicitly for the other to follow. The Putrakaraka-Atmakaraka thread is the most classically specific of the three: it points at what {4}'s own chart says about parenting instinctively, set against what {5}'s own chart says about their core drive — where those two align, parenting can feel intuitive; where they differ, {6} may find that supporting {7} well means consciously stepping outside a first instinct rather than assuming it will land the same way it would for a differently-wired child.   ## {0}=parent_label, {1}=child_label, {2}=parent_label, {3}=child_label, {4}=parent_label, {5}=child_label, {6}=parent_label, {7}=child_label
+# engine/family_bonds.py:319
+2315	Three traditional threads, read together, sketch a symbolic picture of the {0}-{1} bond. First, by Moon-sign element: {2} Second, by temperament group (Gana): {3} Third, by Jaimini significator: {4} None of this is a scored verdict the way Ashtakoot is for a marriage — it is a thematic lens for reflecting on natural tendencies in how {5} and {6} may relate, not a prediction or a claim about a specific shared history.   ## {0}=parent_label, {1}=child_label, {2}=elemental['note'], {3}=temperament['note'], {4}=putrakaraka_link['note'], {5}=parent_label, {6}=child_label
+# engine/family_bonds.py:188
+2316	As with every technique in this project, Ashtakoot is one traditional lens among several a real relationship should be evaluated by — see compatibility.py's own docstring for exactly which parts of this scoring are well-sourced versus documented simplification. In practice, a high total score is best read as 'several structural supports are already in place,' not as a guarantee, and a lower or partial score is best read as 'certain dimensions may need more conscious attention,' not as a verdict against the relationship — every long-term partnership, regardless of its Ashtakoot total, still depends far more on how two specific people choose to treat each other day to day than on any one classical calculation. The eight koota breakdowns below are meant to be read as a map of WHERE to pay attention, not as a substitute for actually getting to know how {0} and {1} communicate, handle stress, and support each other in practice.   ## {0}=label_a, {1}=label_b
+# engine/family_bonds.py:164
+2317	Across all eight kootas, {0} and {1} score {2:.1f} out of {3} points — {4}.    ## {0}=label_a, {1}=label_b, {2}=total, {3}=mx, {4}=result['verdict']
+# engine/family_bonds.py:133
+2318	scores a partial {0} of {1} points here   ## {0}=pts, {1}=mx
+# engine/family_bonds.py:243
+2319	This is a thematic, symbolic exploration, not a scored compatibility test — Ashtakoot Guna Milan is a classical MARRIAGE-compatibility system and is deliberately not applied here to a parent/child pair, which it was never designed to evaluate. Nothing below describes a literal past-life history between these two specific people; it reads classical significators symbolically, the same way the Karmic & Past Life tab does for an individual chart.
+# engine/family_bonds.py:408
+2320	This karmic view is a symbolic, traditional lens — it reads each person's own Ketu (past-life imprint), Rahu (this-life growth direction), and Atmakaraka (soul focus), then reflects on how the two might support each other. It is NOT a claim about a literal shared past life between these two specific people, and NOT a verdict on the relationship.
+# engine/family_bonds.py:51
+2321	Varna reflects a broad spiritual/temperamental hierarchy between the two people — traditionally read as whether one partner's natural disposition can comfortably 'lead' the household's spiritual and ethical tone without friction. Classically it's considered the lightest-weighted koota (1 of 36 points) precisely because it captures such a broad, background quality rather than a decisive one on its own.
+# engine/family_bonds.py:58
+2322	Vashya describes mutual magnetism and the capacity for each partner to hold the other's attention and cooperation — literally 'the ability to be drawn toward and stay attracted to' one another. It is traditionally read alongside Yoni as one of the more instinctive, less consciously-controlled dimensions of a relationship's day-to-day chemistry.
+# engine/family_bonds.py:65
+2323	Tara (via each partner's nakshatra count from the other's) is read as an indicator of general wellbeing each partner brings to the other — health, safety, and everyday good fortune within the relationship. Because it's calculated bidirectionally (each partner counted from the other), it can score a partial result even when only one direction of the count lands favorably.
+# engine/family_bonds.py:72
+2324	Yoni, keyed to the symbolic animal of each partner's nakshatra, is the koota most associated with physical and instinctive compatibility — the bodily, non-verbal register of the relationship, sometimes described as how naturally two people's underlying temperaments 'move' alongside each other outside of conscious effort.
+# engine/family_bonds.py:78
+2325	Graha Maitri compares the natural classical friendship between the planetary rulers of each partner's Moon sign — read as mental and intellectual compatibility, how naturally the two minds cooperate on ideas, values, and everyday decisions. It carries real weight (5 of 36 points) because classical texts treat a shared or friendly mental wavelength as foundational to a lasting partnership.
+# engine/family_bonds.py:85
+2326	Gana (Deva/divine, Manushya/human, or Rakshasa/turbulent temperament) is read as basic temperament compatibility — how naturally the two personalities' underlying dispositions, energy levels, and emotional styles coexist day to day, independent of how much either partner consciously tries.
+# engine/family_bonds.py:91
+2327	Bhakoot, based on the angular distance between the two Moon signs, is traditionally tied to the relationship's capacity for love, family growth, and long-term prosperity together — several classical texts specifically connect it to the ease of building a shared household and raising a family over time.
+# engine/family_bonds.py:97
+2328	Nadi is the single highest-weighted koota (8 of 36 points) and is traditionally read as a genetic/constitutional compatibility marker most associated with the health and ease of having children together — its outsized weight reflects how seriously classical texts treat this particular dimension relative to the other seven.
+# engine/family_bonds.py:105
+2329	Sourcing confidence: high — Varna's element-based derivation and its directional (higher-rank-should-not-be-lower) rule are described identically across every classical and contemporary source checked while building this project.
+# engine/family_bonds.py:106
+2330	Sourcing confidence: high for the whole-sign version used here — the one documented gap is that Sagittarius and Capricorn classically split at their midpoint into two different Vashya categories, which this project's whole-sign approach does not implement (see avkahada.py's own note).
+# engine/family_bonds.py:107
+2331	Sourcing confidence: high — the nakshatra-count-modulo-9 method and which remainders count as unfavorable are consistently described across sources with no meaningful disagreement found.
+# engine/family_bonds.py:108
+2332	Sourcing confidence: high for same-animal and the 7 classical enemy pairs, but a documented simplification for everything else — no source found spells out a complete, consistent friendly/neutral/unfriendly matrix for every remaining animal pair, so this project scores those as a flat neutral rather than guessing at finer distinctions.
+# engine/family_bonds.py:109
+2333	Sourcing confidence: high for the underlying planetary friendship table itself (cross-checked against its well-known asymmetric quirks), but the exact numeric point values for the two 'middle' friend/neutral/enemy combinations follow the best-supported convention rather than a single directly-cited numeric source.

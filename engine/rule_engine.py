@@ -44,6 +44,7 @@ import doshas
 import life_timeline
 from astrology_tables import PLANET_ABBR, SIGN_ABBR, SIGN_LORD, get_dignity, ordinal
 from yogas import detect_all_yogas
+from i18n import is_english, t_text, tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 _CLASSICAL_SEVEN = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]
 
@@ -123,7 +124,7 @@ def _load_nakshatra_kb():
 def _nakshatra_reading(nakshatra_name, warnings=None):
     entry = _load_nakshatra_kb().get(nakshatra_name)
     if entry is None and warnings is not None:
-        warnings.append(f"No 'nakshatra' entry found for '{nakshatra_name}'.")
+        warnings.append(tr("No 'nakshatra' entry found for '{0}'.", nakshatra_name))
     return entry
 
 
@@ -146,7 +147,7 @@ def _load_pada_kb():
 def _pada_reading(nakshatra_name, pada, warnings=None):
     entry = _load_pada_kb().get((nakshatra_name, pada))
     if entry is None and warnings is not None:
-        warnings.append(f"No 'nakshatra_pada' entry found for '{nakshatra_name}' pada {pada}.")
+        warnings.append(tr("No 'nakshatra_pada' entry found for '{0}' pada {1}.", nakshatra_name, pada))
     return entry
 
 
@@ -174,7 +175,7 @@ def antardasha_id(maha_planet, antar_planet):
 
 
 def divisional_chart_id(varga_number):
-    return f"DIV-D{varga_number}"
+    return tr('DIV-D{0}', varga_number)
 
 
 def divisional_planet_in_sign_id(varga_number, planet, sign):
@@ -188,7 +189,7 @@ def divisional_planet_in_sign_id(varga_number, planet, sign):
 def _lookup(kb_name, item_id, warnings):
     item = _load(kb_name).get(item_id)
     if item is None:
-        warnings.append(f"No '{kb_name}' entry found for id '{item_id}'.")
+        warnings.append(tr("No '{0}' entry found for id '{1}'.", kb_name, item_id))
     return item
 
 
@@ -219,7 +220,7 @@ def _combustion_reading(chart, planet, warnings):
     sep = combustion.sun_separation(sun_lon, detail["longitude"])
     orb = combustion.combustion_orb(planet, detail.get("retrograde", False))
     combust = sep <= orb
-    entry = _lookup("combustion", f"CMB-{planet[:2]}", warnings) if combust else None
+    entry = _lookup("combustion", tr('CMB-{0}', planet[:2]), warnings) if combust else None
     return {"combust": combust, "orb": orb, "separation": round(sep, 2), "reading": entry}
 
 
@@ -307,11 +308,11 @@ def _plain_planet_gloss(planet, sign, house, in_sign, in_house):
             gist_bits.append(entry["summary"])
     if not paragraph_bits:
         return None
-    header = f"Your {planet} in {sign} ({ordinal(house)} house):"
+    header = tr('Your {0} in {1} ({2} house):', planet, sign, ordinal(house))
     professional = " ".join(paragraph_bits)
     if gist_bits:
-        return f"{header} {professional} [In simple terms: {' '.join(gist_bits)}]"
-    return f"{header} {professional}"
+        return tr('{0} {1} [In simple terms: {2}]', header, professional, ' '.join(gist_bits))
+    return tr('{0} {1}', header, professional)
 
 
 def _planet_reading(chart, planet, warnings):
@@ -351,7 +352,7 @@ def _planet_reading(chart, planet, warnings):
         varga_sign = detail["vargas"].get(f"D{n}")
         if varga_sign is None:
             continue
-        kb_name = f"divisional_D{n}_planet_in_sign"
+        kb_name = tr('divisional_D{0}_planet_in_sign', n)
         entry = _lookup(kb_name, divisional_planet_in_sign_id(n, planet, varga_sign), warnings)
         reading["vargas"][f"D{n}"] = {"sign": varga_sign, "reading": entry}
     return reading
@@ -392,7 +393,7 @@ def _yoga_readings(chart, warnings):
     for result in detected:
         kb_entry = yogas_kb.get(result["id"])
         if kb_entry is None:
-            warnings.append(f"No 'classical_yogas' entry found for id '{result['id']}'.")
+            warnings.append(tr("No 'classical_yogas' entry found for id '{0}'.", result['id']))
         # `details` (from detect_all_yogas) is a short, per-CHART computed
         # fact ("Jupiter is in house 4 from Moon, a kendra") - it was the
         # only text ever shown for a yoga in any UI, even though classical_
@@ -406,11 +407,11 @@ def _yoga_readings(chart, warnings):
         if kb_entry:
             bits = []
             if kb_entry.get("formation"):
-                bits.append(f"Classical formation: {kb_entry['formation']}")
+                bits.append(tr('Classical formation: {0}', kb_entry['formation']))
             if kb_entry.get("effects"):
                 bits.append(kb_entry["effects"])
             if kb_entry.get("strength_modifiers_and_cautions"):
-                bits.append(f"Worth noting: {kb_entry['strength_modifiers_and_cautions']}")
+                bits.append(tr('Worth noting: {0}', kb_entry['strength_modifiers_and_cautions']))
             explanation = " ".join(bits) or None
         readings.append({
             "id": result["id"],
@@ -481,7 +482,7 @@ _CHART_DESCRIPTION_PLANET_ORDER = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", 
 # just clearer, jargon-free wording. Rewritten accordingly - plain
 # explanation, no theatrical framing.
 # ---------------------------------------------------------------------------
-_SIGN_PLAIN_FLAVOR = {
+_SIGN_PLAIN_FLAVOR = tbl({
     "Aries": "bold and eager to go first",
     "Taurus": "steady, comfort-loving, and patient",
     "Gemini": "curious, chatty, and quick to learn",
@@ -494,9 +495,9 @@ _SIGN_PLAIN_FLAVOR = {
     "Capricorn": "disciplined, ambitious, and patient",
     "Aquarius": "independent, original, and idea-driven",
     "Pisces": "dreamy, compassionate, and imaginative",
-}
+})
 
-_PLANET_PLAIN_ROLE = {
+_PLANET_PLAIN_ROLE = tbl({
     "Sun": "your core sense of self",
     "Moon": "your inner feelings and what makes you comfortable",
     "Mars": "your drive, courage, and how you take action",
@@ -506,14 +507,14 @@ _PLANET_PLAIN_ROLE = {
     "Saturn": "the hard lessons, patience, and discipline in your life",
     "Rahu": "a hunger for something new and unfamiliar",
     "Ketu": "what you're already ready to let go of",
-}
+})
 
-_DIGNITY_PLAIN_PHRASE = {
+_DIGNITY_PLAIN_PHRASE = tbl({
     "exalted": "at its very best here",
     "own": "right at home here",
     "debilitated": "finding this a bit of a struggle here",
     "neutral": "doing okay here, nothing dramatic",
-}
+})
 
 
 def _chart_plain_explanation(chart_label, primary_use, asc_sign, planet_placements):
@@ -522,19 +523,19 @@ def _chart_plain_explanation(chart_label, primary_use, asc_sign, planet_placemen
     _build_chart_descriptions already assembled - everyday wording, no
     classical terms, no theatrical framing (see note above)."""
     asc_flavor = _SIGN_PLAIN_FLAVOR.get(asc_sign, "")
-    opening = f"In plain terms, this is your {chart_label}"
+    opening = tr('In plain terms, this is your {0}', chart_label)
     if primary_use:
-        opening += f", which is mainly about {primary_use}"
-    opening += f". Your rising sign here is {asc_sign} ({asc_flavor})."
+        opening += tr(', which is mainly about {0}', primary_use)
+    opening += tr('. Your rising sign here is {0} ({1}).', asc_sign, asc_flavor)
     lines = [opening]
     for planet, sign, house, dignity in planet_placements:
         role = _PLANET_PLAIN_ROLE.get(planet, planet)
         flavor = _SIGN_PLAIN_FLAVOR.get(sign, "")
         where = _PLAIN_HOUSE.get(house, "another part of life")
         dignity_phrase = _DIGNITY_PLAIN_PHRASE.get(dignity, "")
-        line = f"{planet} ({role}) is in {sign} ({flavor}), showing up mainly in the part of life about {where}"
+        line = tr('{0} ({1}) is in {2} ({3}), showing up mainly in the part of life about {4}', planet, role, sign, flavor, where)
         if dignity_phrase:
-            line += f" - {dignity_phrase}"
+            line += tr(' - {0}', dignity_phrase)
         line += "."
         lines.append(line)
     return " ".join(lines)
@@ -564,8 +565,8 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
     # DIVISIONAL_VARGAS), built straight from chart["ascendant"]/["planets"]
     # plus the base in_sign/in_house KB readings already in planets_reading.
     asc_sign = chart["ascendant"]["sign"]
-    bits = [f"Your Ascendant (Lagna) is {asc_sign} - this is your main birth chart, the foundation "
-            f"every other divisional chart below refines."]
+    bits = [tr('Your Ascendant (Lagna) is {0} - this is your main birth chart, the foundation every other '
+               'divisional chart below refines.', asc_sign)]
     for p in _CHART_DESCRIPTION_PLANET_ORDER:
         detail = chart["planets"][p]
         pr = planets_reading[p]
@@ -575,15 +576,15 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
             if entry and entry.get("summary"):
                 gist_bits.append(entry["summary"])
         gist = " ".join(gist_bits)
-        line = f"{p} is in {detail['sign']}, your {ordinal(detail['house'])} house - {dignity} here."
+        line = tr('{0} is in {1}, your {2} house - {3} here.', p, detail['sign'], ordinal(detail['house']), dignity)
         if gist:
-            line += f" {gist}"
+            line += tr(' {0}', gist)
         bits.append(line)
     d1_placements = [(p, chart["planets"][p]["sign"], chart["planets"][p]["house"],
                        get_dignity(p, chart["planets"][p]["sign"])) for p in _CHART_DESCRIPTION_PLANET_ORDER]
     descriptions["D1"] = {
-        "name": "Rasi (main birth chart)", "ascendant_sign": asc_sign, "text": " ".join(bits),
-        "plain_explanation": _chart_plain_explanation("main birth chart", None, asc_sign, d1_placements),
+        "name": tx("Rasi (main birth chart)"), "ascendant_sign": asc_sign, "text": " ".join(bits),
+        "plain_explanation": _chart_plain_explanation(tx("main birth chart"), None, asc_sign, d1_placements),
     }
 
     for n in DIVISIONAL_VARGAS:
@@ -594,10 +595,10 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
         overview = divisional_overviews.get(key) or {}
         name = overview.get("name", key)
         primary_use = overview.get("primary_use")
-        intro = f"In your {key} ({name}) chart"
+        intro = tr('In your {0} ({1}) chart', key, name)
         if primary_use:
-            intro += f" - classically used for {primary_use}"
-        intro += f", your Ascendant falls in {varga_asc}."
+            intro += tr(' - classically used for {0}', primary_use)
+        intro += tr(', your Ascendant falls in {0}.', varga_asc)
         bits = [intro]
         placements = []
         for p in _CHART_DESCRIPTION_PLANET_ORDER:
@@ -609,14 +610,14 @@ def _build_chart_descriptions(chart, planets_reading, divisional_overviews):
             kb = varga_entry.get("reading") or {}
             dignity = kb.get("dignity") or get_dignity(p, p_sign)
             gist = kb.get("summary") or ""
-            line = f"{p} sits in {p_sign}, your {ordinal(house)} house here - {dignity} in this chart."
+            line = tr('{0} sits in {1}, your {2} house here - {3} in this chart.', p, p_sign, ordinal(house), dignity)
             if gist:
-                line += f" {gist}"
+                line += tr(' {0}', gist)
             bits.append(line)
             placements.append((p, p_sign, house, dignity))
         descriptions[key] = {
             "name": name, "ascendant_sign": varga_asc, "text": " ".join(bits),
-            "plain_explanation": _chart_plain_explanation(f"{key} ({name}) chart", primary_use, varga_asc, placements),
+            "plain_explanation": _chart_plain_explanation(tr('{0} ({1}) chart', key, name), primary_use, varga_asc, placements),
         }
 
     return descriptions
@@ -701,7 +702,7 @@ def _karaka_snapshot(karakas, abbr, planets_reading):
 # Reading Ketu's HOUSE as "the arena the past life centered on" is a
 # standard traditional interpretation; the phrasings below describe the
 # symbolic ROLE/arena each house points to, never a literal identity claim.
-_KETU_HOUSE_PAST_ARENA = {
+_KETU_HOUSE_PAST_ARENA = tbl({
     1: "a life turned intensely inward on the self, the body, or a strongly individual identity — self-reliance developed to the point of over-identification with 'I' and 'my own way'",
     2: "a life organized around family, lineage, accumulated wealth, and the spoken word — resources and belonging mastered, perhaps clung to",
     3: "a hands-on life of courage, skill, and effort — a craftsperson, communicator, sibling-among-many, or someone who lived by their own initiative and daring",
@@ -714,16 +715,16 @@ _KETU_HOUSE_PAST_ARENA = {
     10: "a life of authority, duty, and public standing — governance, command, career, or a strong preoccupation with status and worldly achievement",
     11: "a life of gains, networks, and community — commerce, alliances, elder siblings, and the pursuit of ambitions through the collective",
     12: "a secluded, foreign, or otherworldly life — monastery, exile, distant lands, imagination, or a withdrawal from the visible world toward the inner or the beyond",
-}
+})
 
 # Broad temperament flavor of the past-life imprint, by the ELEMENT of the
 # sign Ketu occupies — a coarse classical Tattva grouping, not a precise claim.
-_ELEMENT_PAST_NATURE = {
+_ELEMENT_PAST_NATURE = tbl({
     "Fire": "with a zealous, assertive, leadership-driven temperament (fire signs)",
     "Earth": "with a practical, material, endurance-driven temperament (earth signs)",
     "Air": "with an intellectual, social, communicative temperament (air signs)",
     "Water": "with an emotional, intuitive, devotional temperament (water signs)",
-}
+})
 
 _SIGN_ELEMENT = {
     "Aries": "Fire", "Leo": "Fire", "Sagittarius": "Fire",
@@ -735,7 +736,7 @@ _SIGN_ELEMENT = {
 # Plain-English, jargon-free meaning of each of the 12 houses - used to
 # turn "the 10th lord sits in the 9th" into "your career is tied to luck,
 # higher learning and mentors". Deliberately everyday wording.
-_PLAIN_HOUSE = {
+_PLAIN_HOUSE = tbl({
     1: "yourself - your body, health and personality",
     2: "money, family and what you say",
     3: "courage, siblings and your own effort",
@@ -748,7 +749,7 @@ _PLAIN_HOUSE = {
     10: "career, status and public life",
     11: "income, friendships and big goals",
     12: "letting go, foreign lands and spiritual life",
-}
+})
 _ORDINAL_HOUSE = {1: "1st", 2: "2nd", 3: "3rd", 4: "4th", 5: "5th", 6: "6th",
                   7: "7th", 8: "8th", 9: "9th", 10: "10th", 11: "11th", 12: "12th"}
 # Houses whose lord being placed there is classically supportive vs. effortful.
@@ -765,16 +766,16 @@ def _plain_life_gloss(house_lords, primary_house, area_word):
     if not hl:
         return ""
     placed = hl["placed_in_house"]
-    where = _PLAIN_HOUSE.get(placed, "another part of life")
+    where = _PLAIN_HOUSE.get(placed) or tx("another part of life")
     if placed in _STRONG_HOUSES:
-        senti = "That is usually a supportive, helpful placement for this part of life."
+        senti = tx("That is usually a supportive, helpful placement for this part of life.")
     elif placed in _WEAK_HOUSES:
-        senti = ("That placement tends to ask for extra effort here, or brings some ups and "
-                 "downs before things settle.")
+        senti = (tx("That placement tends to ask for extra effort here, or brings some ups and "
+                 "downs before things settle."))
     else:
-        senti = "That is a mixed, workable placement for this part of life."
-    return (f"In simple terms: the planet in charge of your {area_word} sits in the part of "
-            f"your life about {where}, so your {area_word} is closely tied to {where}. {senti}")
+        senti = tx("That is a mixed, workable placement for this part of life.")
+    return (tr('In simple terms: the planet in charge of your {0} sits in the part of your life about {1}, so '
+               'your {2} is closely tied to {3}. {4}', area_word, where, area_word, where, senti))
 
 
 # Archetypal past-life PROFESSIONS/deeds per house - deliberately plural and
@@ -782,7 +783,7 @@ def _plain_life_gloss(house_lords, primary_house, area_word):
 # named occupation, since the classical signal here is an ARENA of life
 # (Ketu's house), not a job title - these are illustrative professions that
 # fit that arena, not a literal claim about a specific past occupation.
-_PAST_LIFE_PROFESSION = {
+_PAST_LIFE_PROFESSION = tbl({
     1: "a warrior, athlete, or someone whose whole identity was built through sheer physical presence and self-reliance",
     2: "a merchant, treasurer, singer, or head of a family estate - someone who managed wealth, voice, or lineage",
     3: "a craftsperson, messenger, scout, or performer - someone who lived by hands-on skill, courage, and initiative",
@@ -795,13 +796,13 @@ _PAST_LIFE_PROFESSION = {
     10: "a ruler, administrator, or person of public authority - someone whose identity was built through career and status",
     11: "a guild member, trader's network organizer, or elder sibling managing a large household - someone who worked through community and alliance",
     12: "a monk, exile, hospital worker, or someone who lived apart from ordinary society - a life of seclusion, service, or foreign lands",
-}
+})
 
 # A short closing flavor, keyed by Atmakaraka (the planet with the highest
 # degree in-sign - Jaimini's significator of the soul's core drive across
 # lifetimes), added as a coda to root WHY that profession/arena mattered to
 # this particular soul, not just which house it was.
-_ATMAKARAKA_PAST_FLAVOR = {
+_ATMAKARAKA_PAST_FLAVOR = tbl({
     "Sun": "and whatever the role, it was carried out in a way that sought recognition, authority, or being seen as the one in charge",
     "Moon": "and whatever the role, it was carried out with strong emotional investment - care for others, or a deep need to belong",
     "Mars": "and whatever the role, it was carried out with courage, competitiveness, and a willingness to fight for it",
@@ -809,7 +810,7 @@ _ATMAKARAKA_PAST_FLAVOR = {
     "Jupiter": "and whatever the role, it was carried out with a sense of purpose, teaching, or moral responsibility",
     "Venus": "and whatever the role, it was carried out with an eye for beauty, relationship, and pleasure",
     "Saturn": "and whatever the role, it was carried out through hard, patient, often thankless labor over a long stretch of time",
-}
+})
 
 
 def _past_life_identity(ketu, atmakaraka=None):
@@ -819,31 +820,30 @@ def _past_life_identity(ketu, atmakaraka=None):
     never a literal identity. atmakaraka (optional, from chara_karaka.py's
     already-computed ranking) adds a short closing flavor on HOW that role
     was carried out, rooted in the soul's core drive across lifetimes."""
-    arena = _KETU_HOUSE_PAST_ARENA.get(ketu["house"], "an arena not cleanly captured by a single house theme")
+    arena = _KETU_HOUSE_PAST_ARENA.get(ketu["house"]) or tx("an arena not cleanly captured by a single house theme")
     element = _SIGN_ELEMENT.get(ketu["sign"], None)
     nature = _ELEMENT_PAST_NATURE.get(element, "") if element else ""
     profession = _PAST_LIFE_PROFESSION.get(ketu["house"])
     summary = (
-        f"With Ketu in {ketu['sign']} (house {ketu['house']}, {ketu['nakshatra']} nakshatra), the "
-        f"strongest past-life imprint points to {arena}"
-        + (f", {nature}" if nature else "")
+        tr('With Ketu in {0} (house {1}, {2} nakshatra), the strongest past-life imprint points to {3}', ketu['sign'], ketu['house'], ketu['nakshatra'], arena)
+        + (tr(', {0}', nature) if nature else "")
         + "."
     )
     detail = (
-        "Classically, Ketu marks what the soul had already 'finished' — a mastery so complete it "
+        tx("Classically, Ketu marks what the soul had already 'finished' — a mastery so complete it "
         "was carried in as instinct rather than learned again. Wherever Ketu sits is therefore "
         "read as the life-arena that was over-developed to the point of diminishing returns: "
         "familiar, even effortless, but no longer where growth lies. That is precisely why this "
         "life pulls in the opposite direction (see the main karmic goal below), toward the house "
-        "and sign Rahu occupies."
+        "and sign Rahu occupies.")
     )
     profession_text = None
     if profession:
-        profession_text = f"In that kind of life, you may have been {profession}."
+        profession_text = tr('In that kind of life, you may have been {0}.', profession)
         atmakaraka_planet = atmakaraka.get("planet") if atmakaraka else None
         flavor = _ATMAKARAKA_PAST_FLAVOR.get(atmakaraka_planet)
         if flavor:
-            profession_text += f" Your Atmakaraka is {atmakaraka_planet}, {flavor}."
+            profession_text += tr(' Your Atmakaraka is {0}, {1}.', atmakaraka_planet, flavor)
     return {
         "house": ketu["house"], "sign": ketu["sign"], "summary": summary, "detail": detail,
         "profession": profession_text,
@@ -856,23 +856,20 @@ def _karmic_actions(ketu, saturn, purva_punya):
     (debts and consequences being worked off), and the 5th house / Purva
     Punya (the store of past merit carried forward)."""
     bits = [
-        f"The over-reliance shown by Ketu in house {ketu['house']} ({ketu['sign']}) is read as the "
-        f"past-life pattern most in need of release now — the very competence that once served the "
-        f"soul became a groove too deep, a comfort clung to past its usefulness."
+        tr('The over-reliance shown by Ketu in house {0} ({1}) is read as the past-life pattern most in '
+           'need of release now — the very competence that once served the soul became a groove too deep, a '
+           'comfort clung to past its usefulness.', ketu['house'], ketu['sign'])
     ]
     if saturn.get("in_house_effects") or saturn.get("in_sign_effects"):
         bits.append(
-            f"Saturn — the karaka of karma itself — sits in {saturn['sign']} (house {saturn['house']}), "
-            f"marking where accumulated debts and consequences of past conduct are being steadily "
-            f"worked off through responsibility and delay in this life: "
-            f"{saturn.get('in_house_effects') or saturn.get('in_sign_effects')}"
+            tr('Saturn — the karaka of karma itself — sits in {0} (house {1}), marking where accumulated debts '
+               'and consequences of past conduct are being steadily worked off through responsibility and delay '
+               'in this life: {2}', saturn['sign'], saturn['house'], saturn.get('in_house_effects') or saturn.get('in_sign_effects'))
         )
     if purva_punya.get("summary"):
         bits.append(
-            f"The 5th house — Purva Punya, the storehouse of merit EARNED by good past-life action — "
-            f"is ruled by {purva_punya['lord']} (in {purva_punya['lord_sign']}, placed in house "
-            f"{purva_punya['placed_in_house']}), describing the credit balance carried forward: "
-            f"{purva_punya.get('effects') or purva_punya['summary']}"
+            tr('The 5th house — Purva Punya, the storehouse of merit EARNED by good past-life action — is ruled '
+               'by {0} (in {1}, placed in house {2}), describing the credit balance carried forward: {3}', purva_punya['lord'], purva_punya['lord_sign'], purva_punya['placed_in_house'], purva_punya.get('effects') or purva_punya['summary'])
         )
     return " ".join(bits)
 
@@ -881,7 +878,7 @@ def _karmic_actions(ketu, saturn, purva_punya):
 # growth reaches toward — the mirror image of _KETU_HOUSE_PAST_ARENA above
 # (same 12 houses, opposite pole: what is being BUILT, not what was already
 # mastered). Phrased as a goal/direction rather than a past-tense identity.
-_RAHU_HOUSE_GROWTH_GOAL = {
+_RAHU_HOUSE_GROWTH_GOAL = tbl({
     1: "building a confident, self-directed identity — learning to stand on one's own initiative rather than leaning on old, over-familiar support",
     2: "developing a stable relationship with resources, family, and one's own voice — learning to value and articulate what one has rather than taking it for granted",
     3: "growing into courage, self-effort, and communication — reaching for skills and initiative that must be earned firsthand, not inherited",
@@ -894,7 +891,7 @@ _RAHU_HOUSE_GROWTH_GOAL = {
     10: "stepping into public responsibility, career, and authority — building a reputation and standing earned through visible effort, not granted by birthright",
     11: "growing through community, ambition, and long-term gain — learning to work toward goals through networks and collective effort rather than solitary comfort",
     12: "developing surrender, imagination, and release — reaching toward the unseen, the spiritual, or the foreign, rather than clinging to the visible and familiar",
-}
+})
 
 
 def _karmic_goal_statement(rahu, atmakaraka, dharma):
@@ -909,30 +906,27 @@ def _karmic_goal_statement(rahu, atmakaraka, dharma):
         rahu["house"], "an arena not cleanly captured by a single house theme"
     )
     sentences = [
-        f"This life's main karmic goal centers on {goal_arena} — the territory Rahu occupies in "
-        f"{rahu['sign']} (house {rahu['house']}, {rahu['nakshatra']} nakshatra), read as the "
-        f"direction the soul is here to stretch toward, however unfamiliar or effortful it may "
-        f"feel at first."
+        tr("This life's main karmic goal centers on {0} — the territory Rahu occupies in {1} (house {2}, "
+           '{3} nakshatra), read as the direction the soul is here to stretch toward, however unfamiliar or '
+           'effortful it may feel at first.', goal_arena, rahu['sign'], rahu['house'], rahu['nakshatra'])
     ]
     if rahu.get("in_house_effects") or rahu.get("in_sign_effects"):
         sentences.append(
-            "Concretely, that stretch plays out as: "
+            tx("Concretely, that stretch plays out as: ")
             + (rahu.get("in_house_effects") or rahu.get("in_sign_effects"))
         )
     sentences.append(
-        f"This growth is carried out through the lens of the Atmakaraka, {atmakaraka['planet']} "
-        f"in {atmakaraka['sign']} (house {atmakaraka['house']}) — the soul's central "
-        f"quality — meaning the goal is not simply to arrive in Rahu's territory, but to bring "
-        f"{atmakaraka['planet']}'s own nature into it: "
-        + (atmakaraka.get("in_sign_effects") or f"the qualities {atmakaraka['sign']} classically signifies")
+        tr('This growth is carried out through the lens of the Atmakaraka, {0} in {1} (house {2}) — the '
+           "soul's central quality — meaning the goal is not simply to arrive in Rahu's territory, but to "
+           "bring {3}'s own nature into it: ", atmakaraka['planet'], atmakaraka['sign'], atmakaraka['house'], atmakaraka['planet'])
+        + (atmakaraka.get("in_sign_effects") or tr('the qualities {0} classically signifies', atmakaraka['sign']))
         + "."
     )
     if dharma.get("summary"):
         sentences.append(
-            f"The 9th house (Dharma) frames why this matters beyond the individual: ruled by "
-            f"{dharma['lord']} in {dharma['lord_sign']}, placed in house {dharma['placed_in_house']}, "
-            f"it points to {dharma.get('effects') or dharma['summary']} — the larger sense of "
-            f"purpose this life's karmic stretch is ultimately in service of."
+            tr('The 9th house (Dharma) frames why this matters beyond the individual: ruled by {0} in {1}, '
+               "placed in house {2}, it points to {3} — the larger sense of purpose this life's karmic stretch "
+               'is ultimately in service of.', dharma['lord'], dharma['lord_sign'], dharma['placed_in_house'], dharma.get('effects') or dharma['summary'])
         )
     return " ".join(sentences)
 
@@ -941,9 +935,9 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     ketu = _significator_snapshot("Ketu", planets_reading)
     rahu = _significator_snapshot("Rahu", planets_reading)
     saturn = _significator_snapshot("Saturn", planets_reading)
-    purva_punya = _house_significator_snapshot(5, "Purva Punya (past-life merit)", house_lords)
-    dharma = _house_significator_snapshot(9, "Dharma (fortune / higher purpose)", house_lords)
-    moksha = _house_significator_snapshot(12, "Moksha (endings / past attachments)", house_lords)
+    purva_punya = _house_significator_snapshot(5, tx("Purva Punya (past-life merit)"), house_lords)
+    dharma = _house_significator_snapshot(9, tx("Dharma (fortune / higher purpose)"), house_lords)
+    moksha = _house_significator_snapshot(12, tx("Moksha (endings / past attachments)"), house_lords)
     atmakaraka = _karaka_snapshot(karakas, "AK", planets_reading)
     darakaraka = _karaka_snapshot(karakas, "DK", planets_reading)
     putrakaraka = _karaka_snapshot(karakas, "PK", planets_reading)
@@ -962,11 +956,9 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     moon_pada = _pada_reading(moon_nakshatra_name, moon_nakshatra_pada)
     if moon_nakshatra:
         janma_text = (
-            f"Your Janma Nakshatra — the lunar mansion the Moon occupied at birth, and "
-            f"traditionally read as foundational to personal identity in its own right — is "
-            f"{moon_nakshatra['name']}, ruled by {moon_nakshatra['ruling_planet']} and "
-            f"presided over by {moon_nakshatra['deity']}, symbolized by {moon_nakshatra['symbol'].lower()}. "
-            f"{moon_nakshatra['effects']}"
+            tr('Your Janma Nakshatra — the lunar mansion the Moon occupied at birth, and traditionally read as '
+               'foundational to personal identity in its own right — is {0}, ruled by {1} and presided over by '
+               '{2}, symbolized by {3}. {4}', moon_nakshatra['name'], moon_nakshatra['ruling_planet'], moon_nakshatra['deity'], moon_nakshatra['symbol'].lower(), moon_nakshatra['effects'])
         )
         if moon_pada:
             # Not splicing moon_pada['summary'] into a lowercase mid-sentence
@@ -975,86 +967,80 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
             # letter mangled that into "revati's" on the first pass. A colon
             # break avoids needing to touch the KB text's own capitalization.
             janma_text += (
-                f" More specifically, the Moon sits in pada {moon_nakshatra_pada} of "
-                f"{moon_nakshatra_name} (Navamsa: {moon_pada['navamsa_sign']}): "
-                f"{moon_pada['summary']}"
+                tr(' More specifically, the Moon sits in pada {0} of {1} (Navamsa: {2}): {3}', moon_nakshatra_pada, moon_nakshatra_name, moon_pada['navamsa_sign'], moon_pada['summary'])
             )
         paragraphs.append(janma_text)
 
     # --- Paragraph 1: the soul's core nature (Atmakaraka) ---
     ak_text = (
-        f"In Jaimini astrology, the planet holding the highest degree among the seven classical "
-        f"grahas is the Atmakaraka — literally the 'significator of the soul' — read as the "
-        f"planet whose themes the soul itself is most identified with in this incarnation. Here "
-        f"that planet is {atmakaraka['planet']}, placed in {atmakaraka['sign']} in house "
-        f"{atmakaraka['house']} ({atmakaraka['nakshatra']} nakshatra, pada {atmakaraka['nakshatra_pada']})."
+        tr('In Jaimini astrology, the planet holding the highest degree among the seven classical grahas is '
+           "the Atmakaraka — literally the 'significator of the soul' — read as the planet whose themes the "
+           'soul itself is most identified with in this incarnation. Here that planet is {0}, placed in {1} '
+           'in house {2} ({3} nakshatra, pada {4}).', atmakaraka['planet'], atmakaraka['sign'], atmakaraka['house'], atmakaraka['nakshatra'], atmakaraka['nakshatra_pada'])
     )
     if atmakaraka.get("in_sign_effects"):
-        ak_text += f" By sign, this classically reads as: {atmakaraka['in_sign_effects']}"
+        ak_text += tr(' By sign, this classically reads as: {0}', atmakaraka['in_sign_effects'])
     if atmakaraka.get("in_house_effects"):
-        ak_text += f" By house, its themes play out through the domain it occupies: {atmakaraka['in_house_effects']}"
+        ak_text += tr(' By house, its themes play out through the domain it occupies: {0}', atmakaraka['in_house_effects'])
     if atmakaraka.get("dignity_note"):
-        ak_text += f" {atmakaraka['dignity_note']}"
+        ak_text += tr(' {0}', atmakaraka['dignity_note'])
     ak_text += (
-        " Traditionally, whatever this planet governs is treated as the soul's central "
+        tx(" Traditionally, whatever this planet governs is treated as the soul's central "
         "preoccupation across lifetimes — the quality it keeps returning to develop, express, "
-        "or master — rather than a peripheral trait."
+        "or master — rather than a peripheral trait.")
     )
     paragraphs.append(ak_text)
 
     # --- Paragraph 2: what was carried forward (Ketu) ---
     if ketu.get("in_house_effects") or ketu.get("in_sign_effects"):
         ketu_text = (
-            f"Ketu is the classical significator of past-life imprint — skills, instincts, and "
-            f"unfinished business already carried into this birth, experienced less as something "
-            f"learned and more as something simply KNOWN. It sits in {ketu['sign']} in house "
-            f"{ketu['house']} ({ketu['nakshatra']} nakshatra)."
+            tr('Ketu is the classical significator of past-life imprint — skills, instincts, and unfinished '
+               'business already carried into this birth, experienced less as something learned and more as '
+               'something simply KNOWN. It sits in {0} in house {1} ({2} nakshatra).', ketu['sign'], ketu['house'], ketu['nakshatra'])
         )
         if ketu.get("in_sign_effects"):
-            ketu_text += f" {ketu['in_sign_effects']}"
+            ketu_text += tr(' {0}', ketu['in_sign_effects'])
         if ketu.get("in_house_effects"):
-            ketu_text += f" In the domain of house {ketu['house']} specifically: {ketu['in_house_effects']}"
+            ketu_text += tr(' In the domain of house {0} specifically: {1}', ketu['house'], ketu['in_house_effects'])
         ketu_text += (
-            " Classically, a strong or prominent Ketu placement often shows up as an area where "
+            tx(" Classically, a strong or prominent Ketu placement often shows up as an area where "
             "the native feels an odd, hard-to-explain fluency or detachment — as if this "
-            "particular ground has already been covered before."
+            "particular ground has already been covered before.")
         )
         paragraphs.append(ketu_text)
 
     # --- Paragraph 3: the direction of growth (Rahu) ---
     if rahu.get("in_house_effects") or rahu.get("in_sign_effects"):
         rahu_text = (
-            f"Rahu sits opposite Ketu by definition and is read as the direction this life's "
-            f"karmic growth pulls toward — unfamiliar territory the soul is drawn to reach for, "
-            f"often with more hunger than comfort at first. It is placed in {rahu['sign']} in "
-            f"house {rahu['house']} ({rahu['nakshatra']} nakshatra)."
+            tr("Rahu sits opposite Ketu by definition and is read as the direction this life's karmic growth "
+               'pulls toward — unfamiliar territory the soul is drawn to reach for, often with more hunger than '
+               'comfort at first. It is placed in {0} in house {1} ({2} nakshatra).', rahu['sign'], rahu['house'], rahu['nakshatra'])
         )
         if rahu.get("in_sign_effects"):
-            rahu_text += f" {rahu['in_sign_effects']}"
+            rahu_text += tr(' {0}', rahu['in_sign_effects'])
         if rahu.get("in_house_effects"):
-            rahu_text += f" In the domain of house {rahu['house']}: {rahu['in_house_effects']}"
+            rahu_text += tr(' In the domain of house {0}: {1}', rahu['house'], rahu['in_house_effects'])
         rahu_text += (
-            " Where Ketu describes what already feels familiar, Rahu describes what this "
+            tx(" Where Ketu describes what already feels familiar, Rahu describes what this "
             "incarnation is reaching to build — often the area of greatest ambition, "
-            "restlessness, and eventual growth once its excesses are tempered by experience."
+            "restlessness, and eventual growth once its excesses are tempered by experience.")
         )
         paragraphs.append(rahu_text)
 
     # --- Paragraph 4: karma and consequence (Saturn) ---
     if saturn.get("in_house_effects") or saturn.get("in_sign_effects"):
         saturn_text = (
-            f"Saturn is the classical karaka for karma itself — structure, discipline, delay, "
-            f"and the working-out of consequence over time. It sits in {saturn['sign']} in house "
-            f"{saturn['house']} ({saturn['nakshatra']} nakshatra)."
+            tr('Saturn is the classical karaka for karma itself — structure, discipline, delay, and the '
+               'working-out of consequence over time. It sits in {0} in house {1} ({2} nakshatra).', saturn['sign'], saturn['house'], saturn['nakshatra'])
         )
         if saturn.get("in_sign_effects"):
-            saturn_text += f" {saturn['in_sign_effects']}"
+            saturn_text += tr(' {0}', saturn['in_sign_effects'])
         if saturn.get("in_house_effects"):
-            saturn_text += f" In that house's domain: {saturn['in_house_effects']}"
+            saturn_text += tr(" In that house's domain: {0}", saturn['in_house_effects'])
         saturn_text += (
-            " Saturn's placement is traditionally read as showing exactly where patience, "
+            tx(" Saturn's placement is traditionally read as showing exactly where patience, "
             "responsibility, and the slow, unglamorous accumulation of effort become the "
-            "vehicle through which karma is actually resolved rather than merely felt."
+            "vehicle through which karma is actually resolved rather than merely felt.")
         )
         paragraphs.append(saturn_text)
 
@@ -1062,45 +1048,41 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     purpose_bits = []
     if purva_punya.get("summary"):
         purpose_bits.append(
-            f"The 5th house — Purva Punya, the storehouse of past-life merit — is ruled by "
-            f"{purva_punya['lord']} (in {purva_punya['lord_sign']}), placed in house "
-            f"{purva_punya['placed_in_house']}: {purva_punya.get('effects') or purva_punya['summary']}"
+            tr('The 5th house — Purva Punya, the storehouse of past-life merit — is ruled by {0} (in {1}), '
+               'placed in house {2}: {3}', purva_punya['lord'], purva_punya['lord_sign'], purva_punya['placed_in_house'], purva_punya.get('effects') or purva_punya['summary'])
         )
     if dharma.get("summary"):
         purpose_bits.append(
-            f"The 9th house — Dharma, higher purpose and fortune — is ruled by {dharma['lord']} "
-            f"(in {dharma['lord_sign']}), placed in house {dharma['placed_in_house']}: "
-            f"{dharma.get('effects') or dharma['summary']}"
+            tr('The 9th house — Dharma, higher purpose and fortune — is ruled by {0} (in {1}), placed in house '
+               '{2}: {3}', dharma['lord'], dharma['lord_sign'], dharma['placed_in_house'], dharma.get('effects') or dharma['summary'])
         )
     if moksha.get("summary"):
         purpose_bits.append(
-            f"The 12th house — Moksha, release and the letting-go of past attachments — is "
-            f"ruled by {moksha['lord']} (in {moksha['lord_sign']}), placed in house "
-            f"{moksha['placed_in_house']}: {moksha.get('effects') or moksha['summary']}"
+            tr('The 12th house — Moksha, release and the letting-go of past attachments — is ruled by {0} (in '
+               '{1}), placed in house {2}: {3}', moksha['lord'], moksha['lord_sign'], moksha['placed_in_house'], moksha.get('effects') or moksha['summary'])
         )
     if purpose_bits:
         paragraphs.append(
-            "Three houses classically frame this life's overarching purpose. " + " ".join(purpose_bits)
+            tx("Three houses classically frame this life's overarching purpose. ") + " ".join(purpose_bits)
         )
 
     # --- Paragraph 6: this soul's disposition toward partnership ---
     disposition_bits = []
     if darakaraka.get("in_house_effects") or darakaraka.get("in_sign_effects"):
         dk_text = (
-            f"Darakaraka — the Jaimini significator of the spouse/life partner, held here by "
-            f"{darakaraka['planet']} in {darakaraka['sign']}, house {darakaraka['house']} "
-            f"({darakaraka['nakshatra']} nakshatra) — describes this soul's own disposition "
-            f"toward partnership, prior to comparing charts with anyone specific."
+            tr('Darakaraka — the Jaimini significator of the spouse/life partner, held here by {0} in {1}, '
+               "house {2} ({3} nakshatra) — describes this soul's own disposition toward partnership, prior to "
+               'comparing charts with anyone specific.', darakaraka['planet'], darakaraka['sign'], darakaraka['house'], darakaraka['nakshatra'])
         )
         if darakaraka.get("in_sign_effects"):
-            dk_text += f" {darakaraka['in_sign_effects']}"
+            dk_text += tr(' {0}', darakaraka['in_sign_effects'])
         disposition_bits.append(dk_text)
     if disposition_bits:
         paragraphs.append(
             " ".join(disposition_bits) +
-            " (A specific two-chart comparison with an actual partner or family member's own "
+            tx(" (A specific two-chart comparison with an actual partner or family member's own "
             "Atmakaraka and Moon placement — not just this soul's own disposition — is what the "
-            "Family Compatibility tab's Karmic Connection sections cover.)"
+            "Family Compatibility tab's Karmic Connection sections cover.)")
         )
 
     # --- Past-life identity, the actions that led here, and this life's
@@ -1116,36 +1098,34 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     if past_life.get("profession"):
         past_life_text += " " + past_life["profession"]
     paragraphs.append(
-        "--- What you may have been (past-life imprint) ---\n"
+        tx("--- What you may have been (past-life imprint) ---\n")
         + past_life_text
-        + f"\n\nIn simple terms: you seem to have come into this life already comfortable with "
-        f"{ketu_where}. It feels natural, even over-familiar - so it's a strength you can lean "
-        f"on, but not where your growth is meant to happen this time."
+        + tr('\n\nIn simple terms: you seem to have come into this life already comfortable with {0}. It feels '
+             "natural, even over-familiar - so it's a strength you can lean on, but not where your growth is "
+             'meant to happen this time.', ketu_where)
     )
     paragraphs.append(
-        "--- What led here (the actions carried forward) ---\n" + karmic_actions
-        + "\n\nIn simple terms: these are the old habits and duties your chart suggests you're "
+        tx("--- What led here (the actions carried forward) ---\n") + karmic_actions
+        + tx("\n\nIn simple terms: these are the old habits and duties your chart suggests you're "
         "still carrying - leaning too hard on what already came easily, which now has to be "
-        "balanced out."
+        "balanced out.")
     )
     if main_karmic_goal:
         paragraphs.append(
-            "--- Your main karmic goal this life ---\n" + main_karmic_goal
-            + f"\n\nIn simple terms: your growth this life is mostly about {rahu_where}. Leaning "
-            f"into that - even when it feels new or uncomfortable - is where the real meaning and "
-            f"progress tend to come from."
+            tx("--- Your main karmic goal this life ---\n") + main_karmic_goal
+            + tr('\n\nIn simple terms: your growth this life is mostly about {0}. Leaning into that - even when it '
+                 'feels new or uncomfortable - is where the real meaning and progress tend to come from.', rahu_where)
         )
 
     # --- Closing synthesis ---
     closing = (
-        f"Read together, these significators sketch one coherent traditional narrative: a soul "
-        f"whose defining focus (Atmakaraka in {atmakaraka['sign']}, house {atmakaraka['house']}) "
-        f"arrives already carrying the imprint described by Ketu, is pulled to grow in the "
-        f"direction Rahu points toward, works through consequence via Saturn's placement, and "
-        f"orients its deeper purpose around the 5th/9th/12th houses described above. None of "
-        f"this specifies a literal former life, era, or identity — it is a symbolic framework "
-        f"this project's own verified KB entries already support, reassembled under a "
-        f"traditional karmic lens for reflection."
+        tr('Read together, these significators sketch one coherent traditional narrative: a soul whose '
+           'defining focus (Atmakaraka in {0}, house {1}) arrives already carrying the imprint described by '
+           'Ketu, is pulled to grow in the direction Rahu points toward, works through consequence via '
+           "Saturn's placement, and orients its deeper purpose around the 5th/9th/12th houses described "
+           'above. None of this specifies a literal former life, era, or identity — it is a symbolic '
+           "framework this project's own verified KB entries already support, reassembled under a "
+           'traditional karmic lens for reflection.', atmakaraka['sign'], atmakaraka['house'])
     )
     paragraphs.append(closing)
 
@@ -1157,12 +1137,11 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     # so this field holds plain text and each UI applies its own italic
     # styling to it (see gui_app.py/app.js/tabs_reports.py). ---
     plain_section_summary = (
-        f"In simple words: you seem to arrive already comfortable with {ketu_where}, "
-        f"and this life is asking you to grow into {rahu_where}. Your sense of self "
-        f"centers on {atmakaraka['planet']} in {atmakaraka['sign']}, and your wider sense "
-        f"of purpose is shaped by the 5th, 9th, and 12th houses covered above. None of "
-        f"this is a literal past life - it's a traditional lens for noticing patterns "
-        f"that might be worth paying attention to, not a fact about who you were."
+        tr('In simple words: you seem to arrive already comfortable with {0}, and this life is asking you '
+           'to grow into {1}. Your sense of self centers on {2} in {3}, and your wider sense of purpose is '
+           'shaped by the 5th, 9th, and 12th houses covered above. None of this is a literal past life - '
+           "it's a traditional lens for noticing patterns that might be worth paying attention to, not a "
+           'fact about who you were.', ketu_where, rahu_where, atmakaraka['planet'], atmakaraka['sign'])
     )
     paragraphs.append(plain_section_summary)
 
@@ -1172,15 +1151,15 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
     # callers (e.g. the GUI's one-line status text) still use this.
     short_bits = []
     if ketu.get("in_house_summary"):
-        short_bits.append(f"Ketu in {ketu['sign']} (house {ketu['house']}): {ketu['in_house_summary']}")
+        short_bits.append(tr('Ketu in {0} (house {1}): {2}', ketu['sign'], ketu['house'], ketu['in_house_summary']))
     if rahu.get("in_house_summary"):
-        short_bits.append(f"Rahu in {rahu['sign']} (house {rahu['house']}): {rahu['in_house_summary']}")
+        short_bits.append(tr('Rahu in {0} (house {1}): {2}', rahu['sign'], rahu['house'], rahu['in_house_summary']))
     if purva_punya.get("summary"):
-        short_bits.append(f"5th house (Purva Punya): {purva_punya['summary']}")
+        short_bits.append(tr('5th house (Purva Punya): {0}', purva_punya['summary']))
     if dharma.get("summary"):
-        short_bits.append(f"9th house (Dharma): {dharma['summary']}")
+        short_bits.append(tr('9th house (Dharma): {0}', dharma['summary']))
     if moksha.get("summary"):
-        short_bits.append(f"12th house (Moksha): {moksha['summary']}")
+        short_bits.append(tr('12th house (Moksha): {0}', moksha['summary']))
     short_synthesis = " ".join(short_bits)
 
     return {
@@ -1201,7 +1180,7 @@ def _build_karmic_and_past_life(chart, planets_reading, house_lords, karakas):
         "soul_narrative": soul_narrative,
         "synthesis": short_synthesis,
         "plain_section_summary": plain_section_summary,
-        "caveat": _KARMIC_CAVEAT,
+        "caveat": tx(_KARMIC_CAVEAT),
     }
 
 
@@ -1231,7 +1210,7 @@ def _hl_text(house_lords, house_num, prefer="effects"):
     if not r:
         return None
     text = r.get(prefer) or r.get("summary")
-    return f"the {ordinal(house_num)} house's lord {hl['lord']} (in {hl['lord_sign']}, placed in house {hl['placed_in_house']}): {text}"
+    return tr("the {0} house's lord {1} (in {2}, placed in house {3}): {4}", ordinal(house_num), hl['lord'], hl['lord_sign'], hl['placed_in_house'], text)
 
 
 def _planet_text(planets_reading, planet, prefer="in_house"):
@@ -1241,7 +1220,7 @@ def _planet_text(planets_reading, planet, prefer="in_house"):
     entry = r.get(prefer)
     if not entry:
         return None
-    return f"{planet} in {r['sign']} (house {r['house']}): {entry.get('effects') or entry.get('summary')}"
+    return tr('{0} in {1} (house {2}): {3}', planet, r['sign'], r['house'], entry.get('effects') or entry.get('summary'))
 
 
 # ---------------------------------------------------------------------------
@@ -1252,7 +1231,7 @@ def _planet_text(planets_reading, planet, prefer="in_house"):
 
 # Classical body/ailment karaka themes per planet — used ONLY to describe the
 # symbolic "area" a planet points at, never as a diagnosis.
-_PLANET_HEALTH_THEME = {
+_PLANET_HEALTH_THEME = tbl({
     "Sun": "heart, bones, general vitality, and the eyes",
     "Moon": "the mind and emotions, blood, bodily fluids, and the chest/lungs",
     "Mars": "blood, muscles, inflammation, accidents, wounds, and surgical events",
@@ -1262,7 +1241,7 @@ _PLANET_HEALTH_THEME = {
     "Saturn": "chronic and degenerative conditions, the joints, bones, and slow-developing ailments",
     "Rahu": "hard-to-diagnose, toxic, or unusual conditions",
     "Ketu": "sudden, undiagnosed, or accident-related conditions",
-}
+})
 
 _MALEFICS = {"Sun", "Mars", "Saturn", "Rahu", "Ketu"}
 _BENEFICS = {"Jupiter", "Venus", "Mercury", "Moon"}
@@ -1306,7 +1285,7 @@ _MEDICAL_OVERVIEW = (
 # Personalized (house-from-Ascendant, not fixed-sign) Kalapurusha body map -
 # the standard way this is applied to an individual chart: house 1 is
 # always "the head" for THIS person regardless of which sign occupies it.
-_HOUSE_BODY_PART = {
+_HOUSE_BODY_PART = tbl({
     1: "the head and brain",
     2: "the face, mouth, and throat",
     3: "the throat, arms, shoulders, and ears",
@@ -1319,16 +1298,16 @@ _HOUSE_BODY_PART = {
     10: "the knees and joints",
     11: "the calves and ankles",
     12: "the feet and the immune system",
-}
+})
 
 # One-word names for the body-map chart (the full wording above stays in the text).
-_HOUSE_BODY_SHORT = {
+_HOUSE_BODY_SHORT = tbl({
     1: "Head", 2: "Face", 3: "Arms", 4: "Chest", 5: "Heart", 6: "Belly",
     7: "Kidneys", 8: "Pelvis", 9: "Thighs", 10: "Knees", 11: "Calves", 12: "Feet",
-}
+})
 
 # "How I'd say it to a friend" versions, appended in [brackets] after the classical wording.
-_DOSHA_FRIEND = {
+_DOSHA_FRIEND = tbl({
     "Pitta": "you run a bit 'hot' - lots of drive and a strong appetite, but when you are stressed it tends "
              "to show up as irritability, heat or acidity",
     "Kapha": "you are steady and sturdy, with good stamina, but you can get sluggish or put on weight if "
@@ -1337,43 +1316,43 @@ _DOSHA_FRIEND = {
             "and eating are your usual signs that you are run down",
     "Kapha-Vata": "you are a mix of calm-and-steady and light-and-restless, so both slowing down too much "
                   "and overthinking can affect you",
-}
-_DOSHA_FRIEND_TOUCH = {"Pitta": "some heat and intensity", "Kapha": "some steadiness", "Vata": "some restlessness",
-                       "Kapha-Vata": "a mix of steadiness and restlessness"}
+})
+_DOSHA_FRIEND_TOUCH = tbl({"Pitta": "some heat and intensity", "Kapha": "some steadiness", "Vata": "some restlessness",
+                       "Kapha-Vata": "a mix of steadiness and restlessness"})
 _GOOD_DIGNITY = ("exalted", "own", "moolatrikona")
 _WEAK_DIGNITY = ("debilitated", "enemy", "great enemy")
 
 
 def _friend_asc_lord(dignity):
     if dignity in _GOOD_DIGNITY:
-        return "it is well supported and bounces back quickly, so you tend to recover well."
+        return tx("it is well supported and bounces back quickly, so you tend to recover well.")
     if dignity in _WEAK_DIGNITY:
-        return ("it can dip more easily, so sleep, routine and not over-pushing yourself matter "
-                "a bit more for you than for most.")
-    return "it is ordinary and dependable - no big plus or minus."
+        return (tx("it can dip more easily, so sleep, routine and not over-pushing yourself matter "
+                "a bit more for you than for most."))
+    return tx("it is ordinary and dependable - no big plus or minus.")
 
 
 def _friend_moon(dignity, afflicted, supported):
     if afflicted:
-        return ("your mind can feel busier or more pressured than most at times - calm routines, good sleep "
-                "and talking things through help.")
+        return (tx("your mind can feel busier or more pressured than most at times - calm routines, good sleep "
+                "and talking things through help."))
     if supported:
-        return "your mind has some built-in support, so you tend to settle and calm down fairly easily."
+        return tx("your mind has some built-in support, so you tend to settle and calm down fairly easily.")
     if dignity in _GOOD_DIGNITY:
-        return "your emotional side is well supported, so you tend to stay level."
+        return tx("your emotional side is well supported, so you tend to stay level.")
     if dignity in _WEAK_DIGNITY:
-        return "your feelings can swing a bit more easily, so give your mind proper rest and downtime."
-    return "your emotional side is neither a strong point nor a weak spot."
+        return tx("your feelings can swing a bit more easily, so give your mind proper rest and downtime.")
+    return tx("your emotional side is neither a strong point nor a weak spot.")
 
 
 def _friend_saturn(dignity):
     if dignity in _GOOD_DIGNITY:
-        return "Saturn is about staying power, and yours is strong, so you tend to wear well over the years."
+        return tx("Saturn is about staying power, and yours is strong, so you tend to wear well over the years.")
     if dignity in _WEAK_DIGNITY:
-        return ("Saturn is about staying power and it is a bit strained here, so bones, joints and slow-building "
-                "niggles deserve steady care and regular check-ups.")
-    return ("Saturn is about staying power and yours is average - just look after your joints and bones as you "
-            "get older, like anyone.")
+        return (tx("Saturn is about staying power and it is a bit strained here, so bones, joints and slow-building "
+                "niggles deserve steady care and regular check-ups."))
+    return (tx("Saturn is about staying power and yours is average - just look after your joints and bones as you "
+            "get older, like anyone."))
 
 
 # Ayurvedic constitution (Prakriti) by element - Jyotish and Ayurveda share
@@ -1381,7 +1360,7 @@ def _friend_saturn(dignity):
 # Fire signs -> Pitta, Earth -> Kapha, Air -> Vata, Water -> a Kapha/Vata
 # blend (some sources call water purely Kapha; the blend is the more widely
 # cited version and is flagged as such below rather than asserted flatly).
-_ELEMENT_DOSHA = {
+_ELEMENT_DOSHA = tbl({
     "Fire": ("Pitta", "a fire-driven constitution - sharp digestion, strong drive, and a tendency "
                        "toward heat, inflammation, or irritability when out of balance"),
     "Earth": ("Kapha", "an earth-driven constitution - steady, well-built, and resilient, with a "
@@ -1391,9 +1370,9 @@ _ELEMENT_DOSHA = {
     "Water": ("Kapha-Vata", "a water-driven constitution (sources vary between calling this Kapha or "
                               "a Kapha-Vata blend) - emotionally sensitive and fluid-retentive, with a "
                               "tendency toward congestion or emotional overwhelm when out of balance"),
-}
+})
 
-_DOSHA_BALANCE_TIP = {
+_DOSHA_BALANCE_TIP = tbl({
     "Pitta": "Pitta-leaning constitutions are classically said to benefit from cooling foods, "
              "moderation in heat/spice, and avoiding overexertion - general wellness framing, not a diet plan.",
     "Kapha": "Kapha-leaning constitutions are classically said to benefit from regular movement, "
@@ -1402,7 +1381,7 @@ _DOSHA_BALANCE_TIP = {
             "grounding habits - general wellness framing, not a diet plan.",
     "Kapha-Vata": "This blended constitution is classically said to benefit from both routine/warmth "
                   "(Vata) and regular movement (Kapha) - general wellness framing, not a diet plan.",
-}
+})
 
 
 def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
@@ -1463,16 +1442,15 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     moon_afflicted = [p for p in moon_house_mates if p in _MALEFICS]
     moon_supported = [p for p in moon_house_mates if p in _BENEFICS]
     moon_text = (
-        f"Moon (mind and emotional wellbeing) is in {moon_detail['sign']}, your "
-        f"{ordinal(moon_detail['house'])} house - classically {moon_dignity} there."
+        tr('Moon (mind and emotional wellbeing) is in {0}, your {1} house - classically {2} there.', moon_detail['sign'], ordinal(moon_detail['house']), moon_dignity)
     )
     if moon_afflicted:
         moon_text += (
-            f" Sharing that house with {', '.join(moon_afflicted)} classically suggests the mind may "
-            "feel more pressure or restlessness at times - not a diagnosis, just a theme worth gentle awareness."
+            tr(' Sharing that house with {0} classically suggests the mind may feel more pressure or '
+               'restlessness at times - not a diagnosis, just a theme worth gentle awareness.', ', '.join(moon_afflicted))
         )
     if moon_supported:
-        moon_text += f" {', '.join(moon_supported)} sharing that house is classically calming and supportive for it."
+        moon_text += tr(' {0} sharing that house is classically calming and supportive for it.', ', '.join(moon_supported))
 
     # --- Saturn: significator of endurance, read on its own regardless of which
     #     house it occupies, since it governs the body's endurance broadly. ---
@@ -1503,11 +1481,11 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
                 continue
             roles = []
             if maha["lord"] == sixth["lord"]:
-                roles.append("6th-house (disease) lord")
+                roles.append(tx("6th-house (disease) lord"))
             if maha["lord"] == eighth["lord"]:
-                roles.append("8th-house (chronic/hidden) lord")
+                roles.append(tx("8th-house (chronic/hidden) lord"))
             if maha["lord"] == "Saturn":
-                roles.append("Saturn, classical significator of chronic conditions")
+                roles.append(tx("Saturn, classical significator of chronic conditions"))
             sa, ea = max(0, int(round(start_age))), int(round(end_age))
             age_windows.append({
                 "lord": maha["lord"], "role": " / ".join(roles),
@@ -1517,53 +1495,52 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
             })
 
     def friend(text):
-        return f" [In simple terms: {text}]"
+        return tr(' [In simple terms: {0}]', text)
 
-    text_bits = [_MEDICAL_OVERVIEW + friend(
-        "astrology lays your body over your birth chart like a map - each of the 12 houses is a body area, "
+    text_bits = [tx(_MEDICAL_OVERVIEW) + friend(
+        tx("astrology lays your body over your birth chart like a map - each of the 12 houses is a body area, "
         "from the head (1st house) down to the feet (12th), and the planets sitting in a house colour that "
-        "area. It is a way of spotting themes to look after, not a check-up.")]
+        "area. It is a way of spotting themes to look after, not a check-up."))]
     if dosha:
-        dosha_line = f"Ayurvedic constitution (Prakriti): primarily {dosha['primary']} - {dosha['primary_description']}."
+        dosha_line = tr('Ayurvedic constitution (Prakriti): primarily {0} - {1}.', dosha['primary'], dosha['primary_description'])
         if dosha["secondary"] and dosha["secondary"] != dosha["primary"]:
-            dosha_line += f" Your Moon adds a {dosha['secondary']} flavor - {dosha['secondary_description']}."
+            dosha_line += tr(' Your Moon adds a {0} flavor - {1}.', dosha['secondary'], dosha['secondary_description'])
         if dosha["balance_tip"]:
-            dosha_line += f" {dosha['balance_tip']}"
+            dosha_line += tr(' {0}', dosha['balance_tip'])
         gist = _DOSHA_FRIEND.get(dosha["primary"], "")
         if dosha["secondary"] and dosha["secondary"] != dosha["primary"]:
-            gist += f". Your mind adds {_DOSHA_FRIEND_TOUCH.get(dosha['secondary'], 'its own flavour')}"
-        text_bits.append(dosha_line + friend(f"your body type is mostly {dosha['primary']}, which means {gist}."))
-    asc_text = (f"Ascendant lord (overall vitality): {ascendant_lord_text}" if ascendant_lord_text else
-                f"Ascendant lord {first['lord']} (overall vitality) is {first_dignity} in {first['lord_sign']}.")
-    text_bits.append(asc_text + friend("this is your overall energy, and " + _friend_asc_lord(first_dignity)))
-    text_bits.append(moon_text + friend("the Moon is your mind and mood - " +
+            gist += tr('. Your mind adds {0}', _DOSHA_FRIEND_TOUCH.get(dosha['secondary'], 'its own flavour'))
+        text_bits.append(dosha_line + friend(tr('your body type is mostly {0}, which means {1}.', dosha['primary'], gist)))
+    asc_text = (tr('Ascendant lord (overall vitality): {0}', ascendant_lord_text) if ascendant_lord_text else
+                tr('Ascendant lord {0} (overall vitality) is {1} in {2}.', first['lord'], first_dignity, first['lord_sign']))
+    text_bits.append(asc_text + friend(tx("this is your overall energy, and ") + _friend_asc_lord(first_dignity)))
+    text_bits.append(moon_text + friend(tx("the Moon is your mind and mood - ") +
                                         _friend_moon(moon_dignity, moon_afflicted, moon_supported)))
     if saturn_text:
-        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions: {saturn_text}"
+        text_bits.append(tr('Saturn, the classical significator of endurance and chronic conditions: {0}', saturn_text)
                          + friend(_friend_saturn(saturn_dignity)))
     elif saturn_dignity:
-        text_bits.append(f"Saturn, the classical significator of endurance and chronic conditions, is {saturn_dignity} "
-                         f"in {saturn_detail['sign']}." + friend(_friend_saturn(saturn_dignity)))
+        text_bits.append(tr('Saturn, the classical significator of endurance and chronic conditions, is {0} in {1}.', saturn_dignity, saturn_detail['sign']) + friend(_friend_saturn(saturn_dignity)))
     def health_gloss(house_num, area):
         placed = house_lords[house_num]["placed_in_house"]
         where = _PLAIN_HOUSE.get(placed, "another part of life")
         if placed in _STRONG_HOUSES:
-            senti = "that is usually a helpful placement, so this area tends to be looked after."
+            senti = tx("that is usually a helpful placement, so this area tends to be looked after.")
         elif placed in _WEAK_HOUSES:
-            senti = "that tends to ask for extra care here, with some ups and downs before things settle."
+            senti = tx("that tends to ask for extra care here, with some ups and downs before things settle.")
         else:
-            senti = "that is a mixed, workable placement."
-        return (f"In simple terms: the planet that looks after your {area} sits in the part of your life about "
-                f"{where} - {senti}")
+            senti = tx("that is a mixed, workable placement.")
+        return (tr('In simple terms: the planet that looks after your {0} sits in the part of your life about {1} - '
+                   '{2}', area, where, senti))
 
-    sixth_gloss = health_gloss(6, "everyday health and immunity")
-    eighth_gloss = health_gloss(8, "long-running or hidden health matters")
-    text_bits.append((f"6th house (disease, daily health): {sixth_text}" if sixth_text else
-                      f"The 6th house is ruled by {sixth['lord']}, {sixth_dignity} in {sixth['lord_sign']}.")
-                     + (f" [{sixth_gloss}]" if sixth_gloss else ""))
-    text_bits.append((f"8th house (chronic or hidden conditions): {eighth_text}" if eighth_text else
-                      f"The 8th house is ruled by {eighth['lord']}, {eighth_dignity} in {eighth['lord_sign']}.")
-                     + (f" [{eighth_gloss}]" if eighth_gloss else ""))
+    sixth_gloss = health_gloss(6, tx("everyday health and immunity"))
+    eighth_gloss = health_gloss(8, tx("long-running or hidden health matters"))
+    text_bits.append((tr('6th house (disease, daily health): {0}', sixth_text) if sixth_text else
+                      tr('The 6th house is ruled by {0}, {1} in {2}.', sixth['lord'], sixth_dignity, sixth['lord_sign']))
+                     + (tr(' [{0}]', sixth_gloss) if sixth_gloss else ""))
+    text_bits.append((tr('8th house (chronic or hidden conditions): {0}', eighth_text) if eighth_text else
+                      tr('The 8th house is ruled by {0}, {1} in {2}.', eighth['lord'], eighth_dignity, eighth['lord_sign']))
+                     + (tr(' [{0}]', eighth_gloss) if eighth_gloss else ""))
 
     body_bits, strain_parts, support_parts = [], [], []
     for area in body_areas:
@@ -1571,11 +1548,11 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
             continue
         clause_bits = []
         for note in area["occupant_notes"]:
-            tag = "supportive" if note["planet"] in _BENEFICS else "worth extra attention"
+            tag = "supportive" if note["planet"] in _BENEFICS else tx("worth extra attention")
             clause_bits.append(
-                f"{note['planet']} ({note['dignity']}, classically {tag}) points to {note['theme']}"
+                tr('{0} ({1}, classically {2}) points to {3}', note['planet'], note['dignity'], tag, note['theme'])
             )
-        body_bits.append(f"Your {ordinal(area['house'])} house ({area['body_part']}): " + "; ".join(clause_bits) + ".")
+        body_bits.append(tr('Your {0} house ({1}): ', ordinal(area['house']), area['body_part']) + "; ".join(clause_bits) + ".")
         if area["malefic_occupants"]:
             strain_parts.append(area["short"].lower())
         elif area["benefic_occupants"]:
@@ -1583,33 +1560,32 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
     if body_bits:
         friend_bits = []
         if strain_parts:
-            friend_bits.append("the spots on your body map that carry a planet worth a little extra care are "
+            friend_bits.append(tx("the spots on your body map that carry a planet worth a little extra care are ")
                                + ", ".join(strain_parts))
         if support_parts:
-            friend_bits.append(("and " if strain_parts else "") + "these have a friendly, supportive planet on them: "
+            friend_bits.append((tx("and") + " " if strain_parts else "") + tx("these have a friendly, supportive planet on them: ")
                                + ", ".join(support_parts))
-        friend_bits.append("every other area has nothing sitting on it, which is simply neutral")
-        text_bits.append("Body areas where your own planets sit: " + " ".join(body_bits)
-                         + friend("; ".join(friend_bits) + ". Think of shaded spots as 'keep an eye on this', "
-                                  "not 'something is wrong'."))
+        friend_bits.append(tx("every other area has nothing sitting on it, which is simply neutral"))
+        text_bits.append(tx("Body areas where your own planets sit: ") + " ".join(body_bits)
+                         + friend("; ".join(friend_bits) + tx(". Think of shaded spots as 'keep an eye on this', "
+                                  "not 'something is wrong'.")))
 
     if age_windows:
         text_bits.append(
-            "Classically-flagged age windows worth being mindful during (a Mahadasha is a multi-year "
+            tx("Classically-flagged age windows worth being mindful during (a Mahadasha is a multi-year "
             "planetary period; these are the ones ruled by a planet tied to health themes above - "
-            "not certainties, just windows classically worth a bit more attention): " +
+            "not certainties, just windows classically worth a bit more attention): ") +
             "; ".join(
-                f"age {w['start_age']}-{w['end_age']} ({w['lord']} Mahadasha - {w['role']}; "
-                f"themes: {w['theme']})" for w in age_windows
+                tr('age {0}-{1} ({2} Mahadasha - {3}; themes: {4})', w['start_age'], w['end_age'], w['lord'], w['role'], w['theme']) for w in age_windows
             ) + "." + friend(
-                "these are just stretches of life when it is smart to be a bit more mindful of your health - "
+                tx("these are just stretches of life when it is smart to be a bit more mindful of your health - "
                 "book the check-up and keep your routine going. Think of it as a friendly nudge, not a warning "
-                "that something will happen."))
-    text_bits.append(_MEDICAL_CAVEAT)
+                "that something will happen.")))
+    text_bits.append(tx(_MEDICAL_CAVEAT))
 
     return {
-        "title": "Medical Astrology",
-        "overview": _MEDICAL_OVERVIEW,
+        "title": tx("Medical Astrology"),
+        "overview": tx(_MEDICAL_OVERVIEW),
         "dosha": dosha,
         "ascendant_lord": first["lord"], "ascendant_lord_sign": first["lord_sign"],
         "ascendant_lord_dignity": first_dignity,
@@ -1623,7 +1599,7 @@ def _build_medical_astrology(chart, planets_reading, house_lords, dasha):
         "body_areas": body_areas,
         "age_windows": age_windows,
         "text": "\n\n".join(text_bits),
-        "caveat": _MEDICAL_CAVEAT,
+        "caveat": tx(_MEDICAL_CAVEAT),
     }
 
 
@@ -1632,9 +1608,9 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
     dasha_note = ""
     if running.get("mahadasha_lord"):
         dasha_note = (
-            f" The Mahadasha running at birth is {running['mahadasha_lord']}"
-            + (f" / {running['antardasha_lord']} Antardasha" if running.get("antardasha_lord") else "")
-            + ", which colors the timing and flavor of this area for the corresponding period of life."
+            tr(' The Mahadasha running at birth is {0}', running['mahadasha_lord'])
+            + (tr(' / {0} Antardasha', running['antardasha_lord']) if running.get("antardasha_lord") else "")
+            + tx(", which colors the timing and flavor of this area for the corresponding period of life.")
         )
 
     def area(title, house_nums, planet_names, extra_yoga_ids=(), closing="", area_word=""):
@@ -1642,14 +1618,14 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
         for h in house_nums:
             t = _hl_text(house_lords, h)
             if t:
-                bits.append(f"Through {t}")
+                bits.append(tr('Through {0}', t))
         for p in planet_names:
             t = _planet_text(planets_reading, p)
             if t:
                 bits.append(t)
         present_yogas = [y for y in yogas if y["present"] and y["id"] in extra_yoga_ids]
         for y in present_yogas:
-            bits.append(f"{y['name']} is present in this chart: {y['details']}")
+            bits.append(tr('{0} is present in this chart: {1}', y['name'], y['details']))
         text = " ".join(bits)
         if closing:
             text = text + " " + closing
@@ -1663,7 +1639,7 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
         # unbracketed sentence) in case a UI wants it on its own.
         gloss = _plain_life_gloss(house_lords, house_nums[0], area_word) if area_word and house_nums else ""
         if gloss:
-            text = text + f"\n\n[{gloss}]"
+            text = text + tr('\n\n[{0}]', gloss)
         return {
             "title": title, "houses_considered": list(house_nums), "planets_considered": list(planet_names),
             "text": text.strip(), "plain_gloss": gloss or None,
@@ -1671,44 +1647,39 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
 
     predictions = {
         "career_and_profession": area(
-            "Career & Profession",
+            tx("Career & Profession"),
             [10, 6, 2, 11], ["Sun", "Saturn"],
             closing=(
-                f"The Amatyakaraka (Jaimini's career significator) here is "
-                f"{chara_karaka.get_karaka(karakas, 'AmK')['planet']}, in "
-                f"{planets_reading[chara_karaka.get_karaka(karakas, 'AmK')['planet']]['sign']} — "
-                "classically read as the planet whose qualities most shape vocational direction."
+                tr("The Amatyakaraka (Jaimini's career significator) here is {0}, in {1} — classically read as the "
+                   'planet whose qualities most shape vocational direction.', chara_karaka.get_karaka(karakas, 'AmK')['planet'], planets_reading[chara_karaka.get_karaka(karakas, 'AmK')['planet']]['sign'])
                 + dasha_note
             ),
             area_word="career",
         ),
-        "wealth_and_finances": area("Wealth & Finances", [2, 11, 9], ["Jupiter", "Venus"],
-            area_word="money and finances"),
+        "wealth_and_finances": area(tx("Wealth & Finances"), [2, 11, 9], ["Jupiter", "Venus"],
+            area_word=tx("money and finances")),
         "marriage_and_relationships": area(
-            "Marriage & Relationships",
+            tx("Marriage & Relationships"),
             [7], ["Venus"],
             closing=(
-                f"The Darakaraka (Jaimini's spouse significator) is "
-                f"{chara_karaka.get_karaka(karakas, 'DK')['planet']}, in "
-                f"{planets_reading[chara_karaka.get_karaka(karakas, 'DK')['planet']]['sign']} — "
-                "see the Karmic & Past Life tab for this soul's own relational disposition, and "
-                "Family Compatibility for an actual two-chart comparison if a partner profile "
-                "has been generated."
+                tr("The Darakaraka (Jaimini's spouse significator) is {0}, in {1} — see the Karmic & Past Life tab "
+                   "for this soul's own relational disposition, and Family Compatibility for an actual two-chart "
+                   'comparison if a partner profile has been generated.', chara_karaka.get_karaka(karakas, 'DK')['planet'], planets_reading[chara_karaka.get_karaka(karakas, 'DK')['planet']]['sign'])
             ),
-            area_word="marriage and partnerships",
+            area_word=tx("marriage and partnerships"),
         ),
-        "health_and_vitality": area("Health & Vitality", [1, 6, 8], [],
-            area_word="health and vitality"),
-        "education_and_learning": area("Education & Learning", [4, 5], ["Mercury", "Jupiter"],
-            area_word="education and learning"),
-        "family_and_home": area("Family & Home", [2, 4], ["Moon"],
-            area_word="home and family"),
-        "spirituality_and_inner_growth": area("Spirituality & Inner Growth", [9, 12], ["Jupiter", "Ketu"],
-            area_word="spiritual life"),
-        "travel_and_foreign_connections": area("Travel & Foreign Connections", [3, 9, 12], [],
-            area_word="travel and foreign ties"),
+        "health_and_vitality": area(tx("Health & Vitality"), [1, 6, 8], [],
+            area_word=tx("health and vitality")),
+        "education_and_learning": area(tx("Education & Learning"), [4, 5], ["Mercury", "Jupiter"],
+            area_word=tx("education and learning")),
+        "family_and_home": area(tx("Family & Home"), [2, 4], ["Moon"],
+            area_word=tx("home and family")),
+        "spirituality_and_inner_growth": area(tx("Spirituality & Inner Growth"), [9, 12], ["Jupiter", "Ketu"],
+            area_word=tx("spiritual life")),
+        "travel_and_foreign_connections": area(tx("Travel & Foreign Connections"), [3, 9, 12], [],
+            area_word=tx("travel and foreign ties")),
     }
-    predictions["caveat"] = _LIFE_PREDICTIONS_CAVEAT
+    predictions["caveat"] = tx(_LIFE_PREDICTIONS_CAVEAT)
     return predictions
 
 
@@ -1725,12 +1696,11 @@ def _build_life_predictions(chart, planets_reading, house_lords, yogas, dasha, k
 # ---------------------------------------------------------------------------
 def _plain_list_summary(present_count, total_count, present_names, topic, absent_note):
     if present_count == 0:
-        return f"In short: none of these {total_count} {topic} are present in this chart. {absent_note}"
+        return tr('In short: none of these {0} {1} are present in this chart. {2}', total_count, topic, absent_note)
     names = ", ".join(present_names)
     return (
-        f"In short: {present_count} of {total_count} {topic} {'is' if present_count == 1 else 'are'} "
-        f"present in this chart — {names}. See below for what each one means; they're reported "
-        f"separately on purpose, not combined into a single verdict."
+        tr('In short: {0} of {1} {2} {3} present in this chart — {4}. See below for what each one means; '
+           "they're reported separately on purpose, not combined into a single verdict.", present_count, total_count, topic, 'is' if present_count == 1 else 'are', names)
     )
 
 
@@ -1746,8 +1716,8 @@ def _doshas_plain_summary(doshas_reading):
     ]
     present = [i["kb"]["title"] for i in indicators if i["present"] and i.get("kb")]
     return _plain_list_summary(
-        len(present), len(indicators), present, "affliction checks",
-        "That's a common, unremarkable result, not a gap in the chart.",
+        len(present), len(indicators), present, tx("affliction checks"),
+        tx("That's a common, unremarkable result, not a gap in the chart."),
     )
 
 
@@ -1775,41 +1745,40 @@ def _relationship_deep_discussion(rel_reading, karmic_and_past_life):
     mct = rel_reading.get("marriage_count_tendency")
     if mct:
         bits.append(
-            "On how many significant relationships or marriages this chart tends toward: this "
-            f"reading leans toward {mct['tendency']}."
+            tr('On how many significant relationships or marriages this chart tends toward: this reading leans '
+               'toward {0}.', mct['tendency'])
             + (" Specifically: " + " ".join(mct["indicators"]) if mct["indicators"] else
-               " No strong classical multiplicity indicators (a dual-sign 7th lord, a crowded 7th "
+               tx(" No strong classical multiplicity indicators (a dual-sign 7th lord, a crowded 7th "
                "house, Rahu/Ketu sharing a house with the 7th lord, or Venus in a dual sign) are "
-               "present here.")
+               "present here."))
         )
 
     if present_texts:
         bits.append(
-            "On commitment and exclusivity themes specifically - read only as tendencies in this "
-            "person's OWN chart, never as evidence about a partner (see the caveat above): "
+            tx("On commitment and exclusivity themes specifically - read only as tendencies in this "
+            "person's OWN chart, never as evidence about a partner (see the caveat above): ")
             + " ".join(present_texts)
         )
     else:
         bits.append(
-            "None of this chart's checked commitment/exclusivity indicators (7th-lord affliction, "
+            tx("None of this chart's checked commitment/exclusivity indicators (7th-lord affliction, "
             "Venus-Mars combinations, Rahu on Venus or the 7th house, a crowded 7th house, or an "
-            "afflicted Venus) are present here - a common, unremarkable result, not a gap."
+            "afflicted Venus) are present here - a common, unremarkable result, not a gap.")
         )
 
     dk = (karmic_and_past_life or {}).get("darakaraka")
     if dk and (dk.get("in_house_effects") or dk.get("in_sign_effects")):
         bits.append(
-            f"Why relationships may take the shape they do (a karmic lens): the Darakaraka - "
-            f"Jaimini's significator of the spouse or life partner - is {dk['planet']} in "
-            f"{dk['sign']}, house {dk['house']}. Classically, the Darakaraka describes the KIND of "
-            "partner and partnership this soul is karmically drawn toward, prior to comparing "
-            "charts with anyone specific. " + (dk.get("in_sign_effects") or "")
+            tr("Why relationships may take the shape they do (a karmic lens): the Darakaraka - Jaimini's "
+               'significator of the spouse or life partner - is {0} in {1}, house {2}. Classically, the '
+               'Darakaraka describes the KIND of partner and partnership this soul is karmically drawn toward, '
+               'prior to comparing charts with anyone specific. ', dk['planet'], dk['sign'], dk['house']) + (dk.get("in_sign_effects") or "")
         )
 
     bits.append(
-        "None of the above says anything about what a real partner has done, will do, or is like - "
+        tx("None of the above says anything about what a real partner has done, will do, or is like - "
         "it describes tendencies in this person's OWN chart only, and free will always matters more "
-        "than any single placement."
+        "than any single placement.")
     )
     return " ".join(bits)
 
@@ -1825,7 +1794,7 @@ def _relationship_themes_plain_summary(rel_reading):
     present = [i["kb"]["title"] for i in indicators if i["present"] and i.get("kb")]
     return _plain_list_summary(
         len(present), len(indicators), present, "indicators",
-        "That's a common, unremarkable result, not a gap in the chart.",
+        tx("That's a common, unremarkable result, not a gap in the chart."),
     )
 
 
@@ -1837,6 +1806,8 @@ def _first_sentence(text, max_chars=140):
         return ""
     end = text.find(". ")
     sentence = text[: end + 1] if end != -1 else text
+    if not is_english():
+        return t_text(sentence)      # the whole sentence, so it matches the translation table (never cut mid-sentence)
     if len(sentence) > max_chars:
         sentence = sentence[:max_chars].rsplit(" ", 1)[0] + "..."
     return sentence
@@ -1845,17 +1816,16 @@ def _first_sentence(text, max_chars=140):
 def _yogas_plain_summary(yogas_present):
     if not yogas_present:
         return (
-            "In short: none of the 24 classical yogas this app checks are formed in this chart. "
-            "That's common — most charts trigger only a few, if any; it isn't a deficiency."
+            tx("In short: none of the 24 classical yogas this app checks are formed in this chart. "
+            "That's common — most charts trigger only a few, if any; it isn't a deficiency.")
         )
     lines = [
-        f"In short: {len(yogas_present)} classical yoga{'s' if len(yogas_present) != 1 else ''} "
-        f"{'are' if len(yogas_present) != 1 else 'is'} present in this chart:"
+        tr('In short: {0} classical yoga{1} {2} present in this chart:', len(yogas_present), 's' if len(yogas_present) != 1 else '', 'are' if len(yogas_present) != 1 else 'is')
     ]
     for y in yogas_present:
         kb = y.get("kb_entry") or {}
         gist = _first_sentence(kb.get("effects"))
-        lines.append(f"  • {y['name']}" + (f" — {gist}" if gist else ""))
+        lines.append(f"  • {tx(y['name'])}" + (f" — {gist}" if gist else ""))
     return "\n".join(lines)
 
 
@@ -1981,6 +1951,6 @@ def reading_to_json_string(reading):
     def default(obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
-        raise TypeError(f"Not JSON serializable: {type(obj)}")
+        raise TypeError(tr('Not JSON serializable: {0}', type(obj)))
 
     return json.dumps(reading, indent=2, ensure_ascii=False, default=default)

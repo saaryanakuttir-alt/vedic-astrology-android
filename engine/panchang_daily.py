@@ -18,6 +18,7 @@ tens of seconds (ordinary cross-software ephemeris/rounding noise):
     Sunrise 04:52, Sunset 18:16, Day Duration 13:24, Sidereal Time 23:56.
 """
 import ephemeris
+from i18n import tr  # noqa: E402 - translation helpers (engine/i18n.py)
 
 TITHI_NAMES = [
     "Pratipada", "Dwitiya", "Tritiya", "Chaturthi", "Panchami", "Shashthi",
@@ -101,7 +102,7 @@ def _format_hms(decimal_hours):
     total_seconds = round(decimal_hours * 3600.0)
     h, remainder = divmod(total_seconds, 3600)
     m, s = divmod(remainder, 60)
-    return f"{h:02d}:{m:02d}:{s:02d}"
+    return tr('{0:02d}:{1:02d}:{2:02d}', h, m, s)
 
 
 def compute_day_details(local_midnight_jd_ut, latitude, longitude, birth_jd_ut):

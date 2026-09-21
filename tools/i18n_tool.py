@@ -22,6 +22,12 @@ ENGINE_MODULES = ["extras", "life_profile", "remedy_plan", "varshaphal", "shadba
 UI_MODULES = ["tabs_chart", "tabs_entry", "tabs_extra", "tabs_family", "tabs_help", "tabs_home", "tabs_insights", "tabs_reports", "tabs_tables"]
 FILES = [f"engine/{m}.py" for m in ENGINE_MODULES] + [f"ui/{m}.py" for m in UI_MODULES] + ["main.py"]
 
+# second wave: the classical-reading engine (rule_engine composes the text around the knowledge-base paragraphs)
+ENGINE_MODULES2 = ["rule_engine", "family_bonds", "yogas", "compatibility", "relationship_themes", "life_timeline", "upaya",
+                   "chara_karaka", "graha_yuddha", "maitri", "panchang_daily", "combustion", "manglik",
+                   "avkahada", "faq_data"]
+FILES2 = [f"engine/{m}.py" for m in ENGINE_MODULES2]
+
 # module-level display tables whose values are translated when read (wrapped in tbl())
 TABLES = {
     "engine/extras.py": ["SHODASHVARGA", "_HOUSE_AREA", "_SIGNIFIES", "_EFFECTS", "_TONE_GIST", "_TONE_PHRASE", "_HOUSE_TEMPLATE",
@@ -128,7 +134,7 @@ def _emit_template_call(template, args, col):
     return "tr(" + lit + "".join(", " + a for a in args) + ")"
 
 
-def collect(path, apply_wrap=False):
+def collect(path, apply_wrap=False, wide=False):
     """Return (edits, keys) for one file. edits: [(start, end, replacement)]; keys: [dict]."""
     full = os.path.join(APP, path)
     text = open(full, encoding="utf-8").read()
@@ -179,11 +185,29 @@ def collect(path, apply_wrap=False):
         # a module-level text constant handed straight to a list (parts.append(_ADVICE)) or added to a sentence
         if isinstance(n, ast.Name) and n.id in module_strings and _in_function(n):
             par = getattr(n, "_parent", None)
-            if (isinstance(par, ast.Call) and n in par.args and isinstance(par.func, ast.Attribute) and par.func.attr in ("append", "insert")) or \
+            if wide and any(isinstance(a, ast.Call) and isinstance(a.func, ast.Name) and a.func.id in ("tx", "tr", "tbl", "t")
+                            for a in _ancestors(n)):
+                continue                  # already translated by an earlier pass
+            wide_use = wide and isinstance(getattr(n, "ctx", None), ast.Load) and \
+                not isinstance(par, (ast.Compare, ast.Subscript, ast.FormattedValue)) and not (isinstance(par, ast.Call) and _call_is_denied(par))
+            if wide_use or (isinstance(par, ast.Call) and n in par.args and isinstance(par.func, ast.Attribute) and par.func.attr in ("append", "insert")) or \
                     (isinstance(par, ast.BinOp) and isinstance(par.op, ast.Add)):
                 a, b = _span(n, starts)
                 edits.append((a, b, "tx(" + n.id + ")"))
                 used.add("tx")
+    program_tokens = set()
+    if wide:
+        for n in ast.walk(tree):
+            if isinstance(n, ast.Compare):
+                for c in ast.walk(n):
+                    if isinstance(c, ast.Constant) and isinstance(c.value, str):
+                        program_tokens.add(c.value)
+            elif isinstance(n, ast.Dict):
+                for k in n.keys:
+                    if isinstance(k, ast.Constant) and isinstance(k.value, str):
+                        program_tokens.add(k.value)
+            elif isinstance(n, ast.Subscript) and isinstance(n.slice, ast.Constant) and isinstance(n.slice.value, str):
+                program_tokens.add(n.slice.value)
     for n in ast.walk(tree):
         if not (isinstance(n, ast.Constant) and isinstance(n.value, str)) or id(n) in docs:
             continue
@@ -191,6 +215,10 @@ def collect(path, apply_wrap=False):
         if not WORDY.search(s):
             continue
         parent = getattr(n, "_parent", None)
+        already = wide and any(isinstance(a, ast.Call) and isinstance(a.func, ast.Name) and a.func.id in ("tx", "tr", "tbl", "t")
+                               for a in _ancestors(n))
+        if already and isinstance(parent, ast.Call) and isinstance(parent.func, ast.Name) and parent.func.id == "tr" and parent.args[:1] == [n]:
+            continue                      # a template: recorded by step 2b
         if id(n) in inside_f:
             # constants inside f-string expressions ({'a' if x else 'b'}) are looked up as pieces
             fs = next((a for a in _ancestors(n) if isinstance(a, ast.JoinedStr)), None)
@@ -226,7 +254,9 @@ def collect(path, apply_wrap=False):
             wrap = True
         elif (len(s) >= 50 or s.startswith(("--- ", "=== "))) and " " in s:
             wrap = True                  # a long sentence anywhere in a function (return, assignment, list item, conditional value)
-        if wrap and multiword:
+        elif wide and len(s.split()) >= 2 and len(s.strip()) >= 12 and s not in program_tokens and                 not (isinstance(parent, ast.keyword) and parent.arg in ("id", "key", "kind", "type", "category", "status")):
+            wrap = True                  # second wave: any multi-word phrase assembled inside a function
+        if wrap and multiword and not already:
             a, b = _span(n, starts)
             edits.append((a, b, "tx(" + src_bytes[a:b].decode("utf-8") + ")"))
             used.add("tx")
@@ -239,7 +269,15 @@ def collect(path, apply_wrap=False):
             keys.insert(0, {"kind": "template", "en": n.args[0].value, "args": args, "where": f"{path}:{n.lineno}"})
 
     # 3. display tables -> tbl({...}); their string values are keys too
-    for name in TABLES.get(path, []):
+    auto_tables = []
+    if wide:
+        for node in tree.body:
+            if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name) and                     isinstance(node.value, (ast.Dict, ast.List)) and not node.targets[0].id.endswith(("FILENAMES", "_ABBR", "_KEYS", "_FILES")):
+                vals = [c for c in ast.walk(node.value) if isinstance(c, ast.Constant) and isinstance(c.value, str)
+                        and len(c.value.split()) >= 3 and WORDY.search(c.value)]
+                if len(vals) >= 2 and "from i18n import" in text and "tbl(" not in seg(node.value)[:5]:
+                    auto_tables.append(node.targets[0].id)
+    for name in TABLES.get(path, []) + auto_tables:
         for node in tree.body:
             if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == name for t in node.targets):
                 for c in ast.walk(node.value):
@@ -261,11 +299,11 @@ def _drop_nested(edits):
     return out
 
 
-def rewrite():
+def rewrite(files=None, wide=False):
     total = 0
-    for path in FILES:
-        text, src_bytes, edits, _keys, used, tree = collect(path)
-        if "from i18n import" in text:
+    for path in (files or FILES):
+        text, src_bytes, edits, _keys, used, tree = collect(path, wide=wide)
+        if "from i18n import" in text and not wide:
             print(f"skip {path}: already rewritten")
             continue
         edits = _drop_nested(edits)
@@ -285,7 +323,11 @@ def rewrite():
         for a, b, rep in sorted(edits, key=lambda e: -e[0]):
             out = out[:a] + rep.encode("utf-8") + out[b:]
         text2 = out.decode("utf-8")
-        names = sorted(n for n in ("fmt_date", "join_list", "tbl", "tr", "tx") if n in used)
+        have = set(re.findall(r"^from i18n import (.*?)\s*(?:#.*)?$", text2, re.M))
+        have = {n.strip() for h in have for n in h.split(",")}
+        names = sorted({n for n in ("fmt_date", "join_list", "tbl", "tr", "tx") if n in used} | have)
+        if wide:
+            text2 = re.sub(r"^from i18n import .*\n", "", text2, flags=re.M)
         # insert the import after the last top-level import
         tree2 = ast.parse(text2)
         last = max((n.end_lineno for n in tree2.body if isinstance(n, (ast.Import, ast.ImportFrom))), default=0)
@@ -329,6 +371,36 @@ def extract():
     print("keys:", len(keys), "templates:", sum(1 for k in keys if k["kind"] == "template"))
 
 
+PROGRAM_KEY = re.compile(r"^[A-Za-z0-9_{}:.\-]+$")
+
+
+def _is_program_key(text):
+    """File names, ids and format codes that the code itself uses (never translated): no spaces and either an
+    underscore, a .json name, an ALL-CAPS id such as REL-VENUS-MARS-CONJ, or only digits/format codes."""
+    if re.search(r"\s", text) or not PROGRAM_KEY.match(text):
+        return False
+    return "_" in text or text.endswith(".json") or bool(re.match(r"^[A-Z]+(-[A-Z0-9{}]+)+$", text)) or not re.search(r"[A-Za-z]{3,}", re.sub(r"\{[^}]*\}", "", text))
+
+
+def extract2():
+    """Second wave: keys of FILES2 that the first table does not already translate -> i18n_todo/keys2.json (ids from 2001)."""
+    known = {k["en"] for k in json.load(open(os.path.join(TODO, "keys.json"), encoding="utf-8"))}
+    sys.path.insert(0, os.path.join(APP, "i18n_src"))
+    import importlib
+    known |= set(importlib.import_module("bn").T)
+    keys = []
+    for path in FILES2:
+        _text, _sb, _edits, ks, _used, _tree = collect(path, wide=True)
+        for k in ks:
+            if k["en"] in known or _is_program_key(k["en"]):
+                continue
+            known.add(k["en"])
+            k["id"] = 2000 + len(keys) + 1
+            keys.append(k)
+    json.dump(keys, open(os.path.join(TODO, "keys2.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print("keys2:", len(keys), "words:", sum(len(k["en"].split()) for k in keys))
+
+
 def write_batches(size=90):
     keys = json.load(open(os.path.join(TODO, "keys.json"), encoding="utf-8"))
     for i in range(0, len(keys), size):
@@ -346,6 +418,12 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "rewrite":
         rewrite()
+    elif cmd == "rewrite2":
+        rewrite(FILES2)
+    elif cmd == "rewrite3":
+        rewrite(FILES2 + ["engine/doshas.py"], wide=True)
+    elif cmd == "extract2":
+        extract2()
     elif cmd == "extract":
         extract()
         write_batches()

@@ -1,0 +1,70 @@
+# house_lord_placement:HL-5-in-8
+11006	The lord of the 5th house — governing intelligence, creativity, romance, and speculation — is placed in the 8th house, the house of transformation, occult matters, inheritance, and sudden events.
+11007	Counted from the 5th house itself, the 8th house falls in a kendra (angular) relationship to it.
+11008	This is a stabilizing, mutually supportive functional connection, meaning matters of intelligence, creativity, romance, and speculation tend to find a firm, action-oriented outlet through transformation, occult matters, inheritance, and sudden events.
+11009	In practice, this placement tends to channel the native's experience of creativity through the lens of transformation and shared resources, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-5-in-9
+11010	Connects creativity with fortune and higher wisdom.
+11011	The lord of the 5th house — governing intelligence, creativity, romance, and speculation — is placed in the 9th house, the house of fortune, dharma, the father, higher learning, and long journeys.
+11012	Counted from the 5th house itself, the 9th house falls in a trikona (trine) relationship to it.
+11013	This is a classically auspicious connection, often linking intelligence, creativity, romance, and speculation with good fortune, grace, and support flowing in through fortune, dharma, the father, higher learning, and long journeys.
+11014	In practice, this placement tends to channel the native's experience of creativity through the lens of fortune and higher wisdom, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-5-in-10
+11015	Connects creativity with career and status.
+11016	The lord of the 5th house — governing intelligence, creativity, romance, and speculation — is placed in the 10th house, the house of career, status, authority, and public reputation.
+11017	Counted from the 5th house itself, the 10th house falls in a dusthana (6th/8th/12th) relationship to it.
+11018	This classically indicates that matters of intelligence, creativity, romance, and speculation may encounter obstacles, delay, loss, or significant transformation as they pass through career, status, authority, and public reputation, unless other factors in the chart provide relief.
+11019	In practice, this placement tends to channel the native's experience of creativity through the lens of career and status, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-5-in-11
+11020	Connects creativity with gains and aspirations.
+11021	The lord of the 5th house — governing intelligence, creativity, romance, and speculation — is placed in the 11th house, the house of gains, income, friendships, elder siblings, and aspirations.
+11022	Counted from the 5th house itself, the 11th house falls in a kendra (angular) relationship to it.
+11023	This is a stabilizing, mutually supportive functional connection, meaning matters of intelligence, creativity, romance, and speculation tend to find a firm, action-oriented outlet through gains, income, friendships, elder siblings, and aspirations.
+11024	In practice, this placement tends to channel the native's experience of creativity through the lens of gains and aspirations, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-5-in-12
+11025	Connects creativity with loss, spirituality, and liberation.
+11026	The lord of the 5th house — governing intelligence, creativity, romance, and speculation — is placed in the 12th house, the house of loss, expenditure, foreign lands, spirituality, and liberation (moksha).
+11027	Counted from the 5th house itself, the 12th house falls in a dusthana (6th/8th/12th) relationship to it.
+11028	This classically indicates that matters of intelligence, creativity, romance, and speculation may encounter obstacles, delay, loss, or significant transformation as they pass through loss, expenditure, foreign lands, spirituality, and liberation (moksha), unless other factors in the chart provide relief.
+11029	In practice, this placement tends to channel the native's experience of creativity through the lens of loss, spirituality, and liberation, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-1
+11030	Connects service and obstacles with self and vitality.
+11031	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 1st house, the house of self, physical body, personality, general vitality, and appearance.
+11032	Counted from the 6th house itself, the 1st house falls in a dusthana (6th/8th/12th) relationship to it.
+11033	This classically indicates that matters of obstacles, disease, debts, service, daily work, and competitors may encounter obstacles, delay, loss, or significant transformation as they pass through self, physical body, personality, general vitality, and appearance, unless other factors in the chart provide relief.
+11034	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of self and vitality, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-2
+11035	Connects service and obstacles with wealth and family.
+11036	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 2nd house, the house of wealth, family, speech, food, and accumulated resources.
+11037	Counted from the 6th house itself, the 2nd house falls in a trikona (trine) relationship to it.
+11038	This is a classically auspicious connection, often linking obstacles, disease, debts, service, daily work, and competitors with good fortune, grace, and support flowing in through wealth, family, speech, food, and accumulated resources.
+11039	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of wealth and family, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-3
+11040	Connects service and obstacles with courage and self-effort.
+11041	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 3rd house, the house of courage, siblings, self-effort, short journeys, and communication.
+11042	Counted from the 6th house itself, the 3rd house falls in a kendra (angular) relationship to it.
+11043	This is a stabilizing, mutually supportive functional connection, meaning matters of obstacles, disease, debts, service, daily work, and competitors tend to find a firm, action-oriented outlet through courage, siblings, self-effort, short journeys, and communication.
+11044	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of courage and self-effort, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-4
+11045	Connects service and obstacles with home and inner comfort.
+11046	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 4th house, the house of home, mother, property, vehicles, and emotional comfort.
+11047	Counted from the 6th house itself, the 4th house falls in an upachaya (growth) relationship to it.
+11048	Matters of obstacles, disease, debts, service, daily work, and competitors tend to develop and strengthen gradually through home, mother, property, vehicles, and emotional comfort, typically improving with sustained effort and time.
+11049	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of home and inner comfort, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-5
+11050	Connects service and obstacles with creativity.
+11051	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 5th house, the house of intelligence, creativity, romance, and speculation.
+11052	Counted from the 6th house itself, the 5th house falls in a dusthana (6th/8th/12th) relationship to it.
+11053	This classically indicates that matters of obstacles, disease, debts, service, daily work, and competitors may encounter obstacles, delay, loss, or significant transformation as they pass through intelligence, creativity, romance, and speculation, unless other factors in the chart provide relief.
+11054	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of creativity, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-6
+11055	The lord of the 6th house sits in its own house, directly reinforcing service and obstacles.
+11056	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 6th house, the house of obstacles, disease, debts, service, daily work, and competitors.
+11057	This is a Swakshetra-style placement: the lord of the 6th house sits within its own house.
+11058	A house lord placed in its own house generally reinforces and stabilizes its own significations directly, strengthening obstacles, disease, debts, service, daily work, and competitors, provided the lord itself is reasonably well placed by sign and is not heavily afflicted by malefic influences.
+11059	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of service and obstacles, and the two areas of life should be read together rather than in isolation.
+# house_lord_placement:HL-6-in-7
+11060	Connects service and obstacles with marriage and partnership.
+11061	The lord of the 6th house — governing obstacles, disease, debts, service, daily work, and competitors — is placed in the 7th house, the house of marriage, business partnership, public dealings, and the spouse.
+11062	Counted from the 6th house itself, the 7th house is the 2nd from it — a house of accumulation and continuation, suggesting that matters of obstacles, disease, debts, service, daily work, and competitors become bound up with sustaining or consolidating resources through marriage, business partnership, public dealings, and the spouse.
+11063	In practice, this placement tends to channel the native's experience of service and obstacles through the lens of marriage and partnership, and the two areas of life should be read together rather than in isolation.

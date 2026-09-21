@@ -30,6 +30,7 @@ from astrology_tables import (
     NATURAL_MALEFICS, DUSTHANA_HOUSES, SIGN_LORD, get_dignity, planet_aspects_house,
 )
 import combustion
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 RELATIONSHIP_CAVEAT = (
     "These are classical correlations with relationship TENDENCIES in the native's "
@@ -73,15 +74,14 @@ def marriage_count_tendency(chart):
     score = 0
     if seventh_lord_sign in _DUAL_SIGNS:
         indicators.append(
-            f"{seventh_lord} (7th lord) sits in {seventh_lord_sign}, a dual sign - classically "
-            "associated with more than one significant relationship theme."
+            tr('{0} (7th lord) sits in {1}, a dual sign - classically associated with more than one significant '
+               'relationship theme.', seventh_lord, seventh_lord_sign)
         )
         score += 1
     if len(seventh_house_occupants) >= 2:
         indicators.append(
-            f"{len(seventh_house_occupants)} planets share the 7th house "
-            f"({', '.join(seventh_house_occupants)}) - classically read as more activity or "
-            "complexity around partnership."
+            tr('{0} planets share the 7th house ({1}) - classically read as more activity or complexity around '
+               'partnership.', len(seventh_house_occupants), ', '.join(seventh_house_occupants))
         )
         score += 1
     rahu_house = planets["Rahu"]["house"]
@@ -89,30 +89,30 @@ def marriage_count_tendency(chart):
     if seventh_lord_house in (rahu_house, ketu_house):
         axis_planet = "Rahu" if seventh_lord_house == rahu_house else "Ketu"
         indicators.append(
-            f"{seventh_lord} (7th lord) shares a house with {axis_planet} - a classical marker of "
-            "an unconventional or non-linear relationship path."
+            tr('{0} (7th lord) shares a house with {1} - a classical marker of an unconventional or non-linear '
+               'relationship path.', seventh_lord, axis_planet)
         )
         score += 1
     venus_sign = planets["Venus"]["sign"]
     if venus_sign in _DUAL_SIGNS:
-        indicators.append(f"Venus sits in {venus_sign}, a dual sign - another classical multiplicity marker.")
+        indicators.append(tr('Venus sits in {0}, a dual sign - another classical multiplicity marker.', venus_sign))
         score += 1
 
     if score >= 3:
-        tendency = "real complexity here - more than one significant relationship across life is a plausible reading"
+        tendency = tx("real complexity here - more than one significant relationship across life is a plausible reading")
     elif score >= 1:
-        tendency = "some complexity, but nothing overwhelming - a mix of steadiness and change is more likely than either extreme"
+        tendency = tx("some complexity, but nothing overwhelming - a mix of steadiness and change is more likely than either extreme")
     else:
-        tendency = "a single, steady partnership rather than multiplicity"
+        tendency = tx("a single, steady partnership rather than multiplicity")
 
     return {
         "seventh_lord": seventh_lord, "seventh_lord_sign": seventh_lord_sign,
         "indicators": indicators, "score": score, "tendency": tendency,
         "caveat": (
-            "This is a TENDENCY, not a count - no classical method fixes an exact number of "
+            tx("This is a TENDENCY, not a count - no classical method fixes an exact number of "
             "marriages or relationships from a natal chart alone. It also says nothing about a "
             "partner's behavior or fidelity - only about complexity/multiplicity themes in the "
-            "native's own chart."
+            "native's own chart.")
         ),
     }
 
@@ -168,58 +168,57 @@ def assess_relationship_themes(chart):
     )
 
     return {
-        "caveat": RELATIONSHIP_CAVEAT,
+        "caveat": tx(RELATIONSHIP_CAVEAT),
         "seventh_house_lord": {
             "lord": seventh_lord, "sign": seventh_sign, "placed_in_house": seventh_lord_house,
             "in_dusthana": {
                 "present": seventh_lord_house in DUSTHANA_HOUSES,
-                "detail": f"{seventh_lord} (7th lord) is placed in house {seventh_lord_house}.",
+                "detail": tr('{0} (7th lord) is placed in house {1}.', seventh_lord, seventh_lord_house),
             },
             "malefic_conjunction": {
                 "present": bool(malefics_conjunct_7th_lord),
                 "planets": malefics_conjunct_7th_lord,
-                "detail": (f"{seventh_lord} (7th lord) is conjunct {', '.join(malefics_conjunct_7th_lord)}."
-                           if malefics_conjunct_7th_lord else f"{seventh_lord} (7th lord) has no natural malefic conjunction."),
+                "detail": (tr('{0} (7th lord) is conjunct {1}.', seventh_lord, ', '.join(malefics_conjunct_7th_lord))
+                           if malefics_conjunct_7th_lord else tr('{0} (7th lord) has no natural malefic conjunction.', seventh_lord)),
             },
             "malefic_aspect": {
                 "present": bool(malefics_aspecting_7th_lord),
                 "planets": malefics_aspecting_7th_lord,
-                "detail": (f"{seventh_lord} (7th lord) is aspected by {', '.join(malefics_aspecting_7th_lord)}."
-                           if malefics_aspecting_7th_lord else f"{seventh_lord} (7th lord) has no natural malefic aspect."),
+                "detail": (tr('{0} (7th lord) is aspected by {1}.', seventh_lord, ', '.join(malefics_aspecting_7th_lord))
+                           if malefics_aspecting_7th_lord else tr('{0} (7th lord) has no natural malefic aspect.', seventh_lord)),
             },
         },
         "venus_mars": {
             "conjunction": {
                 "present": venus_mars_conjunction,
-                "detail": f"Venus (house {venus_house}) and Mars (house {mars_house})"
-                          + (" are conjunct." if venus_mars_conjunction else " are not conjunct."),
+                "detail": tr('Venus (house {0}) and Mars (house {1})', venus_house, mars_house)
+                          + (tx(" are conjunct.") if venus_mars_conjunction else tx(" are not conjunct.")),
             },
             "mutual_aspect": {
                 "present": venus_mars_mutual_aspect,
-                "detail": "Venus and Mars aspect each other." if venus_mars_mutual_aspect
-                          else "Venus and Mars do not aspect each other.",
+                "detail": tx("Venus and Mars aspect each other.") if venus_mars_mutual_aspect
+                          else tx("Venus and Mars do not aspect each other."),
             },
         },
         "rahu": {
             "conjunct_venus": {
                 "present": rahu_venus_conjunction,
-                "detail": "Rahu is conjunct Venus." if rahu_venus_conjunction else "Rahu is not conjunct Venus.",
+                "detail": tx("Rahu is conjunct Venus.") if rahu_venus_conjunction else tx("Rahu is not conjunct Venus."),
             },
             "in_seventh_house": {
                 "present": rahu_in_7th,
-                "detail": "Rahu occupies the 7th house." if rahu_in_7th else f"Rahu occupies house {rahu_house}, not the 7th.",
+                "detail": tx("Rahu occupies the 7th house.") if rahu_in_7th else tr('Rahu occupies house {0}, not the 7th.', rahu_house),
             },
         },
         "crowded_seventh_house": {
             "present": len(seventh_house_occupants) >= 3,
             "occupants": seventh_house_occupants,
-            "detail": (f"{len(seventh_house_occupants)} planet{'s' if len(seventh_house_occupants) != 1 else ''} "
-                       f"in the 7th house ({', '.join(seventh_house_occupants)})."
-                       if seventh_house_occupants else "No planets in the 7th house."),
+            "detail": (tr('{0} planet{1} in the 7th house ({2}).', len(seventh_house_occupants), 's' if len(seventh_house_occupants) != 1 else '', ', '.join(seventh_house_occupants))
+                       if seventh_house_occupants else tx("No planets in the 7th house.")),
         },
         "venus_afflicted": {
             "present": venus_dignity == "debilitated" or venus_combust,
             "dignity": venus_dignity, "combust": venus_combust,
-            "detail": f"Venus is {venus_dignity}" + (", and combust" if venus_combust else "") + " in this chart.",
+            "detail": tr('Venus is {0}', venus_dignity) + (tx(", and combust") if venus_combust else "") + tx(" in this chart."),
         },
     }

@@ -1,0 +1,276 @@
+# divisional_D30_planet_in_sign:D30-PS-Ve-Lib
+10465	Own sign — colors misfortunes and weaknesses through Libra's partnership.
+# divisional_D30_planet_in_sign:D30-PS-Ve-Pis
+10466	Exalted — colors misfortunes and weaknesses through Pisces's compassion.
+# divisional_D30_planet_in_sign:D30-PS-Sa-Ari
+10467	Debilitated — colors misfortunes and weaknesses through Aries's initiation.
+# divisional_D30_planet_in_sign:D30-PS-Sa-Lib
+10468	Exalted — colors misfortunes and weaknesses through Libra's partnership.
+# divisional_D30_planet_in_sign:D30-PS-Sa-Cap
+10469	Own sign — colors misfortunes and weaknesses through Capricorn's discipline.
+# divisional_D30_planet_in_sign:D30-PS-Sa-Aqu
+10470	Own sign — colors misfortunes and weaknesses through Aquarius's innovation.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Ari
+10471	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Aries's initiation.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Tau
+10472	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Taurus's stability.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Gem
+10473	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Gemini's communication.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Can
+10474	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Cancer's nurturing.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Leo
+10475	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Leo's self-expression.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Vir
+10476	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Virgo's service.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Lib
+10477	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Libra's partnership.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Sco
+10478	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Scorpio's transformation.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Sag
+10479	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Sagittarius's expansion.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Cap
+10480	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Capricorn's discipline.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Aqu
+10481	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Aquarius's innovation.
+# divisional_D30_planet_in_sign:D30-PS-Ra-Pis
+10482	Shadow planet (no fixed dignity) — colors misfortunes and weaknesses through Pisces's compassion.
+# divisional_D3_planet_in_sign:D3-PS-Su-Ari
+10483	Exalted — colors siblings and courage through Aries's initiation.
+# divisional_D3_planet_in_sign:D3-PS-Su-Tau
+10484	Neutral dignity — colors siblings and courage through Taurus's stability.
+# divisional_D3_planet_in_sign:D3-PS-Su-Gem
+10485	Neutral dignity — colors siblings and courage through Gemini's communication.
+# divisional_D3_planet_in_sign:D3-PS-Su-Can
+10486	Neutral dignity — colors siblings and courage through Cancer's nurturing.
+# divisional_D3_planet_in_sign:D3-PS-Su-Leo
+10487	Own sign — colors siblings and courage through Leo's self-expression.
+# divisional_D3_planet_in_sign:D3-PS-Su-Vir
+10488	Neutral dignity — colors siblings and courage through Virgo's service.
+# divisional_D3_planet_in_sign:D3-PS-Su-Lib
+10489	Debilitated — colors siblings and courage through Libra's partnership.
+# divisional_D3_planet_in_sign:D3-PS-Su-Sco
+10490	Neutral dignity — colors siblings and courage through Scorpio's transformation.
+# divisional_D3_planet_in_sign:D3-PS-Su-Sag
+10491	Neutral dignity — colors siblings and courage through Sagittarius's expansion.
+# divisional_D3_planet_in_sign:D3-PS-Su-Cap
+10492	Neutral dignity — colors siblings and courage through Capricorn's discipline.
+# divisional_D3_planet_in_sign:D3-PS-Su-Aqu
+10493	Neutral dignity — colors siblings and courage through Aquarius's innovation.
+# divisional_D3_planet_in_sign:D3-PS-Su-Pis
+10494	Neutral dignity — colors siblings and courage through Pisces's compassion.
+# divisional_D3_planet_in_sign:D3-PS-Mo-Ari
+10495	Neutral dignity — colors siblings and courage through Aries's initiation.
+# divisional_D3_planet_in_sign:D3-PS-Mo-Tau
+10496	Exalted — colors siblings and courage through Taurus's stability.
+# divisional_D3_planet_in_sign:D3-PS-Mo-Can
+10497	Own sign — colors siblings and courage through Cancer's nurturing.
+# divisional_D3_planet_in_sign:D3-PS-Mo-Leo
+10498	Neutral dignity — colors siblings and courage through Leo's self-expression.
+# divisional_D3_planet_in_sign:D3-PS-Mo-Lib
+10499	Neutral dignity — colors siblings and courage through Libra's partnership.
+# divisional_D3_planet_in_sign:D3-PS-Mo-Sco
+10500	Debilitated — colors siblings and courage through Scorpio's transformation.
+# divisional_D3_planet_in_sign:D3-PS-Ma-Ari
+10501	Own sign — colors siblings and courage through Aries's initiation.
+# divisional_D3_planet_in_sign:D3-PS-Ma-Can
+10502	Debilitated — colors siblings and courage through Cancer's nurturing.
+# divisional_D3_planet_in_sign:D3-PS-Ma-Sco
+10503	Own sign — colors siblings and courage through Scorpio's transformation.
+# divisional_D3_planet_in_sign:D3-PS-Ma-Cap
+10504	Exalted — colors siblings and courage through Capricorn's discipline.
+# divisional_D3_planet_in_sign:D3-PS-Me-Gem
+10505	Own sign — colors siblings and courage through Gemini's communication.
+# divisional_D3_planet_in_sign:D3-PS-Me-Vir
+10506	Exalted — colors siblings and courage through Virgo's service.
+# divisional_D3_planet_in_sign:D3-PS-Me-Pis
+10507	Debilitated — colors siblings and courage through Pisces's compassion.
+# divisional_D3_planet_in_sign:D3-PS-Ju-Can
+10508	Exalted — colors siblings and courage through Cancer's nurturing.
+# divisional_D3_planet_in_sign:D3-PS-Ju-Sag
+10509	Own sign — colors siblings and courage through Sagittarius's expansion.
+# divisional_D3_planet_in_sign:D3-PS-Ju-Cap
+10510	Debilitated — colors siblings and courage through Capricorn's discipline.
+# divisional_D3_planet_in_sign:D3-PS-Ju-Pis
+10511	Own sign — colors siblings and courage through Pisces's compassion.
+# divisional_D3_planet_in_sign:D3-PS-Ve-Tau
+10512	Own sign — colors siblings and courage through Taurus's stability.
+# divisional_D3_planet_in_sign:D3-PS-Ve-Vir
+10513	Debilitated — colors siblings and courage through Virgo's service.
+# divisional_D3_planet_in_sign:D3-PS-Ve-Lib
+10514	Own sign — colors siblings and courage through Libra's partnership.
+# divisional_D3_planet_in_sign:D3-PS-Ve-Pis
+10515	Exalted — colors siblings and courage through Pisces's compassion.
+# divisional_D3_planet_in_sign:D3-PS-Sa-Ari
+10516	Debilitated — colors siblings and courage through Aries's initiation.
+# divisional_D3_planet_in_sign:D3-PS-Sa-Lib
+10517	Exalted — colors siblings and courage through Libra's partnership.
+# divisional_D3_planet_in_sign:D3-PS-Sa-Cap
+10518	Own sign — colors siblings and courage through Capricorn's discipline.
+# divisional_D3_planet_in_sign:D3-PS-Sa-Aqu
+10519	Own sign — colors siblings and courage through Aquarius's innovation.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Ari
+10520	Shadow planet (no fixed dignity) — colors siblings and courage through Aries's initiation.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Tau
+10521	Shadow planet (no fixed dignity) — colors siblings and courage through Taurus's stability.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Gem
+10522	Shadow planet (no fixed dignity) — colors siblings and courage through Gemini's communication.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Can
+10523	Shadow planet (no fixed dignity) — colors siblings and courage through Cancer's nurturing.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Leo
+10524	Shadow planet (no fixed dignity) — colors siblings and courage through Leo's self-expression.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Vir
+10525	Shadow planet (no fixed dignity) — colors siblings and courage through Virgo's service.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Lib
+10526	Shadow planet (no fixed dignity) — colors siblings and courage through Libra's partnership.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Sco
+10527	Shadow planet (no fixed dignity) — colors siblings and courage through Scorpio's transformation.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Sag
+10528	Shadow planet (no fixed dignity) — colors siblings and courage through Sagittarius's expansion.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Cap
+10529	Shadow planet (no fixed dignity) — colors siblings and courage through Capricorn's discipline.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Aqu
+10530	Shadow planet (no fixed dignity) — colors siblings and courage through Aquarius's innovation.
+# divisional_D3_planet_in_sign:D3-PS-Ra-Pis
+10531	Shadow planet (no fixed dignity) — colors siblings and courage through Pisces's compassion.
+# divisional_D4_planet_in_sign:D4-PS-Su-Ari
+10532	Exalted — colors property and fortune through Aries's initiation.
+# divisional_D4_planet_in_sign:D4-PS-Su-Tau
+10533	Neutral dignity — colors property and fortune through Taurus's stability.
+# divisional_D4_planet_in_sign:D4-PS-Su-Gem
+10534	Neutral dignity — colors property and fortune through Gemini's communication.
+# divisional_D4_planet_in_sign:D4-PS-Su-Can
+10535	Neutral dignity — colors property and fortune through Cancer's nurturing.
+# divisional_D4_planet_in_sign:D4-PS-Su-Leo
+10536	Own sign — colors property and fortune through Leo's self-expression.
+# divisional_D4_planet_in_sign:D4-PS-Su-Vir
+10537	Neutral dignity — colors property and fortune through Virgo's service.
+# divisional_D4_planet_in_sign:D4-PS-Su-Lib
+10538	Debilitated — colors property and fortune through Libra's partnership.
+# divisional_D4_planet_in_sign:D4-PS-Su-Sco
+10539	Neutral dignity — colors property and fortune through Scorpio's transformation.
+# divisional_D4_planet_in_sign:D4-PS-Su-Sag
+10540	Neutral dignity — colors property and fortune through Sagittarius's expansion.
+# divisional_D4_planet_in_sign:D4-PS-Su-Cap
+10541	Neutral dignity — colors property and fortune through Capricorn's discipline.
+# divisional_D4_planet_in_sign:D4-PS-Su-Aqu
+10542	Neutral dignity — colors property and fortune through Aquarius's innovation.
+# divisional_D4_planet_in_sign:D4-PS-Su-Pis
+10543	Neutral dignity — colors property and fortune through Pisces's compassion.
+# divisional_D4_planet_in_sign:D4-PS-Mo-Ari
+10544	Neutral dignity — colors property and fortune through Aries's initiation.
+# divisional_D4_planet_in_sign:D4-PS-Mo-Tau
+10545	Exalted — colors property and fortune through Taurus's stability.
+# divisional_D4_planet_in_sign:D4-PS-Mo-Can
+10546	Own sign — colors property and fortune through Cancer's nurturing.
+# divisional_D4_planet_in_sign:D4-PS-Mo-Leo
+10547	Neutral dignity — colors property and fortune through Leo's self-expression.
+# divisional_D4_planet_in_sign:D4-PS-Mo-Lib
+10548	Neutral dignity — colors property and fortune through Libra's partnership.
+# divisional_D4_planet_in_sign:D4-PS-Mo-Sco
+10549	Debilitated — colors property and fortune through Scorpio's transformation.
+# divisional_D4_planet_in_sign:D4-PS-Ma-Ari
+10550	Own sign — colors property and fortune through Aries's initiation.
+# divisional_D4_planet_in_sign:D4-PS-Ma-Can
+10551	Debilitated — colors property and fortune through Cancer's nurturing.
+# divisional_D4_planet_in_sign:D4-PS-Ma-Sco
+10552	Own sign — colors property and fortune through Scorpio's transformation.
+# divisional_D4_planet_in_sign:D4-PS-Ma-Cap
+10553	Exalted — colors property and fortune through Capricorn's discipline.
+# divisional_D4_planet_in_sign:D4-PS-Me-Gem
+10554	Own sign — colors property and fortune through Gemini's communication.
+# divisional_D4_planet_in_sign:D4-PS-Me-Vir
+10555	Exalted — colors property and fortune through Virgo's service.
+# divisional_D4_planet_in_sign:D4-PS-Me-Pis
+10556	Debilitated — colors property and fortune through Pisces's compassion.
+# divisional_D4_planet_in_sign:D4-PS-Ju-Can
+10557	Exalted — colors property and fortune through Cancer's nurturing.
+# divisional_D4_planet_in_sign:D4-PS-Ju-Sag
+10558	Own sign — colors property and fortune through Sagittarius's expansion.
+# divisional_D4_planet_in_sign:D4-PS-Ju-Cap
+10559	Debilitated — colors property and fortune through Capricorn's discipline.
+# divisional_D4_planet_in_sign:D4-PS-Ju-Pis
+10560	Own sign — colors property and fortune through Pisces's compassion.
+# divisional_D4_planet_in_sign:D4-PS-Ve-Tau
+10561	Own sign — colors property and fortune through Taurus's stability.
+# divisional_D4_planet_in_sign:D4-PS-Ve-Vir
+10562	Debilitated — colors property and fortune through Virgo's service.
+# divisional_D4_planet_in_sign:D4-PS-Ve-Lib
+10563	Own sign — colors property and fortune through Libra's partnership.
+# divisional_D4_planet_in_sign:D4-PS-Ve-Pis
+10564	Exalted — colors property and fortune through Pisces's compassion.
+# divisional_D4_planet_in_sign:D4-PS-Sa-Ari
+10565	Debilitated — colors property and fortune through Aries's initiation.
+# divisional_D4_planet_in_sign:D4-PS-Sa-Lib
+10566	Exalted — colors property and fortune through Libra's partnership.
+# divisional_D4_planet_in_sign:D4-PS-Sa-Cap
+10567	Own sign — colors property and fortune through Capricorn's discipline.
+# divisional_D4_planet_in_sign:D4-PS-Sa-Aqu
+10568	Own sign — colors property and fortune through Aquarius's innovation.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Ari
+10569	Shadow planet (no fixed dignity) — colors property and fortune through Aries's initiation.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Tau
+10570	Shadow planet (no fixed dignity) — colors property and fortune through Taurus's stability.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Gem
+10571	Shadow planet (no fixed dignity) — colors property and fortune through Gemini's communication.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Can
+10572	Shadow planet (no fixed dignity) — colors property and fortune through Cancer's nurturing.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Leo
+10573	Shadow planet (no fixed dignity) — colors property and fortune through Leo's self-expression.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Vir
+10574	Shadow planet (no fixed dignity) — colors property and fortune through Virgo's service.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Lib
+10575	Shadow planet (no fixed dignity) — colors property and fortune through Libra's partnership.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Sco
+10576	Shadow planet (no fixed dignity) — colors property and fortune through Scorpio's transformation.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Sag
+10577	Shadow planet (no fixed dignity) — colors property and fortune through Sagittarius's expansion.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Cap
+10578	Shadow planet (no fixed dignity) — colors property and fortune through Capricorn's discipline.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Aqu
+10579	Shadow planet (no fixed dignity) — colors property and fortune through Aquarius's innovation.
+# divisional_D4_planet_in_sign:D4-PS-Ra-Pis
+10580	Shadow planet (no fixed dignity) — colors property and fortune through Pisces's compassion.
+# divisional_D60_planet_in_sign:D60-PS-Su-Ari
+10581	Exalted — colors fine-grained results and past-life karma through Aries's initiation.
+# divisional_D60_planet_in_sign:D60-PS-Su-Tau
+10582	Neutral dignity — colors fine-grained results and past-life karma through Taurus's stability.
+# divisional_D60_planet_in_sign:D60-PS-Su-Gem
+10583	Neutral dignity — colors fine-grained results and past-life karma through Gemini's communication.
+# divisional_D60_planet_in_sign:D60-PS-Su-Can
+10584	Neutral dignity — colors fine-grained results and past-life karma through Cancer's nurturing.
+# divisional_D60_planet_in_sign:D60-PS-Su-Leo
+10585	Own sign — colors fine-grained results and past-life karma through Leo's self-expression.
+# divisional_D60_planet_in_sign:D60-PS-Su-Vir
+10586	Neutral dignity — colors fine-grained results and past-life karma through Virgo's service.
+# divisional_D60_planet_in_sign:D60-PS-Su-Lib
+10587	Debilitated — colors fine-grained results and past-life karma through Libra's partnership.
+# divisional_D60_planet_in_sign:D60-PS-Su-Sco
+10588	Neutral dignity — colors fine-grained results and past-life karma through Scorpio's transformation.
+# divisional_D60_planet_in_sign:D60-PS-Su-Sag
+10589	Neutral dignity — colors fine-grained results and past-life karma through Sagittarius's expansion.
+# divisional_D60_planet_in_sign:D60-PS-Su-Cap
+10590	Neutral dignity — colors fine-grained results and past-life karma through Capricorn's discipline.
+# divisional_D60_planet_in_sign:D60-PS-Su-Aqu
+10591	Neutral dignity — colors fine-grained results and past-life karma through Aquarius's innovation.
+# divisional_D60_planet_in_sign:D60-PS-Su-Pis
+10592	Neutral dignity — colors fine-grained results and past-life karma through Pisces's compassion.
+# divisional_D60_planet_in_sign:D60-PS-Mo-Ari
+10593	Neutral dignity — colors fine-grained results and past-life karma through Aries's initiation.
+# divisional_D60_planet_in_sign:D60-PS-Mo-Tau
+10594	Exalted — colors fine-grained results and past-life karma through Taurus's stability.
+# divisional_D60_planet_in_sign:D60-PS-Mo-Can
+10595	Own sign — colors fine-grained results and past-life karma through Cancer's nurturing.
+# divisional_D60_planet_in_sign:D60-PS-Mo-Leo
+10596	Neutral dignity — colors fine-grained results and past-life karma through Leo's self-expression.
+# divisional_D60_planet_in_sign:D60-PS-Mo-Lib
+10597	Neutral dignity — colors fine-grained results and past-life karma through Libra's partnership.
+# divisional_D60_planet_in_sign:D60-PS-Mo-Sco
+10598	Debilitated — colors fine-grained results and past-life karma through Scorpio's transformation.
+# divisional_D60_planet_in_sign:D60-PS-Ma-Ari
+10599	Own sign — colors fine-grained results and past-life karma through Aries's initiation.
+# divisional_D60_planet_in_sign:D60-PS-Ma-Can
+10600	Debilitated — colors fine-grained results and past-life karma through Cancer's nurturing.
+# divisional_D60_planet_in_sign:D60-PS-Ma-Sco
+10601	Own sign — colors fine-grained results and past-life karma through Scorpio's transformation.
+# divisional_D60_planet_in_sign:D60-PS-Ma-Cap
+10602	Exalted — colors fine-grained results and past-life karma through Capricorn's discipline.

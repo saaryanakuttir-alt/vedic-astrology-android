@@ -1,0 +1,148 @@
+# nakshatra_pada:NKP-PAS-1
+11632	Purva Ashadha's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-PAS-2
+11633	Purva Ashadha's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-PAS-3
+11634	Purva Ashadha's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-PAS-4
+11635	Purva Ashadha's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-UAS-1
+11636	Uttara Ashadha's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-UAS-2
+11637	Uttara Ashadha's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-UAS-3
+11638	Uttara Ashadha's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-UAS-4
+11639	Uttara Ashadha's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-SHR-1
+11640	Shravana's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-SHR-2
+11641	Shravana's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-SHR-3
+11642	Shravana's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-SHR-4
+11643	Shravana's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-DHA-1
+11644	Dhanishta's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-DHA-2
+11645	Dhanishta's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-DHA-3
+11646	Dhanishta's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-DHA-4
+11647	Dhanishta's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-SHT-1
+11648	Shatabhisha's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-SHT-2
+11649	Shatabhisha's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-SHT-3
+11650	Shatabhisha's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-SHT-4
+11651	Shatabhisha's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# nakshatra_pada:NKP-PBH-1
+11652	Purva Bhadrapada's core theme, bold, pioneering, quick to act here (Navamsa: Aries).
+# nakshatra_pada:NKP-PBH-2
+11653	Purva Bhadrapada's core theme, steady, sensual, resource-minded here (Navamsa: Taurus).
+# nakshatra_pada:NKP-PBH-3
+11654	Purva Bhadrapada's core theme, curious, communicative, quick to adapt here (Navamsa: Gemini).
+# nakshatra_pada:NKP-PBH-4
+11655	Purva Bhadrapada's core theme, nurturing, protective, emotionally attuned here (Navamsa: Cancer).
+# nakshatra_pada:NKP-UBH-1
+11656	Uttara Bhadrapada's core theme, confident, expressive, driven to be seen here (Navamsa: Leo).
+# nakshatra_pada:NKP-UBH-2
+11657	Uttara Bhadrapada's core theme, meticulous, service-minded, practically discerning here (Navamsa: Virgo).
+# nakshatra_pada:NKP-UBH-3
+11658	Uttara Bhadrapada's core theme, harmonizing, relational, weighing both sides here (Navamsa: Libra).
+# nakshatra_pada:NKP-UBH-4
+11659	Uttara Bhadrapada's core theme, intense, probing, transformative here (Navamsa: Scorpio).
+# nakshatra_pada:NKP-REV-1
+11660	Revati's core theme, expansive, philosophical, freedom-seeking here (Navamsa: Sagittarius).
+# nakshatra_pada:NKP-REV-2
+11661	Revati's core theme, disciplined, ambitious, patiently building here (Navamsa: Capricorn).
+# nakshatra_pada:NKP-REV-3
+11662	Revati's core theme, innovative, detached, community-minded here (Navamsa: Aquarius).
+# nakshatra_pada:NKP-REV-4
+11663	Revati's core theme, intuitive, compassionate, boundary-dissolving here (Navamsa: Pisces).
+# panchadha_maitri:PM-AdhiMitra
+11664	Natural friend and temporally well-placed — the warmest possible relationship between two planets.
+11665	Both the permanent (Naisargika) and the chart-specific (Tatkalika) friendship point the same way here, so a planet sitting in a Great Friend's sign is considered a welcome, supported guest: its significations tend to express with unusual ease, and it lends genuine strength to whatever it governs.
+11666	Classically the strongest of the five Panchadha Maitri grades.
+# panchadha_maitri:PM-Mitra
+11667	Naturally neutral, but favorably placed in this chart — a working friendship, not an inborn one.
+11668	The two planets have no fixed natural bond, but their positions in THIS particular chart bring them into a cooperative relationship.
+11669	A planet placed in such a sign is a comfortable, if not especially close, guest — its expression is generally supported without being amplified.
+# panchadha_maitri:PM-Sama
+11670	The natural and temporal readings pull in opposite directions and cancel out.
+11671	Either a natural friendship undercut by an unfavorable chart position, or natural dislike offset by a favorable one — the two effects balance each other.
+11672	A planet here is neither especially helped nor hindered by its host; read its other dignities (exaltation, own sign, etc.) as the more decisive factor.
+# panchadha_maitri:PM-Shatru
+11673	Naturally neutral, but unfavorably placed in this chart.
+11674	No inborn hostility, but this chart's specific arrangement puts the two planets at odds.
+11675	A planet placed in such a sign is a somewhat unwelcome guest — its expression can feel constrained or effortful, without being as severely undermined as under a Great Enemy.
+# panchadha_maitri:PM-AdhiShatru
+11676	Natural enemy and temporally poorly placed — the most difficult of the five grades.
+11677	Both the permanent and the chart-specific reading agree: this is real friction.
+11678	A planet sitting in a Great Enemy's sign is considered an unwelcome guest in hostile territory — its significations tend to express with real difficulty, and classical texts treat this as a meaningful weakening factor, on top of (not instead of) whatever exaltation/own-sign/debilitation status already applies.
+# planet_in_house:PH-Su-H1
+11679	Self, physical body, personality, overall vitality
+11680	Gives a strong, confident sense of self with natural authority and leadership presence.
+11681	The native carries an assertive, self-assured personality with a pronounced ego and a desire to lead rather than follow.
+11682	Vitality and constitution are generally robust, and there is often a commanding physical presence or bearing.
+11683	This placement favors positions of authority, government, or public visibility, though the strong ego can create friction with others or with the father if unchecked.
+11684	Self-respect and personal identity are central life themes.
+11685	Effects strengthen when Sun is exalted (Aries) or in its own sign (Leo), and in its directional-strength (dig bala) house, the 10th.
+11686	When debilitated (Libra) or heavily afflicted by malefics, the themes below tend to manifest as low confidence, friction with authority or father, or vitality/health strain instead of leadership and status.
+# planet_in_house:PH-Su-H2
+11687	Wealth, family, speech, food, accumulated values
+11688	Links self-worth and status closely to family standing, wealth, and forthright speech.
+11689	Speech tends to be direct, authoritative, and sometimes blunt, and the native values prestige within the family and community.
+11690	Wealth often connects to government, authority, or self-earned status rather than inheritance, and spending can rise to maintain image.
+11691	Family life may carry an authority figure whose ego needs managing, and the right eye or facial vitality (Sun's bodily significations) deserve attention.
+# planet_in_house:PH-Su-H3
+11692	Courage, siblings, self-effort, short journeys, communication
+11693	A favorable upachaya placement that fuels courage, initiative, and success through self-effort.
+11694	The native shows strong willpower, valor, and a results-oriented drive in personal efforts, short journeys, and communication.
+11695	Relationships with younger siblings can be colored by the native's dominant, leadership-oriented style, sometimes creating rivalry but also protective authority.
+11696	This position favors writing, media, or any field where assertive self-expression leads to recognition.
+# planet_in_house:PH-Su-H4
+11697	Home, mother, comforts, property, emotional foundation
+11698	Creates some restlessness in domestic life while supporting property, status, and connection to homeland.
+11699	Because the Sun is not naturally comfortable in the 4th house, emotional peace at home can be interrupted by ego clashes, frequent change, or an authoritative, sometimes distant mother figure.
+11700	Positively, this placement supports property ownership, real-estate gains, and a strong connection to one's homeland, community standing, or political life.
+11701	Conscious effort toward domestic harmony helps balance the drive for independence with the need for a stable emotional base.
+# planet_in_house:PH-Su-H5
+11702	Intelligence, creativity, romance, past-life merit (purva punya)
+11703	The native shows confident, original intelligence and often takes a natural leadership role in creative, educational, or speculative matters.
+11704	This placement favors success in politics, administration, education, or speculation tied to status and reputation, along with strong purva punya (past-life merit) themes.
+# planet_in_house:PH-Su-H6
+11705	Enemies, disease, debts, service, daily work, competition
+11706	A strong upachaya placement supporting victory over rivals, discipline, and success in service or government roles.
+11707	The Sun performs well in this house of competition, giving the stamina and authority to overcome enemies, litigation, and obstacles.
+11708	The native does well in government service, civil administration, medicine, or any competitive field requiring discipline and self-confidence.
+11709	Health is generally resilient once early challenges are met, though relations with maternal relatives can be strained by the native's dominant approach.
+# planet_in_house:PH-Su-H7
+11710	Marriage, partnerships, business, public dealings
+11711	Brings a strong-willed approach to partnerships that can create ego friction in marriage.
+11712	The native tends to attract a spouse or business partner who is authoritative, prominent, or from a respected background, but the Sun's ego here can create power struggles in one-to-one relationships.
+11713	Business partnerships fare better than emotional ones, particularly those connected with government or authority.
+11714	Conscious humility and shared decision-making help this placement mature into a dignified, mutually respectful partnership.
+# planet_in_house:PH-Su-H8
+11715	Transformation, occult, inheritance, sudden events
+11716	A challenging dusthana placement that can bring health fluctuations, status upheavals, and deep transformative interests.
+11717	The native may experience periodic health concerns, sudden changes in status or authority, or complications around the father's wellbeing and inheritance matters.
+11718	There is often a strong pull toward research, occult study, or investigating hidden truths, since the Sun's light seeks to illuminate the 8th house's mysteries.
+11719	With supportive influences elsewhere in the chart, this placement can grant resilience and the ability to rise again after setbacks.
+# planet_in_house:PH-Su-H9
+11720	Fortune, dharma, father, higher learning, long journeys
+11721	A highly auspicious trikona placement bringing fortune, dharma, and a respected father or guru figure.
+11722	The native is generally fortunate, principled, and drawn to higher learning, philosophy, and ethical or religious pursuits.
+11723	The father (or a father-like mentor) tends to be respected, successful, or influential, and relationships with teachers and gurus are supportive.
+11724	Long journeys, foreign connections, and higher education tied to authority or government are favored, with success following righteous conduct.
+# planet_in_house:PH-Su-H10
+11725	Career, status, authority, public reputation
+11726	The Sun's directional-strength (dig bala) house — excellent for career, authority, and public reputation.
+11727	This is one of the strongest placements for professional success, giving ambition, leadership, and a natural fit for government, administration, or any authoritative public role.
+11728	The native earns respect and visibility through career achievements and is often recognized as a leader in their field.
+11729	The drive for status and accomplishment can come at the cost of family time if not consciously balanced.
+# planet_in_house:PH-Su-H11
+11730	Gains, income, friendships, aspirations, elder siblings
+11731	Supports strong material and social gains through authoritative, influential connections.

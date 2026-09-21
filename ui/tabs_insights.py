@@ -345,8 +345,8 @@ class KPTab(_InsightPage):
                     [(p["planet"][:3] + ("R" if p["retrograde"] else ""), p["dms"], p["house"], ab(p["sign_lord"]), ab(p["star_lord"]),
                       ab(p["sub_lord"]), ab(p["subsub_lord"])) for p in t["planets"]], "10sp")
         r = t["ruling"]
-        self._text(tx("--- Ruling planets ---\nLagna (sign, star, sub lord): ") + ", ".join(r["Lagna"]) + tx(". Moon (sign, star, sub lord): ") +
-                   ", ".join(r["Moon"]) + tr('. Weekday lord: {0}.\n\n[In simple terms: these are the planets KP astrologers treat as most '
+        self._text(tx("--- Ruling planets ---\nLagna (sign, star, sub lord): ") + ", ".join(tx(x) for x in r["Lagna"]) + tx(". Moon (sign, star, sub lord): ") +
+                   ", ".join(tx(x) for x in r["Moon"]) + tr('. Weekday lord: {0}.\n\n[In simple terms: these are the planets KP astrologers treat as most '
                                              'active at the time and place of your birth.]', r['Day lord']), compactable=True)
         self._text(tx("--- Planets linked with each house (significators, strongest first) ---"))
         self._table(["House", "Signified by"], [0.2, 0.8], [(h, ", ".join(x[:3] for x in pl)) for h, pl in t["significators"].items()], "11sp")

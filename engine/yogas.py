@@ -30,6 +30,7 @@ from astrology_tables import (
     is_moon_waxing,
     planet_aspects_house,
 )
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 CLASSICAL_PLANETS = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]
 
@@ -119,8 +120,8 @@ def detect_gajakesari(chart):
     dist = house_distance(moon_h, jup_h)
     present = dist in KENDRA_HOUSES
     return _yoga("YOGA-01", present,
-                 f"Jupiter is {dist} houses from the Moon (house {jup_h} vs Moon's house {moon_h})."
-                 if present else f"Jupiter is not in a kendra from the Moon (distance {dist}).")
+                 tr("Jupiter is {0} houses from the Moon (house {1} vs Moon's house {2}).", dist, jup_h, moon_h)
+                 if present else tr('Jupiter is not in a kendra from the Moon (distance {0}).', dist))
 
 
 # ---------------------------------------------------------------------------
@@ -141,9 +142,8 @@ def _detect_mahapurusha(chart, yoga_id, planet, label):
     in_kendra = house in KENDRA_HOUSES
     present = well_dignified and in_kendra
     return _yoga(yoga_id, present,
-                 f"{planet} is in {sign} (own/exaltation) and in house {house} (a kendra) — {label} Yoga formed."
-                 if present else f"{planet} in {sign}, house {house}: "
-                                  f"{'own/exalted sign but not a kendra house' if well_dignified else 'not in own/exaltation sign'}.")
+                 tr('{0} is in {1} (own/exaltation) and in house {2} (a kendra) — {3} Yoga formed.', planet, sign, house, label)
+                 if present else tr('{0} in {1}, house {2}: {3}.', planet, sign, house, 'own/exalted sign but not a kendra house' if well_dignified else 'not in own/exaltation sign'))
 
 
 # ---------------------------------------------------------------------------
@@ -159,10 +159,10 @@ def detect_kendra_trikona_raja_yoga(chart):
                 continue  # same planet ruling both — not a "connection" between two lords
             connected, _, _ = houses_connected(chart, k, t)
             if connected:
-                pairs_found.append(f"{k}th-lord {lord_k} <-> {t}th-lord {lord_t}")
+                pairs_found.append(tr('{0}th-lord {1} <-> {2}th-lord {3}', k, lord_k, t, lord_t))
     present = len(pairs_found) > 0
-    details = ("Kendra-trikona lord connection(s): " + "; ".join(sorted(set(pairs_found)))) if present \
-        else "No kendra lord forms a conjunction/aspect/parivartana with a trikona lord."
+    details = (tx("Kendra-trikona lord connection(s): ") + "; ".join(sorted(set(pairs_found)))) if present \
+        else tx("No kendra lord forms a conjunction/aspect/parivartana with a trikona lord.")
     return _yoga("YOGA-07", present, details)
 
 
@@ -173,12 +173,11 @@ def detect_dhana_yoga(chart):
     lord2, lord11 = lord_of_house(chart, 2), lord_of_house(chart, 11)
     if lord2 == lord11:
         return _yoga("YOGA-08", True,
-                      f"The same planet ({lord2}) rules both the 2nd (wealth) and 11th (gains) houses — "
-                      f"a direct wealth-combination in its own right.")
+                      tr('The same planet ({0}) rules both the 2nd (wealth) and 11th (gains) houses — a direct '
+                         'wealth-combination in its own right.', lord2))
     connected, _, _ = houses_connected(chart, 2, 11)
     return _yoga("YOGA-08", connected,
-                 f"2nd lord {lord2} and 11th lord {lord11} "
-                 f"{'are connected (conjunction/aspect/parivartana).' if connected else 'have no direct connection.'}")
+                 tr('2nd lord {0} and 11th lord {1} {2}', lord2, lord11, 'are connected (conjunction/aspect/parivartana).' if connected else 'have no direct connection.'))
 
 
 # ---------------------------------------------------------------------------
@@ -198,10 +197,10 @@ def detect_kemadruma(chart):
     ]
     present = not occupants and not aspecting_or_conjunct
     if present:
-        details = "No classical planet occupies the 2nd/12th from the Moon, and none conjoins or aspects it — the Moon is isolated."
+        details = tx("No classical planet occupies the 2nd/12th from the Moon, and none conjoins or aspects it — the Moon is isolated.")
     else:
         supporting = sorted(set(occupants) | set(aspecting_or_conjunct))
-        details = f"The Moon is supported by: {', '.join(supporting)} — not isolated, so Kemadruma is not formed."
+        details = tr('The Moon is supported by: {0} — not isolated, so Kemadruma is not formed.', ', '.join(supporting))
     return _yoga("YOGA-09", present, details)
 
 
@@ -241,14 +240,14 @@ def detect_neecha_bhanga(chart):
         if cond_a or cond_b or cond_c:
             reasons = []
             if cond_a:
-                reasons.append(f"debilitation-dispositor {dispositor} is in a kendra from lagna/Moon")
+                reasons.append(tr('debilitation-dispositor {0} is in a kendra from lagna/Moon', dispositor))
             if cond_b:
-                reasons.append(f"{exalted_here} (exalted in {debil_sign}) is in a kendra from lagna/Moon")
+                reasons.append(tr('{0} (exalted in {1}) is in a kendra from lagna/Moon', exalted_here, debil_sign))
             if cond_c:
-                reasons.append(f"{planet} is in its own/exaltation sign ({d9_sign}) in the D9 despite D1 debilitation")
-            findings.append(f"{planet} debilitated in {debil_sign}, cancelled because: {'; '.join(reasons)}.")
+                reasons.append(tr('{0} is in its own/exaltation sign ({1}) in the D9 despite D1 debilitation', planet, d9_sign))
+            findings.append(tr('{0} debilitated in {1}, cancelled because: {2}.', planet, debil_sign, '; '.join(reasons)))
     present = len(findings) > 0
-    details = " | ".join(findings) if present else "No debilitated classical planet meets the checked cancellation conditions."
+    details = " | ".join(findings) if present else tx("No debilitated classical planet meets the checked cancellation conditions.")
     return _yoga("YOGA-10", present, details)
 
 
@@ -262,9 +261,9 @@ def _detect_vipareeta(chart, yoga_id, house, label):
     lord_house = house_of_lord(chart, house)
     present = lord_house in DUSTHANA_HOUSES
     if not present:
-        return _yoga(yoga_id, False, f"Lord of house {house} is in house {lord_house} (not a dusthana).")
-    form = "self-placement (weaker classical form)" if lord_house == house else "different dusthana (stronger classical form)"
-    return _yoga(yoga_id, True, f"{label}: lord of house {house} is in house {lord_house} — {form}.")
+        return _yoga(yoga_id, False, tr('Lord of house {0} is in house {1} (not a dusthana).', house, lord_house))
+    form = tx("self-placement (weaker classical form)") if lord_house == house else tx("different dusthana (stronger classical form)")
+    return _yoga(yoga_id, True, tr('{0}: lord of house {1} is in house {2} — {3}.', label, house, lord_house, form))
 
 
 # ---------------------------------------------------------------------------
@@ -273,8 +272,8 @@ def _detect_vipareeta(chart, yoga_id, house, label):
 def detect_chandra_mangal(chart):
     present = are_conjunct(chart, "Moon", "Mars")
     return _yoga("YOGA-14", present,
-                 f"Moon and Mars are both in house {_planet_house(chart, 'Moon')}." if present
-                 else "Moon and Mars are not conjunct.")
+                 tr('Moon and Mars are both in house {0}.', _planet_house(chart, 'Moon')) if present
+                 else tx("Moon and Mars are not conjunct."))
 
 
 # ---------------------------------------------------------------------------
@@ -286,11 +285,11 @@ def detect_guru_mangal(chart):
                       and planet_aspects_planet(chart, "Mars", "Jupiter"))
     present = conjunct or mutual_aspect
     if conjunct:
-        details = f"Jupiter and Mars are conjunct in house {_planet_house(chart, 'Jupiter')}."
+        details = tr('Jupiter and Mars are conjunct in house {0}.', _planet_house(chart, 'Jupiter'))
     elif mutual_aspect:
-        details = "Jupiter and Mars are in mutual kendra aspect."
+        details = tx("Jupiter and Mars are in mutual kendra aspect.")
     else:
-        details = "Jupiter and Mars are neither conjunct nor in mutual aspect."
+        details = tx("Jupiter and Mars are neither conjunct nor in mutual aspect.")
     return _yoga("YOGA-15", present, details)
 
 
@@ -314,9 +313,9 @@ def detect_amala(chart):
         benefics_here = [p for p in occupants if p in benefics_now]
         malefics_here = [p for p in occupants if p in NATURAL_MALEFICS]
         if benefics_here and not malefics_here:
-            findings.append(f"10th from {house_label} (house {house_num}) holds unafflicted benefic(s): {', '.join(benefics_here)}")
+            findings.append(tr('10th from {0} (house {1}) holds unafflicted benefic(s): {2}', house_label, house_num, ', '.join(benefics_here)))
     present = len(findings) > 0
-    return _yoga("YOGA-16", present, "; ".join(findings) if present else "No unafflicted benefic occupies the 10th from lagna or Moon.")
+    return _yoga("YOGA-16", present, "; ".join(findings) if present else tx("No unafflicted benefic occupies the 10th from lagna or Moon."))
 
 
 # ---------------------------------------------------------------------------
@@ -329,7 +328,7 @@ def detect_adhi_yoga(chart):
     houses_6_7_8 = [((moon_house + off - 1) % 12) + 1 for off in (6, 7, 8)]
     per_house = {h: [p for p in _planets_in_house(chart, h) if p in NATURAL_BENEFICS_UNCONDITIONAL] for h in houses_6_7_8}
     present = all(per_house[h] for h in houses_6_7_8)
-    details = "; ".join(f"house {h} (from Moon): {per_house[h] or 'none'}" for h in houses_6_7_8)
+    details = "; ".join(tr('house {0} (from Moon): {1}', h, per_house[h] or 'none') for h in houses_6_7_8)
     return _yoga("YOGA-17", present, details)
 
 
@@ -342,7 +341,7 @@ def detect_shakat(chart):
     dist = house_distance(jup_house, moon_house)
     present = dist in DUSTHANA_HOUSES
     return _yoga("YOGA-18", present,
-                 f"Moon is {dist} houses from Jupiter." if present else f"Moon is {dist} houses from Jupiter (not a dusthana relationship).")
+                 tr('Moon is {0} houses from Jupiter.', dist) if present else tr('Moon is {0} houses from Jupiter (not a dusthana relationship).', dist))
 
 
 # ---------------------------------------------------------------------------
@@ -365,8 +364,8 @@ def detect_kalasarpa(chart):
     all_ketu_to_rahu = all(_in_forward_arc(ketu_lon, rahu_lon, lon) for lon in lons.values())
     present = all_rahu_to_ketu or all_ketu_to_rahu
     side = "Rahu-to-Ketu" if all_rahu_to_ketu else ("Ketu-to-Rahu" if all_ketu_to_rahu else None)
-    details = f"All 7 classical planets fall within the {side} arc." if present \
-        else "The 7 classical planets are not all confined to one node-to-node arc."
+    details = tr('All 7 classical planets fall within the {0} arc.', side) if present \
+        else tx("The 7 classical planets are not all confined to one node-to-node arc.")
     return _yoga("YOGA-19", present, details)
 
 
@@ -375,9 +374,9 @@ def detect_kalasarpa(chart):
 # ---------------------------------------------------------------------------
 def detect_grahan(chart):
     combos = [("Sun", "Rahu"), ("Sun", "Ketu"), ("Moon", "Rahu"), ("Moon", "Ketu")]
-    hits = [f"{a}-{b}" for a, b in combos if are_conjunct(chart, a, b)]
+    hits = [tr('{0}-{1}', a, b) for a, b in combos if are_conjunct(chart, a, b)]
     present = len(hits) > 0
-    return _yoga("YOGA-20", present, ("Conjunctions found: " + ", ".join(hits)) if present else "No Sun/Moon-node conjunction.")
+    return _yoga("YOGA-20", present, (tx("Conjunctions found: ") + ", ".join(hits)) if present else tx("No Sun/Moon-node conjunction."))
 
 
 # ---------------------------------------------------------------------------
@@ -385,7 +384,7 @@ def detect_grahan(chart):
 # ---------------------------------------------------------------------------
 def detect_angarak(chart):
     present = are_conjunct(chart, "Mars", "Rahu")
-    return _yoga("YOGA-21", present, "Mars and Rahu are conjunct." if present else "Mars and Rahu are not conjunct.")
+    return _yoga("YOGA-21", present, tx("Mars and Rahu are conjunct.") if present else tx("Mars and Rahu are not conjunct."))
 
 
 # ---------------------------------------------------------------------------
@@ -394,7 +393,7 @@ def detect_angarak(chart):
 def detect_kuja_dosha(chart):
     mars_house = _planet_house(chart, "Mars")
     present = mars_house in {1, 2, 4, 7, 8, 12}
-    return _yoga("YOGA-22", present, f"Mars is in house {mars_house} from the lagna.")
+    return _yoga("YOGA-22", present, tr('Mars is in house {0} from the lagna.', mars_house))
 
 
 # ---------------------------------------------------------------------------
@@ -406,11 +405,11 @@ def detect_guru_chandal(chart):
     with_ketu = are_conjunct(chart, "Jupiter", "Ketu")
     present = with_rahu or with_ketu
     if with_rahu:
-        details = "Jupiter and Rahu are conjunct (the primary classical form)."
+        details = tx("Jupiter and Rahu are conjunct (the primary classical form).")
     elif with_ketu:
-        details = "Jupiter and Ketu are conjunct (a secondary form recognized by some traditions)."
+        details = tx("Jupiter and Ketu are conjunct (a secondary form recognized by some traditions).")
     else:
-        details = "Jupiter is not conjunct either node."
+        details = tx("Jupiter is not conjunct either node.")
     return _yoga("YOGA-23", present, details)
 
 
@@ -419,7 +418,7 @@ def detect_guru_chandal(chart):
 # ---------------------------------------------------------------------------
 def detect_vish_yoga(chart):
     present = are_conjunct(chart, "Saturn", "Rahu")
-    return _yoga("YOGA-24", present, "Saturn and Rahu are conjunct." if present else "Saturn and Rahu are not conjunct.")
+    return _yoga("YOGA-24", present, tx("Saturn and Rahu are conjunct.") if present else tx("Saturn and Rahu are not conjunct."))
 
 
 def detect_all_yogas(chart):

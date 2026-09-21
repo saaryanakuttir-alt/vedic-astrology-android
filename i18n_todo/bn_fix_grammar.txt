@@ -1,0 +1,4 @@
+# templates whose slotted arguments are English grammar words (plural s, is/are): the Bengali drops them
+In short: {0} classical yoga{1} {2} present in this chart:	সংক্ষেপে: এই কুণ্ডলীতে {0}টি শাস্ত্রীয় যোগ আছে:
+In short: {0} of {1} {2} {3} present in this chart — {4}. See below for what each one means; they're reported separately on purpose, not combined into a single verdict.	সংক্ষেপে: {1}টির মধ্যে {0}টি {2} এই কুণ্ডলীতে আছে — {4}। প্রতিটির অর্থ কী তা নিচে দেখুন; এগুলি ইচ্ছাকৃতভাবে আলাদা করে দেখানো হয়েছে, একটিমাত্র রায়ে মেলানো হয়নি।
+{0} planet{1} in the 7th house ({2}).	৭ম ভাবে {0}টি গ্রহ আছে ({2})।

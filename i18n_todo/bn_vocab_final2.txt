@@ -1,0 +1,46 @@
+Head	মাথা
+Face	মুখ
+Arms	বাহু
+Chest	বুক
+Heart	হৃদয়
+Belly	পেট
+Kidneys	কিডনি
+Pelvis	কটিদেশ
+Thighs	উরু
+Knees	হাঁটু
+Calves	পায়ের ডিম
+Feet	পা
+Fire	অগ্নি
+Earth	ভূমি
+Air	বায়ু
+Water	জল
+Self	নিজ
+Child	সন্তান
+Child 1	সন্তান 1
+Child 2	সন্তান 2
+Child 3	সন্তান 3
+Child 4	সন্তান 4
+Child 5	সন্তান 5
+Child 6	সন্তান 6
+indicators	সূচক
+career-	কর্মজীবন-
+career	কর্মজীবন
+Antar	অন্তর
+person a moon lord	প্রথম ব্যক্তির চন্দ্রের অধিপতি
+person b moon lord	দ্বিতীয় ব্যক্তির চন্দ্রের অধিপতি
+a sees b as	প্রথম ব্যক্তি দ্বিতীয়জনকে দেখে
+b sees a as	দ্বিতীয় ব্যক্তি প্রথমজনকে দেখে
+person a gana	প্রথম ব্যক্তির গণ
+person b gana	দ্বিতীয় ব্যক্তির গণ
+person a nadi	প্রথম ব্যক্তির নাড়ী
+person b nadi	দ্বিতীয় ব্যক্তির নাড়ী
+person a varna	প্রথম ব্যক্তির বর্ণ
+person b varna	দ্বিতীয় ব্যক্তির বর্ণ
+person a vashya	প্রথম ব্যক্তির বশ্য
+person b vashya	দ্বিতীয় ব্যক্তির বশ্য
+person a yoni	প্রথম ব্যক্তির যোনি
+person b yoni	দ্বিতীয় ব্যক্তির যোনি
+person a to b remainder	প্রথম থেকে দ্বিতীয় ব্যক্তির অবশেষ
+person b to a remainder	দ্বিতীয় থেকে প্রথম ব্যক্তির অবশেষ
+same nadi	একই নাড়ী
+moon sign	চন্দ্র রাশি

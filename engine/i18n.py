@@ -168,20 +168,36 @@ def t_text(text):
     return "\n\n".join(out_paragraphs)
 
 
-_SENTENCE = re.compile(r"(?<=[.!?])\s+")
+# a sentence ends at . ! ? followed by a space - except after abbreviations such as "e.g." or "vs."
+_SENTENCE = re.compile(r"(?<=[.!?।])(?<!e\.g\.)(?<!i\.e\.)(?<!vs\.)(?<!etc\.)\s+")
+_GIST = re.compile(r"^\[In simple terms:\s*(.*)\]([.]?)$", re.S)
 
 
 def _translate_sentences(line, table):
     parts = _SENTENCE.split(line)
+    danda = getattr(_module(_code), "DANDA", "")     # text already written in the language ends its sentences with this
+    if danda:
+        parts = [q for s in parts for q in re.split("(?<=" + re.escape(danda) + r")\s+", s)]
     done = []
     for s in parts:
         hit = table.get(s)
         if hit is None:
-            m = re.match(r"^(\[In simple terms: )(.*)(\]\.?)$", s, re.S)          # bracketed plain-words lines
-            if m and m.group(2) in table:
-                hit = "[" + table["[In simple terms:]"] + " " + table[m.group(2)] + "]" if "[In simple terms:]" in table else None
+            m = _GIST.match(s)                                   # "[In simple terms: ...]" plain-words lines
+            if m:
+                inner = t_text(m.group(1))
+                label = table.get("In simple terms")
+                if label and inner != m.group(1):
+                    hit = "[" + label + ": " + inner + "]" + m.group(2)
+        if hit is None and s.endswith(".."):                     # a full stop added after text that already ends in one
+            hit = table.get(s[:-1])
         if hit is None:
             hit = _rule(s)
+        if hit is None:
+            # "Heading: body" where only the body is a known sentence (the heading is built by the program)
+            head, colon, body = s.partition(": ")
+            if colon and body in table and len(head) < 90:
+                lead = t(head) if head.strip() else head
+                hit = lead + ": " + table[body]
         if hit is None and _misses is not None and re.search(r"[A-Za-z]{3,}", s):
             _misses.add(s)
         done.append(hit if hit is not None else s)
@@ -212,7 +228,13 @@ def _format_arg(value, spec, conversion):
         hit = _lookup(value)
         if hit is None and _misses is not None and re.search(r"[A-Za-z]{3,}", value) and len(value) < 60:
             _arg_misses.add(value)
-        value = hit if hit is not None else (_rule(value) or value)
+        if hit is None:
+            hit = _rule(value)
+        if hit is None and len(value) > 40 and " " in value:
+            hit = t_text(value)                                  # a knowledge-base paragraph passed into a template
+            if hit == value:
+                hit = None
+        value = hit if hit is not None else value
         if spec:
             return format(value, spec)
         return value

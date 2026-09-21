@@ -17,6 +17,7 @@ latitude rule as its primary read, but says so explicitly rather than
 presenting it as uncontested.
 """
 from ephemeris import WAR_ELIGIBLE_PLANETS
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 WAR_ORB_DEG = 1.0
 
@@ -53,9 +54,9 @@ def find_wars(longitudes, latitudes):
                 "winner": winner,
                 "loser": loser,
                 "detail": (
-                    f"{a} and {b} are in Graha Yuddha ({sep:.2f}° apart)."
-                    + (f" By the greater-latitude rule, {winner} wins and {loser} is considered defeated."
-                       if winner else " Latitudes are effectively tied - no clear winner by this rule.")
+                    tr('{0} and {1} are in Graha Yuddha ({2:.2f}° apart).', a, b, sep)
+                    + (tr(' By the greater-latitude rule, {0} wins and {1} is considered defeated.', winner, loser)
+                       if winner else tx(" Latitudes are effectively tied - no clear winner by this rule."))
                 ),
             })
     return wars

@@ -1,0 +1,197 @@
+# engine/family_bonds.py:110
+2334	Sourcing confidence: high — the three Gana groups and their pairwise point values are stable across every source checked.
+# engine/family_bonds.py:111
+2335	Sourcing confidence: moderate-high — the three dosha-causing sign-distance pairs and the lord-friendship cancellation rule are cited consistently, though not verified here against a primary classical Sanskrit text directly.
+# engine/family_bonds.py:112
+2336	Sourcing confidence: high for the base same/different-Nadi score, but classical cancellation exceptions (e.g. same nakshatra with different pada) are described inconsistently across sources and are deliberately NOT auto-applied here.
+# engine/family_bonds.py:116
+2337	Worth reflecting on: do the two of you find it easy to agree on values and who takes the lead in which areas of shared life, without it feeling like a power struggle?
+# engine/family_bonds.py:117
+2338	Worth reflecting on: does the everyday pull toward each other feel mutual and comfortable, or does it feel more one-sided?
+# engine/family_bonds.py:118
+2339	Worth reflecting on: do you tend to bring out steadiness and wellbeing in each other, especially during stressful periods?
+# engine/family_bonds.py:119
+2340	Worth reflecting on: does physical and instinctive rapport come naturally, or does it need more deliberate attention than other parts of the relationship?
+# engine/family_bonds.py:120
+2341	Worth reflecting on: when you disagree, does it feel like two compatible minds working through a problem, or two very different operating systems?
+# engine/family_bonds.py:121
+2342	Worth reflecting on: do your baseline energy levels and emotional tempos match well, or does one of you regularly need to slow down (or speed up) for the other?
+# engine/family_bonds.py:122
+2343	Worth reflecting on: does building a shared life together — home, finances, family plans — feel like it flows, or does it take unusually deliberate coordination?
+# engine/family_bonds.py:123
+2344	Worth reflecting on: this specific koota is the one classical texts most flag for a conversation with a qualified astrologer rather than a DIY reading, given the cancellation-exception ambiguity documented in compatibility.py.
+# engine/family_bonds.py:136
+2345	Life Partner
+# engine/family_bonds.py:201
+2346	Ashtakoot Guna Milan compares eight dimensions ('kootas') of each partner's Moon sign and nakshatra, weighted from 1 to 8 points (36 total), and is the most widely used classical Vedic marriage-compatibility technique. Varna, Gana, Nadi, and the Tara counting method are consistently described identically across every classical and contemporary source checked while building this project — high confidence. Yoni's finer middle tier and Graha Maitri's exact middle-combination point values are documented simplifications where sources genuinely disagree (see compatibility.py). The full breakdown below shows each koota's domain, this specific pairing's score, and a reflection prompt — not a pass/fail judgment on the relationship itself.
+# engine/family_bonds.py:234
+2347	both share the Deva (refined/gentle) temperament group — an easy natural resonance
+# engine/family_bonds.py:235
+2348	both share the Manushya (balanced/human) temperament group — a grounded natural resonance
+# engine/family_bonds.py:236
+2349	both share the Rakshasa (intense/driven) temperament group — a high-energy natural resonance
+# engine/family_bonds.py:237
+2350	one Deva, one Manushya — a generally cooperative pairing classically considered mild and workable
+# engine/family_bonds.py:238
+2351	one Manushya, one Rakshasa — a pairing classical texts suggest benefits from patience with differing paces and intensities
+# engine/family_bonds.py:239
+2352	one Deva, one Rakshasa — the temperamentally furthest-apart classical pairing, traditionally suggesting real value in deliberately meeting each other's very different natural styles
+# engine/family_bonds.py:343
+2353	This parent-child thematic connection deliberately uses three DIFFERENT classical tools than Ashtakoot, because Ashtakoot itself was designed and is taught exclusively as a marriage-compatibility system between prospective spouses — applying its scoring to a parent and child would misuse a technique outside its intended scope, not merely simplify it. Moon-sign element (Tattva) theory groups the 12 signs into Fire (Agni), Earth (Prithvi), Air (Vayu), and Water (Jala) — a broad classical temperament framework used across both marriage and family analysis, not marriage-specific. Gana (Deva/Manushya/Rakshasa) is the same nakshatra-based temperament classification Ashtakoot itself draws on for its own Gana koota, reused here purely as a temperament descriptor with no marriage-specific scoring attached. The Putrakaraka (Jaimini's children-significator) and Atmakaraka (soul-significator) comparison is the most classically specific of the three: Putrakaraka describes a PARENT's own disposition toward children in general, while Atmakaraka describes a CHILD's own core identity — comparing the two speaks to how naturally that parent's instinctive parenting style may resonate with that particular child's nature, not a verdict on the relationship's quality.
+# engine/family_bonds.py:130
+2354	scores the full available points here
+# engine/family_bonds.py:132
+2355	scores zero here — the classical caution point for this specific koota
+# engine/family_bonds.py:177
+2356	Nadi Dosha (same Nadi group) is present — classically the most cautioned combination in this system, though traditional texts also describe cancellation exceptions that a qualified astrologer should confirm rather than assuming either way. 
+# engine/family_bonds.py:183
+2357	Bhakoot Dosha (an inauspicious Moon-sign distance not cancelled by lord-friendship) is also present, traditionally read as worth attention for long-term family growth and harmony specifically. 
+# engine/family_bonds.py:225
+2358	classically complementary
+2359	fire and air traditionally sustain and energize each other
+# engine/family_bonds.py:226
+2360	earth and water traditionally nurture and give shape to each other
+# engine/family_bonds.py:227
+2361	classically contrasting
+2362	fire and water traditionally temper and challenge each other, needing conscious patience
+# engine/family_bonds.py:228
+2363	earth and air traditionally move at different paces, needing conscious patience
+# engine/family_bonds.py:229
+2364	classically mixed
+2365	fire and earth traditionally combine drive with practicality once aligned
+# engine/family_bonds.py:230
+2366	air and water traditionally combine ideas with feeling once aligned
+# engine/family_bonds.py:277
+2367	same element
+# engine/family_bonds.py:307
+2368	a naturally cooperative classical relationship (at least one of the two planets calls the other a natural friend)
+# engine/family_bonds.py:495
+2369	. It starts with each person's own relational disposition (already computed on their individual Karmic & Past Life tab), then adds cross-chart comparisons: Ashtakoot Guna Milan for Self and Life Partner specifically (the classical marriage-compatibility technique), and a separately-scoped thematic connection for Self and each child (which deliberately does NOT use Ashtakoot — see the Parent-Child section below for why).
+# engine/family_bonds.py:283
+2370	these elements combine in varied ways depending on the rest of each chart
+# engine/family_bonds.py:309
+2371	a classically effortful relationship (at least one of the two planets calls the other a natural enemy) — traditionally read as more growth-through-friction than automatic ease
+# engine/family_bonds.py:311
+2372	a classically neutral relationship — neither particularly easy nor particularly effortful by planetary temperament alone
+# engine/family_bonds.py:440
+2373	Past-life imprints each person carries into this bond:\n
+# engine/family_bonds.py:444
+2374	The main goals of this life for each:\n
+# engine/family_bonds.py:502
+2375	's Own Relational Disposition ---\n
+# engine/yogas.py:247
+2376	{0} is in its own/exaltation sign ({1}) in the D9 despite D1 debilitation   ## {0}=planet, {1}=d9_sign
+# engine/yogas.py:245
+2377	{0} (exalted in {1}) is in a kendra from lagna/Moon   ## {0}=exalted_here, {1}=debil_sign
+# engine/yogas.py:243
+2378	debilitation-dispositor {0} is in a kendra from lagna/Moon   ## {0}=dispositor
+# engine/yogas.py:162
+2379	{0}th-lord {1} <-> {2}th-lord {3}   ## {0}=k, {1}=lord_k, {2}=t, {3}=lord_t
+# engine/yogas.py:316
+2380	10th from {0} (house {1}) holds unafflicted benefic(s): {2}   ## {0}=house_label, {1}=house_num, {2}=', '.join(benefics_here)
+# engine/yogas.py:248
+2381	{0} debilitated in {1}, cancelled because: {2}.   ## {0}=planet, {1}=debil_sign, {2}='; '.join(reasons)
+# engine/yogas.py:344
+2382	Moon is {0} houses from Jupiter (not a dusthana relationship).   ## {0}=dist
+2383	Moon is {0} houses from Jupiter.   ## {0}=dist
+# engine/yogas.py:331
+2384	house {0} (from Moon): {1}   ## {0}=h, {1}=per_house[h] or 'none'
+# engine/yogas.py:275
+2385	Moon and Mars are both in house {0}.   ## {0}=_planet_house(chart, 'Moon')
+# engine/yogas.py:264
+2386	Lord of house {0} is in house {1} (not a dusthana).   ## {0}=house, {1}=lord_house
+# engine/yogas.py:176
+2387	The same planet ({0}) rules both the 2nd (wealth) and 11th (gains) houses — a direct wealth-combination in its own right.   ## {0}=lord2
+# engine/yogas.py:146
+2388	{0} in {1}, house {2}: {3}.   ## {0}=planet, {1}=sign, {2}=house, {3}='own/exalted sign but not a kendra house
+# engine/yogas.py:145
+2389	{0} is in {1} (own/exaltation) and in house {2} (a kendra) — {3} Yoga formed.   ## {0}=planet, {1}=sign, {2}=house, {3}=label
+# engine/yogas.py:124
+2390	Jupiter is not in a kendra from the Moon (distance {0}).   ## {0}=dist
+# engine/yogas.py:123
+2391	Jupiter is {0} houses from the Moon (house {1} vs Moon's house {2}).   ## {0}=dist, {1}=jup_h, {2}=moon_h
+# engine/yogas.py:396
+2392	Mars is in house {0} from the lagna.   ## {0}=mars_house
+# engine/yogas.py:367
+2393	All 7 classical planets fall within the {0} arc.   ## {0}=side
+# engine/yogas.py:288
+2394	Jupiter and Mars are conjunct in house {0}.   ## {0}=_planet_house(chart, 'Jupiter')
+# engine/yogas.py:266
+2395	{0}: lord of house {1} is in house {2} — {3}.   ## {0}=label, {1}=house, {2}=lord_house, {3}=form
+# engine/yogas.py:203
+2396	The Moon is supported by: {0} — not isolated, so Kemadruma is not formed.   ## {0}=', '.join(supporting)
+# engine/yogas.py:180
+2397	2nd lord {0} and 11th lord {1} {2}   ## {0}=lord2, {1}=lord11, {2}='are connected (conjunction/aspect/pariv
+# engine/yogas.py:366
+2398	Rahu-to-Ketu
+# engine/yogas.py:165
+2399	No kendra lord forms a conjunction/aspect/parivartana with a trikona lord.
+# engine/yogas.py:200
+2400	No classical planet occupies the 2nd/12th from the Moon, and none conjoins or aspects it — the Moon is isolated.
+# engine/yogas.py:250
+2401	No debilitated classical planet meets the checked cancellation conditions.
+# engine/yogas.py:265
+2402	self-placement (weaker classical form)
+2403	different dusthana (stronger classical form)
+# engine/yogas.py:366
+2404	Ketu-to-Rahu
+# engine/yogas.py:368
+2405	The 7 classical planets are not all confined to one node-to-node arc.
+# engine/yogas.py:408
+2406	Jupiter and Rahu are conjunct (the primary classical form).
+# engine/yogas.py:164
+2407	Kendra-trikona lord connection(s): 
+# engine/yogas.py:180
+2408	are connected (conjunction/aspect/parivartana).
+2409	have no direct connection.
+# engine/yogas.py:276
+2410	Moon and Mars are not conjunct.
+# engine/yogas.py:290
+2411	Jupiter and Mars are in mutual kendra aspect.
+# engine/yogas.py:292
+2412	Jupiter and Mars are neither conjunct nor in mutual aspect.
+# engine/yogas.py:318
+2413	No unafflicted benefic occupies the 10th from lagna or Moon.
+# engine/yogas.py:379
+2414	No Sun/Moon-node conjunction.
+# engine/yogas.py:387
+2415	Mars and Rahu are conjunct.
+2416	Mars and Rahu are not conjunct.
+# engine/yogas.py:410
+2417	Jupiter and Ketu are conjunct (a secondary form recognized by some traditions).
+# engine/yogas.py:412
+2418	Jupiter is not conjunct either node.
+# engine/yogas.py:421
+2419	Saturn and Rahu are conjunct.
+2420	Saturn and Rahu are not conjunct.
+# engine/yogas.py:146
+2421	own/exalted sign but not a kendra house
+2422	not in own/exaltation sign
+# engine/yogas.py:379
+2423	Conjunctions found: 
+# engine/compatibility.py:149
+2424	Same-category only (2 or 0) — the classical middle tier ('one is Vashya of the other', 1 point) is not implemented; see module docstring.
+# engine/compatibility.py:288
+2425	Excellent match (traditional threshold: 33-36)
+# engine/compatibility.py:134
+2426	Sex not given for both people — compared person_a's Varna against person_b's (classical rule is normally groom-vs-bride directional).
+# engine/compatibility.py:258
+2427	Nadi Dosha (0 points) shown as-is with no automatic cancellation applied. Classical texts describe exception cases (e.g. identical nakshatra but different pada) inconsistently across sources — have an astrologer confirm whether an exception applies rather than assuming either way.
+# engine/compatibility.py:290
+2428	Very good match (traditional threshold: 25-32)
+# engine/compatibility.py:180
+2429	neutral (simplified — see module docstring)
+# engine/compatibility.py:292
+2430	Acceptable — commonly cited as the minimum workable score (18-24); consider other factors too
+# engine/compatibility.py:294
+2431	Below the commonly-cited minimum (18) — traditionally considered a weak match on this method alone
+# engine/relationship_themes.py:222
+2432	Venus is {0}   ## {0}=venus_dignity
+# engine/relationship_themes.py:210
+2433	Rahu occupies house {0}, not the 7th.   ## {0}=rahu_house
+# engine/relationship_themes.py:194
+2434	Venus (house {0}) and Mars (house {1})   ## {0}=venus_house, {1}=mars_house
+# engine/relationship_themes.py:188
+2435	{0} (7th lord) has no natural malefic aspect.   ## {0}=seventh_lord
+# engine/relationship_themes.py:187
+2436	{0} (7th lord) is aspected by {1}.   ## {0}=seventh_lord, {1}=', '.join(malefics_aspecting_7th_lord)

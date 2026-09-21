@@ -1,0 +1,64 @@
+# classical_yogas:YOGA-07
+10032	The lord of a kendra house (1st, 4th, 7th, or 10th) forms a connection — by conjunction, mutual aspect, or exchange of signs (parivartana) — with the lord of a trikona house (1st, 5th, or 9th).
+10033	Since the 1st house is both kendra and trikona, any strong connection involving the lagna lord is especially significant.
+10034	Considered one of the most important categories of yoga for worldly status, authority, wealth, and rising fortune in Parashari astrology.
+10035	The native typically experiences a marked rise in position, especially during the dashas of the planets involved.
+10036	The strength of the resulting rise depends heavily on the dignity (sign strength) of the participating lords and the houses they occupy; a Raja Yoga formed by well-placed, unafflicted lords in good houses produces far more pronounced results than one formed by weak or afflicted lords.
+# classical_yogas:YOGA-08
+10037	Dhana Yoga (2nd-11th Lord Wealth Combination)
+10038	PINNED PRIMARY DEFINITION for this dataset: the lord of the 2nd house (dhana, wealth) and the lord of the 11th house (labha, gains) form a connection with each other — by mutual conjunction, mutual aspect, or exchange of signs (parivartana).
+10039	Classical and popular sources do not converge on one single fixed configuration for 'Dhana Yoga' (unlike, say, the tightly-defined Pancha Mahapurusha yogas), so this 2nd-11th lord connection was deliberately selected as the dataset's default because it is the single most consistently cited 'core' formulation across sources.
+10040	A commonly recognized EXTENDED form also exists: the 2nd or 11th lord additionally connecting with a trikona lord (5th or 9th), or a natural benefic occupying or aspecting the 2nd or 11th house — these are treated here as secondary/extended variants rather than the core definition, and are noted separately where relevant.
+10041	Indicates the potential for financial prosperity and accumulation of wealth, activating most strongly during the dasha periods of the 2nd and 11th lords (or, for the extended variant, the additional trikona lord or benefic involved).
+10042	Multiple distinct dhana yogas present together in one chart compound and reinforce the overall wealth potential.
+10043	A dhana yoga formed by lords of dusthana houses (6th, 8th, or 12th) sharing this connection, or afflicted by malefics without other support, produces a weaker or more complicated form of wealth (e.g. wealth through struggle, litigation, or with ethical compromise) rather than clean prosperity.
+10044	If your primary reference text defines Dhana Yoga differently, treat the pinned definition above as this dataset's default and adjust as needed — it was a deliberate editorial choice among several valid classical framings, not a uniquely 'correct' one.
+# classical_yogas:YOGA-09
+10045	Kemadruma Yoga
+10046	No planet other than Rahu/Ketu occupies the 2nd or 12th house from the Moon, and the Moon receives no conjunction or supporting aspect from any other planet (nodes excluded from this count too) — leaving the Moon effectively isolated in the chart.
+10047	Classically associated with instability, struggle, lack of consistent support from others, or a sense of emotional isolation, particularly in earlier life.
+10048	This is one of the more feared combinations in popular astrology.
+10049	Classical texts list numerous cancellation (Bhanga) conditions that are frequently overlooked in casual analysis, including: the Moon placed in a kendra (1st/4th/7th/10th) from the lagna; the Moon receiving aspect from a benefic (e.g. Jupiter or Venus); a benefic occupying a kendra from the Moon; the Moon posited in Taurus or Cancer (both considered to significantly weaken the yoga); or a strong lagna lord/benefics in kendra from the ascendant providing resilience.
+10050	Any single one of these is generally enough to substantially reduce or cancel the yoga, so a genuinely uncancelled Kemadruma is less common than its popular reputation suggests, and a full check for these conditions should always precede any negative interpretation.
+# classical_yogas:YOGA-10
+10051	Neecha Bhanga Raja Yoga
+10052	A planet's debilitation (neecha) is cancelled under specific classical conditions — commonly cited variants include: the lord of the debilitation sign itself occupies a kendra from the lagna or the Moon; the planet that would be exalted in the debilitated planet's sign is placed in a kendra from the lagna or Moon; the debilitated planet is otherwise strengthened through conjunction or aspect with its dispositor or exaltation-sign lord under favorable placement rules; or the debilitated planet occupies its own sign or exaltation sign in the Navamsa (D9) chart even while debilitated in the main chart (D1).
+10053	Classical texts (e.g. Phaladeepika) enumerate several such rules, and not all schools weight them identically.
+10054	When genuinely cancelled, the planet's apparent weakness reverses into a source of significant strength and good fortune — often associated with a dramatic rise from early adversity, hardship, or obscurity to notable, self-made success later in life.
+10055	The cancellation is considered strongest ('cleanest') — and most likely to produce a true Raja Yoga rather than mere neutralization of the weakness — when multiple confirming conditions are present simultaneously, and when the planets involved additionally hold kendra or trikona lordship; a marginal or single-condition cancellation produces a milder version of the reversal.
+# classical_yogas:YOGA-11
+10056	Vipreet Raja Yoga - Harsha
+10057	The lord of the 6th house is placed in the 6th, 8th, or 12th house.
+10058	Placement in the 6th lord's own house (a 'self-placement' variant) is accepted by many traditions, though placement in a DIFFERENT dusthana (8th or, especially, 12th — read as 'loss of enemies') is generally considered the stronger, more classical form of the yoga.
+10059	A dusthana lord placed among the dusthanas is classically read as two difficulties neutralizing each other, producing an unexpected reversal: protection from enemies, litigation, and disease, along with resilience and gains connected to overcoming competition or obstacles.
+10060	Some classical commentators note the yoga can be diluted ('spoiled') if the 6th lord additionally receives a strong connection with kendra or trikona lords or benefics, since this ties the dusthana lord too closely to auspicious houses; this point is debated across traditions, as is the relative strength of the self-placement (6th-in-6th) variant versus cross-dusthana placement.
+10061	See also the generic house_lord_placement entries where lord_of_house is 6 and placed_in_house is 6, 8, or 12.
+# classical_yogas:YOGA-12
+10062	Vipreet Raja Yoga - Sarala
+10063	The lord of the 8th house is placed in the 6th, 8th, or 12th house.
+10064	Placement in the 8th lord's own house (a 'self-placement' variant, associated with unusual composure navigating sudden events) is accepted by some traditions, though placement in a DIFFERENT dusthana (6th or 12th) is generally considered the stronger, more classical form of the yoga.
+10065	Classically associated with courage in the face of danger, resilience against sudden misfortune, and an unexpected capacity to convert crisis into strength.
+10066	The native often shows notable composure when facing life's difficult transitions.
+10067	As with the other Vipareeta Raja Yogas, some commentators note the effect can be diluted if the 8th lord is also strongly connected to kendra/trikona lords or benefics; a 'purer' dusthana-to-DIFFERENT-dusthana placement is considered to produce the fullest reversal effect, versus the milder self-placement variant.
+# classical_yogas:YOGA-13
+10068	Vipreet Raja Yoga - Vimala
+10069	The lord of the 12th house is placed in the 6th, 8th, or 12th house.
+10070	Placement in the 12th lord's own house (a 'self-placement' variant, associated with expenditure staying under control) is accepted by some traditions, though placement in a DIFFERENT dusthana (6th or 8th) is generally considered the stronger, more classical form of the yoga.
+10071	Classically associated with contentment despite limited material means, ethical restraint regarding expenditure and loss, and an unexpected capacity to find security or spiritual benefit precisely where loss might otherwise be expected.
+10072	As with the other Vipareeta Raja Yogas, the reversal is considered strongest when the 12th lord is not simultaneously drawn into a strong kendra/trikona connection, and when it lands in a different dusthana rather than its own; opinions on both points vary by classical school.
+# classical_yogas:YOGA-14
+10073	Chandra-Mangal Yoga
+10074	The Moon and Mars are conjunct in the same house.
+10075	Classically associated with enterprising drive, strong business or entrepreneurial acumen, and the capacity to generate wealth through sustained personal effort, real estate, or dynamic ventures.
+10076	The combination blends emotional intensity with energetic initiative.
+10077	Depending on other chart factors, the same intensity can also manifest as emotional volatility, a quick temper, or impulsive financial decisions if Mars and the Moon are otherwise afflicted; the yoga's wealth-generating potential is strongest when both planets are reasonably well-placed by sign.
+# classical_yogas:YOGA-15
+10078	Guru-Mangal Yoga
+10079	Jupiter and Mars are conjunct in the same house, or placed in mutual kendra aspect to each other.
+10080	Combines Jupiter's wisdom and ethical orientation with Mars's courage and drive, favoring leadership in fields that require both principled judgment and decisive action, such as law, defense, medicine, or entrepreneurship.
+10081	The native often shows conviction backed by genuine capability.
+10082	Results are most favorable when neither planet is significantly afflicted; a heavily afflicted combination can instead produce dogmatic or overly aggressive assertion of one's beliefs.
+# classical_yogas:YOGA-16
+10083	Amala Yoga
+10084	A natural benefic planet (Jupiter, Venus, a well-placed Mercury, or a waxing Moon) occupies the 10th house counted from the lagna or from the Moon, without affliction from malefics.
+10085	The name means 'spotless' or 'pure,' and the yoga is classically associated with a lasting, untarnished reputation, ethical conduct in public and professional life, philanthropy, and a benevolent influence that others remember well.

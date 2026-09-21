@@ -1,0 +1,106 @@
+# planet_in_house:PH-Su-H11
+11732	The native tends to fulfill ambitions and accumulate gains through networks that include people of status, government, or authority.
+11733	Elder siblings or influential friends often play a supportive role, and social standing rises through achievement-oriented circles.
+11734	Income connected to leadership, recognition, or public roles is generally favored under this placement.
+# planet_in_house:PH-Su-H12
+11735	Loss, expenditure, foreign lands, spirituality, liberation (moksha)
+11736	A dusthana placement that turns the Sun's authority inward, favoring spirituality over public status.
+11737	The native may experience a diminished public profile, loss of status, or a father who is distant, unwell, or based abroad.
+11738	Expenditure often relates to maintaining dignity or self-image, and eye or vitality-related care is worth attention.
+11739	Positively, this placement can support meaningful work behind the scenes, service to foreign or spiritual institutions, and a mature, ego-softened path toward introspection and moksha.
+# planet_in_house:PH-Mo-H1
+11740	Gives an emotionally expressive, empathetic, and publicly appealing personality.
+11741	The native is sensitive, imaginative, and quick to respond to the moods of their surroundings, often with an attractive or soothing presence that draws others in.
+11742	Emotional wellbeing and physical health tend to fluctuate along with the Moon's own waxing and waning nature.
+11743	A close, often emotionally dependent bond with the mother shapes early identity, and the native is naturally nurturing toward others.
+11744	Effects strengthen with a waxing or exalted Moon (Taurus) or the Moon in its own sign (Cancer), and in its directional-strength (dig bala) house, the 4th.
+11745	A waning, debilitated (Scorpio), or afflicted Moon tends to express the themes below as anxiety, emotional instability, or an unsettled mind rather than warmth and adaptability.
+# planet_in_house:PH-Mo-H2
+11746	Ties emotional security to family, food, and fluctuating but generally comfortable finances.
+11747	Speech is gentle, sweet, and persuasive, and the native finds emotional comfort in family gatherings, food, and shared resources.
+11748	Wealth can fluctuate with the Moon's phases or public sentiment, often connected to liquid assets, dairy, hospitality, or public-facing trade.
+11749	The mother's family may notably influence the native's values and financial habits.
+# planet_in_house:PH-Mo-H3
+11750	Brings emotional sensitivity to communication, courage, and the sibling bond, especially with sisters.
+11751	The native's efforts and short journeys are motivated by emotional needs, and communication carries a warm, imaginative, or artistic quality well suited to writing or media.
+11752	Courage can be inconsistent, rising and falling with mood, but a close, protective relationship with siblings (particularly sisters) is common.
+11753	Adaptability helps the native navigate changing circumstances through self-effort.
+# planet_in_house:PH-Mo-H4
+11754	The Moon's directional-strength (dig bala) house — excellent for domestic happiness, comfort, and bond with the mother.
+11755	This is one of the most favorable placements for the Moon, granting a nurturing home environment, emotional security, and a deep, often central bond with the mother.
+11756	Property, vehicles, and material comforts tend to come easily, and the native finds genuine contentment in domestic life.
+11757	Emotional wellbeing is closely tied to the stability of home and family circumstances.
+# planet_in_house:PH-Mo-H5
+11758	The native shows imaginative, emotionally attuned intelligence well suited to the arts, teaching, or counseling, and decisions in romance or creative work are guided as much by feeling as by logic.
+11759	Speculative gains fluctuate but are generally supported by the native's intuitive sense of timing.
+# planet_in_house:PH-Mo-H6
+11760	Places emotional sensitivity under the pressure of competition, service, and daily obstacles.
+11761	The native may experience emotional stress tied to work, health (particularly digestive or fluid-related issues), or interpersonal conflict, and needs to manage worry proactively.
+11762	This placement suits caregiving, healthcare, hospitality, or public-service roles where emotional attentiveness becomes a professional asset.
+11763	Persistence through emotionally taxing circumstances tends to build real resilience over time.
+# planet_in_house:PH-Mo-H7
+11764	Brings emotional depth and popularity to marriage, partnerships, and public dealings.
+11765	The native seeks and often finds a nurturing, emotionally responsive spouse or business partner, and relationships are central to overall happiness.
+11766	Popularity and charm support success in public-facing partnerships, though the relationship's emotional tone can shift with the Moon's own fluctuations.
+11767	Hospitality, public relations, and consumer-facing business partnerships are especially favored.
+# planet_in_house:PH-Mo-H8
+11768	Deepens emotional intuition but brings periodic turbulence tied to transformation and the mother.
+11769	The native experiences intense emotional undercurrents, heightened intuition, and a natural pull toward psychology, mysticism, or the unseen.
+11770	Health and emotional stability can fluctuate around major life transitions, and inheritance or shared resources may connect to the mother's side of the family.
+11771	Emotional grounding practices help stabilize the Moon's sensitivity in this challenging house.
+# planet_in_house:PH-Mo-H9
+11772	A fortunate placement linking emotional life to faith, higher learning, and a wise or devoted mother.
+11773	The native feels genuine emotional connection to their belief system, philosophy, or spiritual practice, and often has a pious, wise, or emotionally supportive mother.
+11774	Travel for pilgrimage or emotionally meaningful purposes is favored, and the native gains public goodwill and fortune through sincere, ethically grounded conduct.
+11775	Higher education in humanistic or intuitive subjects suits this placement well.
+# planet_in_house:PH-Mo-H10
+11776	Brings a public-facing, popular career with a nurturing leadership style.
+11777	The native's professional reputation is closely tied to public perception and can rise or fall with public mood, favoring careers in hospitality, healthcare, retail, media, or any field involving direct public contact.
+11778	Leadership style tends to be nurturing and emotionally attuned rather than purely authoritative.
+11779	Career path may show more change and adaptation than a fixed, linear trajectory.
+# planet_in_house:PH-Mo-H11
+11780	Supports emotionally fulfilling gains through a wide and caring circle of friends.
+11781	The native tends to have a large, emotionally supportive social network and finds satisfaction in group activities, community involvement, or public-facing income sources.
+11782	Gains fluctuate somewhat but are generally positive, and elder siblings or close friends often provide meaningful emotional and practical support.
+11783	Popularity contributes directly to the fulfillment of long-term desires.
+# planet_in_house:PH-Mo-H12
+11784	Turns emotional life inward, favoring introspection, foreign connections, and hidden sensitivity.
+11785	The native tends toward introspection, vivid inner life, and sometimes disturbed sleep or subconscious emotional patterns that benefit from meditation or quiet reflection.
+11786	Connection to the mother may involve distance, whether physical or emotional, and expenditure often flows toward family or emotionally significant causes.
+11787	Foreign residence, spiritual retreats, or work in seclusion often bring the native genuine peace.
+# planet_in_house:PH-Ma-H1
+11788	Gives a bold, energetic, athletic personality with a strong will and direct manner.
+11789	The native is assertive, physically active, and often has a lean, muscular build with visible scars or marks (especially near the head) common to this placement.
+11790	Courage and competitive drive are pronounced, favoring leadership through decisive action, though impatience or a quick temper need conscious management.
+11791	This is one of the placements associated with Ruchaka Yoga when Mars is in its own or exalted sign, granting exceptional physical and leadership strength.
+11792	Effects strengthen when Mars is exalted (Capricorn) or in its own signs (Aries, Scorpio); a well-placed Mars in the 1st, 4th, 7th, 8th, or 12th house from Lagna or Moon is also examined for Kuja/Mangal Dosha in marriage matters.
+11793	When debilitated (Cancer) or afflicted, the drive described below tends to show as recklessness, injury, or conflict rather than constructive courage.
+# planet_in_house:PH-Ma-H2
+11794	Brings blunt, forceful speech and wealth built through risk, effort, and technical skill.
+11795	The native's speech can be sharp or argumentative, occasionally causing friction within the family, and financial life often involves calculated risk, land dealings, or technical/engineering income.
+11796	Family relationships may see periodic conflict due to directness or impatience.
+11797	Care around facial or dental injuries and disciplined spending both deserve attention under this placement.
+# planet_in_house:PH-Ma-H3
+11798	One of Mars's most favorable placements, granting courage, athleticism, and success through self-effort.
+11799	This upachaya house amplifies Mars's natural energy into valor, initiative, and a competitive edge in personal effort, short journeys, and sibling relationships (especially with brothers).
+11800	The native often excels in sports, technical trades, or any field where bold, hands-on action leads to results.
+11801	Protective instincts toward younger siblings coexist with occasional rivalry.
+# planet_in_house:PH-Ma-H4
+11802	One of the classical Kuja Dosha houses, bringing restlessness at home alongside strong property drive.
+11803	Domestic peace can be disrupted by disputes over property, impatience, or tension with the mother, and this house is specifically examined for Mangal Dosha in marriage compatibility.
+11804	Positively, the native often shows strong technical or engineering aptitude and succeeds in acquiring land or real estate through direct effort.
+11805	Conscious patience at home helps offset the native's natural restlessness.
+# planet_in_house:PH-Ma-H5
+11806	Another Kuja Dosha house, adding intensity and impulsiveness to romance, intellect, and speculation.
+11807	The native's intelligence is sharp and quick but can be impulsive in decision-making, particularly in romance, investments, or creative risk-taking.
+11808	This placement is also examined for Mangal Dosha, and channeling the native's competitive energy into structured creative or academic pursuits works well.
+# planet_in_house:PH-Ma-H6
+11809	An excellent upachaya placement giving decisive victory over rivals, strong immunity, and disciplined service.
+11810	Mars performs strongly here, granting the courage and stamina to overcome competitors, litigation, and obstacles, along with generally resilient health once early challenges are addressed.
+11811	This placement favors careers in the military, police, surgery, or any competitive, discipline-driven field.
+11812	Tension with maternal relatives is possible, but professional and health-related battles tend to resolve in the native's favor.
+# planet_in_house:PH-Ma-H7
+11813	A classic Kuja Dosha house associated with passionate but conflict-prone partnerships.
+11814	Marriage and business partnerships tend to be intense, direct, and occasionally argumentative, with a spouse or partner who is assertive or competitive by nature.
+11815	This placement is one of the primary houses considered for Mangal Dosha analysis in marital compatibility.
+11816	When channeled constructively, the native's competitive drive can build strong, dynamic joint ventures, particularly in business requiring bold decision-making.

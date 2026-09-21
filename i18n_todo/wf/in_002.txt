@@ -1,0 +1,182 @@
+# engine/rule_engine.py:650
+2093	Karmic/past-life analysis has no single agreed classical formula, and none of what follows is a factual claim about a literal past incarnation. This section reuses this project's own verified planet, house-lord, and Chara Karaka (Jaimini) readings — Ketu, Rahu, Saturn, the 5th/9th/12th houses, and the Atmakaraka/Darakaraka/Putrakaraka significators — the combination most consistently cited for this lens across classical and traditional sources — and presents them together as a traditional, symbolic perspective for reflection, not a unique, definitive, or literal reading.
+# engine/rule_engine.py:1197
+2094	These are classical tendencies read from house/planet significations and the current dasha — general traditional themes to consider, not guaranteed or literal predictions of specific events.
+# engine/rule_engine.py:1266
+2095	IMPORTANT: This is a traditional, symbolic health-THEMES indication from classical Vedic astrology - it is NOT a medical diagnosis, NOT medical advice, and NOT a substitute for a doctor. Astrology can describe symbolic tendencies at best; it cannot detect, confirm, or predict any actual medical condition. For any real health concern, please see a doctor.
+# engine/rule_engine.py:1273
+2096	Classical Vedic 'medical astrology' (Ayurvedic/Jyotish health analysis) reads the body onto the chart through the idea of the Kalapurusha, the 'cosmic body' - each of the 12 houses maps to a body region (see the table below), so a planet sitting in a house classically colors that body area. Four placements matter most: the Ascendant (Lagna) and its lord for overall vitality and constitution; the 6th house and its lord for disease, immunity, and daily health battles; the 8th house and its lord for chronic, hidden, or long-developing conditions; and Saturn, the classical significator of the body's endurance and of chronic, slow-onset conditions, wherever it sits. The Moon is read separately as the significator of the mind and emotional wellbeing, since Ayurveda and Jyotish both treat mental and physical health as linked, not separate.
+# engine/rule_engine.py:1322
+2097	moolatrikona
+# engine/rule_engine.py:1323
+2098	great enemy
+# engine/rule_engine.py:486
+2099	bold and eager to go first
+# engine/rule_engine.py:487
+2100	steady, comfort-loving, and patient
+# engine/rule_engine.py:488
+2101	curious, chatty, and quick to learn
+# engine/rule_engine.py:489
+2102	caring, emotional, and protective
+# engine/rule_engine.py:490
+2103	proud, warm, and wanting to shine
+# engine/rule_engine.py:491
+2104	careful, practical, and detail-focused
+# engine/rule_engine.py:492
+2105	fair, social, and looking for balance
+# engine/rule_engine.py:493
+2106	intense, private, and drawn to deep change
+# engine/rule_engine.py:494
+2107	adventurous, honest, and big-picture
+# engine/rule_engine.py:495
+2108	disciplined, ambitious, and patient
+# engine/rule_engine.py:496
+2109	independent, original, and idea-driven
+# engine/rule_engine.py:497
+2110	dreamy, compassionate, and imaginative
+# engine/rule_engine.py:501
+2111	your core sense of self
+# engine/rule_engine.py:502
+2112	your inner feelings and what makes you comfortable
+# engine/rule_engine.py:503
+2113	your drive, courage, and how you take action
+# engine/rule_engine.py:504
+2114	your voice, thinking, and how you communicate
+# engine/rule_engine.py:505
+2115	your luck, wisdom, and how you grow
+# engine/rule_engine.py:506
+2116	love, beauty, and what you enjoy
+# engine/rule_engine.py:507
+2117	the hard lessons, patience, and discipline in your life
+# engine/rule_engine.py:508
+2118	a hunger for something new and unfamiliar
+# engine/rule_engine.py:509
+2119	what you're already ready to let go of
+# engine/rule_engine.py:513
+2120	at its very best here
+# engine/rule_engine.py:514
+2121	right at home here
+# engine/rule_engine.py:515
+2122	finding this a bit of a struggle here
+# engine/rule_engine.py:516
+2123	doing okay here, nothing dramatic
+# engine/rule_engine.py:706
+2124	a life turned intensely inward on the self, the body, or a strongly individual identity — self-reliance developed to the point of over-identification with 'I' and 'my own way'
+# engine/rule_engine.py:707
+2125	a life organized around family, lineage, accumulated wealth, and the spoken word — resources and belonging mastered, perhaps clung to
+# engine/rule_engine.py:708
+2126	a hands-on life of courage, skill, and effort — a craftsperson, communicator, sibling-among-many, or someone who lived by their own initiative and daring
+# engine/rule_engine.py:709
+2127	a life rooted in home, land, mother, and emotional belonging — deeply domestic, tied to a place, property, or the inner emotional world
+# engine/rule_engine.py:710
+2128	a creative, devotional, or scholarly life — teaching, artistry, mantra, or speculative intelligence were the center of gravity
+# engine/rule_engine.py:711
+2129	a life of service, discipline, conflict, or healing — a soldier, healer, servant, or someone defined by daily toil and the overcoming of obstacles
+# engine/rule_engine.py:712
+2130	a life centered on others — partnership, trade, diplomacy, or public dealings — identity built through relationship and the marketplace
+# engine/rule_engine.py:713
+2131	a life marked by the hidden, the transformative, and the sudden — occult knowledge, research, crises, inheritance, or a preoccupation with what lies beneath the surface
+# engine/rule_engine.py:714
+2132	a philosophical, religious, or wandering life — a teacher, priest, pilgrim, or seeker of higher meaning, law, and distant horizons
+# engine/rule_engine.py:715
+2133	a life of authority, duty, and public standing — governance, command, career, or a strong preoccupation with status and worldly achievement
+# engine/rule_engine.py:716
+2134	a life of gains, networks, and community — commerce, alliances, elder siblings, and the pursuit of ambitions through the collective
+# engine/rule_engine.py:717
+2135	a secluded, foreign, or otherworldly life — monastery, exile, distant lands, imagination, or a withdrawal from the visible world toward the inner or the beyond
+# engine/rule_engine.py:723
+2136	with a zealous, assertive, leadership-driven temperament (fire signs)
+# engine/rule_engine.py:724
+2137	with a practical, material, endurance-driven temperament (earth signs)
+# engine/rule_engine.py:725
+2138	with an intellectual, social, communicative temperament (air signs)
+# engine/rule_engine.py:726
+2139	with an emotional, intuitive, devotional temperament (water signs)
+# engine/rule_engine.py:740
+2140	yourself - your body, health and personality
+# engine/rule_engine.py:741
+2141	money, family and what you say
+# engine/rule_engine.py:742
+2142	courage, siblings and your own effort
+# engine/rule_engine.py:743
+2143	home, your mother and inner peace
+# engine/rule_engine.py:744
+2144	creativity, romance and learning
+# engine/rule_engine.py:745
+2145	work, health and overcoming obstacles
+# engine/rule_engine.py:746
+2146	marriage and close partnerships
+# engine/rule_engine.py:747
+2147	big changes, shared money and hidden things
+# engine/rule_engine.py:748
+2148	luck, higher learning, teachers and father
+# engine/rule_engine.py:749
+2149	career, status and public life
+# engine/rule_engine.py:750
+2150	income, friendships and big goals
+# engine/rule_engine.py:751
+2151	letting go, foreign lands and spiritual life
+# engine/rule_engine.py:787
+2152	a warrior, athlete, or someone whose whole identity was built through sheer physical presence and self-reliance
+# engine/rule_engine.py:788
+2153	a merchant, treasurer, singer, or head of a family estate - someone who managed wealth, voice, or lineage
+# engine/rule_engine.py:789
+2154	a craftsperson, messenger, scout, or performer - someone who lived by hands-on skill, courage, and initiative
+# engine/rule_engine.py:790
+2155	a farmer, homemaker, landowner, or caretaker of a household - someone whose life centered on land, home, and family
+# engine/rule_engine.py:791
+2156	a teacher, priest, artist, or advisor to rulers - someone whose gifts were creative, devotional, or intellectual
+# engine/rule_engine.py:792
+2157	a soldier, healer, servant, or laborer - someone who lived through discipline, conflict, or care for others in need
+# engine/rule_engine.py:793
+2158	a trader, diplomat, matchmaker, or business partner - someone whose life was built through dealing with other people
+# engine/rule_engine.py:794
+2159	an occultist, researcher, undertaker, or inheritor of hidden knowledge - someone drawn to what lies beneath the surface
+# engine/rule_engine.py:795
+2160	a pilgrim, scholar, judge, or religious teacher - someone whose life revolved around law, faith, or long journeys
+# engine/rule_engine.py:796
+2161	a ruler, administrator, or person of public authority - someone whose identity was built through career and status
+# engine/rule_engine.py:797
+2162	a guild member, trader's network organizer, or elder sibling managing a large household - someone who worked through community and alliance
+# engine/rule_engine.py:798
+2163	a monk, exile, hospital worker, or someone who lived apart from ordinary society - a life of seclusion, service, or foreign lands
+# engine/rule_engine.py:806
+2164	and whatever the role, it was carried out in a way that sought recognition, authority, or being seen as the one in charge
+# engine/rule_engine.py:807
+2165	and whatever the role, it was carried out with strong emotional investment - care for others, or a deep need to belong
+# engine/rule_engine.py:808
+2166	and whatever the role, it was carried out with courage, competitiveness, and a willingness to fight for it
+# engine/rule_engine.py:809
+2167	and whatever the role, it was carried out through cleverness, communication, and adaptability
+# engine/rule_engine.py:810
+2168	and whatever the role, it was carried out with a sense of purpose, teaching, or moral responsibility
+# engine/rule_engine.py:811
+2169	and whatever the role, it was carried out with an eye for beauty, relationship, and pleasure
+# engine/rule_engine.py:812
+2170	and whatever the role, it was carried out through hard, patient, often thankless labor over a long stretch of time
+# engine/rule_engine.py:833
+2171	Classically, Ketu marks what the soul had already 'finished' — a mastery so complete it was carried in as instinct rather than learned again. Wherever Ketu sits is therefore read as the life-arena that was over-developed to the point of diminishing returns: familiar, even effortless, but no longer where growth lies. That is precisely why this life pulls in the opposite direction (see the main karmic goal below), toward the house and sign Rahu occupies.
+# engine/rule_engine.py:882
+2172	building a confident, self-directed identity — learning to stand on one's own initiative rather than leaning on old, over-familiar support
+# engine/rule_engine.py:883
+2173	developing a stable relationship with resources, family, and one's own voice — learning to value and articulate what one has rather than taking it for granted
+# engine/rule_engine.py:884
+2174	growing into courage, self-effort, and communication — reaching for skills and initiative that must be earned firsthand, not inherited
+# engine/rule_engine.py:885
+2175	cultivating genuine inner and domestic security — building a home, emotional foundation, or sense of belonging that had to be consciously created rather than assumed
+# engine/rule_engine.py:886
+2176	developing creative, intellectual, or devotional expression — reaching toward legacy or original ideas rather than simply repeating what already came easily
+# engine/rule_engine.py:887
+2177	mastering discipline, service, and the resolution of conflict — learning to face obstacles directly and build competence through daily effort
+# engine/rule_engine.py:888
+2178	learning genuine partnership and reciprocity — reaching outward into relationship and negotiation rather than staying self-contained
+# engine/rule_engine.py:889
+2179	engaging transformation, shared resources, and the hidden directly — learning to sit with crisis, depth, and change instead of avoiding it
+# engine/rule_engine.py:890
+2180	reaching for higher meaning, belief, and far horizons — building a personal philosophy or sense of purpose rather than inheriting one unexamined
+# engine/rule_engine.py:891
+2181	stepping into public responsibility, career, and authority — building a reputation and standing earned through visible effort, not granted by birthright
+# engine/rule_engine.py:892
+2182	growing through community, ambition, and long-term gain — learning to work toward goals through networks and collective effort rather than solitary comfort
+# engine/rule_engine.py:893
+2183	developing surrender, imagination, and release — reaching toward the unseen, the spiritual, or the foreign, rather than clinging to the visible and familiar

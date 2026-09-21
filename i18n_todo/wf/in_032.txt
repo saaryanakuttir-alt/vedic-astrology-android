@@ -1,0 +1,109 @@
+# planet_in_house:PH-Sa-H4
+11994	Can create emotional distance or delay in domestic comfort, though stability builds with time.
+11995	The native may experience a reserved, strict, or emotionally distant relationship with the mother, and domestic happiness or property ownership can be delayed but is generally achieved through sustained effort.
+11996	A structured, disciplined approach to home life helps offset an initial lack of emotional warmth.
+11997	Long-term security at home tends to improve significantly with age and persistence.
+# planet_in_house:PH-Sa-H5
+11998	Brings a serious, disciplined approach to education, and creative or speculative matters.
+11999	Education and intellectual pursuits benefit from patient, methodical study rather than quick intuition, and speculative ventures fare better with caution and long-term planning.
+12000	Romantic matters often develop slowly and seriously rather than impulsively.
+# planet_in_house:PH-Sa-H6
+12001	An excellent upachaya placement, giving hardworking discipline that overcomes obstacles and rivals.
+12002	Saturn is particularly well suited to this house, granting the endurance and work ethic needed to succeed in service, administration, or competitive fields despite early difficulty.
+12003	Health tends to stabilize with disciplined routines, and persistence generally leads to eventual victory over enemies, debts, or professional obstacles.
+12004	This placement favors long, steady careers built on reliability.
+# planet_in_house:PH-Sa-H7
+12005	Saturn's directional-strength (dig bala) house — favors delayed but stable, enduring partnerships.
+12006	Marriage or significant partnerships often arrive later in life or require patience to establish, but tend to be durable and built on mutual responsibility once formed.
+12007	The spouse or business partner may be mature, serious, or older, and business partnerships benefit from Saturn's structured reliability and long-term thinking.
+12008	Patience and realistic expectations serve relationships well under this placement.
+# planet_in_house:PH-Sa-H8
+12009	Associated by many classical sources with resilience, though chronic health matters need patience.
+12010	Inheritance, joint finances, or major life transformations tend to unfold slowly rather than suddenly, and a disciplined, patient approach to structured occult or research study can be rewarding.
+12011	Hardship faced here often builds significant long-term inner strength.
+# planet_in_house:PH-Sa-H9
+12012	Brings a disciplined, sometimes restrictive relationship to belief systems, fortune, and the father.
+12013	The native may initially experience delayed fortune or a strict, demanding relationship with the father or traditional teachers, but consistent ethical practice tends to build durable, long-term dharmic strength.
+12014	Higher education and philosophical study benefit from patient, structured discipline rather than quick insight.
+12015	Respect for tradition and gradual, earned wisdom characterize this placement.
+# planet_in_house:PH-Sa-H10
+12016	An excellent upachaya placement for long-term career authority achieved through sustained discipline.
+12017	The native builds professional success gradually, often through administrative, engineering, or structured leadership roles requiring patience and reliability rather than quick recognition.
+12018	Career authority and status, once achieved, tend to be substantial and enduring.
+12019	This placement rewards a long-view approach to ambition, with peak professional success often coming in mid-to-later life.
+# planet_in_house:PH-Sa-H11
+12020	An excellent upachaya placement, favoring steady, long-term material gains and enduring friendships.
+12021	The native tends to achieve significant goals through sustained, disciplined effort rather than quick opportunity, often building wealth gradually over time.
+12022	Friendships may be fewer but tend to be long-lasting, often with older or more experienced individuals.
+12023	Fulfillment of major desires is favored later in life as accumulated effort pays off.
+# planet_in_house:PH-Sa-H12
+12024	Favors disciplined solitude, service, or foreign-based work requiring patience and detachment.
+12025	The native may be drawn toward introspective, service-oriented, or foreign-based work that requires significant patience, discipline, and a degree of solitude.
+12026	Expenditure often connects to responsibilities toward elders or long-term obligations, and chronic health matters benefit from sustained, disciplined care.
+12027	This placement can support meaningful spiritual practice or research requiring detachment from worldly recognition.
+# planet_in_house:PH-Ra-H1
+12028	Gives an unconventional, ambitious, and magnetic personality with a strong drive for recognition.
+12029	The native often feels a pull toward standing out or breaking from tradition, sometimes experiencing confusion or uncertainty about a fixed sense of identity.
+12030	Ambition and determination are strong, and the native's presence often has an intense, sometimes magnetic quality that others notice.
+12031	Health patterns can be unconventional, and self-understanding tends to deepen significantly with maturity.
+12032	As a shadow planet (chhaya graha), Rahu has no exaltation/debilitation status agreed upon by all classical schools, though many texts treat Gemini as its best sign and Sagittarius as weakest.
+12033	Rahu is generally considered to function best in upachaya houses (3, 6, 10, 11), amplifying ambition constructively there, while in other houses its themes are more prone to illusion, excess, or instability unless well-supported.
+# planet_in_house:PH-Ra-H2
+12034	Brings unconventional approaches to wealth-building, family dynamics, and speech.
+12035	The native may pursue material accumulation through unusual, foreign, or non-traditional means, sometimes with a tendency to exaggerate in speech or financial matters.
+12036	Family background or values may include unconventional or foreign elements, and there can be a strong, sometimes restless desire for material security.
+12037	Financial gains are often sudden or come from unexpected sources.
+# planet_in_house:PH-Ra-H3
+12038	A favorable upachaya placement, giving bold, unconventional courage and strong communication or media skill.
+12039	Rahu performs well in this house, granting ambitious drive, resourcefulness, and often notable skill in media, marketing, technology, or writing.
+12040	The native shows strong initiative in short-term efforts and short journeys, sometimes taking bold or unconventional approaches with siblings or personal projects.
+12041	This placement favors success through innovation and calculated risk-taking.
+# planet_in_house:PH-Ra-H4
+12042	Creates restlessness around home and property, often involving foreign or unconventional domestic circumstances.
+12043	The native may experience an unsettled relationship with home, property, or the mother, sometimes involving relocation, foreign residence, or unconventional domestic arrangements.
+12044	There is often a strong desire to acquire property or vehicles, sometimes pursued through nontraditional means.
+12045	Emotional peace at home benefits from consciously grounding practices given Rahu's inherently restless nature here.
+# planet_in_house:PH-Ra-H5
+12046	Brings an unconventional, ambitious approach to education, creativity, and speculative matters.
+12047	The native may pursue nontraditional educational paths or subjects, along with a tendency toward speculative risk-taking in creative or financial ventures.
+12048	Innovative thinking often produces unique achievements when Rahu's ambition here is guided constructively.
+# planet_in_house:PH-Ra-H6
+12049	An excellent upachaya placement, favoring unconventional strategy in overcoming rivals and competitive success.
+12050	Rahu performs strongly here, granting sharp, sometimes unconventional strategic thinking that helps the native overcome enemies, legal disputes, or professional obstacles.
+12051	Success is often found in foreign, technological, or unconventional service fields, and the native's competitive instincts are well-suited to high-pressure environments.
+12052	Health concerns, once identified and managed, tend to improve with disciplined attention.
+# planet_in_house:PH-Ra-H7
+12053	Brings intense ambition and sometimes unconventional dynamics to marriage and partnerships.
+12054	The native may be drawn to a foreign, unconventional, or intensely magnetic spouse or business partner, and partnerships often carry an element of obsession, idealization, or eventual illusion that requires clear-eyed evaluation.
+12055	Ambition within partnerships is strong, sometimes prioritizing status or growth over emotional stability.
+12056	Conscious communication helps clarify expectations and reduce misunderstanding in close relationships.
+# planet_in_house:PH-Ra-H8
+12057	Deepens fascination with the occult, hidden matters, and sudden, transformative change.
+12058	The native often shows an intense curiosity about mysteries, taboo subjects, or hidden knowledge, along with the potential for sudden, unexpected transformations in life circumstances.
+12059	Shared resources, inheritance, or joint finances may involve unconventional or unclear elements requiring careful attention.
+12060	This placement rewards cautious, well-informed decision-making around sudden opportunities or risks.
+# planet_in_house:PH-Ra-H9
+12061	Draws the native toward unconventional belief systems, foreign philosophies, or nontraditional higher learning.
+12062	The native may adopt foreign, nontraditional, or unconventional approaches to spirituality, philosophy, or higher education, sometimes creating tension with more traditional father figures or gurus.
+12063	Ambition connected to foreign travel, publishing, or unconventional academic pursuits is often strong.
+12064	Genuine wisdom develops through embracing rather than resisting the native's unconventional path.
+# planet_in_house:PH-Ra-H10
+12065	An excellent upachaya placement for ambitious, sometimes rapid rise in unconventional or foreign-linked careers.
+12066	Rahu performs strongly in this house, often granting a strong drive for status, recognition, and rapid career advancement, particularly in technology, foreign business, media, or innovative fields.
+12067	Public image is often tied to being seen as ahead of the curve or unconventional in professional approach.
+12068	Sudden career shifts or opportunities are common, and success is generally significant when ambition is matched with integrity.
+# planet_in_house:PH-Ra-H11
+12069	An excellent upachaya placement, strongly favoring material gains and an expansive, unconventional network.
+12070	The native tends to fulfill ambitious material desires, often through foreign, technological, or unconventional income sources, supported by a large and diverse social network.
+12071	Gains here are considered particularly favorable, sometimes arriving suddenly or from unexpected connections.
+12072	Long-term goals connected to status, wealth, or innovation are strongly supported by this placement.
+# planet_in_house:PH-Ra-H12
+12073	Draws the native toward foreign lands, hidden desires, and unconventional forms of expenditure or escape.
+12074	The native may feel a strong pull toward foreign residence, travel, or subconscious desires that are not always clearly understood, sometimes leading to spending on unconventional or hidden pursuits.
+12075	There can be an interesting blend of spiritual interest and materialistic undertone in the native's private life.
+12076	This placement often favors eventual foreign settlement or work connected to imagination, illusion, or unconventional spiritual paths.
+# planet_in_house:PH-Ke-H1
+12077	Gives an introspective, spiritually inclined personality with a somewhat detached sense of self.
+12078	The native often feels a subtle disconnect from ordinary bodily identity or ego, along with heightened intuitive or psychic sensitivity.
+12079	There is frequently a spiritual undertone to the personality, sometimes appearing unconventional or difficult for others to fully categorize.
+12080	Vitality benefits from mindful, grounding practices given Ketu's naturally scattering influence on the physical self.

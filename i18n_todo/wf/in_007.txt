@@ -1,0 +1,108 @@
+# engine/faq_data.py:25
+2514	Your birth date, birth TIME (as exact as possible - even 15 minutes off can shift the Ascendant and house placements), and birth place. Time is the single biggest source of error - check a birth certificate or hospital record if you have one.
+# engine/faq_data.py:29
+2515	Why does the app ask for a country hint along with the city?
+# engine/faq_data.py:30
+2516	Many city names repeat around the world (there are Londons in the UK, Canada, and the US). The country hint tells the offline place lookup which one you mean - especially useful for expat families searching for a city outside India.
+# engine/faq_data.py:34
+2517	I don't know the exact birth time. What should I do?
+# engine/faq_data.py:35
+2518	Use the closest estimate you have (a birth certificate, hospital paperwork, or a family member's memory). The chart still computes, but treat Ascendant-dependent results (house placements, some yogas) as approximate rather than exact.
+# engine/faq_data.py:39
+2519	What does 'sidereal' / Lahiri ayanamsa mean?
+# engine/faq_data.py:40
+2520	Vedic astrology measures planets against the fixed stars (the sidereal zodiac), not the seasons (the tropical zodiac used in Western astrology). Lahiri is the most widely used sidereal reference point in Indian astrology, and it's what this app uses throughout.
+# engine/faq_data.py:52
+2521	What's the difference between North Indian and South Indian chart styles?
+# engine/faq_data.py:53
+2522	Same information, two traditional drawing conventions. North Indian charts keep the Ascendant fixed in a diamond shape and the signs rotate around it; South Indian charts keep the signs fixed in a grid and the planets move between boxes. Pick whichever you're used to reading - the maths behind both is identical.
+# engine/faq_data.py:59
+2523	What is a Varga / divisional chart (D9, D10...)?
+# engine/faq_data.py:60
+2524	Traditional Vedic astrology doesn't stop at the main birth chart (D1) - it re-divides each sign into smaller slices for specific life areas: D9 (Navamsa) for marriage and inner strength, D10 (Dashamsha) for career, and so on. They refine the D1 picture rather than replace it.
+# engine/faq_data.py:65
+2525	What is a Yoga?
+# engine/faq_data.py:66
+2526	A Yoga is a specific, named combination of planets and houses that classical texts treat as significant - some favourable, some challenging. Think of it as a recognisable 'pattern' astrologers look for, similar to a doctor looking for a specific cluster of symptoms.
+# engine/faq_data.py:71
+2527	What is Dasha / Antardasha?
+# engine/faq_data.py:72
+2528	The Vimshottari Dasha is a traditional timeline that assigns different life periods to different planets (a Mahadasha, further divided into Antardasha sub-periods). It's the system's main tool for timing WHEN a theme is more active, not just whether it exists in the chart at all.
+# engine/faq_data.py:84
+2529	How literally should I take the Karmic & Past Life section?
+# engine/faq_data.py:85
+2530	As a symbolic, reflective lens - Rahu/Ketu placements are a traditional way to talk about old patterns (Ketu) versus the direction you're being pulled to grow (Rahu), not a literal historical record. Many people still find it useful for self-reflection.
+# engine/faq_data.py:90
+2531	Does the app predict lifespan or how many children I will have?
+# engine/faq_data.py:91
+2532	No, deliberately. There is no lifespan, time-of-death or number-of-children output anywhere in this app. Those are the least reliable claims in traditional astrology, and a wrong or frightening answer does real harm, so they were left out. What remains is the chart itself and its traditional themes, to be read as reflection rather than fact.
+# engine/faq_data.py:97
+2533	What's the difference between 'Compact' and 'Detailed' reading?
+# engine/faq_data.py:98
+2534	Use the Compact | Detailed switch at the top of any long reading. Compact keeps each section's heading and its short 'in simple terms' summary; Detailed adds the full traditional wording underneath. Same analysis either way - Compact is just the same conclusions with less reading. It also decides how long your PDF report is.
+# engine/faq_data.py:104
+2535	How do I get a PDF report?
+# engine/faq_data.py:105
+2536	Open Full Reading and tap 'Save PDF report'. It makes a PDF with your birth details, the chart diagram, the planet table and the readings (short or long, following the Compact | Detailed switch), saves it in your phone's Downloads/VedicAstrology folder, and offers to open it. Nothing is uploaded anywhere.
+# engine/faq_data.py:110
+2537	What do the Weekly & Monthly predictions use, if not AI?
+# engine/faq_data.py:111
+2538	Classical Gochara (transit) astrology: where the real planets are positioned RIGHT NOW relative to your birth Moon, plus your currently running Dasha period. It's fully offline and recalculated instantly using the same ephemeris as your birth chart - just applied to today's date instead of your birth date.
+# engine/faq_data.py:124
+2539	What is Ashtakoot Guna Milan?
+# engine/faq_data.py:125
+2540	A traditional 36-point compatibility scoring system compared between two birth charts (classically for marriage matching), covering 8 separate factors: Varna, Vashya, Tara, Yoni, Graha Maitri, Gana, Bhakoot, and Nadi.
+# engine/faq_data.py:129
+2541	Can I generate charts for my children too?
+# engine/faq_data.py:130
+2542	Yes - use the profile chips at the top of the New Chart screen to add a Life Partner and up to four Child profiles, each with its own independent birth details and full reading.
+# engine/faq_data.py:134
+2543	How do I save birth details so I can reload them quickly?
+# engine/faq_data.py:135
+2544	Every chart you generate is saved automatically on your phone. Open Saved Charts (Library) and tap a person to load their details into the profile you choose and regenerate the chart in one step. Use the Delete button on a row to remove someone. Saved details never leave your device.
+# engine/faq_data.py:140
+2545	The phone keyboard does not appear when I tap a field. What now?
+# engine/faq_data.py:141
+2546	The New Chart screen has its own built-in keyboard, which is the default and does not depend on your phone's keyboard app. Use the Keyboard switch at the top of the form to choose between the built-in keyboard and the phone keyboard.
+# engine/faq_data.py:145
+2547	Is my birth data ever sent anywhere?
+# engine/faq_data.py:146
+2548	No. Place lookup, chart maths, and every reading run entirely offline on your own device. Nothing is uploaded, and there's no internet connection involved at any point.
+# classical_yogas:YOGA-01
+10001	Gajakesari Yoga
+10002	Jupiter is placed in a kendra (1st, 4th, 7th, or 10th house) counted from the Moon.
+10003	Classically associated with intelligence, eloquence, good reputation, prosperity, and respect in society; the native is often remembered fondly and finds success in dealing with others.
+10004	It is one of the most widely cited benefic yogas in popular and classical literature alike.
+10005	Effects are considerably weaker if Jupiter is debilitated, combust (too close to the Sun), or placed in a dusthana (6th, 8th, or 12th) from the lagna; the yoga is strongest when Jupiter is additionally well-dignified (own sign, exalted, or otherwise well-aspected).
+# classical_yogas:YOGA-02
+10006	Ruchaka Yoga (Panch Mahapurusha)
+10007	Mars occupies its own sign (Aries or Scorpio) or its exaltation sign (Capricorn), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.
+10008	Grants a strong, athletic physique, courageous and commanding personality, natural leadership, and success in fields requiring decisive action such as the military, sports, engineering, or entrepreneurship.
+10009	The native is typically direct, energetic, and unafraid of competition.
+10010	Full strength requires Mars to be free of heavy affliction; the yoga is considered most powerful when Mars is also well-aspected by benefics or otherwise unafflicted.
+# classical_yogas:YOGA-03
+10011	Bhadra Yoga (Panch Mahapurusha)
+10012	Mercury occupies its own sign (Gemini or Virgo) or its exaltation sign (Virgo), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.
+10013	Grants exceptional intelligence, eloquence, and business or analytical acumen, with natural skill in communication, trade, writing, or scholarship.
+10014	The native is typically quick-witted, versatile, and well-regarded for their intellect.
+10015	Effects are strongest when Mercury is also unafflicted by malefic conjunction or aspect, and further supported by a strong Mercury dasha period.
+# classical_yogas:YOGA-04
+10016	Hamsa Yoga (Panch Mahapurusha)
+10017	Jupiter occupies its own sign (Sagittarius or Pisces) or its exaltation sign (Cancer), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.
+10018	Grants wisdom, righteousness, and a dignified, respected character, often producing a natural teacher, counselor, or spiritually inclined figure of good repute.
+10019	The native's conduct tends to be principled and their fortune generally favorable.
+10020	Most powerful when Jupiter is also unafflicted and well-aspected; a Jupiter under heavy malefic influence will express this yoga's virtues less fully.
+# classical_yogas:YOGA-05
+10021	Malavya Yoga (Panch Mahapurusha)
+10022	Venus occupies its own sign (Taurus or Libra) or its exaltation sign (Pisces), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.
+10023	Grants charm, artistic or aesthetic talent, a comfortable and often luxurious lifestyle, and harmonious personal relationships.
+10024	The native tends to be attractive in manner or appearance and drawn toward refined, pleasurable pursuits.
+10025	Full expression depends on Venus being free of significant affliction; a well-aspected Venus in this yoga particularly favors the arts, luxury goods, or diplomacy as career paths.
+# classical_yogas:YOGA-06
+10026	Sasa Yoga (Panch Mahapurusha)
+10027	Saturn occupies its own sign (Capricorn or Aquarius) or its exaltation sign (Libra), while also being placed in a kendra (1st, 4th, 7th, or 10th house) from the lagna.
+10028	Grants disciplined authority, leadership ability (especially over large groups, institutions, or the working masses), and long-term success achieved through sustained, patient effort.
+10029	The native often rises to a position of responsibility later in life through genuine, earned merit.
+10030	Strongest when Saturn is not heavily afflicted; because Saturn's own nature favors delay, results under this yoga still tend to arrive gradually rather than early.
+# classical_yogas:YOGA-07
+10031	Kendra-Trikona Raja Yoga
