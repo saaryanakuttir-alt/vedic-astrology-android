@@ -80,7 +80,7 @@ def test_compact_report_is_short_but_keeps_doshas_and_verdicts(sample):
     chart, reading = sample
     r = pypdf.PdfReader(io.BytesIO(pdf_report.build_pdf(chart, reading, mode="compact")))
     text = "\n".join(p.extract_text() for p in r.pages)
-    assert "Doshas at a glance" in text and "Planet by planet" in text
+    assert "Doshas at a glance" in text and "Planet by planet" in text and "Your nature" in text
     assert "All divisional charts" not in text and "Vimshottari Dasha" not in text
 
 
@@ -96,7 +96,8 @@ def test_report_text_content(sample):
                     "All divisional charts", "Shodashvarga table", "D27 Saptavimshamsha", "D45 Akshavedamsha",
                     "Bhava Chalit", "Ashtakvarga", "Vimshottari Dasha", "Medical Astrology - body map",
                     "effects on your houses and signs", "Yogini Dasha", "Char Dasha", "Jaimini significators",
-                    "What each Mahadasha may feel like"):
+                    "What each Mahadasha may feel like", "Your nature", "Sade Sati for you", "Varshaphal", "KP system",
+                    "Planet strength", "Prastharashtakvarga"):
         assert section in text, section
     for forbidden in ("Longevity", "lifespan", "Children"):     # the removed sections must not come back via the PDF
         assert forbidden not in text

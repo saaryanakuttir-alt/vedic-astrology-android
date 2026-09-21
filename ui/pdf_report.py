@@ -270,11 +270,13 @@ def _doshas_section(doc, chart, mode, ex):
     if mode == "compact":
         doc.heading("Doshas at a glance")
         doc.table(["Dosha", "Verdict", "Status"], [[d["name"], d["tone"], d["status"]] for d in ex["doshas"]], [200, 90, 205])
+        _heading_para(doc, compact_text(extras.sade_sati_detail_text(chart)))
         return
     _heading_para(doc, "--- Doshas and Sade Sati ---\nDoshas are classical 'watch points'. Each one below says whether it is present, "
                        "what it may mean, and what can help. They describe tendencies, not fixed fate - many people with a "
                        "dosha live very happily, and the rest of the chart matters more.")
     _heading_para(doc, extras.doshas_text(chart))
+    _heading_para(doc, extras.sade_sati_detail_text(chart))
     doc.heading("Sade Sati and Dhaiya through your life")
     doc.paragraph("Sade Sati is Saturn's roughly 7.5-year walk over the sign before, the sign of and the sign after your Moon. "
                   "Dhaiya (Small Panoti) is its 2.5-year stay in the 4th or 8th sign from your Moon. These are times that test "
@@ -459,6 +461,70 @@ def _more_dashas_section(doc, chart, style):
     _draw_chart(doc, md.with_karakamsa(chart), style, size=230, varga="KM")
 
 
+
+def _nature_section(doc, chart, detailed):
+    import life_profile
+    text = life_profile.profile_text(chart)
+    _heading_para(doc, "--- Your nature: character, career, learning and hobbies ---\nIn plain words, drawn from your rising sign, "
+                       "Moon and the planets that rule these areas. These are tendencies, not rules.")
+    _heading_para(doc, text if detailed else compact_text(text))
+
+
+def _advanced_section(doc, chart, style):
+    """Detailed PDF only: Varshaphal for the current year, KP tables, planet strength and Prastharashtakvarga."""
+    import kp
+    import prastara
+    import shadbala
+    import varshaphal
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+    birth_year = int(chart["birth_input"]["birth_date"][:4])
+    year = max(now.year if varshaphal.return_moment(chart, now.year) <= now else now.year - 1, birth_year + 1)
+    vp = varshaphal.varshaphal(chart, year)
+    doc.heading(f"Varshaphal - your year from {vp['local']:%d %b %Y} (age {vp['age']})")
+    _heading_para(doc, varshaphal.varshaphal_text(vp))
+    doc.table(["Period", "From", "To", "House", "Feels"], [[p["lord"], _fmt_date(p["start"]), _fmt_date(p["end"]), str(p["house"]), p["tone"]]
+                                                         for p in vp["mudda"]], [90, 100, 100, 50, 155])
+    doc.ensure(280)
+    doc.paragraph("The yearly chart", bold=True, color=GOLD, size=9.5)
+    _draw_chart(doc, vp["varsha"], style, size=230)
+
+    sb = shadbala.compute_shadbala(chart)
+    doc.heading("Planet strength")
+    _heading_para(doc, shadbala.shadbala_text(chart))
+    head = ["Source"] + [p[:3] for p in shadbala.SEVEN]
+    rows = [[label.split(" (")[0]] + [f"{sb[p][key]:.0f}" for p in shadbala.SEVEN] for key, label in shadbala.COMPONENTS]
+    rows.append(["Total"] + [f"{sb[p]['total']:.0f}" for p in shadbala.SEVEN])
+    doc.table(head, rows, [125] + [52.8] * 7)
+    doc.paragraph("Not counted: the year and month lords, planetary speed, aspect strength and planetary war. Read the scores as "
+                  "comparisons between your own planets, not as the traditional 'rupa' totals.", size=8, color=MUTED)
+
+    t = kp.kp_tables(chart)
+    ab = lambda p: p[:3]
+    doc.heading("KP system (Krishnamurti Paddhati)")
+    doc.paragraph(f"Placidus houses with the KP ayanamsa ({t['ayanamsa_dms']}). The star lord shows the kind of result a house or planet is "
+                  "linked to and the sub lord decides whether it is likely to come through. Positions can differ from the main chart by a "
+                  "few arc-minutes, which may change a sub lord. [In simple terms: extra detail for KP astrologers, not a verdict.]", size=9)
+    doc.table(["House", "Degree", "Sign lord", "Star", "Sub", "Sub-sub"],
+              [[str(c["cusp"]), c["dms"], ab(c["sign_lord"]), ab(c["star_lord"]), ab(c["sub_lord"]), ab(c["subsub_lord"])] for c in t["cusps"]],
+              [50, 110, 85, 80, 85, 85])
+    doc.table(["Planet", "Degree", "House", "Sign lord", "Star", "Sub", "Sub-sub"],
+              [[p["planet"][:3] + ("R" if p["retrograde"] else ""), p["dms"], str(p["house"]), ab(p["sign_lord"]), ab(p["star_lord"]),
+                ab(p["sub_lord"]), ab(p["subsub_lord"])] for p in t["planets"]], [55, 110, 45, 75, 70, 70, 70])
+    r = t["ruling"]
+    doc.paragraph("Ruling planets - Lagna (sign, star, sub lord): " + ", ".join(r["Lagna"]) + ". Moon: " + ", ".join(r["Moon"]) +
+                  f". Weekday lord: {r['Day lord']}.")
+    doc.table(["House", "Signified by (strongest first)"], [[str(h), ", ".join(x[:3] for x in pl)] for h, pl in t["significators"].items()], [60, 435])
+
+    doc.heading("Ashtakvarga detail (Prastharashtakvarga)")
+    doc.paragraph("For each planet, who gives each point: 1 means that helper gives a point to the sign. The last row is the planet's usual "
+                  "Ashtakvarga row.", size=9)
+    for planet, grid in prastara.all_prastara(chart).items():
+        doc.paragraph(planet, bold=True, color=GOLD, size=9.5)
+        rows = [[c] + ["1" if v else "." for v in r_] for c, r_ in grid["rows"].items()]
+        rows.append(["Total"] + [str(x) for x in grid["totals"]])
+        doc.table(["From"] + [s[:3] for s in SIGNS], rows, [55] + [36.7] * 12, size=8)
+
+
 # ---------------------------------------------------------------- the report
 def build_pdf(chart, reading, style="North Indian", mode="detailed"):
     import extras
@@ -515,6 +581,7 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
     doc.table(["Planet", "Sign", "Deg", "House", "Nakshatra", "Pada", "Dignity"], rows,
               [58, 62, 38, 36, 82, 32, 187])
 
+    _nature_section(doc, chart, detailed)
     for block in (extras.period_text(chart), extras.houses_text(chart)):
         if block:
             _heading_para(doc, block if detailed else compact_text(block))
@@ -533,6 +600,7 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
         _chalit_ashtak_section(doc, chart)
         _dasha_section(doc, chart)
         _more_dashas_section(doc, chart, style)
+        _advanced_section(doc, chart, style)
 
     text = document_text(reading, planet_glosses=not detailed)
     if not detailed:

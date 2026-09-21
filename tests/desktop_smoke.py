@@ -81,7 +81,7 @@ check(app.header.title_label.text == "Home", "header title is Home")
 print("== Home cards navigate")
 home = app._screens["home"]
 cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 24, f"24 home cards (got {len(cards)})")
+check(len(cards) == 29, f"29 home cards (got {len(cards)})")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -357,6 +357,27 @@ for key, minimum_ratio in (("yogas", 0.9), ("dasha", 0.5), ("chart", 0.9)):
     scr.mode_bar.seg.select("Detailed"); pump(12)
 app.goto("family"); pump(10)
 check(app._screens["family"].mode_bar is not None, "family: has the Compact | Detailed switch")
+
+print("== Nature, Varshaphal, KP, Strength and Ashtakvarga detail screens")
+app.store.current_profile_id = "self"
+for key, words in (("nature", ["Your character", "Virgo rising", "career"]), ("varshaphal", ["Muntha", "Mudda", "Age "]),
+                   ("kp", ["Cusps", "Ruling planets", "Sub-sub"]), ("strength", ["Planet strength", "Naisargika", "Total"]),
+                   ("prastara", ["Sun", "Lagna", "Total"])):
+    app.goto(key); pump(16)
+    blob = " ".join(texts(app._screens[key]))
+    check("hit an error" not in blob and "Traceback" not in blob, f"{key}: no error text")
+    for word in words:
+        check(word in blob, f"{key}: shows '{word}'")
+app.goto("varshaphal"); pump(6)
+vt = app._screens["varshaphal"]
+first_year = vt.year
+spin = [w for w in walk(vt) if type(w).__name__ == "ThemedSpinner"]
+check(bool(spin), "varshaphal: year picker present")
+if spin:
+    spin[0].text = spin[0].values[0]; pump(16)
+    check(vt.year != first_year, f"varshaphal: choosing another year changes the chart ({first_year} -> {vt.year})")
+app.goto("doshas"); pump(12)
+check("Sade Sati for you" in " ".join(texts(app._screens["doshas"])), "doshas: personal Sade Sati section")
 
 print("== Planet effects sections and the More Dashas screen")
 app.store.current_profile_id = "self"

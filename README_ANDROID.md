@@ -360,3 +360,16 @@ Rahu/Ketu aspects on the 5th/7th/9th while this engine gives them only the 7th.
 * The profile row on New Chart shows two child slots (was four).
 * The app version is shown on Home and in Help (`ui/version.py`, kept equal to buildozer.spec by a test) so a bug report can say which build it came from.
 * Doshas that are not present now say "What this means".
+
+## Version 1.7.0 (2026-09-21)
+
+Checked against the AstroSage reference report (same birth data); AstroSage was used only to compare numbers, all wording is original.
+
+* **Varshaphal** (`engine/varshaphal.py`, screen "Varshaphal"): Sun-return moment (matches to 31 s), yearly chart, Muntha, Mudda Dasha (all 8 periods within a day), good/mixed/care outlook. Pick any year.
+* **KP system** (`engine/kp.py`): Placidus cusps, star/sub/sub-sub lords, ruling planets, significators. All 12 cusp sign/star/sub lords match; sub lords of planets can differ by an arc-minute.
+* **Planet strength** (`engine/shadbala.py`): the parts of Shadbala that can be computed from the chart - 9 of 13 match AstroSage; Saptavargaja differs for 3 planets (a different friendship convention), Hora uses the classical sunrise count. NOT included: Abda, Masa, Cheshta, Drik, Yuddha and Bhavabala (need tables/formulas not implemented), so it is shown as comparative "strength points", not rupas.
+* **Your Nature** (`engine/life_profile.py`): character, mind, career, education, hobbies in plain words (original text).
+* **Ashtakvarga detail** (`engine/prastara.py`): Prastharashtakvarga for all seven planets (columns equal the Bhinnashtakvarga rows).
+* **Sade Sati in detail** (`extras.sade_sati_detail_text`): personal reading - Saturn and Moon in your chart, where you are now, how each phase may go, per-stay Ashtakvarga points, all cycles.
+* Not done: Lal Kitab (not enough reliable knowledge to write it), KP Pratyantar pages, Bhavabala.
+* PDF (Detailed) now also has Your Nature, personal Sade Sati, Varshaphal, Planet strength, KP and Ashtakvarga detail; Compact has Your Nature and a short Sade Sati.

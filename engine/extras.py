@@ -719,3 +719,109 @@ def compute_extras(chart, at=None):
         "aspects": western_aspects(chart), "doshas": assess_doshas(chart, at),
         "sade_sati": sade_sati_table(chart), "shodashvarga": shodashvarga_table(chart),
     }
+
+
+# ---------------------------------------------------------------- Sade Sati in detail, for this person
+_PHASE_STORY = {
+    "rising phase": ("Saturn is in the sign before your Moon sign. It is the warm-up: expenses and worries about the future tend to "
+                     "creep in, sleep or peace of mind may need protecting, and you may feel pressure to prove yourself."),
+    "peak phase": ("Saturn is over your Moon sign itself. It is the most personal stretch: mood, energy and confidence feel tested, "
+                   "responsibilities grow and results come slowly - yet it is also when patience and discipline build the most lasting strength."),
+    "setting phase": ("Saturn is in the sign after your Moon sign. The pressure eases: money and family matters may still ask for care, "
+                      "but you can usually feel things settling and the lessons turning into steadiness."),
+}
+_ADVICE = ("What usually helps: a steady daily routine, keeping promises, honest work, looking after sleep and health, "
+           "helping people who are older or have less than you, and avoiding big risks or shortcuts while Saturn is testing you.")
+
+
+def sade_sati_cycles(chart, years=100):
+    """Each Sade Sati (three phases, ~7.5 years) as one cycle: {start, end, start_age, end_age, stays: [...]}."""
+    rows = [r for r in sade_sati_table(chart, years) if r["kind"] == "Sade Sati"]
+    cycles = []
+    for r in rows:
+        if cycles and (r["start"] - cycles[-1]["end"]).days < 500:
+            cycles[-1]["stays"].append(r)
+            cycles[-1]["end"], cycles[-1]["end_age"] = r["end"], r["end_age"]
+        else:
+            cycles.append({"start": r["start"], "end": r["end"], "start_age": r["start_age"], "end_age": r["end_age"], "stays": [r]})
+    return cycles
+
+
+def _stay_detail(chart, stay):
+    """What one stay of Saturn (sign, phase) means for this chart."""
+    sign = stay["sign"]
+    house = (SIGNS.index(sign) - SIGNS.index(chart["ascendant"]["sign"])) % 12 + 1
+    pts = chart["ashtakavarga"]["bhinnashtakavarga"]["Saturn"][sign]
+    tone = "supportive" if pts >= 5 else "average" if pts >= 4 else "demanding"
+    tail = {"supportive": ", so this part tends to be gentler than the general description",
+            "average": ", so expect the general description to apply",
+            "demanding": ", so this part may feel heavier than usual and reward extra patience"}[tone]
+    word = {"supportive": "a supportive", "average": "an average", "demanding": "a demanding"}[tone]
+    return {"house": house, "area": _HOUSE_AREA[house], "points": pts, "points_tone": tone,
+            "text": (f"Saturn is moving through {sign}, your {ordinal(house)} house ({_HOUSE_AREA[house]}), so the pressure is felt most in "
+                     f"{_HOUSE_AREA[house]}. Saturn scores {pts} of 8 points in {sign} in your Ashtakvarga, which is {word} sign for it{tail}.")}
+
+
+def sade_sati_detail_text(chart, at=None):
+    """A personal walk-through of Sade Sati: where Saturn is now, how each phase may go for THIS chart, and the whole life's cycles."""
+    at = at or _dt.datetime.now(_dt.timezone.utc).replace(tzinfo=None)
+    today = at.date()
+    cons = planet_considerations(chart)
+    sat, moon = cons["Saturn"], cons["Moon"]
+    cycles = sade_sati_cycles(chart)
+    parts = []
+
+    rank = (sat["relation"] or "no special sign rank").lower()
+    natal = (f"Saturn in your birth chart looks {sat['tone'].lower()}: it sits in {sat['sign']} ({rank}), in your {ordinal(sat['house'])} "
+             f"house, and rules your {_list(ordinal(h) for h in sat['lord_of'])} house{'s' if len(sat['lord_of']) > 1 else ''}. "
+             f"Your Moon looks {moon['tone'].lower()} (in {moon['sign']}, {ordinal(moon['house'])} house). ")
+    if sat["tone"] in ("Good", "Mostly good"):
+        natal += ("Because Saturn is well placed for you, Sade Sati tends to feel more like a strict but fair teacher: hard work is "
+                  "usually rewarded, even if slowly.")
+    elif sat["tone"] == "Mixed":
+        natal += ("Because Saturn is mixed for you, expect some genuinely testing stretches and some where effort pays off; how you "
+                  "handle the first half often decides how the second half feels.")
+    else:
+        natal += ("Because Saturn needs care in your chart, Sade Sati may feel heavier than average, so steady habits, health check-ups "
+                  "and avoiding big risks matter more for you.")
+    parts.append("--- Sade Sati for you ---\n" + natal +
+                 "\n\n[In simple terms: Sade Sati is Saturn's 7.5-year test. How hard it feels depends on how Saturn and your Moon are "
+                 "placed in YOUR chart - described above. It is a tendency, never a fixed result.]")
+
+    kind = sade_sati_now(chart, at)["kind"]
+    cur = next((c for c in cycles if c["start"] <= today <= c["end"]), None)
+    if kind and kind.startswith("Sade") and cur:
+        stay = next((s for s in cur["stays"] if s["start"] <= today <= s["end"]), cur["stays"][0])
+        d = _stay_detail(chart, stay)
+        left = (cur["end"] - today).days
+        done = (today - cur["start"]).days
+        total = max((cur["end"] - cur["start"]).days, 1)
+        parts.append(f"--- Where you are right now ---\nYou are in Sade Sati - {stay['phase']}. This cycle began on {cur['start']:%d %b %Y} "
+                     f"(age {max(cur['start_age'], 0):.0f}) and runs to about {cur['end']:%d %b %Y} (age {cur['end_age']:.0f}) - roughly "
+                     f"{done * 100 // total}% is behind you and about {left // 365} years {(left % 365) // 30} months remain.\n\n"
+                     f"{_PHASE_STORY[stay['phase']]}\n\n{d['text']}\n\n{_ADVICE}\n\n"
+                     f"[In simple terms: you are in the {stay['phase'].split()[0]} stretch of Saturn's test. It is asking for patience in "
+                     f"{d['area']}. Keep routines steady and the difficult months tend to pass with lasting lessons.]")
+    elif kind:
+        parts.append(f"--- Where you are right now ---\nSaturn is currently in a smaller test for you ({kind}). It is a shorter, milder "
+                     "version of Sade Sati; steady routines and looking after health and home are enough for most people.")
+    else:
+        nxt = next((c for c in cycles if c["start"] > today), None)
+        parts.append("--- Where you are right now ---\nYou are not in Sade Sati at the moment." + (
+            f" The next one begins around {nxt['start']:%d %b %Y} (age {nxt['start_age']:.0f})." if nxt else ""))
+
+    story = ["--- How each phase may go for you ---"]
+    for phase in ("rising phase", "peak phase", "setting phase"):
+        story.append(f"{phase.capitalize()}: {_PHASE_STORY[phase]}")
+    story.append(_ADVICE)
+    parts.append("\n\n".join(story))
+
+    lines = ["--- Your Sade Sati cycles through life ---"]
+    for i, c in enumerate(cycles, start=1):
+        lines.append(f"Cycle {i}: {max(c['start_age'], 0):.0f} to {c['end_age']:.0f} years old ({c['start']:%b %Y} - {c['end']:%b %Y}).")
+        for s in c["stays"]:
+            d = _stay_detail(chart, s)
+            lines.append(f"- {s['phase'].capitalize()} in {s['sign']} ({s['start']:%d %b %Y} to {s['end']:%d %b %Y}): pressure on "
+                         f"{d['area']}; Saturn's Ashtakvarga points here {d['points']}/8 ({d['points_tone']}).")
+    parts.append("\n".join(lines))
+    return "\n\n".join(parts)
