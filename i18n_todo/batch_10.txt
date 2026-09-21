@@ -1,0 +1,90 @@
+811	\n\n--- Full discussion ---\n
+812	This tab hit an error while building - details below so it can be reported:\n\n
+813	Could not build this prediction:\n\n
+814	Self <-> Life Partner - Total: {0:.1f} / {1} - {2}   ## {0}=result['total_points'], {1}=result['max_points'], {2}=result['verdict']
+815	Generate a chart for Self at minimum; add Life Partner and/or Child profiles for a fuller report. Self <-> Life Partner uses 'Ashtakoot Guna Milan' (a classical 36-point marriage-matching score); Self <-> Child deliberately does NOT, since that scoring system is only meant for spouses - children instead get a separate, appropriately-scoped comparison. Both also get a karmic layer: past-life themes and how each of you can support the other's growth.
+816	Compute Family Compatibility Report
+817	Generate a chart for Self first.
+818	This report hit an error - see details below.
+819	No Life Partner chart yet - showing Self's own disposition below.
+820	This tab hit an error while building its report - showing the details below instead of a blank screen so it can be reported:\n\n
+821	No questions match "{0}" - try a different word.   ## {0}=self.search_input.text
+822	Vedic Astrology · Created by Sammya Das · version {0}   ## {0}=VERSION
+823	All topics
+824	Help & FAQ
+825	Search a question, e.g. 'dasha' or 'time zone'...
+826	Answers to the questions people ask most when they first open a chart - no AI, no internet, just a searchable guide.
+827	Remove {0} from your saved birth details?   ## {0}=name
+828	{0}  -  version {1}   ## {0}=CREDIT, {1}=VERSION
+829	{0} {1}, {2}   ## {0}=_MONTHS[int(inp['month']) - 1], {1}=int(inp['day']), {2}=inp['year']
+830	Created by Sammya Das
+831	Birth Chart
+832	Generate and view a chart
+833	Divisional Charts
+834	D9, D10 and more
+835	planet_house
+836	Planet in House
+837	Which life area each planet is in
+838	Planet in Sign
+839	How each planet behaves in its sign
+840	House Lord Placements
+841	Lordship analysis
+842	Classical Yogas
+843	Yoga combinations
+844	Mahadasha & Antardasha
+845	Planetary periods
+846	Saved Charts
+847	Your saved birth details
+848	CHARTS & TABLES
+849	TIMING & YEARS
+850	STRENGTH, DOSHAS & REMEDIES
+851	PEOPLE & HELP
+852	Incomplete details
+853	 · time unknown
+854	Chart Diagram
+855	North / South Indian
+856	Kundli Details
+857	Key facts & classifications
+858	shodashvarga
+859	Shodashvarga Table
+860	All 15 divisional charts
+861	Sign-by-sign support
+862	Ashtakvarga Detail
+863	Who gives each point
+864	Bhava house boundaries
+865	KP System
+866	Cusps, star & sub lords
+867	Your Nature
+868	Character, career, hobbies
+869	Life Predictions
+870	Career, wealth, family
+871	Karmic & Past Life
+872	Old patterns, new direction
+873	Medical Astrology
+874	Body areas & constitution
+875	relationship
+876	Relationship Themes
+877	Marriage & partnership
+878	Full Reading
+879	Everything in one report
+880	More Dashas
+881	Yogini, Char & Karakamsa
+882	Your year, from birthday
+883	Any date, year & transits
+884	Planet by Planet
+885	Good, mixed or needs care?
+886	Planet Strength
+887	How strong is each planet?
+888	Doshas & Sade Sati
+889	Manglik, Kalsarpa, Saturn
+890	What helps right now
+891	Family Compatibility
+892	Partner & child bonds
+893	Help & About
+894	FAQ and credits
+895	 · exact coordinates
+896	Load into
+897	Delete saved details
+898	Your birth-chart engine and classical interpretive library.
+899	Tap a person to load them and generate their chart.
+900	No saved birth details yet.\n\nGenerate a chart on the New Chart screen and its details are saved here automatically, ready to load in one tap.

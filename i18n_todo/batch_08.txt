@@ -1,0 +1,90 @@
+631	leadership, recognition and a wish to shine in your own right
+632	service, detail and useful skills
+633	fairness, partnership and beauty
+634	depth, research and transformation
+635	learning, teaching and higher ideals
+636	discipline, structure and long-term achievement
+637	ideas, groups and doing things differently
+638	imagination, compassion and spiritual leanings
+639	the soul - your core drive
+640	Amatyakaraka
+641	career and advisers
+642	Bhratrukaraka
+643	mother and inner peace
+644	intellect and creativity
+645	relatives and rivals
+646	spouse and partnerships
+647	[In simple terms: the Karakamsa is a hint about the kind of life goals that feel most 'you'. It is a tendency to reflect on, not a prediction.]
+648	--- What each Mahadasha may feel like ---\nEach long life period takes the mood of its ruling planet. Below, each one is rated Good, Mixed or Needs care from how that planet is placed in YOUR chart, with what may happen. [In simple terms: think of these as the seasons of your life. None is fixed - they describe likely moods and themes.]
+649	 - running now
+650	A gentle planet inside the Karakamsa may make it easier to follow your purpose with support from others.
+651	A strong or restless planet inside the Karakamsa may make your path more intense and self-driven.
+652	Sub-periods still to come inside this Mahadasha:\n\n
+653	Mangala
+654	Pingala
+655	Dhanya
+656	Bhramari
+657	Bhadrika
+658	Ulka
+659	Siddha
+660	Sankata
+661	Atmakaraka
+662	Matrukaraka
+663	Putrakaraka
+664	Gnatikaraka
+665	Darakaraka
+666	{0} house ({1})   ## {0}=ordinal(h), {1}=_HOUSE_AREA[h]
+667	{0} and {1}, the ruler of {2} - {3}   ## {0}=p, {1}=lr.get('lord'), {2}=sign, {3}=r.get('grade_english', lr.get('grade', '
+668	{0} in the {1} house - {2}   ## {0}=p, {1}=ordinal(house), {2}=ih.get('house_theme', area)
+669	{0}  -  {1}  -  {2}   ## {0}=p.upper(), {1}=where, {2}=c['tone']
+670	{0} is in {1}{2}, in your {3} house ({4}). Verdict: {5}. {6}.   ## {0}=p, {1}=sign, {2}=rel, {3}=ordinal(house), {4}=area, {5}=c['tone'], {6}=c['summary'].split('. It rules')[0]
+671	=== {0} ===   ## {0}=e['banner']
+672	It is looked at by {0}.   ## {0}=_list(c['aspected_by'])
+673	 - {0}   ## {0}=c['relation'].lower()
+674	At a glance
+675	In simple terms
+676	No other planet looks at it directly.
+677	Very close to the Sun (combust)
+678	retrograde_reading
+679	Moving backwards (retrograde)
+680	As a shadow planet it does not rule a house of its own.
+681	What it rules and looks at
+682	dignity_note
+683	Same sign in the Rasi and Navamsha charts (vargottama)
+684	Rules your 
+685	Looks at your 
+686	Why the verdict is '
+687	The {0} sub-period continues to flavour these days.   ## {0}=running['antardasha']
+688	Sade Sati is currently active ({0}): Saturn is in the {1} from your Moon. Traditionally a demanding, maturing ~7.5-year passage - steady effort and patience are the classic advice, not alarm.   ## {0}=sade_sati['phase'], {1}=_ord(sat_house)
+689	Running period: {0} Mahadasha / {1} Antardasha - this sets the underlying tone for the whole stretch.   ## {0}=running['mahadasha'], {1}=running['antardasha']
+690	{0} is transiting {1} ({2} from your Moon) - {3} for {4}.   ## {0}=planet, {1}=t['sign'], {2}=_ord(t['house_from_moon']), {3}=verdict, {4}=t['theme']
+691	This is a traditional Gochara (transit) outlook - general tendencies for the period read from where the planets are now relative to your birth Moon, plus your running dasha. It is for reflection, not a guarantee of specific events. Transit timing is approximate: the Moon changes sign every ~2-3 days, so the weekly notes shift within the week.
+692	confidence, health, status and dealings with authority
+693	mood, comfort, and day-to-day emotional weather
+694	energy, drive, conflict and physical effort
+695	communication, paperwork, travel and decisions
+696	growth, luck, learning, finances and optimism
+697	relationships, comfort, money and pleasures
+698	responsibility, discipline, delays and hard lessons
+699	ambition, restlessness and unconventional pushes
+700	detachment, letting go and inward focus
+701	a generally favourable transit
+702	a more mixed / effortful transit
+703	=== This Month ===
+704	=== This Week ===
+705	. Focus on the areas the favourable planets above touch, and go steadily where the mixed ones do.
+706	 Remember the Moon shifts sign every 2-3 days, so the mood changes through the week.
+707	first (rising) phase
+708	final (setting) phase
+709	In simple terms: this month leans 
+710	generally supportive
+711	toward effort and patience
+712	In simple terms: 
+713	a broadly positive few days - good for moving things forward.
+714	a mixed few days - pick your moments and avoid forcing things.
+715	[In simple terms: the {0} chart ({1}) is a 'zoom-in' on {2}. Read it like your main chart - see which sign each planet falls in and whether the planets look comfortable there. It adds detail to the main chart and never overrides it.]   ## {0}=name, {1}=key, {2}=purpose
+716	{0} {1}   ## {0}=house, {1}=self.body_short.get(house, '')
+717	Ascendant ({0}): {1}   ## {0}=varga_key, {1}=asc_sign
+718	Rasi (D1)
+719	Hora (D2)
+720	Drekkana (D3)

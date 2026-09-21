@@ -1,0 +1,90 @@
+1171	Gau (Cow) - M
+1172	Mahish (Buffalo) - F
+1173	Vyaghra (Tiger) - F
+1174	Mahish (Buffalo) - M
+1175	Vyaghra (Tiger) - M
+1176	Mriga (Deer) - F
+1177	Mriga (Deer) - M
+1178	Shwan (Dog) - M
+1179	Vanar (Monkey) - F
+1180	Nakul (Mongoose) - M
+1181	Vanar (Monkey) - M
+1182	Simha (Lion) - F
+1183	Ashva (Horse) - F
+1184	Simha (Lion) - M
+1185	Gau (Cow) - F
+1186	Gaja (Elephant) - M
+1187	Monday
+1188	Tuesday
+1189	Wednesday
+1190	Thursday
+1191	Friday
+1192	Saturday
+1193	Sunday
+1194	January
+1195	February
+1196	March
+1197	April
+1198	May
+1199	June
+1200	July
+1201	August
+1202	September
+1203	October
+1204	November
+1205	December
+1206	AM
+1207	PM
+1208	Krishna
+1209	Shukla
+1210	Shukla Paksha
+1211	Krishna Paksha
+1212	Vishkumbha
+1213	Priti
+1214	Ayushman
+1215	Saubhagya
+1216	Shobhana
+1217	Atiganda
+1218	Sukarma
+1219	Dhriti
+1220	Shoola
+1221	Ganda
+1222	Vriddhi
+1223	Dhruva
+1224	Vyaghata
+1225	Harshana
+1226	Vajra
+1227	Siddhi
+1228	Vyatipata
+1229	Variyana
+1230	Parigha
+1231	Shiva
+1232	Sadhya
+1233	Shubha
+1234	Brahma
+1235	Indra
+1236	Vaidhriti
+1237	Pratipada
+1238	Dwitiya
+1239	Tritiya
+1240	Chaturthi
+1241	Panchami
+1242	Shashthi
+1243	Saptami
+1244	Ashtami
+1245	Navami
+1246	Dashami
+1247	Ekadashi
+1248	Dwadashi
+1249	Trayodashi
+1250	Chaturdashi
+1251	Bava
+1252	Balava
+1253	Kaulava
+1254	Taitila
+1255	Gara
+1256	Vanija
+1257	Vishti (Bhadra)
+1258	+  Can I generate charts for my children too?
+1259	+  How do I get a PDF report?
+1260	+  Is my birth data ever sent anywhere?

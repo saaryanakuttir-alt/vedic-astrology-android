@@ -1,0 +1,90 @@
+1081	1st
+1082	2nd
+1083	3rd
+1084	4th
+1085	5th
+1086	6th
+1087	7th
+1088	8th
+1089	9th
+1090	10th
+1091	11th
+1092	12th
+1093	Exalted
+1094	Debilitated
+1095	and
+1096	none
+1097	supportive
+1098	average
+1099	demanding
+1100	Easy
+1101	Tense
+1102	Blend
+1103	easy
+1104	tense
+1105	blend
+1106	opposite
+1107	Lagna
+1108	Uchcha
+1109	Saptavargaja
+1110	Ojayugma
+1111	Kendra
+1112	Dig
+1113	Nathonnatha
+1114	Paksha
+1115	Tribhaga
+1116	Vara
+1117	Ayana
+1118	Naisargika
+1119	Compact
+1120	Detailed
+1121	Present
+1122	Optional
+1123	Ithasala
+1124	Ishrafa
+1125	Rising phase
+1126	Peak phase
+1127	Setting phase
+1128	Dhaiya
+1129	Home
+1130	Chart
+1131	Dasha
+1132	Yogas
+1133	Library
+1134	Cancel
+1135	OK
+1136	Delete
+1137	Open
+1138	Name
+1139	Date
+1140	Month
+1141	Year
+1142	Male
+1143	Female
+1144	Generate Chart
+1145	Brahmin
+1146	Kshatriya
+1147	Vaishya
+1148	Shudra
+1149	Deva
+1150	Manushya
+1151	Rakshasa
+1152	Adi (Vata)
+1153	Madhya (Pitta)
+1154	Antya (Kapha)
+1155	Chatushpada (quadruped)
+1156	Manava (human)
+1157	Jalachara (aquatic)
+1158	Vanachara (wild)
+1159	Keeta (insect)
+1160	Ashva (Horse) - M
+1161	Gaja (Elephant) - F
+1162	Mesha (Goat) - F
+1163	Sarpa (Serpent) - M
+1164	Sarpa (Serpent) - F
+1165	Shwan (Dog) - F
+1166	Marjar (Cat) - M
+1167	Mesha (Goat) - M
+1168	Marjar (Cat) - F
+1169	Mushak (Rat) - M
+1170	Mushak (Rat) - F

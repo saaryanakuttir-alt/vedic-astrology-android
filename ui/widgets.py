@@ -8,6 +8,7 @@ plain scrollable GridLayout: a bold header row, then one row per data row.
 It's intentionally simple (no sorting/column-resize) — this app's tables
 are for reading, not manipulating.
 """
+import i18n
 import re
 
 from kivy.uix.boxlayout import BoxLayout
@@ -248,7 +249,7 @@ class LongText(ScrollView):
         # every individual texture small regardless of how long the
         # overall report is.
         self.grid.clear_widgets()
-        paragraphs = _split_into_chunks(text)
+        paragraphs = _split_into_chunks(i18n.t_text(text))
         for para in paragraphs:
             label = Label(
                 text=para, size_hint_y=None, height=dp(28), text_size=(None, None),
@@ -284,7 +285,7 @@ class FlowText(GridLayout):
 
     def set_text(self, text):
         self.clear_widgets()
-        for para in _split_into_chunks(text):
+        for para in _split_into_chunks(i18n.t_text(text)):
             label = Label(text=para, size_hint_y=None, height=dp(28), text_size=(None, None),
                           halign="left", valign="top", padding=(dp(10), dp(6)))
             label.bind(texture_size=self._resize, width=self._on_width)

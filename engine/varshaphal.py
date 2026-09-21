@@ -10,6 +10,7 @@ import swisseph as swe
 import ephemeris
 from extras import BODIES, _HOUSE_AREA, _TONE_GIST, _TONE_PHRASE, ordinal, house_verdicts, planet_considerations
 from panchanga import SIGNS
+from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 _DAYS_PER_YEAR = 365.2422
 _MUDDA_ORDER = ["Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury"]
@@ -18,11 +19,11 @@ _NAKSHATRA_LORD = [_MUDDA_ORDER[i % 9] for i in range(27)]            # Ashwini 
 
 _MUNTHA_KIND = {h: "good" for h in (1, 2, 3, 5, 9, 10, 11)}
 _MUNTHA_KIND.update({4: "mixed", 7: "mixed", 6: "care", 8: "care", 12: "care"})
-_MUNTHA_TEXT = {
+_MUNTHA_TEXT = tbl({
     "good": "The Muntha falls in a supportive house, so the year's main focus tends to go well and give you backing in %s.",
     "mixed": "The Muntha falls in a house that brings a mix of easy and effortful stretches, so %s may ask for some give-and-take this year.",
     "care": "The Muntha falls in a house that asks for care, so %s may need extra patience and looking after this year.",
-}
+})
 
 
 def _sun_return_jd(natal_sun_lon, near_jd):
@@ -59,7 +60,7 @@ def varsha_chart(chart, year):
     loc, bi = chart["resolved_location"], chart["birth_input"]
     utc = return_moment(chart, year).replace(tzinfo=_dt.timezone.utc)
     local = utc.astimezone(zoneinfo.ZoneInfo(loc["tz_name"]))
-    v = compute_birth_chart(name=f"{chart.get('name') or 'Chart'} - Varsha {year}", birth_date=(local.year, local.month, local.day),
+    v = compute_birth_chart(name=tr('{0} - Varsha {1}', chart.get('name') or 'Chart', year), birth_date=(local.year, local.month, local.day),
                             birth_time=(local.hour, local.minute, local.second), place_name=bi.get("place_name") or "",
                             latitude=loc["latitude"], longitude=loc["longitude"], tz_name=loc["tz_name"],
                             dasha_years_forward=2, sex=bi.get("sex"))
@@ -112,9 +113,8 @@ def varshaphal(chart, year):
         c = cons[period["lord"]]
         period.update(house=c["house"], tone=c["tone"], area=_HOUSE_AREA[c["house"]])
     kind = _MUNTHA_KIND[m["house"]]
-    summary = (f"The year starting {v['varsha']['local']:%d %b %Y} has the {v['ascendant']['sign']} sign rising. Its ruler {lagna_lord} "
-               f"{_TONE_PHRASE[cons[lagna_lord]['tone']]} in the yearly chart. The Muntha is in {m['sign']}, the {ordinal(m['house'])} house "
-               f"({_HOUSE_AREA[m['house']]}). " + _house_text(kind, m["house"]))
+    summary = (tr('The year starting {0:%d %b %Y} has the {1} sign rising. Its ruler {2} {3} in the yearly chart. '
+                  'The Muntha is in {4}, the {5} house ({6}). ', v['varsha']['local'], v['ascendant']['sign'], lagna_lord, _TONE_PHRASE[cons[lagna_lord]['tone']], m['sign'], ordinal(m['house']), _HOUSE_AREA[m['house']]) + _house_text(kind, m["house"]))
     return {"year": year, "age": age, "varsha": v, "local": v["varsha"]["local"], "muntha": {**m, "kind": kind},
             "mudda": mudda, "lagna_lord": lagna_lord, "lagna_lord_tone": cons[lagna_lord]["tone"], "summary": summary,
             "houses": [hv[h] for h in range(1, 13)], "considerations": cons, "tajika": tajika_yogas(v)}
@@ -122,25 +122,24 @@ def varshaphal(chart, year):
 
 def varshaphal_text(vp, compact=False):
     """Reader-friendly text in the '--- Heading ---' convention."""
-    parts = [f"--- Your year from {vp['local']:%d %b %Y} (age {vp['age']}) ---\n{vp['summary']}\n\n"
-             f"[In simple terms: the yearly chart is a fresh map for the year that begins on your birthday. The Muntha shows the "
-             f"life area that gets the spotlight, and the periods below show how the mood changes through the year. These are "
-             f"tendencies, not fixed events.]"]
+    parts = [tr('--- Your year from {0:%d %b %Y} (age {1}) ---\n{2}\n\n[In simple terms: the yearly chart is a '
+                'fresh map for the year that begins on your birthday. The Muntha shows the life area that gets '
+                'the spotlight, and the periods below show how the mood changes through the year. These are '
+                'tendencies, not fixed events.]', vp['local'], vp['age'], vp['summary'])]
     tone_idx = {"Good": 0, "Mostly good": 0, "Mixed": 1, "Needs some care": 2, "Challenging": 2}
     from extras import _EFFECTS
-    parts.append("--- The year's periods (Mudda Dasha) ---\nThe year is split into nine periods, each coloured by one planet as placed in "
-                 "the yearly chart.")
+    parts.append(tx("--- The year's periods (Mudda Dasha) ---\nThe year is split into nine periods, each coloured by one planet as placed in "
+                 "the yearly chart."))
     for p in vp["mudda"]:
-        line = (f"{p['lord']} period, {p['start']:%d %b %Y} to {p['end']:%d %b %Y} ({p['days']} days): {p['lord']} "
-                f"{_TONE_PHRASE[p['tone']]} in the yearly chart and sits in the {ordinal(p['house'])} house, so this stretch is felt "
-                f"through {p['area']}.")
+        line = (tr('{0} period, {1:%d %b %Y} to {2:%d %b %Y} ({3} days): {4} {5} in the yearly chart and sits in '
+                   'the {6} house, so this stretch is felt through {7}.', p['lord'], p['start'], p['end'], p['days'], p['lord'], _TONE_PHRASE[p['tone']], ordinal(p['house']), p['area']))
         if not compact:
-            line += " What may happen: " + _EFFECTS[p["lord"]][tone_idx[p["tone"]]]
+            line += tx(" What may happen: ") + _EFFECTS[p["lord"]][tone_idx[p["tone"]]]
         parts.append(line)
     if not compact:
         parts.append(tajika_text(vp))
-        parts.append("--- The yearly chart's 12 houses at a glance ---\n" + "\n\n".join(
-            f"{ordinal(h['house'])} house ({h['area']}): {h['tone']}. {h['may_happen']}" for h in vp["houses"]))
+        parts.append(tx("--- The yearly chart's 12 houses at a glance ---\n") + "\n\n".join(
+            tr('{0} house ({1}): {2}. {3}', ordinal(h['house']), h['area'], h['tone'], h['may_happen']) for h in vp["houses"]))
     return "\n\n".join(parts)
 
 
@@ -178,16 +177,16 @@ def tajika_text(vp):
     """Plain-words reading of the yearly chart's planet links."""
     yogas = vp["tajika"]
     if not yogas:
-        return ("--- Planet links in the yearly chart ---\nNo two planets are close to an exact angle in this yearly chart, so no one "
-                "planet-to-planet link stands out. [In simple terms: nothing special is being pulled together or pulled apart by the planets.]")
-    lines = ["--- Planet links in the yearly chart (Tajika yogas) ---\nWhen two planets sit at a friendly or testing angle and are close "
+        return (tx("--- Planet links in the yearly chart ---\nNo two planets are close to an exact angle in this yearly chart, so no one "
+                "planet-to-planet link stands out. [In simple terms: nothing special is being pulled together or pulled apart by the planets.]"))
+    lines = [tx("--- Planet links in the yearly chart (Tajika yogas) ---\nWhen two planets sit at a friendly or testing angle and are close "
              "to it, their themes are linked. 'Coming together' (Ithasala) means the angle is still tightening, so what they stand for "
              "tends to be building or coming through this year. 'Moving apart' (Ishrafa) means the angle has just passed its peak, so "
-             "the matter tends to be fading or already settled."]
+             "the matter tends to be fading or already settled.")]
     for y in yogas:
         state = ("coming together" if y["kind"] == "Ithasala" else "moving apart")
-        feel = {"easy": "an easy, supportive link", "tense": "a testing link that asks for effort", "blend": "a blending of the two"}[y["flow"]]
-        lines.append(f"{y['fast']} and {y['slow']} are {y['angle_name']}, and the link is {state} ({y['gap']} degrees from exact): {feel}.")
-    lines.append("[In simple terms: the tighter the gap, the stronger the link. Easy links help things run smoothly; testing links bring "
-                 "friction that can also push you to act. Tendencies only.]")
+        feel = {"easy": tx("an easy, supportive link"), "tense": tx("a testing link that asks for effort"), "blend": tx("a blending of the two")}[y["flow"]]
+        lines.append(tr('{0} and {1} are {2}, and the link is {3} ({4} degrees from exact): {5}.', y['fast'], y['slow'], y['angle_name'], state, y['gap'], feel))
+    lines.append(tx("[In simple terms: the tighter the gap, the stronger the link. Easy links help things run smoothly; testing links bring "
+                 "friction that can also push you to act. Tendencies only.]"))
     return "\n\n".join(lines)

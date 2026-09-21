@@ -1,0 +1,90 @@
+991	purva_punya_house_5
+992	5th House - Purva Punya (past-life merit)
+993	dharma_house_9
+994	9th House - Dharma (fortune / higher purpose)
+995	moksha_house_12
+996	12th House - Moksha (endings / past attachments)
+997	No chart yet
+998	pdf_sections_
+999	Select all
+1000	Choose report sections
+1001	Create PDF
+1002	Pick at least one
+1003	PDF saved
+1004	\n--- Planets ---
+1005	\n\n--- Yogas present ---
+1006	\n\n--- Life Predictions ---
+1007	\n\n--- Karmic & Past Life: The Soul's Narrative ---
+1008	(see the Karmic & Past Life tab)
+1009	(not enough KB data to synthesize this area for this chart)
+1010	Generate a chart for this profile first, then save its PDF report.
+1011	Could not create the PDF
+1012	\n(none of the 24 checked yogas are formed in this chart)
+1013	This tab hit an error while building its text - showing the details below instead of a blank screen so it can be reported:\n\n
+1014	Could not open it
+1015	{0:.2f}   ## {0}=detail['degree_in_sign']
+1016	{0}/{1}   ## {0}=maha['lord'], {1}=antar['lord']
+1017	House {0} -    ## {0}=m['from_venus']['house']
+1018	{0}   ## {0}=maha['lord']
+1019	{0} from its own house   ## {0}=ordinal(relation)
+1020	{0} ({1} Paksha)   ## {0}=p['tithi']['name'], {1}=p['tithi']['paksha']
+1021	{0:.6f} deg   ## {0}=c['resolved_datetime']['ayanamsa_value_d
+1022	{0:.4f}   ## {0}=loc['longitude']
+1023	A summary of your birth chart's key facts, plus traditional classifications (the 'Avkahada Chakra') used for things like matching horoscopes.
+1024	Where each planet sat in the sky at your birth. Deg = position within its sign (0-30). Rx = retrograde (appears to move backward). House = the life-area it falls in; Chalit Hs is a more precise recalculation of that. Nakshatra/Pada = the lunar 'constellation' and its quarter-division. Dignity = how strong or comfortable the planet is in that sign.
+1025	Which of your 12 houses (life areas, counted from your rising sign) each planet sits in. The house shows WHERE in life the planet's effects are felt - for example the 10th house is career and the 7th is partnership. Chalit Hs is a more precise recalculation of the house. 'Rules' and 'Looks at' show which other houses the planet governs and influences.
+1026	Which of the 12 zodiac signs each planet sits in. The sign shows HOW the planet behaves - its style and temperament, and whether it is comfortable there. Deg = position within the sign (0-30), Rx = moving backwards, Nakshatra/Pada = the lunar 'constellation' and its quarter, Dignity = how strong the planet is in that sign.
+1027	The 12 houses represent 12 areas of life (career, home, relationships...). 'Lord' is the planet that rules each house's sign; where that planet itself sits shapes how that life-area actually plays out for you.
+1028	'Dasha' is a timeline system: your life is divided into periods ruled by each planet in turn ('Maha' = main period, 'Antar' = a sub-period within it), used to time when a planet's themes are most active for you. Compact shows the main periods only.
+1029	'Ashtakvarga' scores each zodiac sign (0-8 points) for how supportive it tends to be for each planet - higher numbers mean more support. 'Sarva (Total)' adds every planet's score together per sign.
+1030	'Chalit' is a more precise recalculation of your house boundaries (each 'Bhava' = house). 'Begin' is where the house starts, 'Madhya' is its exact midpoint - used to double-check which house a planet near a boundary truly falls in.
+1031	Chalit Hs
+1032	Rules house
+1033	Looks at house
+1034	Lord placed in house
+1035	At Birth?
+1036	Begin Sign
+1037	Begin Deg
+1038	Madhya Sign
+1039	Madhya Deg
+1040	Date of Birth
+1041	Time of Birth
+1042	Day of Birth
+1043	Place of Birth
+1044	Time Zone
+1045	Ayanamsa (Lahiri)
+1046	Day Duration
+1047	Sidereal Time at Birth
+1048	SunSign (Indian/sidereal)
+1049	SunSign (Western/tropical)
+1050	Midheaven (MC) sign
+1051	Lagna (Ascendant)
+1052	Rasi (Moon sign)
+1053	Nakshatra - Pada
+1054	Nakshatra Lord
+1055	(not computed - disputed formula)
+1056	Mars sign
+1057	From Lagna
+1058	From Moon
+1059	--- Basic Details ---
+1060	(not entered)
+1061	(exact coordinates entered)
+1062	--- Avkahada Chakra ---
+1063	--- Panchang ---
+1064	--- Dasha Balance at Birth ---
+1065	--- Mangal Dosha (Manglik) ---
+1066	From Venus
+1067	At least one reference point shows the dosha
+1068	No dosha from any checked reference point
+1069	'Yogas' are specific planetary combinations that classical texts link to particular life themes (e.g. leadership, wealth, obstacles) when present. Compact shows just the first sentence of each meaning.
+1070	Show only present yogas
+1071	Dosha present
+1072	No dosha
+1073	<-- at birth
+1074	Sarva (Total)
+1075	How each planet affects the house it sits in - one section per planet, with a plain-words verdict (good, mixed or needs care) and what may happen:
+1076	How each planet behaves in the sign it sits in - one section per planet, with a plain-words verdict (good, mixed or needs care) and what may happen:
+1077	below_target
+1078	Vedic Astrology
+1079	New Chart
+1080	Varshaphal - Your Year

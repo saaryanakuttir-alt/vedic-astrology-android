@@ -15,6 +15,7 @@ from ui import theme
 from ui.widgets import ChipButton, ExpandableCard
 from ui.theme import ThemedTextInput as TextInput
 from faq_data import FAQ_CATEGORIES
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 
 class HelpTab(BoxLayout):
@@ -25,15 +26,15 @@ class HelpTab(BoxLayout):
         self.add_widget(theme.SectionHeader("❓", "Help & FAQ"))
 
         from ui.version import VERSION
-        credit = Label(text=f"Vedic Astrology · Created by Sammya Das · version {VERSION}", color=theme.ACCENT_700, bold=True,
+        credit = Label(text=tr('Vedic Astrology · Created by Sammya Das · version {0}', VERSION), color=theme.ACCENT_700, bold=True,
                        font_size="13sp", size_hint_y=None, height=dp(30), halign="left", valign="middle",
                        padding=(dp(4), 0))
         credit.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         self.add_widget(credit)
 
         caption = Label(
-            text="Answers to the questions people ask most when they first open a "
-                 "chart - no AI, no internet, just a searchable guide.",
+            text=tx("Answers to the questions people ask most when they first open a "
+                 "chart - no AI, no internet, just a searchable guide."),
             color=theme.MUTED, italic=True, font_size="12sp",
             size_hint_y=None, halign="left", valign="top", padding=(dp(4), dp(4)),
         )
@@ -108,7 +109,7 @@ class HelpTab(BoxLayout):
                 self.list_grid.add_widget(ExpandableCard(question, answer))
         if not any_shown:
             msg = Label(
-                text=f"No questions match \"{self.search_input.text}\" - try a different word.",
+                text=tr('No questions match "{0}" - try a different word.', self.search_input.text),
                 color=theme.MUTED, italic=True, font_size="13sp",
                 size_hint_y=None, height=dp(60), halign="left", valign="top",
             )

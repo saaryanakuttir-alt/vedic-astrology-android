@@ -1,0 +1,90 @@
+1	its ruler {0} is weak (debilitated)   ## {0}=lord
+2	 The next one begins around {0:%d %b %Y} (age {1:.0f}).   ## {0}=nxt['start'], {1}=nxt['start_age']
+3	{0} is placed in the {1} house, a tougher spot   ## {0}=lord, {1}=ordinal(lh)
+4	its ruler {0} sits in an unfriendly sign   ## {0}=lord
+5	the {0} house is a tougher house for this planet   ## {0}=ordinal(house)
+6	the {0} house suits a helpful planet   ## {0}=ordinal(house)
+7	Running - {0}   ## {0}=kind
+8	The {0} is clear of Rahu and Ketu, so this worry does not apply to you.   ## {0}=lum
+9	The {0} is close to Rahu or Ketu, so it can feel shadowed at times - a tendency, not a fixed result.   ## {0}=lum
+10	The {0} is clear of the Rahu-Ketu shadow.   ## {0}=lum
+11	the sign has a low support score ({0} points)   ## {0}=pts
+12	{0} look at it kindly   ## {0}=_list(helpers)
+13	{0} looks at it kindly   ## {0}=_list(helpers)
+14	{0} can do well here   ## {0}=_list(bad_occ)
+15	{0} add pressure from inside the house   ## {0}=_list(bad_occ)
+16	{0} adds pressure from inside the house   ## {0}=_list(bad_occ)
+17	{0} bring support from inside the house   ## {0}=_list(good_occ)
+18	{0} brings support from inside the house   ## {0}=_list(good_occ)
+19	{0} is placed in the {1} house, a helpful spot   ## {0}=lord, {1}=ordinal(lh)
+20	its ruler {0} sits in a friendly sign   ## {0}=lord
+21	the {0} house is a house where strong planets tend to do well   ## {0}=ordinal(house)
+22	the {0} house is a tougher house for a helpful planet   ## {0}=ordinal(house)
+23	- {0} in {1} ({2:%d %b %Y} to {3:%d %b %Y}): pressure on {4}; Saturn's Ashtakvarga points here {5}/8 ({6}).   ## {0}=s['phase'].capitalize(), {1}=s['sign'], {2}=s['start'], {3}=s['end'], {4}=d['area'], {5}=d['points'], {6}=d['points_tone']
+24	--- Where you are right now ---\nSaturn is currently in a smaller test for you ({0}). It is a shorter, milder version of Sade Sati; steady routines and looking after health and home are enough for most people.   ## {0}=kind
+25	The {0} together with Rahu or Ketu.   ## {0}=lum
+26	Because all planets are on one side of Rahu and Ketu, life may feel eventful ({0} type).   ## {0}=ks['type']
+27	Present - {0} type   ## {0}=ks['type']
+28	Present ({0}) - counted from {1}   ## {0}=strength, {1}=_list(hit)
+29	the sign has a high support score ({0} points)   ## {0}=pts
+30	its ruler {0} is strong ({1})   ## {0}=lord, {1}=c['relation'].lower()
+31	it gets a pressuring look from {0}   ## {0}=_list(strainers)
+32	it gets a supportive look from {0}   ## {0}=_list(helpers)
+33	it sits in a strong place ({0})   ## {0}=rel.lower()
+34	Cycle {0}: {1:.0f} to {2:.0f} years old ({3:%b %Y} - {4:%b %Y}).   ## {0}=i, {1}=max(c['start_age'], 0), {2}=c['end_age'], {3}=c['start'], {4}=c['end']
+35	{0}: {1}   ## {0}=phase.capitalize(), {1}=_PHASE_STORY[phase]
+36	--- Where you are right now ---\nYou are in Sade Sati - {0}. This cycle began on {1:%d %b %Y} (age {2:.0f}) and runs to about {3:%d %b %Y} (age {4:.0f}) - roughly {5}% is behind you and about {6} years {7} months remain.\n\n{8}\n\n{9}\n\n{10}\n\n[In simple terms: you are in the {11} stretch of Saturn's test. It is asking for patience in {12}. Keep routines steady and the difficult months tend to pass with lasting lessons.]   ## {0}=stay['phase'], {1}=cur['start'], {2}=max(cur['start_age'], 0), {3}=cur['end'], {4}=cur['end_age'], {5}=done * 100 // total, {6}=left // 365, {7}=(left % 365) // 30, {8}=_PHASE_STORY[stay['phase']], {9}=d['text'], {10}=_ADVICE, {11}=stay['phase'].split()[0], {12}=d['area']
+37	{0} - {1}: {2:%d %b %Y} to {3:%d %b %Y} (age {4:.0f} to {5:.0f}). Likely feel: {6}.   ## {0}=r['kind'], {1}=r['phase'], {2}=r['start'], {3}=r['end'], {4}=max(r['start_age'], 0), {5}=r['end_age'], {6}=r['plain']
+38	--- {0} ---\n{1}   ## {0}=d['name'], {1}=body
+39	\n\nWhat can help: {0}   ## {0}=d['easing']
+40	{0} house ({1}): {2}. {3} {4}   ## {0}=ordinal(v['house']), {1}=v['area'], {2}=v['tone'], {3}=v['may_happen'], {4}=why
+41	Because {0}.   ## {0}="; ".join(v["reasons"])
+42	--- {0}: {1} ---\n{2}\n\n{3}\n\n{4}\n\nWhat may happen: {5}\n\n[In simple terms: {6} {7} in your chart - {8}.]   ## {0}=p, {1}=c['tone'], {2}=c['summary'], {3}=facts, {4}=why, {5}=c['effects'], {6}=p, {7}=_TONE_PHRASE[c['tone']], {8}=_TONE_GIST[c['tone']]
+43	Why this verdict: {0}.   ## {0}="; ".join(c["reasons"])
+44	 It is looked at by {0}.   ## {0}=_list(c["aspected_by"])
+45	 It is the lord of the {0}.   ## {0}=houses_phrase(c['lord_of'])
+46	 ({0})   ## {0}=c['relation'].lower()
+47	 It rules your {0} house{1}.   ## {0}=_list(ordinal(h) for h in lords[p]), {1}='s' if len(lords[p]) > 1 else ''
+48	Saturn is moving through {0}, your {1} house ({2}), so the pressure is felt most in {3}. Saturn scores {4} of 8 points in {5} in your Ashtakvarga, which is {6} sign for it{7}.   ## {0}=sign, {1}=ordinal(house), {2}=_HOUSE_AREA[house], {3}=_HOUSE_AREA[house], {4}=pts, {5}=sign, {6}=word, {7}=tail
+49	\n\n[In simple terms: {0}]   ## {0}=d['plain']
+50	Verdict: {0} - {1}.\n\nWhat it is: {2}\n\n{3}: {4}   ## {0}=d['tone'], {1}=d['status'], {2}=d['what'], {3}=label, {4}=d['may_happen']
+51	 It looks at the {0}.   ## {0}=houses_phrase(c["aspects_houses"])
+52	{0} is in {1}{2}, in your {3} house.   ## {0}=p, {1}=c['sign'], {2}=rel, {3}=ordinal(c['house'])
+53	{0} stands for {1}. In your chart it sits in the {2} house, so its effects show up mostly in {3}.{4}   ## {0}=p, {1}=_SIGNIFIES[p], {2}=ordinal(house), {3}=area, {4}=lord_txt
+54	{0} houses   ## {0}=join_list(names)
+55	{0} house   ## {0}=names[0]
+56	Saturn in your birth chart looks {0}: it sits in {1} ({2}), in your {3} house, and rules your {4} house{5}. Your Moon looks {6} (in {7}, {8} house).    ## {0}=sat['tone'].lower(), {1}=sat['sign'], {2}=rank, {3}=ordinal(sat['house']), {4}=_list(ordinal(h) for h in sat['lord_of'], {5}='s' if len(sat['lord_of']) > 1 else '', {6}=moon['tone'].lower(), {7}=moon['sign'], {8}=ordinal(moon['house'])
+57	--- Where you are right now ---\nYour main life period (Mahadasha) is {0}, which looks {1} in your chart. What may happen: {2}\n\nInside it you are in the {3} sub-period (Antardasha), which looks {4}. What may happen: {5}\n\n[In simple terms: the {6} season sets the general mood of these years and the {7} sub-period is the weather within it. These are tendencies, not fixed events.]   ## {0}=o['mahadasha'], {1}=o['maha_tone'].lower(), {2}=o['maha_effects'], {3}=o['antardasha'], {4}=o['antar_tone'].lower(), {5}=o['antar_effects'], {6}=o['mahadasha'], {7}=o['antardasha']
+58	What usually helps: a steady daily routine, keeping promises, honest work, looking after sleep and health, helping people who are older or have less than you, and avoiding big risks or shortcuts while Saturn is testing you.
+59	Mostly good
+60	Needs some care
+61	your body, looks and personality
+62	money, family and speech
+63	courage, effort and siblings
+64	home, mother and inner peace
+65	studies, creativity and fun
+66	work, debts and health habits
+67	marriage and partnerships
+68	sudden changes and hidden matters
+69	luck, teachers and travel
+70	career and reputation
+71	gains and friends
+72	expenses, sleep and foreign places
+73	confidence, health, father figures and standing in society
+74	mind, mood, mother and everyday comfort
+75	energy, courage, drive and how you handle conflict
+76	thinking, speech, learning, business and skills
+77	wisdom, growth, teachers, money and good fortune
+78	love, comfort, art, pleasures and vehicles
+79	hard work, discipline, patience and responsibility
+80	big ambitions, sudden pushes, foreign things and restlessness
+81	detachment, intuition, letting go and spiritual interest
+82	Own sign
+83	it is more of a helper than a hurdle for the areas it touches
+84	it mostly helps, with the odd bump along the way
+85	expect a blend of easy and effortful stretches in the areas it touches
+86	the areas it touches may need extra patience and looking after
+87	the areas it touches may ask a lot of you, so steady habits and patience matter most
+88	looks good
+89	looks mostly good
+90	looks mixed

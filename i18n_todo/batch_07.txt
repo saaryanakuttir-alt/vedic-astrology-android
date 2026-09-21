@@ -1,0 +1,90 @@
+541	Choose a simple prayer or mantra from your own tradition and repeat it daily (108 times or ten minutes). Steady practice matters more than the exact words.
+542	Once a week, write down three things you are grateful for.
+543	Treat every remedy as optional: never put your health, money or family peace at risk for one.
+544	Chant 'Om Namah Shivaya' regularly, keep to a steady routine and do regular charity; the pattern is traditionally seen as easing with patience and service.
+545	Care for elders and respect family traditions, and give food or help to people in need in your family's name.
+546	\n\n[In simple terms: most people need only one or two of these - start with the mantra and everyday habits, and add a stone later only if an astrologer you trust agrees. Nothing here is a cure or a guarantee.]
+547	Nothing more is needed for your current periods: the planets running now look comfortable in your chart. The everyday habits below are enough.
+548	--- Keep in mind for later ---\nThese look troubled in your chart but are not active now, so nothing is needed yet:
+549	--- What everyone can do ---\nThese everyday habits suit any chart and need no expert:\n
+550	--- How to use these safely ---\n
+551	It looks comfortable in your chart, so no remedy is needed.
+552	--- Remedies for you, for right now ---\nOnly what is needed for the periods you are living through now is listed. A planet is considered only when it looks weak or troubled in YOUR chart AND is active at the moment. 
+553	--- Combinations to avoid ---\n
+554	--- For the doshas that are active now ---\n
+555	no period of it begins soon.
+556	A simple mantra and a small weekly donation are the safe way to ease it.]
+557	 and Saturn is also in a testing stretch (
+558	No period of it begins soon, so nothing is needed.
+559	finger an astrologer advises
+560	Stone-free alternative (or in addition): 
+561	{0} house ({1}): {2}. {3}   ## {0}=ordinal(h['house']), {1}=h['area'], {2}=h['tone'], {3}=h['may_happen']
+562	{0} and {1} are {2}, and the link is {3} ({4} degrees from exact): {5}.   ## {0}=y['fast'], {1}=y['slow'], {2}=y['angle_name'], {3}=state, {4}=y['gap'], {5}=feel
+563	{0} - Varsha {1}   ## {0}=chart.get('name') or 'Chart', {1}=year
+564	{0} period, {1:%d %b %Y} to {2:%d %b %Y} ({3} days): {4} {5} in the yearly chart and sits in the {6} house, so this stretch is felt through {7}.   ## {0}=p['lord'], {1}=p['start'], {2}=p['end'], {3}=p['days'], {4}=p['lord'], {5}=_TONE_PHRASE[p['tone']], {6}=ordinal(p['house']), {7}=p['area']
+565	--- Your year from {0:%d %b %Y} (age {1}) ---\n{2}\n\n[In simple terms: the yearly chart is a fresh map for the year that begins on your birthday. The Muntha shows the life area that gets the spotlight, and the periods below show how the mood changes through the year. These are tendencies, not fixed events.]   ## {0}=vp['local'], {1}=vp['age'], {2}=vp['summary']
+566	The year starting {0:%d %b %Y} has the {1} sign rising. Its ruler {2} {3} in the yearly chart. The Muntha is in {4}, the {5} house ({6}).    ## {0}=v['varsha']['local'], {1}=v['ascendant']['sign'], {2}=lagna_lord, {3}=_TONE_PHRASE[cons[lagna_lord]['tone']], {4}=m['sign'], {5}=ordinal(m['house']), {6}=_HOUSE_AREA[m['house']]
+567	The Muntha falls in a supportive house, so the year's main focus tends to go well and give you backing in %s.
+568	The Muntha falls in a house that brings a mix of easy and effortful stretches, so %s may ask for some give-and-take this year.
+569	The Muntha falls in a house that asks for care, so %s may need extra patience and looking after this year.
+570	together (conjunction)
+571	friendly (sextile)
+572	very friendly (trine)
+573	testing (square)
+574	--- The year's periods (Mudda Dasha) ---\nThe year is split into nine periods, each coloured by one planet as placed in the yearly chart.
+575	--- Planet links in the yearly chart ---\nNo two planets are close to an exact angle in this yearly chart, so no one planet-to-planet link stands out. [In simple terms: nothing special is being pulled together or pulled apart by the planets.]
+576	--- Planet links in the yearly chart (Tajika yogas) ---\nWhen two planets sit at a friendly or testing angle and are close to it, their themes are linked. 'Coming together' (Ithasala) means the angle is still tightening, so what they stand for tends to be building or coming through this year. 'Moving apart' (Ishrafa) means the angle has just passed its peak, so the matter tends to be fading or already settled.
+577	coming together
+578	moving apart
+579	[In simple terms: the tighter the gap, the stronger the link. Easy links help things run smoothly; testing links bring friction that can also push you to act. Tendencies only.]
+580	 What may happen: 
+581	--- The yearly chart's 12 houses at a glance ---\n
+582	an easy, supportive link
+583	a testing link that asks for effort
+584	a blending of the two
+585	{0} - rank {1} of 7 ({2}): {3:.0f} points. Its {4} are {5}. Its strongest support comes from {6}.   ## {0}=p, {1}=c['rank'], {2}=c['tone'], {3}=c['total'], {4}=_STRENGTH_THEME[p], {5}=_TONE_TEXT[c['tone']], {6}=best[1].split(' (')[0]
+586	Uchcha (exaltation)
+587	saptavargaja
+588	Saptavargaja (7 charts)
+589	Ojayugma (odd/even)
+590	Kendra (angular)
+591	Dig (direction)
+592	Nathonnatha (day/night)
+593	Paksha (Moon phase)
+594	Vara (weekday)
+595	Hora (hour)
+596	Ayana (declination)
+597	Naisargika (natural)
+598	one of the strongest planets in your chart, so its themes tend to come through clearly and reliably
+599	of middling strength, so its themes come through steadily but need some effort
+600	among the weaker planets in your chart, so its themes may need extra effort and support
+601	confidence and vitality
+602	mind and emotional steadiness
+603	energy and courage
+604	thinking and communication
+605	wisdom and good fortune
+606	love and comfort
+607	discipline and endurance
+608	--- Planet strength ---\nEach planet is scored on several classical sources of strength: how close it is to its exalted sign, how it fares across seven divisional charts, whether it sits in a strong house or direction, the time of day and Moon phase at your birth, and its own natural strength. The scores are compared between the planets of your own chart. [In simple terms: a stronger planet delivers its good qualities more easily; a weaker one needs more effort and support. It is a comparison, not a verdict on your life.]
+609	Strong
+610	Average
+611	Weaker
+612	{0} sub-period   ## {0}=a['lord']
+613	{0} period   ## {0}=m['lord']
+614	--- {0} Mahadasha{1} ---\n   ## {0}=m['lord'], {1}=now
+615	{0} ({1} to {2}): {3} {4} in your chart and sits in your {5} house, so this time is felt mostly through {6}. What may happen: {7}   ## {0}=label, {1}=fmt(s), {2}=fmt(e), {3}=p, {4}=_TONE_PHRASE[c['tone']], {5}=ordinal(c['house']), {6}=area, {7}=_EFFECTS[p][idx]
+616	{0:%d %b %Y}   ## {0}=d
+617	Planets sitting in the Karakamsa sign: {0}. Planets in the house just before it: {1}.   ## {0}=join_list(inside) if inside else tx("non, {1}=join_list(twelfth) if twelfth else tx("n
+618	Your Atmakaraka (the planet that stands for your soul's drive) is {0}. Its sign in the Navamsha chart, {1}, is your Karakamsa. It points to {2}.   ## {0}=ak, {1}=ks, {2}=_KARAKAMSA_TRAIT[ks]
+619	good fortune and auspicious beginnings
+620	some stress, ups and downs and effort
+621	money, comfort and growth
+622	restlessness, travel and changes
+623	steady progress and gains through work
+624	pressure, hard work and testing times
+625	achievement, success and recognition
+626	obstacles and a need for patience
+627	a bold, self-starting way of following your purpose
+628	steady, practical, comfort-loving aims
+629	curious, communicative and skill-based aims
+630	caring, home- and people-centred aims

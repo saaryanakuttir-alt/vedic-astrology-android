@@ -38,3 +38,8 @@ Rahu/Ketu aspect only the 7th here (AstroSage: 5th, 7th, 9th). Moon-Mars natural
 
 ## Remedies - `engine/remedy_plan.py`
 Built on the remedy knowledge base already in the app plus these rules: a planet is considered only when it is weak/troubled AND active now (running Mahadasha/Antardasha, or Saturn during Sade Sati/Dhaiya); a gemstone only for a planet that rules a trine house and no difficult house. Missing: **gemstone weight and metal rules by planet and by person**, the **classical list of functional benefics and malefics per ascendant** (currently derived from house lordship only), and **transit-based** (Gochara) triggers. These need a qualified source before the app should say more.
+
+## Languages - `engine/i18n.py`
+Bengali step 1 is built (interface and app-composed text). **Not translated yet**: the classical knowledge-base paragraphs (`engine/kb/*.json`
+and the text `engine/rule_engine.py` composes around them, about 155,000 words), the PDF report, and the Hindi language. These need a full
+translation with a native proofreader. Bengali numerals are not used (digits stay 0-9, except ordinals such as ১ম).

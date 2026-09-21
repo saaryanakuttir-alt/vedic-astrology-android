@@ -22,6 +22,7 @@ from ui import reading_mode, theme
 from ui.reading_mode import ReadingModeBar
 from ui.widgets import CaptionLabel, FlowText, LongText
 from ui.theme import ThemedSpinner as Spinner
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 VARGA_CHOICES = [
     ("Rasi (D1)", "D1"), ("Hora (D2)", "D2"), ("Drekkana (D3)", "D3"),
@@ -206,7 +207,7 @@ class BodyMapCanvas(ChartCanvas):
 
     def _cell_text(self, house, names, cx, cy, is_asc):
         """Body area (small, muted) over the planets (bold), stacked and centred on (cx, cy)."""
-        label = f"{house} {self.body_short.get(house, '')}".strip()
+        label = tr('{0} {1}', house, self.body_short.get(house, '')).strip()
         block = self._planet_block(names, "ASC" if is_asc else None)
         t_label = self._texture(label, 9.5, False)
         t_block = self._texture(block, 12.5, True) if block else None
@@ -285,10 +286,10 @@ class ChartTab(BoxLayout):
 
         self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
         page.add_widget(CaptionLabel(
-            "A visual diagram of your chart, showing which sign/house each planet falls "
+            tx("A visual diagram of your chart, showing which sign/house each planet falls "
             "in. 'D1' (Rasi) is your main birth chart; the other 'D' options are "
             "specialized zoom-ins classical texts use for specific life areas (e.g. D9 for "
-            "marriage). Compact shows just the plain-words explanation under the chart."
+            "marriage). Compact shows just the plain-words explanation under the chart.")
         ))
         page.add_widget(self.mode_bar)
 
@@ -332,9 +333,9 @@ class ChartTab(BoxLayout):
             import extras
             for key, name, purpose in extras.SHODASHVARGA:
                 if key == varga_key:
-                    return (f"[In simple terms: the {name} chart ({key}) is a 'zoom-in' on {purpose}. Read it like your "
-                            "main chart - see which sign each planet falls in and whether the planets look comfortable "
-                            "there. It adds detail to the main chart and never overrides it.]")
+                    return (tr("[In simple terms: the {0} chart ({1}) is a 'zoom-in' on {2}. Read it like your main chart - see "
+                               'which sign each planet falls in and whether the planets look comfortable there. It adds detail '
+                               'to the main chart and never overrides it.]', name, key, purpose))
             return ""
         if reading_mode.current(self.store) == "compact":
             return (cd.get("plain_explanation") or "").strip()
@@ -355,5 +356,5 @@ class ChartTab(BoxLayout):
         self._scroll.scroll_y = 1
         varga_key = self._varga_key()
         asc_sign = cg.ascendant_sign_for_varga(chart, varga_key)
-        self.info_label.text = f"Ascendant ({varga_key}): {asc_sign}"
+        self.info_label.text = tr('Ascendant ({0}): {1}', varga_key, asc_sign)
         self.canvas_widget.set_chart(chart, varga_key, self.style_spinner.text)

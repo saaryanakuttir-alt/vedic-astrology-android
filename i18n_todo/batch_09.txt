@@ -1,0 +1,90 @@
+721	Chaturthamsa (D4)
+722	Navamsa (D9)
+723	Dasamsa (D10)
+724	Dwadasamsa (D12)
+725	Shodasamsa (D16)
+726	Vimsamsa (D20)
+727	Chaturvimsamsa (D24)
+728	Saptavimsamsa (D27)
+729	Trimsamsa (D30)
+730	Khavedamsa (D40)
+731	Akshavedamsa (D45)
+732	Shashtiamsa (D60)
+733	North Indian
+734	No chart generated yet for this profile.
+735	No chart generated yet.
+736	South Indian
+737	A visual diagram of your chart, showing which sign/house each planet falls in. 'D1' (Rasi) is your main birth chart; the other 'D' options are specialized zoom-ins classical texts use for specific life areas (e.g. D9 for marriage). Compact shows just the plain-words explanation under the chart.
+738	In classical terms:
+739	{0} must be a whole number, got '{1}'.   ## {0}=field_name, {1}=text
+740	{0}   [size=11sp]{1:.2f}°, {2:.2f}° · {3}[/size]   ## {0}=c['name'], {1}=c['lat'], {2}=c['lng'], {3}=c['country']
+741	{0:02d}   ## {0}=i
+742	Chart generated for {0} ({1}) - Ascendant {2} {3:.2f} degrees.   ## {0}=PROFILE_LABELS[pid], {1}=name, {2}=chart['ascendant']['sign'], {3}=chart['ascendant']['degree_in_sign']
+743	Computing chart for {0}...   ## {0}=PROFILE_LABELS[pid]
+744	{0} is required.   ## {0}=field_name
+745	{0}: no chart generated yet.   ## {0}=label
+746	{0}: chart generated (Ascendant {1}).   ## {0}=label, {1}=chart['ascendant']['sign']
+747	Saved {0}. Find them under Saved people.   ## {0}=name
+748	Calculating…
+749	Enter birth details and tap Generate chart.
+750	these details
+751	(not set)
+752	Generate chart
+753	Saved people
+754	e.g. Asha Rao
+755	Sex (optional)
+756	Date of birth
+757	A noon chart will be used until the exact time is confirmed. Ascendant and finer dasha timing depend on precise time.
+758	Time of birth
+759	Search city
+760	Place of birth
+761	Enter exact coordinates instead
+762	Asia/Kolkata
+763	Time zone
+764	Chart style
+765	Lahiri ayanamsa · sidereal (Vedic) positions
+766	Save these details
+767	Not saved yet
+768	CHART GENERATED
+769	Full planetary placements, dashas and yogas are ready in the other screens.
+770	Open chart
+771	New chart
+772	Enter a date of birth and a place of birth (or exact coordinates) first, then save.
+773	Birth year
+774	Birth month
+775	Birth day
+776	Birth time (hour)
+777	Birth time (minute)
+778	Error - no chart was generated.
+779	 Details saved.
+780	No matches — try another city.
+781	Could not generate chart
+782	\n[In simple terms: at this age you are in a {0} chapter of life, and {1}.{2} Think of it as the season you are in, not a fixed event.]   ## {0}=entry['mahadasha_lord'], {1}=spot, {2}=overall
+783	 Overall it is {0}.   ## {0}=entry['leaning']
+784	the spotlight is on {0}   ## {0}=entry['muntha_theme']
+785	{0} - Muntha in {1} - {2}\n   ## {0}=periods, {1}=entry['muntha_sign'], {2}=entry.get('leaning', '')
+786	 / {0} Pratyantardasha   ## {0}=entry['pratyantardasha_lord']
+787	This chart leans toward: {0}.   ## {0}=mct['tendency']
+788	\n[In simple terms: {0}]   ## {0}=_weather(forecast['weekly_text'], 'week'
+789	\n\n--- Transit outlook as of {0} (birth Moon in {1}) ---\n   ## {0}=target.date().isoformat(), {1}=forecast['moon_sign']
+790	{0} Mahadasha / {1} Antardasha   ## {0}=entry['mahadasha_lord'], {1}=entry['antardasha_lord']
+791	=== {0} - age {1} ===\n   ## {0}=target.date().isoformat(), {1}=age
+792	=== Relationship Themes - {0} ===\n   ## {0}=name
+793	=== Medical Astrology - {0} ===   ## {0}=name
+794	for this {0} the planets in the sky are {1}. It is like a weather forecast for your life at that time - some easier days, some harder ones, nothing fixed.   ## {0}=span, {1}=mood
+795	Traditional Vedic 'medical astrology': which body areas your own planets classically emphasize, your Ayurvedic constitution, and age windows traditionally worth being mindful during. Symbolic only - NOT a diagnosis and never a substitute for a doctor.
+796	How to read the body map: each triangle or diamond is one of your 12 houses, and each house stands for a part of the body, from the head (house 1) down to the feet (house 12). Planets sitting in a house classically colour that body area. Shaded houses hold a planet that classical texts link with strain or caution (Sun, Mars, Saturn, Rahu, Ketu); the others are empty or have a supportive planet. [In simple terms: picture your body laid over the chart like a map. The shaded spots are just the areas astrology says deserve a little extra care - it is a symbolic map, not a scan, and nothing on it means something is wrong.]
+797	Classical indicators of relationship TENDENCIES in your OWN chart - never predictions of behaviour and never evidence about a partner. Includes a marriage/relationship-count tendency (a band, not a number) and a karmic read on why relationships take the shape they do.
+798	mostly friendly for you
+799	a bit more effortful than usual
+800	a balanced mix of easy and harder influences
+801	Pick a year between 1900 and 2100.
+802	Relationship themes are not available for this chart.
+803	Get prediction
+804	no single area dominates
+805	\n\n--- How many marriages/relationships? (a tendency, not a count) ---
+806	Pick any date - past, present or future - and get that date's full picture: which Dasha/Muntha year it falls in, plus that date's own weekly/monthly transit outlook. General tendencies for the period, not fixed events. [In simple terms: choose a day, month and year and tap Get prediction; you get the general mood of that period, like a weather forecast for your life - not a promise.]
+807	That is not a real date (for example 31 June, or no year entered). Pick the day and month, and type a 4-digit year.
+808	--- Dasha & Muntha for this year ---
+809	This date falls outside the computed 0-100 year Dasha timeline for this chart.
+810	Medical astrology data is not available for this chart.

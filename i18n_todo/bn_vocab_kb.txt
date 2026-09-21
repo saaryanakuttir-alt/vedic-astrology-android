@@ -1,0 +1,89 @@
+Blue Sapphire	নীলকান্তমণি
+Cat's Eye	ক্যাটস আই
+Diamond	হীরা
+Emerald	পান্না
+Hessonite Garnet	গোমেদ
+Pearl	মুক্তা
+Red Coral	লাল প্রবাল
+Ruby	চুনি
+Yellow Sapphire	হলুদ নীলা
+Gomed	গোমেদ
+Heera	হীরা
+Lehsunia / Vaidurya	লহসুনিয়া / বৈদূর্য
+Manik	মাণিক
+Moonga	মুঙ্গা
+Moti	মোতি
+Neelam	নীলম
+Panna	পান্না
+Pukhraj	পোখরাজ
+Alexandrite	আলেকজান্দ্রাইট
+Amethyst	অ্যামেথিস্ট
+Carnelian	কার্নেলিয়ান
+Citrine	সিট্রিন
+Green Tourmaline	সবুজ টুরমালিন
+Iolite	আয়োলাইট
+Moonstone	চন্দ্রকান্তমণি
+Orange Zircon	কমলা জিরকন
+Peridot	পেরিডট
+Red Garnet	লাল গার্নেট
+Red Spinel	লাল স্পিনেল
+White Sapphire	সাদা নীলা
+Yellow Topaz	হলুদ পোখরাজ
+Zircon	জিরকন
+Copper or Gold	তামা বা সোনা
+Gold	সোনা
+Gold or Silver	সোনা বা রুপো
+Iron, Silver, or Panchdhatu (5-metal alloy)	লোহা, রুপো বা পঞ্চধাতু (৫ ধাতুর মিশ্র)
+Silver	রুপো
+Silver or Gold	রুপো বা সোনা
+Silver or Platinum	রুপো বা প্লাটিনাম
+Index finger	তর্জনী
+Little finger	কনিষ্ঠা
+Middle finger	মধ্যমা
+Ring finger	অনামিকা
+Om Bhraam Bhreem Bhraum Sah Rahave Namah	ওঁ ভ্রাং ভ্রীং ভ্রৌং সঃ রাহবে নমঃ
+Om Braam Breem Braum Sah Budhaya Namah	ওঁ ব্রাং ব্রীং ব্রৌং সঃ বুধায় নমঃ
+Om Draam Dreem Draum Sah Shukraya Namah	ওঁ দ্রাং দ্রীং দ্রৌং সঃ শুক্রায় নমঃ
+Om Graam Greem Graum Sah Gurave Namah	ওঁ গ্রাং গ্রীং গ্রৌং সঃ গুরবে নমঃ
+Om Hraam Hreem Hraum Sah Suryaya Namah	ওঁ হ্রাং হ্রীং হ্রৌং সঃ সূর্যায় নমঃ
+Om Kraam Kreem Kraum Sah Bhaumaya Namah	ওঁ ক্রাং ক্রীং ক্রৌং সঃ ভৌমায় নমঃ
+Om Praam Preem Praum Sah Shanaishcharaya Namah	ওঁ প্রাং প্রীং প্রৌং সঃ শনৈশ্চরায় নমঃ
+Om Shraam Shreem Shraum Sah Chandraya Namah	ওঁ শ্রাং শ্রীং শ্রৌং সঃ চন্দ্রায় নমঃ
+Om Sraam Sreem Sraum Sah Ketave Namah	ওঁ স্রাং স্রীং স্রৌং সঃ কেতবে নমঃ
+Evening, on Mondays	সন্ধ্যায়, সোমবারে
+Evening, on Saturdays	সন্ধ্যায়, শনিবারে
+Evening, on Tuesdays	সন্ধ্যায়, মঙ্গলবারে
+Morning, on Fridays	সকালে, শুক্রবারে
+Morning, on Thursdays	সকালে, বৃহস্পতিবারে
+Morning, on Wednesdays	সকালে, বুধবারে
+Sunrise, on Sundays	সূর্যোদয়ের সময়, রবিবারে
+Sunrise, on Tuesdays	সূর্যোদয়ের সময়, মঙ্গলবারে
+Black sesame (til), iron, black cloth, mustard oil, urad dal	কালো তিল, লোহা, কালো কাপড়, সরষের তেল, কালো মাষকলাই ডাল
+Green gram (moong dal), green cloth, bronze items	মুগ ডাল, সবুজ কাপড়, কাঁসার জিনিস
+Multi-colored cloth, sesame seeds, blankets	রঙিন কাপড়, তিল, কম্বল
+Mustard oil, black gram (urad dal), blankets, coconut	সরষের তেল, কালো মাষকলাই ডাল, কম্বল, নারকেল
+Red lentils (masoor dal), red cloth, jaggery, copper	মসুর ডাল, লাল কাপড়, গুড়, তামা
+Rice, milk, white cloth, silver, sugar	চাল, দুধ, সাদা কাপড়, রুপো, চিনি
+Turmeric, gram dal (chana dal), yellow cloth, gold, books	হলুদ, ছোলার ডাল, হলুদ কাপড়, সোনা, বই
+Wheat, jaggery, copper, red cloth, red flowers	গম, গুড়, তামা, লাল কাপড়, লাল ফুল
+White clothes, rice, sugar, silver, perfume, ghee	সাদা কাপড়, চাল, চিনি, রুপো, আতর, ঘি
+Black, Dark Blue	কালো, গাঢ় নীল
+Green	সবুজ
+Grey, Brown, Multi-colored	ধূসর, বাদামি, রঙিন
+Red	লাল
+Red, Orange, Copper	লাল, কমলা, তামাটে
+Smoky Grey, Blue-black	ধোঁয়াটে ধূসর, নীলচে কালো
+White, Pastel, Pink	সাদা, হালকা রঙ, গোলাপি
+White, Silver, Cream	সাদা, রুপোলি, ক্রিম
+Yellow, Gold	হলুদ, সোনালি
+stronger	তীব্রতর
+mild	মৃদু
+{0} in the 9th house.	৯ম ভাবে {0}।
+Neither Rahu nor Ketu is in the 9th house.	রাহু বা কেতু কেউই ৯ম ভাবে নেই।
+Sun is conjunct {0}.	সূর্য {0}-এর সঙ্গে যুক্ত।
+Sun is not conjunct Rahu or Ketu.	সূর্য রাহু বা কেতুর সঙ্গে যুক্ত নয়।
+{0} (9th lord) is conjunct {1}.	{0} (৯ম ভাবের অধিপতি) {1}-এর সঙ্গে যুক্ত।
+{0} (9th lord) has no natural-malefic conjunction.	{0} (৯ম ভাবের অধিপতি)-এর সঙ্গে কোনো স্বভাবতই অশুভ গ্রহ যুক্ত নেই।
+{0}, {1} house	{0}, {1} ভাব
+{0} {1}Y {2}M {3}D	{0} {1} বছর {2} মাস {3} দিন
+{0:.6f} deg	{0:.6f} ডিগ্রি

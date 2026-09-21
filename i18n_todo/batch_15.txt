@@ -1,0 +1,90 @@
+1261	+  What does 'sidereal' / Lahiri ayanamsa mean?
+1262	+  What is Ashtakoot Guna Milan?
+1263	+  What is Dasha / Antardasha?
+1264	+  What is a Yoga?
+1265	=== Family Compatibility Report ===
+1266	Age
+1267	Angle
+1268	Antar
+1269	Aqu
+1270	Ari
+1271	Aries (now)
+1272	Asc
+1273	Ashtakvarga
+1274	Balance
+1275	Bhakoot
+1276	Bhava
+1277	Bhramari (now)
+1278	Built-in
+1279	Can
+1280	Cap
+1281	Chalit
+1282	Change
+1283	Deg
+1284	Degree
+1285	Details
+1286	Dignity
+1287	Editing: Self (Native)
+1288	End
+1289	English
+1290	FAMILY & COMPATIBILITY
+1291	Family & Compatibility
+1292	Feels
+1293	Field
+1294	From
+1295	GETTING STARTED
+1296	Gana
+1297	Gem
+1298	Getting Started
+1299	Graha Maitri
+1300	House
+1301	Jup
+1302	Karana
+1303	Ket
+1304	Ket, Mar, Mer
+1305	Ket, Sat, Rah, Moo, Jup
+1306	KetR
+1307	Keyboard
+1308	Known
+1309	Koota
+1310	Kuja Dosha (Mangal Dosha)
+1311	Lagna · Virgo
+1312	Language
+1313	Latitude
+1314	Level
+1315	Lib
+1316	Longitude
+1317	Lord
+1318	Maha
+1319	Mar
+1320	Mar, Mer
+1321	Mar, Mer, Sun
+1322	Max
+1323	Mer
+1324	Mer, Rah, Moo
+1325	Mer, Rah, Moo, Ket, Sat
+1326	Mercury (now)
+1327	Moo
+1328	Moo, Jup, Sat, Sun, Ven
+1329	Moon · Aquarius
+1330	Nadi
+1331	Nakshatra
+1332	Note
+1333	Opposition
+1334	Overall
+1335	PREDICTIONS & KARMIC SECTION
+1336	Pada
+1337	Paya
+1338	Period
+1339	Phase
+1340	Phone
+1341	Pis
+1342	Planet
+1343	Planets
+1344	Points
+1345	Pratyantar
+1346	Predictions
+1347	Predictions & Karmic Section
+1348	READING YOUR CHART
+1349	READINGS
+1350	Rah

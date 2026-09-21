@@ -19,6 +19,7 @@ from astrology_tables import SIGN_LORD
 from divisional import d7_saptamsha
 from maitri import CLASSICAL_SEVEN, panchadha_maitri
 from panchanga import SIGNS
+from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 SEVEN = CLASSICAL_SEVEN
 _DEBIL_POINT = {"Sun": 190.0, "Moon": 213.0, "Mars": 118.0, "Mercury": 345.0, "Jupiter": 275.0, "Venus": 177.0, "Saturn": 20.0}
@@ -158,26 +159,26 @@ def compute_shadbala(chart):
     return out
 
 
-_TONE_TEXT = {
+_TONE_TEXT = tbl({
     "Strong": "one of the strongest planets in your chart, so its themes tend to come through clearly and reliably",
     "Average": "of middling strength, so its themes come through steadily but need some effort",
     "Weaker": "among the weaker planets in your chart, so its themes may need extra effort and support",
-}
-_STRENGTH_THEME = {"Sun": "confidence and vitality", "Moon": "mind and emotional steadiness", "Mars": "energy and courage",
+})
+_STRENGTH_THEME = tbl({"Sun": "confidence and vitality", "Moon": "mind and emotional steadiness", "Mars": "energy and courage",
                    "Mercury": "thinking and communication", "Jupiter": "wisdom and good fortune", "Venus": "love and comfort",
-                   "Saturn": "discipline and endurance"}
+                   "Saturn": "discipline and endurance"})
 
 
 def shadbala_text(chart):
     sb = compute_shadbala(chart)
-    parts = ["--- Planet strength ---\nEach planet is scored on several classical sources of strength: how close it is to its exalted sign, how "
+    parts = [tx("--- Planet strength ---\nEach planet is scored on several classical sources of strength: how close it is to its exalted sign, how "
              "it fares across seven divisional charts, whether it sits in a strong house or direction, the time of day and Moon phase at "
              "your birth, and its own natural strength. The scores are compared between the planets of your own chart. "
              "[In simple terms: a stronger planet delivers its good qualities more easily; a weaker one needs more effort and support. "
-             "It is a comparison, not a verdict on your life.]"]
+             "It is a comparison, not a verdict on your life.]")]
     for p in sorted(SEVEN, key=lambda x: sb[x]["rank"]):
         c = sb[p]
         best = max(COMPONENTS, key=lambda kv: c[kv[0]] / 60.0)
-        parts.append(f"{p} - rank {c['rank']} of 7 ({c['tone']}): {c['total']:.0f} points. Its {_STRENGTH_THEME[p]} are {_TONE_TEXT[c['tone']]}. "
-                     f"Its strongest support comes from {best[1].split(' (')[0]}.")
+        parts.append(tr('{0} - rank {1} of 7 ({2}): {3:.0f} points. Its {4} are {5}. Its strongest support comes from '
+                        '{6}.', p, c['rank'], c['tone'], c['total'], _STRENGTH_THEME[p], _TONE_TEXT[c['tone']], best[1].split(' (')[0]))
     return "\n\n".join(parts)

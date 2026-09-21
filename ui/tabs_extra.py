@@ -23,6 +23,7 @@ from ui.tabs_chart import BodyMapCanvas
 from ui.tabs_entry import MONTHS
 from ui.theme import SegmentedControl, ThemedButton, ThemedSpinner, ThemedTextInput
 from ui.widgets import CaptionLabel, FlowText, LongText
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 
 def _weather(text, span):
@@ -35,8 +36,8 @@ def _weather(text, span):
         mood = "a bit more effortful than usual"
     else:
         mood = "a balanced mix of easy and harder influences"
-    return (f"for this {span} the planets in the sky are {mood}. It is like a weather forecast for your life at "
-            "that time - some easier days, some harder ones, nothing fixed.")
+    return (tr('for this {0} the planets in the sky are {1}. It is like a weather forecast for your life at '
+               'that time - some easier days, some harder ones, nothing fixed.', span, mood))
 
 
 class MedicalTab(BoxLayout):
@@ -84,7 +85,7 @@ class MedicalTab(BoxLayout):
         if not m or chart is None:
             note = FlowText()
             note.set_text("No chart generated yet for this profile." if not m else
-                          "Medical astrology data is not available for this chart.")
+                          tx("Medical astrology data is not available for this chart."))
             self.content.add_widget(note)
             return
         try:
@@ -93,14 +94,14 @@ class MedicalTab(BoxLayout):
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:MedicalTab: failed:\n{tb}")
             err = FlowText()
-            err.set_text("This tab hit an error while building - details below so it can be reported:\n\n" + tb)
+            err.set_text(tx("This tab hit an error while building - details below so it can be reported:\n\n") + tb)
             self.content.add_widget(err)
         self._scroll.scroll_y = 1
 
     def _build(self, reading, chart, m):
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
         title = FlowText()
-        title.set_text(f"=== Medical Astrology - {name} ===")
+        title.set_text(tr('=== Medical Astrology - {0} ===', name))
         self.content.add_widget(title)
 
         row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(44), padding=(dp(10), dp(3)))
@@ -142,20 +143,20 @@ class RelationshipTab(_BaseReportTab):
     def _build_text(self, reading):
         rel = reading.get("relationship_themes")
         if not rel:
-            return "Relationship themes are not available for this chart."
+            return tx("Relationship themes are not available for this chart.")
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
-        lines = [f"=== Relationship Themes - {name} ===\n", rel["caveat"] + "\n"]
+        lines = [tr('=== Relationship Themes - {0} ===\n', name), rel["caveat"] + "\n"]
         if rel.get("plain_summary"):
             lines.append("\n" + rel["plain_summary"])
         mct = rel.get("marriage_count_tendency")
         if mct:
-            lines.append("\n\n--- How many marriages/relationships? (a tendency, not a count) ---")
+            lines.append(tx("\n\n--- How many marriages/relationships? (a tendency, not a count) ---"))
             lines.append(mct["caveat"])
-            lines.append(f"This chart leans toward: {mct['tendency']}.")
+            lines.append(tr('This chart leans toward: {0}.', mct['tendency']))
             for i in mct.get("indicators", []):
-                lines.append(f"- {i}")
+                lines.append(tr('- {0}', i))
         if rel.get("deep_discussion"):
-            lines.append("\n\n--- Full discussion ---\n" + rel["deep_discussion"])
+            lines.append(tx("\n\n--- Full discussion ---\n") + rel["deep_discussion"])
         return "\n".join(lines)
 
 
@@ -169,10 +170,10 @@ class PredictionsTab(BoxLayout):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
         self.add_widget(CaptionLabel(
-            "Pick any date - past, present or future - and get that date's full picture: which Dasha/Muntha "
+            tx("Pick any date - past, present or future - and get that date's full picture: which Dasha/Muntha "
             "year it falls in, plus that date's own weekly/monthly transit outlook. General tendencies for the "
             "period, not fixed events. [In simple terms: choose a day, month and year and tap Get prediction; "
-            "you get the general mood of that period, like a weather forecast for your life - not a promise.]"
+            "you get the general mood of that period, like a weather forecast for your life - not a promise.]")
         ))
         today = datetime.date.today()
         # Pickers instead of typing "YYYY-MM-DD": nothing to type but a 4-digit year, which
@@ -221,7 +222,7 @@ class PredictionsTab(BoxLayout):
         except Exception:  # noqa: BLE001 - show the error on screen rather than a blank tab
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:PredictionsTab: failed:\n{tb}")
-            self.text_view.set_text("Could not build this prediction:\n\n" + tb)
+            self.text_view.set_text(tx("Could not build this prediction:\n\n") + tb)
 
     def _build(self, chart, reading):
         import life_timeline
@@ -231,7 +232,7 @@ class PredictionsTab(BoxLayout):
             year = int((self.year_input.text or "").strip())
             target = datetime.datetime(year, MONTHS.index(self.month_spinner.text) + 1, int(self.day_spinner.text))
         except ValueError:
-            return "That is not a real date (for example 31 June, or no year entered). Pick the day and month, and type a 4-digit year."
+            return tx("That is not a real date (for example 31 June, or no year entered). Pick the day and month, and type a 4-digit year.")
         if not 1900 <= target.year <= 2100:
             return "Pick a year between 1900 and 2100."
         at_dt = target.replace(hour=12, minute=0, second=0, microsecond=0)
@@ -241,26 +242,26 @@ class PredictionsTab(BoxLayout):
         entry = years.get(age)
         forecast = compute_transit_forecast(chart, at_dt)
 
-        lines = [f"=== {target.date().isoformat()} - age {age} ===\n"]
+        lines = [tr('=== {0} - age {1} ===\n', target.date().isoformat(), age)]
         if entry:
-            lines.append("--- Dasha & Muntha for this year ---")
-            periods = f"{entry['mahadasha_lord']} Mahadasha / {entry['antardasha_lord']} Antardasha"
+            lines.append(tx("--- Dasha & Muntha for this year ---"))
+            periods = tr('{0} Mahadasha / {1} Antardasha', entry['mahadasha_lord'], entry['antardasha_lord'])
             if entry.get("pratyantardasha_lord"):
-                periods += f" / {entry['pratyantardasha_lord']} Pratyantardasha"
-            lines.append(f"{periods} - Muntha in {entry['muntha_sign']} - {entry.get('leaning', '')}\n")
+                periods += tr(' / {0} Pratyantardasha', entry['pratyantardasha_lord'])
+            lines.append(tr('{0} - Muntha in {1} - {2}\n', periods, entry['muntha_sign'], entry.get('leaning', '')))
             lines.append(entry["note"])
-            spot = (f"the spotlight is on {entry['muntha_theme']}" if entry.get("muntha_theme")
+            spot = (tr('the spotlight is on {0}', entry['muntha_theme']) if entry.get("muntha_theme")
                     else "no single area dominates")
-            overall = f" Overall it is {entry['leaning']}." if entry.get("leaning") else ""
-            lines.append(f"\n[In simple terms: at this age you are in a {entry['mahadasha_lord']} chapter of life, "
-                         f"and {spot}.{overall} Think of it as the season you are in, not a fixed event.]")
+            overall = tr(' Overall it is {0}.', entry['leaning']) if entry.get("leaning") else ""
+            lines.append(tr('\n[In simple terms: at this age you are in a {0} chapter of life, and {1}.{2} Think of it as the '
+                            'season you are in, not a fixed event.]', entry['mahadasha_lord'], spot, overall))
         else:
-            lines.append("This date falls outside the computed 0-100 year Dasha timeline for this chart.")
-        lines.append(f"\n\n--- Transit outlook as of {target.date().isoformat()} (birth Moon in {forecast['moon_sign']}) ---\n")
+            lines.append(tx("This date falls outside the computed 0-100 year Dasha timeline for this chart."))
+        lines.append(tr('\n\n--- Transit outlook as of {0} (birth Moon in {1}) ---\n', target.date().isoformat(), forecast['moon_sign']))
         lines.append(forecast["monthly_text"])
-        lines.append(f"\n[In simple terms: {_weather(forecast['monthly_text'], 'month')}]")
+        lines.append(tr('\n[In simple terms: {0}]', _weather(forecast['monthly_text'], 'month')))
         lines.append("\n" + forecast["weekly_text"])
-        lines.append(f"\n[In simple terms: {_weather(forecast['weekly_text'], 'week')}]")
+        lines.append(tr('\n[In simple terms: {0}]', _weather(forecast['weekly_text'], 'week')))
         lines.append("\n\n" + forecast["caveat"])
         lines.append("\n" + reading["year_by_year"]["caveat"])
         return "\n".join(lines)

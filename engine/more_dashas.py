@@ -9,6 +9,7 @@ import datetime as _dt
 from extras import (BODIES, _EFFECTS, _HOUSE_AREA, _TONE_PHRASE, ordinal, planet_considerations)
 from astrology_tables import SIGN_LORD
 from panchanga import SIGNS
+from i18n import join_list, tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 DAY = 365.25
 _ONE_DAY = _dt.timedelta(days=1)
@@ -30,12 +31,12 @@ def _add_years(t, years):
 # ---------------------------------------------------------------- Yogini Dasha (36-year cycle)
 YOGINIS = [("Mangala", "Ma", 1), ("Pingala", "Pi", 2), ("Dhanya", "Dh", 3), ("Bhramari", "Br", 4),
            ("Bhadrika", "Ba", 5), ("Ulka", "Ul", 6), ("Siddha", "Si", 7), ("Sankata", "Sn", 8)]
-_YOGINI_MEANING = {
+_YOGINI_MEANING = tbl({
     "Mangala": "good fortune and auspicious beginnings", "Pingala": "some stress, ups and downs and effort",
     "Dhanya": "money, comfort and growth", "Bhramari": "restlessness, travel and changes",
     "Bhadrika": "steady progress and gains through work", "Ulka": "pressure, hard work and testing times",
     "Siddha": "achievement, success and recognition", "Sankata": "obstacles and a need for patience",
-}
+})
 
 
 def yogini_dasha(chart, years=100):
@@ -114,19 +115,19 @@ def char_dasha(chart):
 
 
 # ---------------------------------------------------------------- Jaimini significators and Karakamsa
-_KARAKA_ROLES = [("Atmakaraka", "the soul - your core drive"), ("Amatyakaraka", "career and advisers"),
+_KARAKA_ROLES = tbl([("Atmakaraka", "the soul - your core drive"), ("Amatyakaraka", "career and advisers"),
                  ("Bhratrukaraka", "brothers, sisters and courage"), ("Matrukaraka", "mother and inner peace"),
                  ("Putrakaraka", "intellect and creativity"), ("Gnatikaraka", "relatives and rivals"),
-                 ("Darakaraka", "spouse and partnerships")]
+                 ("Darakaraka", "spouse and partnerships")])
 _FIXED_KARAKA = ["Sun", "Mercury", "Mars", "Moon", "Jupiter", "Saturn", "Venus"]       # Sthira karakas, same role order
-_KARAKAMSA_TRAIT = {
+_KARAKAMSA_TRAIT = tbl({
     "Aries": "a bold, self-starting way of following your purpose", "Taurus": "steady, practical, comfort-loving aims",
     "Gemini": "curious, communicative and skill-based aims", "Cancer": "caring, home- and people-centred aims",
     "Leo": "leadership, recognition and a wish to shine in your own right", "Virgo": "service, detail and useful skills",
     "Libra": "fairness, partnership and beauty", "Scorpio": "depth, research and transformation",
     "Sagittarius": "learning, teaching and higher ideals", "Capricorn": "discipline, structure and long-term achievement",
     "Aquarius": "ideas, groups and doing things differently", "Pisces": "imagination, compassion and spiritual leanings",
-}
+})
 
 
 def karakas(chart):
@@ -156,16 +157,16 @@ def karakamsa_text(chart):
     house_of = lambda s: (SIGNS.index(s) - SIGNS.index(ks)) % 12 + 1
     inside = [p for p in BODIES if house_of(chart["planets"][p]["sign"]) == 1]
     twelfth = [p for p in BODIES if house_of(chart["planets"][p]["sign"]) == 12]
-    bits = [f"Your Atmakaraka (the planet that stands for your soul's drive) is {ak}. Its sign in the Navamsha chart, {ks}, is your "
-            f"Karakamsa. It points to {_KARAKAMSA_TRAIT[ks]}."]
-    bits.append("Planets sitting in the Karakamsa sign: " + (", ".join(inside) if inside else "none") + ". "
-                "Planets in the house just before it: " + (", ".join(twelfth) if twelfth else "none") + ".")
+    bits = [tr("Your Atmakaraka (the planet that stands for your soul's drive) is {0}. Its sign in the Navamsha "
+               'chart, {1}, is your Karakamsa. It points to {2}.', ak, ks, _KARAKAMSA_TRAIT[ks])]
+    bits.append(tr("Planets sitting in the Karakamsa sign: {0}. Planets in the house just before it: {1}.",
+                   join_list(inside) if inside else tx("none"), join_list(twelfth) if twelfth else tx("none")))
     if any(p in ("Jupiter", "Venus", "Mercury", "Moon") for p in inside):
-        bits.append("A gentle planet inside the Karakamsa may make it easier to follow your purpose with support from others.")
+        bits.append(tx("A gentle planet inside the Karakamsa may make it easier to follow your purpose with support from others."))
     elif any(p in ("Saturn", "Mars", "Rahu", "Ketu", "Sun") for p in inside):
-        bits.append("A strong or restless planet inside the Karakamsa may make your path more intense and self-driven.")
-    bits.append("[In simple terms: the Karakamsa is a hint about the kind of life goals that feel most 'you'. It is a tendency to reflect on, "
-                "not a prediction.]")
+        bits.append(tx("A strong or restless planet inside the Karakamsa may make your path more intense and self-driven."))
+    bits.append(tx("[In simple terms: the Karakamsa is a hint about the kind of life goals that feel most 'you'. It is a tendency to reflect on, "
+                "not a prediction.]"))
     return "\n\n".join(bits)
 
 
@@ -175,24 +176,24 @@ def mahadasha_text(chart, at=None):
     at = at or _dt.datetime.now(_dt.timezone.utc).replace(tzinfo=None)
     cons = planet_considerations(chart)
     birth = _birth(chart)
-    fmt = lambda d: f"{d:%d %b %Y}"
+    fmt = lambda d: tr('{0:%d %b %Y}', d)
 
     def line(p, s, e, label):
         c = cons[p]
         area = _HOUSE_AREA[c["house"]]
         idx = {"Good": 0, "Mostly good": 0, "Mixed": 1, "Needs some care": 2, "Challenging": 2}[c["tone"]]
-        return (f"{label} ({fmt(s)} to {fmt(e)}): {p} {_TONE_PHRASE[c['tone']]} in your chart and sits in your {ordinal(c['house'])} "
-                f"house, so this time is felt mostly through {area}. What may happen: {_EFFECTS[p][idx]}")
+        return (tr('{0} ({1} to {2}): {3} {4} in your chart and sits in your {5} house, so this time is felt mostly '
+                   'through {6}. What may happen: {7}', label, fmt(s), fmt(e), p, _TONE_PHRASE[c['tone']], ordinal(c['house']), area, _EFFECTS[p][idx]))
 
-    parts = ["--- What each Mahadasha may feel like ---\nEach long life period takes the mood of its ruling planet. Below, "
+    parts = [tx("--- What each Mahadasha may feel like ---\nEach long life period takes the mood of its ruling planet. Below, "
              "each one is rated Good, Mixed or Needs care from how that planet is placed in YOUR chart, with what may happen. "
-             "[In simple terms: think of these as the seasons of your life. None is fixed - they describe likely moods and themes.]"]
+             "[In simple terms: think of these as the seasons of your life. None is fixed - they describe likely moods and themes.]")]
     for m in chart["dasha"]["timeline"]:
         s, e = max(_naive(m["start"]), birth), _naive(m["end"])
         now = " - running now" if _naive(m["start"]) <= at < e else ""
-        parts.append(f"--- {m['lord']} Mahadasha{now} ---\n" + line(m["lord"], s, e, f"{m['lord']} period"))
+        parts.append(tr('--- {0} Mahadasha{1} ---\n', m['lord'], now) + line(m["lord"], s, e, tr('{0} period', m['lord'])))
         if now:
-            subs = [f"- {line(a['lord'], _naive(a['start']), _naive(a['end']), a['lord'] + ' sub-period')}"
+            subs = [tr('- {0}', line(a['lord'], _naive(a['start']), _naive(a['end']), tr('{0} sub-period', a['lord'])))
                     for a in m["antardashas"] if _naive(a["end"]) > at]
-            parts.append("Sub-periods still to come inside this Mahadasha:\n\n" + "\n\n".join(subs[:9]))
+            parts.append(tx("Sub-periods still to come inside this Mahadasha:\n\n") + "\n\n".join(subs[:9]))
     return "\n\n".join(parts)

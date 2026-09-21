@@ -1,0 +1,55 @@
+1351	RahR
+1352	Rank
+1353	Reading Your Chart
+1354	Relation
+1355	Remedies
+1356	Role
+1357	Sag
+1358	Sat
+1359	Sat, Sun
+1360	SatR
+1361	Sco
+1362	Self (Native)
+1363	Sex
+1364	Sextile
+1365	Sign
+1366	Source
+1367	Square
+1368	Star
+1369	Start
+1370	Strength
+1371	Sub
+1372	Sub-period
+1373	Sub-sub
+1374	Sun · Gemini
+1375	Sun, Mar
+1376	Sun, Mar, Ket, Sat
+1377	Sun, Mercury
+1378	Sunrise
+1379	Sunset
+1380	Tara
+1381	Tau
+1382	Tithi
+1383	Today
+1384	Total
+1385	Trine
+1386	Type
+1387	Unknown
+1388	Value
+1389	Varna
+1390	Varshaphal
+1391	Vashya
+1392	Vasya
+1393	Ven
+1394	Ven, Moo, Jup
+1395	Verdict
+1396	Vir
+1397	Vish Yoga
+1398	Years
+1399	Yes
+1400	Yoga
+1401	Yogini
+1402	Yoni
+1403	neutral
+1404	own
+1405	undetermined (classical texts disagree)

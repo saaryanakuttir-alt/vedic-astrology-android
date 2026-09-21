@@ -25,6 +25,7 @@ from ui import keyboard, theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.theme import (ThemedButton, ThemedSpinner, ThemedTextInput, ThemedCheckBox,
                       SegmentedControl, Divider, OutlineBox)
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
@@ -157,12 +158,12 @@ class EntryScreen(BoxLayout):
         time_box.add_widget(self.time_seg)
         self.time_row = BoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=None, height=dp(46))
         self.hour_spinner = ThemedSpinner(text="Hr", values=[str(i) for i in range(1, 13)])
-        self.minute_spinner = ThemedSpinner(text="Min", values=[f"{i:02d}" for i in range(60)])
+        self.minute_spinner = ThemedSpinner(text="Min", values=[tr('{0:02d}', i) for i in range(60)])
         self.ampm_spinner = ThemedSpinner(text="AM", values=["AM", "PM"])
         for w in (self.hour_spinner, self.minute_spinner, self.ampm_spinner):
             self.time_row.add_widget(w)
-        self.time_note = _muted("A noon chart will be used until the exact time is confirmed. Ascendant and finer "
-                                "dasha timing depend on precise time.", height=dp(46), size="12sp")
+        self.time_note = _muted(tx("A noon chart will be used until the exact time is confirmed. Ascendant and finer "
+                                "dasha timing depend on precise time."), height=dp(46), size="12sp")
         time_box.add_widget(self.time_row)
         form.add_widget(self._field("Time of birth", time_box, height=dp(124)))
         self.time_box = time_box
@@ -291,11 +292,11 @@ class EntryScreen(BoxLayout):
         self._save_form_into_profile(self.store.current_profile_id)
         item = self.store.saved.save(self.store.current["inputs"])
         if item is None:
-            show_message("Not saved yet", "Enter a date of birth and a place of birth (or exact coordinates) "
-                                          "first, then save.")
+            show_message("Not saved yet", tx("Enter a date of birth and a place of birth (or exact coordinates) "
+                                          "first, then save."))
             return
         name = item["inputs"].get("name") or "these details"
-        self._set_status(f"Saved {name}. Find them under Saved people.")
+        self._set_status(tr('Saved {0}. Find them under Saved people.', name))
 
     def generate_now(self):
         """Used by Saved Charts: the details are loaded, so generate straight away."""
@@ -346,7 +347,7 @@ class EntryScreen(BoxLayout):
             if c is None:
                 self.suggest_box.add_widget(_muted("No matches — try another city.", height=dp(30), size="12sp"))
                 continue
-            b = Button(text=f"{c['name']}   [size=11sp]{c['lat']:.2f}°, {c['lng']:.2f}° · {c['country']}[/size]",
+            b = Button(text=tr('{0}   [size=11sp]{1:.2f}°, {2:.2f}° · {3}[/size]', c['name'], c['lat'], c['lng'], c['country']),
                        markup=True, halign="left", valign="middle", background_normal="", background_down="",
                        background_color=theme.SURFACE, color=theme.TEXT, font_size="13sp",
                        size_hint_y=None, height=dp(40), padding=(dp(12), 0))
@@ -432,7 +433,7 @@ class EntryScreen(BoxLayout):
             hi = int(h)
             self.hour_spinner.text = str(hi % 12 or 12)
             self.ampm_spinner.text = "PM" if hi >= 12 else "AM"
-            self.minute_spinner.text = f"{int(inp.get('minute') or 0):02d}"
+            self.minute_spinner.text = tr('{0:02d}', int(inp.get('minute') or 0))
         else:
             self.hour_spinner.text, self.minute_spinner.text, self.ampm_spinner.text = "Hr", "Min", "AM"
         self._setting_place = True
@@ -449,8 +450,8 @@ class EntryScreen(BoxLayout):
         self._form_pid = self.store.current_profile_id
         chart = self.store.current["chart"]
         label = PROFILE_LABELS[self.store.current_profile_id]
-        self._set_status(f"{label}: chart generated (Ascendant {chart['ascendant']['sign']})." if chart
-                         else f"{label}: no chart generated yet.")
+        self._set_status(tr('{0}: chart generated (Ascendant {1}).', label, chart['ascendant']['sign']) if chart
+                         else tr('{0}: no chart generated yet.', label))
 
     def _set_status(self, text):
         self.status_label.text = text
@@ -478,11 +479,11 @@ class EntryScreen(BoxLayout):
     def _parse_int(text, field_name):
         text = (text or "").strip()
         if not text:
-            raise ValueError(f"{field_name} is required.")
+            raise ValueError(tr('{0} is required.', field_name))
         try:
             return int(text)
         except ValueError:
-            raise ValueError(f"{field_name} must be a whole number, got '{text}'.")
+            raise ValueError(tr("{0} must be a whole number, got '{1}'.", field_name, text))
 
     def _generate_current_profile(self, quiet=False):
         # Imported lazily: loading the chart engine pulls in every bundled KB file.
@@ -512,7 +513,7 @@ class EntryScreen(BoxLayout):
                 kwargs["tz_name"] = inp["tz"]
             elif not place_name:
                 raise ValueError("Enter a place of birth, or tick 'Enter exact coordinates' and fill those in.")
-            self._set_status(f"Computing chart for {PROFILE_LABELS[pid]}...")
+            self._set_status(tr('Computing chart for {0}...', PROFILE_LABELS[pid]))
             chart = compute_birth_chart(**kwargs)
             reading = generate_reading(chart)
         except Exception as exc:  # noqa: BLE001 - shown to the user
@@ -524,8 +525,7 @@ class EntryScreen(BoxLayout):
         self.store.profiles[pid]["chart"] = chart
         self.store.profiles[pid]["reading"] = reading
         saved = self.store.saved.save(inp)
-        self._set_status(f"Chart generated for {PROFILE_LABELS[pid]} ({name}) - Ascendant "
-                         f"{chart['ascendant']['sign']} {chart['ascendant']['degree_in_sign']:.2f} degrees."
+        self._set_status(tr('Chart generated for {0} ({1}) - Ascendant {2} {3:.2f} degrees.', PROFILE_LABELS[pid], name, chart['ascendant']['sign'], chart['ascendant']['degree_in_sign'])
                          + (" Details saved." if saved else ""))
         if not quiet:
             self._render_chips()
@@ -556,7 +556,7 @@ class EntryScreen(BoxLayout):
             tag.add_widget(tl)
             tags.add_widget(tag)
         tags.add_widget(BoxLayout())
-        note = _muted("Full planetary placements, dashas and yogas are ready in the other screens.", height=dp(34), size="12.5sp")
+        note = _muted(tx("Full planetary placements, dashas and yogas are ready in the other screens."), height=dp(34), size="12.5sp")
         buttons = BoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=None, height=dp(44))
         open_btn = ThemedButton(text="Open chart", variant="secondary")
         open_btn.bind(on_release=lambda *_: self.goto("chart"))

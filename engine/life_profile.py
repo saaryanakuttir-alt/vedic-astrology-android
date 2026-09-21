@@ -5,8 +5,9 @@ line is a tendency ("tends to", "may"), never a fixed fact. Nothing here touches
 from astrology_tables import SIGN_LORD
 from extras import _HOUSE_AREA, _TONE_PHRASE, ordinal, planet_considerations
 from panchanga import SIGNS
+from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
-RISING = {
+RISING = tbl({
     "Aries": "bold, direct and quick to act. You like to lead from the front, hate waiting around, and recover fast after a setback. Patience is the skill to grow",
     "Taurus": "steady, patient and practical. You value comfort, loyalty and things that last, and you work at your own reliable pace. Once you decide, you can be very stubborn",
     "Gemini": "curious, talkative and quick-witted. You pick things up fast, enjoy variety and people, and adapt easily. A restless mind is your challenge, so finishing what you start matters",
@@ -19,8 +20,8 @@ RISING = {
     "Capricorn": "disciplined, ambitious and responsible. You build slowly and carefully, take duties seriously and get better with age. Remember to rest and enjoy the journey",
     "Aquarius": "independent, original and friendly in a detached way. You like ideas, groups and causes, and think differently from the crowd. Close emotional warmth may need conscious effort",
     "Pisces": "gentle, imaginative and compassionate. You are intuitive, absorb the moods around you and are drawn to art or spirituality. Boundaries and practical planning protect you",
-}
-MOON = {
+})
+MOON = tbl({
     "Aries": "Your mind is quick and fiery: you react fast, feel strongly and calm down soon after. Action clears your head.",
     "Taurus": "Your mind is calm and steady and needs comfort and routine to feel secure. Change unsettles you at first but you adapt slowly.",
     "Gemini": "Your mind is busy and curious, always taking in something new. You process feelings by talking or writing them out.",
@@ -33,8 +34,8 @@ MOON = {
     "Capricorn": "Your mind is serious and self-controlled. You hide vulnerability behind duty, and you feel better once you have a plan.",
     "Aquarius": "Your mind is independent and inventive and likes space. You handle feelings by stepping back and thinking them through.",
     "Pisces": "Your mind is dreamy, sensitive and very intuitive. You need quiet time to recharge, and kind surroundings matter a lot.",
-}
-CAREER = {
+})
+CAREER = tbl({
     "Aries": "work that involves initiative, leadership or competition - management, sport, engineering, defence, or starting your own venture",
     "Taurus": "steady work with something tangible - finance, farming, food, art, design, luxury goods or property",
     "Gemini": "communication and variety - writing, media, teaching, sales, technology, trade or anything involving information",
@@ -47,8 +48,8 @@ CAREER = {
     "Capricorn": "structure and authority - administration, industry, construction, government or building a business step by step",
     "Aquarius": "ideas and networks - technology, science, social causes, innovation, aviation or group-based work",
     "Pisces": "creative or compassionate work - arts, healing, music, film, spiritual guidance, chemistry or work behind the scenes",
-}
-LEISURE = {
+})
+LEISURE = tbl({
     "Aries": "sport, adventure, competitions and anything active and hands-on",
     "Taurus": "good food, gardening, music, art and comfortable home pleasures",
     "Gemini": "reading, conversation, puzzles, games, writing and short trips",
@@ -61,8 +62,8 @@ LEISURE = {
     "Capricorn": "hiking, building or restoring things, history and long-term projects",
     "Aquarius": "technology, gadgets, community causes, science and unusual hobbies",
     "Pisces": "music, painting, poetry, dance, meditation and time near water",
-}
-LEARNING = {
+})
+LEARNING = tbl({
     "Aries": "You learn best by doing, and you race ahead when a subject challenges you.",
     "Taurus": "You learn steadily and remember well, and you do best with practical, step-by-step material.",
     "Gemini": "You learn quickly through reading, talking and variety, though you may skim before you go deep.",
@@ -75,8 +76,8 @@ LEARNING = {
     "Capricorn": "You learn with discipline and long-term focus, and you do well in structured programmes.",
     "Aquarius": "You enjoy science, technology and original ideas, and you learn best your own way.",
     "Pisces": "You learn through imagination, stories and intuition, and you shine in creative or caring subjects.",
-}
-NAKSHATRA = [
+})
+NAKSHATRA = tbl([
     ("Ashwini", "quick, energetic and pioneering, with a healing touch"), ("Bharani", "intense, responsible and able to carry heavy loads"),
     ("Krittika", "sharp, honest and purifying, with a cutting wit"), ("Rohini", "charming, creative and fond of beauty and comfort"),
     ("Mrigashira", "curious, gentle and always searching"), ("Ardra", "stormy and emotional, with a deep urge to renew things"),
@@ -91,11 +92,11 @@ NAKSHATRA = [
     ("Dhanishta", "rhythmic, ambitious and good with groups"), ("Shatabhisha", "private, independent and healing-minded"),
     ("Purva Bhadrapada", "intense, idealistic and unconventional"), ("Uttara Bhadrapada", "calm, deep and compassionate"),
     ("Revati", "gentle, caring and protective of the vulnerable"),
-]
+])
 _SIGN_ADJ = {s: s for s in SIGNS}
 
 
-PURPOSE = {
+PURPOSE = tbl({
     "Aries": "being first, leading a cause and proving that you can",
     "Taurus": "building something lasting and secure with your own hands",
     "Gemini": "learning, sharing ideas and connecting people",
@@ -108,8 +109,8 @@ PURPOSE = {
     "Capricorn": "achieving something solid and earning respect over time",
     "Aquarius": "improving life for groups and bringing in new ideas",
     "Pisces": "healing, creating and serving something larger than yourself",
-}
-MONEY = {
+})
+MONEY = tbl({
     "Aries": "money tends to come through initiative and can move fast - you may spend as quickly as you earn, so a savings habit helps",
     "Taurus": "you value steady savings and material security, and tend to build wealth slowly and patiently",
     "Gemini": "income may come from several smaller sources such as skills, trading or communication",
@@ -122,8 +123,8 @@ MONEY = {
     "Capricorn": "you save methodically and build wealth steadily, often growing more secure with age",
     "Aquarius": "income may come through technology, networks or unusual ideas, and it can rise and fall",
     "Pisces": "money may flow in and out easily, so clear budgets and separating giving from spending help",
-}
-SPEAKING = {
+})
+SPEAKING = tbl({
     "Aries": "You speak directly and think fast; you say it as you see it.",
     "Taurus": "You speak calmly and deliberately, and you think things through before answering.",
     "Gemini": "You are a natural talker and quick thinker with a wide range of interests.",
@@ -136,7 +137,7 @@ SPEAKING = {
     "Capricorn": "You speak plainly and practically and think in terms of plans and results.",
     "Aquarius": "You think in original, group-minded ways and enjoy exchanging ideas.",
     "Pisces": "You think in images and intuition, and may find it easier to feel something than to explain it.",
-}
+})
 
 
 def _care_advice(planet):
@@ -161,50 +162,48 @@ def profile_sections(chart):
     nak = NAKSHATRA[int(moon["longitude"] // (360 / 27))]
     S = []
     S.append(("Your character", (
-        f"With {rising} rising, you tend to be {RISING[rising]}. Your Sun is in {sun['sign']}, in your {ordinal(sun['house'])} house "
-        f"({_HOUSE_AREA[sun['house']]}), so your sense of self is drawn toward {_HOUSE_AREA[sun['house']]}. Your Moon nakshatra, "
-        f"{nak[0]}, adds a nature that is {nak[1]}.\n\n[In simple terms: the sign rising at your birth shows how people first see you; "
-        f"the Sun shows what you want to stand for; the Moon nakshatra colours your inner temperament. None is fixed - you can grow past any of it.]")))
+        tr('With {0} rising, you tend to be {1}. Your Sun is in {2}, in your {3} house ({4}), so your sense '
+           'of self is drawn toward {5}. Your Moon nakshatra, {6}, adds a nature that is {7}.\n\n[In simple '
+           'terms: the sign rising at your birth shows how people first see you; the Sun shows what you '
+           'want to stand for; the Moon nakshatra colours your inner temperament. None is fixed - you can '
+           'grow past any of it.]', rising, RISING[rising], sun['sign'], ordinal(sun['house']), _HOUSE_AREA[sun['house']], _HOUSE_AREA[sun['house']], nak[0], nak[1]))))
     S.append(("What gives you purpose", (
-        f"With the Sun in {sun['sign']}, you tend to feel most alive when you are {PURPOSE[sun['sign']]}. The Sun {_TONE_PHRASE[cons['Sun']['tone']]} in your chart"
-        f"{', so this drive comes fairly naturally' if cons['Sun']['tone'] in ('Good', 'Mostly good') else ', so it may come in waves and need steady encouragement' if cons['Sun']['tone'] == 'Mixed' else ', so building confidence step by step matters for you'}. "
-        f"[In simple terms: this is the kind of activity that makes you feel most like yourself.]")))
+        tr('With the Sun in {0}, you tend to feel most alive when you are {1}. The Sun {2} in your '
+           'chart{3}. [In simple terms: this is the kind of activity that makes you feel most like '
+           'yourself.]', sun['sign'], PURPOSE[sun['sign']], _TONE_PHRASE[cons['Sun']['tone']], ', so this drive comes fairly naturally' if cons['Sun']['tone'] in ('Good', 'Mostly good') else ', so it may come in waves and need steady encouragement' if cons['Sun']['tone'] == 'Mixed' else ', so building confidence step by step matters for you'))))
     S.append(("Your mind and emotions", (
-        f"{MOON[moon['sign']]} With the Moon in your {ordinal(moon['house'])} house, your feelings tend to be tied up with "
-        f"{_HOUSE_AREA[moon['house']]}. The Moon {_TONE_PHRASE[cons['Moon']['tone']]} in your chart"
-        f"{', so your mood tends to be fairly steady' if cons['Moon']['tone'] in ('Good', 'Mostly good') else ', so your mood may swing more than most at times' if cons['Moon']['tone'] == 'Mixed' else ', so looking after sleep and calm routines matters for you'}.")))
+        tr('{0} With the Moon in your {1} house, your feelings tend to be tied up with {2}. The Moon {3} in '
+           'your chart{4}.', MOON[moon['sign']], ordinal(moon['house']), _HOUSE_AREA[moon['house']], _TONE_PHRASE[cons['Moon']['tone']], ', so your mood tends to be fairly steady' if cons['Moon']['tone'] in ('Good', 'Mostly good') else ', so your mood may swing more than most at times' if cons['Moon']['tone'] == 'Mixed' else ', so looking after sleep and calm routines matters for you'))))
     S.append(("How you speak and think", (
-        f"{SPEAKING[merc['sign']]} Mercury sits in your {ordinal(merc['house'])} house, so your thinking and talking often turn toward "
-        f"{_HOUSE_AREA[merc['house']]}, and it {_TONE_PHRASE[cons['Mercury']['tone']]} in your chart. "
-        f"[In simple terms: this is your natural style of communicating.]")))
+        tr('{0} Mercury sits in your {1} house, so your thinking and talking often turn toward {2}, and it '
+           '{3} in your chart. [In simple terms: this is your natural style of communicating.]', SPEAKING[merc['sign']], ordinal(merc['house']), _HOUSE_AREA[merc['house']], _TONE_PHRASE[cons['Mercury']['tone']]))))
     S.append(("Education and learning", (
-        f"{LEARNING[merc['sign']]} Mercury, the planet of learning, is in {merc['sign']} in your {ordinal(merc['house'])} house and "
-        f"{_TONE_PHRASE[cons['Mercury']['tone']]}, so studies tend to connect with {_HOUSE_AREA[merc['house']]}. "
-        f"[In simple terms: this describes how you take in and use knowledge.]")))
+        tr('{0} Mercury, the planet of learning, is in {1} in your {2} house and {3}, so studies tend to '
+           'connect with {4}. [In simple terms: this describes how you take in and use knowledge.]', LEARNING[merc['sign']], merc['sign'], ordinal(merc['house']), _TONE_PHRASE[cons['Mercury']['tone']], _HOUSE_AREA[merc['house']]))))
     S.append(("Your career leanings", (
-        f"Your 10th house of career is in {tenth}, which points toward {CAREER[tenth]}. Its ruler {tenth_lord} sits in {tl['sign']} in your "
-        f"{ordinal(tl['house'])} house, so your working life tends to connect with {_HOUSE_AREA[tl['house']]}, and {tenth_lord} "
-        f"{_TONE_PHRASE[cons[tenth_lord]['tone']]} in your chart - "
-        f"{'a helpful sign for steady progress' if cons[tenth_lord]['tone'] in ('Good', 'Mostly good') else 'a mix of easy and effortful stretches' if cons[tenth_lord]['tone'] == 'Mixed' else 'a reminder that patience and steady skills matter more than shortcuts'}. "
-        f"[In simple terms: these are the kinds of work that tend to suit your temperament; they are leanings, not rules.]")))
+        tr('Your 10th house of career is in {0}, which points toward {1}. Its ruler {2} sits in {3} in your '
+           '{4} house, so your working life tends to connect with {5}, and {6} {7} in your chart - {8}. [In '
+           'simple terms: these are the kinds of work that tend to suit your temperament; they are '
+           'leanings, not rules.]', tenth, CAREER[tenth], tenth_lord, tl['sign'], ordinal(tl['house']), _HOUSE_AREA[tl['house']], tenth_lord, _TONE_PHRASE[cons[tenth_lord]['tone']], 'a helpful sign for steady progress' if cons[tenth_lord]['tone'] in ('Good', 'Mostly good') else 'a mix of easy and effortful stretches' if cons[tenth_lord]['tone'] == 'Mixed' else 'a reminder that patience and steady skills matter more than shortcuts'))))
     S.append(("Money habits", (
-        f"With {second} on your 2nd house of savings, {MONEY[second]}. Your 11th house of gains is in {eleventh}, so income from friends, groups "
-        f"and long-term goals tends to carry a {eleventh} flavour. [In simple terms: these are habits and channels that tend to suit you, not a forecast of how much you will earn.]")))
+        tr('With {0} on your 2nd house of savings, {1}. Your 11th house of gains is in {2}, so income from '
+           'friends, groups and long-term goals tends to carry a {3} flavour. [In simple terms: these are '
+           'habits and channels that tend to suit you, not a forecast of how much you will earn.]', second, MONEY[second], eleventh, eleventh))))
     S.append(("Hobbies and free time", (
-        f"With Venus in {venus['sign']}, you are likely to enjoy {LEISURE[venus['sign']]}. Your Moon in {moon['sign']} adds a liking for "
-        f"{LEISURE[moon['sign']]}. [In simple terms: these are the pastimes most likely to refresh you.]")))
+        tr('With Venus in {0}, you are likely to enjoy {1}. Your Moon in {2} adds a liking for {3}. [In '
+           'simple terms: these are the pastimes most likely to refresh you.]', venus['sign'], LEISURE[venus['sign']], moon['sign'], LEISURE[moon['sign']]))))
     strong = [p for p in ("Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn") if cons[p]["tone"] in ("Good", "Mostly good")]
     S.append(("Your strengths", (
-        ("Planets that look comfortable in your chart, and what they give you: " + "; ".join(f"{p} - {_SIGNIFIES[p]}" for p in strong) + "."
-         if strong else "No single planet stands out as especially strong, so your strengths come from balance and effort.") +
-        " [In simple terms: these are the qualities you can lean on.]")))
+        (tx("Planets that look comfortable in your chart, and what they give you: ") + "; ".join(tr('{0} - {1}', p, _SIGNIFIES[p]) for p in strong) + "."
+         if strong else tx("No single planet stands out as especially strong, so your strengths come from balance and effort.")) +
+        tx(" [In simple terms: these are the qualities you can lean on.]"))))
     care = [p for p in ("Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn") if cons[p]["tone"] in ("Needs some care", "Challenging")]
     S.append(("Your growth areas", (
-        ("Planets that ask for a little more care, and what usually helps: " + " ".join(f"{p} ({_SIGNIFIES[p].split(',')[0]}): {_care_advice(p)}" for p in care)
-         if care else "No planet stands out as needing special care; steady habits are enough.") +
-        " [In simple terms: these are the areas where a little extra effort pays off most.]")))
+        (tx("Planets that ask for a little more care, and what usually helps: ") + " ".join(tr('{0} ({1}): {2}', p, _SIGNIFIES[p].split(',')[0], _care_advice(p)) for p in care)
+         if care else tx("No planet stands out as needing special care; steady habits are enough.")) +
+        tx(" [In simple terms: these are the areas where a little extra effort pays off most.]"))))
     return S
 
 
 def profile_text(chart):
-    return "\n\n".join(f"--- {title} ---\n{text}" for title, text in profile_sections(chart))
+    return "\n\n".join(tr('--- {0} ---\n{1}', title, text) for title, text in profile_sections(chart))

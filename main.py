@@ -45,7 +45,8 @@ from kivy.uix.floatlayout import FloatLayout
 # resizing the whole Window on every keyboard show/hide.
 Window.softinput_mode = "below_target"
 
-from ui import keyboard, theme
+import i18n
+from ui import fonts, i18n_hook, keyboard, theme
 from ui.app_state import ProfileStore
 from ui.tabs_chart import ChartTab
 from ui.tabs_entry import EntryScreen
@@ -74,11 +75,30 @@ class VedicAstrologyApp(App):
         # before any screen is built: text fields read it when they are created.
         keyboard.SERVICE.builtin = self.store.settings.get("keyboard", "builtin") != "phone"
         Window.clearcolor = theme.BG
+        i18n_hook.install()
+        self._apply_language(self.store.settings.get("language", "en"))
         root = self._root = FloatLayout()
         self._build_ui(root)
         Window.bind(on_keyboard=self._on_keyboard)
         self.goto("home")
         return root
+
+    def _apply_language(self, code):
+        """Make `code` the language of the text and of the default font (widgets built afterwards use it)."""
+        if not i18n.language_available(code):
+            code = "en"
+        i18n.set_language(code)
+        fonts.apply(code)
+        return code
+
+    def set_language(self, code):
+        """The user picked a language on Home: remember it and rebuild every screen in it."""
+        code = self._apply_language(code)
+        self.store.settings.set("language", code)
+        keyboard.SERVICE.hide()
+        self._root.clear_widgets()
+        self._build_ui(self._root)
+        self.goto("home")
 
     def _build_ui(self, root):
         """(Re)build everything under `root`. Called at start-up and whenever the language changes."""
@@ -87,7 +107,7 @@ class VedicAstrologyApp(App):
 
         # key -> (English header title, factory); titles are translated when shown
         self._registry = {
-            "home": ("Home", lambda: HomeScreen(self.store, self.goto)),
+            "home": ("Home", lambda: HomeScreen(self.store, self.goto, self.set_language)),
             "entry": ("New Chart", lambda: EntryScreen(self.store, self._on_chart_generated, self.goto)),
             "library": ("Saved Charts", lambda: LibraryScreen(self.store, self.goto, self._load_saved)),
             "chart": ("Chart Diagram", lambda: ChartTab(self.store)),

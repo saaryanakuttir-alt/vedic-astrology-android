@@ -20,6 +20,7 @@ from ui import reading_mode
 from ui.reading_mode import ReadingModeBar
 from panchanga import SIGNS
 from astrology_tables import ordinal
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 
 class _BaseTableTab(BoxLayout):
@@ -71,17 +72,17 @@ class KundliDetailsTab(_BaseTableTab):
         c = chart
         loc = c["resolved_location"]
         rows = [
-            ("--- Basic Details ---", ""),
+            (tx("--- Basic Details ---"), ""),
             ("Name", c["name"]),
             ("Sex", c["birth_input"]["sex"] or "(not entered)"),
             ("Date of Birth", str(c["birth_input"]["birth_date"])),
             ("Time of Birth", str(c["birth_input"]["birth_time_local"])),
             ("Day of Birth", c["day_of_week"]),
             ("Place of Birth", c["birth_input"]["place_name"] or "(exact coordinates entered)"),
-            ("Latitude", f"{loc['latitude']:.4f}"),
-            ("Longitude", f"{loc['longitude']:.4f}"),
+            ("Latitude", tr('{0:.4f}', loc['latitude'])),
+            ("Longitude", tr('{0:.4f}', loc['longitude'])),
             ("Time Zone", loc["tz_name"]),
-            ("Ayanamsa (Lahiri)", f"{c['resolved_datetime']['ayanamsa_value_deg']:.6f} deg"),
+            ("Ayanamsa (Lahiri)", tr('{0:.6f} deg', c['resolved_datetime']['ayanamsa_value_deg'])),
             ("Sunrise", c["day_details"]["sunrise_local"] or "n/a"),
             ("Sunset", c["day_details"]["sunset_local"] or "n/a"),
             ("Day Duration", c["day_details"]["day_duration"] or "n/a"),
@@ -89,13 +90,13 @@ class KundliDetailsTab(_BaseTableTab):
             ("SunSign (Indian/sidereal)", c["planets"]["Sun"]["sign"]),
             ("SunSign (Western/tropical)", c["western_sun_sign"]),
             ("Midheaven (MC) sign", c["ascendant"]["mc_sign"]),
-            ("--- Avkahada Chakra ---", ""),
+            (tx("--- Avkahada Chakra ---"), ""),
         ]
         a = c["avkahada_chakra"]
         rows += [
             ("Lagna (Ascendant)", c["ascendant"]["sign"]),
             ("Rasi (Moon sign)", c["planets"]["Moon"]["sign"]),
-            ("Nakshatra - Pada", f"{c['planets']['Moon']['nakshatra']} - {c['planets']['Moon']['nakshatra_pada']}"),
+            ("Nakshatra - Pada", tr('{0} - {1}', c['planets']['Moon']['nakshatra'], c['planets']['Moon']['nakshatra_pada'])),
             ("Nakshatra Lord", c["planets"]["Moon"]["nakshatra_lord"]),
             ("Varna", a["varna"]), ("Vasya", a["vasya"]), ("Yoni", a["yoni"]),
             ("Gana", a["gana"]), ("Nadi", a["nadi"]),
@@ -106,30 +107,30 @@ class KundliDetailsTab(_BaseTableTab):
 
         p = c["panchang"]
         rows += [
-            ("--- Panchang ---", ""),
-            ("Tithi", f"{p['tithi']['name']} ({p['tithi']['paksha']} Paksha)"),
+            (tx("--- Panchang ---"), ""),
+            ("Tithi", tr('{0} ({1} Paksha)', p['tithi']['name'], p['tithi']['paksha'])),
             ("Yoga", p["yoga"]["name"]),
             ("Karana", p["karana"]["name"]),
         ]
 
         bal = c["dasha"]["balance_at_birth"]
-        rows.append(("--- Dasha Balance at Birth ---", ""))
-        rows.append(("Balance", f"{bal['lord']} {bal['years']}Y {bal['months']}M {bal['days']}D"))
+        rows.append((tx("--- Dasha Balance at Birth ---"), ""))
+        rows.append(("Balance", tr('{0} {1}Y {2}M {3}D', bal['lord'], bal['years'], bal['months'], bal['days'])))
 
         m = c["mangal_dosha"]
         rows += [
-            ("--- Mangal Dosha (Manglik) ---", ""),
+            (tx("--- Mangal Dosha (Manglik) ---"), ""),
             ("Mars sign", m["mars_sign"]),
-            ("From Lagna", f"House {m['from_lagna']['house']} - " +
-             ("Dosha present" if m["from_lagna"]["dosha_present"] else "No dosha")),
-            ("From Moon", f"House {m['from_moon']['house']} - " +
-             ("Dosha present" if m["from_moon"]["dosha_present"] else "No dosha")),
+            ("From Lagna", tr('House {0} - ', m['from_lagna']['house']) +
+             (tx("Dosha present") if m["from_lagna"]["dosha_present"] else tx("No dosha"))),
+            ("From Moon", tr('House {0} - ', m['from_moon']['house']) +
+             (tx("Dosha present") if m["from_moon"]["dosha_present"] else tx("No dosha"))),
         ]
         if m["from_venus"]:
-            rows.append(("From Venus", f"House {m['from_venus']['house']} - " +
-                         ("Dosha present" if m["from_venus"]["dosha_present"] else "No dosha")))
-        rows.append(("Overall", "At least one reference point shows the dosha" if m["any_present"]
-                     else "No dosha from any checked reference point"))
+            rows.append(("From Venus", tr('House {0} - ', m['from_venus']['house']) +
+                         (tx("Dosha present") if m["from_venus"]["dosha_present"] else tx("No dosha"))))
+        rows.append(("Overall", tx("At least one reference point shows the dosha") if m["any_present"]
+                     else tx("No dosha from any checked reference point")))
         rows.append(("Note", m["note"]))
         self.table.set_rows(rows)
 
@@ -187,10 +188,10 @@ class PlanetsTab(BoxLayout):
         # "What this means" - the table is raw placement data; this is the plain-language "so what
         # does that actually affect" reading for each planet, from reading["planets"][p]["plain_gloss"]
         # (rule_engine.py's _plain_planet_gloss). One paragraph per planet.
-        page.add_widget(CaptionLabel({"house": "How each planet affects the house it sits in - one section per planet, with a "
-                                                 "plain-words verdict (good, mixed or needs care) and what may happen:",
-                                      "sign": "How each planet behaves in the sign it sits in - one section per planet, with a "
-                                                "plain-words verdict (good, mixed or needs care) and what may happen:"}.get(
+        page.add_widget(CaptionLabel({"house": tx("How each planet affects the house it sits in - one section per planet, with a "
+                                                 "plain-words verdict (good, mixed or needs care) and what may happen:"),
+                                      "sign": tx("How each planet behaves in the sign it sits in - one section per planet, with a "
+                                                "plain-words verdict (good, mixed or needs care) and what may happen:")}.get(
             focus, "How each planet affects your houses and signs - one section per planet, with a plain-words "
                    "verdict (good, mixed or needs care) and what may happen:")))
         self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
@@ -216,12 +217,12 @@ class PlanetsTab(BoxLayout):
                              ", ".join(map(str, c["aspects_houses"]))))
         elif self.focus == "sign":
             for planet, detail in chart["planets"].items():
-                rows.append((planet, detail["sign"], f"{detail['degree_in_sign']:.2f}", "Yes" if detail["retrograde"] else "",
+                rows.append((planet, detail["sign"], tr('{0:.2f}', detail['degree_in_sign']), "Yes" if detail["retrograde"] else "",
                              detail["nakshatra"], detail["nakshatra_pada"], get_dignity(planet, detail["sign"])))
         for planet, detail in ([] if self.focus else chart["planets"].items()):
             dignity = get_dignity(planet, detail["sign"])
             rows.append((
-                planet, detail["sign"], f"{detail['degree_in_sign']:.2f}",
+                planet, detail["sign"], tr('{0:.2f}', detail['degree_in_sign']),
                 "Yes" if detail["retrograde"] else "",
                 detail["house"], detail.get("chalit_house", ""),
                 detail["nakshatra"], detail["nakshatra_pada"], dignity,
@@ -255,7 +256,7 @@ class HousesTab(_BaseTableTab):
         rows = []
         for house_num, detail in reading["house_lords"].items():
             relation = detail["reading"]["relation_of_placed_house_from_lord_house"] if detail["reading"] else None
-            relation_text = f"{ordinal(relation)} from its own house" if relation is not None else "?"
+            relation_text = tr('{0} from its own house', ordinal(relation)) if relation is not None else "?"
             rows.append((house_num, detail["house_sign"], detail["lord"], detail["placed_in_house"],
                          relation_text))
         self.table.set_rows(rows)
@@ -266,9 +267,9 @@ class YogasTab(BoxLayout):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
         self.add_widget(CaptionLabel(
-            "'Yogas' are specific planetary combinations that classical texts link to "
+            tx("'Yogas' are specific planetary combinations that classical texts link to "
             "particular life themes (e.g. leadership, wealth, obstacles) when present. Compact shows just the first "
-            "sentence of each meaning."
+            "sentence of each meaning.")
         ))
         self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
         self.add_widget(self.mode_bar)
@@ -353,11 +354,11 @@ class DashaTab(_BaseTableTab):
         rows = []
         for maha in reading["dasha"]["timeline"]:
             is_running_maha = maha["lord"] == running["mahadasha_lord"] and maha["is_partial_at_birth"]
-            rows.append(("Maha", f"{maha['lord']}", fmt(maha["start"]), fmt(maha["end"]),
+            rows.append(("Maha", tr('{0}', maha['lord']), fmt(maha["start"]), fmt(maha["end"]),
                          "<-- at birth" if is_running_maha else ""))
             for antar in ([] if reading_mode.current(self.store) == "compact" else maha["antardashas"]):
                 is_running_antar = is_running_maha and antar["lord"] == running["antardasha_lord"]
-                rows.append(("  Antar", f"{maha['lord']}/{antar['lord']}", fmt(antar["start"]), fmt(antar["end"]),
+                rows.append(("  Antar", tr('{0}/{1}', maha['lord'], antar['lord']), fmt(antar["start"]), fmt(antar["end"]),
                              "<-- at birth" if is_running_antar else ""))
         self.table.set_rows(rows)
 
@@ -413,7 +414,7 @@ class ChalitTab(_BaseTableTab):
         rows = []
         for row in chart["chalit"]:
             bhava = row["bhava"]
-            rows.append((bhava, row["begin_sign"], f"{row['begin_degree_in_sign']:.2f}",
-                        row["madhya_sign"], f"{row['madhya_degree_in_sign']:.2f}",
+            rows.append((bhava, row["begin_sign"], tr('{0:.2f}', row['begin_degree_in_sign']),
+                        row["madhya_sign"], tr('{0:.2f}', row['madhya_degree_in_sign']),
                         ", ".join(planets_by_chalit_house[bhava]) or ""))
         self.table.set_rows(rows)

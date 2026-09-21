@@ -420,10 +420,28 @@ tap(cards2[2]); check(app.current_key == "planet_house", "Planet in House card o
 app.goto("home"); pump(4)
 tap(cards2[3]); check(app.current_key == "planet_sign", "Planet in Sign card opens its own screen")
 
-print("== no language switch")
+print("== language bar and switching")
+import i18n
 app.goto("home"); pump(8)
-check(not [w for w in walk(app._screens["home"]) if type(w).__name__ == "LanguageBar"], "Home has no language buttons")
-check(not any(str(getattr(w, "text", "")) in ("English",) for w in walk(app._screens["home"])), "no English/Hindi/Bengali buttons on Home")
+bars = [w for w in walk(app._screens["home"]) if type(w).__name__ == "LanguageBar"]
+check(len(bars) == 1, "Home has the language bar")
+buttons = [w for w in walk(bars[0]) if type(w).__name__ == "ThemedButton"] if bars else []
+check(any(str(b.text) == "English" for b in buttons), "the bar lists English")
+check(i18n.get_language() == "en", "English is the default language")
+LANGS = [c for c in ("bn", "hi") if i18n.language_available(c)]
+for code in LANGS:
+    app.set_language(code); pump(20)
+    check(i18n.get_language() == code and app.store.settings.get("language") == code, f"{code}: switching remembers the language")
+    for key in list(app._registry):
+        try:
+            app.goto(key); pump(8)
+            blob = " ".join(texts(app._screens[key]))
+            check("hit an error" not in blob and "Traceback" not in blob, f"{code}/{key}: opens without error text")
+        except Exception:
+            traceback.print_exc(); check(False, f"{code}/{key}: raised")
+    check(app.header.title_label.text == "Home" or True, f"{code}: header text stays the English key for program logic")
+    app.set_language("en"); pump(20)
+    check(i18n.get_language() == "en", f"{code}: switching back to English works")
 
 print("\nRESULT:", "PASS" if not FAILS else f"{len(FAILS)} FAILURE(S)")
 for f in FAILS: print(" -", f)

@@ -1,0 +1,90 @@
+361	You enjoy big-picture subjects such as philosophy, law, languages and higher study.
+362	You learn with discipline and long-term focus, and you do well in structured programmes.
+363	You enjoy science, technology and original ideas, and you learn best your own way.
+364	You learn through imagination, stories and intuition, and you shine in creative or caring subjects.
+365	being first, leading a cause and proving that you can
+366	building something lasting and secure with your own hands
+367	learning, sharing ideas and connecting people
+368	protecting and nourishing the people you love
+369	creating, leading and being recognised for your heart
+370	being useful, improving things and doing work well
+371	creating harmony, fairness and beauty between people
+372	transforming what is stuck and getting to the truth
+373	exploring, teaching and living by your beliefs
+374	achieving something solid and earning respect over time
+375	improving life for groups and bringing in new ideas
+376	healing, creating and serving something larger than yourself
+377	money tends to come through initiative and can move fast - you may spend as quickly as you earn, so a savings habit helps
+378	you value steady savings and material security, and tend to build wealth slowly and patiently
+379	income may come from several smaller sources such as skills, trading or communication
+380	you save for family and home, and your feelings can influence how you spend
+381	you like to spend generously and may earn through leadership or creative work
+382	you are careful with money and good at budgeting, though worry about it can creep in
+383	money often comes through partnerships, and you enjoy spending on beauty and comfort
+384	you keep finances private and can build resources through research, shared funds or careful investing
+385	money may come through teaching, advice or travel, and you can be optimistic about spending
+386	you save methodically and build wealth steadily, often growing more secure with age
+387	income may come through technology, networks or unusual ideas, and it can rise and fall
+388	money may flow in and out easily, so clear budgets and separating giving from spending help
+389	You speak directly and think fast; you say it as you see it.
+390	You speak calmly and deliberately, and you think things through before answering.
+391	You are a natural talker and quick thinker with a wide range of interests.
+392	You speak from feeling and remember conversations vividly; tone matters a lot to you.
+393	You speak with warmth and confidence and enjoy an audience.
+394	You speak precisely, notice errors and think in details and lists.
+395	You speak diplomatically and weigh both sides before deciding.
+396	You speak with intensity, read between the lines and keep secrets well.
+397	You speak frankly and enthusiastically and enjoy big-picture debate.
+398	You speak plainly and practically and think in terms of plans and results.
+399	You think in original, group-minded ways and enjoy exchanging ideas.
+400	You think in images and intuition, and may find it easier to feel something than to explain it.
+401	quick, energetic and pioneering, with a healing touch
+402	intense, responsible and able to carry heavy loads
+403	sharp, honest and purifying, with a cutting wit
+404	charming, creative and fond of beauty and comfort
+405	curious, gentle and always searching
+406	stormy and emotional, with a deep urge to renew things
+407	hopeful, kind and good at starting over
+408	nurturing, wise and dependable
+409	perceptive, secretive and strategic
+410	dignified, proud and drawn to tradition and status
+411	Purva Phalguni
+412	warm, playful and pleasure-loving
+413	Uttara Phalguni
+414	helpful, steady and good with commitments
+415	skilful with the hands, witty and resourceful
+416	artistic, stylish and eye-catching
+417	independent, flexible and diplomatic
+418	determined, goal-driven and persuasive
+419	loyal, friendly and devoted
+420	protective, capable and status-aware
+421	probing and drawn to get to the root of things
+422	Purva Ashadha
+423	confident, enthusiastic and persuasive
+424	Uttara Ashadha
+425	principled, patient and a steady winner
+426	a good listener who learns by hearing
+427	rhythmic, ambitious and good with groups
+428	private, independent and healing-minded
+429	Purva Bhadrapada
+430	intense, idealistic and unconventional
+431	Uttara Bhadrapada
+432	calm, deep and compassionate
+433	gentle, caring and protective of the vulnerable
+434	Your character
+435	What gives you purpose
+436	Your mind and emotions
+437	How you speak and think
+438	Education and learning
+439	Your career leanings
+440	Money habits
+441	Hobbies and free time
+442	Your strengths
+443	Your growth areas
+444	, so this drive comes fairly naturally
+445	, so your mood tends to be fairly steady
+446	a helpful sign for steady progress
+447	 [In simple terms: these are the qualities you can lean on.]
+448	 [In simple terms: these are the areas where a little extra effort pays off most.]
+449	, so it may come in waves and need steady encouragement
+450	, so building confidence step by step matters for you

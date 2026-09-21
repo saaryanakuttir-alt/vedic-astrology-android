@@ -1,0 +1,90 @@
+271	Sun: sun-gazing at sunrise, confidence-building routines. 
+272	it sits in a weak sign (debilitated)
+273	It may be eased because 
+274	All planets except 
+275	Confidence or father-related matters may feel shadowed at times.
+276	Hora
+277	Drekkana
+278	Navamsha
+279	Dashamsha
+280	Vimshamsha
+281	Trimshamsha
+282	Khavedamsha
+283	Sun
+284	Moon
+285	Mars
+286	Mercury
+287	Jupiter
+288	Venus
+289	Saturn
+290	Rahu
+291	Ketu
+292	Good
+293	Mixed
+294	Challenging
+295	{0} - {1}   ## {0}=p, {1}=_SIGNIFIES[p]
+296	{0} ({1}): {2}   ## {0}=p, {1}=_SIGNIFIES[p].split(',')[0], {2}=_care_advice(p)
+297	With Venus in {0}, you are likely to enjoy {1}. Your Moon in {2} adds a liking for {3}. [In simple terms: these are the pastimes most likely to refresh you.]   ## {0}=venus['sign'], {1}=LEISURE[venus['sign']], {2}=moon['sign'], {3}=LEISURE[moon['sign']]
+298	With {0} on your 2nd house of savings, {1}. Your 11th house of gains is in {2}, so income from friends, groups and long-term goals tends to carry a {3} flavour. [In simple terms: these are habits and channels that tend to suit you, not a forecast of how much you will earn.]   ## {0}=second, {1}=MONEY[second], {2}=eleventh, {3}=eleventh
+299	Your 10th house of career is in {0}, which points toward {1}. Its ruler {2} sits in {3} in your {4} house, so your working life tends to connect with {5}, and {6} {7} in your chart - {8}. [In simple terms: these are the kinds of work that tend to suit your temperament; they are leanings, not rules.]   ## {0}=tenth, {1}=CAREER[tenth], {2}=tenth_lord, {3}=tl['sign'], {4}=ordinal(tl['house']), {5}=_HOUSE_AREA[tl['house']], {6}=tenth_lord, {7}=_TONE_PHRASE[cons[tenth_lord]['tone']], {8}='a helpful sign for steady progress' if 
+300	{0} Mercury, the planet of learning, is in {1} in your {2} house and {3}, so studies tend to connect with {4}. [In simple terms: this describes how you take in and use knowledge.]   ## {0}=LEARNING[merc['sign']], {1}=merc['sign'], {2}=ordinal(merc['house']), {3}=_TONE_PHRASE[cons['Mercury']['tone']], {4}=_HOUSE_AREA[merc['house']]
+301	{0} Mercury sits in your {1} house, so your thinking and talking often turn toward {2}, and it {3} in your chart. [In simple terms: this is your natural style of communicating.]   ## {0}=SPEAKING[merc['sign']], {1}=ordinal(merc['house']), {2}=_HOUSE_AREA[merc['house']], {3}=_TONE_PHRASE[cons['Mercury']['tone']]
+302	{0} With the Moon in your {1} house, your feelings tend to be tied up with {2}. The Moon {3} in your chart{4}.   ## {0}=MOON[moon['sign']], {1}=ordinal(moon['house']), {2}=_HOUSE_AREA[moon['house']], {3}=_TONE_PHRASE[cons['Moon']['tone']], {4}=', so your mood tends to be fairly stead
+303	With the Sun in {0}, you tend to feel most alive when you are {1}. The Sun {2} in your chart{3}. [In simple terms: this is the kind of activity that makes you feel most like yourself.]   ## {0}=sun['sign'], {1}=PURPOSE[sun['sign']], {2}=_TONE_PHRASE[cons['Sun']['tone']], {3}=', so this drive comes fairly naturally'
+304	With {0} rising, you tend to be {1}. Your Sun is in {2}, in your {3} house ({4}), so your sense of self is drawn toward {5}. Your Moon nakshatra, {6}, adds a nature that is {7}.\n\n[In simple terms: the sign rising at your birth shows how people first see you; the Sun shows what you want to stand for; the Moon nakshatra colours your inner temperament. None is fixed - you can grow past any of it.]   ## {0}=rising, {1}=RISING[rising], {2}=sun['sign'], {3}=ordinal(sun['house']), {4}=_HOUSE_AREA[sun['house']], {5}=_HOUSE_AREA[sun['house']], {6}=nak[0], {7}=nak[1]
+305	bold, direct and quick to act. You like to lead from the front, hate waiting around, and recover fast after a setback. Patience is the skill to grow
+306	steady, patient and practical. You value comfort, loyalty and things that last, and you work at your own reliable pace. Once you decide, you can be very stubborn
+307	curious, talkative and quick-witted. You pick things up fast, enjoy variety and people, and adapt easily. A restless mind is your challenge, so finishing what you start matters
+308	caring, protective and sensitive. Home, family and memories matter deeply to you, and you read moods well. You may hold on to hurts, so learning to let go helps
+309	warm, proud and generous. You have natural presence, like to be appreciated and are loyal to your people. Guard against needing constant applause
+310	careful, modest and analytical. You notice details others miss and like being useful. Worry and self-criticism are the things to keep in check
+311	charming, fair-minded and peace-loving. You value harmony, beauty and partnership, and see both sides of a question. Indecision is the thing to work on
+312	intense, private and determined. You feel deeply, sense what is beneath the surface and do not give up easily. Learning to trust and forgive brings ease
+313	optimistic, honest and freedom-loving. You enjoy learning, travel and big ideas, and you say what you think. Tact and follow-through are the lessons
+314	disciplined, ambitious and responsible. You build slowly and carefully, take duties seriously and get better with age. Remember to rest and enjoy the journey
+315	independent, original and friendly in a detached way. You like ideas, groups and causes, and think differently from the crowd. Close emotional warmth may need conscious effort
+316	gentle, imaginative and compassionate. You are intuitive, absorb the moods around you and are drawn to art or spirituality. Boundaries and practical planning protect you
+317	Your mind is quick and fiery: you react fast, feel strongly and calm down soon after. Action clears your head.
+318	Your mind is calm and steady and needs comfort and routine to feel secure. Change unsettles you at first but you adapt slowly.
+319	Your mind is busy and curious, always taking in something new. You process feelings by talking or writing them out.
+320	Your mind is deeply emotional and caring, tied to home and loved ones. Your mood follows the atmosphere around you.
+321	Your mind is warm, proud and generous. You need to feel valued, and encouragement lifts you more than anything.
+322	Your mind is practical and detail-minded and likes to fix things. Worry can creep in, so calming routines help.
+323	Your mind seeks balance and company. You feel best when relationships are peaceful and unsettled when they are not.
+324	Your mind is intense and private, with strong feelings you keep well hidden. You remember deeply and heal by facing things honestly.
+325	Your mind is hopeful and restless for meaning. Freedom, learning and trust in the future keep your spirits up.
+326	Your mind is serious and self-controlled. You hide vulnerability behind duty, and you feel better once you have a plan.
+327	Your mind is independent and inventive and likes space. You handle feelings by stepping back and thinking them through.
+328	Your mind is dreamy, sensitive and very intuitive. You need quiet time to recharge, and kind surroundings matter a lot.
+329	work that involves initiative, leadership or competition - management, sport, engineering, defence, or starting your own venture
+330	steady work with something tangible - finance, farming, food, art, design, luxury goods or property
+331	communication and variety - writing, media, teaching, sales, technology, trade or anything involving information
+332	caring or public-facing work - healthcare, hospitality, education, real estate, food or working with families
+333	roles with visibility and leadership - administration, government, performing arts, management or education
+334	detail and service - health, accounts, analysis, editing, research, quality control or technical work
+335	partnership and design - law, diplomacy, fashion, art, counselling, public relations or business with partners
+336	depth and investigation - research, medicine, psychology, finance, insurance, engineering or work in crisis and change
+337	teaching and horizons - education, law, publishing, travel, advice, philosophy or international work
+338	structure and authority - administration, industry, construction, government or building a business step by step
+339	ideas and networks - technology, science, social causes, innovation, aviation or group-based work
+340	creative or compassionate work - arts, healing, music, film, spiritual guidance, chemistry or work behind the scenes
+341	sport, adventure, competitions and anything active and hands-on
+342	good food, gardening, music, art and comfortable home pleasures
+343	reading, conversation, puzzles, games, writing and short trips
+344	cooking, home projects, family time, nature and nostalgic hobbies
+345	performing, creative projects, entertaining friends and celebrations
+346	crafts, gardening, health routines, reading and improving or organising things
+347	art, music, fashion, socialising, movies and design
+348	mysteries, research, deep films and books, swimming or intense sports
+349	travel, outdoor life, learning, spiritual reading and team sport
+350	hiking, building or restoring things, history and long-term projects
+351	technology, gadgets, community causes, science and unusual hobbies
+352	music, painting, poetry, dance, meditation and time near water
+353	You learn best by doing, and you race ahead when a subject challenges you.
+354	You learn steadily and remember well, and you do best with practical, step-by-step material.
+355	You learn quickly through reading, talking and variety, though you may skim before you go deep.
+356	You learn best where you feel safe and supported, and you remember what touches you emotionally.
+357	You learn best when you are encouraged and can present or lead what you know.
+358	You learn through careful analysis and notes, and you are usually thorough and accurate.
+359	You learn well through discussion and in company, and you enjoy the arts and law-like reasoning.
+360	You learn by digging deep and focusing intensely, and you enjoy research and hidden patterns.

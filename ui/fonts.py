@@ -1,0 +1,40 @@
+"""
+fonts.py - which font the app draws with, per language.
+
+Kivy's default font (Roboto) has no Devanagari or Bengali letters, so for Hindi
+and Bengali the app re-points the default "Roboto" name at fonts/IndicHi-*.ttf or
+IndicBn-*.ttf. These are Noto Sans fonts (SIL Open Font License, fonts/OFL-NotoSans.txt)
+into which tools/build_i18n.py has baked every pre-joined syllable of the translations
+(Kivy cannot join Hindi/Bengali letters itself). Every Label and TextInput that does not
+name its own font then picks the font up automatically. The fonts include Latin letters
+and digits, so mixed text ("D9", "ASC", English names) still draws. Fully offline.
+"""
+import os
+
+import kivy
+from kivy.core.text import LabelBase
+
+_APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FONT_DIR = os.path.join(_APP_DIR, "fonts")
+
+DEVANAGARI = {"fn_regular": os.path.join(FONT_DIR, "IndicHi-Regular.ttf"),
+              "fn_bold": os.path.join(FONT_DIR, "IndicHi-Bold.ttf")}
+BENGALI = {"fn_regular": os.path.join(FONT_DIR, "IndicBn-Regular.ttf"),
+           "fn_bold": os.path.join(FONT_DIR, "IndicBn-Bold.ttf")}
+
+
+def _roboto():
+    d = os.path.join(kivy.kivy_data_dir, "fonts")
+    return {"fn_regular": os.path.join(d, "Roboto-Regular.ttf"), "fn_italic": os.path.join(d, "Roboto-Italic.ttf"),
+            "fn_bold": os.path.join(d, "Roboto-Bold.ttf"), "fn_bolditalic": os.path.join(d, "Roboto-BoldItalic.ttf")}
+
+
+def font_for_language(code):
+    """Path of the regular font that can draw this language's own name."""
+    return {"hi": DEVANAGARI["fn_regular"], "bn": BENGALI["fn_regular"]}.get(code)
+
+
+def apply(code):
+    """Make `code` the language of the default font. Widgets created AFTER this use it."""
+    files = {"hi": DEVANAGARI, "bn": BENGALI}.get(code)
+    LabelBase.register("Roboto", **(files or _roboto()))

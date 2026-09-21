@@ -1,0 +1,112 @@
+# hand-listed vocabulary: single words / short phrases that are slotted into sentences or drawn as labels
+Sun
+Moon
+Mars
+Mercury
+Jupiter
+Venus
+Saturn
+Rahu
+Ketu
+Aries
+Taurus
+Gemini
+Cancer
+Leo
+Virgo
+Libra
+Scorpio
+Sagittarius
+Capricorn
+Aquarius
+Pisces
+1st
+2nd
+3rd
+4th
+5th
+6th
+7th
+8th
+9th
+10th
+11th
+12th
+Good
+Mostly good
+Mixed
+Needs some care
+Challenging
+Own sign
+Exalted
+Debilitated
+Friendly sign
+Neutral sign
+Enemy sign
+and
+none
+supportive
+average
+demanding
+Easy
+Tense
+Blend
+easy
+tense
+blend
+opposite
+Lagna
+Uchcha
+Saptavargaja
+Ojayugma
+Kendra
+Drekkana
+Dig
+Nathonnatha
+Paksha
+Tribhaga
+Vara
+Hora
+Ayana
+Naisargika
+Strong
+Average
+Weaker
+Compact
+Detailed
+North Indian
+South Indian
+Present
+Not present
+Highly recommended
+Recommended with care
+Helpful without a gemstone
+Optional
+Not needed right now
+No remedy needed
+Ithasala
+Ishrafa
+rising phase
+peak phase
+setting phase
+Rising phase
+Peak phase
+Setting phase
+Sade Sati
+Dhaiya
+Home
+Chart
+Dasha
+Yogas
+Library
+Cancel
+OK
+Delete
+Open
+Name
+Date
+Month
+Year
+Male
+Female
+Generate Chart

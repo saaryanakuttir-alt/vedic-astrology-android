@@ -1,0 +1,90 @@
+181	Friendly sign
+182	Neutral sign
+183	Enemy sign
+184	Why this verdict: nothing special helps or hurts it.
+185	 It is moving backwards (retrograde), which classical texts read as a more inward, delayed or intense version of its themes.
+186	Nothing special helps or hurts it.
+187	Mars is in a strong sign of its own or exaltation
+188	Jupiter looks at Mars and softens it
+189	Manglik (Mangal) Dosha
+190	Not present
+191	Kalsarpa Dosha
+192	rahu_ketu_in_9th
+193	sun_conjunct_rahu_ketu
+194	ninth_lord_afflicted
+195	Pitra Dosha (ancestral pattern)
+196	Present (some signs)
+197	None of the usual signs are present.
+198	Nothing here to worry about.
+199	Jupiter and Rahu are not together.
+200	Saturn and Rahu are not together.
+201	It starts gently - expenses, worries about the future and a sense of pressure may build.
+202	This is the heaviest stretch - responsibilities, slowdowns and lessons about patience may feel strongest.
+203	It is easing - things may slowly settle, with some last tests around money and family.
+204	Sade Sati (now)
+205	, so this part tends to be gentler than the general description
+206	, so expect the general description to apply
+207	, so this part may feel heavier than usual and reward extra patience
+208	a supportive
+209	an average
+210	a demanding
+211	no special sign rank
+212	Because Saturn is mixed for you, expect some genuinely testing stretches and some where effort pays off; how you handle the first half often decides how the second half feels.
+213	Because Saturn needs care in your chart, Sade Sati may feel heavier than average, so steady habits, health check-ups and avoiding big risks matter more for you.
+214	\n\n[In simple terms: Sade Sati is Saturn's 7.5-year test. How hard it feels depends on how Saturn and your Moon are placed in YOUR chart - described above. It is a tendency, never a fixed result.]
+215	Sade Sati - rising phase
+216	Sade Sati - peak phase
+217	Sade Sati - setting phase
+218	Dhaiya (Saturn in the 4th from Moon)
+219	Dhaiya (Saturn in the 8th from Moon)
+220	Mars in the 1st, 2nd, 4th, 7th, 8th or 12th house from the Lagna, Moon or Venus.
+221	Nothing to worry about here - Mars does not sit in a tense marriage house.
+222	Mars is not in a sensitive place, so this worry does not apply to you.
+223	It may bring a hot temper, quick reactions or delays and friction in marriage or close partnerships. Many people with it have happy marriages, and it is traditionally seen as balanced when the partner also has it.
+224	Mars is in a sensitive spot, so relationships may need extra patience - it is a tendency, not a fixed fate.
+225	All seven main planets fall on one side of the Rahu-Ketu axis.
+226	It may bring ups and downs, delays or a feeling of being held back in some years, and often progress comes in bursts. Its strength depends a lot on the rest of the chart.
+227	Steady effort, helping others and spiritual practice are the usual advice.
+228	Not fully present (partial)
+229	Your chart is free from this.
+230	It may show up as delays in luck, or family patterns you feel you are working through. Not every source agrees on this rule.
+231	Respecting elders, charity in the family's name and steady effort are the traditional advice.
+232	There are some signs of an ancestral pattern - read it as a gentle nudge to care for family roots.
+233	The 9th house, its lord or the Sun being troubled by Rahu, Ketu or harsh planets.
+234	Your wisdom and beliefs may be pulled toward unusual ideas, and you may question teachers or traditions. It can also make you a bold, original thinker.
+235	Choosing guides carefully and checking advice against your own values helps.
+236	Your wisdom planet is mixed with a restless one - worth choosing teachers wisely.
+237	Jupiter and Rahu are apart, so this worry does not apply to you.
+238	Delays may pile on delays, and you may feel stuck or face sudden reversals in some years. It is a tendency that steady effort tends to soften.
+239	Discipline, honesty and service to others are the classic remedies.
+240	Saturn and Rahu are together, so patience matters.
+241	Saturn and Rahu are apart, so this worry does not apply to you.
+242	Saturn passes over the sign before, the sign of, and the sign after your natal Moon, about 7.5 years.
+243	Patience, routine, honesty and helping others are the standard advice.
+244	Saturn is testing you now, but this is a strict-teacher phase, not a punishment.
+245	Dhaiya (now)
+246	Routine, patience and looking after health.
+247	Sade Sati / Dhaiya (now)
+248	Not running
+249	--- Sade Sati for you ---\n
+250	it sits in a friendly sign
+251	it is very close to the Sun (combust), which can dim its results
+252	Patience, calm talk and choosing a partner who understands your fire usually help.
+253	The classical pattern is not complete, so its effect is usually mild or absent.
+254	Almost, but not fully, formed - usually nothing to worry about.
+255	All seven main planets on one side of the Rahu-Ketu axis.
+256	Your planets are spread on both sides of the axis, so this pattern does not apply.
+257	Calming routines, sleep and time in nature. 
+258	 Many people find it also brings maturity, discipline and lasting progress.
+259	Saturn spends about 2.5 years in the 4th or 8th sign from your Moon.
+260	You may feel extra pressure around home, peace of mind, health or sudden events. It usually passes with steady effort.
+261	A smaller Saturn phase - manageable with steady habits.
+262	Saturn is not currently in a sensitive place from your Moon.
+263	Saturn's heavier lessons are not pressing on you right now.
+264	You are not in a Saturn testing phase at the moment.
+265	--- Where you are right now ---\nYou are not in Sade Sati at the moment.
+266	it sits in an unfriendly sign
+267	Mars sits in the 1st, 2nd, 4th, 7th, 8th or 12th house counted from 
+268	 are on one side of the Rahu-Ketu axis.
+269	Your mind may feel clouded or anxious at times.
+270	 Effects depend on the rest of the chart.

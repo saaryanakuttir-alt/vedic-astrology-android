@@ -1,0 +1,90 @@
+901	{0:.0f}   ## {0}=sb[p]['total']
+902	{0:%d %b %y}   ## {0}=p['end']
+903	--- Smallest periods inside {0} / {1} ---   ## {0}=run['lord'], {1}=ant['lord']
+904	{0} {1}: {2}.   ## {0}=r['key'], {1}=r['name'], {2}=r['purpose']
+905	{0} / {1}   ## {0}=c['sign'], {1}=c['house']
+906	--- Sub-periods inside the running {0} period ---   ## {0}=run['lord']
+907	. Weekday lord: {0}.\n\n[In simple terms: these are the planets KP astrologers treat as most active at the time and place of your birth.]   ## {0}=r['Day lord']
+908	{0:.1f}   ## {0}=a['orb']
+909	=== Remedies - {0} ===   ## {0}=self._name(reading)
+910	=== Your year - {0}, age {1} ===   ## {0}=self._name(reading), {1}=vp['age']
+911	Age {0}  ({1}-{2})   ## {0}=y - birth_year, {1}=y, {2}=str(y + 1)[2:]
+912	KP ayanamsa: {0}.\n\n[In simple terms: the star lord shows the kind of result a house or planet is linked to, and the sub lord decides whether that result is likely to come through. It is a table for astrologers who use KP; treat it as extra detail, not a verdict.]   ## {0}=t['ayanamsa_dms']
+913	=== KP system - {0} ===   ## {0}=self._name(reading)
+914	=== Ashtakvarga detail - {0} ===   ## {0}=self._name(reading)
+915	=== Planet strength - {0} ===   ## {0}=self._name(reading)
+916	=== Your nature - {0} ===   ## {0}=self._name(reading)
+917	=== More dashas and Jaimini - {0} ===   ## {0}=self._name(reading)
+918	=== Shodashvarga table - {0} ===   ## {0}=self._name(reading)
+919	=== Planet by planet - {0} ===   ## {0}=self._name(reading)
+920	=== Doshas & Sade Sati - {0} ===   ## {0}=self._name(reading)
+921	Doshas are classical 'watch points' in a chart. Each one below says whether it is present, what it may mean, and what can help. They describe tendencies, not fixed fate - many people with a dosha live very happily, and the rest of the chart matters more.
+922	For every planet: is it doing well in your chart (good, mixed or needs care?), what may happen because of it, and why. Below that, which planets get along with each other and which angles they make. All of this describes tendencies, never certainties.
+923	The sign each planet occupies in all 15 divisional charts (each zoom-in looks at one life area). Use it to spot planets that keep landing in comfortable or uncomfortable signs across charts.
+924	Two more ways of dividing life into periods (Yogini Dasha and Jaimini's Char Dasha), what each Vimshottari period may feel like, and your Jaimini soul-planet (Atmakaraka) with its Karakamsa chart. All are tendencies to reflect on, not fixed events; dates are approximate.
+925	Your character, mind, career leanings, learning style and hobbies, in plain words, drawn from your rising sign, Moon, nakshatra and the planets that rule those areas. These are tendencies, not rules.
+926	How strong each planet is in your chart, from the classical sources of strength (exaltation, divisional charts, house and direction, time of birth, Moon phase and natural strength). Scores compare the planets of YOUR chart with each other.
+927	Prastharashtakvarga shows WHO gives each point in a planet's Ashtakvarga row. For each planet, every helper (the other planets and the Lagna) gives a point (1) to some signs and none (.) to others; the last row is the planet's usual Ashtakvarga row. A sign with more points is friendlier for that planet.
+928	Krishnamurti Paddhati (KP): every point of the zodiac has a sign lord, a star (nakshatra) lord and a sub lord. KP reads a house by the star and sub lord of its cusp. Uses Placidus houses and the KP ayanamsa. Positions differ from the main chart by a few arc-minutes, which can change the sub lord.
+929	Varshaphal is your yearly chart, cast for the moment the Sun returns to its birth position each year (near your birthday). It shows the year's rising sign, the Muntha (the life area in the spotlight) and how the year's mood changes period by period. Pick the year below. Tendencies only, not fixed events.
+930	What may help right now: only planets that are both weak or troubled in your chart AND active in your current periods are listed, with a gemstone only where it is traditionally safe and a stone-free alternative (mantra, charity, fast). Plus everyday habits for everyone. Traditional guidance - optional, and never a cure or a guarantee.
+931	--- Sade Sati and Dhaiya through your life (dates) ---
+932	Sade Sati is Saturn's roughly 7.5-year walk over the sign before, the sign of and the sign after your Moon. Dhaiya (Small Panoti) is its 2.5-year stay in the 4th or 8th sign from your Moon. These are times that test patience and reward steady work - not fixed bad news. Saturn sometimes steps back into the earlier sign for a few months, so a phase can appear twice. Dates are approximate.
+933	Saturn in
+934	Sign / house
+935	Ruler of
+936	Looks at
+937	--- Which planets get along ---
+938	Read each row as: how this planet feels about the planet in the column. Natural friendship is permanent; temporary friendship depends on how close the planets sit in YOUR chart; the combined table joins the two into one of five grades. Key: ++ great friend, + friend, = neutral, - enemy, -- great enemy. [In simple terms: it shows which planets help each other in your chart and which tend to work against each other.]
+939	Natural friendship
+940	Temporary friendship (this chart)
+941	Combined (five-fold) friendship
+942	--- Angles between the planets (Western-style aspects) ---
+943	Two planets at certain angles influence each other. Conjunction (together) blends them, sextile and trine support each other, square and opposition pull against each other. Smaller 'orb' means a stronger link. [In simple terms: 'easy' pairs tend to help you, 'tense' pairs push you to act.]
+944	Orb (deg)
+945	--- What each chart looks at ---
+946	--- Yogini Dasha (a 36-year cycle of eight periods) ---
+947	[In simple terms: each 'yogini' colours a stretch of life - Mangala for good fortune, Pingala for effort, Dhanya for money and comfort, Bhramari for change, Bhadrika for steady gains, Ulka for pressure, Siddha for achievement and Sankata for obstacles that ask for patience.]
+948	Feels like
+949	--- Char Dasha (Jaimini, counted by signs from your Lagna) ---
+950	[In simple terms: instead of planets, each period belongs to a zodiac sign, starting with your rising sign. The sign's house in your chart shows which area of life is in focus during that period.]
+951	--- Jaimini significators (Chara Karakas) ---
+952	Stands for
+953	--- Karakamsa ---
+954	--- Points from each source ---
+955	Not counted: the year and month lords, planetary speed, aspect strength and planetary war, which need extra tables. So read these as comparisons between your own planets, not as the traditional 'rupa' totals.
+956	--- Cusps (house starting points) ---
+957	Sign lord
+958	--- Planets ---
+959	--- Planets linked with each house (significators, strongest first) ---
+960	Signified by
+961	--- KP Vimshottari periods (KP Moon) ---\nSame planetary periods as the main Dasha but counted from the KP Moon, so dates can differ from the main chart by a few days. [In simple terms: the running period shows which planet's KP themes are active now.]
+962	Main period
+963	--- The yearly chart ---
+964	None found
+965	This screen hit an error while building - details below so it can be reported:\n\n
+966	. Moon (sign, star, sub lord): 
+967	--- Ruling planets ---\nLagna (sign, star, sub lord): 
+968	{0}\n\nThe file is saved; open it from your Files app.   ## {0}=exc
+969	\n{0} {1}: {2}   ## {0}=y['id'], {1}=y['name'], {2}=y['details']
+970	   {0}   ## {0}=detail['in_house'].get('effects') or det
+971	\n{0}: {1}   ## {0}=entry['title'], {1}=entry['text']
+972	\n{0}   ## {0}=running['antardasha_reading']['summary']
+973	\n{0}: {1}, house {2} ({3} pada {4})   ## {0}=planet, {1}=detail['sign'], {2}=detail['house'], {3}=detail['nakshatra'], {4}=detail['nakshatra_pada']
+974	{0}\n\nOpen it from your Files / Downloads app, or tap Open.   ## {0}=saved.where
+975	Choose what to include in your {0} report.   ## {0}=mode
+976	\n--- {0} ---   ## {0}=entry['title']
+977	Lord: {0} in {1}, placed in house {2}   ## {0}=h['lord'], {1}=h['lord_sign'], {2}=h['placed_in_house']
+978	\n\n--- {0} (reference) ---   ## {0}=title
+979	\n\n--- Dasha running at birth: {0} Mahadasha / {1} Antardasha ---   ## {0}=running['mahadasha_lord'], {1}=running['antardasha_lord']
+980	Ascendant: {0} ({1:.2f} degrees)\n   ## {0}=r['ascendant']['sign'], {1}=r['ascendant']['degree_in_sign']
+981	=== {0} ({1}) ===\n   ## {0}=r['name'] or 'Birth Chart', {1}=profile_label
+982	=== Life Predictions - {0} ===\n   ## {0}=name
+983	\n--- Chara Karakas (Jaimini significators) ---\nAtmakaraka (soul): {0} in {1}, house {2} ({3})\nDarakaraka (spouse): {4} in {5}, house {6} ({7})\nPutrakaraka (intellect & creativity): {8} in {9}, house {10} ({11})   ## {0}=ak['planet'], {1}=ak['sign'], {2}=ak['house'], {3}=ak['nakshatra'], {4}=dk['planet'], {5}=dk['sign'], {6}=dk['house'], {7}=dk['nakshatra'], {8}=pk['planet'], {9}=pk['sign'], {10}=pk['house'], {11}=pk['nakshatra']
+984	=== Karmic & Past Life Perspective - {0} ===\n   ## {0}=name
+985	A symbolic, reflective look at past-life themes and this life's karmic direction - not literal history, just a traditional lens for thinking about old patterns (Ketu) versus where you're being pulled to grow (Rahu).
+986	General traditional tendencies for different areas of life (career, health, relationships...), based on your houses, planets, and current Dasha period - broad themes to consider, not guaranteed events.
+987	Everything from the other tabs combined into one complete, readable report. Use 'Save PDF report' to keep it as a file you can open, print or share.
+988	Creating PDF...
+989	Save PDF report
+990	\n\n--- The Soul's Narrative ---\n

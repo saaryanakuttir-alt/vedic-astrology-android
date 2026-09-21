@@ -20,6 +20,7 @@ from ui import theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.theme import HomeCard, OutlineBox, ThemedButton, ThemedSpinner
 from ui.version import VERSION
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 CREDIT = "Created by Sammya Das"
 
@@ -71,8 +72,31 @@ HOME_GROUPS = [
 HOME_MORE = [card for _title, cards in HOME_GROUPS for card in cards]      # flat list of every card in the groups
 
 
+class LanguageBar(BoxLayout):
+    """A row of language buttons (English plus every language that ships in this build)."""
+
+    def __init__(self, current, on_pick, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("height", dp(42))
+        super().__init__(orientation="horizontal", spacing=dp(8), **kwargs)
+        import i18n
+        from ui import fonts
+        cap = Label(text="Language", font_size="12sp", color=theme.MUTED, size_hint_x=None, width=dp(74), halign="left", valign="middle")
+        cap.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+        self.add_widget(cap)
+        for code in i18n.LANGUAGE_CODES:
+            if not i18n.language_available(code):
+                continue
+            button = ThemedButton(text=i18n.native_name(code), variant="primary" if code == current else "secondary", font_size="14sp")
+            font = fonts.font_for_language(code)
+            if font:
+                button.font_name = font                      # draw the language's own name even while the app is in English
+            button.bind(on_release=lambda _b, c=code: on_pick(c))
+            self.add_widget(button)
+
+
 class HomeScreen(BoxLayout):
-    def __init__(self, store, goto, **kwargs):
+    def __init__(self, store, goto, on_language=None, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.goto = goto
         scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
@@ -82,10 +106,13 @@ class HomeScreen(BoxLayout):
         scroll.add_widget(body)
         self.add_widget(scroll)
 
-        sub = Label(text="Your birth-chart engine and classical interpretive library.", font_size="13sp",
+        sub = Label(text=tx("Your birth-chart engine and classical interpretive library."), font_size="13sp",
                     color=theme.MUTED, halign="left", valign="middle", size_hint_y=None, height=dp(24))
         sub.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         body.add_widget(sub)
+        if on_language is not None:
+            import i18n
+            body.add_widget(LanguageBar(i18n.get_language(), on_language))
         body.add_widget(self._grid(HOME_CORE))
 
         for title, cards in HOME_GROUPS:
@@ -95,7 +122,7 @@ class HomeScreen(BoxLayout):
             body.add_widget(heading)
             body.add_widget(self._grid(cards))
 
-        credit = Label(text=f"{CREDIT}  -  version {VERSION}", font_size="12sp", color=theme.MUTED, italic=True,
+        credit = Label(text=tr('{0}  -  version {1}', CREDIT, VERSION), font_size="12sp", color=theme.MUTED, italic=True,
                        size_hint_y=None, height=dp(44))
         body.add_widget(credit)
 
@@ -118,11 +145,11 @@ _MONTHS = ["January", "February", "March", "April", "May", "June", "July", "Augu
 def describe_birth(inp):
     """'June 15, 1990 · 2:30 PM · Mumbai' for a saved person's inputs."""
     try:
-        text = f"{_MONTHS[int(inp['month']) - 1]} {int(inp['day'])}, {inp['year']}"
+        text = tr('{0} {1}, {2}', _MONTHS[int(inp['month']) - 1], int(inp['day']), inp['year'])
     except (KeyError, ValueError, IndexError, TypeError):
         return "Incomplete details"
     if inp.get("time_known") == "no":
-        text += " · time unknown"
+        text += tx(" · time unknown")
     elif str(inp.get("hour", "")).isdigit():
         hh, mm = int(inp["hour"]), int(inp.get("minute") or 0)
         text += f" · {hh % 12 or 12}:{mm:02d} {'PM' if hh >= 12 else 'AM'}"
@@ -130,7 +157,7 @@ def describe_birth(inp):
     if place:
         text += f" · {place}"
     elif inp.get("use_manual_coords"):
-        text += " · exact coordinates"
+        text += tx(" · exact coordinates")
     return text
 
 
@@ -182,7 +209,7 @@ class LibraryScreen(BoxLayout):
 
         bar = BoxLayout(orientation="vertical", size_hint_y=None, height=dp(84), spacing=dp(6),
                         padding=(dp(18), dp(10), dp(18), dp(4)))
-        hint = Label(text="Tap a person to load them and generate their chart.", font_size="12.5sp",
+        hint = Label(text=tx("Tap a person to load them and generate their chart."), font_size="12.5sp",
                      color=theme.MUTED, halign="left", valign="middle", size_hint_y=None, height=dp(20))
         hint.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         bar.add_widget(hint)
@@ -214,8 +241,8 @@ class LibraryScreen(BoxLayout):
         self.body.clear_widgets()
         people = self.store.saved.all()
         if not people:
-            empty = Label(text="No saved birth details yet.\n\nGenerate a chart on the New Chart screen and its "
-                               "details are saved here automatically, ready to load in one tap.",
+            empty = Label(text=tx("No saved birth details yet.\n\nGenerate a chart on the New Chart screen and its "
+                               "details are saved here automatically, ready to load in one tap."),
                           font_size="13sp", color=theme.MUTED, halign="left", valign="top", size_hint_y=None,
                           height=dp(120))
             empty.bind(width=lambda inst, w: setattr(inst, "text_size", (w, None)))
@@ -231,7 +258,7 @@ class LibraryScreen(BoxLayout):
 
     def _confirm_delete(self, saved_id, name):
         content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(12))
-        msg = Label(text=f"Remove {name} from your saved birth details?", halign="center", valign="middle")
+        msg = Label(text=tr('Remove {0} from your saved birth details?', name), halign="center", valign="middle")
         msg.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         content.add_widget(msg)
         buttons = BoxLayout(orientation="horizontal", spacing=dp(10), size_hint_y=None, height=dp(46))

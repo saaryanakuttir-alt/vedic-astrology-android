@@ -1,0 +1,90 @@
+451	, so your mood may swing more than most at times
+452	, so looking after sleep and calm routines matters for you
+453	a mix of easy and effortful stretches
+454	a reminder that patience and steady skills matter more than shortcuts
+455	No single planet stands out as especially strong, so your strengths come from balance and effort.
+456	No planet stands out as needing special care; steady habits are enough.
+457	Planets that ask for a little more care, and what usually helps: 
+458	Planets that look comfortable in your chart, and what they give you: 
+459	Aries
+460	Taurus
+461	Gemini
+462	Cancer
+463	Leo
+464	Virgo
+465	Libra
+466	Scorpio
+467	Sagittarius
+468	Capricorn
+469	Aquarius
+470	Pisces
+471	Ashwini
+472	Bharani
+473	Krittika
+474	Rohini
+475	Mrigashira
+476	Ardra
+477	Punarvasu
+478	Pushya
+479	Ashlesha
+480	Magha
+481	Hasta
+482	Chitra
+483	Swati
+484	Vishakha
+485	Anuradha
+486	Jyeshtha
+487	Mula
+488	Shravana
+489	Dhanishta
+490	Shatabhisha
+491	Revati
+492	It is active because {0}, and it looks mixed and a little weaker than the others, so a light practice such as a mantra may help, but nothing is needed.   ## {0}=reason
+493	It is active because {0}, and it {1}. But it rules a difficult or mixed house ({2}), so a gemstone could strengthen its troublesome side. A mantra, charity and fasting are the safer way to ease it.   ## {0}=reason, {1}=_TONE_PHRASE[c['tone']], {2}=_houses(houses) or 'none'
+494	It is active because {0}, and it {1}. It rules a neutral house ({2}), so a stone may help but is best confirmed by an astrologer first; a mantra is the gentle first step.   ## {0}=reason, {1}=_TONE_PHRASE[c['tone']], {2}=_houses(houses)
+495	Gemstone: not advised for {0} in your chart.   ## {0}=i['planet']
+496	Gemstone: {0} is traditionally linked with {1}, but it is not advised without an expert.   ## {0}=i['stone'], {1}=i['planet']
+497	It is active because {0}, and it {1}. It rules your {2} (supportive for you), so strengthening it is traditionally considered safe and useful.   ## {0}=reason, {1}=_TONE_PHRASE[c['tone']], {2}=_houses(houses)
+498	Its next period begins about {0:%b %Y}; that is the time to think about a remedy.   ## {0}=when
+499	- {0}   ## {0}=t
+500	its next period begins about {0:%b %Y}.   ## {0}=i['next_start']
+501	a {0}-mukhi rudraksha bead is sometimes worn   ## {0}=i['rudraksha']
+502	favour {0} on {1}   ## {0}=i['colors'].lower(), {1}=i['day']
+503	observe the {0} fast in the way that suits you   ## {0}=i['day']
+504	donate {0} on {1}   ## {0}=i['daan'].lower(), {1}=i['day']
+505	chant '{0}' ({1} repetitions is the full traditional count; 108 a day is a common lighter practice), best at {2}   ## {0}=i['mantra'], {1}=i['japa'], {2}=i['best_time']
+506	Gemstone: {0} ({1}), set in {2}, worn on the {3}, on a {4}.{5}   ## {0}=i['stone'], {1}=i['sanskrit'], {2}=i['metal'], {3}=i['finger'].lower() if i['finger'] else , {4}=i['day'], {5}=sub
+507	 Milder substitutes: {0}.   ## {0}=', '.join(i['substitutes'])
+508	Wearing {0} is the traditional choice, or you can chant its mantra and give the donation instead.]   ## {0}=i['stone']
+509	It is active because {0}, and it {1}. It is a shadow planet, so a gemstone is not normally advised without an expert; a mantra and charity are gentler.   ## {0}=reason, {1}=_TONE_PHRASE[c['tone']]
+510	It {0} in your chart, but it is not active in your life right now.    ## {0}=_TONE_PHRASE[c['tone']]
+511	- Doshas in your chart that are not active now: {0}. Their practices matter mainly when the planets involved are running.   ## {0}=join_list(quiet)
+512	- {0}:    ## {0}=i['planet']
+513	[In simple terms: {0} is active now and may need support.    ## {0}=i['planet']
+514	Your {0} period is active because {1}, and it looks comfortable, so it should feel supportive - no remedy needed.   ## {0}=p, {1}=reason
+515	{0} ({1} in your chart): {2}   ## {0}=i['planet'], {1}=i['tone'].lower(), {2}=i['why']
+516	--- {0} ---   ## {0}=level
+517	Saturn is in a testing stretch for you ({0})   ## {0}=saturn_test.lower()
+518	it rules your running sub-period (Antardasha) until {0:%b %Y}   ## {0}=run['antar_end']
+519	it rules both your main period and your running sub-period (Antardasha, until {0:%b %Y})   ## {0}=run['antar_end']
+520	 Saturn is in a testing stretch for you ({0}).   ## {0}=plan['now']['saturn'].lower()
+521	Right now you are in the {0} main period (until {1:%b %Y}) and the {2} sub-period (until {3:%b %Y}).   ## {0}=run['maha'], {1}=run['maha_end'], {2}=run['antar'], {3}=run['antar_end']
+522	Honest work, service to others, and {0} on Saturdays; patience is the traditional advice.   ## {0}=mantra('Saturn')
+523	Keep calm evening routines and enough sleep, and chant {0} on Mondays.   ## {0}=mantra('Moon')
+524	Greet the sunrise, keep to a steady morning routine and chant {0} on Sundays.   ## {0}=mantra('Sun')
+525	Respect teachers and elders, choose guides carefully, and chant {0} on Thursdays.   ## {0}=mantra('Jupiter')
+526	Saturn's test: chant {0} or read the Hanuman Chalisa on Saturdays, donate black sesame, mustard oil or warm clothing to those in need, look after elders, keep a steady routine and avoid big risks.   ## {0}=mantra('Saturn')
+527	Mars themes: chant {0} on Tuesdays, keep calm and patient in partnerships, and channel energy into exercise or service. Traditionally the dosha is also seen as balanced when the partner has it too.   ## {0}=mantra('Mars')
+528	Do not wear {0} and {1} together: {2}   ## {0}=x['a_stone'], {1}=x['b_stone'], {2}=x['why']
+529	it rules your running main period (Mahadasha) until {0:%b %Y}   ## {0}=run['maha_end']
+530	Mantras, charity and fasting carry no risk, so start there. A gemstone is worn on the body and is traditionally chosen with a qualified astrologer, tried for a few weeks first (stop if you feel unsettled), and never bought under pressure or beyond your means. None of this replaces medical, legal or financial advice.
+531	Highly recommended
+532	Recommended with care
+533	Helpful without a gemstone
+534	Not needed right now
+535	No remedy needed
+536	Begin the day calmly: a few minutes of quiet, prayer or slow breathing before you look at your phone.
+537	Keep one small weekly act of giving: feed birds or animals, help someone in need, or donate food or clothes.
+538	Respect your parents and elders: call, visit and listen, even when it is inconvenient.
+539	Keep your promises, speak truthfully and avoid gossip - these steady every chart.
+540	Look after the basics: regular sleep and meals, some daily sunlight and a walk.

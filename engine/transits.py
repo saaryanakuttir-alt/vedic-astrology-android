@@ -24,6 +24,7 @@ import datetime as _dt
 
 import ephemeris
 from panchanga import SIGNS
+from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 # Gochara: houses (counted from the natal Moon) in which each transiting
 # planet is classically said to give FAVOURABLE results. Anything else is
@@ -41,7 +42,7 @@ _GOCHARA_GOOD = {
 }
 
 # Plain, everyday description of what each planet's transit tends to touch.
-_PLANET_THEME = {
+_PLANET_THEME = tbl({
     "Sun": "confidence, health, status and dealings with authority",
     "Moon": "mood, comfort, and day-to-day emotional weather",
     "Mars": "energy, drive, conflict and physical effort",
@@ -51,7 +52,7 @@ _PLANET_THEME = {
     "Saturn": "responsibility, discipline, delays and hard lessons",
     "Rahu": "ambition, restlessness and unconventional pushes",
     "Ketu": "detachment, letting go and inward focus",
-}
+})
 
 _MONTH_PLANETS = ["Jupiter", "Saturn", "Rahu", "Ketu"]   # slow movers frame the month
 _WEEK_PLANETS = ["Moon", "Mercury", "Venus", "Sun", "Mars"]  # faster movers colour the week
@@ -130,7 +131,7 @@ def _compute_transit_forecast_locked(chart, at_dt):
 
     # Sade Sati: Saturn in 12th / 1st / 2nd from natal Moon.
     sat_house = planet_transits["Saturn"]["house_from_moon"]
-    phase = {12: "first (rising) phase", 1: "peak phase", 2: "final (setting) phase"}.get(sat_house)
+    phase = {12: tx("first (rising) phase"), 1: tx("peak phase"), 2: tx("final (setting) phase")}.get(sat_house)
     sade_sati = {"active": phase is not None, "phase": phase, "saturn_house_from_moon": sat_house}
 
     running = _running_dasha(chart, at_dt)
@@ -138,36 +139,35 @@ def _compute_transit_forecast_locked(chart, at_dt):
     def line(planet):
         t = planet_transits[planet]
         verdict = "a generally favourable transit" if t["favourable"] else "a more mixed / effortful transit"
-        return (f"{planet} is transiting {t['sign']} ({_ord(t['house_from_moon'])} from your Moon) - "
-                f"{verdict} for {t['theme']}.")
+        return (tr('{0} is transiting {1} ({2} from your Moon) - {3} for {4}.', planet, t['sign'], _ord(t['house_from_moon']), verdict, t['theme']))
 
     # --- Monthly outlook (slow planets + dasha) ---
-    m = ["=== This Month ==="]
+    m = [tx("=== This Month ===")]
     if running:
-        m.append(f"Running period: {running['mahadasha']} Mahadasha / {running['antardasha']} Antardasha - "
-                 f"this sets the underlying tone for the whole stretch.")
+        m.append(tr('Running period: {0} Mahadasha / {1} Antardasha - this sets the underlying tone for the whole '
+                    'stretch.', running['mahadasha'], running['antardasha']))
     for p in _MONTH_PLANETS:
         m.append(line(p))
     if sade_sati["active"]:
-        m.append(f"Sade Sati is currently active ({sade_sati['phase']}): Saturn is in the {_ord(sat_house)} from "
-                 f"your Moon. Traditionally a demanding, maturing ~7.5-year passage - steady effort and "
-                 f"patience are the classic advice, not alarm.")
+        m.append(tr('Sade Sati is currently active ({0}): Saturn is in the {1} from your Moon. Traditionally a '
+                    'demanding, maturing ~7.5-year passage - steady effort and patience are the classic advice, not '
+                    'alarm.', sade_sati['phase'], _ord(sat_house)))
     good_m = [p for p in _MONTH_PLANETS if planet_transits[p]["favourable"]]
-    m.append("In simple terms: this month leans " + (
-        "generally supportive" if len(good_m) >= 2 else "toward effort and patience") +
-        ". Focus on the areas the favourable planets above touch, and go steadily where the mixed ones do.")
+    m.append(tx("In simple terms: this month leans ") + (
+        tx("generally supportive") if len(good_m) >= 2 else tx("toward effort and patience")) +
+        tx(". Focus on the areas the favourable planets above touch, and go steadily where the mixed ones do."))
 
     # --- Weekly outlook (fast planets) ---
-    w = ["=== This Week ==="]
+    w = [tx("=== This Week ===")]
     for p in _WEEK_PLANETS:
         w.append(line(p))
     if running:
-        w.append(f"The {running['antardasha']} sub-period continues to flavour these days.")
+        w.append(tr('The {0} sub-period continues to flavour these days.', running['antardasha']))
     good_w = [p for p in _WEEK_PLANETS if planet_transits[p]["favourable"]]
-    w.append("In simple terms: " + (
-        "a broadly positive few days - good for moving things forward." if len(good_w) >= 3 else
-        "a mixed few days - pick your moments and avoid forcing things.") +
-        " Remember the Moon shifts sign every 2-3 days, so the mood changes through the week.")
+    w.append(tx("In simple terms: ") + (
+        tx("a broadly positive few days - good for moving things forward.") if len(good_w) >= 3 else
+        tx("a mixed few days - pick your moments and avoid forcing things.")) +
+        tx(" Remember the Moon shifts sign every 2-3 days, so the mood changes through the week."))
 
     return {
         "as_of": at_dt.replace(microsecond=0).isoformat() + "Z",

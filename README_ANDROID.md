@@ -393,3 +393,23 @@ Everything that could not be done reliably is listed in `KNOWLEDGE_GAPS.md` (wha
 * **Home** is grouped under headings (Charts & tables, Readings, Timing & years, Strength doshas & remedies, People & help).
 * **Your Nature** is deeper: purpose, speaking and thinking, money habits, strengths and growth areas were added.
 * Not done (see KNOWLEDGE_GAPS.md): Drik, Cheshta, Abda, Masa, Bhavabala, year lord, Sahams, Lal Kitab.
+
+## Version 1.9.0 (2026-09-22) - Bengali (বাংলা), step 1
+
+A language bar on Home switches the whole app between English and Bengali; the choice is remembered. Fully offline.
+
+* **How it works** (`engine/i18n.py`): every piece of text the program builds goes through `t()` / `tr()` / `tbl()` / `join_list()` /
+  `fmt_date()`; sentences built from pieces are translated as whole templates so Bengali word order is right. `ui/i18n_hook.py` translates
+  what Kivy draws, so widget `.text` stays English for program logic. English mode returns exactly the old text (tests prove it).
+* **Fonts**: Kivy cannot join Bengali letters, so `tools/build_i18n.py` pre-shapes every syllable with HarfBuzz into private-use glyphs of
+  `fonts/IndicBn-*.ttf` (Noto Sans Bengali, SIL OFL; `fonts/OFL-NotoSans.txt`) and writes `engine/i18n_bn.py`.
+* **Sources**: `i18n_todo/keys.json` (1405 texts extracted by `tools/i18n_tool.py`), the translations `i18n_todo/bn_NN.txt` plus
+  `bn_vocab_kb.txt` (remedy stones, mantras, donations, colours); `tools/merge_bn.py` merges them into `i18n_src/bn.py` and checks that
+  every placeholder survived; `tools/build_i18n.py` bakes the fonts and the table. None of these folders ship in the APK.
+* **What is Bengali in this step**: the whole interface and everything the app composes itself - Home, menus, captions, doshas, Sade Sati,
+  planet verdicts, houses, periods, remedies, Your Nature, Varshaphal, KP text, strength, help/FAQ questions.
+* **Still English on purpose**: the long classical knowledge-base paragraphs (planet in house / sign readings, Kundli notes, Life,
+  Karmic, Medical, Relationship and Family body text - about 155,000 words) and the PDF report. Text without a translation simply shows in
+  English. Step 2 will translate the classical paragraphs; Hindi follows the same route (`tools/build_i18n.py` already supports it).
+* Bengali wording needs a native reader's proofreading pass: edit `i18n_todo/bn_NN.txt`, then run `python tools/merge_bn.py` and
+  `python tools/build_i18n.py`.

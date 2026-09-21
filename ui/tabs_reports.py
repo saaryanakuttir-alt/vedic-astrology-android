@@ -22,6 +22,7 @@ from ui.reading_mode import ReadingModeBar
 from ui.theme import ThemedButton, ThemedCheckBox
 from ui.widgets import LongText, CaptionLabel, ItalicSummaryLabel
 from ui.app_state import PROFILE_LABELS
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 
 class _BaseReportTab(BoxLayout):
@@ -68,8 +69,8 @@ class _BaseReportTab(BoxLayout):
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:{type(self).__name__}: _build_text failed:\n{tb}")
             self.text_view.set_text(
-                "This tab hit an error while building its text - showing the "
-                "details below instead of a blank screen so it can be reported:\n\n"
+                tx("This tab hit an error while building its text - showing the "
+                "details below instead of a blank screen so it can be reported:\n\n")
                 + tb
             )
             return
@@ -95,16 +96,15 @@ class KarmicTab(_BaseReportTab):
     def _build_text(self, reading):
         k = reading["karmic_and_past_life"]
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
-        lines = [f"=== Karmic & Past Life Perspective - {name} ===\n", k["caveat"] + "\n"]
+        lines = [tr('=== Karmic & Past Life Perspective - {0} ===\n', name), k["caveat"] + "\n"]
 
         ak, dk, pk = k["atmakaraka"], k["darakaraka"], k["putrakaraka"]
         lines.append(
-            "\n--- Chara Karakas (Jaimini significators) ---\n"
-            f"Atmakaraka (soul): {ak['planet']} in {ak['sign']}, house {ak['house']} ({ak['nakshatra']})\n"
-            f"Darakaraka (spouse): {dk['planet']} in {dk['sign']}, house {dk['house']} ({dk['nakshatra']})\n"
-            f"Putrakaraka (intellect & creativity): {pk['planet']} in {pk['sign']}, house {pk['house']} ({pk['nakshatra']})"
+            tr('\n--- Chara Karakas (Jaimini significators) ---\nAtmakaraka (soul): {0} in {1}, house {2} '
+               '({3})\nDarakaraka (spouse): {4} in {5}, house {6} ({7})\nPutrakaraka (intellect & creativity): '
+               '{8} in {9}, house {10} ({11})', ak['planet'], ak['sign'], ak['house'], ak['nakshatra'], dk['planet'], dk['sign'], dk['house'], dk['nakshatra'], pk['planet'], pk['sign'], pk['house'], pk['nakshatra'])
         )
-        lines.append("\n\n--- The Soul's Narrative ---\n")
+        lines.append(tx("\n\n--- The Soul's Narrative ---\n"))
         # soul_narrative ends with plain_section_summary (see
         # rule_engine.py's _build_karmic_and_past_life) - stripped here
         # since it's shown separately, in italics, via self.summary_label
@@ -119,8 +119,8 @@ class KarmicTab(_BaseReportTab):
                             ("dharma_house_9", "9th House - Dharma (fortune / higher purpose)"),
                             ("moksha_house_12", "12th House - Moksha (endings / past attachments)")):
             h = k[key]
-            lines.append(f"\n\n--- {title} (reference) ---")
-            lines.append(f"Lord: {h['lord']} in {h['lord_sign']}, placed in house {h['placed_in_house']}")
+            lines.append(tr('\n\n--- {0} (reference) ---', title))
+            lines.append(tr('Lord: {0} in {1}, placed in house {2}', h['lord'], h['lord_sign'], h['placed_in_house']))
             if h.get("effects") or h.get("summary"):
                 lines.append(h.get("effects") or h.get("summary"))
 
@@ -143,7 +143,7 @@ class LifePredictionsTab(_BaseReportTab):
     def _build_text(self, reading):
         lp = reading["life_predictions"]
         name = reading.get("name") or PROFILE_LABELS[self.store.current_profile_id]
-        lines = [f"=== Life Predictions - {name} ===\n", lp["caveat"] + "\n"]
+        lines = [tr('=== Life Predictions - {0} ===\n', name), lp["caveat"] + "\n"]
         chart = self.store.current["chart"]
         if chart is not None:
             import extras
@@ -151,13 +151,13 @@ class LifePredictionsTab(_BaseReportTab):
         for key, entry in lp.items():
             if key == "caveat" or not isinstance(entry, dict):
                 continue
-            lines.append(f"\n--- {entry['title']} ---")
+            lines.append(tr('\n--- {0} ---', entry['title']))
             # `text` already ends with the plain-language gist in
             # [brackets] (see rule_engine.py's area()) - the professional
             # classical writing stays intact and first; the gist is an
             # addition at the end, not a replacement or a lead-in
             # (explicit user feedback after an earlier pass led with it).
-            text = entry["text"] or "(not enough KB data to synthesize this area for this chart)"
+            text = entry["text"] or tx("(not enough KB data to synthesize this area for this chart)")
             lines.append(text)
         return "\n".join(lines)
 
@@ -176,7 +176,7 @@ class FullReadingTab(_BaseReportTab):
     def _save_pdf(self):
         data = self.store.current
         if data["chart"] is None or data["reading"] is None:
-            self._popup("No chart yet", "Generate a chart for this profile first, then save its PDF report.")
+            self._popup("No chart yet", tx("Generate a chart for this profile first, then save its PDF report."))
             return
         self._choose_sections(data)
 
@@ -188,7 +188,7 @@ class FullReadingTab(_BaseReportTab):
         chosen = {k for k, _ in avail} if not isinstance(saved, list) else set(saved)
         self._chooser_checks = {}
         content = BoxLayout(orientation="vertical", spacing=dp(8), padding=dp(10))
-        hint = Label(text=f"Choose what to include in your {mode} report.", size_hint_y=None, height=dp(28), halign="left", valign="middle")
+        hint = Label(text=tr('Choose what to include in your {0} report.', mode), size_hint_y=None, height=dp(28), halign="left", valign="middle")
         hint.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         content.add_widget(hint)
         scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
@@ -244,7 +244,7 @@ class FullReadingTab(_BaseReportTab):
             pdf = pdf_report.build_pdf(data["chart"], data["reading"], style=self.store.chart_style,
                                        mode=reading_mode.current(self.store), sections=set(sections) if sections else None)
             saved = export.save_pdf(pdf, pdf_report.safe_filename(data["chart"].get("name")), self.store.data_dir)
-            self._popup("PDF saved", f"{saved.where}\n\nOpen it from your Files / Downloads app, or tap Open.",
+            self._popup("PDF saved", tr('{0}\n\nOpen it from your Files / Downloads app, or tap Open.', saved.where),
                         open_fn=saved.open_fn)
         except Exception as exc:  # noqa: BLE001 - shown to the user
             Logger.error(f"VedicAstro:FullReadingTab: PDF failed:\n{traceback.format_exc()}")
@@ -266,7 +266,7 @@ class FullReadingTab(_BaseReportTab):
                 try:
                     open_fn()
                 except Exception as exc:  # noqa: BLE001 - e.g. no PDF viewer installed
-                    self._popup("Could not open it", f"{exc}\n\nThe file is saved; open it from your Files app.")
+                    self._popup("Could not open it", tr('{0}\n\nThe file is saved; open it from your Files app.', exc))
             open_btn = ThemedButton(text="Open", variant="primary")
             open_btn.bind(on_release=_open)
             buttons.add_widget(open_btn)
@@ -279,44 +279,42 @@ class FullReadingTab(_BaseReportTab):
     def _build_text(self, reading):
         r = reading
         profile_label = PROFILE_LABELS[self.store.current_profile_id]
-        lines = [f"=== {r['name'] or 'Birth Chart'} ({profile_label}) ===\n"]
-        lines.append(f"Ascendant: {r['ascendant']['sign']} ({r['ascendant']['degree_in_sign']:.2f} degrees)\n")
+        lines = [tr('=== {0} ({1}) ===\n', r['name'] or 'Birth Chart', profile_label)]
+        lines.append(tr('Ascendant: {0} ({1:.2f} degrees)\n', r['ascendant']['sign'], r['ascendant']['degree_in_sign']))
 
-        lines.append("\n--- Planets ---")
+        lines.append(tx("\n--- Planets ---"))
         for planet, detail in r["planets"].items():
-            lines.append(f"\n{planet}: {detail['sign']}, house {detail['house']} "
-                         f"({detail['nakshatra']} pada {detail['nakshatra_pada']})")
+            lines.append(tr('\n{0}: {1}, house {2} ({3} pada {4})', planet, detail['sign'], detail['house'], detail['nakshatra'], detail['nakshatra_pada']))
             if detail["in_sign"]:
-                lines.append(f"   {detail['in_sign'].get('effects') or detail['in_sign']['summary']}")
+                lines.append(tr('   {0}', detail['in_sign'].get('effects') or detail['in_sign']['summary']))
             if detail["in_house"]:
-                lines.append(f"   {detail['in_house'].get('effects') or detail['in_house']['summary']}")
+                lines.append(tr('   {0}', detail['in_house'].get('effects') or detail['in_house']['summary']))
 
-        lines.append("\n\n--- Yogas present ---")
+        lines.append(tx("\n\n--- Yogas present ---"))
         if r.get("yogas_plain_summary"):
             lines.append(r["yogas_plain_summary"])
         present = [y for y in r["yogas"] if y["present"]]
         if present:
             for y in present:
-                lines.append(f"\n{y['id']} {y['name']}: {y['details']}")
+                lines.append(tr('\n{0} {1}: {2}', y['id'], y['name'], y['details']))
         else:
-            lines.append("\n(none of the 24 checked yogas are formed in this chart)")
+            lines.append(tx("\n(none of the 24 checked yogas are formed in this chart)"))
 
         running = r["dasha"]["running_at_birth"]
-        lines.append(f"\n\n--- Dasha running at birth: {running['mahadasha_lord']} Mahadasha / "
-                     f"{running['antardasha_lord']} Antardasha ---")
+        lines.append(tr('\n\n--- Dasha running at birth: {0} Mahadasha / {1} Antardasha ---', running['mahadasha_lord'], running['antardasha_lord']))
         if running["mahadasha_reading"]:
-            lines.append(f"\n{running['mahadasha_reading']['general_effects']}")
+            lines.append(tr('\n{0}', running['mahadasha_reading']['general_effects']))
         if running["antardasha_reading"]:
-            lines.append(f"\n{running['antardasha_reading']['summary']}")
+            lines.append(tr('\n{0}', running['antardasha_reading']['summary']))
 
-        lines.append("\n\n--- Life Predictions ---")
+        lines.append(tx("\n\n--- Life Predictions ---"))
         lp = r["life_predictions"]
         for key, entry in lp.items():
             if key == "caveat" or not isinstance(entry, dict):
                 continue
-            lines.append(f"\n{entry['title']}: {entry['text']}")
+            lines.append(tr('\n{0}: {1}', entry['title'], entry['text']))
 
-        lines.append("\n\n--- Karmic & Past Life: The Soul's Narrative ---")
+        lines.append(tx("\n\n--- Karmic & Past Life: The Soul's Narrative ---"))
         lines.append(r["karmic_and_past_life"]["soul_narrative"] or "(see the Karmic & Past Life tab)")
 
         return "\n".join(lines)

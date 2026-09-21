@@ -10,6 +10,7 @@ PITRA_NOTE below) - this module picks one commonly-cited formulation and
 says so plainly rather than presenting it as the single correct rule.
 """
 from astrology_tables import SIGN_LORD, NATURAL_MALEFICS
+from i18n import tr, tx
 
 RAHU_KETU = {"Rahu", "Ketu"}
 
@@ -51,18 +52,18 @@ def assess_pitra_dosha(chart):
         "note": PITRA_NOTE,
         "rahu_ketu_in_9th": {
             "present": bool(rahu_ketu_in_9th), "planets": rahu_ketu_in_9th,
-            "detail": (f"{', '.join(rahu_ketu_in_9th)} in the 9th house." if rahu_ketu_in_9th
-                       else "Neither Rahu nor Ketu is in the 9th house."),
+            "detail": (tr("{0} in the 9th house.", ", ".join(rahu_ketu_in_9th)) if rahu_ketu_in_9th
+                       else tx("Neither Rahu nor Ketu is in the 9th house.")),
         },
         "sun_conjunct_rahu_ketu": {
             "present": bool(sun_conjunct_shadow), "planets": sun_conjunct_shadow,
-            "detail": (f"Sun is conjunct {', '.join(sun_conjunct_shadow)}." if sun_conjunct_shadow
-                       else "Sun is not conjunct Rahu or Ketu."),
+            "detail": (tr("Sun is conjunct {0}.", ", ".join(sun_conjunct_shadow)) if sun_conjunct_shadow
+                       else tx("Sun is not conjunct Rahu or Ketu.")),
         },
         "ninth_lord_afflicted": {
             "present": bool(lord_conjunct_malefic), "lord": ninth_lord, "planets": lord_conjunct_malefic,
-            "detail": (f"{ninth_lord} (9th lord) is conjunct {', '.join(lord_conjunct_malefic)}."
-                       if lord_conjunct_malefic else f"{ninth_lord} (9th lord) has no natural-malefic conjunction."),
+            "detail": (tr("{0} (9th lord) is conjunct {1}.", ninth_lord, ", ".join(lord_conjunct_malefic))
+                       if lord_conjunct_malefic else tr("{0} (9th lord) has no natural-malefic conjunction.", ninth_lord)),
         },
     }
 

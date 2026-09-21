@@ -21,6 +21,7 @@ from ui import reading_mode
 from ui.app_state import PROFILE_LABELS
 from ui.reading_mode import ReadingModeBar
 from ui.theme import ThemedButton as Button
+from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
 
 class FamilyTab(BoxLayout):
@@ -29,12 +30,12 @@ class FamilyTab(BoxLayout):
         self.store = store
 
         note = CaptionLabel(
-            "Generate a chart for Self at minimum; add Life Partner and/or Child profiles "
+            tx("Generate a chart for Self at minimum; add Life Partner and/or Child profiles "
             "for a fuller report. Self <-> Life Partner uses 'Ashtakoot Guna Milan' (a "
             "classical 36-point marriage-matching score); Self <-> Child deliberately does "
             "NOT, since that scoring system is only meant for spouses - children instead "
             "get a separate, appropriately-scoped comparison. Both also get a karmic layer: "
-            "past-life themes and how each of you can support the other's growth."
+            "past-life themes and how each of you can support the other's growth.")
         )
         self.add_widget(note)
         self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
@@ -114,8 +115,8 @@ class FamilyTab(BoxLayout):
             self._set_summary("This report hit an error - see details below.")
             self.table.clear_rows()
             self.report_text.set_text(
-                "This tab hit an error while building its report - showing the "
-                "details below instead of a blank screen so it can be reported:\n\n"
+                tx("This tab hit an error while building its report - showing the "
+                "details below instead of a blank screen so it can be reported:\n\n")
                 + tb
             )
             return
@@ -123,13 +124,12 @@ class FamilyTab(BoxLayout):
         result = report["ashtakoot"]
         if result:
             self._set_summary(
-                f"Self <-> Life Partner - Total: {result['total_points']:.1f} / "
-                f"{result['max_points']} - {result['verdict']}"
+                tr('Self <-> Life Partner - Total: {0:.1f} / {1} - {2}', result['total_points'], result['max_points'], result['verdict'])
             )
             rows = [(k["koota"], k["points"], k["max_points"]) for k in result["kootas"]]
             self.table.set_rows(rows)
         else:
-            self._set_summary("No Life Partner chart yet - showing Self's own disposition below.")
+            self._set_summary(tx("No Life Partner chart yet - showing Self's own disposition below."))
             self.table.clear_rows()
 
         self.report_text.set_text(reading_mode.apply(self.store, report["text"]))

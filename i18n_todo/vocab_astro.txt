@@ -1,0 +1,141 @@
+Ashwini
+Bharani
+Krittika
+Rohini
+Mrigashira
+Ardra
+Punarvasu
+Pushya
+Ashlesha
+Magha
+Purva Phalguni
+Uttara Phalguni
+Hasta
+Chitra
+Swati
+Vishakha
+Anuradha
+Jyeshtha
+Mula
+Purva Ashadha
+Uttara Ashadha
+Shravana
+Dhanishta
+Shatabhisha
+Purva Bhadrapada
+Uttara Bhadrapada
+Revati
+Brahmin
+Kshatriya
+Vaishya
+Shudra
+Deva
+Manushya
+Rakshasa
+Adi (Vata)
+Madhya (Pitta)
+Antya (Kapha)
+Chatushpada (quadruped)
+Manava (human)
+Jalachara (aquatic)
+Vanachara (wild)
+Keeta (insect)
+Ashva (Horse) - M
+Gaja (Elephant) - F
+Mesha (Goat) - F
+Sarpa (Serpent) - M
+Sarpa (Serpent) - F
+Shwan (Dog) - F
+Marjar (Cat) - M
+Mesha (Goat) - M
+Marjar (Cat) - F
+Mushak (Rat) - M
+Mushak (Rat) - F
+Gau (Cow) - M
+Mahish (Buffalo) - F
+Vyaghra (Tiger) - F
+Mahish (Buffalo) - M
+Vyaghra (Tiger) - M
+Mriga (Deer) - F
+Mriga (Deer) - M
+Shwan (Dog) - M
+Vanar (Monkey) - F
+Nakul (Mongoose) - M
+Vanar (Monkey) - M
+Simha (Lion) - F
+Ashva (Horse) - F
+Simha (Lion) - M
+Gau (Cow) - F
+Gaja (Elephant) - M
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+AM
+PM
+Krishna
+Shukla
+Shukla Paksha
+Krishna Paksha
+Vishkumbha
+Priti
+Ayushman
+Saubhagya
+Shobhana
+Atiganda
+Sukarma
+Dhriti
+Shoola
+Ganda
+Vriddhi
+Dhruva
+Vyaghata
+Harshana
+Vajra
+Siddhi
+Vyatipata
+Variyana
+Parigha
+Shiva
+Siddha
+Sadhya
+Shubha
+Brahma
+Indra
+Vaidhriti
+Pratipada
+Dwitiya
+Tritiya
+Chaturthi
+Panchami
+Shashthi
+Saptami
+Ashtami
+Navami
+Dashami
+Ekadashi
+Dwadashi
+Trayodashi
+Chaturdashi
+Bava
+Balava
+Kaulava
+Taitila
+Gara
+Vanija
+Vishti (Bhadra)
