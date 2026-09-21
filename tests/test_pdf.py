@@ -94,7 +94,9 @@ def test_report_text_content(sample):
     assert "Planet positions" in text and "Life areas" in text
     for section in ("Planet by planet", "Doshas and Sade Sati", "Sade Sati and Dhaiya", "Which planets get along",
                     "All divisional charts", "Shodashvarga table", "D27 Saptavimshamsha", "D45 Akshavedamsha",
-                    "Bhava Chalit", "Ashtakvarga", "Vimshottari Dasha", "Medical Astrology - body map"):
+                    "Bhava Chalit", "Ashtakvarga", "Vimshottari Dasha", "Medical Astrology - body map",
+                    "effects on your houses and signs", "Yogini Dasha", "Char Dasha", "Jaimini significators",
+                    "What each Mahadasha may feel like"):
         assert section in text, section
     for forbidden in ("Longevity", "lifespan", "Children"):     # the removed sections must not come back via the PDF
         assert forbidden not in text

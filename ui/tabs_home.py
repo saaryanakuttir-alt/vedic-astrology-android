@@ -19,6 +19,7 @@ from kivy.uix.scrollview import ScrollView
 from ui import theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.theme import HomeCard, OutlineBox, ThemedButton, ThemedSpinner
+from ui.version import VERSION
 
 CREDIT = "Created by Sammya Das"
 
@@ -40,6 +41,7 @@ HOME_MORE = [
     ("chalit", "Chalit", "Bhava house boundaries", "diamond", None),
     ("shodashvarga", "Shodashvarga Table", "All 15 divisional charts", "grid", None),
     ("relations", "Planet by Planet", "Good, mixed or needs care?", "gem", None),
+    ("moredashas", "More Dashas", "Yogini, Char & Karakamsa", "hourglass", None),
     ("doshas", "Doshas & Sade Sati", "Manglik, Kalsarpa, Saturn", "warn", None),
     ("karmic", "Karmic & Past Life", "Old patterns, new direction", "infinity", None),
     ("life", "Life Predictions", "Career, wealth, family", "star", None),
@@ -75,7 +77,7 @@ class HomeScreen(BoxLayout):
         body.add_widget(more)
         body.add_widget(self._grid(HOME_MORE))
 
-        credit = Label(text=CREDIT, font_size="12sp", color=theme.MUTED, italic=True,
+        credit = Label(text=f"{CREDIT}  -  version {VERSION}", font_size="12sp", color=theme.MUTED, italic=True,
                        size_hint_y=None, height=dp(44))
         body.add_widget(credit)
 

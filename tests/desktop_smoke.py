@@ -81,7 +81,7 @@ check(app.header.title_label.text == "Home", "header title is Home")
 print("== Home cards navigate")
 home = app._screens["home"]
 cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 23, f"23 home cards (got {len(cards)})")
+check(len(cards) == 24, f"24 home cards (got {len(cards)})")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -340,6 +340,40 @@ for label in ("Saptavimsamsa (D27)", "Khavedamsa (D40)", "Akshavedamsa (D45)"):
     chart_screen.varga_spinner.text = label; pump(8)
     check(chart_screen.info_label.text.startswith("Ascendant ("), f"chart picker shows {label}")
 chart_screen.varga_spinner.text = "Rasi (D1)"; pump(4)
+
+print("== Compact / Detailed switch on the remaining detailed screens")
+app.store.current_profile_id = "self"
+def screen_len(key):
+    return len(" ".join(texts(app._screens[key])))
+for key, minimum_ratio in (("yogas", 0.9), ("dasha", 0.5), ("chart", 0.9)):
+    app.goto(key); pump(10)
+    scr = app._screens[key]
+    check(scr.mode_bar is not None, f"{key}: has the Compact | Detailed switch")
+    scr.mode_bar.seg.select("Detailed"); pump(12)
+    detailed = screen_len(key)
+    scr.mode_bar.seg.select("Compact"); pump(12)
+    compact = screen_len(key)
+    check(compact < detailed, f"{key}: Compact is shorter ({compact} vs {detailed})")
+    scr.mode_bar.seg.select("Detailed"); pump(12)
+app.goto("family"); pump(10)
+check(app._screens["family"].mode_bar is not None, "family: has the Compact | Detailed switch")
+
+print("== Planet effects sections and the More Dashas screen")
+app.store.current_profile_id = "self"
+app.goto("planets"); pump(16)
+blob = " ".join(texts(app._screens["planets"]))
+check("hit an error" not in blob, "planets: no error text")
+for word in ("SUN", "At a glance", "What it rules and looks at", "What may happen", "In simple terms", "in the 12th house"):
+    check(word in blob or word in blob.replace("  ", " "), f"planets: shows '{word}'")
+app._screens["planets"].mode_bar.seg.select("Compact"); pump(14)
+compact_len = len(" ".join(texts(app._screens["planets"])))
+app._screens["planets"].mode_bar.seg.select("Detailed"); pump(14)
+check(compact_len < len(" ".join(texts(app._screens["planets"]))) * 0.7, "planets: Compact is shorter than Detailed")
+app.goto("moredashas"); pump(16)
+blob = " ".join(texts(app._screens["moredashas"]))
+check("hit an error" not in blob, "moredashas: no error text")
+for word in ("Yogini Dasha", "Char Dasha", "Atmakaraka", "Karakamsa", "Bhramari", "Gemini"):
+    check(word in blob, f"moredashas: shows '{word}'")
 
 print("== no language switch")
 app.goto("home"); pump(8)

@@ -24,7 +24,8 @@ class HelpTab(BoxLayout):
 
         self.add_widget(theme.SectionHeader("❓", "Help & FAQ"))
 
-        credit = Label(text="Vedic Astrology · Created by Sammya Das", color=theme.ACCENT_700, bold=True,
+        from ui.version import VERSION
+        credit = Label(text=f"Vedic Astrology · Created by Sammya Das · version {VERSION}", color=theme.ACCENT_700, bold=True,
                        font_size="13sp", size_hint_y=None, height=dp(30), halign="left", valign="middle",
                        padding=(dp(4), 0))
         credit.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))

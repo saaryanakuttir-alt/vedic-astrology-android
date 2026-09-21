@@ -351,3 +351,12 @@ Rahu/Ketu aspects on the 5th/7th/9th while this engine gives them only the 7th.
 ## Version 1.6.1 (2026-09-21)
 
 * Doshas that are not present now say "What this means" instead of "What may happen", and their plain-words lines say why the worry does not apply.
+
+## Version 1.6.2 (2026-09-21)
+
+* **Planet effects**: Planet in House / Planet in Sign now show one banner per planet with labelled sections (house, sign, ruler relationship, special conditions, what it rules and looks at, verdict, what may happen, in simple terms) - `engine/planet_effects.py`; also in the Detailed PDF.
+* **More Dashas** screen (Yogini Dasha, Jaimini Char Dasha, Chara Karakas + Karakamsa chart, plain-words verdict for every Mahadasha) - `engine/more_dashas.py`. Char Dasha and Karakas match the AstroSage reference exactly; Yogini dates are within 2 days (AstroSage also shifts the first sub-periods).
+* **Compact | Detailed switch** now also on Yogas, Dasha, Chart Diagram, Family Compatibility, Planets and the new screens.
+* The profile row on New Chart shows two child slots (was four).
+* The app version is shown on Home and in Help (`ui/version.py`, kept equal to buildozer.spec by a test) so a bug report can say which build it came from.
+* Doshas that are not present now say "What this means".

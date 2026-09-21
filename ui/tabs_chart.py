@@ -18,7 +18,8 @@ from kivy.clock import Clock
 import chart_geometry as cg
 from astrology_tables import SIGN_ABBR
 from panchanga import SIGNS
-from ui import theme
+from ui import reading_mode, theme
+from ui.reading_mode import ReadingModeBar
 from ui.widgets import CaptionLabel, FlowText, LongText
 from ui.theme import ThemedSpinner as Spinner
 
@@ -282,12 +283,14 @@ class ChartTab(BoxLayout):
         self._scroll.add_widget(page)
         self.add_widget(self._scroll)
 
+        self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
         page.add_widget(CaptionLabel(
             "A visual diagram of your chart, showing which sign/house each planet falls "
             "in. 'D1' (Rasi) is your main birth chart; the other 'D' options are "
             "specialized zoom-ins classical texts use for specific life areas (e.g. D9 for "
-            "marriage)."
+            "marriage). Compact shows just the plain-words explanation under the chart."
         ))
+        page.add_widget(self.mode_bar)
 
         self.info_label = Label(text="No chart generated yet.", size_hint_y=None, height=dp(28))
         page.add_widget(self.info_label)
@@ -333,9 +336,12 @@ class ChartTab(BoxLayout):
                             "main chart - see which sign each planet falls in and whether the planets look comfortable "
                             "there. It adds detail to the main chart and never overrides it.]")
             return ""
+        if reading_mode.current(self.store) == "compact":
+            return (cd.get("plain_explanation") or "").strip()
         return "\n\n".join([cd.get("plain_explanation", ""), "In classical terms:", cd.get("text", "")]).strip()
 
     def refresh(self):
+        self.mode_bar.sync()
         chart = self.store.current["chart"]
         style = getattr(self.store, "chart_style", None)
         if style and self.style_spinner.text != style:

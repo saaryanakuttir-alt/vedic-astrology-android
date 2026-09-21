@@ -16,6 +16,8 @@ from kivy.metrics import dp
 from ui.widgets import SimpleTable, FlowTable, FlowText, CaptionLabel, LongText
 from ui.theme import ThemedCheckBox as CheckBox
 from ui import theme
+from ui import reading_mode
+from ui.reading_mode import ReadingModeBar
 from panchanga import SIGNS
 from astrology_tables import ordinal
 
@@ -33,12 +35,17 @@ class _BaseTableTab(BoxLayout):
     # at least one classical Sanskrit/astrology term (Chalit, Ashtakvarga,
     # Nakshatra, Yoga, Dasha...) with no explanation otherwise.
     caption = ""
+    has_mode_bar = False        # True: show the Compact | Detailed switch under the caption
 
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
         if self.caption:
             self.add_widget(CaptionLabel(self.caption))
+        self.mode_bar = None
+        if self.has_mode_bar:
+            self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
+            self.add_widget(self.mode_bar)
         self.table = SimpleTable(self.columns, self.col_hints, font_size=self.font_size)
         self.add_widget(self.table)
 
@@ -160,16 +167,20 @@ class PlanetsTab(BoxLayout):
         # "What this means" - the table is raw placement data; this is the plain-language "so what
         # does that actually affect" reading for each planet, from reading["planets"][p]["plain_gloss"]
         # (rule_engine.py's _plain_planet_gloss). One paragraph per planet.
-        page.add_widget(CaptionLabel("What this means for you, planet by planet:"))
-        self.gloss_text = FlowText()
-        page.add_widget(self.gloss_text)
+        page.add_widget(CaptionLabel("How each planet affects your houses and signs - one section per planet, with a plain-words "
+                                     "verdict (good, mixed or needs care) and what may happen:"))
+        self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
+        page.add_widget(self.mode_bar)
+        self.effects_box = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        self.effects_box.bind(minimum_height=self.effects_box.setter("height"))
+        page.add_widget(self.effects_box)
 
     def refresh(self):
         from astrology_tables import get_dignity
         chart = self.store.current["chart"]
         if chart is None:
             self.table.set_rows([("No chart generated yet.", "", "", "", "", "", "", "", "")])
-            self.gloss_text.set_text("")
+            self.effects_box.clear_widgets()
             return
         rows = []
         for planet, detail in chart["planets"].items():
@@ -183,16 +194,13 @@ class PlanetsTab(BoxLayout):
         self.table.set_rows(rows)
         self._scroll.scroll_y = 1
 
+        self.mode_bar.sync()
         reading = self.store.current["reading"]
-        if reading is None:
-            self.gloss_text.set_text("")
-            return
-        glosses = [
-            reading["planets"][p]["plain_gloss"]
-            for p in chart["planets"]
-            if reading["planets"].get(p, {}).get("plain_gloss")
-        ]
-        self.gloss_text.set_text("\n\n".join(glosses))
+        self.effects_box.clear_widgets()
+        if reading is not None:
+            from ui.tabs_insights import planet_effect_widgets
+            for w in planet_effect_widgets(self.store, chart, reading):
+                self.effects_box.add_widget(w)
 
 
 class HousesTab(_BaseTableTab):
@@ -224,8 +232,11 @@ class YogasTab(BoxLayout):
         self.store = store
         self.add_widget(CaptionLabel(
             "'Yogas' are specific planetary combinations that classical texts link to "
-            "particular life themes (e.g. leadership, wealth, obstacles) when present."
+            "particular life themes (e.g. leadership, wealth, obstacles) when present. Compact shows just the first "
+            "sentence of each meaning."
         ))
+        self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
+        self.add_widget(self.mode_bar)
         # Rebuilt fresh each refresh() rather than mutated - same "never
         # mutate .text on an already-rendered Label" pattern as widgets.py's
         # LongText/SimpleTable (see LongText's own comment for why this
@@ -256,6 +267,7 @@ class YogasTab(BoxLayout):
         self.summary_area.height = label.height
 
     def refresh(self):
+        self.mode_bar.sync()
         reading = self.store.current["reading"]
         if reading is None:
             self._set_summary("")
@@ -274,21 +286,24 @@ class YogasTab(BoxLayout):
             # Moon..."). Show both - the fact first, then what it means.
             text = y["details"]
             if y.get("explanation"):
-                text = f"{text} — {y['explanation']}"
+                more = y["explanation"] if reading_mode.current(self.store) == "detailed" else reading_mode.first_sentence(y["explanation"])
+                text = f"{text} — {more}"
             rows.append((y["id"], y["name"], "Yes" if y["present"] else "No", text))
         self.table.set_rows(rows)
 
 
 class DashaTab(_BaseTableTab):
+    has_mode_bar = True         # Compact: the main periods only; Detailed: every sub-period too
     columns = ["Level", "Lord", "Start", "End", "At Birth?"]
     col_hints = [0.14, 0.16, 0.22, 0.22, 0.26]
     caption = (
         "'Dasha' is a timeline system: your life is divided into periods ruled by "
         "each planet in turn ('Maha' = main period, 'Antar' = a sub-period within it), "
-        "used to time when a planet's themes are most active for you."
+        "used to time when a planet's themes are most active for you. Compact shows the main periods only."
     )
 
     def refresh(self):
+        self.mode_bar.sync()
         reading = self.store.current["reading"]
         if reading is None:
             self.table.set_rows([("No chart generated yet.", "", "", "", "")])
@@ -305,7 +320,7 @@ class DashaTab(_BaseTableTab):
             is_running_maha = maha["lord"] == running["mahadasha_lord"] and maha["is_partial_at_birth"]
             rows.append(("Maha", f"{maha['lord']}", fmt(maha["start"]), fmt(maha["end"]),
                          "<-- at birth" if is_running_maha else ""))
-            for antar in maha["antardashas"]:
+            for antar in ([] if reading_mode.current(self.store) == "compact" else maha["antardashas"]):
                 is_running_antar = is_running_maha and antar["lord"] == running["antardasha_lord"]
                 rows.append(("  Antar", f"{maha['lord']}/{antar['lord']}", fmt(antar["start"]), fmt(antar["end"]),
                              "<-- at birth" if is_running_antar else ""))

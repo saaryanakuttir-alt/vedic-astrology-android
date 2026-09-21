@@ -26,16 +26,17 @@ MUTED = (0.45, 0.44, 0.43)
 
 
 # ---------------------------------------------------------------- the text of the report
-def document_text(reading):
+def document_text(reading, planet_glosses=True):
     """The readings in the same convention as the on-screen reports: '--- Heading ---' paragraphs
     followed by body paragraphs, separated by blank lines."""
     r, parts = reading, []
 
-    parts.append("--- What each planet means ---")
-    for planet, detail in r["planets"].items():
-        gloss = detail.get("plain_gloss")
-        if gloss:
-            parts.append(gloss)
+    if planet_glosses:
+        parts.append("--- What each planet means ---")
+        for planet, detail in r["planets"].items():
+            gloss = detail.get("plain_gloss")
+            if gloss:
+                parts.append(gloss)
 
     parts.append("--- Yogas in this chart ---")
     if r.get("yogas_plain_summary"):
@@ -402,6 +403,62 @@ def _naive(v):
     return v.replace(tzinfo=None) if v.tzinfo else v
 
 
+
+def _planet_effects_section(doc, chart, reading):
+    import planet_effects
+    doc.heading("Planet by planet - effects on your houses and signs")
+    doc.paragraph("One block per planet: what its house does, what its sign does, how it gets on with the ruler of its sign, "
+                  "any special conditions, what it rules and looks at, and a plain-words verdict. [In simple terms: read each block "
+                  "as the story of one planet in your chart - good, mixed or needing care - with what may happen.]", size=9)
+    for e in planet_effects.planet_effects(chart, reading):
+        doc.ensure(90)
+        doc.heading(e["banner"].replace("  -  ", " - "), size=12)
+        for label, text in e["sections"]:
+            doc.ensure(50)
+            doc.paragraph(label, size=9.5, bold=True, color=GOLD)
+            for para in text.split("\n\n"):
+                if para.strip():
+                    doc.paragraph(para.strip())
+
+
+def _more_dashas_section(doc, chart, style):
+    import more_dashas as md
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+    _heading_para(doc, md.mahadasha_text(chart, now))
+    doc.heading("Yogini Dasha (a 36-year cycle of eight periods)")
+    doc.paragraph("[In simple terms: each 'yogini' colours a stretch of life - Mangala for good fortune, Pingala for effort, Dhanya "
+                  "for money and comfort, Bhramari for change, Bhadrika for steady gains, Ulka for pressure, Siddha for achievement "
+                  "and Sankata for obstacles that ask for patience. Dates are approximate, a couple of days either way.]", size=9)
+    yog = md.yogini_dasha(chart)
+    doc.table(["Yogini", "From", "To", "Years", "Feels like"],
+              [[y["name"] + (" (now)" if y["start"] <= now < y["end"] else ""), _fmt_date(y["start"]), _fmt_date(y["end"]),
+                str(y["years"]), md._YOGINI_MEANING[y["name"]]] for y in yog], [80, 75, 75, 35, 230])
+    for y in yog[:6]:
+        doc.paragraph(f"{y['name']} period - sub-periods", bold=True, color=GOLD, size=9.5)
+        doc.table(["Sub-period", "From", "To"], [[a["name"], _fmt_date(a["start"]), _fmt_date(a["end"])] for a in y["antardashas"]],
+                  [165, 165, 165], size=8)
+    doc.heading("Char Dasha (Jaimini - periods of zodiac signs from your Lagna)")
+    doc.paragraph("[In simple terms: instead of planets, each period belongs to a zodiac sign, starting with your rising sign. The "
+                  "sign's house in your chart shows which area of life is in focus.]", size=9)
+    chd = md.char_dasha(chart)
+    doc.table(["Sign", "Years", "From", "To"], [[c["sign"] + (" (now)" if c["start"] <= now < c["end"] else ""), str(c["years"]),
+                                                  _fmt_date(c["start"]), _fmt_date(c["end"])] for c in chd], [150, 60, 140, 145])
+    for c in chd[:4]:
+        doc.paragraph(f"{c['sign']} period - sub-periods", bold=True, color=GOLD, size=9.5)
+        rows = []
+        half = len(c["antardashas"]) // 2
+        for i in range(half):
+            a, b = c["antardashas"][i], c["antardashas"][i + half]
+            rows.append([a["sign"], _fmt_date(a["start"]), _fmt_date(a["end"]), b["sign"], _fmt_date(b["start"]), _fmt_date(b["end"])])
+        doc.table(["Sub-period", "From", "To", "Sub-period", "From", "To"], rows, [70, 88, 88, 70, 88, 88], size=8)
+    doc.heading("Jaimini significators (Chara Karakas) and Karakamsa")
+    doc.table(["Role", "Planet", "Stands for"], [[k["role"], k["chara"], k["meaning"]] for k in md.karakas(chart)], [130, 90, 275])
+    doc.paragraph(md.karakamsa_text(chart))
+    doc.ensure(280)
+    doc.paragraph("Karakamsa chart (birth-chart planets counted from the Karakamsa sign)", bold=True, color=GOLD, size=9.5)
+    _draw_chart(doc, md.with_karakamsa(chart), style, size=230, varga="KM")
+
+
 # ---------------------------------------------------------------- the report
 def build_pdf(chart, reading, style="North Indian", mode="detailed"):
     import extras
@@ -462,9 +519,12 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
         if block:
             _heading_para(doc, block if detailed else compact_text(block))
     planets_text = extras.planet_considerations_text(chart)
-    _heading_para(doc, "--- Planet by planet: good, mixed or needs care? ---\nFor each planet: how well it is placed in your chart "
-                       "and what that may mean for you.")
-    _heading_para(doc, planets_text if detailed else compact_text(planets_text))
+    if detailed:
+        _planet_effects_section(doc, chart, reading)
+    else:
+        _heading_para(doc, "--- Planet by planet: good, mixed or needs care? ---\nFor each planet: how well it is placed in your "
+                           "chart and what that may mean for you.")
+        _heading_para(doc, compact_text(planets_text))
     _doshas_section(doc, chart, mode, ex)
 
     if detailed:
@@ -472,8 +532,9 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
         _divisional_section(doc, chart, style, reading)
         _chalit_ashtak_section(doc, chart)
         _dasha_section(doc, chart)
+        _more_dashas_section(doc, chart, style)
 
-    text = document_text(reading)
+    text = document_text(reading, planet_glosses=not detailed)
     if not detailed:
         text = compact_text(text)
     medical = (reading or {}).get("medical_astrology")

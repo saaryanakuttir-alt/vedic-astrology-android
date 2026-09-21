@@ -14,7 +14,7 @@ import tempfile
 
 from ui.persist import SavedBirths, Settings
 
-CHILD_SLOT_COUNT = 4
+CHILD_SLOT_COUNT = 2      # the profile row on New Chart shows Self, Life Partner and two child slots
 
 PROFILE_IDS = ["self", "partner"] + [f"child_{i}" for i in range(1, CHILD_SLOT_COUNT + 1)]
 

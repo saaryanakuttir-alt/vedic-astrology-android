@@ -163,3 +163,111 @@ class ShodashvargaTab(_InsightPage):
         self._table(head, [0.11, 0.09] + [0.088] * 9, rows, "10sp")
         self._text("--- What each chart looks at ---")
         self._text("\n\n".join(f"{r['key']} {r['name']}: {r['purpose']}." for r in extras.shodashvarga_table(chart)))
+
+
+# ---------------------------------------------------------------- planet-by-planet effect sections
+from kivy.graphics import Color, Rectangle  # noqa: E402
+from kivy.uix.label import Label  # noqa: E402
+from ui import theme  # noqa: E402
+
+
+class PlanetBanner(Label):
+    """A tinted bar that starts each planet's section, so the planets are easy to tell apart."""
+
+    def __init__(self, text, **kwargs):
+        super().__init__(text=text, bold=True, font_size="14sp", color=theme.ACCENT_800, halign="left", valign="middle",
+                         size_hint_y=None, height=dp(42), **kwargs)
+        with self.canvas.before:
+            Color(theme.ACCENT[0], theme.ACCENT[1], theme.ACCENT[2], 0.16)
+            self._bg = Rectangle(pos=self.pos, size=self.size)
+        self.bind(pos=self._sync, size=self._sync)
+
+    def _sync(self, *_):
+        self._bg.pos, self._bg.size = self.pos, self.size
+        self.text_size = (self.width - dp(20), self.height)
+        self.padding = (dp(10), 0)
+
+
+class SectionLabel(Label):
+    """The small bold label above one block of a planet's explanation (e.g. 'Sun in the 12th house')."""
+
+    def __init__(self, text, **kwargs):
+        super().__init__(text=text, bold=True, font_size="13sp", color=theme.ACCENT_700, halign="left", valign="bottom",
+                         size_hint_y=None, **kwargs)
+        self.bind(width=self._fit, texture_size=self._fit)
+
+    def _fit(self, *_):
+        self.text_size = (self.width - dp(8), None)
+        self.height = max(dp(30), self.texture_size[1] + dp(12))
+
+
+def planet_effect_widgets(store, chart, reading):
+    """A banner and labelled sections for every planet (Compact keeps 'At a glance' and 'In simple terms')."""
+    import planet_effects
+    compact = reading_mode.current(store) == "compact"
+    widgets = []
+    for e in planet_effects.planet_effects(chart, reading):
+        widgets.append(PlanetBanner(e["banner"]))
+        for label, text in e["sections"]:
+            if compact and label not in (planet_effects.GLANCE, planet_effects.SIMPLE):
+                continue
+            widgets.append(SectionLabel(label))
+            body = FlowText()
+            body.set_text(text)
+            widgets.append(body)
+    return widgets
+
+
+# ---------------------------------------------------------------- Yogini, Char dasha and Jaimini
+class MoreDashaTab(_InsightPage):
+    caption = (
+        "Two more ways of dividing life into periods (Yogini Dasha and Jaimini's Char Dasha), what each Vimshottari "
+        "period may feel like, and your Jaimini soul-planet (Atmakaraka) with its Karakamsa chart. All are tendencies to "
+        "reflect on, not fixed events; dates are approximate."
+    )
+
+    def _build(self, chart, reading):
+        import datetime
+        import more_dashas as md
+        from ui.tabs_chart import ChartCanvas
+        now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+        fmt = lambda d: f"{d:%d %b %Y}"
+        self._text(f"=== More dashas and Jaimini - {self._name(reading)} ===")
+        self._text(md.mahadasha_text(chart), compactable=True)
+
+        self._text("--- Yogini Dasha (a 36-year cycle of eight periods) ---")
+        self._text("[In simple terms: each 'yogini' colours a stretch of life - Mangala for good fortune, Pingala for effort, "
+                   "Dhanya for money and comfort, Bhramari for change, Bhadrika for steady gains, Ulka for pressure, Siddha for "
+                   "achievement and Sankata for obstacles that ask for patience.]")
+        yog = md.yogini_dasha(chart)
+        self._table(["Yogini", "From", "To", "Years", "Feels like"], [0.17, 0.2, 0.2, 0.1, 0.33],
+                    [(y["name"] + (" (now)" if y["start"] <= now < y["end"] else ""), fmt(y["start"]), fmt(y["end"]),
+                      y["years"], md._YOGINI_MEANING[y["name"]]) for y in yog], "11sp")
+        run = next((y for y in yog if y["start"] <= now < y["end"]), None)
+        if run:
+            self._text(f"--- Sub-periods inside the running {run['name']} period ---")
+            self._table(["Sub-period", "From", "To"], [0.4, 0.3, 0.3],
+                        [(a["name"], fmt(a["start"]), fmt(a["end"])) for a in run["antardashas"]], "11sp")
+
+        self._text("--- Char Dasha (Jaimini, counted by signs from your Lagna) ---")
+        self._text("[In simple terms: instead of planets, each period belongs to a zodiac sign, starting with your rising sign. "
+                   "The sign's house in your chart shows which area of life is in focus during that period.]")
+        chd = md.char_dasha(chart)
+        self._table(["Sign", "Years", "From", "To"], [0.3, 0.14, 0.28, 0.28],
+                    [(c["sign"] + (" (now)" if c["start"] <= now < c["end"] else ""), c["years"], fmt(c["start"]), fmt(c["end"]))
+                     for c in chd], "11sp")
+        crun = next((c for c in chd if c["start"] <= now < c["end"]), None)
+        if crun:
+            self._text(f"--- Sub-periods inside the running {crun['sign']} period ---")
+            self._table(["Sub-period", "From", "To"], [0.4, 0.3, 0.3],
+                        [(a["sign"], fmt(a["start"]), fmt(a["end"])) for a in crun["antardashas"]], "11sp")
+
+        self._text("--- Jaimini significators (Chara Karakas) ---")
+        self._table(["Role", "Planet", "Stands for"], [0.3, 0.2, 0.5],
+                    [(k["role"], k["chara"], k["meaning"]) for k in md.karakas(chart)], "11sp")
+        self._text("--- Karakamsa ---")
+        self._text(md.karakamsa_text(chart), compactable=True)
+        view = md.with_karakamsa(chart)
+        canvas = ChartCanvas(size_hint_y=None, height=dp(340))
+        canvas.set_chart(view, "KM", self.store.chart_style)
+        self.page.add_widget(canvas)

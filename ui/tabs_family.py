@@ -17,7 +17,9 @@ from kivy.clock import Clock
 from kivy.logger import Logger
 
 from ui.widgets import FlowTable, FlowText, CaptionLabel
+from ui import reading_mode
 from ui.app_state import PROFILE_LABELS
+from ui.reading_mode import ReadingModeBar
 from ui.theme import ThemedButton as Button
 
 
@@ -35,6 +37,8 @@ class FamilyTab(BoxLayout):
             "past-life themes and how each of you can support the other's growth."
         )
         self.add_widget(note)
+        self.mode_bar = ReadingModeBar(store, lambda: self.refresh())
+        self.add_widget(self.mode_bar)
 
         compute_btn = Button(text="Compute Family Compatibility Report", gold=True, size_hint_y=None, height=dp(48))
         compute_btn.bind(on_release=lambda *_: self.refresh())
@@ -85,6 +89,7 @@ class FamilyTab(BoxLayout):
         self.summary_label.height = max(dp(30), self.summary_label.texture_size[1] + dp(10))
 
     def refresh(self):
+        self.mode_bar.sync()
         self_chart = self.store.profiles["self"]["chart"]
         self_reading = self.store.profiles["self"]["reading"]
         if self_chart is None or self_reading is None:
@@ -127,4 +132,4 @@ class FamilyTab(BoxLayout):
             self._set_summary("No Life Partner chart yet - showing Self's own disposition below.")
             self.table.clear_rows()
 
-        self.report_text.set_text(report["text"])
+        self.report_text.set_text(reading_mode.apply(self.store, report["text"]))

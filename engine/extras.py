@@ -322,17 +322,17 @@ def house_verdicts(chart):
         bad_occ = [p for p in occupants if p in ("Saturn", "Mars", "Rahu", "Ketu", "Sun")]
         if good_occ and h not in (6, 8, 12):
             score += 1
-            reasons.append(f"{_list(good_occ)} bring support from inside the house")
+            reasons.append(f"{_list(good_occ)} {'brings' if len(good_occ) == 1 else 'bring'} support from inside the house")
         if bad_occ and h not in (3, 6, 10, 11):
             score -= 1
-            reasons.append(f"{_list(bad_occ)} add pressure from inside the house")
+            reasons.append(f"{_list(bad_occ)} {'adds' if len(bad_occ) == 1 else 'add'} pressure from inside the house")
         elif bad_occ:
             score += 1
             reasons.append(f"{_list(bad_occ)} can do well here")
         helpers = [q for q in aspected_by_house(chart, h) if q in ("Jupiter", "Venus")]
         if helpers:
             score += 1
-            reasons.append(f"{_list(helpers)} look at it kindly")
+            reasons.append(f"{_list(helpers)} {'looks' if len(helpers) == 1 else 'look'} at it kindly")
         pts = sav[sign]
         if pts >= 30:
             score += 1
