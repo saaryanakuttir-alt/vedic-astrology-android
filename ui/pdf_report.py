@@ -470,11 +470,23 @@ def _nature_section(doc, chart, detailed):
     _heading_para(doc, text if detailed else compact_text(text))
 
 
-def _advanced_section(doc, chart, style):
-    """Detailed PDF only: Varshaphal for the current year, KP tables, planet strength and Prastharashtakvarga."""
-    import kp
-    import prastara
-    import shadbala
+SECTIONS = [
+    ("nature", "Your nature (character, career, learning, hobbies)"), ("verdicts", "Where you are now and your 12 houses"),
+    ("planets", "Planet by planet"), ("doshas", "Doshas and Sade Sati"), ("remedies", "Remedies (what helps right now)"),
+    ("friends", "Planet friendships and aspects"), ("vargas", "All divisional charts"), ("tables", "Chalit and Ashtakvarga"),
+    ("dashas", "Vimshottari dasha tables"), ("moredashas", "Yogini, Char dasha and Karakamsa"), ("varsha", "Varshaphal (current year)"),
+    ("strength", "Planet strength"), ("kp", "KP system"), ("prastara", "Ashtakvarga detail"),
+    ("readings", "Readings: yogas, life areas, karmic, medical, relationships"),
+]
+COMPACT_KEYS = {"nature", "verdicts", "planets", "doshas", "remedies", "readings"}
+
+
+def available_sections(mode):
+    """(key, label) for the sections that exist in this mode - the Compact report is a shorter set."""
+    return [s for s in SECTIONS if mode != "compact" or s[0] in COMPACT_KEYS]
+
+
+def _varsha_section(doc, chart, style):
     import varshaphal
     now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
     birth_year = int(chart["birth_input"]["birth_date"][:4])
@@ -488,6 +500,9 @@ def _advanced_section(doc, chart, style):
     doc.paragraph("The yearly chart", bold=True, color=GOLD, size=9.5)
     _draw_chart(doc, vp["varsha"], style, size=230)
 
+
+def _strength_section(doc, chart):
+    import shadbala
     sb = shadbala.compute_shadbala(chart)
     doc.heading("Planet strength")
     _heading_para(doc, shadbala.shadbala_text(chart))
@@ -498,6 +513,9 @@ def _advanced_section(doc, chart, style):
     doc.paragraph("Not counted: the year and month lords, planetary speed, aspect strength and planetary war. Read the scores as "
                   "comparisons between your own planets, not as the traditional 'rupa' totals.", size=8, color=MUTED)
 
+
+def _kp_section(doc, chart):
+    import kp
     t = kp.kp_tables(chart)
     ab = lambda p: p[:3]
     doc.heading("KP system (Krishnamurti Paddhati)")
@@ -514,7 +532,26 @@ def _advanced_section(doc, chart, style):
     doc.paragraph("Ruling planets - Lagna (sign, star, sub lord): " + ", ".join(r["Lagna"]) + ". Moon: " + ", ".join(r["Moon"]) +
                   f". Weekday lord: {r['Day lord']}.")
     doc.table(["House", "Signified by (strongest first)"], [[str(h), ", ".join(x[:3] for x in pl)] for h, pl in t["significators"].items()], [60, 435])
+    now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+    dasha = kp.kp_dasha(chart)
+    doc.paragraph("KP Vimshottari periods (counted from the KP Moon)", bold=True, color=GOLD, size=9.5)
+    doc.table(["Main period", "From", "To"], [[m["lord"] + (" (now)" if m["start"] <= now < m["end"] else ""), _fmt_date(m["start"]), _fmt_date(m["end"])]
+                                              for m in dasha[:9]], [165, 165, 165])
+    run = next((m for m in dasha if m["start"] <= now < m["end"]), None)
+    if run:
+        doc.paragraph(f"Sub-periods and smallest periods inside the running {run['lord']} period", bold=True, color=GOLD, size=9.5)
+        for a in run["antardashas"]:
+            if a["end"] < now:
+                continue
+            doc.paragraph(f"{run['lord']} / {a['lord']}: {_fmt_date(a['start'])} to {_fmt_date(a['end'])}", size=9, bold=True)
+            doc.table(["Pratyantar", "From", "To"], [[x["lord"], _fmt_date(x["start"]), _fmt_date(x["end"])] for x in a["pratyantars"]],
+                      [165, 165, 165], size=8)
+            if a["start"] > now + datetime.timedelta(days=365 * 3):
+                break
 
+
+def _prastara_section(doc, chart):
+    import prastara
     doc.heading("Ashtakvarga detail (Prastharashtakvarga)")
     doc.paragraph("For each planet, who gives each point: 1 means that helper gives a point to the sign. The last row is the planet's usual "
                   "Ashtakvarga row.", size=9)
@@ -525,9 +562,17 @@ def _advanced_section(doc, chart, style):
         doc.table(["From"] + [s[:3] for s in SIGNS], rows, [55] + [36.7] * 12, size=8)
 
 
+def _remedies_section(doc, chart, reading, detailed):
+    import remedy_plan
+    text = remedy_plan.remedy_text(chart, reading, compact=not detailed)
+    _heading_para(doc, text if detailed else compact_text(text))
+
+
 # ---------------------------------------------------------------- the report
-def build_pdf(chart, reading, style="North Indian", mode="detailed"):
+def build_pdf(chart, reading, style="North Indian", mode="detailed", sections=None):
+    """sections: None = everything this mode has, or a collection of keys from SECTIONS to include."""
     import extras
+    want = lambda key: sections is None or key in sections
     name = chart.get("name") or "Birth chart"
     detailed = mode != "compact"
     doc = _Doc(f"Vedic Astrology report - {name}")
@@ -581,29 +626,46 @@ def build_pdf(chart, reading, style="North Indian", mode="detailed"):
     doc.table(["Planet", "Sign", "Deg", "House", "Nakshatra", "Pada", "Dignity"], rows,
               [58, 62, 38, 36, 82, 32, 187])
 
-    _nature_section(doc, chart, detailed)
-    for block in (extras.period_text(chart), extras.houses_text(chart)):
-        if block:
-            _heading_para(doc, block if detailed else compact_text(block))
-    planets_text = extras.planet_considerations_text(chart)
-    if detailed:
-        _planet_effects_section(doc, chart, reading)
-    else:
-        _heading_para(doc, "--- Planet by planet: good, mixed or needs care? ---\nFor each planet: how well it is placed in your "
-                           "chart and what that may mean for you.")
-        _heading_para(doc, compact_text(planets_text))
-    _doshas_section(doc, chart, mode, ex)
+    if want("nature"):
+        _nature_section(doc, chart, detailed)
+    if want("verdicts"):
+        for block in (extras.period_text(chart), extras.houses_text(chart)):
+            if block:
+                _heading_para(doc, block if detailed else compact_text(block))
+    if want("planets"):
+        if detailed:
+            _planet_effects_section(doc, chart, reading)
+        else:
+            _heading_para(doc, "--- Planet by planet: good, mixed or needs care? ---\nFor each planet: how well it is placed in your "
+                               "chart and what that may mean for you.")
+            _heading_para(doc, compact_text(extras.planet_considerations_text(chart)))
+    if want("doshas"):
+        _doshas_section(doc, chart, mode, ex)
+    if want("remedies"):
+        _remedies_section(doc, chart, reading, detailed)
 
     if detailed:
-        _friend_and_aspect_section(doc, chart, ex)
-        _divisional_section(doc, chart, style, reading)
-        _chalit_ashtak_section(doc, chart)
-        _dasha_section(doc, chart)
-        _more_dashas_section(doc, chart, style)
-        _advanced_section(doc, chart, style)
+        if want("friends"):
+            _friend_and_aspect_section(doc, chart, ex)
+        if want("vargas"):
+            _divisional_section(doc, chart, style, reading)
+        if want("tables"):
+            _chalit_ashtak_section(doc, chart)
+        if want("dashas"):
+            _dasha_section(doc, chart)
+        if want("moredashas"):
+            _more_dashas_section(doc, chart, style)
+        if want("varsha"):
+            _varsha_section(doc, chart, style)
+        if want("strength"):
+            _strength_section(doc, chart)
+        if want("kp"):
+            _kp_section(doc, chart)
+        if want("prastara"):
+            _prastara_section(doc, chart)
 
-    text = document_text(reading, planet_glosses=not detailed)
-    if not detailed:
+    text = document_text(reading, planet_glosses=not detailed) if want("readings") else ""
+    if text and not detailed:
         text = compact_text(text)
     medical = (reading or {}).get("medical_astrology")
     for para in text.split("\n\n"):

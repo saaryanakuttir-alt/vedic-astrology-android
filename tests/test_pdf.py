@@ -97,7 +97,21 @@ def test_report_text_content(sample):
                     "Bhava Chalit", "Ashtakvarga", "Vimshottari Dasha", "Medical Astrology - body map",
                     "effects on your houses and signs", "Yogini Dasha", "Char Dasha", "Jaimini significators",
                     "What each Mahadasha may feel like", "Your nature", "Sade Sati for you", "Varshaphal", "KP system",
-                    "Planet strength", "Prastharashtakvarga"):
+                    "Planet strength", "Prastharashtakvarga", "Remedies for you", "Planet links in the yearly chart",
+                    "KP Vimshottari"):
         assert section in text, section
     for forbidden in ("Longevity", "lifespan", "Children"):     # the removed sections must not come back via the PDF
         assert forbidden not in text
+
+
+def test_choosing_sections_changes_the_report(sample):
+    pypdf = pytest.importorskip("pypdf")
+    import io
+    chart, reading = sample
+    everything = pdf_report.build_pdf(chart, reading, mode="detailed")
+    only = pdf_report.build_pdf(chart, reading, mode="detailed", sections={"nature", "remedies"})
+    assert _page_count(only) < _page_count(everything) / 3
+    text = "\n".join(p.extract_text() for p in pypdf.PdfReader(io.BytesIO(only)).pages)
+    assert "Your nature" in text and "Remedies for you" in text and "Vimshottari Dasha" not in text and "KP system" not in text
+    assert [k for k, _ in pdf_report.available_sections("compact")] == ["nature", "verdicts", "planets", "doshas", "remedies", "readings"]
+    assert len(pdf_report.available_sections("detailed")) == 15

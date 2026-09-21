@@ -81,7 +81,7 @@ check(app.header.title_label.text == "Home", "header title is Home")
 print("== Home cards navigate")
 home = app._screens["home"]
 cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 29, f"29 home cards (got {len(cards)})")
+check(len(cards) == 30, f"30 home cards (got {len(cards)})")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -305,7 +305,11 @@ check(total_len(app._screens["life"]) > compact_len * 2, "back to Detailed resto
 app.goto("full"); pump(12)
 full = app._screens["full"]
 reports = os.path.join(os.environ["VEDIC_DATA_DIR"], "reports")
-tap(full.pdf_button); pump(30, 0.06)
+tap(full.pdf_button); pump(12, 0.05)
+check(isinstance(getattr(full, "_chooser", None), Popup) and len(full._chooser_checks) == 15, "Save PDF opens the section chooser (15 sections in Detailed)")
+full._chooser_checks["kp"].active = False; full._chooser_checks["prastara"].active = False
+tap(full._chooser_create); pump(40, 0.06)
+check(app.store.settings.get("pdf_sections_detailed") and "kp" not in app.store.settings.get("pdf_sections_detailed"), "the section choice is remembered")
 files = os.listdir(reports) if os.path.isdir(reports) else []
 check(len(files) == 1 and files[0].endswith(".pdf"), f"Save PDF report wrote a file ({files})")
 if files:

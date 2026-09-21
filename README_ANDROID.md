@@ -377,3 +377,19 @@ Checked against the AstroSage reference report (same birth data); AstroSage was 
 ## Version 1.7.1 (2026-09-21)
 
 * **Planet in House** and **Planet in Sign** are now two separate screens (before, both cards opened the same page). House: the house table (house, Chalit house, houses ruled, houses looked at) and the house-side sections. Sign: the sign table (sign, degree, nakshatra, dignity) and the sign-side sections (sign, ruler relationship, combust/retrograde/vargottama). The verdict, what may happen and the plain-words summary appear on both. The full combined view is still in the PDF.
+
+## Version 1.8.0 (2026-09-21)
+
+Everything that could not be done reliably is listed in `KNOWLEDGE_GAPS.md` (what is missing and what a source must provide).
+
+* **Remedies** screen (`engine/remedy_plan.py`): only what is needed NOW - a planet is considered only if it is weak or troubled AND active
+  (running Mahadasha/Antardasha, or Saturn during Sade Sati/Dhaiya). Levels: Highly recommended (gemstone traditionally safe: the planet rules a trine
+  and no difficult house), Recommended with care, Helpful without a gemstone, Optional. Every stone comes with a stone-free alternative (mantra,
+  donation, fast, colour) and milder substitute stones; troubled-but-inactive planets are listed with the date their period begins; a "What everyone
+  can do" section gives everyday habits; combinations of stones to avoid are flagged.
+* **KP**: Vimshottari maha / antar / pratyantar tables from the KP Moon (within 3-4 days of AstroSage), on the KP screen and in the PDF.
+* **Varshaphal**: Tajika yogas (Ithasala and Ishrafa) in plain words.
+* **PDF section chooser**: "Save PDF report" now asks which sections to include (15 in Detailed, 6 in Compact); the choice is remembered.
+* **Home** is grouped under headings (Charts & tables, Readings, Timing & years, Strength doshas & remedies, People & help).
+* **Your Nature** is deeper: purpose, speaking and thinking, money habits, strengths and growth areas were added.
+* Not done (see KNOWLEDGE_GAPS.md): Drik, Cheshta, Abda, Masa, Bhavabala, year lord, Sahams, Lal Kitab.

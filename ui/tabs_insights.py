@@ -349,6 +349,25 @@ class KPTab(_InsightPage):
                    "most active at the time and place of your birth.]", compactable=True)
         self._text("--- Planets linked with each house (significators, strongest first) ---")
         self._table(["House", "Signified by"], [0.2, 0.8], [(h, ", ".join(x[:3] for x in pl)) for h, pl in t["significators"].items()], "11sp")
+        import datetime
+        now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+        fmt = lambda d: f"{d:%d %b %Y}"
+        dasha = kp.kp_dasha(chart)
+        self._text("--- KP Vimshottari periods (KP Moon) ---\nSame planetary periods as the main Dasha but counted from the KP Moon, so "
+                   "dates can differ from the main chart by a few days. [In simple terms: the running period shows which planet's KP themes are "
+                   "active now.]", compactable=True)
+        self._table(["Main period", "From", "To"], [0.34, 0.33, 0.33],
+                    [(m["lord"] + (" (now)" if m["start"] <= now < m["end"] else ""), fmt(m["start"]), fmt(m["end"])) for m in dasha[:9]], "11sp")
+        run = next((m for m in dasha if m["start"] <= now < m["end"]), None)
+        if run:
+            ant = next((a for a in run["antardashas"] if a["start"] <= now < a["end"]), None)
+            self._text(f"--- Sub-periods inside the running {run['lord']} period ---")
+            self._table(["Sub-period", "From", "To"], [0.34, 0.33, 0.33],
+                        [(a["lord"] + (" (now)" if a is ant else ""), fmt(a["start"]), fmt(a["end"])) for a in run["antardashas"]], "11sp")
+            if ant:
+                self._text(f"--- Smallest periods inside {run['lord']} / {ant['lord']} ---")
+                self._table(["Pratyantar", "From", "To"], [0.34, 0.33, 0.33],
+                            [(x["lord"], fmt(x["start"]), fmt(x["end"])) for x in ant["pratyantars"]], "11sp")
 
 
 class VarshaphalTab(_InsightPage):
@@ -391,3 +410,14 @@ class VarshaphalTab(_InsightPage):
         if year and year != self.year:
             self.year = year
             self.refresh()
+
+
+class RemediesTab(_InsightPage):
+    caption = ("What may help right now: only planets that are both weak or troubled in your chart AND active in your current periods are "
+               "listed, with a gemstone only where it is traditionally safe and a stone-free alternative (mantra, charity, fast). Plus "
+               "everyday habits for everyone. Traditional guidance - optional, and never a cure or a guarantee.")
+
+    def _build(self, chart, reading):
+        import remedy_plan
+        self._text(f"=== Remedies - {self._name(reading)} ===")
+        self._text(remedy_plan.remedy_text(chart, reading), compactable=True)

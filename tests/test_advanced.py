@@ -89,7 +89,8 @@ def test_prastara_columns_equal_bhinnashtakvarga(chart):
 
 def test_your_nature_is_plain_and_safe(chart):
     sections = dict(life_profile.profile_sections(chart))
-    assert list(sections) == ["Your character", "Your mind and emotions", "Your career leanings", "Education and learning", "Hobbies and free time"]
+    assert list(sections) == ["Your character", "What gives you purpose", "Your mind and emotions", "How you speak and think", "Education and learning",
+                              "Your career leanings", "Money habits", "Hobbies and free time", "Your strengths", "Your growth areas"]
     assert "Gemini rising" in sections["Your character"] and "Ashwini" in sections["Your character"]
     assert "Pisces" in sections["Your career leanings"]                      # 10th house sign
     assert FORBIDDEN.search(life_profile.profile_text(chart)) is None
@@ -103,3 +104,55 @@ def test_personal_sade_sati_text(chart):
     cycles = extras.sade_sati_cycles(chart)
     assert cycles[0]["start"] == datetime.date(1995, 6, 2) and any(c["start"].year == 2025 for c in cycles)
     assert FORBIDDEN.search(text) is None
+
+
+def test_kp_vimshottari_matches_astrosage_within_a_few_days(chart):
+    dasha = kp.kp_dasha(chart)
+    assert [m["lord"] for m in dasha[:3]] == ["Ketu", "Venus", "Sun"]
+    rahu_antar = dasha[0]["antardashas"][1]
+    assert rahu_antar["lord"] == "Rahu" and abs((rahu_antar["end"].date() - datetime.date(1993, 10, 28)).days) <= 5
+    ends = [p["end"].date() for p in rahu_antar["pratyantars"]]
+    expected = [datetime.date(1992, 12, 7), datetime.date(1993, 1, 27), datetime.date(1993, 3, 27), datetime.date(1993, 5, 21),
+                datetime.date(1993, 6, 13), datetime.date(1993, 8, 16), datetime.date(1993, 9, 5), datetime.date(1993, 10, 6),
+                datetime.date(1993, 10, 28)]
+    assert all(abs((a - b).days) <= 5 for a, b in zip(ends, expected))
+
+
+def test_tajika_yogas_are_well_formed(chart):
+    vp = varshaphal.varshaphal(chart, 2026)
+    assert vp["tajika"] and all(y["kind"] in ("Ithasala", "Ishrafa") and y["gap"] < y["limit"] for y in vp["tajika"])
+    assert vp["tajika"] == sorted(vp["tajika"], key=lambda y: y["gap"])
+    assert "Ithasala" in varshaphal.tajika_text(vp) and FORBIDDEN.search(varshaphal.tajika_text(vp)) is None
+
+
+def test_remedies_are_only_for_what_is_active_now(chart):
+    import remedy_plan
+    from rule_engine import generate_reading
+    reading = generate_reading(chart)
+    at = datetime.datetime(2026, 9, 20, 12)
+    plan = remedy_plan.remedy_plan(chart, reading, at)
+    assert (plan["now"]["periods"]["maha"], plan["now"]["periods"]["antar"]) == ("Moon", "Jupiter") and "Saturn" in plan["now"]["active"]
+    by = {i["planet"]: i for i in plan["planets"]}
+    for planet, item in by.items():
+        if item["level"] in (remedy_plan.HIGH, remedy_plan.CARE, remedy_plan.HELPFUL, remedy_plan.OPTIONAL):
+            assert planet in plan["now"]["active"], planet                     # nothing is recommended for a planet that is not running
+        if item["level"] == remedy_plan.LATER:
+            assert planet not in plan["now"]["active"] and item["next_start"] > at
+    assert by["Mercury"]["level"] == remedy_plan.LATER                         # troubled, but its period only begins in 2028
+    assert all(i["stone_ok"] is False for i in plan["planets"] if i["planet"] in ("Rahu", "Ketu"))
+    text = remedy_plan.remedy_text(chart, reading, at)
+    for phrase in ("for right now", "Keep in mind for later", "What everyone can do", "How to use these safely", "Sade Sati"):
+        assert phrase in text, phrase
+    assert FORBIDDEN.search(text) is None
+
+
+def test_gemstone_only_when_safe_and_active(chart):
+    import copy
+    import remedy_plan
+    from rule_engine import generate_reading
+    reading = generate_reading(chart)
+    # pretend every planet is active and troubled: only trine-ruling, non-difficult planets may get a stone
+    plan = remedy_plan.remedy_plan(chart, reading, datetime.datetime(2026, 9, 20, 12))
+    for item in plan["planets"]:
+        if item["stone_ok"]:
+            assert item["level"] in (remedy_plan.HIGH, remedy_plan.CARE) and item["planet"] not in ("Rahu", "Ketu")

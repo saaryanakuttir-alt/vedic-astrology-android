@@ -117,7 +117,7 @@ def varshaphal(chart, year):
                f"({_HOUSE_AREA[m['house']]}). " + _house_text(kind, m["house"]))
     return {"year": year, "age": age, "varsha": v, "local": v["varsha"]["local"], "muntha": {**m, "kind": kind},
             "mudda": mudda, "lagna_lord": lagna_lord, "lagna_lord_tone": cons[lagna_lord]["tone"], "summary": summary,
-            "houses": [hv[h] for h in range(1, 13)], "considerations": cons}
+            "houses": [hv[h] for h in range(1, 13)], "considerations": cons, "tajika": tajika_yogas(v)}
 
 
 def varshaphal_text(vp, compact=False):
@@ -138,6 +138,56 @@ def varshaphal_text(vp, compact=False):
             line += " What may happen: " + _EFFECTS[p["lord"]][tone_idx[p["tone"]]]
         parts.append(line)
     if not compact:
+        parts.append(tajika_text(vp))
         parts.append("--- The yearly chart's 12 houses at a glance ---\n" + "\n\n".join(
             f"{ordinal(h['house'])} house ({h['area']}): {h['tone']}. {h['may_happen']}" for h in vp["houses"]))
     return "\n\n".join(parts)
+
+
+# ---------------------------------------------------------------- Tajika yogas: Ithasala and Ishrafa
+_DEEPTAMSA = {"Sun": 15, "Moon": 12, "Mars": 8, "Mercury": 7, "Jupiter": 9, "Venus": 7, "Saturn": 9}      # planetary orbs
+_TAJIKA_SPEED = ["Moon", "Mercury", "Venus", "Sun", "Mars", "Jupiter", "Saturn"]                          # fastest first
+_ANGLES = {0: ("together (conjunction)", "blend"), 60: ("friendly (sextile)", "easy"), 120: ("very friendly (trine)", "easy"),
+           90: ("testing (square)", "tense"), 180: ("opposite", "tense")}
+
+
+def tajika_yogas(varsha_chart):
+    """Ithasala (two planets moving toward an exact angle) and Ishrafa (moving apart from it) among the seven planets
+    of the yearly chart, within the mean of their orbs. Faster planet is decided by the Tajika speed order."""
+    pl = varsha_chart["planets"]
+    out = []
+    for i, fast in enumerate(_TAJIKA_SPEED):
+        for slow in _TAJIKA_SPEED[i + 1:]:
+            d = (pl[slow]["longitude"] - pl[fast]["longitude"]) % 360
+            for target in (0, 60, 90, 120, 180, 240, 270, 300):
+                delta = d - target
+                limit = (_DEEPTAMSA[fast] + _DEEPTAMSA[slow]) / 2.0
+                if abs(delta) < limit:
+                    angle = target if target <= 180 else 360 - target
+                    name, flow = _ANGLES[angle]
+                    kind = "Ithasala" if delta > 0 else "Ishrafa"
+                    if angle == 0 and abs(delta) < 1e-9:
+                        kind = "Ithasala"
+                    out.append({"fast": fast, "slow": slow, "angle": angle, "angle_name": name, "flow": flow, "kind": kind,
+                                "gap": round(abs(delta), 2), "limit": round(limit, 1)})
+    out.sort(key=lambda r: r["gap"])
+    return out
+
+
+def tajika_text(vp):
+    """Plain-words reading of the yearly chart's planet links."""
+    yogas = vp["tajika"]
+    if not yogas:
+        return ("--- Planet links in the yearly chart ---\nNo two planets are close to an exact angle in this yearly chart, so no one "
+                "planet-to-planet link stands out. [In simple terms: nothing special is being pulled together or pulled apart by the planets.]")
+    lines = ["--- Planet links in the yearly chart (Tajika yogas) ---\nWhen two planets sit at a friendly or testing angle and are close "
+             "to it, their themes are linked. 'Coming together' (Ithasala) means the angle is still tightening, so what they stand for "
+             "tends to be building or coming through this year. 'Moving apart' (Ishrafa) means the angle has just passed its peak, so "
+             "the matter tends to be fading or already settled."]
+    for y in yogas:
+        state = ("coming together" if y["kind"] == "Ithasala" else "moving apart")
+        feel = {"easy": "an easy, supportive link", "tense": "a testing link that asks for effort", "blend": "a blending of the two"}[y["flow"]]
+        lines.append(f"{y['fast']} and {y['slow']} are {y['angle_name']}, and the link is {state} ({y['gap']} degrees from exact): {feel}.")
+    lines.append("[In simple terms: the tighter the gap, the stronger the link. Easy links help things run smoothly; testing links bring "
+                 "friction that can also push you to act. Tendencies only.]")
+    return "\n\n".join(lines)

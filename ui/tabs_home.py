@@ -34,29 +34,41 @@ HOME_CORE = [
     ("dasha", "Mahadasha & Antardasha", "Planetary periods", "clock", None),
     ("library", "Saved Charts", "Your saved birth details", "book", None),
 ]
-HOME_MORE = [
-    ("chart", "Chart Diagram", "North / South Indian", "diamond", None),
-    ("kundli", "Kundli Details", "Key facts & classifications", "card", None),
-    ("ashtakvarga", "Ashtakvarga", "Sign-by-sign support", "grid", None),
-    ("chalit", "Chalit", "Bhava house boundaries", "diamond", None),
-    ("nature", "Your Nature", "Character, career, hobbies", "star", None),
-    ("varshaphal", "Varshaphal", "Your year, from birthday", "calendar", None),
-    ("strength", "Planet Strength", "How strong is each planet?", "gem", None),
-    ("kp", "KP System", "Cusps, star & sub lords", "grid", None),
-    ("prastara", "Ashtakvarga Detail", "Who gives each point", "grid", None),
-    ("shodashvarga", "Shodashvarga Table", "All 15 divisional charts", "grid", None),
-    ("relations", "Planet by Planet", "Good, mixed or needs care?", "gem", None),
-    ("moredashas", "More Dashas", "Yogini, Char & Karakamsa", "hourglass", None),
-    ("doshas", "Doshas & Sade Sati", "Manglik, Kalsarpa, Saturn", "warn", None),
-    ("karmic", "Karmic & Past Life", "Old patterns, new direction", "infinity", None),
-    ("life", "Life Predictions", "Career, wealth, family", "star", None),
-    ("predictions", "Predictions", "Any date, year & transits", "calendar", None),
-    ("medical", "Medical Astrology", "Body areas & constitution", "cross", None),
-    ("relationship", "Relationship Themes", "Marriage & partnership", "heart", None),
-    ("full", "Full Reading", "Everything in one report", "doc", None),
-    ("family", "Family Compatibility", "Partner & child bonds", "people", None),
-    ("help", "Help & About", "FAQ and credits", "help", None),
+HOME_GROUPS = [
+    ("CHARTS & TABLES", [
+        ("chart", "Chart Diagram", "North / South Indian", "diamond", None),
+        ("kundli", "Kundli Details", "Key facts & classifications", "card", None),
+        ("shodashvarga", "Shodashvarga Table", "All 15 divisional charts", "grid", None),
+        ("ashtakvarga", "Ashtakvarga", "Sign-by-sign support", "grid", None),
+        ("prastara", "Ashtakvarga Detail", "Who gives each point", "grid", None),
+        ("chalit", "Chalit", "Bhava house boundaries", "diamond", None),
+        ("kp", "KP System", "Cusps, star & sub lords", "grid", None),
+    ]),
+    ("READINGS", [
+        ("nature", "Your Nature", "Character, career, hobbies", "star", None),
+        ("life", "Life Predictions", "Career, wealth, family", "star", None),
+        ("karmic", "Karmic & Past Life", "Old patterns, new direction", "infinity", None),
+        ("medical", "Medical Astrology", "Body areas & constitution", "cross", None),
+        ("relationship", "Relationship Themes", "Marriage & partnership", "heart", None),
+        ("full", "Full Reading", "Everything in one report", "doc", None),
+    ]),
+    ("TIMING & YEARS", [
+        ("moredashas", "More Dashas", "Yogini, Char & Karakamsa", "hourglass", None),
+        ("varshaphal", "Varshaphal", "Your year, from birthday", "calendar", None),
+        ("predictions", "Predictions", "Any date, year & transits", "calendar", None),
+    ]),
+    ("STRENGTH, DOSHAS & REMEDIES", [
+        ("relations", "Planet by Planet", "Good, mixed or needs care?", "gem", None),
+        ("strength", "Planet Strength", "How strong is each planet?", "gem", None),
+        ("doshas", "Doshas & Sade Sati", "Manglik, Kalsarpa, Saturn", "warn", None),
+        ("remedies", "Remedies", "What helps right now", "key", None),
+    ]),
+    ("PEOPLE & HELP", [
+        ("family", "Family Compatibility", "Partner & child bonds", "people", None),
+        ("help", "Help & About", "FAQ and credits", "help", None),
+    ]),
 ]
+HOME_MORE = [card for _title, cards in HOME_GROUPS for card in cards]      # flat list of every card in the groups
 
 
 class HomeScreen(BoxLayout):
@@ -76,11 +88,12 @@ class HomeScreen(BoxLayout):
         body.add_widget(sub)
         body.add_widget(self._grid(HOME_CORE))
 
-        more = Label(text="MORE READINGS", font_size="11sp", color=theme.ACCENT, halign="left", valign="middle",
-                     size_hint_y=None, height=dp(28), bold=True)
-        more.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
-        body.add_widget(more)
-        body.add_widget(self._grid(HOME_MORE))
+        for title, cards in HOME_GROUPS:
+            heading = Label(text=title, font_size="11sp", color=theme.ACCENT, halign="left", valign="middle",
+                            size_hint_y=None, height=dp(28), bold=True)
+            heading.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+            body.add_widget(heading)
+            body.add_widget(self._grid(cards))
 
         credit = Label(text=f"{CREDIT}  -  version {VERSION}", font_size="12sp", color=theme.MUTED, italic=True,
                        size_hint_y=None, height=dp(44))

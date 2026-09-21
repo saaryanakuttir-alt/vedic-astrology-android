@@ -95,8 +95,60 @@ NAKSHATRA = [
 _SIGN_ADJ = {s: s for s in SIGNS}
 
 
+PURPOSE = {
+    "Aries": "being first, leading a cause and proving that you can",
+    "Taurus": "building something lasting and secure with your own hands",
+    "Gemini": "learning, sharing ideas and connecting people",
+    "Cancer": "protecting and nourishing the people you love",
+    "Leo": "creating, leading and being recognised for your heart",
+    "Virgo": "being useful, improving things and doing work well",
+    "Libra": "creating harmony, fairness and beauty between people",
+    "Scorpio": "transforming what is stuck and getting to the truth",
+    "Sagittarius": "exploring, teaching and living by your beliefs",
+    "Capricorn": "achieving something solid and earning respect over time",
+    "Aquarius": "improving life for groups and bringing in new ideas",
+    "Pisces": "healing, creating and serving something larger than yourself",
+}
+MONEY = {
+    "Aries": "money tends to come through initiative and can move fast - you may spend as quickly as you earn, so a savings habit helps",
+    "Taurus": "you value steady savings and material security, and tend to build wealth slowly and patiently",
+    "Gemini": "income may come from several smaller sources such as skills, trading or communication",
+    "Cancer": "you save for family and home, and your feelings can influence how you spend",
+    "Leo": "you like to spend generously and may earn through leadership or creative work",
+    "Virgo": "you are careful with money and good at budgeting, though worry about it can creep in",
+    "Libra": "money often comes through partnerships, and you enjoy spending on beauty and comfort",
+    "Scorpio": "you keep finances private and can build resources through research, shared funds or careful investing",
+    "Sagittarius": "money may come through teaching, advice or travel, and you can be optimistic about spending",
+    "Capricorn": "you save methodically and build wealth steadily, often growing more secure with age",
+    "Aquarius": "income may come through technology, networks or unusual ideas, and it can rise and fall",
+    "Pisces": "money may flow in and out easily, so clear budgets and separating giving from spending help",
+}
+SPEAKING = {
+    "Aries": "You speak directly and think fast; you say it as you see it.",
+    "Taurus": "You speak calmly and deliberately, and you think things through before answering.",
+    "Gemini": "You are a natural talker and quick thinker with a wide range of interests.",
+    "Cancer": "You speak from feeling and remember conversations vividly; tone matters a lot to you.",
+    "Leo": "You speak with warmth and confidence and enjoy an audience.",
+    "Virgo": "You speak precisely, notice errors and think in details and lists.",
+    "Libra": "You speak diplomatically and weigh both sides before deciding.",
+    "Scorpio": "You speak with intensity, read between the lines and keep secrets well.",
+    "Sagittarius": "You speak frankly and enthusiastically and enjoy big-picture debate.",
+    "Capricorn": "You speak plainly and practically and think in terms of plans and results.",
+    "Aquarius": "You think in original, group-minded ways and enjoy exchanging ideas.",
+    "Pisces": "You think in images and intuition, and may find it easier to feel something than to explain it.",
+}
+
+
+def _care_advice(planet):
+    """The 'what usually helps' sentence from the planet's care wording in extras."""
+    from extras import _EFFECTS
+    sentences = [s.strip() for s in _EFFECTS[planet][2].split(". ") if s.strip()]
+    return sentences[-1].rstrip(".") + "."
+
+
 def profile_sections(chart):
-    """[(title, text)] - Character, Mind, Career, Education, Hobbies - built from this chart's own placements."""
+    """[(title, text)] - Character, Purpose, Mind, Speaking, Education, Career, Money, Hobbies, Strengths, Growth areas."""
+    from extras import _SIGNIFIES
     pl = chart["planets"]
     cons = planet_considerations(chart)
     rising = chart["ascendant"]["sign"]
@@ -105,31 +157,53 @@ def profile_sections(chart):
     tenth_lord = SIGN_LORD[tenth]
     tl = pl[tenth_lord]
     merc, venus = pl["Mercury"], pl["Venus"]
+    second, eleventh = chart["houses"][2], chart["houses"][11]
     nak = NAKSHATRA[int(moon["longitude"] // (360 / 27))]
-    sections = []
-    sections.append(("Your character", (
+    S = []
+    S.append(("Your character", (
         f"With {rising} rising, you tend to be {RISING[rising]}. Your Sun is in {sun['sign']}, in your {ordinal(sun['house'])} house "
         f"({_HOUSE_AREA[sun['house']]}), so your sense of self is drawn toward {_HOUSE_AREA[sun['house']]}. Your Moon nakshatra, "
         f"{nak[0]}, adds a nature that is {nak[1]}.\n\n[In simple terms: the sign rising at your birth shows how people first see you; "
         f"the Sun shows what you want to stand for; the Moon nakshatra colours your inner temperament. None is fixed - you can grow past any of it.]")))
-    sections.append(("Your mind and emotions", (
+    S.append(("What gives you purpose", (
+        f"With the Sun in {sun['sign']}, you tend to feel most alive when you are {PURPOSE[sun['sign']]}. The Sun {_TONE_PHRASE[cons['Sun']['tone']]} in your chart"
+        f"{', so this drive comes fairly naturally' if cons['Sun']['tone'] in ('Good', 'Mostly good') else ', so it may come in waves and need steady encouragement' if cons['Sun']['tone'] == 'Mixed' else ', so building confidence step by step matters for you'}. "
+        f"[In simple terms: this is the kind of activity that makes you feel most like yourself.]")))
+    S.append(("Your mind and emotions", (
         f"{MOON[moon['sign']]} With the Moon in your {ordinal(moon['house'])} house, your feelings tend to be tied up with "
         f"{_HOUSE_AREA[moon['house']]}. The Moon {_TONE_PHRASE[cons['Moon']['tone']]} in your chart"
         f"{', so your mood tends to be fairly steady' if cons['Moon']['tone'] in ('Good', 'Mostly good') else ', so your mood may swing more than most at times' if cons['Moon']['tone'] == 'Mixed' else ', so looking after sleep and calm routines matters for you'}.")))
-    sections.append(("Your career leanings", (
+    S.append(("How you speak and think", (
+        f"{SPEAKING[merc['sign']]} Mercury sits in your {ordinal(merc['house'])} house, so your thinking and talking often turn toward "
+        f"{_HOUSE_AREA[merc['house']]}, and it {_TONE_PHRASE[cons['Mercury']['tone']]} in your chart. "
+        f"[In simple terms: this is your natural style of communicating.]")))
+    S.append(("Education and learning", (
+        f"{LEARNING[merc['sign']]} Mercury, the planet of learning, is in {merc['sign']} in your {ordinal(merc['house'])} house and "
+        f"{_TONE_PHRASE[cons['Mercury']['tone']]}, so studies tend to connect with {_HOUSE_AREA[merc['house']]}. "
+        f"[In simple terms: this describes how you take in and use knowledge.]")))
+    S.append(("Your career leanings", (
         f"Your 10th house of career is in {tenth}, which points toward {CAREER[tenth]}. Its ruler {tenth_lord} sits in {tl['sign']} in your "
         f"{ordinal(tl['house'])} house, so your working life tends to connect with {_HOUSE_AREA[tl['house']]}, and {tenth_lord} "
         f"{_TONE_PHRASE[cons[tenth_lord]['tone']]} in your chart - "
         f"{'a helpful sign for steady progress' if cons[tenth_lord]['tone'] in ('Good', 'Mostly good') else 'a mix of easy and effortful stretches' if cons[tenth_lord]['tone'] == 'Mixed' else 'a reminder that patience and steady skills matter more than shortcuts'}. "
         f"[In simple terms: these are the kinds of work that tend to suit your temperament; they are leanings, not rules.]")))
-    sections.append(("Education and learning", (
-        f"{LEARNING[merc['sign']]} Mercury, the planet of learning, is in {merc['sign']} in your {ordinal(merc['house'])} house and "
-        f"{_TONE_PHRASE[cons['Mercury']['tone']]}, so studies tend to connect with {_HOUSE_AREA[merc['house']]}. "
-        f"[In simple terms: this describes how you take in and use knowledge.]")))
-    sections.append(("Hobbies and free time", (
+    S.append(("Money habits", (
+        f"With {second} on your 2nd house of savings, {MONEY[second]}. Your 11th house of gains is in {eleventh}, so income from friends, groups "
+        f"and long-term goals tends to carry a {eleventh} flavour. [In simple terms: these are habits and channels that tend to suit you, not a forecast of how much you will earn.]")))
+    S.append(("Hobbies and free time", (
         f"With Venus in {venus['sign']}, you are likely to enjoy {LEISURE[venus['sign']]}. Your Moon in {moon['sign']} adds a liking for "
         f"{LEISURE[moon['sign']]}. [In simple terms: these are the pastimes most likely to refresh you.]")))
-    return sections
+    strong = [p for p in ("Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn") if cons[p]["tone"] in ("Good", "Mostly good")]
+    S.append(("Your strengths", (
+        ("Planets that look comfortable in your chart, and what they give you: " + "; ".join(f"{p} - {_SIGNIFIES[p]}" for p in strong) + "."
+         if strong else "No single planet stands out as especially strong, so your strengths come from balance and effort.") +
+        " [In simple terms: these are the qualities you can lean on.]")))
+    care = [p for p in ("Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn") if cons[p]["tone"] in ("Needs some care", "Challenging")]
+    S.append(("Your growth areas", (
+        ("Planets that ask for a little more care, and what usually helps: " + " ".join(f"{p} ({_SIGNIFIES[p].split(',')[0]}): {_care_advice(p)}" for p in care)
+         if care else "No planet stands out as needing special care; steady habits are enough.") +
+        " [In simple terms: these are the areas where a little extra effort pays off most.]")))
+    return S
 
 
 def profile_text(chart):

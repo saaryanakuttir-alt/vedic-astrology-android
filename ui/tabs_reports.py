@@ -9,6 +9,8 @@ import traceback
 
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
 from kivy.logger import Logger
 
 from kivy.metrics import dp
@@ -17,7 +19,7 @@ from kivy.uix.label import Label
 
 from ui import export, pdf_report, reading_mode, theme
 from ui.reading_mode import ReadingModeBar
-from ui.theme import ThemedButton
+from ui.theme import ThemedButton, ThemedCheckBox
 from ui.widgets import LongText, CaptionLabel, ItalicSummaryLabel
 from ui.app_state import PROFILE_LABELS
 
@@ -176,14 +178,71 @@ class FullReadingTab(_BaseReportTab):
         if data["chart"] is None or data["reading"] is None:
             self._popup("No chart yet", "Generate a chart for this profile first, then save its PDF report.")
             return
+        self._choose_sections(data)
+
+    def _choose_sections(self, data):
+        """Ask which sections go into the report (the last choice for this mode is remembered)."""
+        mode = reading_mode.current(self.store)
+        avail = pdf_report.available_sections(mode)
+        saved = self.store.settings.get("pdf_sections_" + mode)
+        chosen = {k for k, _ in avail} if not isinstance(saved, list) else set(saved)
+        self._chooser_checks = {}
+        content = BoxLayout(orientation="vertical", spacing=dp(8), padding=dp(10))
+        hint = Label(text=f"Choose what to include in your {mode} report.", size_hint_y=None, height=dp(28), halign="left", valign="middle")
+        hint.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+        content.add_widget(hint)
+        scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
+        box = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        box.bind(minimum_height=box.setter("height"))
+        for key, label in avail:
+            row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(42))
+            check = ThemedCheckBox(active=key in chosen, size_hint_x=None, width=dp(44))
+            self._chooser_checks[key] = check
+            text = Label(text=label, halign="left", valign="middle", font_size="14sp")
+            text.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+            row.add_widget(check)
+            row.add_widget(text)
+            box.add_widget(row)
+        scroll.add_widget(box)
+        content.add_widget(scroll)
+        quick = BoxLayout(orientation="horizontal", spacing=dp(8), size_hint_y=None, height=dp(40))
+        all_btn = ThemedButton(text="Select all", variant="secondary")
+        none_btn = ThemedButton(text="Clear", variant="secondary")
+        all_btn.bind(on_release=lambda *_: [setattr(c, "active", True) for c in self._chooser_checks.values()])
+        none_btn.bind(on_release=lambda *_: [setattr(c, "active", False) for c in self._chooser_checks.values()])
+        quick.add_widget(all_btn)
+        quick.add_widget(none_btn)
+        content.add_widget(quick)
+        buttons = BoxLayout(orientation="horizontal", spacing=dp(10), size_hint_y=None, height=dp(46))
+        popup = self._chooser = Popup(title="Choose report sections", content=content, size_hint=(0.94, 0.86))
+        cancel = ThemedButton(text="Cancel", variant="secondary")
+        cancel.bind(on_release=popup.dismiss)
+        create = self._chooser_create = ThemedButton(text="Create PDF", variant="primary")
+
+        def _create(*_):
+            picked = [k for k, _l in avail if self._chooser_checks[k].active]
+            if not picked:
+                create.text = "Pick at least one"
+                return
+            self.store.settings.set("pdf_sections_" + mode, picked)
+            popup.dismiss()
+            self._start_pdf(data, picked)
+
+        create.bind(on_release=_create)
+        buttons.add_widget(cancel)
+        buttons.add_widget(create)
+        content.add_widget(buttons)
+        popup.open()
+
+    def _start_pdf(self, data, sections):
         self.pdf_button.text = "Creating PDF..."
         self.pdf_button.disabled = True
-        Clock.schedule_once(lambda dt: self._finish_pdf(data), 0.08)      # let the button repaint first
+        Clock.schedule_once(lambda dt: self._finish_pdf(data, sections), 0.08)      # let the button repaint first
 
-    def _finish_pdf(self, data):
+    def _finish_pdf(self, data, sections=None):
         try:
             pdf = pdf_report.build_pdf(data["chart"], data["reading"], style=self.store.chart_style,
-                                       mode=reading_mode.current(self.store))
+                                       mode=reading_mode.current(self.store), sections=set(sections) if sections else None)
             saved = export.save_pdf(pdf, pdf_report.safe_filename(data["chart"].get("name")), self.store.data_dir)
             self._popup("PDF saved", f"{saved.where}\n\nOpen it from your Files / Downloads app, or tap Open.",
                         open_fn=saved.open_fn)

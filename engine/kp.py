@@ -112,3 +112,41 @@ def kp_tables(chart):
                     ordered.append(pl)
         sig[h] = ordered
     return {"ayanamsa": ayan, "ayanamsa_dms": _dms(ayan), "cusps": cusps, "planets": planets, "ruling": ruling, "significators": sig}
+
+
+# ---------------------------------------------------------------- KP Vimshottari: maha / antar / pratyantar
+def kp_dasha(chart, years=100):
+    """[{lord, start, end, antardashas: [{lord, start, end, pratyantars: [{lord, start, end}]}]}] using the KP Moon.
+    Only periods that end after birth are kept; the first period starts at birth."""
+    import datetime as dt
+    day = dt.timedelta(days=1)
+    birth = dt.datetime.fromisoformat(chart["resolved_datetime"]["utc"]).replace(tzinfo=None)
+    # the KP Moon is 0.09 degree ahead of the Lahiri Moon; local clock time is used for the dates shown
+    offset = dt.datetime.fromisoformat(chart["resolved_datetime"]["local"]).replace(tzinfo=None) - birth
+    moon = (chart["planets"]["Moon"]["longitude"] + KP_OFFSET) % 360
+    n = int(moon // NAK)
+    first = ORDER[n % 9]
+    left = 1 - (moon % NAK) / NAK
+    t = birth - day * (YEARS[first] * (1 - left) * 365.25)
+    limit = birth + day * (years * 365.25)
+    out, i = [], ORDER.index(first)
+    while t < limit:
+        lord = ORDER[i % 9]
+        end = t + day * (YEARS[lord] * 365.25)
+        antars, s = [], t
+        for k in range(9):
+            a = ORDER[(ORDER.index(lord) + k) % 9]
+            ae = s + day * (YEARS[lord] * YEARS[a] / 120.0 * 365.25)
+            if ae > birth:
+                pr, ps = [], s
+                for m in range(9):
+                    pl = ORDER[(ORDER.index(a) + m) % 9]
+                    pe = ps + day * (YEARS[lord] * YEARS[a] * YEARS[pl] / 14400.0 * 365.25)
+                    if pe > birth:
+                        pr.append({"lord": pl, "start": max(ps, birth) + offset, "end": pe + offset})
+                    ps = pe
+                antars.append({"lord": a, "start": max(s, birth) + offset, "end": ae + offset, "pratyantars": pr})
+            s = ae
+        out.append({"lord": lord, "start": max(t, birth) + offset, "end": end + offset, "antardashas": antars})
+        t, i = end, i + 1
+    return out
