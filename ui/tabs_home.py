@@ -6,6 +6,9 @@ handoff exactly; the "More readings" section lists this app's other screens
 (the design's placeholders are replaced by real content). Saved Charts lists
 the birth details saved on this device, for one-tap recall. The credit line
 lives at the foot of Home.
+
+In the lite edition (engine/edition.py), _free() drops every card whose screen isn't in
+edition.FREE_SCREENS, and a whole group's heading is skipped if that leaves it empty.
 """
 from kivy.graphics import Color, Line
 from kivy.metrics import dp
@@ -16,6 +19,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.scrollview import ScrollView
 
+import edition
 from ui import theme
 from ui.app_state import PROFILE_IDS, PROFILE_LABELS
 from ui.theme import HomeCard, OutlineBox, ThemedButton, ThemedSpinner
@@ -72,6 +76,11 @@ HOME_GROUPS = [
 HOME_MORE = [card for _title, cards in HOME_GROUPS for card in cards]      # flat list of every card in the groups
 
 
+def _free(cards):
+    """`cards` with anything not in this edition's edition.FREE_SCREENS removed (a no-op in the full edition)."""
+    return [c for c in cards if edition.visible(c[0])]
+
+
 class LanguageBar(BoxLayout):
     """A row of language buttons (English plus every language that ships in this build)."""
 
@@ -106,16 +115,23 @@ class HomeScreen(BoxLayout):
         scroll.add_widget(body)
         self.add_widget(scroll)
 
-        sub = Label(text=tx("Your birth-chart engine and classical interpretive library."), font_size="13sp",
-                    color=theme.MUTED, halign="left", valign="middle", size_hint_y=None, height=dp(24))
+        sub_text = (tx("Your birth-chart engine and classical interpretive library.") if edition.EDITION == "full" else
+                    tx("Compact edition: generate your chart, every divisional-chart diagram, and planet/house "
+                       "placements - fully offline. Yogas, dashas, the full readings, doshas & remedies and family "
+                       "compatibility are in the Premium edition."))
+        sub = Label(text=sub_text, font_size="13sp", color=theme.MUTED, halign="left", valign="top",
+                    size_hint_y=None, height=(dp(24) if edition.EDITION == "full" else dp(56)))
         sub.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         body.add_widget(sub)
         if on_language is not None:
             import i18n
             body.add_widget(LanguageBar(i18n.get_language(), on_language))
-        body.add_widget(self._grid(HOME_CORE))
+        body.add_widget(self._grid(_free(HOME_CORE)))
 
         for title, cards in HOME_GROUPS:
+            cards = _free(cards)
+            if not cards:                          # this whole group is Premium-only in this edition
+                continue
             heading = Label(text=title, font_size="11sp", color=theme.ACCENT, halign="left", valign="middle",
                             size_hint_y=None, height=dp(28), bold=True)
             heading.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))

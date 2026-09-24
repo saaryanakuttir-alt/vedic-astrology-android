@@ -421,3 +421,29 @@ dashas, divisional charts, remedies ...) and every sentence the engine composes 
 kept readings. The PDF report stays English for now. The app remains fully offline. Sources: `i18n_todo/` (translation
 files: `wf/out_NNN.txt`, `bn_vocab_*.txt`, `bn_fix_*.txt`), `tools/merge_bn.py` -> `i18n_src/bn.py` ->
 `tools/build_i18n.py` -> `engine/i18n_bn.py` + `fonts/IndicBn-*.ttf`.
+
+## 2.1.0 - Compact (free) edition
+This same source now builds two separate Android apps, controlled by `engine/edition.py`:
+
+* **Vedic Astrology** (`org.vedicastro.vedicastrology`, `EDITION = "full"`) - every screen, as before.
+* **Vedic Astrology Compact** (`org.vedicastro.vedicastrologycompact`, `EDITION = "lite"`) - a free edition with only
+  Birth Chart, Chart Diagram (every divisional chart), Kundli Details, Planet in House, Planet in Sign, House Lord
+  Placements, Saved Charts and Help. Everything else (Classical Yogas, Mahadasha/Antardasha, the Ashtakvarga/KP/
+  Shodashvarga tables, Chalit, the readings - Your Nature, Life Predictions, Karmic & Past Life, Medical Astrology,
+  Relationship Themes, Full Reading, More Dashas, Varshaphal, Predictions, Planet Strength, Doshas & Sade Sati,
+  Remedies, Family Compatibility - is held back for a future paid **Premium** edition) is left out of Home and the
+  bottom bar entirely; it is not shown locked, it simply isn't built. Both editions install side by side on one
+  device (different package ids), read/write their own separate app data, and are fully offline like the full app.
+
+CI (`.github/workflows/build-apk.yml`) builds both as separate jobs/artifacts from independent checkouts: the "lite"
+job flips `engine/edition.py`'s default to `"lite"` with a `sed` replace before running
+`buildozer --profile lite android debug` (buildozer.spec's `[app@lite]` profile supplies the different title/package
+id); a normal working copy - and the "full" job - are never touched and stay `"full"`. To test the lite edition
+locally without touching the source: `VEDIC_EDITION=lite python main.py` (desktop) or set the same env var before
+`tests/desktop_smoke.py`-style scripts. See `tests/test_edition.py` for the consistency checks (every
+`edition.FREE_SCREENS` key is a real screen main.py can build and has a Home card; the lite bottom bar only points at
+free screens; the CI `sed` target string exists exactly once; the two package ids differ).
+
+Not done in this pass: no in-app upsell/teaser for the Premium screens (Home's subtitle text mentions them, that's
+all), no separate app icon for Compact (both editions currently share `icon.png`), and there is no Premium edition
+itself yet - `EDITION` only has "full" and "lite" today.

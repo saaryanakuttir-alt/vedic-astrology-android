@@ -9,7 +9,7 @@ source.include_exts = py,png,jpg,kv,atlas,json,csv,tab,txt,ttf
 source.include_patterns = engine/kb/*.json,engine/data/*.csv,engine/data/*.tab
 source.exclude_dirs = tests,tools,ci,shelved_language_switch,i18n_todo,i18n_src,bin,.github,__pycache__
 
-version = 2.0.0
+version = 2.1.0
 
 # pyswisseph: no official python-for-android recipe exists, so this project
 # ships one (see recipes/pyswisseph/__init__.py) via p4a.local_recipes below.
@@ -85,3 +85,14 @@ android.archs = arm64-v8a
 [buildozer]
 log_level = 2
 warn_on_root = 1
+
+# The lite (free/compact) edition: same source, a different app name and package id so it can be
+# installed alongside the full app on one device, and (via `buildozer --profile lite`, see
+# build-apk.yml) a different output filename in bin/. This section MUST be the last thing in the
+# file - an INI [section] header claims every line after it up to the NEXT header, so anything
+# placed below [app] but above [buildozer] would silently move OUT of [app] and into this profile
+# instead (confirmed the hard way - see git history). What screens the lite build shows lives in
+# engine/edition.py, NOT here - a profile can only override buildozer.spec keys, not Python source.
+[app@lite]
+title = Vedic Astrology Compact
+package.name = vedicastrologycompact

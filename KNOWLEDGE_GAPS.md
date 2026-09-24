@@ -46,3 +46,6 @@ translation with a native proofreader. Bengali numerals are not used (digits sta
 
 ## Languages (v2.0.0)
 Bengali is complete on screen (interface, knowledge base, composed text). Not yet: Bengali PDF report; Hindi (same route via `i18n_src/hi.py`). A few names/terms intentionally stay English (person names, FAQ, PDF, yoga ids like YOGA-24, the credit line). Open question for the owner: Bengali digits vs Latin digits for dates/years.
+
+## Compact (free) edition - `engine/edition.py` (v2.1.0)
+Not a content gap so much as unfinished packaging: there's a "lite" edition now (see README_ANDROID.md's 2.1.0 section) but no Premium edition to sell yet - `EDITION` only distinguishes "full" and "lite". Still open: which price/store listing Premium becomes (a paid upgrade of the same lite app vs. a separate purchase - affects whether "full" stays a third build or lite gains an in-app unlock), a distinct app icon for Compact (currently shares `icon.png` with the full app), and whether the free edition should tease the locked features (Home's subtitle mentions them in text only; no lock icons on cards) to drive Premium conversions.

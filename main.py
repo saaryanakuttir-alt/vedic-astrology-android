@@ -9,10 +9,14 @@ year predictions and Family Compatibility are the engine's own output.
 (This app has no lifespan/longevity or children predictions, and no sample
 charts - see README_ANDROID.md.)
 
+Two editions build from this same source - see engine/edition.py: "full" (every screen) and
+"lite", a free edition with only a subset of screens (engine/edition.FREE_SCREENS), the rest held
+back for a future paid Premium edition.
+
 Navigation follows the Birth Chart App design handoff: a Home menu of cards,
 a header whose gold diamond mark always returns Home, and a 4-tab bottom bar
-(Chart / Dasha / Yogas / Library). Screens are built lazily on first visit,
-so start-up only constructs Home.
+(Chart / Dasha / Yogas / Library in the full edition - see main.py's BOTTOM_NAV_LITE for the
+lite edition's bar). Screens are built lazily on first visit, so start-up only constructs Home.
 
 Created by Sammya Das.
 """
@@ -45,6 +49,7 @@ from kivy.uix.floatlayout import FloatLayout
 # resizing the whole Window on every keyboard show/hide.
 Window.softinput_mode = "below_target"
 
+import edition
 import i18n
 from ui import fonts, i18n_hook, keyboard, theme
 from ui.app_state import ProfileStore
@@ -62,13 +67,17 @@ from ui.tabs_tables import (
     AshtakvargaTab, ChalitTab, DashaTab, HousesTab, KundliDetailsTab, PlanetsTab, YogasTab,
 )
 
-BOTTOM_NAV = [("entry", "Chart", "diamond"), ("dasha", "Dasha", "clock"),
-              ("yogas", "Yogas", "rings"), ("library", "Library", "book")]
+BOTTOM_NAV_FULL = [("entry", "Chart", "diamond"), ("dasha", "Dasha", "clock"),
+                    ("yogas", "Yogas", "rings"), ("library", "Library", "book")]
+# The lite edition has no Dasha/Yogas screens (see engine/edition.py) - Kundli and House Lords fill the bar instead.
+BOTTOM_NAV_LITE = [("entry", "Chart", "diamond"), ("kundli", "Kundli", "card"),
+                    ("houses", "Houses", "key"), ("library", "Library", "book")]
+BOTTOM_NAV = BOTTOM_NAV_FULL if edition.EDITION == "full" else BOTTOM_NAV_LITE
 
 
 class VedicAstrologyApp(App):
     def build(self):
-        self.title = "Vedic Astrology"
+        self.title = edition.APP_TITLE[edition.EDITION]
         # VEDIC_DATA_DIR lets the desktop tests keep their files out of the real app folder.
         self.store = ProfileStore(os.environ.get("VEDIC_DATA_DIR") or self.user_data_dir)
         # Built-in keyboard unless the user switched to the phone keyboard. Must be set
@@ -152,6 +161,8 @@ class VedicAstrologyApp(App):
             "family": ("Family Compatibility", lambda: FamilyTab(self.store)),
             "help": ("Help & About", lambda: HelpTab()),
         }
+        if edition.EDITION != "full":                # lite: drop every screen not in edition.FREE_SCREENS
+            self._registry = {k: v for k, v in self._registry.items() if edition.visible(k)}
 
         root.add_widget(theme.GradientBackground(size_hint=(1, 1)))
         shell = self._shell = BoxLayout(orientation="vertical", size_hint=(1, 1), pos_hint={"x": 0, "y": 0})

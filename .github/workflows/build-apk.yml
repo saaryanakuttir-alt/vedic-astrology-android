@@ -8,6 +8,9 @@ name: Build Android APK
 # internet access to package registries/SDK downloads - see
 # android_app/README_ANDROID.md for the full story. Push this folder's
 # contents to a GitHub repo and this workflow builds the APK for you.
+#
+# Builds TWO editions (matrix.edition) from this same source - "full" (every screen) and "lite"
+# (the free/compact edition - see engine/edition.py) - each as its own artifact/APK.
 
 on:
   push:
@@ -17,8 +20,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # "full": every screen, package org.vedicastro.vedicastrology.
+        # "lite": the free/compact edition (engine/edition.py's FREE_SCREENS only), package
+        #         org.vedicastro.vedicastrologycompact - a separate app, installable side by side
+        #         with "full" on one device. Each matrix job gets its OWN checkout (below), so
+        #         flipping engine/edition.py's default for the lite job never touches "full"'s.
+        edition: [full, lite]
     steps:
       - uses: actions/checkout@v4
+
+      - name: "lite only: flip engine/edition.py's default to the lite edition"
+        if: matrix.edition == 'lite'
+        run: |
+          sed -i 's/"VEDIC_EDITION", "full"/"VEDIC_EDITION", "lite"/' engine/edition.py
+          grep -n 'VEDIC_EDITION' engine/edition.py
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -90,12 +108,16 @@ jobs:
           # by itself since it doesn't change which JDK is *active* -
           # point JAVA_HOME at it explicitly.
           export JAVA_HOME="$JAVA_HOME_17_X64"
-          yes | buildozer android debug
+          if [ "${{ matrix.edition }}" = "lite" ]; then
+            yes | buildozer --profile lite android debug
+          else
+            yes | buildozer android debug
+          fi
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: vedic-astrology-debug-apk
+          name: vedic-astrology-${{ matrix.edition }}-debug-apk
           path: bin/*.apk
           if-no-files-found: error
 
