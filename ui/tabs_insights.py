@@ -167,7 +167,7 @@ class ShodashvargaTab(_InsightPage):
 
 
 # ---------------------------------------------------------------- planet-by-planet effect sections
-from kivy.graphics import Color, Rectangle  # noqa: E402
+from kivy.graphics import Color, Rectangle, RoundedRectangle  # noqa: E402
 from kivy.uix.label import Label  # noqa: E402
 from ui import theme  # noqa: E402
 from i18n import tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
@@ -180,8 +180,8 @@ class PlanetBanner(Label):
         super().__init__(text=text, bold=True, font_size="14sp", color=theme.ACCENT_800, halign="left", valign="middle",
                          size_hint_y=None, height=dp(42), **kwargs)
         with self.canvas.before:
-            Color(theme.ACCENT[0], theme.ACCENT[1], theme.ACCENT[2], 0.16)
-            self._bg = Rectangle(pos=self.pos, size=self.size)
+            Color(*theme.ACCENT_TINT)
+            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(12)])
         self.bind(pos=self._sync, size=self._sync)
 
     def _sync(self, *_):

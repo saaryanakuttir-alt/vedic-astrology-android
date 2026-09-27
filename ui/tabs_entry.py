@@ -67,14 +67,15 @@ class _Chip(ButtonBehavior, BoxLayout):
         ring_holder = BoxLayout(size_hint_y=None, height=dp(40))
         ring_holder.add_widget(BoxLayout())
         self.ring = Label(text=initial, bold=True, font_size="15sp", size_hint=(None, None), size=(dp(38), dp(38)),
-                          color=theme.ACCENT if selected else theme.TEXT)
-        from kivy.graphics import Color, Line
+                          color=theme.ON_ACCENT if selected else theme.TEXT)
+        from kivy.graphics import Color, Ellipse
+        with self.ring.canvas.before:
+            Color(*(theme.ACCENT if selected else theme.SURFACE_2))
+            self._circle = Ellipse()
         with self.ring.canvas.after:
-            Color(*(theme.ACCENT if selected else theme.DIVIDER))
-            self._circle = Line(circle=(self.ring.center_x, self.ring.center_y, dp(19)), width=1.5)
-            if has_chart:
-                Color(*theme.ACCENT)
-                self._dot = Line(circle=(self.ring.center_x + dp(14), self.ring.center_y + dp(14), dp(3)), width=2)
+            if has_chart:                                # a small dot: this slot already has a chart
+                Color(*theme.SECOND)
+                self._dot = Ellipse(size=(dp(9), dp(9)))
         self.ring.bind(pos=self._sync, size=self._sync)
         ring_holder.add_widget(self.ring)
         ring_holder.add_widget(BoxLayout())
@@ -87,9 +88,9 @@ class _Chip(ButtonBehavior, BoxLayout):
         self._has_chart = has_chart
 
     def _sync(self, *_):
-        self._circle.circle = (self.ring.center_x, self.ring.center_y, dp(19))
+        self._circle.pos, self._circle.size = self.ring.pos, self.ring.size
         if self._has_chart:
-            self._dot.circle = (self.ring.center_x + dp(14), self.ring.center_y + dp(14), dp(3))
+            self._dot.pos = (self.ring.x + self.ring.width - dp(9), self.ring.y + self.ring.height - dp(9))
 
 
 class EntryScreen(BoxLayout):
@@ -542,7 +543,7 @@ class EntryScreen(BoxLayout):
             return
         chart, reading = data["chart"], data["reading"]
         card = OutlineBox(orientation="vertical", padding=dp(14), spacing=dp(8), size_hint_y=None, height=dp(206))
-        kicker = Label(text="CHART GENERATED", font_size="10sp", color=theme.ACCENT, halign="left",
+        kicker = Label(text="CHART GENERATED", font_size="10sp", bold=True, color=theme.ACCENT_700, halign="left",
                        size_hint_y=None, height=dp(16))
         kicker.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         title = Label(text=reading.get("name") or PROFILE_LABELS[self.store.current_profile_id], bold=True,
@@ -552,7 +553,7 @@ class EntryScreen(BoxLayout):
         for cap, val in (("Lagna", chart["ascendant"]["sign"]), ("Moon", chart["planets"]["Moon"]["sign"]),
                          ("Sun", chart["planets"]["Sun"]["sign"])):
             tag = OutlineBox(accent=True, size_hint_x=None, width=dp(104))
-            tl = Label(text=f"{cap} · {val}", font_size="11sp", color=theme.ACCENT)
+            tl = Label(text=f"{cap} · {val}", font_size="11sp", bold=True, color=theme.ACCENT_700)
             tag.add_widget(tl)
             tags.add_widget(tag)
         tags.add_widget(BoxLayout())

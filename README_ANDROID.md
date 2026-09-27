@@ -447,3 +447,13 @@ free screens; the CI `sed` target string exists exactly once; the two package id
 Not done in this pass: no in-app upsell/teaser for the Premium screens (Home's subtitle text mentions them, that's
 all), no separate app icon for Compact (both editions currently share `icon.png`), and there is no Premium edition
 itself yet - `EDITION` only has "full" and "lite" today.
+
+## 2.2.0 - modern redesign, Light/Dark
+New look for every screen (`ui/theme.py`): a Cosmic dark theme (night-sky gradient with faint stars, gold accent) and a
+Clean light theme (lavender-white, violet accent), switched with the sun/moon button in the header or Appearance on
+Home (remembered in settings.json, key `theme`). Filled rounded cards with soft shadows, pill buttons and toggles,
+tonal inputs, a floating bottom bar, and a gradient hero card on Home showing the current person's Lagna, Moon sign
+and birth star. Switching rebuilds the screens the same way a language switch does. Still no image files - all
+gradients and icons are drawn in code. `tools/ui_shots.py OUT [lang] [screens]` (with `SHOT_THEME=light`) saves
+desktop screenshots for design review; `tests/test_theme.py` guards the two palettes.
+

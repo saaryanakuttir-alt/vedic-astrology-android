@@ -292,7 +292,7 @@ class YogasTab(BoxLayout):
     def _set_summary(self, text):
         self.summary_area.clear_widgets()
         label = Label(text=text, size_hint_y=None, halign="left", valign="middle", bold=True,
-                      color=theme.GOLD_SOFT, text_size=(None, None))
+                      color=theme.GOLD_SOFT, text_size=(None, None), padding=(dp(12), dp(4)))
         label.bind(texture_size=lambda inst, ts: setattr(label, "height", max(dp(28), ts[1] + dp(8))))
         label.bind(width=lambda inst, w: setattr(label, "text_size", (w, None)))
         # The box must keep following the label's height as the text wraps at the

@@ -1,0 +1,10 @@
+Good morning	সুপ্রভাত
+Good afternoon	শুভ অপরাহ্ন
+Good evening	শুভ সন্ধ্যা
+Create your birth chart	আপনার জন্মকুণ্ডলী তৈরি করুন
+Enter your birth date, time and place to begin.	শুরু করতে আপনার জন্মের তারিখ, সময় ও স্থান লিখুন।
+Appearance	চেহারা
+Dark	গাঢ়
+Light	হালকা
+Start here	এখান থেকে শুরু
+Compact edition: generate your chart, every divisional-chart diagram, and planet/house placements - fully offline. Yogas, dashas, the full readings, doshas & remedies and family compatibility are in the Premium edition.	সংক্ষিপ্ত সংস্করণ: আপনার কুণ্ডলী তৈরি করুন, প্রতিটি বিভাগীয় কুণ্ডলীর চিত্র এবং গ্রহ/ভাবের অবস্থান দেখুন - সম্পূর্ণ অফলাইনে। যোগ, দশা, সম্পূর্ণ ব্যাখ্যা, দোষ ও প্রতিকার এবং পারিবারিক সামঞ্জস্য প্রিমিয়াম সংস্করণে আছে।

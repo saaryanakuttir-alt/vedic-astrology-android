@@ -27,9 +27,17 @@ from ui import theme
 # Border color shows through the 1dp gaps GridLayout leaves between cells
 # (see _make_cell_background below) - a plain medium gray reads as a grid
 # line against either the header or data cell fill color.
-_BORDER_COLOR = theme.DIVIDER_SOLID   # hairlines between cells
-_HEADER_BG = theme.SURFACE
-_DATA_BG = theme.BG
+# Read when a table is built (not at import), so a Light/Dark switch reaches every table.
+def _border_color():
+    return theme.DIVIDER_SOLID          # hairlines between cells
+
+
+def _header_bg():
+    return theme.SURFACE_2
+
+
+def _data_bg():
+    return theme.SURFACE
 
 
 class _TableMixin:
@@ -47,7 +55,7 @@ class _TableMixin:
         self.grid = GridLayout(cols=len(columns), size_hint_y=None, spacing=dp(1))
         self.grid.bind(minimum_height=self.grid.setter("height"))
         with self.grid.canvas.before:
-            Color(*_BORDER_COLOR)
+            Color(*_border_color())
             self._grid_bg = Rectangle(pos=self.grid.pos, size=self.grid.size)
         self.grid.bind(pos=self._update_grid_bg, size=self._update_grid_bg)
 
@@ -101,7 +109,7 @@ class _TableMixin:
                 color=theme.ACCENT_700 if header else theme.TEXT,
                 shorten=False,
             )
-            self._make_cell_background(lbl, _HEADER_BG if header else _DATA_BG)
+            self._make_cell_background(lbl, _header_bg() if header else _data_bg())
             lbl._row_cells = row_cells
             lbl._need = lbl.height
             row_cells.append(lbl)
@@ -478,22 +486,22 @@ class ChipButton(Button):
         # width would either clip long category names or waste space on
         # short ones.
         self.bind(texture_size=lambda *_: setattr(self, "width", self.texture_size[0] + dp(28)))
-        with self.canvas.after:
-            self._bg_color = Color(*theme.DIVIDER)
-            self._bg = Line(rounded_rectangle=(self.x, self.y, self.width, self.height, dp(18)), width=1)
+        with self.canvas.before:
+            self._bg_color = Color(*theme.SURFACE_2)
+            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(18)])
         self.bind(pos=self._sync, size=self._sync)
         self._apply_active()
 
     def _sync(self, *_):
-        self._bg.rounded_rectangle = (self.x, self.y, self.width, self.height, dp(18))
+        self._bg.pos, self._bg.size = self.pos, self.size
 
     def set_active(self, active):
         self.active = active
         self._apply_active()
 
     def _apply_active(self):
-        self._bg_color.rgba = theme.ACCENT if self.active else theme.DIVIDER
-        self.color = theme.ACCENT if self.active else theme.INK_SOFT
+        self._bg_color.rgba = theme.ACCENT if self.active else theme.SURFACE_2
+        self.color = theme.ON_ACCENT if self.active else theme.INK_SOFT
 
 
 class ExpandableCard(BoxLayout):
@@ -511,8 +519,8 @@ class ExpandableCard(BoxLayout):
         self._open = False
 
         with self.canvas.after:
-            Color(*theme.DIVIDER)
-            self._bg = Line(rounded_rectangle=(self.x, self.y, self.width, self.height, dp(4)), width=1)
+            Color(*theme.SURFACE)
+            self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(16)])
         self.bind(pos=self._sync_bg, size=self._sync_bg)
 
         self.header = Button(
@@ -543,7 +551,7 @@ class ExpandableCard(BoxLayout):
         self.bind(minimum_height=self.setter("height"))
 
     def _sync_bg(self, *_):
-        self._bg.rounded_rectangle = (self.x, self.y, self.width, self.height, dp(4))
+        self._bg.pos, self._bg.size = self.pos, self.size
 
     def _on_header_width(self, header, width):
         header.text_size = (width - dp(20), None)

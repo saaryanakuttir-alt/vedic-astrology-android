@@ -83,7 +83,7 @@ class VedicAstrologyApp(App):
         # Built-in keyboard unless the user switched to the phone keyboard. Must be set
         # before any screen is built: text fields read it when they are created.
         keyboard.SERVICE.builtin = self.store.settings.get("keyboard", "builtin") != "phone"
-        Window.clearcolor = theme.BG
+        theme.apply(self.store.settings.get("theme", theme.DEFAULT_THEME))     # also sets Window.clearcolor
         i18n_hook.install()
         self._apply_language(self.store.settings.get("language", "en"))
         root = self._root = FloatLayout()
@@ -105,10 +105,20 @@ class VedicAstrologyApp(App):
         code = self._apply_language(code)
         self.store.settings.set("language", code)
         self._regenerate_readings()
+        self._rebuild()
+
+    def set_theme(self, name):
+        """The user switched Light/Dark: remember it and rebuild every screen in the new palette, staying on the
+        screen they were looking at."""
+        name = theme.apply(name)
+        self.store.settings.set("theme", name)
+        self._rebuild(self.current_key or "home")
+
+    def _rebuild(self, key="home"):
         keyboard.SERVICE.hide()
         self._root.clear_widgets()
         self._build_ui(self._root)
-        self.goto("home")
+        self.goto(key)
 
     def _regenerate_readings(self):
         """A reading is written (in the current language) when a chart is generated and then kept, so after a language
@@ -129,7 +139,7 @@ class VedicAstrologyApp(App):
 
         # key -> (English header title, factory); titles are translated when shown
         self._registry = {
-            "home": ("Home", lambda: HomeScreen(self.store, self.goto, self.set_language)),
+            "home": ("Home", lambda: HomeScreen(self.store, self.goto, self.set_language, self.set_theme)),
             "entry": ("New Chart", lambda: EntryScreen(self.store, self._on_chart_generated, self.goto)),
             "library": ("Saved Charts", lambda: LibraryScreen(self.store, self.goto, self._load_saved)),
             "chart": ("Chart Diagram", lambda: ChartTab(self.store)),
@@ -166,7 +176,7 @@ class VedicAstrologyApp(App):
 
         root.add_widget(theme.GradientBackground(size_hint=(1, 1)))
         shell = self._shell = BoxLayout(orientation="vertical", size_hint=(1, 1), pos_hint={"x": 0, "y": 0})
-        self.header = theme.AppHeader(on_home=lambda: self.goto("home"))
+        self.header = theme.AppHeader(on_home=lambda: self.goto("home"), on_theme=self.set_theme)
         self.content = BoxLayout(orientation="vertical")
         self.bottom = theme.BottomNav(BOTTOM_NAV, on_select=lambda k: self.goto(k))
         shell.add_widget(self.header)

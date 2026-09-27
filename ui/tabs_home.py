@@ -10,7 +10,7 @@ lives at the foot of Home.
 In the lite edition (engine/edition.py), _free() drops every card whose screen isn't in
 edition.FREE_SCREENS, and a whole group's heading is skipped if that leaves it empty.
 """
-from kivy.graphics import Color, Line
+from kivy.graphics import Color, Ellipse, RoundedRectangle
 from kivy.metrics import dp
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
@@ -104,38 +104,123 @@ class LanguageBar(BoxLayout):
             self.add_widget(button)
 
 
+class _Hero(ButtonBehavior, theme.HeroCard):
+    """The gradient card at the top of Home: a greeting and the current person's chart at a glance (Lagna, Moon
+    sign, birth star), or an invitation to make a chart. Tapping it opens the chart (or New Chart)."""
+
+    def __init__(self, store, goto, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("height", dp(170))
+        kwargs.setdefault("padding", (dp(20), dp(18), dp(20), dp(16)))
+        kwargs.setdefault("spacing", dp(4))
+        super().__init__(orientation="vertical", **kwargs)
+        self.store, self.goto = store, goto
+        white = theme.HERO_TEXT
+        self.kicker = self._label("", "12sp", theme._alpha(white, 0.78), dp(18))
+        self.title = self._label("", "22sp", white, dp(34), bold=True)
+        self.line = self._label("", "13sp", theme._alpha(white, 0.88), dp(40), valign="top")
+        self.cta = Label(text="", bold=True, font_size="13sp", color=white, size_hint=(None, None), height=dp(34))
+        self.cta.bind(texture_size=lambda inst, ts: setattr(inst, "width", ts[0] + dp(32)))
+        with self.cta.canvas.before:
+            Color(1, 1, 1, 0.18)
+            self._cta_bg = RoundedRectangle(radius=[dp(17)])
+        self.cta.bind(pos=self._sync_cta, size=self._sync_cta)
+        for w in (self.kicker, self.title, self.line, self.cta):
+            self.add_widget(w)
+        self.bind(on_release=lambda *_: self.goto("chart" if self._has_chart() else "entry"))
+        self.update()
+
+    @staticmethod
+    def _label(text, size, color, height, bold=False, valign="middle"):
+        lbl = Label(text=text, font_size=size, color=color, bold=bold, halign="left", valign=valign,
+                    size_hint_y=None, height=height, shorten=True, shorten_from="right")
+        lbl.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+        return lbl
+
+    def _sync_cta(self, *_):
+        self._cta_bg.pos, self._cta_bg.size = self.cta.pos, self.cta.size
+
+    def _has_chart(self):
+        data = self.store.current
+        return data.get("chart") is not None and data.get("reading") is not None
+
+    def update(self):
+        import datetime
+        hour = datetime.datetime.now().hour
+        self.kicker.text = tx("Good morning") if hour < 12 else (tx("Good afternoon") if hour < 17 else tx("Good evening"))
+        if self._has_chart():
+            data = self.store.current
+            chart = data["chart"]
+            moon = chart["planets"]["Moon"]
+            self.title.text = (data["reading"].get("name") or tx(PROFILE_LABELS[self.store.current_profile_id])).strip()
+            self.line.text = "{} {}  ·  {} {}  ·  {}".format(tx("Lagna"), tx(chart["ascendant"]["sign"]), tx("Moon"),
+                                                            tx(moon["sign"]), tx(moon.get("nakshatra", "")))
+            self.cta.text = tx("Open chart") + "  ›"
+        else:
+            self.title.text = tx("Create your birth chart")
+            self.line.text = tx("Enter your birth date, time and place to begin.")
+            self.cta.text = tx("Start") + "  ›"
+
+
+class _SettingsCard(OutlineBox):
+    """Language and Light/Dark, in one small card on Home."""
+
+    def __init__(self, on_language, on_theme, **kwargs):
+        rows = (on_language is not None) + (on_theme is not None)
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("height", dp(24) + rows * dp(44) + (rows - 1) * dp(10))
+        kwargs.setdefault("padding", (dp(14), dp(12)))
+        kwargs.setdefault("spacing", dp(10))
+        super().__init__(orientation="vertical", **kwargs)
+        if on_language is not None:
+            import i18n
+            self.add_widget(LanguageBar(i18n.get_language(), on_language))
+        if on_theme is not None:
+            row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(42), spacing=dp(8))
+            cap = Label(text="Appearance", font_size="12sp", color=theme.MUTED, size_hint_x=None, width=dp(74),
+                        halign="left", valign="middle")
+            cap.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+            row.add_widget(cap)
+            seg = theme.SegmentedControl(["Dark", "Light"], selected="Dark" if theme.IS_DARK else "Light",
+                                         on_select=lambda opt: on_theme(opt.lower()), pos_hint={"center_y": 0.5})
+            row.add_widget(seg)
+            row.add_widget(BoxLayout())
+            self.add_widget(row)
+
+
 class HomeScreen(BoxLayout):
-    def __init__(self, store, goto, on_language=None, **kwargs):
+    def __init__(self, store, goto, on_language=None, on_theme=None, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.goto = goto
         scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
-        body = BoxLayout(orientation="vertical", size_hint_y=None, padding=(dp(18), dp(2), dp(18), dp(20)),
-                         spacing=dp(12))
+        body = BoxLayout(orientation="vertical", size_hint_y=None, padding=(dp(16), dp(4), dp(16), dp(24)),
+                         spacing=dp(14))
         body.bind(minimum_height=body.setter("height"))
         scroll.add_widget(body)
         self.add_widget(scroll)
 
+        self.hero = _Hero(store, goto)
+        body.add_widget(self.hero)
         sub_text = (tx("Your birth-chart engine and classical interpretive library.") if edition.EDITION == "full" else
                     tx("Compact edition: generate your chart, every divisional-chart diagram, and planet/house "
                        "placements - fully offline. Yogas, dashas, the full readings, doshas & remedies and family "
                        "compatibility are in the Premium edition."))
         sub = Label(text=sub_text, font_size="13sp", color=theme.MUTED, halign="left", valign="top",
-                    size_hint_y=None, height=(dp(24) if edition.EDITION == "full" else dp(56)))
-        sub.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+                    size_hint_y=None, height=dp(22))
+        # grow with the wrapped text (the compact edition's note is several lines, longer still in Bengali)
+        sub.bind(width=lambda inst, w: setattr(inst, "text_size", (w, None)),
+                 texture_size=lambda inst, ts: setattr(inst, "height", max(dp(22), ts[1])))
         body.add_widget(sub)
-        if on_language is not None:
-            import i18n
-            body.add_widget(LanguageBar(i18n.get_language(), on_language))
+        if on_language is not None or on_theme is not None:
+            body.add_widget(_SettingsCard(on_language, on_theme))
+        body.add_widget(theme.SectionHeader(None, "Start here"))
         body.add_widget(self._grid(_free(HOME_CORE)))
 
         for title, cards in HOME_GROUPS:
             cards = _free(cards)
             if not cards:                          # this whole group is Premium-only in this edition
                 continue
-            heading = Label(text=title, font_size="11sp", color=theme.ACCENT, halign="left", valign="middle",
-                            size_hint_y=None, height=dp(28), bold=True)
-            heading.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
-            body.add_widget(heading)
+            body.add_widget(theme.SectionHeader(None, title))
             body.add_widget(self._grid(cards))
 
         credit = Label(text=tr('{0}  -  version {1}', CREDIT, VERSION), font_size="12sp", color=theme.MUTED, italic=True,
@@ -144,14 +229,14 @@ class HomeScreen(BoxLayout):
 
     def _grid(self, items):
         rows = (len(items) + 1) // 2
-        grid = GridLayout(cols=2, spacing=dp(10), size_hint_y=None, height=rows * dp(108) + (rows - 1) * dp(10))
+        grid = GridLayout(cols=2, spacing=dp(12), size_hint_y=None, height=rows * dp(118) + (rows - 1) * dp(12))
         for key, title, desc, icon, preset in items:
             grid.add_widget(HomeCard(icon, title, desc,
                                      on_press_cb=lambda k=key, p=preset: self.goto(k, preset=p)))
         return grid
 
     def refresh(self):
-        pass
+        self.hero.update()
 
 
 _MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
@@ -187,13 +272,13 @@ class _SavedRow(ButtonBehavior, OutlineBox):
         kwargs.setdefault("padding", (dp(12), dp(10), dp(8), dp(10)))
         kwargs.setdefault("spacing", dp(10))
         super().__init__(orientation="horizontal", **kwargs)
-        av = Label(text=initial, bold=True, font_size="14sp", size_hint=(None, None), size=(dp(36), dp(36)),
-                   pos_hint={"center_y": 0.5})
-        with av.canvas.after:
-            Color(*theme.DIVIDER)
-            self._ring = Line(circle=(av.center_x, av.center_y, dp(18)), width=1.5)
-        av.bind(pos=lambda inst, _v: setattr(self._ring, "circle", (inst.center_x, inst.center_y, dp(18))),
-                size=lambda inst, _v: setattr(self._ring, "circle", (inst.center_x, inst.center_y, dp(18))))
+        av = Label(text=initial, bold=True, font_size="15sp", size_hint=(None, None), size=(dp(40), dp(40)),
+                   pos_hint={"center_y": 0.5}, color=theme.ON_ACCENT)
+        with av.canvas.before:
+            Color(*theme.ACCENT)
+            self._disc = Ellipse(pos=av.pos, size=av.size)
+        av.bind(pos=lambda inst, _v: setattr(self._disc, "pos", inst.pos),
+                size=lambda inst, _v: setattr(self._disc, "size", inst.size))
         self.add_widget(av)
         col = BoxLayout(orientation="vertical")
         n = Label(text=name, bold=True, font_size="15sp", halign="left", valign="bottom", shorten=True,
