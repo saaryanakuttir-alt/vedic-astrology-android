@@ -244,7 +244,8 @@ check(app.store.chart_style == "South Indian" and ct.style_spinner.text == "Sout
 ct.style_spinner.text = "North Indian"; pump(12)
 check(ct.canvas_widget.height >= 300 and abs(ct.canvas_widget.height - ct._scroll.width) < 2, f"Chart Diagram: chart is a square block ({ct.canvas_widget.height:.0f}dp), not stretched")
 check(ct._scroll.children[0].height > ct._scroll.height, "Chart Diagram: page is taller than the screen, so the text below the chart scrolls into view")
-check(len(ct.explain.children) > 3, "Chart Diagram: explanation text is on the scrolling page")
+check(len([w for w in walk(ct.explain) if type(w).__name__ == "Label"]) > 3,
+      "Chart Diagram: explanation text is on the scrolling page")      # v2.3: the paragraphs sit inside reading cards
 check(ct.canvas_widget.style == "North Indian" and app.store.chart_style == "North Indian", "...and back to North Indian")
 
 app.goto("medical"); pump(12)
@@ -253,7 +254,9 @@ canv = [w for w in walk(med) if type(w).__name__ == "BodyMapCanvas"]
 check(len(canv) == 1 and len(canv[0].children) == 0 and len(canv[0].canvas.children) > 5, "Medical shows a body-map chart")
 check(canv[0].body_short.get(1) == "Head" and canv[0].body_short.get(12) == "Feet", "body map knows the body areas")
 mtext = " ".join(texts(med))
-check(mtext.count("[In simple terms") >= 6, f"Medical paragraphs carry friendly explanations ({mtext.count('[In simple terms')})")
+# v2.3: "[In simple terms: ...]" is drawn as a callout card headed IN SIMPLE TERMS
+m_notes = mtext.count("[In simple terms") + mtext.count("IN SIMPLE TERMS")
+check(m_notes >= 6, f"Medical paragraphs carry friendly explanations ({m_notes})")
 check(mtext.count("Ayurvedic constitution (Prakriti)") == 1, "constitution appears once, not twice")
 mseg = [w for w in walk(med) if type(w).__name__ == "SegmentedControl"][0]
 mseg.select("South Indian"); pump(12)
@@ -271,7 +274,9 @@ press("Done"); pump(8)
 pr.month_spinner.text = "March"; pr.day_spinner.text = "15"; pump(12)
 ptxt = " ".join(texts(pr.text_view))
 check("2027-03-15" in ptxt, "Predictions computed for the picked date")
-check(ptxt.count("[In simple terms") >= 3, f"Predictions carry friendly explanations ({ptxt.count('[In simple terms')})")
+p_notes = ptxt.count("[In simple terms") + ptxt.count("IN SIMPLE TERMS")
+check(p_notes >= 3, f"Predictions carry friendly explanations ({p_notes})")
+check(any(type(w).__name__ == "GocharaCard" for w in walk(pr.text_view)), "Predictions shows the Gochara / Vedha grid")
 pr.year_input.text = "3000"; pr.refresh(); pump(6)
 check("between 1900 and 2100" in " ".join(texts(pr.text_view)), "out-of-range year gives a message, not a crash")
 

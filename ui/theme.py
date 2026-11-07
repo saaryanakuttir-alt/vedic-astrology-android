@@ -1,9 +1,18 @@
 """
-theme.py - the design system of the Android/Kivy app (v2.2 "modern" redesign).
+theme.py - the design system of the Android/Kivy app (v2.3 "Dusk & Ivory" redesign; v2.2 introduced Light/Dark).
 
 Two palettes share one set of widgets:
-  * "dark"  - Cosmic: a deep night-sky gradient with faint stars, glowing gold accent, filled rounded cards.
-  * "light" - Clean: soft lavender-white ground, white cards, violet accent (Material-3 style tonal fills).
+  * "dark"  - Midnight Dusk: a deep blue-black sky with two soft aurora glows and faint stars, a saffron accent
+              and a teal second accent, filled rounded cards.
+  * "light" - Ivory: a warm manuscript-ivory ground with a faint mandala, white cards, deep ink text and a
+              vermilion-saffron accent.
+English headings use a serif display face (fonts/DMSerifDisplay-Regular.ttf, SIL OFL); other languages keep
+their own bundled font, which has their pre-shaped letters (see display_font()).
+
+Motion (v2.3): animate_in() fades a widget in while sliding it up a few dp (screens, cards), stagger() does it to
+a row of widgets one after another, and the bottom bar's highlight glides between tabs. All of it is canvas-only
+(a temporary PushMatrix/Translate pair, removed when the animation ends) and is switched off by set_motion(False)
+(Home > Motion, remembered in settings.json as "motion").
 
 apply(name) swaps the palette. Colours are plain module attributes (theme.ACCENT, theme.SURFACE ...) that every
 screen reads while it builds its widgets, so switching the theme = apply() + rebuild the widget tree (main.py
@@ -22,6 +31,9 @@ import math
 import os
 
 import kivy
+from kivy.animation import Animation
+from kivy.clock import Clock
+from kivy.event import EventDispatcher
 from kivy.lang import Builder
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.button import Button
@@ -31,10 +43,10 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Ellipse, InstructionGroup, Line, Rectangle, RoundedRectangle
+from kivy.graphics import Color, Ellipse, InstructionGroup, Line, PopMatrix, PushMatrix, Rectangle, RoundedRectangle, Translate
 from kivy.graphics.texture import Texture
 from kivy.metrics import dp
-from kivy.properties import BooleanProperty
+from kivy.properties import BooleanProperty, NumericProperty
 from kivy.utils import get_color_from_hex as hex_color
 
 
@@ -47,20 +59,24 @@ def _alpha(rgba, a):
 # ---------------------------------------------------------------------------
 PALETTES = {
     "dark": {
-        "BG": "#0b0d1f", "BG_TOP": "#1b1745", "SURFACE": "#161a38", "SURFACE_2": "#232552",
-        "TEXT": "#ece9f7", "ACCENT": "#f0b955", "ACCENT_100": "#2b2646", "ACCENT_600": "#d49b3c",
-        "ACCENT_700": "#f3c977", "ACCENT_800": "#f8dca3", "ON_ACCENT": "#1a1330", "SECOND": "#9d8cff",
-        "NEUTRAL_100": "#1c1f3e", "NEUTRAL_500": "#77759a", "NEUTRAL_600": "#9896b6", "NEUTRAL_800": "#c9c7dc",
-        "DIVIDER_SOLID": "#2b2e57", "HERO_A": "#4a2fa8", "HERO_B": "#18194a", "HERO_TEXT": "#ffffff",
-        "SHADOW": (0, 0, 0, 0.45), "STARS": True, "GOLD_SOFT": "#e9dcbd",
+        "BG": "#070b17", "BG_TOP": "#111a3c", "SURFACE": "#121a33", "SURFACE_2": "#1c2649",
+        "TEXT": "#eef0fa", "ACCENT": "#f6a04d", "ACCENT_100": "#2a2338", "ACCENT_600": "#e08a36",
+        "ACCENT_700": "#f8b56f", "ACCENT_800": "#fbd2a6", "ON_ACCENT": "#1a1206", "SECOND": "#5fd3c6",
+        "NEUTRAL_100": "#151d3a", "NEUTRAL_500": "#6f7899", "NEUTRAL_600": "#949cba", "NEUTRAL_800": "#c6cbe0",
+        "DIVIDER_SOLID": "#26305a", "HERO_A": "#e0773a", "HERO_B": "#34237a", "HERO_TEXT": "#ffffff",
+        "SHADOW": (0, 0, 0, 0.50), "STARS": True, "GOLD_SOFT": "#f3d9b8",
+        "GLOW_A": "#3d5bdb", "GLOW_B": "#14b8a6", "GLOW_ALPHA": (0.26, 0.14), "MANDALA": False,
+        "GOOD": "#4ade80", "WARN": "#fbbf24", "BAD": "#f87171", "INFO": "#7dd3fc",
     },
     "light": {
-        "BG": "#f6f5fb", "BG_TOP": "#ebe6fb", "SURFACE": "#ffffff", "SURFACE_2": "#efebfb",
-        "TEXT": "#1d1b2e", "ACCENT": "#5b45c9", "ACCENT_100": "#eee9ff", "ACCENT_600": "#4a36b0",
-        "ACCENT_700": "#4630a8", "ACCENT_800": "#33218a", "ON_ACCENT": "#ffffff", "SECOND": "#c98a1f",
-        "NEUTRAL_100": "#f3f1f9", "NEUTRAL_500": "#9a97ad", "NEUTRAL_600": "#6e6b84", "NEUTRAL_800": "#3d3a52",
-        "DIVIDER_SOLID": "#e3e0ee", "HERO_A": "#6a4fe0", "HERO_B": "#a57cf2", "HERO_TEXT": "#ffffff",
-        "SHADOW": (0.23, 0.16, 0.45, 0.10), "STARS": False, "GOLD_SOFT": "#4a3f78",
+        "BG": "#f7f3ea", "BG_TOP": "#fcefdc", "SURFACE": "#ffffff", "SURFACE_2": "#f4ede1",
+        "TEXT": "#1c2033", "ACCENT": "#c2552a", "ACCENT_100": "#fbe7da", "ACCENT_600": "#a94820",
+        "ACCENT_700": "#a8461f", "ACCENT_800": "#7d3417", "ON_ACCENT": "#ffffff", "SECOND": "#3a4aa8",
+        "NEUTRAL_100": "#f5f0e6", "NEUTRAL_500": "#a39d90", "NEUTRAL_600": "#6d6878", "NEUTRAL_800": "#3b3a4a",
+        "DIVIDER_SOLID": "#e9e1d3", "HERO_A": "#e0773a", "HERO_B": "#7a3b8f", "HERO_TEXT": "#ffffff",
+        "SHADOW": (0.35, 0.22, 0.10, 0.10), "STARS": False, "GOLD_SOFT": "#7a5a2e",
+        "GLOW_A": "#f5b97a", "GLOW_B": "#d9a1c7", "GLOW_ALPHA": (0.40, 0.28), "MANDALA": True,
+        "GOOD": "#15803d", "WARN": "#b45309", "BAD": "#b91c1c", "INFO": "#1d4ed8",
     },
 }
 THEMES = ("dark", "light")
@@ -68,7 +84,10 @@ DEFAULT_THEME = "dark"
 NAME = DEFAULT_THEME
 
 R = dp(12)            # inputs, buttons with text inside a card
-R_CARD = dp(18)       # cards
+R_CARD = dp(20)       # cards
+DISPLAY_FONT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "fonts",
+                                 "DMSerifDisplay-Regular.ttf")
+MOTION = True         # set_motion(); Home > Motion
 SYMBOL_FONT = os.path.join(kivy.kivy_data_dir, "fonts", "DejaVuSans.ttf")   # Roboto lacks arrows / check marks
 _RULES_FILE = "vedic_theme_rules.kv"
 _texture_cache = {}
@@ -79,6 +98,7 @@ def apply(name, window=True):
     Window.clearcolor (the import-time call must not create the Window before main.py has set its Config)."""
     global NAME, IS_DARK, DIVIDER, DIVIDER_HOVER, MUTED, INK, INK_SOFT, PRESS_TINT, HOVER_TINT, PRESS_TINT_NEUTRAL
     global ACCENT_TINT, PANEL, PANEL_SOFT, INDIGO, INDIGO_2, INDIGO_DEEP, INDIGO_PRESS, GOLD, GOLD_PRESS, GOLD_TEXT
+    global SECOND_TINT
     name = name if name in PALETTES else DEFAULT_THEME
     NAME = name
     IS_DARK = name == "dark"
@@ -95,6 +115,7 @@ def apply(name, window=True):
     HOVER_TINT = _alpha(g["ACCENT"], 0.12)
     PRESS_TINT_NEUTRAL = _alpha(text, 0.10)
     ACCENT_TINT = _alpha(g["ACCENT"], 0.16)
+    SECOND_TINT = _alpha(g["SECOND"], 0.14)
     # legacy aliases
     PANEL = PANEL_SOFT = g["SURFACE"]
     INDIGO = INDIGO_2 = GOLD = g["ACCENT"]
@@ -137,6 +158,36 @@ def _load_rules():
 """, filename=_RULES_FILE)
 
 
+def display_font():
+    """The heading font: the serif display face in English, else the language's own default font (Bengali and
+    Hindi need their pre-shaped glyph fonts, which the display face does not have)."""
+    try:
+        import i18n
+        english = i18n.is_english()
+    except Exception:          # engine/ not on the path (palette-only tests)
+        english = True
+    return DISPLAY_FONT_FILE if english and os.path.exists(DISPLAY_FONT_FILE) else "Roboto"
+
+
+def radial_texture(n=64):
+    """An n x n white texture whose alpha falls from 1 at the centre to 0 at the edge (soft glows)."""
+    key = ("radial", n)
+    tex = _texture_cache.get(key)
+    if tex is None:
+        tex = Texture.create(size=(n, n), colorfmt="rgba")
+        buf = bytearray()
+        c = (n - 1) / 2.0
+        for y in range(n):
+            for x in range(n):
+                d = min(1.0, math.hypot(x - c, y - c) / c)
+                a = (1.0 - d) ** 2
+                buf += bytes((255, 255, 255, int(255 * a)))
+        tex.blit_buffer(bytes(buf), colorfmt="rgba", bufferfmt="ubyte")
+        tex.wrap = "clamp_to_edge"
+        _texture_cache[key] = tex
+    return tex
+
+
 def gradient_texture(c_from, c_to, horizontal=False, n=64):
     """A 1 x n (or n x 1) texture fading from c_from (bottom / left) to c_to (top / right)."""
     key = (tuple(c_from), tuple(c_to), horizontal, n)
@@ -172,26 +223,54 @@ def _stars(count=70, seed=7):
 
 
 class GradientBackground(FloatLayout):
-    """The app ground: a vertical gradient (BG at the bottom -> BG_TOP at the top), plus a faint star field in the
-    dark theme."""
+    """The app ground: a vertical gradient (BG at the bottom -> BG_TOP at the top) with two soft colour glows; a
+    faint star field in the dark theme and a faint mandala in the light one."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._star_items = []
+        self._mandala = []
+        a1, a2 = GLOW_ALPHA
         with self.canvas:
             Color(1, 1, 1, 1)
             self._rect = Rectangle(pos=self.pos, size=self.size, texture=gradient_texture(BG, BG_TOP))
+            Color(*_alpha(GLOW_A, a1))
+            self._glow_a = Rectangle(texture=radial_texture())
+            Color(*_alpha(GLOW_B, a2))
+            self._glow_b = Rectangle(texture=radial_texture())
             if STARS:
                 for x, y, r, a in _stars():
                     Color(1, 1, 1, a)
                     self._star_items.append((x, y, dp(r), Ellipse(size=(dp(r) * 2, dp(r) * 2))))
+            if MANDALA:
+                Color(*_alpha(ACCENT, 0.07))
+                self._mandala = [Line(width=1) for _ in range(4)]
+                self._spokes = [Line(width=1) for _ in range(24)]
         self.bind(pos=self._sync, size=self._sync)
 
     def _sync(self, *_):
         self._rect.pos = self.pos
         self._rect.size = self.size
+        w, h = self.width, self.height
+        ga = max(w, h) * 0.95
+        gb = max(w, h) * 0.75
+        if IS_DARK:
+            self._glow_a.pos, self._glow_a.size = (self.x - ga * 0.45, self.y + h - ga * 0.55), (ga, ga)
+            self._glow_b.pos, self._glow_b.size = (self.x + w - gb * 0.45, self.y + h * 0.35 - gb / 2), (gb, gb)
+        else:
+            self._glow_a.pos, self._glow_a.size = (self.x + w - ga * 0.55, self.y + h - ga * 0.50), (ga, ga)
+            self._glow_b.pos, self._glow_b.size = (self.x - gb * 0.50, self.y - gb * 0.35), (gb, gb)
         for x, y, r, e in self._star_items:
             e.pos = (self.x + x * self.width - r, self.y + y * self.height - r)
+        if self._mandala:
+            cx, cy = self.x + w - dp(40), self.y + h - dp(60)
+            for i, ring in enumerate(self._mandala):
+                ring.circle = (cx, cy, dp(70) + i * dp(46))
+            for k, spoke in enumerate(self._spokes):
+                ang = k * math.pi / 12
+                inner, outer = (dp(70), dp(208)) if k % 2 == 0 else (dp(116), dp(208))
+                spoke.points = [cx + inner * math.cos(ang), cy + inner * math.sin(ang),
+                                cx + outer * math.cos(ang), cy + outer * math.sin(ang)]
 
 
 class Divider(Widget):
@@ -281,7 +360,8 @@ class OutlineBox(_CardDraw, BoxLayout):
 
 
 class HeroCard(BoxLayout):
-    """A gradient card (HERO_A -> HERO_B) with a faint constellation drawn at its right edge."""
+    """A dusk-gradient card (HERO_B -> HERO_A) with a soft sun glow, two orbit rings and a faint constellation at
+    its right edge."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -290,6 +370,8 @@ class HeroCard(BoxLayout):
             self._sh = RoundedRectangle(radius=[dp(22)])
             Color(1, 1, 1, 1)
             self._bg = RoundedRectangle(radius=[dp(22)], texture=gradient_texture(HERO_B, HERO_A, horizontal=True))
+            Color(1, 0.92, 0.75, 0.30)
+            self._sun = Rectangle(texture=radial_texture())
             Color(1, 1, 1, 0.20)
             self._orbit = Line(width=1.1)
             self._orbit2 = Line(width=1)
@@ -303,6 +385,8 @@ class HeroCard(BoxLayout):
         self._bg.pos, self._bg.size = self.pos, self.size
         # x/y/width/height, not right/top: those cached aliases can still be stale inside a size callback
         cx, cy = self.x + self.width - dp(46), self.y + self.height - dp(40)
+        g = dp(190)
+        self._sun.pos, self._sun.size = (cx - g / 2, cy - g / 2), (g, g)
         self._orbit.circle = (cx, cy, dp(58))
         self._orbit2.circle = (cx, cy, dp(30))
         pts = [(cx - dp(40), cy - dp(4)), (cx - dp(16), cy + dp(18)), (cx + dp(8), cy + dp(6)),
@@ -759,29 +843,23 @@ class _NavItem(ButtonBehavior, BoxLayout):
         self.holder.add_widget(Widget())
         self.holder.add_widget(self.icon)
         self.holder.add_widget(Widget())
-        with self.holder.canvas.before:
-            self._pill_color = Color(0, 0, 0, 0)
-            self._pill = RoundedRectangle(radius=[dp(14)])
-        self.holder.bind(pos=self._sync, size=self._sync)
         self.label = Label(text=label, font_size="10.5sp", color=NEUTRAL_600, size_hint_y=None, height=dp(14))
         self.add_widget(self.holder)
         self.add_widget(self.label)
-
-    def _sync(self, *_):
-        w = dp(56)
-        self._pill.pos = (self.holder.x + (self.holder.width - w) / 2, self.holder.y)
-        self._pill.size = (w, self.holder.height)
 
     def set_active(self, on):
         c = ACCENT_700 if on else NEUTRAL_600
         self.icon.set_color(c)
         self.label.color = c
         self.label.bold = on
-        self._pill_color.rgba = ACCENT_TINT if on else (0, 0, 0, 0)
 
 
 class BottomNav(BoxLayout):
-    """A floating rounded tab bar; the active tab gets an accent pill behind its icon."""
+    """A floating rounded tab bar; one accent pill sits behind the active tab's icon and glides to the next tab
+    when the tab changes (instantly when motion is off or no tab is active)."""
+
+    pill_x = NumericProperty(0)
+    pill_alpha = NumericProperty(0)
 
     def __init__(self, items, on_select, **kwargs):
         kwargs.setdefault("size_hint_y", None)
@@ -793,6 +871,12 @@ class BottomNav(BoxLayout):
             self._sh = RoundedRectangle(radius=[dp(26)])
             Color(*(SURFACE_2 if IS_DARK else SURFACE))
             self._bar = RoundedRectangle(radius=[dp(26)])
+            self._pill_color = Color(*_alpha(ACCENT, 0))
+            self._pill = RoundedRectangle(radius=[dp(14)])
+            self._dot_color = Color(*_alpha(ACCENT, 0))
+            self._dot = Ellipse(size=(dp(5), dp(5)))
+        self._active_key = None
+        self.bind(pill_x=self._place_pill, pill_alpha=self._place_pill)
         with self.canvas.after:
             Color(*_alpha(TEXT, 0.07))
             self._edge = Line(width=1)
@@ -809,10 +893,49 @@ class BottomNav(BoxLayout):
         self._sh.pos, self._sh.size = (x, y - dp(3)), (w, h)
         self._bar.pos, self._bar.size = (x, y), (w, h)
         self._edge.rounded_rectangle = (x, y, w, h, dp(26))
+        Clock.schedule_once(lambda _dt: self._jump_to_active(), 0)     # children are laid out after this
+
+    def _target_x(self, key):
+        it = self._items.get(key)
+        return None if it is None else it.x + it.width / 2
+
+    def _jump_to_active(self):
+        x = self._target_x(self._active_key)
+        if x is not None:
+            Animation.cancel_all(self, "pill_x")
+            self.pill_x = x
+
+    def _place_pill(self, *_):
+        w, h = dp(56), dp(28)
+        it = next(iter(self._items.values()), None)
+        y = (it.holder.y if it is not None else self.y + dp(14))
+        self._pill.pos, self._pill.size = (self.pill_x - w / 2, y), (w, h)
+        self._pill_color.rgba = _alpha(ACCENT, 0.18 * self.pill_alpha)
+        self._dot.pos = (self.pill_x - dp(2.5), self.y + dp(9))
+        self._dot_color.rgba = _alpha(ACCENT, 0.9 * self.pill_alpha)
 
     def set_active(self, key):
         for k, it in self._items.items():
             it.set_active(k == key)
+        previous, self._active_key = self._active_key, key
+        x = self._target_x(key)
+        if x is None:                                   # a screen that is not on the bar: fade the pill out
+            Animation.cancel_all(self, "pill_alpha")
+            if MOTION:
+                Animation(pill_alpha=0, d=0.15).start(self)
+            else:
+                self.pill_alpha = 0
+            return
+        moving = previous in self._items and self.pill_alpha > 0
+        Animation.cancel_all(self, "pill_x", "pill_alpha")
+        if MOTION and moving:
+            Animation(pill_x=x, d=0.30, t="out_back").start(self)
+        else:
+            self.pill_x = x
+        if MOTION:
+            Animation(pill_alpha=1, d=0.18).start(self)
+        else:
+            self.pill_alpha = 1
 
 
 class _ChipButton(ButtonBehavior, IconChip):
@@ -834,8 +957,9 @@ class AppHeader(BoxLayout):
         mark.bind(on_release=lambda *_: on_home())
         mark.bind(state=lambda inst, st: inst.set_fill(PRESS_TINT if st == "down" else (SURFACE_2 if IS_DARK else ACCENT_100)))
         self.add_widget(mark)
-        self.title_label = Label(text="Home", bold=True, font_size="20sp", halign="left", valign="middle",
-                                 shorten=True, shorten_from="right")
+        font = display_font()
+        self.title_label = Label(text="Home", bold=font == "Roboto", font_size="23sp" if font != "Roboto" else "20sp",
+                                 font_name=font, halign="left", valign="middle", shorten=True, shorten_from="right")
         self.title_label.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
         self.add_widget(self.title_label)
         if on_theme is not None:
@@ -848,7 +972,9 @@ class AppHeader(BoxLayout):
             self.add_widget(toggle)
 
     def set_title(self, text):
-        self.title_label.text = text
+        if self.title_label.text != text:
+            self.title_label.text = text
+            fade_in(self.title_label, d=0.22)
 
 
 class ButtonBehaviorBox(ButtonBehavior, BoxLayout):
@@ -864,3 +990,72 @@ class ButtonBehaviorBox(ButtonBehavior, BoxLayout):
         row.add_widget(Widget())
         self.add_widget(row)
         self.bind(on_release=lambda *_: cb())
+
+
+# ---------------------------------------------------------------------------
+# Motion (v2.3)
+# ---------------------------------------------------------------------------
+class _Shift(EventDispatcher):
+    dy = NumericProperty(0)
+
+
+def set_motion(on):
+    """Turn every animation on or off (Home > Motion)."""
+    global MOTION
+    MOTION = bool(on)
+
+
+def animate_in(widget, delay=0.0, dy=None, d=0.30):
+    """Fade `widget` in while it slides up `dy` (default 16dp) into place. Canvas-only: a PushMatrix/Translate pair
+    is put in front of the widget's drawing and removed again when the animation ends, so layout and touch are
+    never changed. No-op when motion is off."""
+    if not MOTION or widget is None:
+        return
+    dy = dp(16) if dy is None else dy
+    push, shift_t, pop = PushMatrix(), Translate(0, -dy), PopMatrix()
+    widget.canvas.before.insert(0, shift_t)
+    widget.canvas.before.insert(0, push)
+    widget.canvas.after.add(pop)
+    widget.opacity = 0
+    shift = _Shift(dy=-dy)
+    shift.bind(dy=lambda _o, v: setattr(shift_t, "y", v))
+    widget._motion_shift = shift                    # keep the dispatcher alive while it animates
+
+    def _done(*_):
+        for group, inst in ((widget.canvas.before, push), (widget.canvas.before, shift_t), (widget.canvas.after, pop)):
+            try:
+                group.remove(inst)
+            except Exception:                         # already removed (a second animation finished first)
+                pass
+        widget.opacity = 1
+        widget._motion_shift = None
+
+    def _start(*_):
+        Animation(opacity=1, d=d * 0.85, t="out_quad").start(widget)
+        anim = Animation(dy=0, d=d, t="out_cubic")
+        anim.bind(on_complete=_done)
+        anim.start(shift)
+
+    if delay:
+        Clock.schedule_once(_start, delay)
+    else:
+        _start()
+
+
+def fade_in(widget, d=0.25):
+    """Opacity-only entrance (for things that must not move, such as the header title)."""
+    if not MOTION or widget is None:
+        return
+    widget.opacity = 0
+    Animation(opacity=1, d=d, t="out_quad").start(widget)
+
+
+def stagger(widgets, step=0.035, max_n=12, start=0.0):
+    """animate_in() a sequence of widgets one after another; only the first `max_n` move (the rest just appear),
+    which keeps long pages cheap on slow phones."""
+    if not MOTION:
+        return
+    for i, w in enumerate(widgets):
+        if i >= max_n:
+            break
+        animate_in(w, delay=start + i * step)

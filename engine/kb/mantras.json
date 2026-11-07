@@ -8,7 +8,18 @@
     "performed": true,
     "method": "Cross-checked each mantra's Sanskrit form and traditional japa count against multiple reference sources for consistency.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed",
+      "sources": [
+        "https://vedicmarga.com/navagraha-beej-mantras/",
+        "https://dekhopanchang.com/learn/modules/15-2",
+        "https://www.vedicbirth.com/mantra/navgraha-beej-mantra"
+      ],
+      "findings": "All nine beej mantras and japa counts (7,000 / 11,000 / 10,000 / 9,000 / 19,000 / 16,000 / 23,000 / 18,000 / 17,000) match multiple independent sources.",
+      "variants": "Moon mantra also written ending \"Chandramase Namah\"; Saturn ending \"Shanaye Namah\". Some traditions give other counts (e.g. 4x the count in Kali Yuga, or 40-day schedules); the listed counts are the most widely cited."
+    }
   },
   "user_review_pass": {
     "performed": false,

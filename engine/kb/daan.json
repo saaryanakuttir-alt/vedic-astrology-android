@@ -8,7 +8,18 @@
     "performed": true,
     "method": "Per-planet correspondences cross-checked against multiple classical/reference sources for consistency - these are widely standardized associations across Vedic astrology texts with little cross-source disagreement, unlike e.g. Pitra Dosha's definition.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed_with_variants",
+      "sources": [
+        "https://www.astroyogi.com/remedies/donation",
+        "https://sanskritimagazine.com/?p=16803",
+        "https://en.wikipedia.org/wiki/Navadhanya"
+      ],
+      "findings": "Items for Sun through Saturn match multiple sources.",
+      "variants": "Rahu and Ketu items vary most by region (Rahu: mustard oil, black gram, blankets, coal, sesame, coconut; Ketu: multicoloured cloth, blankets, sesame, horse gram). The Navadhanya grain list assigns chickpea to Mars and white beans to Venus in South Indian practice."
+    }
   },
   "user_review_pass": {
     "performed": false,

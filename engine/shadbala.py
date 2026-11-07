@@ -11,6 +11,12 @@ worked out from the chart alone, each in virupas (60 virupas = 1 rupa) for the s
 NOT included (they need year/month lord tables, planetary speeds against mean positions, or graded aspect
 values): Abda, Masa, Cheshta, Drik and Yuddha bala. So the totals here are called "strength points" and
 should be read as a comparison between the planets of one chart, not as the traditional Shadbala rupas.
+
+The rules for the missing parts are in kb/shadbala_rules.json (BPHS ch.26-27). From it, this module now uses:
+  * Drekkana Bala in the BPHS 27.6 order (male planets in the 1st decanate, female in the 2nd, neuter in the 3rd);
+  * Sphuta Drishti (exact aspect value) and Drik Bala, computed as "drik" for each planet but NOT added to the
+    total: the earlier attempt matched AstroSage for Mars and the Moon only, and the project rule is that a part joins
+    the total only after it matches a reference chart (tests/test_advanced.py).
 """
 import datetime as _dt
 import math
@@ -36,6 +42,74 @@ COMPONENTS = [("uchcha", "Uchcha (exaltation)"), ("saptavargaja", "Saptavargaja 
               ("nathonnatha", "Nathonnatha (day/night)"), ("paksha", "Paksha (Moon phase)"), ("tribhaga", "Tribhaga"),
               ("vara", "Vara (weekday)"), ("hora", "Hora (hour)"), ("ayana", "Ayana (declination)"),
               ("naisargika", "Naisargika (natural)")]
+
+
+def drekkana_bala(planet, degree_in_sign):
+    """BPHS 27.6 (kb/shadbala_rules.json SB-DREKKANA): 15 virupas for male planets (Sun, Mars, Jupiter) in the first
+    decanate, female planets (Moon, Venus) in the second, neuter planets (Mercury, Saturn) in the third."""
+    third = min(int(degree_in_sign // 10), 2)
+    wanted = {"Sun": 0, "Mars": 0, "Jupiter": 0, "Moon": 1, "Venus": 1, "Mercury": 2, "Saturn": 2}[planet]
+    return 15.0 if third == wanted else 0.0
+
+
+_SPECIAL_ASPECT = {"Mars": ((90, 120, 15.0), (210, 240, 15.0)), "Jupiter": ((120, 150, 30.0), (240, 270, 30.0)),
+                   "Saturn": ((60, 90, 45.0), (270, 300, 45.0))}
+
+
+def sphuta_drishti(aspecting_planet, angle):
+    """Exact aspect value in virupas (kb/shadbala_rules.json SB-DRISHTI) for an aspected point `angle` degrees ahead
+    of the aspecting planet (aspected minus aspecting longitude). 60 = a full aspect."""
+    a = angle % 360
+    if a < 30 or a >= 300:
+        v = 0.0
+    elif a < 60:
+        v = (a - 30) / 2
+    elif a < 90:
+        v = a - 45
+    elif a < 120:
+        v = 30 + (120 - a) / 2
+    elif a < 150:
+        v = 150 - a
+    elif a < 180:
+        v = 2 * (a - 150)
+    else:
+        v = (300 - a) / 2
+    for lo, hi, extra in _SPECIAL_ASPECT.get(aspecting_planet, ()):
+        if lo <= a < hi:
+            v += extra
+    return v
+
+
+def _benefic_now(chart, planet):
+    """BPHS benefic test for Drik Bala: Jupiter, Venus, a waxing Moon, and Mercury when not joined with a malefic."""
+    pl = chart["planets"]
+    if planet in ("Jupiter", "Venus"):
+        return True
+    if planet == "Moon":
+        return (pl["Moon"]["longitude"] - pl["Sun"]["longitude"]) % 360 < 180
+    if planet == "Mercury":
+        return not any(pl[m]["sign"] == pl["Mercury"]["sign"] for m in ("Sun", "Mars", "Saturn"))
+    return False
+
+
+def drik_bala(chart, planet):
+    """BPHS 27.19 (kb/shadbala_rules.json SB-DRIK): a quarter of the drishti received from benefics minus a quarter of
+    that from malefics, plus the full drishti of Mercury and Jupiter. Rahu and Ketu are not counted. Not yet checked
+    against a reference chart, so it is reported separately and not added to the total."""
+    pl = chart["planets"]
+    target = pl[planet]["longitude"]
+    good = bad = full = 0.0
+    for q in SEVEN:
+        if q == planet:
+            continue
+        d = sphuta_drishti(q, target - pl[q]["longitude"])
+        if _benefic_now(chart, q):
+            good += d
+        else:
+            bad += d
+        if q in ("Mercury", "Jupiter"):
+            full += d
+    return (good - bad) / 4.0 + full
 
 
 def _angle(a, b):
@@ -133,10 +207,7 @@ def compute_shadbala(chart):
         wants_even = p in ("Moon", "Venus")
         c["ojayugma"] = 15.0 * sum(1 for s in signs if (s not in _ODD_SIGNS) == wants_even)
         c["kendra"] = {1: 60, 4: 60, 7: 60, 10: 60, 2: 30, 5: 30, 8: 30, 11: 30}.get(d["house"], 15.0)
-        c["drekkana"] = 0.0
-        third = int(d["degree_in_sign"] // 10)
-        if (p in ("Sun", "Mars", "Jupiter") and third == 0) or (p in ("Mercury", "Saturn") and third == 1) or (p in ("Moon", "Venus") and third == 2):
-            c["drekkana"] = 15.0
+        c["drekkana"] = drekkana_bala(p, d["degree_in_sign"])
         c["dig"] = (180 - _angle(lon, strong_point[_DIG_STRONG[p]])) / 3.0
         c["nathonnatha"] = 60.0 if p == "Mercury" else day_fraction if p in ("Sun", "Jupiter", "Venus") else 60.0 - day_fraction
         c["paksha"] = (benefic_paksha * (2 if p == "Moon" else 1)) if p in ("Moon", "Mercury", "Jupiter", "Venus") else 60.0 - benefic_paksha
@@ -151,6 +222,7 @@ def compute_shadbala(chart):
         c["total"] = sum(c[k] for k, _ in COMPONENTS)
         c["sthana"] = c["uchcha"] + c["saptavargaja"] + c["ojayugma"] + c["kendra"] + c["drekkana"]
         c["kala"] = c["nathonnatha"] + c["paksha"] + c["tribhaga"] + c["vara"] + c["hora"] + c["ayana"]
+        c["drik"] = drik_bala(chart, p)               # reported only - see the module note
         out[p] = c
     ranked = sorted(SEVEN, key=lambda x: -out[x]["total"])
     for rank, p in enumerate(ranked, start=1):

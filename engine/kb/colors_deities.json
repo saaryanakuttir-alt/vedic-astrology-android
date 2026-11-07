@@ -8,7 +8,13 @@
     "performed": true,
     "method": "Per-planet correspondences cross-checked against multiple classical/reference sources for consistency - these are widely standardized associations across Vedic astrology texts with little cross-source disagreement, unlike e.g. Pitra Dosha's definition.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "consistent",
+      "sources": [],
+      "findings": "Consistent with the standard weekday/graha correspondences (Sun-Sunday ... Saturn-Saturday; Rahu/Ketu with Saturday/Tuesday) used across the remedy files already verified today; not separately searched."
+    }
   },
   "user_review_pass": {
     "performed": false,

@@ -14,7 +14,7 @@ from kivy.uix.scrollview import ScrollView
 
 import extras
 from astrology_tables import PLANET_ABBR, SIGN_ABBR
-from ui import pdf_report, reading_mode
+from ui import pdf_report, reading_mode, theme
 from ui.app_state import PROFILE_LABELS
 from ui.reading_mode import ReadingModeBar
 from ui.widgets import CaptionLabel, FlowTable, FlowText
@@ -30,7 +30,7 @@ class _InsightPage(BoxLayout):
         super().__init__(orientation="vertical", **kwargs)
         self.store = store
         scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
-        self.page = GridLayout(cols=1, size_hint_y=None, spacing=dp(2))
+        self.page = GridLayout(cols=1, size_hint_y=None, spacing=dp(8), padding=(0, 0, 0, dp(20)))
         self.page.bind(minimum_height=self.page.setter("height"))
         scroll.add_widget(self.page)
         self.add_widget(scroll)
@@ -59,6 +59,16 @@ class _InsightPage(BoxLayout):
         widget = FlowText()
         widget.set_text(reading_mode.apply(self.store, text) if compactable else text)
         self.page.add_widget(widget)
+
+    def _card(self, widget):
+        """A ready-made card (ui/knowledge_widgets.py), inset like the reading cards."""
+        holder = BoxLayout(size_hint_y=None, padding=(dp(12), 0))
+        widget.bind(height=lambda w, h: setattr(holder, "height", h))
+        holder.height = widget.height
+        holder.add_widget(widget)
+        self.page.add_widget(holder)
+        theme.animate_in(widget, delay=0.05)
+        return widget
 
     def _table(self, columns, hints, rows, font_size="12sp"):
         table = FlowTable(columns, hints, font_size=font_size)
@@ -295,6 +305,8 @@ class StrengthTab(_InsightPage):
         sb = shadbala.compute_shadbala(chart)
         order = sorted(shadbala.SEVEN, key=lambda p: sb[p]["rank"])
         self._text(tr('=== Planet strength - {0} ===', self._name(reading)))
+        from ui.knowledge_widgets import StrengthBars
+        self._card(StrengthBars(sb))
         self._table(["Planet", "Rank", "Strength", "Points"], [0.3, 0.15, 0.3, 0.25],
                     [(p, sb[p]["rank"], sb[p]["tone"], tr('{0:.0f}', sb[p]['total'])) for p in order])
         self._text(shadbala.shadbala_text(chart), compactable=True)
@@ -302,8 +314,12 @@ class StrengthTab(_InsightPage):
         head = ["Source"] + [p[:3] for p in shadbala.SEVEN]
         rows = [(label.split(" (")[0],) + tuple(tr('{0:.0f}', sb[p][key]) for p in shadbala.SEVEN) for key, label in shadbala.COMPONENTS]
         rows.append(("Total",) + tuple(tr('{0:.0f}', sb[p]['total']) for p in shadbala.SEVEN))
+        rows.append(("Drik *",) + tuple(tr('{0:+.0f}', sb[p]['drik']) for p in shadbala.SEVEN))
         self._table(head, [0.28] + [0.103] * 7, rows, "10sp")
-        self._text(tx("Not counted: the year and month lords, planetary speed, aspect strength and planetary war, which need extra tables. "
+        self._text(tx("* Drik Bala (aspect strength) is now calculated from the classical rules (BPHS chapter 27) and shown "
+                   "for reference, but it is not added to the total until it has been checked against a reference chart.") +
+                   "\n\n" +
+                   tx("Not counted: the year and month lords, planetary speed, aspect strength and planetary war, which need extra tables. "
                    "So read these as comparisons between your own planets, not as the traditional 'rupa' totals."))
 
 
@@ -421,4 +437,6 @@ class RemediesTab(_InsightPage):
     def _build(self, chart, reading):
         import remedy_plan
         self._text(tr('=== Remedies - {0} ===', self._name(reading)))
+        from ui.knowledge_widgets import FunctionalNatureCard
+        self._card(FunctionalNatureCard(chart))
         self._text(remedy_plan.remedy_text(chart, reading), compactable=True)

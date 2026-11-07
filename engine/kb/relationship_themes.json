@@ -8,7 +8,13 @@
     "performed": true,
     "method": "Each indicator cross-checked against multiple classical/reference sources for the underlying astrological correlation (7th lord affliction, Venus-Mars, Rahu-Venus, crowded 7th house, afflicted Venus are all well-established, frequently-cited combinations in this area of classical literature) and for consistent, non-accusatory framing across all 9 entries.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "interpretive",
+      "sources": [],
+      "findings": "Indicators (7th lord affliction, Venus-Mars, Rahu-Venus, crowded 7th, afflicted Venus) are commonly cited combinations; wording is the project's own. Owner review still recommended."
+    }
   },
   "user_review_pass": {
     "performed": false,

@@ -7,10 +7,22 @@ section lists the everyday habits that suit anybody.
 
 It reuses the remedy knowledge base already in the reading (stones, substitutes, mantras, daan, vrat, rudraksha,
 colours). Everything is traditional guidance, never a prescription. Nothing here concerns lifespan or children.
+
+Two knowledge-base tables refine this (both in engine/kb/):
+  * functional_nature.json - BPHS ch.34's functional benefics, malefics and yogakarakas for each ascendant. A planet
+    BPHS counts as a functional benefic or yogakaraka for the person's ascendant may get a gemstone even if it also
+    rules a 12th or 8th house; one BPHS counts as a functional malefic never does. Planets BPHS leaves unlabelled
+    (and the lagna lord, which BPHS calls auspicious) fall back to the house-lordship rule above.
+  * gochara_vedha.json - Jupiter, a slow planet, also counts as "active" while it transits a difficult house from the
+    natal Moon (and no Vipareeta Vedha eases it). Rahu and Ketu are left out of this trigger: they are always exactly
+    opposite, so one of them is nearly always in a difficult house and the trigger would mean nothing.
 """
 import datetime as _dt
+import json
+import os
 
 import shadbala
+import transits
 from extras import BODIES, _TONE_PHRASE, _lordships, assess_doshas, ordinal, planet_considerations, sade_sati_now
 from i18n import join_list, tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
@@ -18,6 +30,28 @@ HIGH, CARE, HELPFUL, OPTIONAL = "Highly recommended", "Recommended with care", "
 LATER, NONE = "Not needed right now", "No remedy needed"
 LEVELS = [HIGH, CARE, HELPFUL, OPTIONAL, LATER, NONE]
 _TRINE, _DIFFICULT, _KENDRA = {1, 5, 9}, {6, 8, 12}, {4, 7, 10}
+_FN_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "kb", "functional_nature.json")
+_FN_CACHE = {}
+_TRANSIT_TRIGGER = ("Jupiter",)          # slow planets whose difficult Gochara makes them "active" (Saturn has Sade Sati)
+
+
+def functional_nature(ascendant_sign):
+    """{planet: "yogakaraka" | "benefic" | "malefic" | "neutral"} for an ascendant, from BPHS ch.34
+    (kb/functional_nature.json). Planets BPHS gives no label for are left out."""
+    if not _FN_CACHE:
+        with open(_FN_PATH, encoding="utf-8") as f:
+            for it in json.load(f)["items"]:
+                nature = {}
+                for key, label in (("neutral", "neutral"), ("functional_malefics", "malefic"),
+                                   ("functional_benefics", "benefic"), ("yogakarakas", "yogakaraka")):
+                    for p in it.get(key) or []:
+                        nature[p] = label
+                _FN_CACHE[it["ascendant"]] = nature
+    return dict(_FN_CACHE.get(ascendant_sign, {}))
+
+
+_FN_PHRASE = tbl({"yogakaraka": "a yogakaraka (a planet that brings success)", "benefic": "a functional benefic (a helper)",
+                  "malefic": "a functional malefic (a difficult planet)"})
 
 _SAFETY = ("Mantras, charity and fasting carry no risk, so start there. A gemstone is worn on the body and is traditionally chosen with a "
            "qualified astrologer, tried for a few weeks first (stop if you feel unsettled), and never bought under pressure or beyond your "
@@ -94,6 +128,18 @@ def remedy_plan(chart, reading, at=None):
     if saturn_test:
         active["Saturn"] = (active["Saturn"] + tx(" and Saturn is also in a testing stretch (") + saturn_test.lower() + ")"
                             if "Saturn" in active else tr('Saturn is in a testing stretch for you ({0})', saturn_test.lower()))
+    gochara = transits.gochara_now(chart, at)
+    for p in _TRANSIT_TRIGGER:
+        g = gochara[p]
+        if g["effective"] != "difficult":
+            continue
+        leaves = transits.sign_leaves(p, at)
+        why_t = (tr('it is passing through a difficult house from your Moon (the {0}) until about {1:%b %Y}',
+                    ordinal(g["house_from_moon"]), leaves) if leaves else
+                 tr('it is passing through a difficult house from your Moon (the {0})', ordinal(g["house_from_moon"])))
+        active[p] = tr("{0}, and also {1}", active[p], why_t) if p in active else why_t
+    asc = chart["ascendant"]["sign"]
+    fnature = functional_nature(asc)
 
     items = []
     for p in BODIES:
@@ -103,6 +149,9 @@ def remedy_plan(chart, reading, at=None):
         mild_need = c["tone"] == "Mixed" and (weak_rank or p in ("Rahu", "Ketu"))
         houses = lords[p]
         trine, difficult = bool(_TRINE & set(houses)), bool(_DIFFICULT & set(houses))
+        fn = fnature.get(p)
+        fn_good = fn in ("benefic", "yogakaraka") or (fn is None and 1 in houses)
+        fn_txt = tr(' For {0} rising, BPHS counts it as {1}.', asc, _FN_PHRASE[fn]) if fn in _FN_PHRASE else ""
         reason = active.get(p)
         when = next_period_start(chart, p, at)
         if not (strong_need or mild_need):
@@ -119,7 +168,16 @@ def remedy_plan(chart, reading, at=None):
             level = HELPFUL if strong_need else OPTIONAL
             why = (tr('It is active because {0}, and it {1}. It is a shadow planet, so a gemstone is not normally '
                       'advised without an expert; a mantra and charity are gentler.', reason, _TONE_PHRASE[c['tone']]))
-        elif strong_need and trine and not difficult:
+        elif strong_need and fn == "malefic":
+            level = HELPFUL
+            why = (tr('It is active because {0}, and it {1}.', reason, _TONE_PHRASE[c['tone']]) + fn_txt +
+                   tx(" A gemstone could strengthen its troublesome side, so a mantra, charity and fasting are the safer "
+                      "way to ease it."))
+        elif strong_need and fn in ("benefic", "yogakaraka"):
+            level = HIGH
+            why = (tr('It is active because {0}, and it {1}.', reason, _TONE_PHRASE[c['tone']]) + fn_txt +
+                   tx(" So strengthening it is traditionally considered safe and useful."))
+        elif strong_need and ((trine and not difficult) or (fn_good and 1 in houses)):
             level = HIGH
             why = (tr('It is active because {0}, and it {1}. It rules your {2} (supportive for you), so strengthening '
                       'it is traditionally considered safe and useful.', reason, _TONE_PHRASE[c['tone']], _houses(houses)))
@@ -144,12 +202,13 @@ def remedy_plan(chart, reading, at=None):
             "mantra": mantra.get("beej_mantra"), "japa": mantra.get("japa_count"), "best_time": mantra.get("best_time"),
             "daan": (rem["daan"].get(p) or {}).get("articles"), "vrat": (rem["vrat"].get(p) or {}).get("method"),
             "rudraksha": (rem["rudraksha"].get(p) or {}).get("mukhi"), "colors": (rem["colors"].get(p) or {}).get("favorable_colors"),
-            "stone_ok": level in (HIGH, CARE) and p not in ("Rahu", "Ketu"),
+            "stone_ok": level in (HIGH, CARE) and p not in ("Rahu", "Ketu") and fn != "malefic",
+            "functional": fn,
         })
     recommended = [i["stone"] for i in items if i["stone_ok"] and i["stone"]]
     avoid = [tr('Do not wear {0} and {1} together: {2}', x['a_stone'], x['b_stone'], x['why']) for x in rem.get("combinations_to_avoid", [])
              if x["a_stone"] in recommended and x["b_stone"] in recommended]
-    return {"now": {"periods": run, "saturn": saturn_test, "active": sorted(active)}, "planets": items,
+    return {"now": {"periods": run, "saturn": saturn_test, "active": sorted(active), "gochara": gochara}, "planets": items,
             "doshas": _dosha_practices(chart, rem, at, set(active)), "avoid": avoid, "everyone": EVERYONE, "caveat": tx(_SAFETY)}
 
 

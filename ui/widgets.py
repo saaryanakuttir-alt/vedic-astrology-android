@@ -16,6 +16,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle, RoundedRectangle, Line
 from kivy.metrics import dp
 from kivy.clock import Clock
@@ -170,6 +171,7 @@ class FlowTable(_TableMixin, BoxLayout):
 
     def __init__(self, columns, col_hints=None, font_size="13sp", **kwargs):
         kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("padding", (dp(12), 0))       # v2.3: lines up with the reading cards
         super().__init__(orientation="vertical", **kwargs)
         self._init_table(columns, col_hints, font_size)
         self.add_widget(self.grid)
@@ -209,6 +211,155 @@ def _split_into_chunks(text, max_chars=400):
     return chunks or [""]
 
 
+
+# ---------------------------------------------------------------------------
+# v2.3 reading layout: the report text's own markers become structure
+# ---------------------------------------------------------------------------
+_TITLE_RE = re.compile(r"^\s*={2,}\s*(.+?)\s*={2,}\s*$")
+_HEAD_RE = re.compile(r"^\s*(?:-{2,}|\u2014)\s*(.+?)\s*(?:-{2,}|\u2014)\s*$")
+_CALLOUT_RE = re.compile(r"^\s*\[([^\[\]:]{2,48}):\s*(.+)\]\s*\.?\s*$", re.S)
+_TAIL_CALLOUT_RE = re.compile(r"^(.*\S)\s+\[([^\[\]:]{2,48}):\s*([^\[\]]+)\]\s*\.?\s*$", re.S)
+
+
+def _wrap_label(text, font_size="14sp", color=None, bold=False, font_name=None, pad=(dp(4), dp(3)), min_h=dp(20)):
+    """A Label that wraps to its width and grows to its text (one paragraph - see LongText for why small)."""
+    kw = {"font_name": font_name} if font_name else {}
+    lbl = Label(text=text, font_size=font_size, color=color or theme.TEXT, bold=bold, size_hint_y=None, height=min_h,
+                halign="left", valign="top", padding=pad, text_size=(None, None), **kw)
+    lbl.bind(width=lambda inst, w: setattr(inst, "text_size", (w, None)),
+             texture_size=lambda inst, ts: setattr(inst, "height", max(min_h, ts[1])))
+    return lbl
+
+
+def _heading_label(text, size="19sp"):
+    font = theme.display_font()
+    serif = font != "Roboto"
+    return _wrap_label(text, font_size=size if serif else "16sp", color=theme.ACCENT_700, bold=not serif,
+                       font_name=font, pad=(dp(4), dp(2)), min_h=dp(26))
+
+
+class ReadingCard(theme.OutlineBox):
+    """One section of a reading: its heading, then its paragraphs and plain-words callouts."""
+
+    def __init__(self, heading=None, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("padding", (dp(14), dp(12), dp(14), dp(14)))
+        kwargs.setdefault("spacing", dp(6))
+        super().__init__(orientation="vertical", **kwargs)
+        self.bind(minimum_height=self.setter("height"))
+        self.has_body = False
+        if heading:
+            self.add_widget(_heading_label(heading))
+            rule = Widget(size_hint_y=None, height=dp(6))
+            with rule.canvas:
+                Color(*theme.ACCENT)
+                bar = RoundedRectangle(radius=[dp(1.5)])
+            rule.bind(pos=lambda w, _v: setattr(bar, "pos", (w.x + dp(4), w.y + dp(2))),
+                      size=lambda w, _v: setattr(bar, "size", (dp(28), dp(3))))
+            self.add_widget(rule)
+
+    def add_text(self, text):
+        """Paragraph text; any line that is (or ends with) a '[Label: ...]' note becomes a callout."""
+        plain = []
+
+        def flush():
+            if plain:
+                for chunk in _split_into_chunks("\n".join(plain)):
+                    self.add_widget(_wrap_label(chunk, font_size="14sp", color=theme.INK))
+                plain.clear()
+
+        for line in text.split("\n"):
+            whole = _CALLOUT_RE.match(line)
+            tail = None if whole else _TAIL_CALLOUT_RE.match(line)
+            if whole:
+                flush()
+                self.add_widget(Callout(whole.group(1), whole.group(2)))
+            elif tail and tail.group(1).strip():
+                plain.append(tail.group(1).rstrip())
+                flush()
+                self.add_widget(Callout(tail.group(2), tail.group(3)))
+            else:
+                plain.append(line)
+        flush()
+        self.has_body = True
+
+    def add_callout(self, kicker, body):
+        self.add_widget(Callout(kicker, body))
+        self.has_body = True
+
+
+class Callout(BoxLayout):
+    """A tinted note with an accent edge: the report's "[In simple terms: ...]" lines (any language)."""
+
+    def __init__(self, kicker, body, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("padding", (dp(14), dp(10), dp(12), dp(10)))
+        kwargs.setdefault("spacing", dp(2))
+        super().__init__(orientation="vertical", **kwargs)
+        self.bind(minimum_height=self.setter("height"))
+        with self.canvas.before:
+            Color(*theme.SECOND_TINT)
+            self._bg = RoundedRectangle(radius=[dp(12)])
+            Color(*theme.SECOND)
+            self._edge = RoundedRectangle(radius=[dp(2)])
+        self.bind(pos=self._sync, size=self._sync)
+        self.add_widget(_wrap_label(kicker.strip().upper(), font_size="11sp", color=theme.SECOND, bold=True,
+                                    pad=(0, 0), min_h=dp(16)))
+        for chunk in _split_into_chunks(body):
+            self.add_widget(_wrap_label(chunk, font_size="13.5sp", color=theme.INK_SOFT, pad=(0, dp(2))))
+
+    def _sync(self, *_):
+        self._bg.pos, self._bg.size = self.pos, self.size
+        self._edge.pos, self._edge.size = (self.x, self.y + dp(8)), (dp(3), max(0, self.height - dp(16)))
+
+
+def build_reading(text):
+    """Widgets for a report: '=== X ===' -> a title, '--- X ---' -> a card with that heading holding what follows,
+    '[Label: ...]' -> a callout. A heading with nothing under it in this text (e.g. just above a table) stays a plain
+    heading. Works in any language - it reads the markers, not the words."""
+    blocks, card = [], None
+    for para in (text or "").split("\n\n"):
+        para = para.strip("\n")
+        if not para.strip():
+            continue
+        lines = para.split("\n")
+        first = lines[0]
+        title = _TITLE_RE.match(first)
+        head = None if title else _HEAD_RE.match(first)
+        rest = "\n".join(lines[1:]) if (title or head) else para
+        if title:
+            card = None
+            t = _wrap_label(title.group(1), font_size="24sp" if theme.display_font() != "Roboto" else "19sp",
+                            bold=theme.display_font() == "Roboto", font_name=theme.display_font(),
+                            pad=(dp(6), dp(6)), min_h=dp(34))
+            blocks.append(t)
+        elif head:
+            card = ReadingCard(head.group(1))
+            blocks.append(card)
+        if not rest.strip():
+            continue
+        if card is None:
+            card = ReadingCard()
+            blocks.append(card)
+        m = _CALLOUT_RE.match(rest)
+        if m and "\n" not in rest.strip():
+            card.add_callout(m.group(1), m.group(2))
+        else:
+            card.add_text(rest)
+    out = []
+    for b in blocks:                                  # an empty section card -> a plain heading
+        if isinstance(b, ReadingCard) and not b.has_body:
+            heading = b.children[-1] if b.children else None
+            if heading is not None:
+                b.clear_widgets()
+                lbl = _heading_label(heading.text, size="18sp")
+                lbl.padding = (dp(8), dp(8))
+                out.append(lbl)
+            continue
+        out.append(b)
+    return out
+
+
 class LongText(ScrollView):
     """A big scrollable block of read-only wrapped text — the mobile
     equivalent of the desktop app's tk.Text widgets used for the Karmic,
@@ -223,11 +374,11 @@ class LongText(ScrollView):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.grid = GridLayout(cols=1, size_hint_y=None, spacing=dp(2), padding=(0, dp(4)))
+        self.grid = GridLayout(cols=1, size_hint_y=None, spacing=dp(12), padding=(dp(12), dp(6), dp(12), dp(20)))
         self.grid.bind(minimum_height=self.grid.setter("height"))
         self.add_widget(self.grid)
 
-    def set_text(self, text):
+    def set_text(self, text, top_widgets=()):
         # Splits the report into per-paragraph Labels (blank-line
         # boundaries - this project's own report-building code already
         # joins its sections with "\n\n", so this recovers exactly the
@@ -257,16 +408,14 @@ class LongText(ScrollView):
         # every individual texture small regardless of how long the
         # overall report is.
         self.grid.clear_widgets()
-        paragraphs = _split_into_chunks(i18n.t_text(text))
-        for para in paragraphs:
-            label = Label(
-                text=para, size_hint_y=None, height=dp(28), text_size=(None, None),
-                halign="left", valign="top", padding=(dp(10), dp(6)),
-            )
-            label.bind(texture_size=self._make_resize_handler(label), width=self._on_label_width)
-            self.grid.add_widget(label)
+        for w in top_widgets:                          # e.g. the Predictions screen's transit grid
+            self.grid.add_widget(w)
+        blocks = build_reading(i18n.t_text(text))     # v2.3: cards per section, still one small Label per paragraph
+        for b in blocks:
+            self.grid.add_widget(b)
+        theme.stagger(list(top_widgets) + blocks, max_n=6)
         self.scroll_y = 1  # start scrolled to the top of the new content
-        Logger.info(f"VedicAstro:LongText: set_text len={len(text or '')} paragraphs={len(paragraphs)}")
+        Logger.info(f"VedicAstro:LongText: set_text len={len(text or '')} blocks={len(blocks)}")
 
     def _on_label_width(self, label, width):
         label.text_size = (width, None)
@@ -286,18 +435,17 @@ class FlowText(GridLayout):
     def __init__(self, **kwargs):
         kwargs.setdefault("cols", 1)
         kwargs.setdefault("size_hint_y", None)
-        kwargs.setdefault("spacing", dp(2))
-        kwargs.setdefault("padding", (0, dp(4)))
+        kwargs.setdefault("spacing", dp(12))
+        kwargs.setdefault("padding", (dp(12), dp(6)))
         super().__init__(**kwargs)
         self.bind(minimum_height=self.setter("height"))
 
     def set_text(self, text):
         self.clear_widgets()
-        for para in _split_into_chunks(i18n.t_text(text)):
-            label = Label(text=para, size_hint_y=None, height=dp(28), text_size=(None, None),
-                          halign="left", valign="top", padding=(dp(10), dp(6)))
-            label.bind(texture_size=self._resize, width=self._on_width)
-            self.add_widget(label)
+        blocks = build_reading(i18n.t_text(text))     # v2.3: cards per section (see build_reading)
+        for b in blocks:
+            self.add_widget(b)
+        theme.stagger(blocks, max_n=4)
 
     @staticmethod
     def _on_width(label, width):
@@ -475,6 +623,7 @@ class ChipButton(Button):
     def __init__(self, text, **kwargs):
         kwargs.setdefault("background_normal", "")
         kwargs.setdefault("background_down", "")
+        kwargs.setdefault("background_color", (0, 0, 0, 0))   # else Button's own white fill hides the rounded chip
         kwargs.setdefault("size_hint", (None, None))
         kwargs.setdefault("height", dp(36))
         kwargs.setdefault("padding", (dp(14), 0))
@@ -518,7 +667,9 @@ class ExpandableCard(BoxLayout):
         super().__init__(**kwargs)
         self._open = False
 
-        with self.canvas.after:
+        # canvas.BEFORE: in v2.2.0 this was canvas.after, which painted the card over its own question and answer
+        # (every FAQ card showed as an empty box)
+        with self.canvas.before:
             Color(*theme.SURFACE)
             self._bg = RoundedRectangle(pos=self.pos, size=self.size, radius=[dp(16)])
         self.bind(pos=self._sync_bg, size=self._sync_bg)

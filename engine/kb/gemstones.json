@@ -8,7 +8,18 @@
     "performed": true,
     "method": "Planet-stone assignments (the classical Navaratna set) and metal/finger/day guidance cross-checked against multiple classical/reference sources for consistency. Saturn's entry specifically flags its widely-cited fastest-and-least-predictable reputation and the traditional trial-period practice, rather than presenting it identically to the other 8.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed_with_variants",
+      "sources": [
+        "https://darshya.pages.dev/navaratna",
+        "https://www.navratan.com/blog/vedic-style-of-wearing-navratna-gemstones",
+        "https://www.grahaguru.in/learn/gemstone-101/navratna-9-gemstones-guide"
+      ],
+      "findings": "Stone-planet pairs, metals and weekdays match. Fingers match for Sun, Moon, Mars, Mercury, Jupiter, Saturn, Rahu.",
+      "variants": "Venus (diamond): middle OR ring finger. Ketu (cat's eye): finger given as middle, ring or little; day Tuesday or Thursday. Minimum carat weights differ widely between modern sellers (e.g. ruby 2.5-6 ct, pearl 2-5 ct) and no classical Parashari text gives a weight rule, so no weights are stored; this closes the KNOWLEDGE_GAPS.md gemstone-weight item as \"no reliable classical rule\"."
+    }
   },
   "user_review_pass": {
     "performed": false,

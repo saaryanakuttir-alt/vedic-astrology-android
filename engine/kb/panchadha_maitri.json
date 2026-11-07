@@ -8,7 +8,13 @@
     "performed": true,
     "method": "The natural-friendship table in engine/maitri.py (not this file) was checked row-by-row against a classical BPHS-derived reference table and passes an internal self-consistency assertion (every planet's row covers the other 6 grahas exactly once, no omissions or duplicates) that runs automatically on import. The 5 grade-meaning texts here were cross-checked for consistency with each other (grade severity ordering) and with how dignity-status text in planet_in_sign.json is worded, so the two layers read as complementary rather than contradictory.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "consistent",
+      "sources": [],
+      "findings": "The five grades follow the standard BPHS ch.3 compound-friendship rule (natural + temporal). Not separately searched."
+    }
   },
   "user_review_pass": {
     "performed": false,

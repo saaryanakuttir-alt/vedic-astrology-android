@@ -42,6 +42,7 @@ Config.set("widgets", "scroll_timeout", "250")
 
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 
@@ -84,6 +85,7 @@ class VedicAstrologyApp(App):
         # before any screen is built: text fields read it when they are created.
         keyboard.SERVICE.builtin = self.store.settings.get("keyboard", "builtin") != "phone"
         theme.apply(self.store.settings.get("theme", theme.DEFAULT_THEME))     # also sets Window.clearcolor
+        theme.set_motion(self.store.settings.get("motion", True))
         i18n_hook.install()
         self._apply_language(self.store.settings.get("language", "en"))
         root = self._root = FloatLayout()
@@ -114,6 +116,11 @@ class VedicAstrologyApp(App):
         self.store.settings.set("theme", name)
         self._rebuild(self.current_key or "home")
 
+    def set_motion(self, on):
+        """Home > Motion: animations on or off, remembered in settings."""
+        theme.set_motion(on)
+        self.store.settings.set("motion", bool(on))
+
     def _rebuild(self, key="home"):
         keyboard.SERVICE.hide()
         self._root.clear_widgets()
@@ -139,7 +146,7 @@ class VedicAstrologyApp(App):
 
         # key -> (English header title, factory); titles are translated when shown
         self._registry = {
-            "home": ("Home", lambda: HomeScreen(self.store, self.goto, self.set_language, self.set_theme)),
+            "home": ("Home", lambda: HomeScreen(self.store, self.goto, self.set_language, self.set_theme, self.set_motion)),
             "entry": ("New Chart", lambda: EntryScreen(self.store, self._on_chart_generated, self.goto)),
             "library": ("Saved Charts", lambda: LibraryScreen(self.store, self.goto, self._load_saved)),
             "chart": ("Chart Diagram", lambda: ChartTab(self.store)),
@@ -206,6 +213,7 @@ class VedicAstrologyApp(App):
             self._screens[key] = screen
         self.content.clear_widgets()
         self.content.add_widget(screen)
+        theme.animate_in(screen, dy=dp(22), d=0.32)     # v2.3: every screen change slides and fades in
         self.current_key = key
         self.header.set_title(title)
         self.bottom.set_active(key)

@@ -218,7 +218,13 @@ class PredictionsTab(BoxLayout):
             return
         try:
             self.mode_bar.sync()
-            self.text_view.set_text(reading_mode.apply(self.store, self._build(data["chart"], data["reading"])))
+            self._forecast = None
+            text = reading_mode.apply(self.store, self._build(data["chart"], data["reading"]))
+            top = []
+            if self._forecast is not None:              # v2.3: the transit grid above the written outlook
+                from ui.knowledge_widgets import GocharaCard
+                top.append(GocharaCard(self._forecast))
+            self.text_view.set_text(text, top_widgets=top)
         except Exception:  # noqa: BLE001 - show the error on screen rather than a blank tab
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:PredictionsTab: failed:\n{tb}")
@@ -241,6 +247,7 @@ class PredictionsTab(BoxLayout):
         years = {y["age"]: y for y in reading["year_by_year"]["years"]}
         entry = years.get(age)
         forecast = compute_transit_forecast(chart, at_dt)
+        self._forecast = forecast
 
         lines = [tr('=== {0} - age {1} ===\n', target.date().isoformat(), age)]
         if entry:

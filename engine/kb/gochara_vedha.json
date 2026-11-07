@@ -1,0 +1,34 @@
+{
+  "checklist_category_id": "gochara_vedha",
+  "name": "Gochara (Transits from the Moon) with Vedha",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Favourable transit houses counted from the natal Moon sign (Janma Rashi), each paired with its Vedha (obstruction) house. If another planet transits the Vedha house at the same time, the good result is blocked; likewise a bad transit result is blocked when a planet occupies the matching favourable house (Vipareeta Vedha). Exceptions: the Sun and Saturn never cause Vedha to each other, nor do the Moon and Mercury (father-son pairs). This fills the KNOWLEDGE_GAPS.md item 'transit-based (Gochara) triggers' for remedy_plan.py. Tradition: Phaladeepika ch.26 and other standard texts; the same tables appear consistently across the references consulted. Rahu and Ketu follow the Saturn/Mars pattern (3, 6, 11). Ashtakavarga points refine these results and the app already computes them. Pairs are listed favourable house -> vedha house.",
+  "verification_pass": {
+    "performed": true,
+    "method": "Favourable houses and vedha pairs compared across several web references (vedic-astrology-wiki, onlinejyotish lesson 102, jagannathhora gochara page, indianastrologysoftware blog, a Phaladeepika-based transit summary). All agree on the favourable houses; the vedha pairing order matches the standard Phaladeepika tables.",
+    "changes_made": [],
+    "unchanged_after_verification": "No disagreement between sources on the favourable houses. Ketu is not listed separately in most sources; it is given the Rahu pattern here, as one source states that both follow Mars."
+  },
+  "user_review_pass": {"performed": false, "reviewer": null, "method": null, "outcome": "Not yet reviewed by the project owner."},
+  "sources": [
+    "https://vedic-astrology-wiki.blogspot.com/2025/08/planets-in-different-houses-from-moon.html",
+    "https://www.onlinejyotish.com/free-astrology/astrology-lessons/lesson_102.php",
+    "https://jagannathhora.com/gochara/",
+    "https://blog.indianastrologysoftware.com/?p=210"
+  ],
+  "generated_at": "2026-11-07T20:00:00+01:00",
+  "generated_by": "Claude - compiled from transit references found online",
+  "total_items": 9,
+  "items": [
+    {"id": "GOC-Su", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Sun", "favourable_houses": [3, 6, 10, 11], "vedha_pairs": {"3": 9, "6": 12, "10": 4, "11": 5}, "no_vedha_from": ["Saturn"], "time_in_sign": "about 1 month", "summary": "The Sun gives good transit results in the 3rd, 6th, 10th and 11th from the Moon: energy, success over rivals, recognition at work, gains.", "status": "verified", "verified": true},
+    {"id": "GOC-Mo", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Moon", "favourable_houses": [1, 3, 6, 7, 10, 11], "vedha_pairs": {"1": 5, "3": 9, "6": 12, "7": 2, "10": 4, "11": 8}, "no_vedha_from": ["Mercury"], "time_in_sign": "about 2.25 days", "summary": "The Moon's transit is good in the 1st, 3rd, 6th, 7th, 10th and 11th from the natal Moon; it sets the mood of the day.", "status": "verified", "verified": true},
+    {"id": "GOC-Ma", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Mars", "favourable_houses": [3, 6, 11], "vedha_pairs": {"3": 12, "6": 9, "11": 5}, "no_vedha_from": [], "time_in_sign": "about 45 days", "summary": "Mars helps in the 3rd, 6th and 11th from the Moon: courage, winning disputes, gains through effort.", "status": "verified", "verified": true},
+    {"id": "GOC-Me", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Mercury", "favourable_houses": [2, 4, 6, 8, 10, 11], "vedha_pairs": {"2": 5, "4": 3, "6": 9, "8": 1, "10": 8, "11": 12}, "no_vedha_from": ["Moon"], "time_in_sign": "about 3-4 weeks", "summary": "Mercury is good in the 2nd, 4th, 6th, 8th, 10th and 11th from the Moon: trade, study, communication and money matters go better.", "status": "verified", "verified": true},
+    {"id": "GOC-Ju", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Jupiter", "favourable_houses": [2, 5, 7, 9, 11], "vedha_pairs": {"2": 12, "5": 4, "7": 3, "9": 10, "11": 8}, "no_vedha_from": [], "time_in_sign": "about 1 year", "summary": "Jupiter is good in the 2nd, 5th, 7th, 9th and 11th from the Moon: income, learning, partnership, fortune and gains.", "status": "verified", "verified": true},
+    {"id": "GOC-Ve", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Venus", "favourable_houses": [1, 2, 3, 4, 5, 8, 9, 11, 12], "vedha_pairs": {"1": 8, "2": 7, "3": 1, "4": 10, "5": 9, "8": 5, "9": 11, "11": 3, "12": 6}, "no_vedha_from": [], "time_in_sign": "about 4 weeks", "summary": "Venus is good almost everywhere from the Moon (all but the 6th, 7th and 10th): comfort, pleasure and relationships.", "status": "verified", "verified": true},
+    {"id": "GOC-Sa", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Saturn", "favourable_houses": [3, 6, 11], "vedha_pairs": {"3": 12, "6": 9, "11": 5}, "no_vedha_from": ["Sun"], "time_in_sign": "about 2.5 years", "summary": "Saturn is good only in the 3rd, 6th and 11th from the Moon; its 12th, 1st and 2nd form Sade Sati, and the 4th and 8th form Dhaiya.", "status": "verified", "verified": true},
+    {"id": "GOC-Ra", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Rahu", "favourable_houses": [3, 6, 11], "vedha_pairs": {"3": 12, "6": 9, "11": 5}, "no_vedha_from": [], "time_in_sign": "about 18 months", "summary": "Rahu gives good transit results in the 3rd, 6th and 11th from the Moon.", "status": "verified", "verified": true},
+    {"id": "GOC-Ke", "category": "gochara_vedha", "tradition": "Parashari", "planet": "Ketu", "favourable_houses": [3, 6, 11], "vedha_pairs": {"3": 12, "6": 9, "11": 5}, "no_vedha_from": [], "time_in_sign": "about 18 months", "summary": "Ketu, like Rahu, gives good transit results in the 3rd, 6th and 11th from the Moon.", "status": "verified", "verified": true}
+  ]
+}

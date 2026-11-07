@@ -8,8 +8,9 @@ what do they mean relative to this person's birth Moon?"
 Method (all classical, all offline):
   * Gochara from the Moon: each transiting planet's house counted from the
     native's natal Moon sign (Chandra Lagna). Classical texts list, per
-    planet, which of those 12 houses give favourable vs. difficult results
-    - see _GOCHARA_GOOD below.
+    planet, which of those 12 houses give favourable vs. difficult results,
+    and the Vedha (obstruction) house that cancels each good result -
+    kb/gochara_vedha.json, applied by gochara_verdict() below.
   * Sade Sati: Saturn transiting the 12th, 1st or 2nd house from the natal
     Moon (its ~7.5-year passage), with the phase named.
   * The running Mahadasha / Antardasha at the forecast moment, for timing
@@ -21,25 +22,60 @@ which planets dominate: the fast Moon (and the running sub-period) colour
 the week; the slower planets (Jupiter, Saturn, Rahu/Ketu) frame the month.
 """
 import datetime as _dt
+import json
+import os
 
 import ephemeris
 from panchanga import SIGNS
-from i18n import tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
+from i18n import join_list, tbl, tr, tx  # noqa: E402 - translation helpers (engine/i18n.py)
 
-# Gochara: houses (counted from the natal Moon) in which each transiting
-# planet is classically said to give FAVOURABLE results. Anything else is
-# read as more mixed/effortful. These are the standard textbook sets.
-_GOCHARA_GOOD = {
-    "Sun": {3, 6, 10, 11},
-    "Moon": {1, 3, 6, 7, 10, 11},
-    "Mars": {3, 6, 11},
-    "Mercury": {2, 4, 6, 8, 10, 11},
-    "Jupiter": {2, 5, 7, 9, 11},
-    "Venus": {1, 2, 3, 4, 5, 8, 9, 11, 12},
-    "Saturn": {3, 6, 11},
-    "Rahu": {3, 6, 10, 11},
-    "Ketu": {3, 6, 11},
-}
+# Gochara: houses (counted from the natal Moon) in which each transiting planet classically gives FAVOURABLE
+# results, each paired with its Vedha (obstruction) house - read from kb/gochara_vedha.json (Phaladeepika ch.26
+# tables). If another planet transits the Vedha house at the same time the good result is held back; a bad
+# result is eased when another planet transits the matching favourable house (Vipareeta Vedha). The Sun and
+# Saturn never obstruct each other, nor do the Moon and Mercury.
+_KB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "kb", "gochara_vedha.json")
+
+
+def _load_gochara():
+    with open(_KB_PATH, encoding="utf-8") as f:
+        items = json.load(f)["items"]
+    good, vedha, exempt = {}, {}, {}
+    for it in items:
+        p = it["planet"]
+        good[p] = set(it["favourable_houses"])
+        vedha[p] = {int(k): v for k, v in it["vedha_pairs"].items()}
+        exempt[p] = set(it.get("no_vedha_from") or [])
+    return good, vedha, exempt
+
+
+_GOCHARA_GOOD, _VEDHA, _NO_VEDHA_FROM = _load_gochara()
+
+
+def gochara_verdict(planet, houses_from_moon, ignore=()):
+    """Classical Gochara verdict for `planet` given every planet's house from the natal Moon.
+
+    Returns {"favourable": bool (by house alone), "effective": "good" | "blocked" | "eased" | "difficult",
+    "by": [planets causing the Vedha / Vipareeta Vedha]}. `ignore` lists planets not counted as obstructers
+    (the monthly outlook ignores the fast Moon, which leaves a Vedha house within 2-3 days).
+    Rahu and Ketu are not counted as obstructing each other: they are always exactly opposite."""
+    h = houses_from_moon[planet]
+    good = h in _GOCHARA_GOOD.get(planet, set())
+    pairs = _VEDHA.get(planet, {})
+    if good:
+        target = pairs.get(h)
+    else:
+        target = next((f for f, v in pairs.items() if v == h), None)   # the favourable house whose Vedha house this is
+    skip = set(ignore) | _NO_VEDHA_FROM.get(planet, set()) | {planet}
+    if planet in ("Rahu", "Ketu"):
+        skip |= {"Rahu", "Ketu"}
+    by = [q for q, hq in houses_from_moon.items() if target is not None and hq == target and q not in skip] if target else []
+    if good:
+        effective = "blocked" if by else "good"
+    else:
+        effective = "eased" if by else "difficult"
+    return {"favourable": good, "effective": effective, "by": by}
+
 
 # Plain, everyday description of what each planet's transit tends to touch.
 _PLANET_THEME = tbl({
@@ -60,7 +96,8 @@ _WEEK_PLANETS = ["Moon", "Mercury", "Venus", "Sun", "Mars"]  # faster movers col
 _CAVEAT = (
     "This is a traditional Gochara (transit) outlook - general tendencies for the period read "
     "from where the planets are now relative to your birth Moon, plus your running dasha. It is "
-    "for reflection, not a guarantee of specific events. Transit timing is approximate: the Moon "
+    "for reflection, not a guarantee of specific events. A good transit can be held back, and a hard one eased, by "
+    "another planet in its Vedha (obstruction) house. Transit timing is approximate: the Moon "
     "changes sign every ~2-3 days, so the weekly notes shift within the week."
 )
 
@@ -123,11 +160,16 @@ def _compute_transit_forecast_locked(chart, at_dt):
     for planet, lon in positions.items():
         sign = SIGNS[int(lon // 30)]
         house = _house_from(sign, moon_sign)
-        good = house in _GOCHARA_GOOD.get(planet, set())
         planet_transits[planet] = {
             "sign": sign, "house_from_moon": house,
-            "favourable": good, "theme": _PLANET_THEME.get(planet, ""),
+            "favourable": house in _GOCHARA_GOOD.get(planet, set()), "theme": _PLANET_THEME.get(planet, ""),
         }
+    houses = {p: t["house_from_moon"] for p, t in planet_transits.items()}
+    for planet, t in planet_transits.items():
+        ignore = ("Moon",) if planet in _MONTH_PLANETS else ()
+        v = gochara_verdict(planet, houses, ignore)
+        t["vedha"] = v["effective"]           # good / blocked / eased / difficult
+        t["vedha_by"] = v["by"]
 
     # Sade Sati: Saturn in 12th / 1st / 2nd from natal Moon.
     sat_house = planet_transits["Saturn"]["house_from_moon"]
@@ -138,7 +180,13 @@ def _compute_transit_forecast_locked(chart, at_dt):
 
     def line(planet):
         t = planet_transits[planet]
-        verdict = "a generally favourable transit" if t["favourable"] else "a more mixed / effortful transit"
+        by = join_list(t["vedha_by"])
+        verdict = {
+            "good": tx("a generally favourable transit"),
+            "difficult": tx("a more mixed / effortful transit"),
+            "blocked": tr("a helpful transit that is held back (Vedha) by {0}, so it feels more mixed", by),
+            "eased": tr("a harder transit that is eased (Vipareeta Vedha) by {0}, so it is milder than usual", by),
+        }[t["vedha"]]
         return (tr('{0} is transiting {1} ({2} from your Moon) - {3} for {4}.', planet, t['sign'], _ord(t['house_from_moon']), verdict, t['theme']))
 
     # --- Monthly outlook (slow planets + dasha) ---
@@ -152,7 +200,7 @@ def _compute_transit_forecast_locked(chart, at_dt):
         m.append(tr('Sade Sati is currently active ({0}): Saturn is in the {1} from your Moon. Traditionally a '
                     'demanding, maturing ~7.5-year passage - steady effort and patience are the classic advice, not '
                     'alarm.', sade_sati['phase'], _ord(sat_house)))
-    good_m = [p for p in _MONTH_PLANETS if planet_transits[p]["favourable"]]
+    good_m = [p for p in _MONTH_PLANETS if planet_transits[p]["vedha"] in ("good", "eased")]
     m.append(tx("In simple terms: this month leans ") + (
         tx("generally supportive") if len(good_m) >= 2 else tx("toward effort and patience")) +
         tx(". Focus on the areas the favourable planets above touch, and go steadily where the mixed ones do."))
@@ -163,7 +211,7 @@ def _compute_transit_forecast_locked(chart, at_dt):
         w.append(line(p))
     if running:
         w.append(tr('The {0} sub-period continues to flavour these days.', running['antardasha']))
-    good_w = [p for p in _WEEK_PLANETS if planet_transits[p]["favourable"]]
+    good_w = [p for p in _WEEK_PLANETS if planet_transits[p]["vedha"] in ("good", "eased")]
     w.append(tx("In simple terms: ") + (
         tx("a broadly positive few days - good for moving things forward.") if len(good_w) >= 3 else
         tx("a mixed few days - pick your moments and avoid forcing things.")) +
@@ -179,3 +227,33 @@ def _compute_transit_forecast_locked(chart, at_dt):
         "monthly_text": "\n".join(m),
         "caveat": _CAVEAT,
     }
+
+
+def gochara_now(chart, at_dt):
+    """{planet: {"sign", "house_from_moon", "favourable", "effective", "by"}} for the moment `at_dt` (naive UTC),
+    using the same Gochara + Vedha rules as the outlook. Used by remedy_plan.py for transit-based triggers."""
+    with ephemeris.EPHEMERIS_LOCK:
+        ephemeris.ensure_sidereal_mode()
+        jd = ephemeris.julian_day_ut(at_dt.year, at_dt.month, at_dt.day, at_dt.hour, at_dt.minute, at_dt.second,
+                                     utc_offset_hours=0.0)
+        positions = ephemeris.get_all_positions(jd)
+    moon_sign = chart["planets"]["Moon"]["sign"]
+    signs = {p: SIGNS[int(lon // 30)] for p, lon in positions.items()}
+    houses = {p: _house_from(s, moon_sign) for p, s in signs.items()}
+    out = {}
+    for p in positions:
+        v = gochara_verdict(p, houses, ignore=("Moon",))
+        out[p] = {"sign": signs[p], "house_from_moon": houses[p], **v}
+    return out
+
+
+def sign_leaves(planet, at_dt, max_days=800):
+    """Approximate date (naive UTC, to the day) when `planet` next leaves its current sign, or None."""
+    with ephemeris.EPHEMERIS_LOCK:
+        ephemeris.ensure_sidereal_mode()
+        jd0 = ephemeris.julian_day_ut(at_dt.year, at_dt.month, at_dt.day, 12, 0, 0, utc_offset_hours=0.0)
+        start = int(ephemeris.get_all_positions(jd0)[planet] // 30)
+        for d in range(1, max_days):
+            if int(ephemeris.get_all_positions(jd0 + d)[planet] // 30) != start:
+                return _dt.datetime(at_dt.year, at_dt.month, at_dt.day) + _dt.timedelta(days=d)
+    return None

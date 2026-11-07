@@ -11,14 +11,14 @@ Shown as comparative "strength points", NOT the traditional rupa totals, because
 
 | Missing | Why | What is needed |
 |---|---|---|
-| Drik Bala | Tried the Parashara drishti-pinda table with special aspects; only Mars and Moon matched AstroSage (Sun, Mercury, Jupiter, Venus, Saturn did not) | The exact aspect-value table (including how Mars 4th/8th, Jupiter 5th/9th, Saturn 3rd/10th are added), the rule for Mercury and the Moon being benefic or malefic, and whether the sum is halved |
+| Drik Bala | Now computed in `shadbala.py` as `drik` from kb/shadbala_rules.json (Sphuta Drishti with special-aspect additions, benefic minus malefic over four, plus the full drishti of Mercury and Jupiter) but NOT added to the total. The earlier attempt matched AstroSage for Mars and the Moon only | AstroSage's Drik values for the reference chart (the PDF is not in the project folder) to test against before it joins the total |
 | Cheshta Bala | Needs mean and true planetary longitudes (seeghrochcha / cheshta-kendra) | The exact formula and the mean-longitude constants; or the accepted motion-based table |
 | Abda Bala and Masa Bala | Year lord and month lord need the traditional calendar (ahargana) count; the Mesha-sankranti weekday did not match AstroSage | The exact rule for the lord of the year and of the month |
 | Yuddha Bala | Planetary war adjustment | The exact adjustment rule |
 | Saptavargaja Bala | Matches AstroSage for Sun, Moon, Mars, Jupiter but differs for Mercury, Venus, Saturn (differences of -45, +15, +15 virupas) | Which friendship convention AstroSage uses in each varga, and how own-sign is scored in D3/D12/D30 |
 | Hora Bala | AstroSage counts the hora from midnight; the classical count is from sunrise | Confirmation of the intended convention |
 | Bhavabala (Bhavadhipati, Bhavadig, Bhavadrishti) | Only the ruler's Shadbala is easy; the direction and aspect parts are not known | The Bhava dig-bala rule (by sign type) and the Bhava drishti-bala formula |
-| Drekkana Bala | AstroSage shows 1 for every planet and does not add it | Confirmation of whether it should be included |
+| Drekkana Bala | Now follows BPHS 27.6 (male planets in the 1st decanate, female in the 2nd, Mercury and Saturn in the 3rd); the code had the 2nd and 3rd swapped. AstroSage shows 1 for every planet and does not add it | Confirmation of whether it should be included |
 
 ## Varshaphal (yearly chart) - `engine/varshaphal.py`
 Implemented and matching AstroSage for 2026: return moment (within 31 s), rising sign, Muntha, all Mudda periods.
@@ -34,10 +34,12 @@ Char Dasha, Yogini dates (within 2-3 days) and karakas match. Missing or unconfi
 **Lal Kitab** (chart rules, planet-in-house effects, debts, 36-year dasha, Varshphal) - not enough reliable knowledge to write it. **Prastharashtakvarga** is built; **Sarvashtakvarga reductions** (Trikona/Ekadhipatya Shodhana) and **Kakshya** are not. **Ascendant / nakshatra / character prose** is original text at a shorter length than AstroSage's pages; more depth needs more source material.
 
 ## Conventions that differ from AstroSage (not errors, but worth knowing)
-Rahu/Ketu aspect only the 7th here (AstroSage: 5th, 7th, 9th). Moon-Mars natural friendship: neutral here, friendly there. Vimshottari dates use 365.25-day years (AstroSage dates differ by 3-4 days). Paya is not computed. The Moon in D7 differs (D7 is not shown in this app).
+Rahu/Ketu aspect only the 7th here (AstroSage: 5th, 7th, 9th). Moon-Mars natural friendship: neutral here, friendly there. Vimshottari dates use 365.25-day years (AstroSage dates differ by 3-4 days). Paya is not computed. Gochara: Rahu's favourable transit houses now follow kb/gochara_vedha.json (3rd, 6th, 11th from the Moon); the older code also counted the 10th. Vedha is applied, with the fast Moon ignored as an obstructer in the monthly outlook. The Moon in D7 differs (D7 is not shown in this app).
 
 ## Remedies - `engine/remedy_plan.py`
-Built on the remedy knowledge base already in the app plus these rules: a planet is considered only when it is weak/troubled AND active now (running Mahadasha/Antardasha, or Saturn during Sade Sati/Dhaiya); a gemstone only for a planet that rules a trine house and no difficult house. Missing: **gemstone weight and metal rules by planet and by person**, the **classical list of functional benefics and malefics per ascendant** (currently derived from house lordship only), and **transit-based** (Gochara) triggers. These need a qualified source before the app should say more.
+Built on the remedy knowledge base already in the app plus these rules: a planet is considered only when it is weak/troubled AND active now (running Mahadasha/Antardasha, or Saturn during Sade Sati/Dhaiya); a gemstone only for a planet that rules a trine house and no difficult house. Originally missing: **gemstone weight and metal rules by planet and by person**, the **classical list of functional benefics and malefics per ascendant**, and **transit-based** (Gochara) triggers. The last two were added in Nov 2026 (see below).
+
+**Nov 2026:** the functional benefic/malefic list per ascendant is now read from `kb/functional_nature.json` (BPHS ch.34): a functional malefic never gets a gemstone, a functional benefic or yogakaraka may even if it also rules the 8th or 12th, and planets BPHS leaves unlabelled keep the house-lordship rule. Transit triggers are now in: Jupiter counts as active while it transits a difficult house from the Moon (Gochara with Vedha, `kb/gochara_vedha.json`). Rahu and Ketu are left out of that trigger because one of them is nearly always in a difficult house. Still missing: gemstone weight and metal rules (no classical rule exists, see kb/gemstones.json).
 
 ## Languages - `engine/i18n.py`
 Bengali step 1 is built (interface and app-composed text). **Not translated yet**: the classical knowledge-base paragraphs (`engine/kb/*.json`

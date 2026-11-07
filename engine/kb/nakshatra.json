@@ -8,7 +8,18 @@
     "performed": true,
     "method": "Deity, symbol, and theme/effects text for all 27 entries cross-checked against multiple independent classical/reference sources for internal consistency (deity-symbol-theme alignment, e.g. Ashlesha/serpent/Naga all cohering). gana/nadi/yoni fields are not independently re-verified here - they are imported directly from avkahada.py's own tables, which already carry their own verification note (matched exactly against a real reference chart, see that module's docstring).",
     "changes_made": [],
-    "unchanged_after_verification": "A small number of nakshatras have more than one commonly-cited symbol (e.g. Punarvasu as a bow-and-quiver vs. a house; Vishakha as an archway vs. a potter's wheel) - both are noted in this file's symbol field rather than picking one, since sources genuinely vary and neither reading is wrong."
+    "unchanged_after_verification": "A small number of nakshatras have more than one commonly-cited symbol (e.g. Punarvasu as a bow-and-quiver vs. a house; Vishakha as an archway vs. a potter's wheel) - both are noted in this file's symbol field rather than picking one, since sources genuinely vary and neither reading is wrong.",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed",
+      "sources": [
+        "https://hindutone.com/astrology/27-nakshatras-list-names-deities-lords-meaning/",
+        "https://en.wikipedia.org/wiki/List_of_Nakshatras",
+        "https://vaya.so/astrology/nakshatras"
+      ],
+      "findings": "Ruling planets, presiding deities, symbols and gana agree with the standard lists (e.g. Vishakha - Indragni, Shatabhisha - Varuna, Purva Bhadrapada - Aja Ekapada, Uttara Bhadrapada - Ahir Budhnya, Revati - Pushan).",
+      "variants": "Symbols vary a little between texts; the file already lists common alternatives."
+    }
   },
   "user_review_pass": {
     "performed": false,

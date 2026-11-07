@@ -7,8 +7,21 @@
   "verification_pass": {
     "performed": true,
     "method": "Per-planet correspondences cross-checked against multiple classical/reference sources for consistency - these are widely standardized associations across Vedic astrology texts with little cross-source disagreement, unlike e.g. Pitra Dosha's definition.",
-    "changes_made": [],
-    "unchanged_after_verification": ""
+    "changes_made": [
+      "2026-11-07: Moon yantra direction corrected from north to north-west (Vayavya); Ketu yantra direction corrected from south-west (Rahu's direction) to north-west, noting north-east as a variant."
+    ],
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "corrected",
+      "sources": [
+        "https://www.kamalkapoor.com/yantras/planets/",
+        "https://sites.google.com/site/hsmneducation/reference-material/hindu-deities/navagraha",
+        "https://www.hindu-blog.com/2021/09/direction-of-navagrahas-in-hinduism.html"
+      ],
+      "findings": "Directions for Sun (east), Mars (south), Mercury (north), Jupiter (north-east), Venus (south-east), Saturn (west) and Rahu (south-west) confirmed. Moon and Ketu corrected (see changes_made).",
+      "variants": "Temple Navagraha layouts differ between Agama and Vaidika systems; yantra-placement guides mostly follow the directional lords above."
+    }
   },
   "user_review_pass": {
     "performed": false,
@@ -43,8 +56,8 @@
       "presiding_deity": "Chandra",
       "title": "Chandra Yantra (Moon)",
       "summary": "A geometric yantra traditionally used to focus worship and support Moon's significations.",
-      "effects": "Traditionally installed and worshipped to strengthen Moon's themes, alongside (not instead of) that planet's mantra. Placed facing north or kept near where one sleeps; associated with calming the mind.",
-      "placement_note": "Placed facing north or kept near where one sleeps; associated with calming the mind.",
+      "effects": "Traditionally installed and worshipped to strengthen Moon's themes, alongside (not instead of) that planet's mantra. Placed facing north-west (Vayavya), or kept near where one sleeps; associated with calming the mind.",
+      "placement_note": "Placed facing north-west (Vayavya), or kept near where one sleeps; associated with calming the mind.",
       "status": "verified",
       "verified": true
     },
@@ -141,8 +154,8 @@
       "presiding_deity": "Ganesha",
       "title": "Ketu Yantra (Ketu)",
       "summary": "A geometric yantra traditionally used to focus worship and support Ketu's significations.",
-      "effects": "Traditionally installed and worshipped to strengthen Ketu's themes, alongside (not instead of) that planet's mantra. Placed facing south-west; associated with Ganesha worship in most traditions.",
-      "placement_note": "Placed facing south-west; associated with Ganesha worship in most traditions.",
+      "effects": "Traditionally installed and worshipped to strengthen Ketu's themes, alongside (not instead of) that planet's mantra. Placed facing north-west in the Vaidika Navagraha layout (some traditions: north-east); associated with Ganesha worship in most traditions.",
+      "placement_note": "Placed facing north-west in the Vaidika Navagraha layout (some traditions: north-east); associated with Ganesha worship in most traditions.",
       "status": "verified",
       "verified": true
     }

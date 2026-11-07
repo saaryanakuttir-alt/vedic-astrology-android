@@ -117,7 +117,9 @@ class _Hero(ButtonBehavior, theme.HeroCard):
         self.store, self.goto = store, goto
         white = theme.HERO_TEXT
         self.kicker = self._label("", "12sp", theme._alpha(white, 0.78), dp(18))
-        self.title = self._label("", "22sp", white, dp(34), bold=True)
+        font = theme.display_font()
+        self.title = self._label("", "26sp" if font != "Roboto" else "22sp", white, dp(36), bold=font == "Roboto")
+        self.title.font_name = font
         self.line = self._label("", "13sp", theme._alpha(white, 0.88), dp(40), valign="top")
         self.cta = Label(text="", bold=True, font_size="13sp", color=white, size_hint=(None, None), height=dp(34))
         self.cta.bind(texture_size=lambda inst, ts: setattr(inst, "width", ts[0] + dp(32)))
@@ -163,10 +165,10 @@ class _Hero(ButtonBehavior, theme.HeroCard):
 
 
 class _SettingsCard(OutlineBox):
-    """Language and Light/Dark, in one small card on Home."""
+    """Language, Light/Dark and Motion (animations on/off), in one small card on Home."""
 
-    def __init__(self, on_language, on_theme, **kwargs):
-        rows = (on_language is not None) + (on_theme is not None)
+    def __init__(self, on_language, on_theme, on_motion=None, **kwargs):
+        rows = (on_language is not None) + (on_theme is not None) + (on_motion is not None)
         kwargs.setdefault("size_hint_y", None)
         kwargs.setdefault("height", dp(24) + rows * dp(44) + (rows - 1) * dp(10))
         kwargs.setdefault("padding", (dp(14), dp(12)))
@@ -186,10 +188,21 @@ class _SettingsCard(OutlineBox):
             row.add_widget(seg)
             row.add_widget(BoxLayout())
             self.add_widget(row)
+        if on_motion is not None:
+            row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(42), spacing=dp(8))
+            cap = Label(text="Motion", font_size="12sp", color=theme.MUTED, size_hint_x=None, width=dp(74),
+                        halign="left", valign="middle")
+            cap.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+            row.add_widget(cap)
+            seg = theme.SegmentedControl(["On", "Off"], selected="On" if theme.MOTION else "Off",
+                                         on_select=lambda opt: on_motion(opt == "On"), pos_hint={"center_y": 0.5})
+            row.add_widget(seg)
+            row.add_widget(BoxLayout())
+            self.add_widget(row)
 
 
 class HomeScreen(BoxLayout):
-    def __init__(self, store, goto, on_language=None, on_theme=None, **kwargs):
+    def __init__(self, store, goto, on_language=None, on_theme=None, on_motion=None, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.goto = goto
         scroll = ScrollView(do_scroll_x=False, bar_width=dp(3))
@@ -198,6 +211,7 @@ class HomeScreen(BoxLayout):
         body.bind(minimum_height=body.setter("height"))
         scroll.add_widget(body)
         self.add_widget(scroll)
+        self._cards = []
 
         self.hero = _Hero(store, goto)
         body.add_widget(self.hero)
@@ -211,8 +225,8 @@ class HomeScreen(BoxLayout):
         sub.bind(width=lambda inst, w: setattr(inst, "text_size", (w, None)),
                  texture_size=lambda inst, ts: setattr(inst, "height", max(dp(22), ts[1])))
         body.add_widget(sub)
-        if on_language is not None or on_theme is not None:
-            body.add_widget(_SettingsCard(on_language, on_theme))
+        if on_language is not None or on_theme is not None or on_motion is not None:
+            body.add_widget(_SettingsCard(on_language, on_theme, on_motion))
         body.add_widget(theme.SectionHeader(None, "Start here"))
         body.add_widget(self._grid(_free(HOME_CORE)))
 
@@ -231,12 +245,15 @@ class HomeScreen(BoxLayout):
         rows = (len(items) + 1) // 2
         grid = GridLayout(cols=2, spacing=dp(12), size_hint_y=None, height=rows * dp(118) + (rows - 1) * dp(12))
         for key, title, desc, icon, preset in items:
-            grid.add_widget(HomeCard(icon, title, desc,
-                                     on_press_cb=lambda k=key, p=preset: self.goto(k, preset=p)))
+            card = HomeCard(icon, title, desc, on_press_cb=lambda k=key, p=preset: self.goto(k, preset=p))
+            grid.add_widget(card)
+            self._cards.append(card)
         return grid
 
     def refresh(self):
         self.hero.update()
+        # v2.3: the first cards drift in one after another (the screen itself already slides in)
+        theme.stagger(self._cards[:8], step=0.04, start=0.08)
 
 
 _MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",

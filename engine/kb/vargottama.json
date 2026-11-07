@@ -8,7 +8,13 @@
     "performed": true,
     "method": "Cross-checked the Vargottama condition and its general effect against multiple classical/reference sources for consistency.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "consistent",
+      "sources": [],
+      "findings": "Definition (same sign in D1 and D9) and strengthening effect are standard; matches divisional_charts.json D9 entry. Not separately searched."
+    }
   },
   "user_review_pass": {
     "performed": false,

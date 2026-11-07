@@ -8,7 +8,17 @@
     "performed": true,
     "method": "Orb values (in combustion.py) cross-checked against multiple classical references; genuine disagreement across sources for Mars/Mercury/Venus disclosed in that module's own docstring rather than silently picking one. Interpretive text here cross-checked for consistency with each planet's own general significations as already used elsewhere in this project's KB (e.g. planet_in_sign.json).",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed",
+      "sources": [
+        "https://www.onlinejyotish.com/free-astrology/astrology-lessons/lesson_148.php",
+        "https://vedicmarga.com/combust-planets-in-transit/"
+      ],
+      "findings": "The orbs combustion.py should use match Surya Siddhanta 9.6-9 as quoted by several sources: Moon 12, Mars 17, Mercury 14 (12 retrograde), Jupiter 11, Venus 10 (8 retrograde), Saturn 15 degrees. The interpretive text is consistent with sources. Rahu/Ketu are never combust.",
+      "variants": "One API reference gives Mercury retrograde as 13 degrees; 12 is the common Surya Siddhanta value."
+    }
   },
   "user_review_pass": {
     "performed": false,

@@ -2,12 +2,14 @@
   "checklist_category_id": "planet_in_house",
   "name": "Planet in House",
   "tradition": "Parashari",
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. Interpretations are baseline classical tendencies synthesized from standard Parashari teaching (in the tradition of texts such as Brihat Parashara Hora Shastra, Phaladeepika, and Saravali). Actual results in any real chart depend on the planet's sign placement (exaltation/debilitation/own sign), aspects and conjunctions, divisional charts (vargas), and the running dasha — this file covers the planet-in-house layer only and is meant to be combined with those other layers, not used in isolation.",
   "verification_pass": {
     "performed": true,
     "method": "Cross-checked the factual backbone every entry's dignity_note depends on — the exaltation/debilitation/own-sign table and the dig bala (directional strength) table for all 7 classical planets — against multiple independent online astrology references, plus spot-checked several individual house interpretations (e.g. Sun in 1st/10th, Saturn in 7th) against classical-style summaries.",
-    "changes_made": [],
+    "changes_made": [
+      "Nov 2026: PH-Ma-H5 called the 5th a Kuja (Mangal) Dosha house; it is not (the classical houses are the 1st, 2nd in some traditions, 4th, 7th, 8th and 12th). Summary and effects corrected. Stray commas left by the Sep 2026 scrub removed from the PH-Ju-H5, PH-Sa-H5 and PH-Ke-H5 summaries."
+    ],
     "unchanged_after_verification": "Exaltation/debilitation/own-sign table and dig bala table both confirmed exactly as used (Sun: exalt Aries/debil Libra/own Leo/dig-bala 10th; Moon: exalt Taurus/debil Scorpio/own Cancer/dig-bala 4th; Mars: exalt Capricorn/debil Cancer/own Aries+Scorpio/dig-bala 10th; Mercury: exalt+own Virgo, also own Gemini/debil Pisces/dig-bala 1st; Jupiter: exalt Cancer/debil Capricorn/own Sagittarius+Pisces/dig-bala 1st; Venus: exalt Pisces/debil Virgo/own Taurus+Libra/dig-bala 4th; Saturn: exalt Libra/debil Aries/own Capricorn+Aquarius/dig-bala 7th). No corrections were needed; the interpretive prose in each entry is still recommended for a full read-through against your primary reference text, since that level of nuance goes beyond what a web verification pass can exhaustively confirm for all 108 entries."
   },
   "user_review_pass": {
@@ -30,7 +32,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Sun in the 1st House",
       "summary": "Gives a strong, confident sense of self with natural authority and leadership presence.",
-      "effects": "The native carries an assertive, self-assured personality with a pronounced ego and a desire to lead rather than follow. Vitality and constitution are generally robust, and there is often a commanding physical presence or bearing. This placement favors positions of authority, government, or public visibility, though the strong ego can create friction with others or with the father if unchecked. Self-respect and personal identity are central life themes.",
+      "effects": "The native carries an assertive, self-assured personality with a pronounced ego and a desire to lead rather than follow. Vitality and constitution are generally robust, and there is often a commanding physical presence or bearing. This placement favors positions of authority, government, or public visibility, though the strong ego can create friction with others or with the father if unchecked. Self-respect and personal identity are central life themes. Classical texts such as Phaladeepika add courage, a sharp temper and a tendency toward heat-related or eye complaints, especially when the Sun is in a weak sign. The native grows into real leadership by letting others share credit, and morning sunlight and steady routines support the vitality this placement gives.",
       "keywords": [
         "confidence",
         "leadership",
@@ -52,7 +54,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Sun in the 2nd House",
       "summary": "Links self-worth and status closely to family standing, wealth, and forthright speech.",
-      "effects": "Speech tends to be direct, authoritative, and sometimes blunt, and the native values prestige within the family and community. Wealth often connects to government, authority, or self-earned status rather than inheritance, and spending can rise to maintain image. Family life may carry an authority figure whose ego needs managing, and the right eye or facial vitality (Sun's bodily significations) deserve attention.",
+      "effects": "Speech tends to be direct, authoritative, and sometimes blunt, and the native values prestige within the family and community. Wealth often connects to government, authority, or self-earned status rather than inheritance, and spending can rise to maintain image. Family life may carry an authority figure whose ego needs managing, and the right eye or facial vitality (Sun's bodily significations) deserve attention. Classical texts mention income connected with the state or people in power, but warn that harsh words can cost the native money and goodwill. Speaking with authority but without arrogance, and keeping careful accounts, turns this placement into a reliable source of family standing.",
       "keywords": [
         "family status",
         "forthright speech",
@@ -73,7 +75,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Sun in the 3rd House",
       "summary": "A favorable upachaya placement that fuels courage, initiative, and success through self-effort.",
-      "effects": "The native shows strong willpower, valor, and a results-oriented drive in personal efforts, short journeys, and communication. Relationships with younger siblings can be colored by the native's dominant, leadership-oriented style, sometimes creating rivalry but also protective authority. This position favors writing, media, or any field where assertive self-expression leads to recognition.",
+      "effects": "The native shows strong willpower, valor, and a results-oriented drive in personal efforts, short journeys, and communication. Relationships with younger siblings can be colored by the native's dominant, leadership-oriented style, sometimes creating rivalry but also protective authority. This position favors writing, media, or any field where assertive self-expression leads to recognition. Classical texts count this among the Sun's good placements, promising valour, a good reputation and success over opponents through personal initiative. The native's results improve further with time, since the 3rd is an upachaya house where planets grow stronger through effort.",
       "keywords": [
         "courage",
         "self-effort",
@@ -95,7 +97,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Sun in the 4th House",
       "summary": "Creates some restlessness in domestic life while supporting property, status, and connection to homeland.",
-      "effects": "Because the Sun is not naturally comfortable in the 4th house, emotional peace at home can be interrupted by ego clashes, frequent change, or an authoritative, sometimes distant mother figure. Positively, this placement supports property ownership, real-estate gains, and a strong connection to one's homeland, community standing, or political life. Conscious effort toward domestic harmony helps balance the drive for independence with the need for a stable emotional base.",
+      "effects": "Because the Sun is not naturally comfortable in the 4th house, emotional peace at home can be interrupted by ego clashes, frequent change, or an authoritative, sometimes distant mother figure. Positively, this placement supports property ownership, real-estate gains, and a strong connection to one's homeland, community standing, or political life. Conscious effort toward domestic harmony helps balance the drive for independence with the need for a stable emotional base. Classical texts describe some lack of peace at home, possible friction with relatives and frequent travel, while noting gains from government or public life. The Sun in the 4th is opposite its directional-strength house, so the native usually feels most fulfilled through public work rather than through the home alone.",
       "keywords": [
         "domestic restlessness",
         "property",
@@ -116,8 +118,8 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Sun in the 5th House",
-      "summary": "",
-      "effects": "The native shows confident, original intelligence and often takes a natural leadership role in creative, educational, or speculative matters. This placement favors success in politics, administration, education, or speculation tied to status and reputation, along with strong purva punya (past-life merit) themes.",
+      "summary": "Sharpens confident, original intelligence and leadership in creative, educational and speculative matters, favoring status-linked gains.",
+      "effects": "The native shows confident, original intelligence and often takes a natural leadership role in creative, educational, or speculative matters. This placement favors success in politics, administration, education, or speculation tied to status and reputation, along with strong purva punya (past-life merit) themes. Classical texts add a quick mind, interest in mantra, scripture or administration, and a temperament that can be proud or quick to anger. Speculation favours careful, well-researched choices, and the native's intelligence shines most when it is used to guide or teach others.",
       "keywords": [
         "intelligence",
         "authority",
@@ -138,7 +140,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Sun in the 6th House",
       "summary": "A strong upachaya placement supporting victory over rivals, discipline, and success in service or government roles.",
-      "effects": "The Sun performs well in this house of competition, giving the stamina and authority to overcome enemies, litigation, and obstacles. The native does well in government service, civil administration, medicine, or any competitive field requiring discipline and self-confidence. Health is generally resilient once early challenges are met, though relations with maternal relatives can be strained by the native's dominant approach.",
+      "effects": "The Sun performs well in this house of competition, giving the stamina and authority to overcome enemies, litigation, and obstacles. The native does well in government service, civil administration, medicine, or any competitive field requiring discipline and self-confidence. Health is generally resilient once early challenges are met, though relations with maternal relatives can be strained by the native's dominant approach. Classical texts praise the Sun in the 6th for fame, victory over enemies, good digestion and favour from people in authority. The native handles pressure well, and a regular daily routine keeps both health and work performance at their best.",
       "keywords": [
         "victory over rivals",
         "discipline",
@@ -159,7 +161,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Sun in the 7th House",
       "summary": "Brings a strong-willed approach to partnerships that can create ego friction in marriage.",
-      "effects": "The native tends to attract a spouse or business partner who is authoritative, prominent, or from a respected background, but the Sun's ego here can create power struggles in one-to-one relationships. Business partnerships fare better than emotional ones, particularly those connected with government or authority. Conscious humility and shared decision-making help this placement mature into a dignified, mutually respectful partnership.",
+      "effects": "The native tends to attract a spouse or business partner who is authoritative, prominent, or from a respected background, but the Sun's ego here can create power struggles in one-to-one relationships. Business partnerships fare better than emotional ones, particularly those connected with government or authority. Conscious humility and shared decision-making help this placement mature into a dignified, mutually respectful partnership. Classical texts warn of friction with the spouse, some loss of status through partners and pressure from authority figures under this placement. Choosing a partner who has their own independent sphere, and agreeing who leads where, helps the relationship stay respectful.",
       "keywords": [
         "marriage friction",
         "authoritative spouse",
@@ -180,7 +182,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Sun in the 8th House",
       "summary": "A challenging dusthana placement that can bring health fluctuations, status upheavals, and deep transformative interests.",
-      "effects": "The native may experience periodic health concerns, sudden changes in status or authority, or complications around the father's wellbeing and inheritance matters. There is often a strong pull toward research, occult study, or investigating hidden truths, since the Sun's light seeks to illuminate the 8th house's mysteries. With supportive influences elsewhere in the chart, this placement can grant resilience and the ability to rise again after setbacks.",
+      "effects": "The native may experience periodic health concerns, sudden changes in status or authority, or complications around the father's wellbeing and inheritance matters. There is often a strong pull toward research, occult study, or investigating hidden truths, since the Sun's light seeks to illuminate the 8th house's mysteries. With supportive influences elsewhere in the chart, this placement can grant resilience and the ability to rise again after setbacks. Classical texts note a restless mind, possible separation from friends or relatives, and the need to guard the eyes and general vitality. Regular health check-ups, honest dealings over shared money and a research-minded career help the native use this placement constructively.",
       "keywords": [
         "health fluctuation",
         "transformation",
@@ -201,7 +203,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Sun in the 9th House",
       "summary": "A highly auspicious trikona placement bringing fortune, dharma, and a respected father or guru figure.",
-      "effects": "The native is generally fortunate, principled, and drawn to higher learning, philosophy, and ethical or religious pursuits. The father (or a father-like mentor) tends to be respected, successful, or influential, and relationships with teachers and gurus are supportive. Long journeys, foreign connections, and higher education tied to authority or government are favored, with success following righteous conduct.",
+      "effects": "The native is generally fortunate, principled, and drawn to higher learning, philosophy, and ethical or religious pursuits. The father (or a father-like mentor) tends to be respected, successful, or influential, and relationships with teachers and gurus are supportive. Long journeys, foreign connections, and higher education tied to authority or government are favored, with success following righteous conduct. Classical texts add devotion to elders and teachers, wealth through righteous means and, at times, some difference of opinion with the father despite respect for him. The native's principles are a real source of luck, and fortune grows when beliefs are lived out rather than preached.",
       "keywords": [
         "fortune",
         "dharma",
@@ -223,7 +225,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Sun in the 10th House",
       "summary": "The Sun's directional-strength (dig bala) house — excellent for career, authority, and public reputation.",
-      "effects": "This is one of the strongest placements for professional success, giving ambition, leadership, and a natural fit for government, administration, or any authoritative public role. The native earns respect and visibility through career achievements and is often recognized as a leader in their field. The drive for status and accomplishment can come at the cost of family time if not consciously balanced.",
+      "effects": "This is one of the strongest placements for professional success, giving ambition, leadership, and a natural fit for government, administration, or any authoritative public role. The native earns respect and visibility through career achievements and is often recognized as a leader in their field. The drive for status and accomplishment can come at the cost of family time if not consciously balanced. Classical texts promise honour from those in power, success in undertakings, and wealth and reputation that grow through the native's own achievements. With the Sun this strong, the main task is to lead with fairness, so that authority earns loyalty rather than only obedience.",
       "keywords": [
         "career success",
         "public authority",
@@ -244,7 +246,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Sun in the 11th House",
       "summary": "Supports strong material and social gains through authoritative, influential connections.",
-      "effects": "The native tends to fulfill ambitions and accumulate gains through networks that include people of status, government, or authority. Elder siblings or influential friends often play a supportive role, and social standing rises through achievement-oriented circles. Income connected to leadership, recognition, or public roles is generally favored under this placement.",
+      "effects": "The native tends to fulfill ambitions and accumulate gains through networks that include people of status, government, or authority. Elder siblings or influential friends often play a supportive role, and social standing rises through achievement-oriented circles. Income connected to leadership, recognition, or public roles is generally favored under this placement. Classical texts praise this placement for wealth, a long run of success, loyal helpers and favour from people in high positions. Because the 11th is an upachaya house, gains tend to increase steadily as the native's reputation and network grow.",
       "keywords": [
         "gains",
         "influential network",
@@ -265,7 +267,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Sun in the 12th House",
       "summary": "A dusthana placement that turns the Sun's authority inward, favoring spirituality over public status.",
-      "effects": "The native may experience a diminished public profile, loss of status, or a father who is distant, unwell, or based abroad. Expenditure often relates to maintaining dignity or self-image, and eye or vitality-related care is worth attention. Positively, this placement can support meaningful work behind the scenes, service to foreign or spiritual institutions, and a mature, ego-softened path toward introspection and moksha.",
+      "effects": "The native may experience a diminished public profile, loss of status, or a father who is distant, unwell, or based abroad. Expenditure often relates to maintaining dignity or self-image, and eye or vitality-related care is worth attention. Positively, this placement can support meaningful work behind the scenes, service to foreign or spiritual institutions, and a mature, ego-softened path toward introspection and moksha. Classical texts warn of expenses, weak eyesight and friction with the father or authorities, and of losses when pride overrules caution. Work in hospitals, foreign organisations, research or charitable institutions often suits the native well and brings quiet respect.",
       "keywords": [
         "reduced status",
         "foreign connection",
@@ -286,7 +288,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Moon in the 1st House",
       "summary": "Gives an emotionally expressive, empathetic, and publicly appealing personality.",
-      "effects": "The native is sensitive, imaginative, and quick to respond to the moods of their surroundings, often with an attractive or soothing presence that draws others in. Emotional wellbeing and physical health tend to fluctuate along with the Moon's own waxing and waning nature. A close, often emotionally dependent bond with the mother shapes early identity, and the native is naturally nurturing toward others.",
+      "effects": "The native is sensitive, imaginative, and quick to respond to the moods of their surroundings, often with an attractive or soothing presence that draws others in. Emotional wellbeing and physical health tend to fluctuate along with the Moon's own waxing and waning nature. A close, often emotionally dependent bond with the mother shapes early identity, and the native is naturally nurturing toward others. Classical texts describe a pleasant, popular person when the Moon is strong, and a more changeable, sensitive constitution when it is weak or waning. Regular sleep, good food and time near water help keep the native's mood and health steady.",
       "keywords": [
         "emotional",
         "empathetic",
@@ -307,7 +309,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Moon in the 2nd House",
       "summary": "Ties emotional security to family, food, and fluctuating but generally comfortable finances.",
-      "effects": "Speech is gentle, sweet, and persuasive, and the native finds emotional comfort in family gatherings, food, and shared resources. Wealth can fluctuate with the Moon's phases or public sentiment, often connected to liquid assets, dairy, hospitality, or public-facing trade. The mother's family may notably influence the native's values and financial habits.",
+      "effects": "Speech is gentle, sweet, and persuasive, and the native finds emotional comfort in family gatherings, food, and shared resources. Wealth can fluctuate with the Moon's phases or public sentiment, often connected to liquid assets, dairy, hospitality, or public-facing trade. The mother's family may notably influence the native's values and financial habits. Classical texts praise the Moon in the 2nd for a sweet voice, good looks, enjoyment of food and wealth that grows when the Moon is strong. Savings do best when the native plans for the ups and downs this placement brings instead of spending in good months.",
       "keywords": [
         "sweet speech",
         "family wealth",
@@ -328,7 +330,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Moon in the 3rd House",
       "summary": "Brings emotional sensitivity to communication, courage, and the sibling bond, especially with sisters.",
-      "effects": "The native's efforts and short journeys are motivated by emotional needs, and communication carries a warm, imaginative, or artistic quality well suited to writing or media. Courage can be inconsistent, rising and falling with mood, but a close, protective relationship with siblings (particularly sisters) is common. Adaptability helps the native navigate changing circumstances through self-effort.",
+      "effects": "The native's efforts and short journeys are motivated by emotional needs, and communication carries a warm, imaginative, or artistic quality well suited to writing or media. Courage can be inconsistent, rising and falling with mood, but a close, protective relationship with siblings (particularly sisters) is common. Adaptability helps the native navigate changing circumstances through self-effort. Classical texts mention a fondness for travel, an artistic temperament and support from siblings, with courage that grows as the Moon waxes in strength. Writing, design or communication work done at the native's own pace tends to bring both satisfaction and recognition.",
       "keywords": [
         "emotional communication",
         "sibling bond",
@@ -349,7 +351,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Moon in the 4th House",
       "summary": "The Moon's directional-strength (dig bala) house — excellent for domestic happiness, comfort, and bond with the mother.",
-      "effects": "This is one of the most favorable placements for the Moon, granting a nurturing home environment, emotional security, and a deep, often central bond with the mother. Property, vehicles, and material comforts tend to come easily, and the native finds genuine contentment in domestic life. Emotional wellbeing is closely tied to the stability of home and family circumstances.",
+      "effects": "This is one of the most favorable placements for the Moon, granting a nurturing home environment, emotional security, and a deep, often central bond with the mother. Property, vehicles, and material comforts tend to come easily, and the native finds genuine contentment in domestic life. Emotional wellbeing is closely tied to the stability of home and family circumstances. Classical texts add comforts such as vehicles and a good home, friends who stay loyal, and a generous, contented nature. Because happiness depends so much on home, the native benefits from keeping a stable base even through periods of change.",
       "keywords": [
         "domestic happiness",
         "mother",
@@ -369,8 +371,8 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Moon in the 5th House",
-      "summary": "",
-      "effects": "The native shows imaginative, emotionally attuned intelligence well suited to the arts, teaching, or counseling, and decisions in romance or creative work are guided as much by feeling as by logic. Speculative gains fluctuate but are generally supported by the native's intuitive sense of timing.",
+      "summary": "Favors intuitive, emotionally attuned intelligence and creativity, with romance and creative choices guided by feeling.",
+      "effects": "The native shows imaginative, emotionally attuned intelligence well suited to the arts, teaching, or counseling, and decisions in romance or creative work are guided as much by feeling as by logic. Speculative gains fluctuate but are generally supported by the native's intuitive sense of timing. Classical texts describe a gentle, intelligent person with a liking for good company, the arts and religious or devotional practice. Feelings can sway judgement in romance and investments, so a short waiting period before big decisions protects the native well.",
       "keywords": [
         "intuitive intelligence",
         "creativity",
@@ -390,7 +392,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Moon in the 6th House",
       "summary": "Places emotional sensitivity under the pressure of competition, service, and daily obstacles.",
-      "effects": "The native may experience emotional stress tied to work, health (particularly digestive or fluid-related issues), or interpersonal conflict, and needs to manage worry proactively. This placement suits caregiving, healthcare, hospitality, or public-service roles where emotional attentiveness becomes a professional asset. Persistence through emotionally taxing circumstances tends to build real resilience over time.",
+      "effects": "The native may experience emotional stress tied to work, health (particularly digestive or fluid-related issues), or interpersonal conflict, and needs to manage worry proactively. This placement suits caregiving, healthcare, hospitality, or public-service roles where emotional attentiveness becomes a professional asset. Persistence through emotionally taxing circumstances tends to build real resilience over time. Classical texts warn of a sensitive stomach, worry, and trouble from rivals, especially when the Moon is weak or waning. Simple, regular meals, clear boundaries at work and talking problems through early keep stress from building up.",
       "keywords": [
         "emotional stress",
         "caregiving",
@@ -411,7 +413,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Moon in the 7th House",
       "summary": "Brings emotional depth and popularity to marriage, partnerships, and public dealings.",
-      "effects": "The native seeks and often finds a nurturing, emotionally responsive spouse or business partner, and relationships are central to overall happiness. Popularity and charm support success in public-facing partnerships, though the relationship's emotional tone can shift with the Moon's own fluctuations. Hospitality, public relations, and consumer-facing business partnerships are especially favored.",
+      "effects": "The native seeks and often finds a nurturing, emotionally responsive spouse or business partner, and relationships are central to overall happiness. Popularity and charm support success in public-facing partnerships, though the relationship's emotional tone can shift with the Moon's own fluctuations. Hospitality, public relations, and consumer-facing business partnerships are especially favored. Classical texts describe an attractive, sociable person with a gentle spouse, gains through trade or travel, and a mind closely tied to the partner's moods. Keeping some emotional independence within the relationship helps the native stay steady when the partner's mood changes.",
       "keywords": [
         "emotional partnership",
         "popularity",
@@ -432,7 +434,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Moon in the 8th House",
       "summary": "Deepens emotional intuition but brings periodic turbulence tied to transformation and the mother.",
-      "effects": "The native experiences intense emotional undercurrents, heightened intuition, and a natural pull toward psychology, mysticism, or the unseen. Health and emotional stability can fluctuate around major life transitions, and inheritance or shared resources may connect to the mother's side of the family. Emotional grounding practices help stabilize the Moon's sensitivity in this challenging house.",
+      "effects": "The native experiences intense emotional undercurrents, heightened intuition, and a natural pull toward psychology, mysticism, or the unseen. Health and emotional stability can fluctuate around major life transitions, and inheritance or shared resources may connect to the mother's side of the family. Emotional grounding practices help stabilize the Moon's sensitivity in this challenging house. Classical texts warn of a restless mind, fluctuating health and money worries when the Moon is weak, and a sharp, research-minded intellect when it is strong. Regular rest, a trusted confidant and careful handling of joint finances are the most useful supports for this placement.",
       "keywords": [
         "emotional intensity",
         "intuition",
@@ -453,7 +455,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Moon in the 9th House",
       "summary": "A fortunate placement linking emotional life to faith, higher learning, and a wise or devoted mother.",
-      "effects": "The native feels genuine emotional connection to their belief system, philosophy, or spiritual practice, and often has a pious, wise, or emotionally supportive mother. Travel for pilgrimage or emotionally meaningful purposes is favored, and the native gains public goodwill and fortune through sincere, ethically grounded conduct. Higher education in humanistic or intuitive subjects suits this placement well.",
+      "effects": "The native feels genuine emotional connection to their belief system, philosophy, or spiritual practice, and often has a pious, wise, or emotionally supportive mother. Travel for pilgrimage or emotionally meaningful purposes is favored, and the native gains public goodwill and fortune through sincere, ethically grounded conduct. Higher education in humanistic or intuitive subjects suits this placement well. Classical texts praise this placement for devotion to religion and elders, good fortune, wealth and a kind-hearted nature. The native's faith tends to deepen through travel and teachers, and kindness offered freely tends to come back as good fortune.",
       "keywords": [
         "fortune",
         "faith",
@@ -475,7 +477,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Moon in the 10th House",
       "summary": "Brings a public-facing, popular career with a nurturing leadership style.",
-      "effects": "The native's professional reputation is closely tied to public perception and can rise or fall with public mood, favoring careers in hospitality, healthcare, retail, media, or any field involving direct public contact. Leadership style tends to be nurturing and emotionally attuned rather than purely authoritative. Career path may show more change and adaptation than a fixed, linear trajectory.",
+      "effects": "The native's professional reputation is closely tied to public perception and can rise or fall with public mood, favoring careers in hospitality, healthcare, retail, media, or any field involving direct public contact. Leadership style tends to be nurturing and emotionally attuned rather than purely authoritative. Career path may show more change and adaptation than a fixed, linear trajectory. Classical texts describe a successful, well-regarded person who completes undertakings and is drawn to virtuous or public-spirited work. Because reputation follows public feeling, the native benefits from consistency and from keeping promises made to customers or followers.",
       "keywords": [
         "public career",
         "popularity",
@@ -496,7 +498,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Moon in the 11th House",
       "summary": "Supports emotionally fulfilling gains through a wide and caring circle of friends.",
-      "effects": "The native tends to have a large, emotionally supportive social network and finds satisfaction in group activities, community involvement, or public-facing income sources. Gains fluctuate somewhat but are generally positive, and elder siblings or close friends often provide meaningful emotional and practical support. Popularity contributes directly to the fulfillment of long-term desires.",
+      "effects": "The native tends to have a large, emotionally supportive social network and finds satisfaction in group activities, community involvement, or public-facing income sources. Gains fluctuate somewhat but are generally positive, and elder siblings or close friends often provide meaningful emotional and practical support. Popularity contributes directly to the fulfillment of long-term desires. Classical texts praise the Moon in the 11th for wealth, influential friends, a good name and a generous, cheerful character. Gains often come through women, the public or trades connected with food, water and travel.",
       "keywords": [
         "social gains",
         "friendship",
@@ -517,7 +519,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Moon in the 12th House",
       "summary": "Turns emotional life inward, favoring introspection, foreign connections, and hidden sensitivity.",
-      "effects": "The native tends toward introspection, vivid inner life, and sometimes disturbed sleep or subconscious emotional patterns that benefit from meditation or quiet reflection. Connection to the mother may involve distance, whether physical or emotional, and expenditure often flows toward family or emotionally significant causes. Foreign residence, spiritual retreats, or work in seclusion often bring the native genuine peace.",
+      "effects": "The native tends toward introspection, vivid inner life, and sometimes disturbed sleep or subconscious emotional patterns that benefit from meditation or quiet reflection. Connection to the mother may involve distance, whether physical or emotional, and expenditure often flows toward family or emotionally significant causes. Foreign residence, spiritual retreats, or work in seclusion often bring the native genuine peace. Classical texts warn of expenses, a sometimes lonely or anxious mind and eye or sleep troubles, especially when the Moon is weak. Meditation, charitable giving and a calm bedtime routine help turn this sensitivity into spiritual depth.",
       "keywords": [
         "introspection",
         "foreign connection",
@@ -538,7 +540,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Mars in the 1st House",
       "summary": "Gives a bold, energetic, athletic personality with a strong will and direct manner.",
-      "effects": "The native is assertive, physically active, and often has a lean, muscular build with visible scars or marks (especially near the head) common to this placement. Courage and competitive drive are pronounced, favoring leadership through decisive action, though impatience or a quick temper need conscious management. This is one of the placements associated with Ruchaka Yoga when Mars is in its own or exalted sign, granting exceptional physical and leadership strength.",
+      "effects": "The native is assertive, physically active, and often has a lean, muscular build with visible scars or marks (especially near the head) common to this placement. Courage and competitive drive are pronounced, favoring leadership through decisive action, though impatience or a quick temper need conscious management. This is one of the placements associated with Ruchaka Yoga when Mars is in its own or exalted sign, granting exceptional physical and leadership strength. Classical texts warn of injuries, fevers or blood-related complaints and a fiery temper, while promising courage and a capacity to lead. Regular hard exercise is one of the best remedies for this placement, giving the energy a healthy outlet.",
       "keywords": [
         "courage",
         "energy",
@@ -560,7 +562,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Mars in the 2nd House",
       "summary": "Brings blunt, forceful speech and wealth built through risk, effort, and technical skill.",
-      "effects": "The native's speech can be sharp or argumentative, occasionally causing friction within the family, and financial life often involves calculated risk, land dealings, or technical/engineering income. Family relationships may see periodic conflict due to directness or impatience. Care around facial or dental injuries and disciplined spending both deserve attention under this placement.",
+      "effects": "The native's speech can be sharp or argumentative, occasionally causing friction within the family, and financial life often involves calculated risk, land dealings, or technical/engineering income. Family relationships may see periodic conflict due to directness or impatience. Care around facial or dental injuries and disciplined spending both deserve attention under this placement. Classical texts warn of harsh speech, quarrels over money or food and trouble from rivals, though the native can earn well through land, metals or technical skill. Some traditions also examine the 2nd house for Mangal Dosha, and calm, considered speech is the single most useful habit here.",
       "keywords": [
         "blunt speech",
         "risk-taking wealth",
@@ -581,7 +583,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Mars in the 3rd House",
       "summary": "One of Mars's most favorable placements, granting courage, athleticism, and success through self-effort.",
-      "effects": "This upachaya house amplifies Mars's natural energy into valor, initiative, and a competitive edge in personal effort, short journeys, and sibling relationships (especially with brothers). The native often excels in sports, technical trades, or any field where bold, hands-on action leads to results. Protective instincts toward younger siblings coexist with occasional rivalry.",
+      "effects": "This upachaya house amplifies Mars's natural energy into valor, initiative, and a competitive edge in personal effort, short journeys, and sibling relationships (especially with brothers). The native often excels in sports, technical trades, or any field where bold, hands-on action leads to results. Protective instincts toward younger siblings coexist with occasional rivalry. Classical texts praise Mars in the 3rd for bravery, wealth, a good reputation and freedom from fear of enemies. Results keep improving with effort over the years, since Mars grows stronger in this upachaya house.",
       "keywords": [
         "valor",
         "self-effort",
@@ -603,7 +605,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Mars in the 4th House",
       "summary": "One of the classical Kuja Dosha houses, bringing restlessness at home alongside strong property drive.",
-      "effects": "Domestic peace can be disrupted by disputes over property, impatience, or tension with the mother, and this house is specifically examined for Mangal Dosha in marriage compatibility. Positively, the native often shows strong technical or engineering aptitude and succeeds in acquiring land or real estate through direct effort. Conscious patience at home helps offset the native's natural restlessness.",
+      "effects": "Domestic peace can be disrupted by disputes over property, impatience, or tension with the mother, and this house is specifically examined for Mangal Dosha in marriage compatibility. Positively, the native often shows strong technical or engineering aptitude and succeeds in acquiring land or real estate through direct effort. Conscious patience at home helps offset the native's natural restlessness. Classical texts warn of changes of residence, problems with vehicles and some lack of comfort at home, while noting success through land and courage. Safety checks on home and vehicles, and taking a pause before reacting at home, address the most common troubles of this placement.",
       "keywords": [
         "Kuja Dosha",
         "property drive",
@@ -623,14 +625,14 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Mars in the 5th House",
-      "summary": "Another Kuja Dosha house, adding intensity and impulsiveness to romance, intellect, and speculation.",
-      "effects": "The native's intelligence is sharp and quick but can be impulsive in decision-making, particularly in romance, investments, or creative risk-taking. This placement is also examined for Mangal Dosha, and channeling the native's competitive energy into structured creative or academic pursuits works well.",
+      "summary": "Adds intensity and impulsiveness to romance, intellect, and speculation.",
+      "effects": "The native's intelligence is sharp and quick but can be impulsive in decision-making, particularly in romance, investments, or creative risk-taking. Channeling the native's competitive energy into structured creative or academic pursuits works well. Classical texts describe a sharp but restless mind, a fiery temperament and interest in technical, competitive or strategic subjects. The 5th is not one of the classical Mangal Dosha houses, and the main care needed here is patience in romance and caution with speculative risk.",
       "keywords": [
         "impulsiveness",
         "romance",
         "speculation",
         "sharp intellect",
-        "Kuja Dosha"
+        "restless mind"
       ],
       "dignity_note": "Effects strengthen when Mars is exalted (Capricorn) or in its own signs (Aries, Scorpio); a well-placed Mars in the 1st, 4th, 7th, 8th, or 12th house from Lagna or Moon is also examined for Kuja/Mangal Dosha in marriage matters. When debilitated (Cancer) or afflicted, the drive described below tends to show as recklessness, injury, or conflict rather than constructive courage.",
       "status": "verified",
@@ -646,7 +648,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Mars in the 6th House",
       "summary": "An excellent upachaya placement giving decisive victory over rivals, strong immunity, and disciplined service.",
-      "effects": "Mars performs strongly here, granting the courage and stamina to overcome competitors, litigation, and obstacles, along with generally resilient health once early challenges are addressed. This placement favors careers in the military, police, surgery, or any competitive, discipline-driven field. Tension with maternal relatives is possible, but professional and health-related battles tend to resolve in the native's favor.",
+      "effects": "Mars performs strongly here, granting the courage and stamina to overcome competitors, litigation, and obstacles, along with generally resilient health once early challenges are addressed. This placement favors careers in the military, police, surgery, or any competitive, discipline-driven field. Tension with maternal relatives is possible, but professional and health-related battles tend to resolve in the native's favor. Classical texts praise Mars in the 6th for victory over enemies, strong digestion, high energy and success in competitive or uniformed services. The native solves problems head-on, and keeping disputes within fair limits stops small conflicts from becoming lasting enmities.",
       "keywords": [
         "victory over rivals",
         "discipline",
@@ -667,7 +669,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Mars in the 7th House",
       "summary": "A classic Kuja Dosha house associated with passionate but conflict-prone partnerships.",
-      "effects": "Marriage and business partnerships tend to be intense, direct, and occasionally argumentative, with a spouse or partner who is assertive or competitive by nature. This placement is one of the primary houses considered for Mangal Dosha analysis in marital compatibility. When channeled constructively, the native's competitive drive can build strong, dynamic joint ventures, particularly in business requiring bold decision-making.",
+      "effects": "Marriage and business partnerships tend to be intense, direct, and occasionally argumentative, with a spouse or partner who is assertive or competitive by nature. This placement is one of the primary houses considered for Mangal Dosha analysis in marital compatibility. When channeled constructively, the native's competitive drive can build strong, dynamic joint ventures, particularly in business requiring bold decision-making. Classical texts warn of disagreements with the spouse, a hasty approach to partnerships and travel or separation that strains the bond. Many traditions consider this dosha balanced when the partner has a similar Mars placement, and shared physical activities help channel the energy well.",
       "keywords": [
         "Kuja Dosha",
         "passionate partnership",
@@ -688,7 +690,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Mars in the 8th House",
       "summary": "A challenging dusthana and Kuja Dosha house linked to accidents, intensity, and sudden transformation.",
-      "effects": "The native should exercise care regarding injuries, surgery, or accident-prone situations, and property or inheritance matters may involve disputes requiring careful handling. There is often an intense, investigative interest in the occult, research, or hidden matters, with sudden, transformative events shaping key life turns. With supportive chart factors, this placement can grant notable resilience and the courage to recover from crises.",
+      "effects": "The native should exercise care regarding injuries, surgery, or accident-prone situations, and property or inheritance matters may involve disputes requiring careful handling. There is often an intense, investigative interest in the occult, research, or hidden matters, with sudden, transformative events shaping key life turns. With supportive chart factors, this placement can grant notable resilience and the courage to recover from crises. Classical texts warn of disputes, debts, injuries and sudden expenses, especially when Mars is weak or aspected by malefics. Careful driving, insurance and clear written agreements about property are practical ways to work with this placement.",
       "keywords": [
         "accidents/surgery risk",
         "transformation",
@@ -709,7 +711,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Mars in the 9th House",
       "summary": "Brings energetic, sometimes assertive conviction to belief systems, higher learning, and the father.",
-      "effects": "The native pursues dharma, philosophy, or higher education with courage and initiative, though an assertive approach can create occasional friction with the father or traditional authorities. Technical, military, or competitive fields of higher study are well favored, as is travel undertaken for competitive or professional reasons. Fortune generally supports the native's bold pursuit of principled goals.",
+      "effects": "The native pursues dharma, philosophy, or higher education with courage and initiative, though an assertive approach can create occasional friction with the father or traditional authorities. Technical, military, or competitive fields of higher study are well favored, as is travel undertaken for competitive or professional reasons. Fortune generally supports the native's bold pursuit of principled goals. Classical texts describe a person with influence and some wealth, but warn of friction with the father or elders and a tendency to argue over principles. The native's convictions become a real strength when they are tested against facts and expressed with respect for others' views.",
       "keywords": [
         "conviction",
         "higher education",
@@ -731,7 +733,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Mars in the 10th House",
       "summary": "An excellent upachaya placement for driven, ambitious career success, especially in technical or leadership fields.",
-      "effects": "The native is ambitious, hardworking, and unafraid of competition, excelling in engineering, the military, sports, entrepreneurship, or executive leadership roles. Career advancement often comes through decisive, bold action rather than patient waiting, though clashes with authority figures are possible if assertiveness is not tempered with diplomacy. Public reputation tends to reflect strength and capability.",
+      "effects": "The native is ambitious, hardworking, and unafraid of competition, excelling in engineering, the military, sports, entrepreneurship, or executive leadership roles. Career advancement often comes through decisive, bold action rather than patient waiting, though clashes with authority figures are possible if assertiveness is not tempered with diplomacy. Public reputation tends to reflect strength and capability. Classical texts praise Mars in the 10th, its directional-strength house, for courage, fame, success in action and favour from those in authority. When Mars is in its own or exalted sign here it forms Ruchaka Yoga, and the native should still learn to delegate rather than control every detail.",
       "keywords": [
         "career ambition",
         "leadership",
@@ -752,7 +754,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Mars in the 11th House",
       "summary": "A favorable upachaya placement bringing strong gains through competitive effort and an energetic social circle.",
-      "effects": "The native achieves ambitious goals through direct action and determination, often gaining income through technical, competitive, or entrepreneurial ventures. Friendships and networks tend to be dynamic and action-oriented, sometimes including close bonds with brothers or fellow competitors. Fulfillment of desires comes readily when the native's energy is applied consistently toward clear goals.",
+      "effects": "The native achieves ambitious goals through direct action and determination, often gaining income through technical, competitive, or entrepreneurial ventures. Friendships and networks tend to be dynamic and action-oriented, sometimes including close bonds with brothers or fellow competitors. Fulfillment of desires comes readily when the native's energy is applied consistently toward clear goals. Classical texts praise Mars in the 11th for wealth, landed property, influence and success over rivals. Gains often come through property, engineering, sports or competitive business, and keep growing as the native builds a reputation for getting things done.",
       "keywords": [
         "ambitious gains",
         "competitive network",
@@ -773,7 +775,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Mars in the 12th House",
       "summary": "Turns Mars's energy inward, favoring disciplined technical or spiritual work over open conflict.",
-      "effects": "The native may suppress anger or channel competitive drive into private, research-oriented, or foreign-based technical work rather than public confrontation. Health matters connected to blood or minor accidents deserve attention, and expenditure often relates to property or technical pursuits abroad. This placement can favor martial arts, disciplined physical practice, or covert/behind-the-scenes technical roles that constructively channel Mars's energy.",
+      "effects": "The native may suppress anger or channel competitive drive into private, research-oriented, or foreign-based technical work rather than public confrontation. Health matters connected to blood or minor accidents deserve attention, and expenditure often relates to property or technical pursuits abroad. This placement can favor martial arts, disciplined physical practice, or covert/behind-the-scenes technical roles that constructively channel Mars's energy. Classical texts warn of expenses, disputes, eye or sleep troubles and losses through hasty decisions, and this house is examined for Mangal Dosha. Physical discipline such as yoga or martial arts, and careful budgeting, help the native use this energy without draining it.",
       "keywords": [
         "suppressed energy",
         "foreign technical work",
@@ -794,7 +796,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Mercury in the 1st House",
       "summary": "Mercury's directional-strength (dig bala) house — gives a witty, articulate, quick-thinking personality.",
-      "effects": "The native is intellectually curious, communicative, and adaptable, often appearing youthful and quick-witted regardless of age. Analytical skill and versatility support success in business, writing, or any field requiring sharp thinking, and the native learns new subjects with ease. Nervous-system sensitivity benefits from calm routines, and the overall personality is friendly, logical, and socially engaging.",
+      "effects": "The native is intellectually curious, communicative, and adaptable, often appearing youthful and quick-witted regardless of age. Analytical skill and versatility support success in business, writing, or any field requiring sharp thinking, and the native learns new subjects with ease. Nervous-system sensitivity benefits from calm routines, and the overall personality is friendly, logical, and socially engaging. Classical texts praise Mercury in the 1st for learning, gentle speech, a youthful appearance and skill in calculation, writing or trade. Mercury takes on the nature of the planets it joins, so its results here depend strongly on whether benefics or malefics influence it.",
       "keywords": [
         "wit",
         "communication",
@@ -815,7 +817,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Mercury in the 2nd House",
       "summary": "Favors eloquent speech and wealth built through trade, writing, or analytical business skill.",
-      "effects": "The native speaks persuasively and precisely, often excelling in negotiation, accounting, writing, or any communication-based trade. Wealth tends to accumulate through calculated business decisions, and the family environment often values education and intellectual achievement. This placement supports a sharp memory for figures and a witty, engaging conversational style.",
+      "effects": "The native speaks persuasively and precisely, often excelling in negotiation, accounting, writing, or any communication-based trade. Wealth tends to accumulate through calculated business decisions, and the family environment often values education and intellectual achievement. This placement supports a sharp memory for figures and a witty, engaging conversational style. Classical texts add wealth through intelligence, a good command of language and enjoyment of good food and fine things. The native's words are an asset in money matters, and keeping written records protects the gains that clever deals bring.",
       "keywords": [
         "eloquent speech",
         "business acumen",
@@ -836,7 +838,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Mercury in the 3rd House",
       "summary": "An excellent upachaya placement for communication, writing, and skillful self-effort.",
-      "effects": "The native shows strong aptitude for writing, marketing, media, or any communication-driven effort, along with an intellectually close bond with siblings. Short journeys and business travel tend to be productive, and manual or technical dexterity often pairs well with analytical thinking. Courage here expresses through clever strategy rather than brute force.",
+      "effects": "The native shows strong aptitude for writing, marketing, media, or any communication-driven effort, along with an intellectually close bond with siblings. Short journeys and business travel tend to be productive, and manual or technical dexterity often pairs well with analytical thinking. Courage here expresses through clever strategy rather than brute force. Classical texts describe a clever, hard-working person who succeeds through skill and effort, though sometimes restless or prone to worry. Skills sharpened through practice keep improving over the years, since the 3rd is an upachaya house.",
       "keywords": [
         "writing",
         "media",
@@ -857,7 +859,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Mercury in the 4th House",
       "summary": "Creates an intellectually engaged home life and an analytical approach to comfort and property.",
-      "effects": "The native grows up in, or creates, a home environment that values learning and communication, often maintaining a close, conversational bond with the mother. Property and vehicle decisions tend to be approached analytically, and the native may show particular interest in gadgets, technology, or intellectual hobbies at home. Educational attainment is generally favored by this placement.",
+      "effects": "The native grows up in, or creates, a home environment that values learning and communication, often maintaining a close, conversational bond with the mother. Property and vehicle decisions tend to be approached analytically, and the native may show particular interest in gadgets, technology, or intellectual hobbies at home. Educational attainment is generally favored by this placement. Classical texts praise Mercury in the 4th for learning, a happy home, vehicles, helpful friends and skill in speech. Mercury in a kendra can lose some of its natural beneficence by the kendradhipati principle when it rules only angular houses, so other chart factors refine this result.",
       "keywords": [
         "intellectual home",
         "education",
@@ -878,7 +880,7 @@
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Mercury in the 5th House",
       "summary": "Sharpens intelligence, memory, and analytical creativity, favoring education and calculated speculation.",
-      "effects": "The native demonstrates strong memory, mathematical or analytical aptitude, and creative intelligence well suited to writing, teaching, or research. Speculative or investment decisions benefit from the native's calculated, detail-oriented approach rather than pure chance.",
+      "effects": "The native demonstrates strong memory, mathematical or analytical aptitude, and creative intelligence well suited to writing, teaching, or research. Speculative or investment decisions benefit from the native's calculated, detail-oriented approach rather than pure chance. Classical texts add skill with mantra, mathematics or literature and a cheerful, learned disposition. The native learns quickly and teaches well, and steady study habits help turn a quick mind into lasting expertise.",
       "keywords": [
         "intelligence",
         "education",
@@ -899,7 +901,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Mercury in the 6th House",
       "summary": "Brings analytical precision to work, health matters, and resolving disputes through negotiation.",
-      "effects": "The native excels in detail-oriented service roles such as accounting, administration, medicine, or analysis, and tends to resolve conflicts through clever negotiation rather than confrontation. Health sensitivity often centers on the nervous or digestive system, benefiting from routine and mental calm. Competitive intellectual environments generally bring out the native's problem-solving strengths.",
+      "effects": "The native excels in detail-oriented service roles such as accounting, administration, medicine, or analysis, and tends to resolve conflicts through clever negotiation rather than confrontation. Health sensitivity often centers on the nervous or digestive system, benefiting from routine and mental calm. Competitive intellectual environments generally bring out the native's problem-solving strengths. Classical texts describe a person who defeats opponents through argument or strategy, though Mercury here can also bring nervous strain or quarrels. Careful reading of contracts and calm, factual communication help the native win disputes without damaging working relationships.",
       "keywords": [
         "analytical work",
         "negotiation",
@@ -920,7 +922,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Mercury in the 7th House",
       "summary": "Favors communicative, intellectually compatible partnerships and success in trade-based business.",
-      "effects": "The native often finds a witty, articulate spouse or business partner, and marriage or partnership benefits significantly from open, honest communication and shared intellectual interests. This placement is well suited to business partnerships in trade, consulting, or commerce, where negotiation skill and adaptability are key assets. Diplomatic handling of disagreements helps sustain long-term partnership harmony.",
+      "effects": "The native often finds a witty, articulate spouse or business partner, and marriage or partnership benefits significantly from open, honest communication and shared intellectual interests. This placement is well suited to business partnerships in trade, consulting, or commerce, where negotiation skill and adaptability are key assets. Diplomatic handling of disagreements helps sustain long-term partnership harmony. Classical texts describe a well-dressed, learned person with a clever spouse, and success in trade or partnerships that rely on skill and negotiation. Shared interests and plenty of conversation keep this partnership lively, while overanalysing a partner's every word can create needless tension.",
       "keywords": [
         "communicative partnership",
         "trade/commerce",
@@ -941,7 +943,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Mercury in the 8th House",
       "summary": "Sharpens intuitive, investigative thinking around hidden, transformative, or research-oriented matters.",
-      "effects": "The native shows a keen analytical interest in mysteries, psychology, or occult subjects, often possessing sharp intuition about hidden truths and shared resources. Nervous tension or overthinking can arise during periods of major transformation, so calming mental practices are helpful. This placement suits investigative work, research, or fields requiring careful analysis of complex, sensitive information.",
+      "effects": "The native shows a keen analytical interest in mysteries, psychology, or occult subjects, often possessing sharp intuition about hidden truths and shared resources. Nervous tension or overthinking can arise during periods of major transformation, so calming mental practices are helpful. This placement suits investigative work, research, or fields requiring careful analysis of complex, sensitive information. Classical texts note a well-known, capable person who may gain through research, inheritance or the affairs of others, especially when Mercury is strong. Mental rest and clear boundaries around worry help this sharp mind stay productive rather than anxious.",
       "keywords": [
         "investigative thinking",
         "occult interest",
@@ -962,7 +964,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Mercury in the 9th House",
       "summary": "Supports an intellectual, communicative approach to philosophy, higher learning, and teaching.",
-      "effects": "The native is drawn to studying, writing about, or teaching philosophy, law, or dharma, often communicating complex ideas in an accessible way. Relationships with the father or gurus benefit from open intellectual exchange, and this placement favors publishing, foreign study, or higher education tied to communication skills. Fortune tends to follow disciplined, well-reasoned pursuit of knowledge.",
+      "effects": "The native is drawn to studying, writing about, or teaching philosophy, law, or dharma, often communicating complex ideas in an accessible way. Relationships with the father or gurus benefit from open intellectual exchange, and this placement favors publishing, foreign study, or higher education tied to communication skills. Fortune tends to follow disciplined, well-reasoned pursuit of knowledge. Classical texts praise Mercury in the 9th for learning, eloquence, good conduct, wealth and devotion to religious or scholarly pursuits. The native often becomes a bridge between traditions or languages, and fortune follows the honest sharing of knowledge.",
       "keywords": [
         "teaching",
         "philosophy",
@@ -983,7 +985,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Mercury in the 10th House",
       "summary": "Favors a versatile, communication-driven career in business, writing, or education.",
-      "effects": "The native builds a professional reputation around intelligence, adaptability, and effective communication, thriving in trade, consulting, writing, teaching, or entrepreneurial ventures. Career paths often show versatility, sometimes involving more than one field simultaneously, and public image reflects wit and competence. Networking and clear communication play a key role in professional advancement.",
+      "effects": "The native builds a professional reputation around intelligence, adaptability, and effective communication, thriving in trade, consulting, writing, teaching, or entrepreneurial ventures. Career paths often show versatility, sometimes involving more than one field simultaneously, and public image reflects wit and competence. Networking and clear communication play a key role in professional advancement. Classical texts praise Mercury in the 10th for success in undertakings, learning, wealth and a good reputation for intelligence. Keeping skills up to date matters a great deal here, since the native's career rests on what they know and how well they explain it.",
       "keywords": [
         "versatile career",
         "business/writing",
@@ -1004,7 +1006,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Mercury in the 11th House",
       "summary": "Brings gains through networking, communication, and analytically planned ventures.",
-      "effects": "The native builds a wide, intellectually stimulating social circle and often earns income through trade, writing, consulting, or communication-based ventures. Long-term goals are approached with careful planning and analysis, increasing the likelihood of their fulfillment. Friendships frequently involve productive exchange of ideas or business opportunities.",
+      "effects": "The native builds a wide, intellectually stimulating social circle and often earns income through trade, writing, consulting, or communication-based ventures. Long-term goals are approached with careful planning and analysis, increasing the likelihood of their fulfillment. Friendships frequently involve productive exchange of ideas or business opportunities. Classical texts praise Mercury in the 11th for wealth, learning, many helpful friends and gains through trade or intellectual work. Several income streams are common, and the native benefits from reviewing them regularly so that the best ones get the most attention.",
       "keywords": [
         "networking gains",
         "consulting income",
@@ -1025,7 +1027,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Mercury in the 12th House",
       "summary": "Turns analytical ability inward, favoring research, foreign communication, or introspective study.",
-      "effects": "The native often shows a reflective, sometimes overthinking mind, well suited to research, foreign languages, writing in solitude, or spiritual and philosophical study. Expenditure may flow toward education, communication technology, or foreign-linked ventures. Behind-the-scenes analytical work, translation, or foreign trade can bring quiet but meaningful success.",
+      "effects": "The native often shows a reflective, sometimes overthinking mind, well suited to research, foreign languages, writing in solitude, or spiritual and philosophical study. Expenditure may flow toward education, communication technology, or foreign-linked ventures. Behind-the-scenes analytical work, translation, or foreign trade can bring quiet but meaningful success. Classical texts warn of expenses, scattered learning and losses through careless agreements, while noting skill in languages and spiritual study. Double-checking paperwork and writing down ideas before they fade help this reflective mind deliver real results.",
       "keywords": [
         "introspective research",
         "foreign languages",
@@ -1046,7 +1048,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Jupiter in the 1st House",
       "summary": "Jupiter's directional-strength (dig bala) house — gives a wise, optimistic, and respected personality.",
-      "effects": "The native carries a naturally philosophical, generous, and optimistic outlook, often serving as a guide or teacher figure to others. Physical constitution and overall life fortune tend to be favorable, and ethical conduct comes relatively naturally. When Jupiter is in its own or exalted sign here, this can produce Hamsa Yoga, indicating exceptional wisdom, dignity, and life success.",
+      "effects": "The native carries a naturally philosophical, generous, and optimistic outlook, often serving as a guide or teacher figure to others. Physical constitution and overall life fortune tend to be favorable, and ethical conduct comes relatively naturally. When Jupiter is in its own or exalted sign here, this can produce Hamsa Yoga, indicating exceptional wisdom, dignity, and life success. Classical texts praise Jupiter in the 1st, its directional-strength house, for a dignified appearance, learning, good health and respect from others. Jupiter's aspects from here protect the 5th, 7th and 9th houses, which is why this placement is said to support the whole chart.",
       "keywords": [
         "wisdom",
         "optimism",
@@ -1068,7 +1070,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Jupiter in the 2nd House",
       "summary": "Supports steady wealth accumulation, generous family values, and wise, pleasant speech.",
-      "effects": "The native tends to accumulate wealth through ethical means and shows generosity toward family, often coming from or building a large, well-provided-for household. Speech is truthful, encouraging, and often carries a teaching or advisory quality. Values around food, resources, and family life reflect abundance and a broad, principled perspective.",
+      "effects": "The native tends to accumulate wealth through ethical means and shows generosity toward family, often coming from or building a large, well-provided-for household. Speech is truthful, encouraging, and often carries a teaching or advisory quality. Values around food, resources, and family life reflect abundance and a broad, principled perspective. Classical texts praise Jupiter in the 2nd for wealth, eloquence, a good appearance and a learned, respected family. The native's advice is often sought, and money grows most reliably through teaching, counselling or finance carried out honestly.",
       "keywords": [
         "ethical wealth",
         "generosity",
@@ -1089,7 +1091,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Jupiter in the 3rd House",
       "summary": "Applies wisdom to communication and self-effort, though this upachaya house can temper Jupiter's natural expansiveness.",
-      "effects": "The native communicates with thoughtful, principled insight, often taking a philosophical or teaching approach to writing and self-expression. Because Jupiter's growth-oriented nature can conflict with the assertive, effort-driven quality of the 3rd house, sibling relationships or personal initiative may develop more slowly or thoughtfully than boldly. Courage here tends to be measured and ethically grounded rather than impulsive.",
+      "effects": "The native communicates with thoughtful, principled insight, often taking a philosophical or teaching approach to writing and self-expression. Because Jupiter's growth-oriented nature can conflict with the assertive, effort-driven quality of the 3rd house, sibling relationships or personal initiative may develop more slowly or thoughtfully than boldly. Courage here tends to be measured and ethically grounded rather than impulsive. Classical texts are mixed here, describing a person who may be thrifty or reserved and must work hard for recognition, though respected by siblings. Jupiter's aspects from here fall on the 7th, 9th and 11th, so partnerships, fortune and gains often benefit even when personal effort feels slow.",
       "keywords": [
         "philosophical communication",
         "measured effort",
@@ -1110,7 +1112,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Jupiter in the 4th House",
       "summary": "Brings domestic happiness, ethical upbringing, and comfort through wisdom and generosity at home.",
-      "effects": "The native typically experiences a nurturing, principled home environment with a wise, generous, or spiritually inclined mother. This placement favors real estate gains, educational attainment, and a generally contented, secure domestic life. Emotional and material fulfillment both benefit from the native's naturally optimistic, big-picture perspective on family matters.",
+      "effects": "The native typically experiences a nurturing, principled home environment with a wise, generous, or spiritually inclined mother. This placement favors real estate gains, educational attainment, and a generally contented, secure domestic life. Emotional and material fulfillment both benefit from the native's naturally optimistic, big-picture perspective on family matters. Classical texts praise Jupiter in the 4th for comforts, vehicles, a good home, learning and the goodwill of friends and relatives. When Jupiter is in its own or exalted sign here it forms Hamsa Yoga, and the native's home often becomes a place of learning or hospitality for others.",
       "keywords": [
         "domestic happiness",
         "wise mother",
@@ -1130,8 +1132,8 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Jupiter in the 5th House",
-      "summary": "An excellent trikona placement for higher intelligence, and ethically grounded creativity.",
-      "effects": "Wisdom and moral clarity guide decision-making in education, romance, and speculative matters, generally leading to favorable outcomes. This is considered one of the most auspicious placements for Jupiter, supporting both intellectual and spiritual growth.",
+      "summary": "An excellent trikona placement for higher intelligence and ethically grounded creativity.",
+      "effects": "Wisdom and moral clarity guide decision-making in education, romance, and speculative matters, generally leading to favorable outcomes. This is considered one of the most auspicious placements for Jupiter, supporting both intellectual and spiritual growth. Classical texts add wisdom, the trust of people in power, skill in counsel and success in study, teaching or investments guided by sound judgement. Jupiter's aspects from here reach the 9th, 11th and 1st houses, linking intelligence directly to fortune, gains and personal well-being.",
       "keywords": [
         "higher intelligence",
         "teaching",
@@ -1151,7 +1153,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Jupiter in the 6th House",
       "summary": "A mixed placement where Jupiter's generosity meets the competitive demands of the 6th house.",
-      "effects": "The native tends to show fairness and generosity even toward rivals or competitors, and success in service-oriented or advisory roles is common. However, this dusthana/upachaya house can dilute some of Jupiter's protective benefits, occasionally leading to weight, liver, or metabolic sensitivity, or a tendency toward overgenerosity that strains finances. Ethical conduct in competitive situations still tends to bring eventual victory over obstacles.",
+      "effects": "The native tends to show fairness and generosity even toward rivals or competitors, and success in service-oriented or advisory roles is common. However, this dusthana/upachaya house can dilute some of Jupiter's protective benefits, occasionally leading to weight, liver, or metabolic sensitivity, or a tendency toward overgenerosity that strains finances. Ethical conduct in competitive situations still tends to bring eventual victory over obstacles. Classical texts say Jupiter in the 6th can make the native lazy or troubled by rivals, yet also successful over enemies through fairness and good counsel. Moderation in food and in lending money are the two practical habits that protect this placement best.",
       "keywords": [
         "fairness in competition",
         "service",
@@ -1172,7 +1174,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Jupiter in the 7th House",
       "summary": "Favors a fortunate, ethically grounded marriage and dharmic business partnerships.",
-      "effects": "The native often attracts a wise, educated, or spiritually inclined spouse, and marriage tends to bring genuine happiness, guidance, and mutual growth. Business partnerships benefit from the native's fair, principled approach, building trust and long-term success. Public reputation in relationships and joint ventures is generally favorable under this placement.",
+      "effects": "The native often attracts a wise, educated, or spiritually inclined spouse, and marriage tends to bring genuine happiness, guidance, and mutual growth. Business partnerships benefit from the native's fair, principled approach, building trust and long-term success. Public reputation in relationships and joint ventures is generally favorable under this placement. Classical texts praise Jupiter in the 7th for a good spouse, refinement, eloquence and success in trade or advisory partnerships. Jupiter aspects the 1st house from here, so the partnership itself tends to improve the native's character and standing.",
       "keywords": [
         "fortunate marriage",
         "wise spouse",
@@ -1192,8 +1194,8 @@
       "house": 8,
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Jupiter in the 8th House",
-      "summary": "",
-      "effects": "Wisdom gained through adversity becomes a defining life theme.",
+      "summary": "Deepens philosophical understanding of life's transitions, bringing resilience, research ability and possible gains through inheritance.",
+      "effects": "The native often develops a thoughtful, spiritually informed perspective on transformation, hidden matters and the deeper meaning of hardship, and may gain unexpected support or inheritance through in-laws or shared resources. Classical sources note that a well-placed Jupiter here softens the 8th house's sudden upheavals and favors research, occult or spiritual study. Wisdom gained through adversity becomes a defining life theme. Classical texts note that Jupiter here can bring hidden support in difficult times, interest in deep study and gains through others' resources. Jupiter's aspects from here fall on the 12th, 2nd and 4th houses, encouraging generosity, family savings and inner peace.",
       "keywords": [
         "philosophical depth",
         "inheritance",
@@ -1214,7 +1216,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Jupiter in the 9th House",
       "summary": "One of the most auspicious placements in the entire chart — strong fortune, dharma, and wisdom.",
-      "effects": "The native tends to be highly fortunate, principled, and naturally drawn to philosophy, law, teaching, or religious life, often with a distinguished or spiritually significant father or guru figure. Higher education, publishing, and long-distance travel for learning or pilgrimage are strongly favored. Ethical conduct and generosity bring lasting good fortune throughout life.",
+      "effects": "The native tends to be highly fortunate, principled, and naturally drawn to philosophy, law, teaching, or religious life, often with a distinguished or spiritually significant father or guru figure. Higher education, publishing, and long-distance travel for learning or pilgrimage are strongly favored. Ethical conduct and generosity bring lasting good fortune throughout life. Classical texts praise Jupiter in the 9th for wealth, piety, learning, a respected father or teacher and the ability to guide others. Jupiter aspects the 1st, 3rd and 5th houses from here, strengthening personality, courage and intelligence together.",
       "keywords": [
         "great fortune",
         "dharma",
@@ -1236,7 +1238,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Jupiter in the 10th House",
       "summary": "Supports a respected, principled career, often in teaching, law, counseling, or advisory roles.",
-      "effects": "The native builds a professional reputation around wisdom, integrity, and fair dealing, thriving in education, law, religious or philosophical work, consulting, or public administration. Career growth tends to be steady and well-regarded, with authority earned through ethical conduct rather than aggression. Public status generally reflects the native's genuine character and knowledge.",
+      "effects": "The native builds a professional reputation around wisdom, integrity, and fair dealing, thriving in education, law, religious or philosophical work, consulting, or public administration. Career growth tends to be steady and well-regarded, with authority earned through ethical conduct rather than aggression. Public status generally reflects the native's genuine character and knowledge. Classical texts praise Jupiter in the 10th for success in undertakings, wealth, good conduct and favour from people in high positions. When Jupiter is in its own or exalted sign here it forms Hamsa Yoga, and the native's integrity becomes the foundation of a lasting career.",
       "keywords": [
         "respected career",
         "teaching/law",
@@ -1257,7 +1259,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Jupiter in the 11th House",
       "summary": "An excellent placement for gains, ethical wealth, and a broad, influential circle of friends.",
-      "effects": "The native tends to fulfill long-term goals and accumulate wealth through generous, principled means, often supported by a wide network of influential or like-minded friends. Income through teaching, consulting, philanthropy, or advisory work is favored, and social connections bring both material and personal fulfillment. This is considered one of Jupiter's strongest houses for material and social success.",
+      "effects": "The native tends to fulfill long-term goals and accumulate wealth through generous, principled means, often supported by a wide network of influential or like-minded friends. Income through teaching, consulting, philanthropy, or advisory work is favored, and social connections bring both material and personal fulfillment. This is considered one of Jupiter's strongest houses for material and social success. Classical texts praise Jupiter in the 11th for wealth, influence, a good name and the fulfilment of most wishes. Jupiter aspects the 3rd, 5th and 7th houses from here, so courage, intelligence and partnerships all share in the gains.",
       "keywords": [
         "ethical gains",
         "influential friendships",
@@ -1278,7 +1280,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Jupiter in the 12th House",
       "summary": "Channels Jupiter's expansiveness toward spirituality, foreign connections, and generous, moksha-oriented pursuits.",
-      "effects": "The native often shows a strong pull toward spiritual practice, foreign travel or residence, and philanthropic or religious giving, sometimes at the expense of material accumulation. This placement is traditionally favorable for liberation-oriented growth, higher wisdom, and meaningful foreign education or charitable work. Generosity should be balanced with practical financial planning to avoid excessive loss of resources.",
+      "effects": "The native often shows a strong pull toward spiritual practice, foreign travel or residence, and philanthropic or religious giving, sometimes at the expense of material accumulation. This placement is traditionally favorable for liberation-oriented growth, higher wisdom, and meaningful foreign education or charitable work. Generosity should be balanced with practical financial planning to avoid excessive loss of resources. Classical texts warn of expenses, some difficulty in holding wealth and occasional ingratitude from others, while praising spiritual and charitable leanings. Jupiter's aspects from here fall on the 4th, 6th and 8th houses, offering protection at home and help in overcoming difficulties.",
       "keywords": [
         "spirituality",
         "foreign connection",
@@ -1299,7 +1301,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Venus in the 1st House",
       "summary": "Gives an attractive, charming, diplomatically graceful personality with refined tastes.",
-      "effects": "The native has an appealing appearance or manner, along with a natural diplomatic charm that eases social interactions. Life is oriented around relationships, comfort, and aesthetics, with a genuine appreciation for beauty, art, or fine living. When Venus occupies its own or exalted sign here, this can produce Malavya Yoga, indicating exceptional charm, comfort, and refined success.",
+      "effects": "The native has an appealing appearance or manner, along with a natural diplomatic charm that eases social interactions. Life is oriented around relationships, comfort, and aesthetics, with a genuine appreciation for beauty, art, or fine living. When Venus occupies its own or exalted sign here, this can produce Malavya Yoga, indicating exceptional charm, comfort, and refined success. Classical texts praise Venus in the 1st for good looks, a long run of comfort, skill in the arts, and popularity. The native's charm is a real asset, and self-discipline keeps the love of comfort from turning into overindulgence.",
       "keywords": [
         "charm",
         "attractiveness",
@@ -1320,7 +1322,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Venus in the 2nd House",
       "summary": "Favors wealth through beauty, luxury goods, or the arts, along with sweet, pleasant speech.",
-      "effects": "The native speaks in a gentle, agreeable manner and often builds wealth connected to aesthetics, fashion, cosmetics, hospitality, or the arts. Family life emphasizes comfort, good food, and shared enjoyment, and material values center on quality and refinement rather than mere accumulation. Close, affectionate family relationships are generally supported.",
+      "effects": "The native speaks in a gentle, agreeable manner and often builds wealth connected to aesthetics, fashion, cosmetics, hospitality, or the arts. Family life emphasizes comfort, good food, and shared enjoyment, and material values center on quality and refinement rather than mere accumulation. Close, affectionate family relationships are generally supported. Classical texts praise Venus in the 2nd for wealth, poetic or musical talent, a pleasant face and a comfortable family life. The native spends readily on beauty and hospitality, so a simple savings rule keeps abundance from slipping away.",
       "keywords": [
         "luxury income",
         "pleasant speech",
@@ -1341,7 +1343,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Venus in the 3rd House",
       "summary": "Brings artistic, diplomatic communication, though effort-driven initiative may be gentler than assertive.",
-      "effects": "The native shows a creative, sociable communication style, often expressed through art, music, or aesthetically pleasing writing, and enjoys warm relationships with sisters or close friends. Because Venus is not naturally suited to the effort-driven 3rd house, personal initiative may lean toward collaborative or diplomatic approaches rather than bold self-assertion. Short journeys and everyday efforts are generally pleasant and socially enriching.",
+      "effects": "The native shows a creative, sociable communication style, often expressed through art, music, or aesthetically pleasing writing, and enjoys warm relationships with sisters or close friends. Because Venus is not naturally suited to the effort-driven 3rd house, personal initiative may lean toward collaborative or diplomatic approaches rather than bold self-assertion. Short journeys and everyday efforts are generally pleasant and socially enriching. Classical texts describe a person who may be less bold or wealthy than others in this placement, but who enjoys good company and artistic pursuits. Creative work shared with others, such as music, design or social media, tends to bring this placement its best results.",
       "keywords": [
         "artistic communication",
         "diplomacy",
@@ -1362,7 +1364,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Venus in the 4th House",
       "summary": "Venus's directional-strength (dig bala) house — excellent for domestic comfort, harmony, and property.",
-      "effects": "This is one of Venus's strongest placements, granting a beautiful, comfortable, and emotionally harmonious home environment along with an affectionate bond with the mother. Property, vehicles, and material comforts tend to come readily, and domestic life is generally a source of genuine happiness. Aesthetic sensibility often shapes the native's approach to home and family life.",
+      "effects": "This is one of Venus's strongest placements, granting a beautiful, comfortable, and emotionally harmonious home environment along with an affectionate bond with the mother. Property, vehicles, and material comforts tend to come readily, and domestic life is generally a source of genuine happiness. Aesthetic sensibility often shapes the native's approach to home and family life. Classical texts praise Venus in the 4th for vehicles, a beautiful home, good friends, comforts and a happy disposition. When Venus is in its own or exalted sign here it forms Malavya Yoga, adding refinement and lasting comfort to home life.",
       "keywords": [
         "domestic harmony",
         "property comfort",
@@ -1382,8 +1384,8 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Venus in the 5th House",
-      "summary": "",
-      "effects": "The native is drawn to romance, the arts, and creative self-expression, often finding fulfillment through entertainment, design, music, or aesthetic pursuits. Intelligence here often expresses through emotional and aesthetic sensitivity.",
+      "summary": "Favors romance, artistic creativity and fulfilling creative self-expression.",
+      "effects": "The native is drawn to romance, the arts, and creative self-expression, often finding fulfillment through entertainment, design, music, or aesthetic pursuits. Intelligence here often expresses through emotional and aesthetic sensitivity. Classical texts add good fortune, a pleasant nature, skill in the arts and support from friends and people of standing. Romance tends to be warm and creative, and the native's talents grow fastest when shared through performance, design or teaching.",
       "keywords": [
         "romance",
         "artistic creativity",
@@ -1403,7 +1405,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Venus in the 6th House",
       "summary": "Can bring relationship complications alongside opportunities in beauty, wellness, or service industries.",
-      "effects": "This dusthana/upachaya placement can create friction or complications in romantic matters, along with a need for attention to reproductive or kidney-related health. Positively, the native often finds professional success in beauty, wellness, fashion, or hospitality service industries, applying aesthetic sensibility within a competitive or service-oriented context. Disputes involving romantic or partnership matters may require patient, diplomatic resolution.",
+      "effects": "This dusthana/upachaya placement can create friction or complications in romantic matters, along with a need for attention to reproductive or kidney-related health. Positively, the native often finds professional success in beauty, wellness, fashion, or hospitality service industries, applying aesthetic sensibility within a competitive or service-oriented context. Disputes involving romantic or partnership matters may require patient, diplomatic resolution. Classical texts warn of trouble through women or partners, hidden opponents and expenses on pleasures, though the native may defeat rivals in the end. Keeping work and romance separate, and attending to sugar and kidney health, are the most practical precautions here.",
       "keywords": [
         "relationship complications",
         "beauty/wellness career",
@@ -1424,7 +1426,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Venus in the 7th House",
       "summary": "Venus's own natural house of significance — excellent for marriage, love, and harmonious partnerships.",
-      "effects": "The native tends to attract an attractive, loving, and refined spouse or business partner, and this placement strongly favors marital happiness, diplomacy, and social charm in all partnerships. Business ventures involving beauty, art, luxury, or public relations benefit particularly well. This is considered one of Venus's most favorable placements for relationship fulfillment.",
+      "effects": "The native tends to attract an attractive, loving, and refined spouse or business partner, and this placement strongly favors marital happiness, diplomacy, and social charm in all partnerships. Business ventures involving beauty, art, luxury, or public relations benefit particularly well. This is considered one of Venus's most favorable placements for relationship fulfillment. Classical texts add a caution known as karako bhava nashaya: a planet placed in the house it signifies can overdo its theme, so Venus here may bring strong desires or more than one serious attachment. Loyalty, clear commitments and shared values let this placement deliver the happy partnership it promises.",
       "keywords": [
         "marital happiness",
         "loving spouse",
@@ -1445,7 +1447,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Venus in the 8th House",
       "summary": "Brings intense, transformative romantic experiences and an interest in hidden or mystical arts.",
-      "effects": "The native may experience deep, emotionally intense relationships, along with possible inheritance or gains connected to a spouse or in-laws. There is often a fascination with mystical, occult, or unconventional aesthetic and romantic interests, and reproductive health deserves attentive care. Relationships here tend to be transformative rather than superficial, often marking significant turning points in life.",
+      "effects": "The native may experience deep, emotionally intense relationships, along with possible inheritance or gains connected to a spouse or in-laws. There is often a fascination with mystical, occult, or unconventional aesthetic and romantic interests, and reproductive health deserves attentive care. Relationships here tend to be transformative rather than superficial, often marking significant turning points in life. Classical texts note that Venus is one of the planets that does comparatively well in the 8th, often bringing comforts, gains through a partner and an interest in hidden subjects. Honesty about money and feelings within close relationships prevents the secrecy that can otherwise complicate this placement.",
       "keywords": [
         "intense relationships",
         "inheritance through spouse",
@@ -1466,7 +1468,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Venus in the 9th House",
       "summary": "Brings fortune through relationships, the arts, and a refined, ethical approach to philosophy and travel.",
-      "effects": "The native often experiences good fortune connected to marriage, artistic pursuits, or travel for pleasure and higher learning, and approaches philosophy or religion with an appreciation for beauty and harmony. Relationships with father figures or teachers tend to be warm and supportive, and foreign travel connected to comfort or aesthetic interests is favored. Marriage prospects and general life fortune are generally blessed under this placement.",
+      "effects": "The native often experiences good fortune connected to marriage, artistic pursuits, or travel for pleasure and higher learning, and approaches philosophy or religion with an appreciation for beauty and harmony. Relationships with father figures or teachers tend to be warm and supportive, and foreign travel connected to comfort or aesthetic interests is favored. Marriage prospects and general life fortune are generally blessed under this placement. Classical texts praise Venus in the 9th for wealth, a virtuous nature, devotion to religion and elders, and good fortune through marriage. Travel, the arts and generosity toward teachers or temples tend to increase the native's luck under this placement.",
       "keywords": [
         "fortune",
         "refined philosophy",
@@ -1487,7 +1489,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Venus in the 10th House",
       "summary": "Favors a public career in the arts, fashion, beauty, diplomacy, or hospitality industries.",
-      "effects": "The native builds a professional reputation around charm, aesthetic sensibility, and relationship-building skill, thriving in fields such as entertainment, fashion, design, public relations, or luxury goods. Diplomacy and likability often open doors professionally, and public image tends to emphasize refinement and grace. Career success is closely tied to the native's ability to create harmonious, appealing experiences for others.",
+      "effects": "The native builds a professional reputation around charm, aesthetic sensibility, and relationship-building skill, thriving in fields such as entertainment, fashion, design, public relations, or luxury goods. Diplomacy and likability often open doors professionally, and public image tends to emphasize refinement and grace. Career success is closely tied to the native's ability to create harmonious, appealing experiences for others. Classical texts praise Venus in the 10th for honour, wealth, success in the arts or trade and favour from people of influence. When Venus is in its own or exalted sign here it forms Malavya Yoga, and the native's career often involves beauty, comfort or creative industries.",
       "keywords": [
         "arts/fashion career",
         "diplomacy",
@@ -1508,7 +1510,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Venus in the 11th House",
       "summary": "Supports gains through the arts, relationships, and a socially pleasant, well-connected circle.",
-      "effects": "The native often earns income through creative, aesthetic, or partnership-based ventures, and enjoys a wide social circle marked by warmth and mutual enjoyment. Long-term desires connected to comfort, love, or luxury tend to be fulfilled favorably. Friendships and networking frequently bring both material gains and genuine personal satisfaction.",
+      "effects": "The native often earns income through creative, aesthetic, or partnership-based ventures, and enjoys a wide social circle marked by warmth and mutual enjoyment. Long-term desires connected to comfort, love, or luxury tend to be fulfilled favorably. Friendships and networking frequently bring both material gains and genuine personal satisfaction. Classical texts praise Venus in the 11th for wealth, comforts, popularity and gains through women, the arts or luxury trade. Generosity toward friends tends to be repaid, and the native's network is one of their most valuable assets.",
       "keywords": [
         "creative income",
         "social gains",
@@ -1529,7 +1531,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Venus in the 12th House",
       "summary": "Favors comfort and romantic fulfillment in private, foreign, or secluded settings.",
-      "effects": "The native often finds pleasure and relationship fulfillment away from public view, sometimes through foreign travel, quiet retreats, or discreet romantic connections. Expenditure tends to flow toward comfort, luxury, or relationship-related matters, and there can be an artistic or spiritual dimension to the native's private enjoyments. This placement can also favor a peaceful, aesthetically rich life in a foreign or secluded setting.",
+      "effects": "The native often finds pleasure and relationship fulfillment away from public view, sometimes through foreign travel, quiet retreats, or discreet romantic connections. Expenditure tends to flow toward comfort, luxury, or relationship-related matters, and there can be an artistic or spiritual dimension to the native's private enjoyments. This placement can also favor a peaceful, aesthetically rich life in a foreign or secluded setting. Classical texts describe comfortable bedroom pleasures, spending on luxuries and, in some views, wealth gained through foreign or private sources. Venus is traditionally considered comfortable in the 12th, and a clear budget helps the native enjoy its pleasures without financial strain.",
       "keywords": [
         "private fulfillment",
         "foreign comfort",
@@ -1550,7 +1552,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Saturn in the 1st House",
       "summary": "Gives a serious, disciplined, and enduring personality that achieves success through patience.",
-      "effects": "The native tends to be reserved, responsible, and hardworking, often appearing more mature than their age or facing early hardships that build lasting resilience. Success and recognition typically come later in life but tend to be stable and enduring once achieved. When Saturn is in its own or exalted sign here, this can produce Sasa Yoga, indicating disciplined authority and long-term achievement.",
+      "effects": "The native tends to be reserved, responsible, and hardworking, often appearing more mature than their age or facing early hardships that build lasting resilience. Success and recognition typically come later in life but tend to be stable and enduring once achieved. When Saturn is in its own or exalted sign here, this can produce Sasa Yoga, indicating disciplined authority and long-term achievement. Classical texts warn of an early life with hardship or poor health and a tendency toward melancholy when Saturn is weak, while promising endurance when it is strong. Regular exercise, warmth and a positive daily routine help counter the heaviness this placement can bring.",
       "keywords": [
         "discipline",
         "patience",
@@ -1571,7 +1573,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Saturn in the 2nd House",
       "summary": "Brings cautious, reserved speech and wealth that builds slowly but steadily over time.",
-      "effects": "The native may experience early financial struggles or family responsibility burdens, but disciplined saving and thrift generally lead to eventual stability. Speech tends to be measured and careful rather than expressive, and family life may carry a sense of duty or restraint. Long-term financial security is favored more than quick or easy gains.",
+      "effects": "The native may experience early financial struggles or family responsibility burdens, but disciplined saving and thrift generally lead to eventual stability. Speech tends to be measured and careful rather than expressive, and family life may carry a sense of duty or restraint. Long-term financial security is favored more than quick or easy gains. Classical texts warn of harsh or hesitant speech, friction within the family and money that comes slowly, especially in early life. Kind words and patient saving gradually turn this placement into lasting financial security.",
       "keywords": [
         "delayed wealth",
         "thrift",
@@ -1592,7 +1594,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Saturn in the 3rd House",
       "summary": "A favorable upachaya placement, giving disciplined courage and steady, hard-won self-effort.",
-      "effects": "Saturn performs well in this house, granting persistence, patience, and a structured approach to communication, skill-building, and short-term goals. The relationship with siblings may be dutiful or somewhat distant rather than emotionally close, but reliable when needed. Consistent, disciplined effort in this placement tends to produce durable, well-earned results.",
+      "effects": "Saturn performs well in this house, granting persistence, patience, and a structured approach to communication, skill-building, and short-term goals. The relationship with siblings may be dutiful or somewhat distant rather than emotionally close, but reliable when needed. Consistent, disciplined effort in this placement tends to produce durable, well-earned results. Classical texts praise Saturn in the 3rd for courage, intelligence, wealth and success over opponents, often after early struggle. Results improve markedly with age, since Saturn grows stronger in this upachaya house.",
       "keywords": [
         "disciplined effort",
         "persistence",
@@ -1613,7 +1615,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Saturn in the 4th House",
       "summary": "Can create emotional distance or delay in domestic comfort, though stability builds with time.",
-      "effects": "The native may experience a reserved, strict, or emotionally distant relationship with the mother, and domestic happiness or property ownership can be delayed but is generally achieved through sustained effort. A structured, disciplined approach to home life helps offset an initial lack of emotional warmth. Long-term security at home tends to improve significantly with age and persistence.",
+      "effects": "The native may experience a reserved, strict, or emotionally distant relationship with the mother, and domestic happiness or property ownership can be delayed but is generally achieved through sustained effort. A structured, disciplined approach to home life helps offset an initial lack of emotional warmth. Long-term security at home tends to improve significantly with age and persistence. Classical texts warn of a lack of comfort or peace at home, problems with vehicles or property and a heavy sense of duty toward family. Maintaining the home and old property carefully, and setting aside regular time for rest, ease the pressure this placement brings.",
       "keywords": [
         "delayed domestic comfort",
         "reserved mother bond",
@@ -1633,8 +1635,8 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Saturn in the 5th House",
-      "summary": "Brings a serious, disciplined approach to education, and creative or speculative matters.",
-      "effects": "Education and intellectual pursuits benefit from patient, methodical study rather than quick intuition, and speculative ventures fare better with caution and long-term planning. Romantic matters often develop slowly and seriously rather than impulsively.",
+      "summary": "Brings a serious, disciplined approach to education and to creative or speculative matters.",
+      "effects": "Education and intellectual pursuits benefit from patient, methodical study rather than quick intuition, and speculative ventures fare better with caution and long-term planning. Romantic matters often develop slowly and seriously rather than impulsively. Classical texts warn of a mind prone to worry, slow progress in studies and losses through rash speculation. Deep, practical knowledge gained over years is the gift of this placement, and long-term investing suits it far better than quick bets.",
       "keywords": [
         "disciplined parenting",
         "methodical study",
@@ -1655,7 +1657,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Saturn in the 6th House",
       "summary": "An excellent upachaya placement, giving hardworking discipline that overcomes obstacles and rivals.",
-      "effects": "Saturn is particularly well suited to this house, granting the endurance and work ethic needed to succeed in service, administration, or competitive fields despite early difficulty. Health tends to stabilize with disciplined routines, and persistence generally leads to eventual victory over enemies, debts, or professional obstacles. This placement favors long, steady careers built on reliability.",
+      "effects": "Saturn is particularly well suited to this house, granting the endurance and work ethic needed to succeed in service, administration, or competitive fields despite early difficulty. Health tends to stabilize with disciplined routines, and persistence generally leads to eventual victory over enemies, debts, or professional obstacles. This placement favors long, steady careers built on reliability. Classical texts praise Saturn in the 6th for victory over enemies, a strong appetite and success in service, law or labour-related work. Chronic complaints respond well to steady routines, and the native's persistence usually outlasts any opposition.",
       "keywords": [
         "hard work",
         "endurance",
@@ -1676,7 +1678,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Saturn in the 7th House",
       "summary": "Saturn's directional-strength (dig bala) house — favors delayed but stable, enduring partnerships.",
-      "effects": "Marriage or significant partnerships often arrive later in life or require patience to establish, but tend to be durable and built on mutual responsibility once formed. The spouse or business partner may be mature, serious, or older, and business partnerships benefit from Saturn's structured reliability and long-term thinking. Patience and realistic expectations serve relationships well under this placement.",
+      "effects": "Marriage or significant partnerships often arrive later in life or require patience to establish, but tend to be durable and built on mutual responsibility once formed. The spouse or business partner may be mature, serious, or older, and business partnerships benefit from Saturn's structured reliability and long-term thinking. Patience and realistic expectations serve relationships well under this placement. Classical texts warn of delays or coldness in marriage, a partner of different age or background and travel that separates the couple at times. When Saturn is in its own or exalted sign here it forms Sasa Yoga, and in any case commitment and patience make the bond steadier every year.",
       "keywords": [
         "delayed but stable partnership",
         "mature spouse",
@@ -1697,7 +1699,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Saturn in the 8th House",
       "summary": "Associated by many classical sources with resilience, though chronic health matters need patience.",
-      "effects": "Inheritance, joint finances, or major life transformations tend to unfold slowly rather than suddenly, and a disciplined, patient approach to structured occult or research study can be rewarding. Hardship faced here often builds significant long-term inner strength.",
+      "effects": "Inheritance, joint finances, or major life transformations tend to unfold slowly rather than suddenly, and a disciplined, patient approach to structured occult or research study can be rewarding. Hardship faced here often builds significant long-term inner strength. Classical texts mention slow-moving health matters, delays in receiving what is owed and burdens connected with others' money. Preventive health care, steady record-keeping and patience with legal or insurance matters serve this placement well.",
       "keywords": [
         "chronic health patience",
         "slow transformation",
@@ -1717,7 +1719,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Saturn in the 9th House",
       "summary": "Brings a disciplined, sometimes restrictive relationship to belief systems, fortune, and the father.",
-      "effects": "The native may initially experience delayed fortune or a strict, demanding relationship with the father or traditional teachers, but consistent ethical practice tends to build durable, long-term dharmic strength. Higher education and philosophical study benefit from patient, structured discipline rather than quick insight. Respect for tradition and gradual, earned wisdom characterize this placement.",
+      "effects": "The native may initially experience delayed fortune or a strict, demanding relationship with the father or traditional teachers, but consistent ethical practice tends to build durable, long-term dharmic strength. Higher education and philosophical study benefit from patient, structured discipline rather than quick insight. Respect for tradition and gradual, earned wisdom characterize this placement. Classical texts warn of a lack of support from the father or elders and some indifference to ritual religion, while noting a serious, principled character. Service to elders and steady ethical practice tend to unlock the fortune that this placement delays.",
       "keywords": [
         "delayed fortune",
         "strict father figure",
@@ -1738,7 +1740,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Saturn in the 10th House",
       "summary": "An excellent upachaya placement for long-term career authority achieved through sustained discipline.",
-      "effects": "The native builds professional success gradually, often through administrative, engineering, or structured leadership roles requiring patience and reliability rather than quick recognition. Career authority and status, once achieved, tend to be substantial and enduring. This placement rewards a long-view approach to ambition, with peak professional success often coming in mid-to-later life.",
+      "effects": "The native builds professional success gradually, often through administrative, engineering, or structured leadership roles requiring patience and reliability rather than quick recognition. Career authority and status, once achieved, tend to be substantial and enduring. This placement rewards a long-view approach to ambition, with peak professional success often coming in mid-to-later life. Classical texts describe a person who rises to authority, may head an organisation or community and is known for hard work, though rises and falls are possible. When Saturn is in its own or exalted sign here it forms Sasa Yoga, and fairness toward those who work under the native keeps the position secure.",
       "keywords": [
         "long-term career success",
         "administrative authority",
@@ -1759,7 +1761,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Saturn in the 11th House",
       "summary": "An excellent upachaya placement, favoring steady, long-term material gains and enduring friendships.",
-      "effects": "The native tends to achieve significant goals through sustained, disciplined effort rather than quick opportunity, often building wealth gradually over time. Friendships may be fewer but tend to be long-lasting, often with older or more experienced individuals. Fulfillment of major desires is favored later in life as accumulated effort pays off.",
+      "effects": "The native tends to achieve significant goals through sustained, disciplined effort rather than quick opportunity, often building wealth gradually over time. Friendships may be fewer but tend to be long-lasting, often with older or more experienced individuals. Fulfillment of major desires is favored later in life as accumulated effort pays off. Classical texts praise Saturn in the 11th for wealth, influence, many helpers and freedom from serious illness. Gains often come through land, industry, labour, older people or long-term investments that mature slowly.",
       "keywords": [
         "steady gains",
         "long-term friendships",
@@ -1780,7 +1782,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Saturn in the 12th House",
       "summary": "Favors disciplined solitude, service, or foreign-based work requiring patience and detachment.",
-      "effects": "The native may be drawn toward introspective, service-oriented, or foreign-based work that requires significant patience, discipline, and a degree of solitude. Expenditure often connects to responsibilities toward elders or long-term obligations, and chronic health matters benefit from sustained, disciplined care. This placement can support meaningful spiritual practice or research requiring detachment from worldly recognition.",
+      "effects": "The native may be drawn toward introspective, service-oriented, or foreign-based work that requires significant patience, discipline, and a degree of solitude. Expenditure often connects to responsibilities toward elders or long-term obligations, and chronic health matters benefit from sustained, disciplined care. This placement can support meaningful spiritual practice or research requiring detachment from worldly recognition. Classical texts warn of expenses, sleep problems and losses through carelessness or bad company, especially when Saturn is weak. Simple living, charity and disciplined spiritual practice are the classic ways this placement turns hardship into inner freedom.",
       "keywords": [
         "disciplined solitude",
         "foreign service",
@@ -1801,7 +1803,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Rahu in the 1st House",
       "summary": "Gives an unconventional, ambitious, and magnetic personality with a strong drive for recognition.",
-      "effects": "The native often feels a pull toward standing out or breaking from tradition, sometimes experiencing confusion or uncertainty about a fixed sense of identity. Ambition and determination are strong, and the native's presence often has an intense, sometimes magnetic quality that others notice. Health patterns can be unconventional, and self-understanding tends to deepen significantly with maturity.",
+      "effects": "The native often feels a pull toward standing out or breaking from tradition, sometimes experiencing confusion or uncertainty about a fixed sense of identity. Ambition and determination are strong, and the native's presence often has an intense, sometimes magnetic quality that others notice. Health patterns can be unconventional, and self-understanding tends to deepen significantly with maturity. Classical texts warn of restlessness, health complaints that are hard to diagnose and some unpredictability in others' view of the native. A steady routine and a clear set of values help the native channel this strong drive into lasting achievement.",
       "keywords": [
         "unconventional identity",
         "ambition",
@@ -1822,7 +1824,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Rahu in the 2nd House",
       "summary": "Brings unconventional approaches to wealth-building, family dynamics, and speech.",
-      "effects": "The native may pursue material accumulation through unusual, foreign, or non-traditional means, sometimes with a tendency to exaggerate in speech or financial matters. Family background or values may include unconventional or foreign elements, and there can be a strong, sometimes restless desire for material security. Financial gains are often sudden or come from unexpected sources.",
+      "effects": "The native may pursue material accumulation through unusual, foreign, or non-traditional means, sometimes with a tendency to exaggerate in speech or financial matters. Family background or values may include unconventional or foreign elements, and there can be a strong, sometimes restless desire for material security. Financial gains are often sudden or come from unexpected sources. Classical texts warn of untruthful or harsh speech, problems with teeth or face and family disagreements under this placement. Truthful speech, a healthy diet and transparent finances are the most effective safeguards here.",
       "keywords": [
         "unconventional wealth",
         "exaggeration",
@@ -1843,7 +1845,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Rahu in the 3rd House",
       "summary": "A favorable upachaya placement, giving bold, unconventional courage and strong communication or media skill.",
-      "effects": "Rahu performs well in this house, granting ambitious drive, resourcefulness, and often notable skill in media, marketing, technology, or writing. The native shows strong initiative in short-term efforts and short journeys, sometimes taking bold or unconventional approaches with siblings or personal projects. This placement favors success through innovation and calculated risk-taking.",
+      "effects": "Rahu performs well in this house, granting ambitious drive, resourcefulness, and often notable skill in media, marketing, technology, or writing. The native shows strong initiative in short-term efforts and short journeys, sometimes taking bold or unconventional approaches with siblings or personal projects. This placement favors success through innovation and calculated risk-taking. Classical texts praise Rahu in the 3rd for courage, wealth and victory over enemies, making the native fearless in action. The native's boldness works best when paired with honest communication, since shortcuts in this house can backfire.",
       "keywords": [
         "bold initiative",
         "media/technology skill",
@@ -1864,7 +1866,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Rahu in the 4th House",
       "summary": "Creates restlessness around home and property, often involving foreign or unconventional domestic circumstances.",
-      "effects": "The native may experience an unsettled relationship with home, property, or the mother, sometimes involving relocation, foreign residence, or unconventional domestic arrangements. There is often a strong desire to acquire property or vehicles, sometimes pursued through nontraditional means. Emotional peace at home benefits from consciously grounding practices given Rahu's inherently restless nature here.",
+      "effects": "The native may experience an unsettled relationship with home, property, or the mother, sometimes involving relocation, foreign residence, or unconventional domestic arrangements. There is often a strong desire to acquire property or vehicles, sometimes pursued through nontraditional means. Emotional peace at home benefits from consciously grounding practices given Rahu's inherently restless nature here. Classical texts warn of a lack of peace at home, frequent changes of residence and worry about property or relatives. Checking property documents carefully and creating a calm space at home help settle this placement.",
       "keywords": [
         "domestic restlessness",
         "foreign residence",
@@ -1885,7 +1887,7 @@
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Rahu in the 5th House",
       "summary": "Brings an unconventional, ambitious approach to education, creativity, and speculative matters.",
-      "effects": "The native may pursue nontraditional educational paths or subjects, along with a tendency toward speculative risk-taking in creative or financial ventures. Innovative thinking often produces unique achievements when Rahu's ambition here is guided constructively.",
+      "effects": "The native may pursue nontraditional educational paths or subjects, along with a tendency toward speculative risk-taking in creative or financial ventures. Innovative thinking often produces unique achievements when Rahu's ambition here is guided constructively. Classical texts warn of a restless or anxious mind and losses through risky speculation when Rahu is afflicted. Original thinking is the gift here, and checking facts before acting on bold ideas protects the native from costly mistakes.",
       "keywords": [
         "unconventional education",
         "speculative risk",
@@ -1906,7 +1908,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Rahu in the 6th House",
       "summary": "An excellent upachaya placement, favoring unconventional strategy in overcoming rivals and competitive success.",
-      "effects": "Rahu performs strongly here, granting sharp, sometimes unconventional strategic thinking that helps the native overcome enemies, legal disputes, or professional obstacles. Success is often found in foreign, technological, or unconventional service fields, and the native's competitive instincts are well-suited to high-pressure environments. Health concerns, once identified and managed, tend to improve with disciplined attention.",
+      "effects": "Rahu performs strongly here, granting sharp, sometimes unconventional strategic thinking that helps the native overcome enemies, legal disputes, or professional obstacles. Success is often found in foreign, technological, or unconventional service fields, and the native's competitive instincts are well-suited to high-pressure environments. Health concerns, once identified and managed, tend to improve with disciplined attention. Classical texts praise Rahu in the 6th for defeating enemies, gaining wealth and enjoying good health in the long run. The native thrives in demanding environments, and fair play keeps victories from creating new enemies.",
       "keywords": [
         "strategic victory",
         "foreign/technology career",
@@ -1927,7 +1929,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Rahu in the 7th House",
       "summary": "Brings intense ambition and sometimes unconventional dynamics to marriage and partnerships.",
-      "effects": "The native may be drawn to a foreign, unconventional, or intensely magnetic spouse or business partner, and partnerships often carry an element of obsession, idealization, or eventual illusion that requires clear-eyed evaluation. Ambition within partnerships is strong, sometimes prioritizing status or growth over emotional stability. Conscious communication helps clarify expectations and reduce misunderstanding in close relationships.",
+      "effects": "The native may be drawn to a foreign, unconventional, or intensely magnetic spouse or business partner, and partnerships often carry an element of obsession, idealization, or eventual illusion that requires clear-eyed evaluation. Ambition within partnerships is strong, sometimes prioritizing status or growth over emotional stability. Conscious communication helps clarify expectations and reduce misunderstanding in close relationships. Classical texts warn of disagreements or separation in partnerships, and of losses through unreliable associates. Taking time to know a partner well, and putting business agreements in writing, are the best protections here.",
       "keywords": [
         "unconventional partnership",
         "foreign spouse potential",
@@ -1948,7 +1950,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Rahu in the 8th House",
       "summary": "Deepens fascination with the occult, hidden matters, and sudden, transformative change.",
-      "effects": "The native often shows an intense curiosity about mysteries, taboo subjects, or hidden knowledge, along with the potential for sudden, unexpected transformations in life circumstances. Shared resources, inheritance, or joint finances may involve unconventional or unclear elements requiring careful attention. This placement rewards cautious, well-informed decision-making around sudden opportunities or risks.",
+      "effects": "The native often shows an intense curiosity about mysteries, taboo subjects, or hidden knowledge, along with the potential for sudden, unexpected transformations in life circumstances. Shared resources, inheritance, or joint finances may involve unconventional or unclear elements requiring careful attention. This placement rewards cautious, well-informed decision-making around sudden opportunities or risks. Classical texts warn of hidden health troubles, sudden expenses and losses through deception under this placement. Regular health checks, insurance and caution with get-rich-quick schemes help the native benefit from this placement's research ability instead.",
       "keywords": [
         "occult fascination",
         "sudden change",
@@ -1969,7 +1971,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Rahu in the 9th House",
       "summary": "Draws the native toward unconventional belief systems, foreign philosophies, or nontraditional higher learning.",
-      "effects": "The native may adopt foreign, nontraditional, or unconventional approaches to spirituality, philosophy, or higher education, sometimes creating tension with more traditional father figures or gurus. Ambition connected to foreign travel, publishing, or unconventional academic pursuits is often strong. Genuine wisdom develops through embracing rather than resisting the native's unconventional path.",
+      "effects": "The native may adopt foreign, nontraditional, or unconventional approaches to spirituality, philosophy, or higher education, sometimes creating tension with more traditional father figures or gurus. Ambition connected to foreign travel, publishing, or unconventional academic pursuits is often strong. Genuine wisdom develops through embracing rather than resisting the native's unconventional path. Classical texts warn of disagreements with the father or teachers and some disregard for traditional religion when Rahu is afflicted. The native's search for meaning is genuine, and choosing teachers by their conduct rather than their claims keeps it on a sound path.",
       "keywords": [
         "unconventional belief",
         "foreign philosophy",
@@ -1990,7 +1992,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Rahu in the 10th House",
       "summary": "An excellent upachaya placement for ambitious, sometimes rapid rise in unconventional or foreign-linked careers.",
-      "effects": "Rahu performs strongly in this house, often granting a strong drive for status, recognition, and rapid career advancement, particularly in technology, foreign business, media, or innovative fields. Public image is often tied to being seen as ahead of the curve or unconventional in professional approach. Sudden career shifts or opportunities are common, and success is generally significant when ambition is matched with integrity.",
+      "effects": "Rahu performs strongly in this house, often granting a strong drive for status, recognition, and rapid career advancement, particularly in technology, foreign business, media, or innovative fields. Public image is often tied to being seen as ahead of the curve or unconventional in professional approach. Sudden career shifts or opportunities are common, and success is generally significant when ambition is matched with integrity. Classical texts describe success in large undertakings and contact with people of power, though reputation can swing suddenly. Integrity and patience protect the native's standing, since rapid rises under Rahu need solid foundations to last.",
       "keywords": [
         "ambitious career rise",
         "foreign/technology field",
@@ -2011,7 +2013,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Rahu in the 11th House",
       "summary": "An excellent upachaya placement, strongly favoring material gains and an expansive, unconventional network.",
-      "effects": "The native tends to fulfill ambitious material desires, often through foreign, technological, or unconventional income sources, supported by a large and diverse social network. Gains here are considered particularly favorable, sometimes arriving suddenly or from unexpected connections. Long-term goals connected to status, wealth, or innovation are strongly supported by this placement.",
+      "effects": "The native tends to fulfill ambitious material desires, often through foreign, technological, or unconventional income sources, supported by a large and diverse social network. Gains here are considered particularly favorable, sometimes arriving suddenly or from unexpected connections. Long-term goals connected to status, wealth, or innovation are strongly supported by this placement. Classical texts praise Rahu in the 11th for wealth, many sources of income and help from influential or foreign contacts. Choosing friends and associates carefully keeps these gains clean and lasting.",
       "keywords": [
         "strong material gains",
         "unconventional network",
@@ -2032,7 +2034,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Rahu in the 12th House",
       "summary": "Draws the native toward foreign lands, hidden desires, and unconventional forms of expenditure or escape.",
-      "effects": "The native may feel a strong pull toward foreign residence, travel, or subconscious desires that are not always clearly understood, sometimes leading to spending on unconventional or hidden pursuits. There can be an interesting blend of spiritual interest and materialistic undertone in the native's private life. This placement often favors eventual foreign settlement or work connected to imagination, illusion, or unconventional spiritual paths.",
+      "effects": "The native may feel a strong pull toward foreign residence, travel, or subconscious desires that are not always clearly understood, sometimes leading to spending on unconventional or hidden pursuits. There can be an interesting blend of spiritual interest and materialistic undertone in the native's private life. This placement often favors eventual foreign settlement or work connected to imagination, illusion, or unconventional spiritual paths. Classical texts warn of hidden expenses, sleep disturbances and losses through deception or secret dealings. Meditation, a clear budget and avoiding intoxicants turn this placement's pull toward the unseen into healthy spiritual or creative work.",
       "keywords": [
         "foreign settlement",
         "hidden desires",
@@ -2053,7 +2055,7 @@
       "house_theme": "Self, physical body, personality, overall vitality",
       "title": "Ketu in the 1st House",
       "summary": "Gives an introspective, spiritually inclined personality with a somewhat detached sense of self.",
-      "effects": "The native often feels a subtle disconnect from ordinary bodily identity or ego, along with heightened intuitive or psychic sensitivity. There is frequently a spiritual undertone to the personality, sometimes appearing unconventional or difficult for others to fully categorize. Vitality benefits from mindful, grounding practices given Ketu's naturally scattering influence on the physical self.",
+      "effects": "The native often feels a subtle disconnect from ordinary bodily identity or ego, along with heightened intuitive or psychic sensitivity. There is frequently a spiritual undertone to the personality, sometimes appearing unconventional or difficult for others to fully categorize. Vitality benefits from mindful, grounding practices given Ketu's naturally scattering influence on the physical self. Classical texts warn of restlessness, minor injuries and uneasiness with relatives, while noting a sharp, intuitive intelligence. Grounding activities such as walking, gardening or regular meals help the native stay present in daily life.",
       "keywords": [
         "introspection",
         "psychic sensitivity",
@@ -2074,7 +2076,7 @@
       "house_theme": "Wealth, family, speech, food, accumulated values",
       "title": "Ketu in the 2nd House",
       "summary": "Brings detachment from material wealth and conventional family values, along with reserved speech.",
-      "effects": "The native may show relatively little interest in accumulating wealth or maintaining family status, sometimes preferring simplicity over material display. Speech patterns can be unusual, minimal, or reluctant, and family relationships may carry an unconventional or emotionally distant quality. This placement can, however, indicate unexpected spiritual wisdom expressed through speech when Ketu is well-supported.",
+      "effects": "The native may show relatively little interest in accumulating wealth or maintaining family status, sometimes preferring simplicity over material display. Speech patterns can be unusual, minimal, or reluctant, and family relationships may carry an unconventional or emotionally distant quality. This placement can, however, indicate unexpected spiritual wisdom expressed through speech when Ketu is well-supported. Classical texts warn of blunt or hurtful speech, problems with the mouth or eyes and an unsettled family situation. Thinking before speaking and a simple savings habit protect both relationships and finances under this placement.",
       "keywords": [
         "material detachment",
         "reserved speech",
@@ -2095,7 +2097,7 @@
       "house_theme": "Courage, siblings, self-effort, short journeys, communication",
       "title": "Ketu in the 3rd House",
       "summary": "Tends to reduce conventional effort-driven courage while sharpening intuitive skill and unconventional communication.",
-      "effects": "Since Ketu's detachment can work against the assertive, effort-based nature of the 3rd house, the native's initiative or courage in everyday efforts may be inconsistent or intuitively rather than deliberately driven. Sibling relationships can be complex or emotionally distant, though there is often notable, sometimes unexpected, skill in intuitive or spiritually informed communication. Self-effort works best when guided by inner conviction rather than external pressure.",
+      "effects": "Since Ketu's detachment can work against the assertive, effort-based nature of the 3rd house, the native's initiative or courage in everyday efforts may be inconsistent or intuitively rather than deliberately driven. Sibling relationships can be complex or emotionally distant, though there is often notable, sometimes unexpected, skill in intuitive or spiritually informed communication. Self-effort works best when guided by inner conviction rather than external pressure. Classical texts nonetheless count Ketu among the planets that do well in the 3rd, giving courage, success over enemies and freedom from fear. Results improve with time in this upachaya house, especially when the native acts on clear inner conviction.",
       "keywords": [
         "intuitive skill",
         "reduced conventional effort",
@@ -2116,7 +2118,7 @@
       "house_theme": "Home, mother, comforts, property, emotional foundation",
       "title": "Ketu in the 4th House",
       "summary": "Creates detachment from home, property, or the mother, favoring inner peace over material domestic comfort.",
-      "effects": "The native may experience restlessness or emotional distance regarding home life, property, or the relationship with the mother, sometimes preferring a simple or unconventional living situation. Material comforts at home may hold less appeal than the native's inner emotional or spiritual life. When approached consciously, this placement can support deep inner peace independent of external domestic circumstances.",
+      "effects": "The native may experience restlessness or emotional distance regarding home life, property, or the relationship with the mother, sometimes preferring a simple or unconventional living situation. Material comforts at home may hold less appeal than the native's inner emotional or spiritual life. When approached consciously, this placement can support deep inner peace independent of external domestic circumstances. Classical texts warn of changes of residence, some distance from relatives and worry over property or vehicles. A simple, uncluttered home and a regular quiet practice help the native feel settled wherever they live.",
       "keywords": [
         "domestic detachment",
         "unconventional home life",
@@ -2136,8 +2138,8 @@
       "house": 5,
       "house_theme": "Intelligence, creativity, romance, past-life merit (purva punya)",
       "title": "Ketu in the 5th House",
-      "summary": "Brings an unconventional, intuitive approach to education, and romance, with reduced interest in conventional speculation.",
-      "effects": "The native may show relatively little interest in traditional speculative gains, instead relying on intuitive insight when it does engage with such matters. Romantic relationships may carry a detached, karmic, or spiritually significant quality.",
+      "summary": "Brings an unconventional, intuitive approach to education and romance, with reduced interest in conventional speculation.",
+      "effects": "The native may show relatively little interest in traditional speculative gains, instead relying on intuitive insight when it does engage with such matters. Romantic relationships may carry a detached, karmic, or spiritually significant quality. Classical texts warn of a restless mind and losses through hasty speculation, while noting interest in mantra, philosophy or spiritual study. The native learns best through direct experience and reflection, and a patient approach to romance avoids misunderstandings.",
       "keywords": [
         "intuitive education approach",
         "unconventional parenting",
@@ -2158,7 +2160,7 @@
       "house_theme": "Enemies, disease, debts, service, daily work, competition",
       "title": "Ketu in the 6th House",
       "summary": "A favorable upachaya placement, supporting success against obstacles through unconventional or intuitive means.",
-      "effects": "Ketu performs relatively well here, granting intuitive problem-solving skill and often success in healing, research, or unconventional approaches to overcoming competitors and health challenges. The native may find conventional treatments less effective than holistic or alternative methods, and disputes are often resolved through detachment rather than direct confrontation. This placement favors careers in healing, research, or unconventional service fields.",
+      "effects": "Ketu performs relatively well here, granting intuitive problem-solving skill and often success in healing, research, or unconventional approaches to overcoming competitors and health challenges. The native may find conventional treatments less effective than holistic or alternative methods, and disputes are often resolved through detachment rather than direct confrontation. This placement favors careers in healing, research, or unconventional service fields. Classical texts praise Ketu in the 6th for victory over enemies, a good reputation and success in disputes. The native's ability to stay calm under pressure is a real professional asset in this upachaya house.",
       "keywords": [
         "intuitive problem-solving",
         "healing/research career",
@@ -2179,7 +2181,7 @@
       "house_theme": "Marriage, partnerships, business, public dealings",
       "title": "Ketu in the 7th House",
       "summary": "Brings detachment or a sense of incompleteness to marriage and partnerships, often carrying karmic undertones.",
-      "effects": "The native may find sustained emotional engagement in partnerships challenging, sometimes feeling an underlying detachment even in significant relationships. Marriage or business partnerships often carry karmic or past-life significance, requiring conscious effort to remain present and committed. Spiritual or unconventional approaches to partnership can help the native find meaning despite the placement's natural tendency toward emotional distance.",
+      "effects": "The native may find sustained emotional engagement in partnerships challenging, sometimes feeling an underlying detachment even in significant relationships. Marriage or business partnerships often carry karmic or past-life significance, requiring conscious effort to remain present and committed. Spiritual or unconventional approaches to partnership can help the native find meaning despite the placement's natural tendency toward emotional distance. Classical texts warn of misunderstandings with the partner, travel that separates the couple and losses through unreliable associates. Shared spiritual or service activities often give this partnership a meaning that ordinary routines do not.",
       "keywords": [
         "relationship detachment",
         "karmic partnership",
@@ -2200,7 +2202,7 @@
       "house_theme": "Transformation, occult, inheritance, sudden events",
       "title": "Ketu in the 8th House",
       "summary": "Deepens intuitive and spiritual understanding of transformation, mystery, and life's hidden dimensions.",
-      "effects": "Crises or transformative life events frequently trigger genuine spiritual awakening rather than mere disruption. This placement favors research, spiritual counseling, or work involving deep psychological or metaphysical inquiry.",
+      "effects": "Crises or transformative life events frequently trigger genuine spiritual awakening rather than mere disruption. This placement favors research, spiritual counseling, or work involving deep psychological or metaphysical inquiry. Classical texts warn of sudden events, hidden health complaints and disputes over shared money under this placement. Preventive health care and clear agreements about joint finances let the native focus on the deep insight this placement offers.",
       "keywords": [
         "intuitive occult insight",
         "spiritual awakening through crisis",
@@ -2221,7 +2223,7 @@
       "house_theme": "Fortune, dharma, father, higher learning, long journeys",
       "title": "Ketu in the 9th House",
       "summary": "Brings an unconventional, intuitive relationship to dharma and philosophy, often reflecting strong past-life spiritual merit.",
-      "effects": "The native may feel detached from conventional religious or philosophical structures while developing unique, intuitively derived spiritual insight of their own. The relationship with the father or gurus can be complex, sometimes involving distance or unconventional guidance. This placement is often associated with significant past-life spiritual merit (purva punya) expressing itself in this lifetime's search for deeper truth.",
+      "effects": "The native may feel detached from conventional religious or philosophical structures while developing unique, intuitively derived spiritual insight of their own. The relationship with the father or gurus can be complex, sometimes involving distance or unconventional guidance. This placement is often associated with significant past-life spiritual merit (purva punya) expressing itself in this lifetime's search for deeper truth. Classical texts warn of some friction with the father or elders and an unconventional attitude toward religious custom. Pilgrimage, quiet study and respect for elders even when disagreeing help this placement bring out its spiritual promise.",
       "keywords": [
         "unconventional dharma",
         "intuitive spirituality",
@@ -2242,7 +2244,7 @@
       "house_theme": "Career, status, authority, public reputation",
       "title": "Ketu in the 10th House",
       "summary": "Reduces attachment to conventional career ambition, often favoring unconventional or spiritually meaningful work.",
-      "effects": "The native may show relatively little interest in public recognition or traditional career ladders, sometimes preferring unconventional, intuitive, or spiritually oriented professional paths. Career trajectory can be non-linear, guided more by inner conviction than external validation. When embraced consciously, this placement can lead to uniquely meaningful, if less conventionally visible, professional fulfillment.",
+      "effects": "The native may show relatively little interest in public recognition or traditional career ladders, sometimes preferring unconventional, intuitive, or spiritually oriented professional paths. Career trajectory can be non-linear, guided more by inner conviction than external validation. When embraced consciously, this placement can lead to uniquely meaningful, if less conventionally visible, professional fulfillment. Classical texts describe obstacles and sudden changes in work, but also skill in technical, research or spiritual fields. Steady effort in one chosen field helps the native build a career that matches their inner values.",
       "keywords": [
         "reduced career ambition",
         "unconventional work path",
@@ -2263,7 +2265,7 @@
       "house_theme": "Gains, income, friendships, aspirations, elder siblings",
       "title": "Ketu in the 11th House",
       "summary": "A favorable upachaya placement for gains, though material desires and attachments tend to be naturally moderate.",
-      "effects": "The native often experiences reasonably good material gains despite a natural lack of strong attachment to accumulating wealth or status. The social circle may be smaller but tends to be meaningful, often involving spiritually or intuitively aligned connections rather than large networks. Fulfillment comes more from inner satisfaction than from the scale of material or social achievement.",
+      "effects": "The native often experiences reasonably good material gains despite a natural lack of strong attachment to accumulating wealth or status. The social circle may be smaller but tends to be meaningful, often involving spiritually or intuitively aligned connections rather than large networks. Fulfillment comes more from inner satisfaction than from the scale of material or social achievement. Classical texts praise Ketu in the 11th for wealth, comforts and success in undertakings, often through unexpected channels. Gains keep improving with time in this upachaya house, especially when the native shares good fortune with others.",
       "keywords": [
         "moderate material gains",
         "meaningful small circle",
@@ -2284,7 +2286,7 @@
       "house_theme": "Loss, expenditure, foreign lands, spirituality, liberation (moksha)",
       "title": "Ketu in the 12th House",
       "summary": "Ketu's most natural house — excellent for spiritual liberation, intuition, and meaningful foreign or solitary pursuits.",
-      "effects": "This is traditionally considered one of Ketu's strongest and most comfortable placements, supporting deep intuitive or psychic ability, meditation, and genuine progress toward moksha (spiritual liberation). The native often feels a strong pull toward foreign travel, spiritual retreats, or solitary research, finding worldly desires less compelling than inner growth. This placement favors quiet, behind-the-scenes spiritual or research-oriented work over public recognition.",
+      "effects": "This is traditionally considered one of Ketu's strongest and most comfortable placements, supporting deep intuitive or psychic ability, meditation, and genuine progress toward moksha (spiritual liberation). The native often feels a strong pull toward foreign travel, spiritual retreats, or solitary research, finding worldly desires less compelling than inner growth. This placement favors quiet, behind-the-scenes spiritual or research-oriented work over public recognition. Classical texts note expenses, travel and some restlessness of sleep, alongside a strong inclination toward charity and spiritual practice. A practical budget and a regular meditation practice let the native enjoy this placement's inner freedom without material strain.",
       "keywords": [
         "spiritual liberation",
         "intuitive/psychic ability",
@@ -2295,5 +2297,14 @@
       "status": "verified",
       "verified": true
     }
-  ]
+  ],
+  "deepening_pass": {
+    "performed": "2026-11-07",
+    "by": "Claude",
+    "method": "Two sentences added to every entry's `effects`: the classical picture (paraphrasing the planet-in-house chapters of Phaladeepika, Saravali and BPHS as commonly rendered in English, with Jupiter's 5th/7th/9th aspects and the Pancha Mahapurusha yogas named where they apply) and a practical note. Venus in the 7th now carries the karako bhava nashaya caution. Existing text was kept word for word so its Bengali translation still applies; each new sentence has its own Bengali entry in i18n_src/bn.py.",
+    "average_effects_words_before": 53.8,
+    "average_effects_words_after": 94.0,
+    "policy": "Follows the app content policy introduced in v1.2 (see README_ANDROID.md): the classical 5th- and 8th-house results that the policy excludes are deliberately left out.",
+    "owner_review": "pending - please spot-check the classical claims and the Bengali"
+  }
 }

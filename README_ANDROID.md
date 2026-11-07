@@ -457,3 +457,27 @@ and birth star. Switching rebuilds the screens the same way a language switch do
 gradients and icons are drawn in code. `tools/ui_shots.py OUT [lang] [screens]` (with `SHOT_THEME=light`) saves
 desktop screenshots for design review; `tests/test_theme.py` guards the two palettes.
 
+
+## 2.3.0 - "Dusk & Ivory" redesign, motion, and the Nov 2026 knowledge update
+**New look** (`ui/theme.py`): the dark theme is now Midnight Dusk (blue-black sky, two soft aurora glows, faint stars,
+saffron accent, teal second accent) and the light theme is Ivory (warm manuscript ground with a faint mandala, deep
+ink text, vermilion-saffron accent). English headings use a serif display face, DM Serif Display
+(`fonts/DMSerifDisplay-Regular.ttf`, SIL OFL - `fonts/OFL-DMSerifDisplay.txt`); Bengali keeps its own pre-shaped font.
+**Readings as cards** (`ui/widgets.build_reading`, used by every FlowText/LongText): `=== Title ===` becomes a serif
+title, each `--- Section ---` a card with its heading, and every `[In simple terms: ...]` note a tinted callout. It
+reads the markers, not the words, so Bengali gets the same layout; paragraphs are still one small Label each (the
+Android blank-text fix described in LongText).
+**Motion**: screens fade and slide in, Home cards drift in one after another, the first reading cards follow, the
+header title cross-fades and the bottom bar's highlight glides to the active tab. Home > Motion turns it off
+(settings.json key `motion`). All canvas-only (`theme.animate_in`), so layout and touch are untouched.
+**Knowledge update** (see KNOWLEDGE_GAPS.md): remedies follow BPHS ch.34's functional benefics/malefics per ascendant
+(`kb/functional_nature.json`); transits apply Gochara with Vedha and Vipareeta Vedha (`kb/gochara_vedha.json`;
+Rahu's favourable houses are now 3/6/11); Jupiter in a difficult transit house counts as active for remedies; Drekkana
+Bala follows BPHS 27.6 and Drik Bala is calculated (shown, not yet totalled); planet_in_sign and planet_in_house
+readings are about twice as long, with six dignity labels and the Mars-in-5th Kuja Dosha claim corrected.
+**New cards** (`ui/knowledge_widgets.py`): Remedies shows the nine planets as Yogakaraka / Helper / Neutral / Difficult
+chips for the person's rising sign; Predictions shows a Gochara grid (each planet's house from the Moon with
+Favourable / Held back / Eased / Effortful and who causes the Vedha); Planet Strength shows strength bars with the
+Drik value beside each, and a Drik row in the source table.
+**Fixed**: Help & About's FAQ cards were blank (their background was drawn over their text) and its filter chips
+showed as white boxes. Tests: `tests/test_ui_v23.py` (layout, motion clean-up, cards), `tests/test_kb_wiring.py`.

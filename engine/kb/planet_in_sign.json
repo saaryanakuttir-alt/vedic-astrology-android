@@ -2,13 +2,15 @@
   "checklist_category_id": "planet_in_sign",
   "name": "Planet in Sign",
   "tradition": "Parashari",
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. This file covers the planet-in-sign (rashi) layer, which colors HOW a planet's significations are temperamentally expressed, distinct from planet_in_house, which covers WHERE in life (which house/area) those significations play out. The 'dignity' field marks exaltation/own-sign/debilitation per standard classical tables for the seven classical grahas; for Rahu/Ketu, classical texts disagree on a fixed dignity scheme, so each entry's dignity_note (at the planet level, see the source content) explains this rather than asserting one convention. Actual results in a real chart also depend on house placement, aspects, conjunctions, divisional charts, and dasha — this file should be combined with those other layers, not used in isolation.",
   "rahu_ketu_dignity_note": "As a shadow planet (chhaya graha), classical texts disagree on a fixed exaltation/debilitation sign for the lunar nodes (common conventions vary between Taurus/Gemini and Scorpio/Sagittarius for Rahu, with Ketu mirroring the opposite sign). This file does not assert one scheme as definitive; instead each entry describes how the node's amplifying, obsessive (Rahu) or detaching, intuitive (Ketu) nature blends with that sign's own temperament.",
   "verification_pass": {
     "performed": true,
     "method": "Cross-checked the DIGNITY table (exaltation/own-sign/debilitation for all 7 classical planets, which every entry's 'dignity' field is drawn from) against multiple independent online astrology references, including moolatrikona sign assignments.",
-    "changes_made": [],
+    "changes_made": [
+      "Nov 2026: corrected six dignity labels that contradicted the classical tables - PS-Mo-Ari and PS-Ma-Pis summaries said 'Debilitated' (the Moon is debilitated in Scorpio, Mars in Cancer); PS-Mo-Can's dignity and the PS-Me-Gem, PS-Ve-Tau and PS-Sa-Cap summaries said moolatrikona, but the moolatrikona signs are Taurus (Moon), Virgo (Mercury), Libra (Venus) and Aquarius (Saturn)."
+    ],
     "unchanged_after_verification": "All 7 exaltation/own-sign/debilitation assignments confirmed exactly as used. One source consulted during this pass appeared to mis-state Jupiter's debilitation sign as Aquarius; two independent sources confirmed Capricorn (as used in this file) is correct, so no change was made — flagging this only because it's a genuinely common point of confusion worth double-checking if you see it stated differently elsewhere."
   },
   "user_review_pass": {
@@ -35,7 +37,7 @@
       "dignity": "exalted",
       "title": "Sun in Aries",
       "summary": "Exalted — bold, pioneering confidence at its strongest.",
-      "effects": "The Sun's authority and vitality express with maximum directness here: courageous, self-reliant, and quick to initiate. Leadership comes naturally and impatience with delay is common. This is considered the Sun's single strongest sign, producing dynamic, achievement-oriented self-expression.",
+      "effects": "The Sun's authority and vitality express with maximum directness here: courageous, self-reliant, and quick to initiate. Leadership comes naturally and impatience with delay is common. This is considered the Sun's single strongest sign, producing dynamic, achievement-oriented self-expression. Classical texts associate this placement with fame through bold enterprise, skill in leadership or arms, and a strong, active constitution. The growth edge is patience: results last longer when the native lets others share the lead instead of pushing every decision alone.",
       "keywords": [
         "exalted",
         "pioneering",
@@ -59,7 +61,7 @@
       "dignity": "neutral",
       "title": "Sun in Taurus",
       "summary": "Grounds the ego in material security and steady, patient confidence.",
-      "effects": "Self-worth here is tied to stability, comfort, and reliability rather than dramatic display. The native's leadership style is patient and persistent, valuing tangible results over recognition alone. A tendency toward stubbornness about self-image can emerge when challenged.",
+      "effects": "Self-worth here is tied to stability, comfort, and reliability rather than dramatic display. The native's leadership style is patient and persistent, valuing tangible results over recognition alone. A tendency toward stubbornness about self-image can emerge when challenged. Older texts link the Sun in Taurus to skill with finance, trade, music or fine goods, and to a steady, earthy pride that dislikes being hurried. Confidence grows with tangible results, so the native does best by building something lasting rather than chasing quick recognition.",
       "keywords": [
         "stability",
         "patience",
@@ -83,7 +85,7 @@
       "dignity": "neutral",
       "title": "Sun in Gemini",
       "summary": "Gives a curious, communicative, intellectually restless sense of identity.",
-      "effects": "Ego and self-expression are closely tied to ideas, conversation, and versatility, with the native often identifying strongly with being knowledgeable or well-informed. Confidence can fluctuate with mental stimulation, and sustained focus on a single identity or goal takes conscious effort.",
+      "effects": "Ego and self-expression are closely tied to ideas, conversation, and versatility, with the native often identifying strongly with being knowledgeable or well-informed. Confidence can fluctuate with mental stimulation, and sustained focus on a single identity or goal takes conscious effort. Classical descriptions point to learning, eloquence, skill in writing or calculation, and an easy manner with many kinds of people. Authority here comes from knowledge and communication, and it steadies when the native commits to a few chosen fields instead of many.",
       "keywords": [
         "curiosity",
         "versatility",
@@ -107,7 +109,7 @@
       "dignity": "neutral",
       "title": "Sun in Cancer",
       "summary": "A comparatively softer expression, with identity tied closely to home and emotional security.",
-      "effects": "Because the Sun's outward, dry warmth sits somewhat uneasily in the Moon-ruled sign of Cancer, ego here often expresses through nurturing and protecting rather than assertive display. Self-worth is bound up with family role and emotional bonds, and authority is exercised gently, through care rather than command.",
+      "effects": "Because the Sun's outward, dry warmth sits somewhat uneasily in the Moon-ruled sign of Cancer, ego here often expresses through nurturing and protecting rather than assertive display. Self-worth is bound up with family role and emotional bonds, and authority is exercised gently, through care rather than command. Classical texts describe a person who works hard for family and home, may serve others or work away from the birthplace, and whose pride is easily hurt. Self-confidence grows when emotional security is built from within, so a settled home base and trusted people make the native noticeably stronger.",
       "keywords": [
         "nurturing authority",
         "emotional identity",
@@ -131,7 +133,7 @@
       "dignity": "own sign (moolatrikona)",
       "title": "Sun in Leo",
       "summary": "Own sign — the Sun's most natural and comfortable self-expression.",
-      "effects": "This is the Sun's home sign, giving dignified, warm-hearted confidence and a natural flair for leadership and creative self-expression. The native thrives on legitimate recognition and generally leads with generosity rather than domination. Pride is strong but tends to be earned rather than empty.",
+      "effects": "This is the Sun's home sign, giving dignified, warm-hearted confidence and a natural flair for leadership and creative self-expression. The native thrives on legitimate recognition and generally leads with generosity rather than domination. Pride is strong but tends to be earned rather than empty. Classical texts promise courage, a commanding presence, and favour from those in power, and the native often rises to positions of responsibility. The main caution is pride: generosity and fairness toward those who serve under the native turn natural authority into real respect.",
       "keywords": [
         "own sign",
         "dignified confidence",
@@ -155,7 +157,7 @@
       "dignity": "neutral",
       "title": "Sun in Virgo",
       "summary": "Channels ego and authority into precise, humble, service-oriented expression.",
-      "effects": "Self-worth here is tied to competence, usefulness, and getting details right rather than to public display. The native often underplays their own achievements, and leadership is exercised through careful, methodical example. Self-criticism can undercut confidence if not balanced with self-acceptance.",
+      "effects": "Self-worth here is tied to competence, usefulness, and getting details right rather than to public display. The native often underplays their own achievements, and leadership is exercised through careful, methodical example. Self-criticism can undercut confidence if not balanced with self-acceptance. Traditional texts link this placement to skill in writing, accounts, crafts, medicine or careful administration, and to a modest, studious nature. Recognition comes through competence rather than display, and the native grows by accepting that good work does not have to be perfect to be valued.",
       "keywords": [
         "humility",
         "precision",
@@ -179,7 +181,7 @@
       "dignity": "debilitated",
       "title": "Sun in Libra",
       "summary": "Debilitated — ego and self-worth seek external validation through partnership.",
-      "effects": "The Sun's independent self-assertion is at its weakest here, so identity often forms in relation to others rather than as a standalone conviction, and decisiveness about one's own path can be difficult. Diplomacy and fairness are natural strengths, and this placement often does well when paired with a strong cause or partner, or when the native deliberately cultivates independent self-worth.",
+      "effects": "The Sun's independent self-assertion is at its weakest here, so identity often forms in relation to others rather than as a standalone conviction, and decisiveness about one's own path can be difficult. Diplomacy and fairness are natural strengths, and this placement often does well when paired with a strong cause or partner, or when the native deliberately cultivates independent self-worth. Classical texts warn of dependence on others, loss of standing through poor company, and some strain with authority figures under this debilitation. Many people with this placement become fine mediators and negotiators, and the work is to build self-worth that does not rise and fall with approval.",
       "keywords": [
         "debilitated",
         "relationship-dependent identity",
@@ -203,7 +205,7 @@
       "dignity": "neutral",
       "title": "Sun in Scorpio",
       "summary": "Gives an intense, private, deeply willed sense of self.",
-      "effects": "Identity and authority here are guarded rather than openly displayed, with real confidence expressed through quiet, magnetic intensity rather than performance. The native often channels ego into transformation, research, or matters others avoid, and personal power tends to be considerable once self-mastery is achieved.",
+      "effects": "Identity and authority here are guarded rather than openly displayed, with real confidence expressed through quiet, magnetic intensity rather than performance. The native often channels ego into transformation, research, or matters others avoid, and personal power tends to be considerable once self-mastery is achieved. Classical texts describe courage, a sharp temper, and ability in medicine, chemistry, investigation or work involving fire, metals or secrets. The native's power is real but works best when it is used openly and fairly, since hidden grudges tend to cost more than they win.",
       "keywords": [
         "intensity",
         "privacy",
@@ -227,7 +229,7 @@
       "dignity": "neutral",
       "title": "Sun in Sagittarius",
       "summary": "Expresses identity through expansive, philosophical, freedom-loving confidence.",
-      "effects": "The native's sense of self is tied to belief, ethics, and the pursuit of higher truth, and leadership style tends to be optimistic, generous, and teacher-like. There is a strong need for freedom of thought and movement, and self-worth grows through exploration and principled conviction rather than routine.",
+      "effects": "The native's sense of self is tied to belief, ethics, and the pursuit of higher truth, and leadership style tends to be optimistic, generous, and teacher-like. There is a strong need for freedom of thought and movement, and self-worth grows through exploration and principled conviction rather than routine. Classical texts link this placement to respect from good people, interest in religion, law or teaching, and a straightforward, honest character. Confidence comes from having a guiding philosophy, and the native grows by turning strong convictions into practical help for others.",
       "keywords": [
         "optimism",
         "philosophy",
@@ -251,7 +253,7 @@
       "dignity": "neutral",
       "title": "Sun in Capricorn",
       "summary": "Grounds ego in disciplined ambition and long-term achievement.",
-      "effects": "Self-worth is closely tied to responsibility, status earned through effort, and practical accomplishment rather than natural charisma. Leadership is serious, patient, and duty-bound, and the native's confidence tends to strengthen steadily with age and experience rather than appearing early.",
+      "effects": "Self-worth is closely tied to responsibility, status earned through effort, and practical accomplishment rather than natural charisma. Leadership is serious, patient, and duty-bound, and the native's confidence tends to strengthen steadily with age and experience rather than appearing early. Traditional texts describe hard work, practical intelligence and slow but steady gains, sometimes after early struggle or a strict upbringing. Authority is earned rather than given, and the native does best when ambition is balanced with warmth toward family and colleagues.",
       "keywords": [
         "ambition",
         "discipline",
@@ -275,7 +277,7 @@
       "dignity": "neutral",
       "title": "Sun in Aquarius",
       "summary": "Expresses identity through individuality balanced against group ideals.",
-      "effects": "The native's sense of self is often tied to being different, visionary, or aligned with humanitarian or unconventional causes rather than to personal glory. Leadership style is detached but genuinely progressive, and there can be inner tension between the desire for personal recognition and loyalty to the collective.",
+      "effects": "The native's sense of self is often tied to being different, visionary, or aligned with humanitarian or unconventional causes rather than to personal glory. Leadership style is detached but genuinely progressive, and there can be inner tension between the desire for personal recognition and loyalty to the collective. Classical texts are cautious here, mentioning a restless or unconventional path and friction with established authority, though not lasting misfortune. The native often finds purpose in reform, science, technology or community work, where independence of mind becomes an asset.",
       "keywords": [
         "individuality",
         "humanitarian ideals",
@@ -299,7 +301,7 @@
       "dignity": "neutral",
       "title": "Sun in Pisces",
       "summary": "Gives a compassionate, imaginative, and somewhat fluid sense of identity.",
-      "effects": "Ego boundaries here are softer than usual, and self-worth is often tied to empathy, creativity, or spiritual connection rather than assertive self-definition. The native's authority is gentle and inspirational rather than commanding, though clear personal boundaries can require conscious cultivation.",
+      "effects": "Ego boundaries here are softer than usual, and self-worth is often tied to empathy, creativity, or spiritual connection rather than assertive self-definition. The native's authority is gentle and inspirational rather than commanding, though clear personal boundaries can require conscious cultivation. Classical texts describe a gentle, honoured person with interest in spiritual matters, water, travel or trade, and gains through quiet good conduct. Identity can feel fluid, so clear goals and healthy boundaries help the native turn compassion and imagination into lasting achievement.",
       "keywords": [
         "compassion",
         "imagination",
@@ -322,8 +324,8 @@
       "sign_theme": "initiation, courage, self-assertion",
       "dignity": "neutral",
       "title": "Moon in Aries",
-      "summary": "Debilitated — quick, impulsive, reactive emotional nature.",
-      "effects": "Emotional responses arise fast and fade fast, favoring direct expression of feeling over patient reflection, which can read as impatience or a short temper. The native needs an outlet for immediate emotional action, and learns emotional maturity by pausing before reacting rather than suppressing the underlying courage this placement provides.",
+      "summary": "Gives a quick, impulsive, reactive emotional nature.",
+      "effects": "Emotional responses arise fast and fade fast, favoring direct expression of feeling over patient reflection, which can read as impatience or a short temper. The native needs an outlet for immediate emotional action, and learns emotional maturity by pausing before reacting rather than suppressing the underlying courage this placement provides. Classical texts describe an active, travel-loving person with a strong will, quick temper and a liking for new beginnings. Physical activity is one of the best ways to settle the mind here, and a short pause before speaking prevents most regrets.",
       "keywords": [
         "debilitated",
         "impulsive emotion",
@@ -347,7 +349,7 @@
       "dignity": "exalted",
       "title": "Moon in Taurus",
       "summary": "Exalted — calm, stable, deeply contented emotional nature.",
-      "effects": "This is considered the Moon's strongest sign, giving a steady, sensuous temperament that finds genuine comfort in routine, physical comforts, and reliable relationships. Emotional security is built through consistency and tangible signs of care, and the native is generally even-tempered unless their sense of stability is directly threatened.",
+      "effects": "This is considered the Moon's strongest sign, giving a steady, sensuous temperament that finds genuine comfort in routine, physical comforts, and reliable relationships. Emotional security is built through consistency and tangible signs of care, and the native is generally even-tempered unless their sense of stability is directly threatened. Classical texts praise this placement for a pleasant appearance, generosity, steady friendships, enjoyment of good food and comfort, and a forgiving mind. The one caution is resistance to change, so the native benefits from welcoming new experiences before circumstances force them.",
       "keywords": [
         "exalted",
         "emotional stability",
@@ -371,7 +373,7 @@
       "dignity": "neutral",
       "title": "Moon in Gemini",
       "summary": "Gives a curious, communicative, changeable emotional temperament.",
-      "effects": "Feelings are processed and expressed verbally, and emotional satisfaction depends heavily on mental engagement and variety. Moods can shift quickly with new information or conversation, and the native often needs to talk through emotions to fully understand them.",
+      "effects": "Feelings are processed and expressed verbally, and emotional satisfaction depends heavily on mental engagement and variety. Moods can shift quickly with new information or conversation, and the native often needs to talk through emotions to fully understand them. Classical texts describe a witty, learned and sociable person with skill in speech, music or writing and a quick grasp of others' moods. Because the mind is always busy, regular rest, writing things down and fewer simultaneous commitments keep the native calm and effective.",
       "keywords": [
         "communicative emotion",
         "changeability",
@@ -392,10 +394,10 @@
       "sign_modality": "Cardinal",
       "sign_ruler": "Moon",
       "sign_theme": "nurturing, emotional security, home",
-      "dignity": "own sign (moolatrikona)",
+      "dignity": "own sign",
       "title": "Moon in Cancer",
       "summary": "Own sign — the Moon's most natural, deeply nurturing emotional expression.",
-      "effects": "This is the Moon's home sign, producing profound emotional sensitivity, strong intuition, and a natural gift for nurturing and protecting others. Home and family are central to emotional wellbeing, and the native's empathy runs deep, sometimes to the point of absorbing others' feelings as their own.",
+      "effects": "This is the Moon's home sign, producing profound emotional sensitivity, strong intuition, and a natural gift for nurturing and protecting others. Home and family are central to emotional wellbeing, and the native's empathy runs deep, sometimes to the point of absorbing others' feelings as their own. Classical texts describe a wise, kind and influential person, fond of home, water and travel, and loyal to friends. Moods can follow the people and surroundings around the native closely, so choosing supportive company is one of the most important habits here.",
       "keywords": [
         "own sign",
         "deep nurturing",
@@ -419,7 +421,7 @@
       "dignity": "neutral",
       "title": "Moon in Leo",
       "summary": "Gives a warm, dramatic, generous emotional temperament that thrives on appreciation.",
-      "effects": "Feelings are expressed openly and with flair, and emotional wellbeing depends significantly on being genuinely seen and valued by others. The native's nurturing style is warm and encouraging, though pride can make it hard to admit vulnerability or ask for support.",
+      "effects": "Feelings are expressed openly and with flair, and emotional wellbeing depends significantly on being genuinely seen and valued by others. The native's nurturing style is warm and encouraging, though pride can make it hard to admit vulnerability or ask for support. Classical texts describe a proud, brave and generous person who likes open spaces and leadership but can be easily angered by slights. The native's warmth lifts others, and emotional balance comes from giving appreciation as freely as wanting to receive it.",
       "keywords": [
         "warmth",
         "generosity",
@@ -443,7 +445,7 @@
       "dignity": "neutral",
       "title": "Moon in Virgo",
       "summary": "Gives an analytical, practical, service-oriented emotional temperament.",
-      "effects": "The native tends to process feelings through analysis rather than pure sensation, often expressing care through practical help rather than open sentiment. There can be a tendency to worry or to hold overly high emotional standards for oneself, and emotional peace comes through order, routine, and useful activity.",
+      "effects": "The native tends to process feelings through analysis rather than pure sensation, often expressing care through practical help rather than open sentiment. There can be a tendency to worry or to hold overly high emotional standards for oneself, and emotional peace comes through order, routine, and useful activity. Classical texts describe a modest, soft-spoken and intelligent person with skill in study, writing, crafts or the arts. Worry and self-criticism are the usual stumbling blocks, so practical routines and kindness toward one's own mistakes keep the mind steady.",
       "keywords": [
         "analytical emotion",
         "practicality",
@@ -467,7 +469,7 @@
       "dignity": "neutral",
       "title": "Moon in Libra",
       "summary": "Ties emotional wellbeing closely to harmony, fairness, and partnership.",
-      "effects": "The native seeks emotional balance through pleasant, cooperative relationships and can feel genuinely unsettled by conflict or disharmony. Diplomacy comes naturally, though there can be difficulty identifying or asserting one's own feelings when they might disrupt peace with others.",
+      "effects": "The native seeks emotional balance through pleasant, cooperative relationships and can feel genuinely unsettled by conflict or disharmony. Diplomacy comes naturally, though there can be difficulty identifying or asserting one's own feelings when they might disrupt peace with others. Classical texts describe a fair-minded, courteous person respected by learned people, with an eye for beauty and skill in trade or the arts. Indecision is the main challenge, and the native grows by trusting their own judgement instead of waiting for everyone to agree.",
       "keywords": [
         "harmony-seeking",
         "diplomacy",
@@ -491,7 +493,7 @@
       "dignity": "debilitated",
       "title": "Moon in Scorpio",
       "summary": "Debilitated — intense, deep, sometimes turbulent emotional nature.",
-      "effects": "Feelings here run extremely deep and are often kept private, with strong undercurrents of passion, suspicion, or possessiveness that can surface unexpectedly. This placement grants formidable emotional resilience and intuition once the native learns to manage intensity constructively rather than letting it become secrecy or control.",
+      "effects": "Feelings here run extremely deep and are often kept private, with strong undercurrents of passion, suspicion, or possessiveness that can surface unexpectedly. This placement grants formidable emotional resilience and intuition once the native learns to manage intensity constructively rather than letting it become secrecy or control. Classical texts warn of hidden worries, strained relations with family members and a tendency to keep resentments, as typical of the debilitated Moon. The same depth gives remarkable perception in research, healing or counselling, and openly talking about feelings is the most effective remedy.",
       "keywords": [
         "debilitated",
         "emotional intensity",
@@ -515,7 +517,7 @@
       "dignity": "neutral",
       "title": "Moon in Sagittarius",
       "summary": "Gives an optimistic, freedom-loving, philosophically minded emotional temperament.",
-      "effects": "Emotional wellbeing depends on a sense of freedom, adventure, and meaning, and the native tends to process difficult feelings by seeking a bigger-picture perspective. Generosity of spirit is natural, though commitment to emotionally demanding situations can feel restrictive if not framed as personally meaningful.",
+      "effects": "Emotional wellbeing depends on a sense of freedom, adventure, and meaning, and the native tends to process difficult feelings by seeking a bigger-picture perspective. Generosity of spirit is natural, though commitment to emotionally demanding situations can feel restrictive if not framed as personally meaningful. Classical texts describe a generous, well-spoken person respected for knowledge, with interest in religion, law, travel or teaching. Restlessness can scatter commitments, so the native feels most at peace when freedom is joined to a clear sense of purpose.",
       "keywords": [
         "optimism",
         "need for freedom",
@@ -539,7 +541,7 @@
       "dignity": "neutral",
       "title": "Moon in Capricorn",
       "summary": "Gives a reserved, disciplined, achievement-oriented emotional temperament.",
-      "effects": "The native often manages feelings through practical responsibility rather than open expression, and emotional security is tied to achievement, structure, and reliability. There can be difficulty accessing or showing vulnerability, especially early in life, though emotional depth and warmth tend to grow with maturity and earned trust.",
+      "effects": "The native often manages feelings through practical responsibility rather than open expression, and emotional security is tied to achievement, structure, and reliability. There can be difficulty accessing or showing vulnerability, especially early in life, though emotional depth and warmth tend to grow with maturity and earned trust. Classical texts describe a hard-working, practical person devoted to duty and family, sometimes reserved in showing affection. Emotional fulfilment grows when the native allows rest and enjoyment without first earning them through work.",
       "keywords": [
         "emotional reserve",
         "responsibility",
@@ -563,7 +565,7 @@
       "dignity": "neutral",
       "title": "Moon in Aquarius",
       "summary": "Gives a detached, intellectually oriented, community-minded emotional temperament.",
-      "effects": "Feelings are often processed with some emotional distance, filtered through ideas and principles rather than pure sentiment, and the native values friendship and belonging within groups. Emotional needs can be unconventional, favoring independence and shared ideals over close, intimate dependency.",
+      "effects": "Feelings are often processed with some emotional distance, filtered through ideas and principles rather than pure sentiment, and the native values friendship and belonging within groups. Emotional needs can be unconventional, favoring independence and shared ideals over close, intimate dependency. Classical texts describe a principled, independent person who values friendship and learning, with interest in unconventional or humanitarian work. Feelings may be analysed more than felt, so the native benefits from close one-to-one bonds as well as wide circles of friends.",
       "keywords": [
         "emotional detachment",
         "intellectualized feeling",
@@ -587,7 +589,7 @@
       "dignity": "neutral",
       "title": "Moon in Pisces",
       "summary": "Gives a highly sensitive, compassionate, imaginative emotional temperament.",
-      "effects": "The native's empathy and intuition run very deep, often to the point of absorbing the emotional atmosphere around them, and emotional life is rich with imagination, art, or spiritual feeling. Clear boundaries and grounding practices help prevent escapism or emotional overwhelm from this profoundly receptive placement.",
+      "effects": "The native's empathy and intuition run very deep, often to the point of absorbing the emotional atmosphere around them, and emotional life is rich with imagination, art, or spiritual feeling. Clear boundaries and grounding practices help prevent escapism or emotional overwhelm from this profoundly receptive placement. Classical texts describe a gentle, learned and grateful person who loves water, travel and the arts, and is liked by many. Because the native absorbs others' feelings easily, quiet time alone and creative or spiritual practice are needed to stay balanced.",
       "keywords": [
         "deep empathy",
         "imagination",
@@ -611,7 +613,7 @@
       "dignity": "own sign (moolatrikona)",
       "title": "Mars in Aries",
       "summary": "Own sign (moolatrikona) — Mars at its most direct and powerful.",
-      "effects": "This is Mars's strongest sign, giving bold, pioneering, highly competitive energy expressed with total directness. The native acts first and asks questions later, showing natural courage and leadership in action, though patience with slower processes or people can be limited.",
+      "effects": "This is Mars's strongest sign, giving bold, pioneering, highly competitive energy expressed with total directness. The native acts first and asks questions later, showing natural courage and leadership in action, though patience with slower processes or people can be limited. Classical texts describe a brave, commanding person who may lead in sports, defence, engineering or business and wins through direct effort. The same fire can bring accidents or quarrels when rushed, so warming up, planning and cooling down are part of using this strength well.",
       "keywords": [
         "own sign",
         "directness",
@@ -635,7 +637,7 @@
       "dignity": "neutral",
       "title": "Mars in Taurus",
       "summary": "Gives determined, persistent energy applied to material goals.",
-      "effects": "Drive here builds slowly but steadily, favoring practical, patient effort over quick bursts of action, and the native tends to be stubborn once a course of action is chosen. Possessiveness or resistance to change can surface when the native's sense of security or resources feels threatened.",
+      "effects": "Drive here builds slowly but steadily, favoring practical, patient effort over quick bursts of action, and the native tends to be stubborn once a course of action is chosen. Possessiveness or resistance to change can surface when the native's sense of security or resources feels threatened. Classical texts describe a determined person who may gain through land, property, agriculture or trade, with strong desires and a stubborn streak. Money matters and close relationships go better when the native avoids harsh speech and lets anger cool before deciding.",
       "keywords": [
         "persistence",
         "practicality",
@@ -659,7 +661,7 @@
       "dignity": "neutral",
       "title": "Mars in Gemini",
       "summary": "Directs energy toward communication, ideas, and versatile action.",
-      "effects": "The native's assertiveness often shows up verbally, through debate, wit, or quick mental engagement, rather than through physical confrontation. Energy can scatter across multiple interests at once, and sustained focus on a single course of action benefits from conscious discipline.",
+      "effects": "The native's assertiveness often shows up verbally, through debate, wit, or quick mental engagement, rather than through physical confrontation. Energy can scatter across multiple interests at once, and sustained focus on a single course of action benefits from conscious discipline. Classical texts link this placement to skill in debate, writing, technical work or several trades at once, with a sharp and sometimes cutting tongue. Energy is best spent on finishing projects rather than starting new ones, and on winning arguments with facts rather than force.",
       "keywords": [
         "verbal assertiveness",
         "versatility",
@@ -683,7 +685,7 @@
       "dignity": "debilitated",
       "title": "Mars in Cancer",
       "summary": "Debilitated — energy is directed inward or through emotional, protective channels.",
-      "effects": "Direct confrontation feels uncomfortable here, so drive and even anger are often expressed indirectly, through moodiness or protective behavior toward family rather than open assertion. This placement's real strength lies in tenacious, quiet protectiveness once the native learns to act from emotional security rather than defensiveness.",
+      "effects": "Direct confrontation feels uncomfortable here, so drive and even anger are often expressed indirectly, through moodiness or protective behavior toward family rather than open assertion. This placement's real strength lies in tenacious, quiet protectiveness once the native learns to act from emotional security rather than defensiveness. Classical texts associate the debilitated Mars with changeable fortunes, dependence on others and friction at home, especially when the native suppresses anger. Regular physical exercise and honest, calm conversation turn this energy into steady protectiveness and skill in caring professions or property matters.",
       "keywords": [
         "debilitated",
         "indirect assertion",
@@ -707,7 +709,7 @@
       "dignity": "neutral",
       "title": "Mars in Leo",
       "summary": "Gives confident, dramatic, leadership-oriented courage.",
-      "effects": "The native acts boldly and visibly, enjoying competition and recognition for their achievements, with a proud, passionate approach to pursuing goals. Leadership through decisive action comes naturally, though ego can make it hard to back down once a position is taken.",
+      "effects": "The native acts boldly and visibly, enjoying competition and recognition for their achievements, with a proud, passionate approach to pursuing goals. Leadership through decisive action comes naturally, though ego can make it hard to back down once a position is taken. Classical texts describe a bold, ambitious person who seeks command, may succeed in administration, politics or the forces, and dislikes being overruled. Leadership is strongest when courage is used to protect others, and weakest when it turns into a contest of egos.",
       "keywords": [
         "confident action",
         "leadership",
@@ -731,7 +733,7 @@
       "dignity": "neutral",
       "title": "Mars in Virgo",
       "summary": "Applies energy with precision, discipline, and a critical eye for detail.",
-      "effects": "Drive here is methodical and service-oriented rather than flashy, and the native works efficiently toward practical improvement in whatever they undertake. Irritability or perfectionism can surface under pressure, especially when standards are not met by self or others.",
+      "effects": "Drive here is methodical and service-oriented rather than flashy, and the native works efficiently toward practical improvement in whatever they undertake. Irritability or perfectionism can surface under pressure, especially when standards are not met by self or others. Classical texts link this placement to skill in technical, medical, legal or analytical work, careful handling of money and a critical eye. The native works hard and well, but needs to watch for nervous strain and for criticising others more sharply than intended.",
       "keywords": [
         "precision",
         "discipline",
@@ -755,7 +757,7 @@
       "dignity": "neutral",
       "title": "Mars in Libra",
       "summary": "Channels assertiveness through diplomacy, fairness, and partnership.",
-      "effects": "Because Mars's direct assertiveness sits somewhat uneasily in harmony-seeking Libra, the native may hesitate before confrontation, preferring negotiation or waiting for the right moment to act. Energy is often best applied to causes involving justice or balanced partnership, where conviction and diplomacy can work together.",
+      "effects": "Because Mars's direct assertiveness sits somewhat uneasily in harmony-seeking Libra, the native may hesitate before confrontation, preferring negotiation or waiting for the right moment to act. Energy is often best applied to causes involving justice or balanced partnership, where conviction and diplomacy can work together. Classical texts describe an attractive, sociable person who may be drawn to trade, law or the arts, with strong desires in relationships. Mars here asks for fairness rather than avoidance: stating needs clearly and early prevents resentment from building up in partnerships.",
       "keywords": [
         "diplomatic assertiveness",
         "hesitation in conflict",
@@ -779,7 +781,7 @@
       "dignity": "own sign",
       "title": "Mars in Scorpio",
       "summary": "Own sign — intense, strategic, deeply powerful drive.",
-      "effects": "This is one of Mars's strongest signs, giving formidable willpower, resourcefulness, and the capacity for sustained, focused intensity toward whatever the native is determined to achieve. The native fights hardest for causes they believe in, sometimes with a secretive or all-or-nothing approach that others find difficult to read.",
+      "effects": "This is one of Mars's strongest signs, giving formidable willpower, resourcefulness, and the capacity for sustained, focused intensity toward whatever the native is determined to achieve. The native fights hardest for causes they believe in, sometimes with a secretive or all-or-nothing approach that others find difficult to read. Classical texts describe a resourceful, courageous person able to handle crises, with possible success in medicine, surgery, research, security or mining. The caution is a tendency to hold grudges or act secretly, so open goals and trusted allies make this strength far more productive.",
       "keywords": [
         "own sign",
         "strategic intensity",
@@ -803,7 +805,7 @@
       "dignity": "neutral",
       "title": "Mars in Sagittarius",
       "summary": "Directs energy toward adventure, exploration, and principled action.",
-      "effects": "The native pursues goals with enthusiasm, directness, and a strong sense of conviction, often connected to travel, belief systems, or expanding horizons. Courage here is optimistic and freedom-loving, though commitment to slow, detailed follow-through can be a weaker point.",
+      "effects": "The native pursues goals with enthusiasm, directness, and a strong sense of conviction, often connected to travel, belief systems, or expanding horizons. Courage here is optimistic and freedom-loving, though commitment to slow, detailed follow-through can be a weaker point. Classical texts describe a respected, outspoken person who may serve in law, teaching, sports, religious work or positions of trust. The native fights hard for beliefs, and does best by checking facts first and leaving room for others' views.",
       "keywords": [
         "adventurous drive",
         "conviction",
@@ -827,7 +829,7 @@
       "dignity": "exalted",
       "title": "Mars in Capricorn",
       "summary": "Exalted — highly disciplined, strategic, and effective drive.",
-      "effects": "This is considered Mars's strongest placement for practical achievement, combining raw drive with patience, structure, and long-term ambition. The native accomplishes significant, lasting results through sustained, methodical effort rather than impulsive bursts of energy, making this excellent for leadership and executive action.",
+      "effects": "This is considered Mars's strongest placement for practical achievement, combining raw drive with patience, structure, and long-term ambition. The native accomplishes significant, lasting results through sustained, methodical effort rather than impulsive bursts of energy, making this excellent for leadership and executive action. Classical texts praise the exalted Mars for wealth, high position, a strong reputation and success in leadership, administration or the forces. Results come through organised, patient effort, and the native's main lesson is to stay approachable while being highly demanding.",
       "keywords": [
         "exalted",
         "disciplined ambition",
@@ -851,7 +853,7 @@
       "dignity": "neutral",
       "title": "Mars in Aquarius",
       "summary": "Applies energy toward group causes, innovation, and unconventional action.",
-      "effects": "The native's assertiveness often serves collective or reformist goals rather than purely personal ones, and courage shows up in willingness to challenge convention. There can be tension between individual drive and loyalty to group consensus, and action is most effective when tied to a clear, principled cause.",
+      "effects": "The native's assertiveness often serves collective or reformist goals rather than purely personal ones, and courage shows up in willingness to challenge convention. There can be tension between individual drive and loyalty to group consensus, and action is most effective when tied to a clear, principled cause. Classical texts are cautious here, noting an independent, sometimes rebellious nature and struggles with money or authority unless energy is well directed. Given a cause or a team, the native becomes a tireless organiser, and technical or scientific work suits this placement well.",
       "keywords": [
         "reformist drive",
         "innovation",
@@ -874,8 +876,8 @@
       "sign_theme": "compassion, imagination, spiritual surrender",
       "dignity": "neutral",
       "title": "Mars in Pisces",
-      "summary": "Debilitated — energy is diffused, intuitive, and best expressed through compassion.",
-      "effects": "Direct, forceful action does not come naturally here, and the native's drive is more easily expressed through creative, spiritual, or self-sacrificing channels than through open assertiveness. Clear boundaries and concrete goals help prevent energy from dissipating into vagueness, escapism, or passive avoidance of conflict.",
+      "summary": "Gives diffused, intuitive energy that is best expressed through compassion.",
+      "effects": "Direct, forceful action does not come naturally here, and the native's drive is more easily expressed through creative, spiritual, or self-sacrificing channels than through open assertiveness. Clear boundaries and concrete goals help prevent energy from dissipating into vagueness, escapism, or passive avoidance of conflict. Classical texts describe a restless person who may travel far or live away from home, gentle in manner but stubborn underneath. Pisces is a friendly sign for Mars, and the energy works well in healing, service, the arts or spiritual practice when it has a clear aim.",
       "keywords": [
         "debilitated",
         "diffused energy",
@@ -899,7 +901,7 @@
       "dignity": "neutral",
       "title": "Mercury in Aries",
       "summary": "Gives quick, direct, sometimes impulsive thinking and speech.",
-      "effects": "The native's mind moves fast and favors decisive statements over prolonged deliberation, learning most effectively through direct experience and action. Communication is candid and assertive, occasionally at the cost of tact or patience for detail.",
+      "effects": "The native's mind moves fast and favors decisive statements over prolonged deliberation, learning most effectively through direct experience and action. Communication is candid and assertive, occasionally at the cost of tact or patience for detail. Classical texts describe a quick-witted, talkative person with skill in writing, calculation or trade, who may be inclined to argue or speak too fast. Double-checking details and listening fully before replying turn this fast mind into a real advantage in business and debate.",
       "keywords": [
         "quick thinking",
         "directness",
@@ -923,7 +925,7 @@
       "dignity": "neutral",
       "title": "Mercury in Taurus",
       "summary": "Gives practical, deliberate, and steady thinking.",
-      "effects": "The native's mind favors concrete, tangible knowledge over abstract theory, and opinions, once formed, tend to be held firmly. Communication is measured and reliable rather than quick, and patience allows for thorough, dependable understanding of practical matters.",
+      "effects": "The native's mind favors concrete, tangible knowledge over abstract theory, and opinions, once formed, tend to be held firmly. Communication is measured and reliable rather than quick, and patience allows for thorough, dependable understanding of practical matters. Classical texts link this placement to skill in finance, trade, the arts or music, a pleasant voice, and a practical, wealth-building mind. Learning is slower but deeper, and the native should not mistake careful thinking for being slow.",
       "keywords": [
         "practical thinking",
         "deliberateness",
@@ -946,8 +948,8 @@
       "sign_theme": "communication, curiosity, adaptability",
       "dignity": "own sign",
       "title": "Mercury in Gemini",
-      "summary": "Own sign (moolatrikona) — Mercury at its most versatile and communicative.",
-      "effects": "This is Mercury's home sign, giving exceptionally quick, curious, and adaptable intellect well suited to multitasking, networking, and the exchange of information. The native learns rapidly across many subjects, though sustained depth in a single area requires deliberate focus.",
+      "summary": "Own sign — Mercury at its most versatile and communicative.",
+      "effects": "This is Mercury's home sign, giving exceptionally quick, curious, and adaptable intellect well suited to multitasking, networking, and the exchange of information. The native learns rapidly across many subjects, though sustained depth in a single area requires deliberate focus. Classical texts describe an eloquent, learned, sweet-spoken person skilled in writing, languages, mathematics or the arts. Nervous energy is the cost of so much mental activity, so regular breaks away from screens and talk help keep this strength sustainable.",
       "keywords": [
         "own sign",
         "versatility",
@@ -971,7 +973,7 @@
       "dignity": "neutral",
       "title": "Mercury in Cancer",
       "summary": "Gives intuitive, emotionally colored thinking and nurturing communication.",
-      "effects": "Thoughts and memory here are closely tied to feeling, and the native often reasons through emotional context rather than pure logic. Communication style is protective and empathetic, particularly regarding family or close relationships, sometimes making objectivity harder to maintain.",
+      "effects": "Thoughts and memory here are closely tied to feeling, and the native often reasons through emotional context rather than pure logic. Communication style is protective and empathetic, particularly regarding family or close relationships, sometimes making objectivity harder to maintain. Classical texts describe a person with a good memory, interest in history, poetry or water-related trade, and a mind easily moved by feelings. Important decisions come out better when the native sleeps on them, so that mood does not replace reasoning.",
       "keywords": [
         "intuitive thinking",
         "emotional memory",
@@ -995,7 +997,7 @@
       "dignity": "neutral",
       "title": "Mercury in Leo",
       "summary": "Gives confident, expressive, and creatively engaging communication.",
-      "effects": "The native shares ideas with flair and conviction, enjoying an audience and often expressing intellect through storytelling, teaching, or creative work. Strong self-belief in one's own opinions can make it harder to accept differing viewpoints gracefully.",
+      "effects": "The native shares ideas with flair and conviction, enjoying an audience and often expressing intellect through storytelling, teaching, or creative work. Strong self-belief in one's own opinions can make it harder to accept differing viewpoints gracefully. Classical texts describe a confident speaker who may be known for learning, with interest in teaching, entertainment, politics or management. Being open to correction is the key growth point, because the native can mistake strong opinions for proven facts.",
       "keywords": [
         "expressive communication",
         "confidence",
@@ -1019,7 +1021,7 @@
       "dignity": "exalted & own sign (moolatrikona)",
       "title": "Mercury in Virgo",
       "summary": "Exalted & own sign — Mercury at its most precise and analytically capable.",
-      "effects": "This is considered Mercury's strongest placement, giving exceptional attention to detail, methodical reasoning, and a natural gift for analysis, editing, or organization. The native's thinking is highly practical and thorough, though a tendency toward over-criticism or excessive worry about small errors needs conscious balance.",
+      "effects": "This is considered Mercury's strongest placement, giving exceptional attention to detail, methodical reasoning, and a natural gift for analysis, editing, or organization. The native's thinking is highly practical and thorough, though a tendency toward over-criticism or excessive worry about small errors needs conscious balance. Classical texts praise this placement for learning, eloquence, skill in writing, accounts, medicine or crafts, and a virtuous, refined nature. The only real risk is over-analysis, and the native should give practical judgement and trust as much room as precision.",
       "keywords": [
         "exalted",
         "analytical precision",
@@ -1043,7 +1045,7 @@
       "dignity": "neutral",
       "title": "Mercury in Libra",
       "summary": "Gives diplomatic, balanced thinking oriented toward fairness.",
-      "effects": "The native naturally sees multiple sides of an issue and communicates with tact, often seeking consensus or aesthetic harmony in how ideas are expressed. Weighing options carefully can sometimes tip into indecisiveness when a clear, timely choice is needed.",
+      "effects": "The native naturally sees multiple sides of an issue and communicates with tact, often seeking consensus or aesthetic harmony in how ideas are expressed. Weighing options carefully can sometimes tip into indecisiveness when a clear, timely choice is needed. Classical texts describe a polite, well-spoken person with skill in trade, law, the arts or public dealings, who spends generously. The native sees every side of a question, and grows by learning to reach a decision and stand by it.",
       "keywords": [
         "diplomatic thinking",
         "balance",
@@ -1067,7 +1069,7 @@
       "dignity": "neutral",
       "title": "Mercury in Scorpio",
       "summary": "Gives penetrating, investigative, strategically minded thinking.",
-      "effects": "The native's mind is drawn to uncovering hidden truths, psychology, or complex systems, and communication can be guarded or strategic rather than openly revealing. Once genuinely interested in a subject, focus and depth of understanding are considerable.",
+      "effects": "The native's mind is drawn to uncovering hidden truths, psychology, or complex systems, and communication can be guarded or strategic rather than openly revealing. Once genuinely interested in a subject, focus and depth of understanding are considerable. Classical texts describe a secretive, clever person with skill in research, investigation, medicine or hidden subjects, who keeps their own counsel. Words can be sharp when the native feels threatened, so using this insight to understand rather than to win arguments builds trust.",
       "keywords": [
         "investigative mind",
         "penetrating insight",
@@ -1091,7 +1093,7 @@
       "dignity": "neutral",
       "title": "Mercury in Sagittarius",
       "summary": "Gives big-picture, philosophical, enthusiastically direct thinking.",
-      "effects": "The native's intellect gravitates toward broad truths, ethics, and higher meaning rather than fine detail, and communication is candid, often blunt, but generally well-intentioned. Enthusiasm for ideas can outpace patience for the finer points of implementation.",
+      "effects": "The native's intellect gravitates toward broad truths, ethics, and higher meaning rather than fine detail, and communication is candid, often blunt, but generally well-intentioned. Enthusiasm for ideas can outpace patience for the finer points of implementation. Classical texts describe a learned, generous person respected for knowledge, with interest in law, religion, teaching or publishing. Details are the weak point, so the native benefits from careful checking of contracts, figures and promises.",
       "keywords": [
         "philosophical thinking",
         "big-picture focus",
@@ -1115,7 +1117,7 @@
       "dignity": "neutral",
       "title": "Mercury in Capricorn",
       "summary": "Gives practical, disciplined, long-term-oriented thinking.",
-      "effects": "The native's mind favors structure, planning, and realistic assessment over abstract speculation, and communication is measured, serious, and purposeful. This placement suits organizational, strategic, or administrative thinking that benefits from patience and methodical follow-through.",
+      "effects": "The native's mind favors structure, planning, and realistic assessment over abstract speculation, and communication is measured, serious, and purposeful. This placement suits organizational, strategic, or administrative thinking that benefits from patience and methodical follow-through. Classical texts describe a hard-working, practical person who may serve others or work in administration, trade or accounts, sometimes burdened by debts or worries. Careful planning is a real strength here, and the native does best by pairing it with optimism instead of expecting the worst.",
       "keywords": [
         "structured thinking",
         "practicality",
@@ -1139,7 +1141,7 @@
       "dignity": "neutral",
       "title": "Mercury in Aquarius",
       "summary": "Gives innovative, independent, systems-oriented thinking.",
-      "effects": "The native's intellect is drawn to original ideas, technology, and group ideals, often approaching problems from an unconventional or theoretical angle. Communication values authenticity and principle over convention, sometimes appearing detached from immediate emotional context.",
+      "effects": "The native's intellect is drawn to original ideas, technology, and group ideals, often approaching problems from an unconventional or theoretical angle. Communication values authenticity and principle over convention, sometimes appearing detached from immediate emotional context. Classical texts describe an independent thinker with skill in science, research, organisation or technical subjects, sometimes at odds with convention. Ideas land best when the native explains them in simple, human terms rather than abstract theory.",
       "keywords": [
         "innovative thinking",
         "independence",
@@ -1163,7 +1165,7 @@
       "dignity": "debilitated",
       "title": "Mercury in Pisces",
       "summary": "Debilitated — imaginative, intuitive, sometimes scattered thinking.",
-      "effects": "The native absorbs and processes information impressionistically, through feeling and imagination rather than strict logical sequence, which can make precise communication or decision-making more challenging. This placement's real strength lies in creative, symbolic, or intuitive understanding once grounding practices support clearer expression.",
+      "effects": "The native absorbs and processes information impressionistically, through feeling and imagination rather than strict logical sequence, which can make precise communication or decision-making more challenging. This placement's real strength lies in creative, symbolic, or intuitive understanding once grounding practices support clearer expression. Classical texts associate the debilitated Mercury with difficulty in practical study or business, dependence on others' advice and a mind that drifts. The same mind is gifted in poetry, music, intuition and spiritual subjects, and simple lists and routines keep everyday matters on track.",
       "keywords": [
         "debilitated",
         "imaginative thinking",
@@ -1187,7 +1189,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Aries",
       "summary": "Gives enthusiastic, pioneering, expansive optimism.",
-      "effects": "The native approaches new ventures with confidence and generosity, believing strongly in their own capacity to succeed through direct action. Wisdom here is gained through bold experience rather than careful study, and impulsive over-optimism is the main pitfall to watch for.",
+      "effects": "The native approaches new ventures with confidence and generosity, believing strongly in their own capacity to succeed through direct action. Wisdom here is gained through bold experience rather than careful study, and impulsive over-optimism is the main pitfall to watch for. Classical texts describe a capable, respected person with leadership qualities, wealth through own effort and a strong sense of justice. The native inspires others to begin things, and wisdom deepens when enthusiasm is joined to patient follow-through.",
       "keywords": [
         "enthusiasm",
         "pioneering optimism",
@@ -1211,7 +1213,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Taurus",
       "summary": "Grounds expansive wisdom in practical, material security.",
-      "effects": "The native's generosity and growth are tied to steady accumulation of resources, comfort, and reliable long-term value rather than risk-taking. Wisdom here is patient and grounded, valuing tangible abundance and ethical, unhurried prosperity.",
+      "effects": "The native's generosity and growth are tied to steady accumulation of resources, comfort, and reliable long-term value rather than risk-taking. Wisdom here is patient and grounded, valuing tangible abundance and ethical, unhurried prosperity. Classical texts describe a good-looking, well-off person who enjoys comfort, food and fine things, and gains through finance, land or trade. The native's generosity is real, and the main caution is letting comfort turn into overindulgence.",
       "keywords": [
         "material wisdom",
         "steady growth",
@@ -1235,7 +1237,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Gemini",
       "summary": "Expands wisdom through communication, learning, and versatile curiosity.",
-      "effects": "The native tends to grow through gathering and sharing knowledge across many subjects, often functioning well as a teacher, communicator, or broad generalist. Depth of philosophical conviction can be diluted by the sheer breadth of interests unless the native chooses to specialize.",
+      "effects": "The native tends to grow through gathering and sharing knowledge across many subjects, often functioning well as a teacher, communicator, or broad generalist. Depth of philosophical conviction can be diluted by the sheer breadth of interests unless the native chooses to specialize. Classical texts describe a learned, eloquent person skilled in writing, teaching, counselling or several branches of knowledge. Breadth comes easily here, and lasting wisdom comes from choosing one area to master and teach.",
       "keywords": [
         "versatile wisdom",
         "communicative growth",
@@ -1259,7 +1261,7 @@
       "dignity": "exalted",
       "title": "Jupiter in Cancer",
       "summary": "Exalted — deeply nurturing, generous, and protective wisdom.",
-      "effects": "This is considered one of Jupiter's most auspicious sign placements, expressing expansive generosity through care for family, home, and emotional wellbeing. The native's ethical instincts are strongly protective, and growth in life often comes through nurturing others as much as through personal ambition.",
+      "effects": "This is considered one of Jupiter's most auspicious sign placements, expressing expansive generosity through care for family, home, and emotional wellbeing. The native's ethical instincts are strongly protective, and growth in life often comes through nurturing others as much as through personal ambition. Classical texts praise the exalted Jupiter for learning, wealth, a respected family position, good friends and a righteous, kind character. The native often becomes a source of guidance and shelter for others, and the only caution is taking on more care for others than is healthy.",
       "keywords": [
         "exalted",
         "nurturing generosity",
@@ -1283,7 +1285,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Leo",
       "summary": "Gives confident, warm-hearted, dramatically generous wisdom.",
-      "effects": "The native's philosophy of life is expressed with warmth and magnanimity, often taking on a natural teaching or mentoring role that others find inspiring. Growth and good fortune tend to follow generous, big-hearted leadership rather than cautious restraint.",
+      "effects": "The native's philosophy of life is expressed with warmth and magnanimity, often taking on a natural teaching or mentoring role that others find inspiring. Growth and good fortune tend to follow generous, big-hearted leadership rather than cautious restraint. Classical texts describe a dignified, generous person with leadership ability, favour from people in power and interest in religion or public service. Wisdom here shines when it is shared generously, and dims when the native needs to be seen as the one who knows best.",
       "keywords": [
         "confident generosity",
         "warmth",
@@ -1307,7 +1309,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Virgo",
       "summary": "Applies expansive wisdom through careful, service-oriented, practical means.",
-      "effects": "Because Jupiter's natural breadth sits somewhat uneasily in detail-oriented Virgo, growth here tends to come through methodical, disciplined effort rather than natural, easy abundance. The native's generosity is expressed through genuinely useful help and precise, well-considered advice rather than grand gestures.",
+      "effects": "Because Jupiter's natural breadth sits somewhat uneasily in detail-oriented Virgo, growth here tends to come through methodical, disciplined effort rather than natural, easy abundance. The native's generosity is expressed through genuinely useful help and precise, well-considered advice rather than grand gestures. Classical texts describe a learned, practical person with skill in accounts, medicine, law or administration, who achieves aims through careful work. Faith and optimism can be crowded out by detail, so the native benefits from remembering the bigger purpose behind daily work.",
       "keywords": [
         "practical wisdom",
         "disciplined growth",
@@ -1331,7 +1333,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Libra",
       "summary": "Expresses wisdom through fairness, diplomacy, and beneficial partnerships.",
-      "effects": "The native's ethical instincts strongly favor justice and balance, often finding good fortune through law, advisory roles, or harmonious relationships. Growth comes through cooperative rather than solitary effort, and a genuinely generous, fair-minded reputation tends to open doors.",
+      "effects": "The native's ethical instincts strongly favor justice and balance, often finding good fortune through law, advisory roles, or harmonious relationships. Growth comes through cooperative rather than solitary effort, and a genuinely generous, fair-minded reputation tends to open doors. Classical texts describe a pleasant, fair-minded person who gains through trade, partnerships, the arts or advisory roles and has many friends. The native's counsel is valued, and growth comes from giving honest advice even when a pleasant answer would be easier.",
       "keywords": [
         "fair-minded wisdom",
         "diplomatic growth",
@@ -1355,7 +1357,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Scorpio",
       "summary": "Gives deep, intense wisdom about transformation and life's hidden dimensions.",
-      "effects": "The native's philosophical growth often comes through facing crisis, loss, or intensity directly rather than avoiding it, developing considerable resilience and psychological insight as a result. Generosity here can be understated but is genuinely profound, especially in times of others' difficulty.",
+      "effects": "The native's philosophical growth often comes through facing crisis, loss, or intensity directly rather than avoiding it, developing considerable resilience and psychological insight as a result. Generosity here can be understated but is genuinely profound, especially in times of others' difficulty. Classical texts describe a capable, strong-willed person with interest in research, healing, finance or spiritual practice, sometimes involved in disputes. Wisdom here grows through crisis and recovery, and the native often becomes a trusted guide for others in difficult times.",
       "keywords": [
         "transformative wisdom",
         "resilience",
@@ -1379,7 +1381,7 @@
       "dignity": "own sign (moolatrikona)",
       "title": "Jupiter in Sagittarius",
       "summary": "Own sign (moolatrikona) — Jupiter at its most naturally wise and expansive.",
-      "effects": "This is Jupiter's home sign, producing natural optimism, strong ethical conviction, and a genuine love of higher learning, travel, and philosophical exploration. The native tends to be a natural teacher or guide, and good fortune follows a life lived according to sincere, generously held principles.",
+      "effects": "This is Jupiter's home sign, producing natural optimism, strong ethical conviction, and a genuine love of higher learning, travel, and philosophical exploration. The native tends to be a natural teacher or guide, and good fortune follows a life lived according to sincere, generously held principles. Classical texts describe a leader among people, wealthy, generous and devoted to learning, religion or teaching, often in an advisory or senior role. The native's faith is a real strength, and it stays healthy when it remains open to other traditions and questions.",
       "keywords": [
         "own sign",
         "natural wisdom",
@@ -1403,7 +1405,7 @@
       "dignity": "debilitated",
       "title": "Jupiter in Capricorn",
       "summary": "Debilitated — wisdom and growth come slowly, through discipline rather than natural ease.",
-      "effects": "The native's optimism is tempered by caution or a tendency toward self-doubt about their own luck or generosity, requiring patient, structured effort to achieve the growth that comes more easily to other placements. Once earned through sustained discipline, the wisdom and stability gained here tend to be exceptionally solid and lasting.",
+      "effects": "The native's optimism is tempered by caution or a tendency toward self-doubt about their own luck or generosity, requiring patient, structured effort to achieve the growth that comes more easily to other placements. Once earned through sustained discipline, the wisdom and stability gained here tend to be exceptionally solid and lasting. Classical texts associate the debilitated Jupiter with hard work for modest returns, struggles with status or finances, and at times a loss of faith. Over time the native often becomes very practical and principled, and wisdom that is tested by experience proves unusually dependable.",
       "keywords": [
         "debilitated",
         "cautious growth",
@@ -1427,7 +1429,7 @@
       "dignity": "neutral",
       "title": "Jupiter in Aquarius",
       "summary": "Expands wisdom through humanitarian ideals and vision for collective progress.",
-      "effects": "The native's generosity and ethical instincts extend readily to causes, communities, and long-term social vision rather than purely personal or family concerns. Growth is often unconventional, favoring innovative or reformist approaches to bettering the wider world.",
+      "effects": "The native's generosity and ethical instincts extend readily to causes, communities, and long-term social vision rather than purely personal or family concerns. Growth is often unconventional, favoring innovative or reformist approaches to bettering the wider world. Classical texts describe a learned, kind person who helps others, with interest in philosophy, science, social service or group work. The native's ideals benefit many people, and personal relationships deserve the same attention as large causes.",
       "keywords": [
         "humanitarian wisdom",
         "collective vision",
@@ -1451,7 +1453,7 @@
       "dignity": "own sign",
       "title": "Jupiter in Pisces",
       "summary": "Own sign — deeply spiritual, compassionate, and idealistic wisdom.",
-      "effects": "This is one of Jupiter's most naturally comfortable placements, expressing profound compassion, faith, and intuitive understanding of universal or spiritual truths. The native's generosity is boundless and genuinely selfless, though practical discernment helps ensure idealism translates into real, grounded benefit.",
+      "effects": "This is one of Jupiter's most naturally comfortable placements, expressing profound compassion, faith, and intuitive understanding of universal or spiritual truths. The native's generosity is boundless and genuinely selfless, though practical discernment helps ensure idealism translates into real, grounded benefit. Classical texts describe a respected, wealthy and learned person, devoted to religion or service, calm in manner and trusted as an adviser. Compassion flows easily here, and practical boundaries keep the native's generosity from being taken for granted.",
       "keywords": [
         "own sign",
         "spiritual wisdom",
@@ -1475,7 +1477,7 @@
       "dignity": "neutral",
       "title": "Venus in Aries",
       "summary": "Gives passionate, direct, spontaneous approach to love and enjoyment.",
-      "effects": "The native is drawn to the thrill of pursuit and enjoys bold, straightforward romantic expression rather than subtlety or prolonged courtship. Relationships benefit from the native's genuine enthusiasm, though patience with a partner's slower pace can require conscious effort.",
+      "effects": "The native is drawn to the thrill of pursuit and enjoys bold, straightforward romantic expression rather than subtlety or prolonged courtship. Relationships benefit from the native's genuine enthusiasm, though patience with a partner's slower pace can require conscious effort. Classical texts describe a passionate, restless person in love, fond of travel and adventure, who may spend freely on pleasures. Relationships last longer when the excitement of the chase is followed by patience and attention to the partner's needs.",
       "keywords": [
         "passionate romance",
         "directness",
@@ -1498,8 +1500,8 @@
       "sign_theme": "stability, material security, sensory pleasure",
       "dignity": "own sign",
       "title": "Venus in Taurus",
-      "summary": "Own sign (moolatrikona) — Venus at its most sensuous, loyal, and stable.",
-      "effects": "This is Venus's home sign, giving deep appreciation for beauty, comfort, and physical pleasure alongside genuine loyalty and steadiness in relationships. The native values security and consistency in love, and once committed, tends to remain devoted and dependable.",
+      "summary": "Own sign — Venus at its most sensuous, loyal, and stable.",
+      "effects": "This is Venus's home sign, giving deep appreciation for beauty, comfort, and physical pleasure alongside genuine loyalty and steadiness in relationships. The native values security and consistency in love, and once committed, tends to remain devoted and dependable. Classical texts describe a good-looking, prosperous person who enjoys comfort, perfume, music and fine clothes, and is generous to others. The native has a natural talent for building beauty and security, and needs only to watch that loyalty does not become possessiveness.",
       "keywords": [
         "own sign",
         "sensuousness",
@@ -1523,7 +1525,7 @@
       "dignity": "neutral",
       "title": "Venus in Gemini",
       "summary": "Gives a playful, communicative, mentally stimulating approach to love.",
-      "effects": "The native is drawn to wit, conversation, and variety in relationships, needing genuine mental connection to sustain romantic interest over time. Charm comes easily, though a need for novelty can create restlessness if a relationship becomes too routine.",
+      "effects": "The native is drawn to wit, conversation, and variety in relationships, needing genuine mental connection to sustain romantic interest over time. Charm comes easily, though a need for novelty can create restlessness if a relationship becomes too routine. Classical texts describe a witty, artistic person with skill in writing, music, conversation or crafts, who is liked by many. Affection here needs variety and good talk, and commitment deepens when the native shares feelings as openly as ideas.",
       "keywords": [
         "playful romance",
         "mental connection",
@@ -1547,7 +1549,7 @@
       "dignity": "neutral",
       "title": "Venus in Cancer",
       "summary": "Gives a nurturing, emotionally deep approach to love and comfort.",
-      "effects": "The native seeks emotional security and genuine tenderness in relationships, often expressing affection through care, protection, and creating a comfortable home. Sentimentality runs deep, and the native tends to hold onto meaningful relationships and memories closely.",
+      "effects": "The native seeks emotional security and genuine tenderness in relationships, often expressing affection through care, protection, and creating a comfortable home. Sentimentality runs deep, and the native tends to hold onto meaningful relationships and memories closely. Classical texts describe a gentle, emotional person attached to home and family comforts, sometimes prone to moodiness in love. The native creates warm, welcoming spaces, and relationships are strongest when needs are stated rather than hinted at.",
       "keywords": [
         "nurturing love",
         "emotional depth",
@@ -1571,7 +1573,7 @@
       "dignity": "neutral",
       "title": "Venus in Leo",
       "summary": "Gives a warm, generous, dramatically affectionate approach to love.",
-      "effects": "The native enjoys grand romantic gestures and appreciates being genuinely admired, expressing love with warmth, loyalty, and passion once truly committed. Relationships benefit from mutual recognition and generosity, though a need for admiration can occasionally overshadow a partner's needs.",
+      "effects": "The native enjoys grand romantic gestures and appreciates being genuinely admired, expressing love with warmth, loyalty, and passion once truly committed. Relationships benefit from mutual recognition and generosity, though a need for admiration can occasionally overshadow a partner's needs. Classical texts describe a person who gains through women or patrons, enjoys luxury and display, and may be proud in love. Creative and performing arts suit this placement, and close relationships thrive on mutual admiration rather than one-sided attention.",
       "keywords": [
         "dramatic affection",
         "generosity",
@@ -1595,7 +1597,7 @@
       "dignity": "debilitated",
       "title": "Venus in Virgo",
       "summary": "Debilitated — a practical, sometimes reserved approach to love and affection.",
-      "effects": "The native may find open emotional expression harder here, often showing love through practical acts of service rather than overt sentiment, and can be unduly self-critical about their own worthiness in relationships. Learning to relax perfectionistic standards, in both self and partner, allows this placement's genuine devotion to come through more freely.",
+      "effects": "The native may find open emotional expression harder here, often showing love through practical acts of service rather than overt sentiment, and can be unduly self-critical about their own worthiness in relationships. Learning to relax perfectionistic standards, in both self and partner, allows this placement's genuine devotion to come through more freely. Classical texts associate the debilitated Venus with modest comforts, hesitation in love, and choices in relationships that may disappoint. The same placement gives care, skill in design, crafts or service, and love grows when the native accepts that no partner, including oneself, is perfect.",
       "keywords": [
         "debilitated",
         "practical affection",
@@ -1619,7 +1621,7 @@
       "dignity": "own sign (moolatrikona)",
       "title": "Venus in Libra",
       "summary": "Own sign — Venus at its most naturally charming, fair, and relationship-oriented.",
-      "effects": "This is Venus's home sign, giving natural grace, diplomacy, and a deep commitment to harmony and fairness in relationships. The native has a refined aesthetic sense and excels at creating balanced, pleasant partnerships, generally making this one of the most favorable placements for love and cooperation.",
+      "effects": "This is Venus's home sign, giving natural grace, diplomacy, and a deep commitment to harmony and fairness in relationships. The native has a refined aesthetic sense and excels at creating balanced, pleasant partnerships, generally making this one of the most favorable placements for love and cooperation. Classical texts describe a respected, wealthy and refined person, skilled in the arts, generous and successful in trade or public life. Harmony comes easily, and the native's growth lies in facing conflict honestly instead of smoothing it over.",
       "keywords": [
         "own sign",
         "natural charm",
@@ -1643,7 +1645,7 @@
       "dignity": "neutral",
       "title": "Venus in Scorpio",
       "summary": "Gives an intense, passionate, deeply transformative approach to love.",
-      "effects": "The native seeks profound emotional and physical bonding rather than superficial connection, and relationships here tend to be all-or-nothing in intensity. Possessiveness or secrecy can surface, but genuine loyalty and depth of feeling run remarkably strong once trust is established.",
+      "effects": "The native seeks profound emotional and physical bonding rather than superficial connection, and relationships here tend to be all-or-nothing in intensity. Possessiveness or secrecy can surface, but genuine loyalty and depth of feeling run remarkably strong once trust is established. Classical texts are cautious here, mentioning strong passions, jealousy, quarrels in love and expenses through pleasures. Deep loyalty is the gift of this placement, and trust grows when the native lets go of control and testing in relationships.",
       "keywords": [
         "intense passion",
         "deep bonding",
@@ -1667,7 +1669,7 @@
       "dignity": "neutral",
       "title": "Venus in Sagittarius",
       "summary": "Gives a freedom-loving, adventurous, philosophically minded approach to love.",
-      "effects": "The native is drawn to relationships that allow independence, shared exploration, or cross-cultural connection, and enjoys love as an extension of life's broader adventure. Commitment can feel restrictive unless the relationship itself is framed as expansive and growth-oriented.",
+      "effects": "The native is drawn to relationships that allow independence, shared exploration, or cross-cultural connection, and enjoys love as an extension of life's broader adventure. Commitment can feel restrictive unless the relationship itself is framed as expansive and growth-oriented. Classical texts describe a respected, wealthy and generous person with refined tastes and a principled approach to love. The native is drawn to partners who share ideals or a love of travel, and commitment feels easiest when it leaves room to grow.",
       "keywords": [
         "adventurous love",
         "need for freedom",
@@ -1691,7 +1693,7 @@
       "dignity": "neutral",
       "title": "Venus in Capricorn",
       "summary": "Gives a practical, committed, sometimes reserved approach to love.",
-      "effects": "The native values stability, loyalty, and long-term partnership, expressing affection through responsibility and consistent action rather than overt displays of emotion. Relationships tend to deepen and improve with time, as trust is earned through demonstrated reliability.",
+      "effects": "The native values stability, loyalty, and long-term partnership, expressing affection through responsibility and consistent action rather than overt displays of emotion. Relationships tend to deepen and improve with time, as trust is earned through demonstrated reliability. Classical texts describe a hard-working person who gains through steady effort, may prefer an older or more mature partner, and is cautious with money. Affection is shown through reliability, and the native's relationships warm up when feelings are expressed in words as well as deeds.",
       "keywords": [
         "committed love",
         "practicality",
@@ -1715,7 +1717,7 @@
       "dignity": "neutral",
       "title": "Venus in Aquarius",
       "summary": "Gives a friendship-based, unconventional approach to love and connection.",
-      "effects": "The native values intellectual and ideological compatibility as much as romantic feeling, often building relationships on shared ideals or genuine friendship first. Independence within the relationship is important, and conventional romantic expectations may feel less appealing than an unconventional, equal partnership.",
+      "effects": "The native values intellectual and ideological compatibility as much as romantic feeling, often building relationships on shared ideals or genuine friendship first. Independence within the relationship is important, and conventional romantic expectations may feel less appealing than an unconventional, equal partnership. Classical texts describe a kind, sociable person with many friends, unconventional tastes and interest in group or community activities. Friendship is the foundation of love here, and the native benefits from letting close bonds become emotionally as well as intellectually intimate.",
       "keywords": [
         "friendship-based love",
         "intellectual connection",
@@ -1739,7 +1741,7 @@
       "dignity": "exalted",
       "title": "Venus in Pisces",
       "summary": "Exalted — deeply compassionate, romantic, and idealistic approach to love.",
-      "effects": "This is considered Venus's strongest placement, giving profound empathy, artistic sensibility, and a self-sacrificing devotion in relationships. The native's capacity for unconditional love and creative or spiritual romantic expression is considerable, though discernment helps prevent idealization of unsuitable partners.",
+      "effects": "This is considered Venus's strongest placement, giving profound empathy, artistic sensibility, and a self-sacrificing devotion in relationships. The native's capacity for unconditional love and creative or spiritual romantic expression is considerable, though discernment helps prevent idealization of unsuitable partners. Classical texts praise the exalted Venus for wealth, refinement, artistic talent, kindness and respect from others. Love is idealistic and devoted, and the native does well to see partners as they are rather than as they could be.",
       "keywords": [
         "exalted",
         "compassionate love",
@@ -1763,7 +1765,7 @@
       "dignity": "debilitated",
       "title": "Saturn in Aries",
       "summary": "Debilitated — discipline sits uneasily against Aries's impulsive nature.",
-      "effects": "The native often feels frustrated by delays or restrictions on independent action, learning patience and structure through repeated, sometimes hard-won experience. Genuine achievement here comes from gradually tempering impulsiveness with realistic planning rather than suppressing initiative altogether.",
+      "effects": "The native often feels frustrated by delays or restrictions on independent action, learning patience and structure through repeated, sometimes hard-won experience. Genuine achievement here comes from gradually tempering impulsiveness with realistic planning rather than suppressing initiative altogether. Classical texts associate the debilitated Saturn with frustration, quarrels, wandering and effort that seems to go unrewarded for a long time. The lesson is to slow down and finish what is started, and people with this placement often develop real resilience through hardship.",
       "keywords": [
         "debilitated",
         "frustrated impulsiveness",
@@ -1787,7 +1789,7 @@
       "dignity": "neutral",
       "title": "Saturn in Taurus",
       "summary": "Gives a practical, patient, materially disciplined temperament.",
-      "effects": "The native values steady, long-term security and builds material stability through persistent, unglamorous effort rather than quick gains. There can be resistance to change once a stable routine or possession is established, but reliability and follow-through are genuine strengths.",
+      "effects": "The native values steady, long-term security and builds material stability through persistent, unglamorous effort rather than quick gains. There can be resistance to change once a stable routine or possession is established, but reliability and follow-through are genuine strengths. Classical texts describe a thrifty, patient person who builds wealth slowly, works with land, agriculture or trade, and keeps a small circle of friends. Venus is Saturn's friend, so this placement often gives lasting results, as long as caution with money does not turn into fear of spending.",
       "keywords": [
         "practical discipline",
         "patience",
@@ -1811,7 +1813,7 @@
       "dignity": "neutral",
       "title": "Saturn in Gemini",
       "summary": "Gives a disciplined, structured approach to communication and learning.",
-      "effects": "The native may feel initially restricted in self-expression, but develops serious, methodical intellectual capacity over time through patient study and careful, well-organized communication. Ideas here are fewer but more thoroughly considered than in more naturally scattered placements.",
+      "effects": "The native may feel initially restricted in self-expression, but develops serious, methodical intellectual capacity over time through patient study and careful, well-organized communication. Ideas here are fewer but more thoroughly considered than in more naturally scattered placements. Classical texts describe a serious, logical person who may work in writing, accounts, technical subjects or teaching, sometimes with a heavy mental load. Learning may come later or through effort, but it tends to be thorough, and regular rest helps prevent worry and overthinking.",
       "keywords": [
         "structured communication",
         "methodical learning",
@@ -1835,7 +1837,7 @@
       "dignity": "neutral",
       "title": "Saturn in Cancer",
       "summary": "Brings emotional reserve to a naturally sensitive sign.",
-      "effects": "The native may find it difficult to express vulnerability openly, often taking a disciplined, responsible approach to family duty rather than open emotional display. Genuine emotional maturity and a capacity for structured, protective caretaking tend to develop through the hardships this placement can bring.",
+      "effects": "The native may find it difficult to express vulnerability openly, often taking a disciplined, responsible approach to family duty rather than open emotional display. Genuine emotional maturity and a capacity for structured, protective caretaking tend to develop through the hardships this placement can bring. Classical texts are cautious here, describing emotional reserve, some distance or duty-bound relationships within the family and changeable finances. The native often becomes the dependable one at home, and needs to allow others to care for them as well.",
       "keywords": [
         "emotional reserve",
         "disciplined caretaking",
@@ -1859,7 +1861,7 @@
       "dignity": "neutral",
       "title": "Saturn in Leo",
       "summary": "Restrains natural self-expression, requiring patient effort to build genuine confidence.",
-      "effects": "The native may struggle with self-doubt or feel unseen early in life, since Saturn's caution sits uneasily with Leo's need for open recognition. Authority and respect, once achieved here, tend to be earned through humble, sustained effort rather than natural charisma, making later-life confidence particularly solid.",
+      "effects": "The native may struggle with self-doubt or feel unseen early in life, since Saturn's caution sits uneasily with Leo's need for open recognition. Authority and respect, once achieved here, tend to be earned through humble, sustained effort rather than natural charisma, making later-life confidence particularly solid. Classical texts describe friction with authority figures or the father, hard work without easy recognition, and a strong sense of duty. Leadership arrives later in life and is well earned, and the native grows by valuing their own worth independently of others' praise.",
       "keywords": [
         "restrained self-expression",
         "early self-doubt",
@@ -1883,7 +1885,7 @@
       "dignity": "neutral",
       "title": "Saturn in Virgo",
       "summary": "Gives a highly disciplined, methodical, detail-oriented temperament.",
-      "effects": "The native excels at structured, analytical work and takes a patient, thorough approach to responsibilities and problem-solving. Perfectionism or excessive self-criticism can become a burden if not balanced with reasonable expectations and self-compassion.",
+      "effects": "The native excels at structured, analytical work and takes a patient, thorough approach to responsibilities and problem-solving. Perfectionism or excessive self-criticism can become a burden if not balanced with reasonable expectations and self-compassion. Classical texts describe a methodical worker suited to service, accounts, research, medicine or administration, often critical but dependable. Mercury is Saturn's friend, so careful work brings steady results, and the main caution is worry about health or small details.",
       "keywords": [
         "methodical discipline",
         "analytical precision",
@@ -1907,7 +1909,7 @@
       "dignity": "exalted",
       "title": "Saturn in Libra",
       "summary": "Exalted — disciplined fairness and structured commitment to relationships.",
-      "effects": "This is considered Saturn's strongest placement, combining a strong sense of justice with the patience and responsibility to build long-term, well-balanced partnerships. The native excels in roles requiring impartial judgment, such as law or diplomacy, and takes relationship commitments seriously and reliably.",
+      "effects": "This is considered Saturn's strongest placement, combining a strong sense of justice with the patience and responsibility to build long-term, well-balanced partnerships. The native excels in roles requiring impartial judgment, such as law or diplomacy, and takes relationship commitments seriously and reliably. Classical texts praise the exalted Saturn for wealth, high position, respect, fairness in judgement and success through steady effort. The native is suited to law, administration, business or any role that needs balanced judgement, and commitments made are usually kept.",
       "keywords": [
         "exalted",
         "disciplined fairness",
@@ -1931,7 +1933,7 @@
       "dignity": "neutral",
       "title": "Saturn in Scorpio",
       "summary": "Gives a disciplined, intense approach to transformation and hidden matters.",
-      "effects": "The native shows considerable patience and endurance when facing crisis or deep psychological material, often developing significant resilience through direct confrontation with fear or loss. A structured, investigative mindset suits research, strategy, or any field requiring sustained focus on complex, sensitive matters.",
+      "effects": "The native shows considerable patience and endurance when facing crisis or deep psychological material, often developing significant resilience through direct confrontation with fear or loss. A structured, investigative mindset suits research, strategy, or any field requiring sustained focus on complex, sensitive matters. Classical texts are cautious here, mentioning secretive or harsh tendencies, risky ventures and hard lessons around power and money. The same placement gives great endurance in research, investigation, crisis work or healing, and steady honesty is its best protection.",
       "keywords": [
         "disciplined endurance",
         "psychological resilience",
@@ -1955,7 +1957,7 @@
       "dignity": "neutral",
       "title": "Saturn in Sagittarius",
       "summary": "Gives a disciplined, structured approach to belief systems and higher learning.",
-      "effects": "The native's natural optimism is tempered by caution, and genuine philosophical conviction develops slowly through patient study and lived experience rather than quick faith. Over time, this produces a serious, well-grounded, and durable personal philosophy rather than a superficial one.",
+      "effects": "The native's natural optimism is tempered by caution, and genuine philosophical conviction develops slowly through patient study and lived experience rather than quick faith. Over time, this produces a serious, well-grounded, and durable personal philosophy rather than a superficial one. Classical texts describe a principled, respected person with interest in law, religion, teaching or administration, who may hold firm traditional views. Faith here is built through experience rather than given, and the native grows by staying open to questions as well as rules.",
       "keywords": [
         "disciplined belief",
         "patient study",
@@ -1978,8 +1980,8 @@
       "sign_theme": "discipline, ambition, structure",
       "dignity": "own sign",
       "title": "Saturn in Capricorn",
-      "summary": "Own sign (moolatrikona) — Saturn at its most naturally disciplined and effective.",
-      "effects": "This is Saturn's home sign, giving exceptional patience, responsibility, and capacity for long-term achievement, particularly in career and administrative matters. The native's authority is earned through sustained, methodical effort and tends to be genuinely respected rather than merely feared.",
+      "summary": "Own sign — Saturn at its most naturally disciplined and effective.",
+      "effects": "This is Saturn's home sign, giving exceptional patience, responsibility, and capacity for long-term achievement, particularly in career and administrative matters. The native's authority is earned through sustained, methodical effort and tends to be genuinely respected rather than merely feared. Classical texts describe a capable, hard-working person who rises through persistence, may manage land, property or large organisations, and is respected by colleagues. The caution is becoming too work-focused or rigid, so time for rest, family and enjoyment keeps this strength humane.",
       "keywords": [
         "own sign",
         "natural discipline",
@@ -2003,7 +2005,7 @@
       "dignity": "own sign (moolatrikona)",
       "title": "Saturn in Aquarius",
       "summary": "Own sign — disciplined structure applied to humanitarian and unconventional goals.",
-      "effects": "The native brings genuine responsibility and staying power to group causes, systemic reform, or unconventional long-term projects, valuing principle and structure over personal glory. Detachment can sometimes read as coldness, but the native's commitment to collective progress tends to be sincere and enduring.",
+      "effects": "The native brings genuine responsibility and staying power to group causes, systemic reform, or unconventional long-term projects, valuing principle and structure over personal glory. Detachment can sometimes read as coldness, but the native's commitment to collective progress tends to be sincere and enduring. Classical texts describe a thoughtful, independent person with skill in science, organisation or community work, and steady gains through groups. Saturn is strongest here in its moolatrikona, and the native's long-term thinking can make lasting improvements for many people.",
       "keywords": [
         "own sign",
         "disciplined idealism",
@@ -2027,7 +2029,7 @@
       "dignity": "neutral",
       "title": "Saturn in Pisces",
       "summary": "Gives a disciplined approach to compassion, spirituality, and sacrifice.",
-      "effects": "The native may feel emotionally restricted or prone to melancholy, but develops genuine spiritual maturity through patient, humble service to others over time. Structure and realistic boundaries help channel this placement's natural compassion into sustainable, effective support rather than self-depleting sacrifice.",
+      "effects": "The native may feel emotionally restricted or prone to melancholy, but develops genuine spiritual maturity through patient, humble service to others over time. Structure and realistic boundaries help channel this placement's natural compassion into sustainable, effective support rather than self-depleting sacrifice. Classical texts describe a modest, capable person who may work in service, charitable or spiritual organisations, or with water and travel. Jupiter's sign softens Saturn here, and the native finds stability by giving structure to compassion rather than giving without limits.",
       "keywords": [
         "disciplined compassion",
         "melancholic tendency",
@@ -2051,7 +2053,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Aries",
       "summary": "Amplifies bold, pioneering ambition, sometimes to the point of recklessness.",
-      "effects": "The native feels an intense, sometimes obsessive drive to be first, best, or most independent, taking unconventional or bold approaches to self-assertion. This placement rewards channeling that drive into genuine achievement rather than impulsive risk for its own sake.",
+      "effects": "The native feels an intense, sometimes obsessive drive to be first, best, or most independent, taking unconventional or bold approaches to self-assertion. This placement rewards channeling that drive into genuine achievement rather than impulsive risk for its own sake. Rahu here can push the native toward fast, risky moves in business, sports or technology, and success often comes suddenly after bold action. The safeguard is to check facts and consider other people's views before acting, so that courage does not become recklessness.",
       "keywords": [
         "amplified ambition",
         "boldness",
@@ -2075,7 +2077,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Taurus",
       "summary": "Intensifies material ambition and desire for wealth, comfort, and sensory security.",
-      "effects": "The native feels a strong, sometimes insatiable pull toward accumulating resources, luxury, or physical pleasure, which can become a defining life focus. Many practitioners consider this a materially favorable placement for Rahu, provided the native manages a tendency toward excess or overattachment to possessions.",
+      "effects": "The native feels a strong, sometimes insatiable pull toward accumulating resources, luxury, or physical pleasure, which can become a defining life focus. Many practitioners consider this a materially favorable placement for Rahu, provided the native manages a tendency toward excess or overattachment to possessions. Many traditions consider this a strong placement for Rahu, often bringing gains through finance, luxury goods, food, property or foreign trade. The caution is never feeling that enough is enough, so contentment and honest dealings keep these gains secure.",
       "keywords": [
         "material ambition",
         "desire for luxury",
@@ -2099,7 +2101,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Gemini",
       "summary": "Amplifies communicative ambition and hunger for information and networking.",
-      "effects": "The native shows an intense, restless curiosity and a strong drive to master communication, media, or unconventional ideas, often functioning as an innovator in how information is shared. Many texts consider this a favorable placement for Rahu's expression, particularly when the native's networking instincts are put to constructive use.",
+      "effects": "The native shows an intense, restless curiosity and a strong drive to master communication, media, or unconventional ideas, often functioning as an innovator in how information is shared. Many texts consider this a favorable placement for Rahu's expression, particularly when the native's networking instincts are put to constructive use. Rahu here favours media, technology, marketing, languages and fast-moving trade, and the native often learns unusual skills quickly. Too much information can create restlessness or nervous strain, so periods of quiet and careful checking of sources are important.",
       "keywords": [
         "communicative ambition",
         "restless curiosity",
@@ -2123,7 +2125,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Cancer",
       "summary": "Amplifies emotional intensity and unconventional patterns around home and security.",
-      "effects": "The native may feel a strong, sometimes obsessive pull regarding domestic status, emotional security, or the mother's role, occasionally creating restlessness about one's own roots or nurturing style. Working consciously with this placement can turn an unsettled inner sense of home into a genuinely expanded, unconventional form of emotional belonging.",
+      "effects": "The native may feel a strong, sometimes obsessive pull regarding domestic status, emotional security, or the mother's role, occasionally creating restlessness about one's own roots or nurturing style. Working consciously with this placement can turn an unsettled inner sense of home into a genuinely expanded, unconventional form of emotional belonging. Rahu here can bring an unusual home life, moves or living abroad, and strong emotional needs that are hard to satisfy. Building a sense of home from within, through routine and trusted people, steadies the restlessness this placement can create.",
       "keywords": [
         "emotional intensity",
         "unconventional home patterns",
@@ -2147,7 +2149,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Leo",
       "summary": "Amplifies the desire for recognition, status, and dramatic self-expression.",
-      "effects": "The native feels an intense, sometimes obsessive need for validation and visibility, approaching leadership or creative self-expression in bold, unconventional ways. Real fulfillment here comes from channeling this hunger for recognition into genuinely earned achievement rather than status-seeking alone.",
+      "effects": "The native feels an intense, sometimes obsessive need for validation and visibility, approaching leadership or creative self-expression in bold, unconventional ways. Real fulfillment here comes from channeling this hunger for recognition into genuinely earned achievement rather than status-seeking alone. Rahu here can bring sudden fame, success in politics, entertainment or management, and conflicts with established authority. Lasting respect comes when the native uses visibility to serve a purpose larger than personal image.",
       "keywords": [
         "desire for recognition",
         "dramatic ambition",
@@ -2171,7 +2173,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Virgo",
       "summary": "Amplifies analytical ambition and unconventional approaches to work and service.",
-      "effects": "The native may develop an intense, sometimes anxious perfectionism, driven to innovate within practical, technical, or health-related fields. This placement rewards disciplined channeling of Rahu's restless energy into genuinely useful expertise rather than obsessive worry over details.",
+      "effects": "The native may develop an intense, sometimes anxious perfectionism, driven to innovate within practical, technical, or health-related fields. This placement rewards disciplined channeling of Rahu's restless energy into genuinely useful expertise rather than obsessive worry over details. Many traditions consider Virgo a comfortable sign for Rahu, favouring technical, analytical, medical or research work and success over competitors. The caution is anxiety about health or perfection, so regular routines and a sense of proportion help a great deal.",
       "keywords": [
         "analytical ambition",
         "innovative service",
@@ -2195,7 +2197,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Libra",
       "summary": "Amplifies desire for status and validation through relationships and partnership.",
-      "effects": "The native may idealize partnership or approach fairness and diplomacy in unconventional, intense ways, sometimes creating instability in close relationships through excessive expectation. Genuine growth here comes from grounding the drive for partnership in realistic, mutual understanding rather than idealized fantasy.",
+      "effects": "The native may idealize partnership or approach fairness and diplomacy in unconventional, intense ways, sometimes creating instability in close relationships through excessive expectation. Genuine growth here comes from grounding the drive for partnership in realistic, mutual understanding rather than idealized fantasy. Rahu here can bring partnerships with people from different backgrounds, success in trade, law, design or diplomacy, and strong social ambitions. Choosing partners for shared values rather than status protects the native from relationships that look better than they feel.",
       "keywords": [
         "relationship ambition",
         "idealization",
@@ -2219,7 +2221,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Scorpio",
       "summary": "Intensifies fascination with hidden, taboo, or transformative matters.",
-      "effects": "The native often feels a magnetic, sometimes destabilizing pull toward power, secrecy, or the occult, and many classical conventions consider this a more difficult placement for Rahu requiring conscious self-awareness. When channeled constructively, this placement can produce genuinely penetrating insight into psychology, research, or transformative work.",
+      "effects": "The native often feels a magnetic, sometimes destabilizing pull toward power, secrecy, or the occult, and many classical conventions consider this a more difficult placement for Rahu requiring conscious self-awareness. When channeled constructively, this placement can produce genuinely penetrating insight into psychology, research, or transformative work. Many traditions consider Scorpio a difficult sign for Rahu, linking it to hidden worries, sudden upheavals and attraction to secrecy or risk. The same intensity suits research, investigation, psychology or crisis work, and transparency in money and relationships is the key safeguard.",
       "keywords": [
         "fascination with hidden matters",
         "magnetic intensity",
@@ -2243,7 +2245,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Sagittarius",
       "summary": "Amplifies unconventional belief systems and hunger for foreign or nontraditional wisdom.",
-      "effects": "The native often feels a restless pull to question inherited tradition, seeking unconventional philosophies, foreign teachings, or unusual paths to higher truth. This placement rewards embracing an authentic, self-derived belief system rather than either blindly following convention or restlessly rejecting all structure.",
+      "effects": "The native often feels a restless pull to question inherited tradition, seeking unconventional philosophies, foreign teachings, or unusual paths to higher truth. This placement rewards embracing an authentic, self-derived belief system rather than either blindly following convention or restlessly rejecting all structure. Rahu here can bring foreign travel, unusual teachers or beliefs, and success in higher education, law, publishing or international work. The caution is following a guru or idea too blindly, so testing beliefs against experience keeps the native's search healthy.",
       "keywords": [
         "unconventional belief",
         "restless searching",
@@ -2267,7 +2269,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Capricorn",
       "summary": "Amplifies ambition for status, authority, and material achievement.",
-      "effects": "The native feels an intense drive to rise within social or professional hierarchies, sometimes taking unconventional or unorthodox routes to establish authority and structure. Real success here comes from pairing this ambition with genuine discipline rather than shortcuts that undermine long-term stability.",
+      "effects": "The native feels an intense drive to rise within social or professional hierarchies, sometimes taking unconventional or unorthodox routes to establish authority and structure. Real success here comes from pairing this ambition with genuine discipline rather than shortcuts that undermine long-term stability. Rahu here can drive steady ambition in business, politics, engineering or large organisations, with recognition that often comes later through persistence. The safeguard is ethical means, since shortcuts taken under this placement tend to be exposed sooner or later.",
       "keywords": [
         "status ambition",
         "unconventional authority",
@@ -2291,7 +2293,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Aquarius",
       "summary": "Amplifies futuristic, unconventional ambition tied to technology and group causes.",
-      "effects": "The native often feels strongly drawn to innovation, reform, or unconventional social causes, sometimes to the point of detachment from more traditional personal ties. This placement favors visionary, forward-thinking work, particularly when the native's individuality is channeled toward genuinely constructive collective progress.",
+      "effects": "The native often feels strongly drawn to innovation, reform, or unconventional social causes, sometimes to the point of detachment from more traditional personal ties. This placement favors visionary, forward-thinking work, particularly when the native's individuality is channeled toward genuinely constructive collective progress. Many traditions consider Aquarius a comfortable sign for Rahu, favouring technology, science, social networks and work with large groups. The native can be ahead of their time, and does best by staying connected to individual people as well as causes.",
       "keywords": [
         "futuristic ambition",
         "technological drive",
@@ -2315,7 +2317,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Rahu in Pisces",
       "summary": "Amplifies spiritual or escapist longing and unconventional imagination.",
-      "effects": "The native may feel an intense, sometimes confusing pull toward the unseen, foreign spiritual paths, or idealized fantasy, occasionally blurring the line between genuine intuition and escapism. Grounding this placement's imaginative hunger in concrete, compassionate action helps transform confusion into genuine spiritual or creative insight.",
+      "effects": "The native may feel an intense, sometimes confusing pull toward the unseen, foreign spiritual paths, or idealized fantasy, occasionally blurring the line between genuine intuition and escapism. Grounding this placement's imaginative hunger in concrete, compassionate action helps transform confusion into genuine spiritual or creative insight. Rahu here can bring vivid imagination, foreign residence, interest in spiritual or hidden subjects, and confusion when boundaries are unclear. Grounding habits, clear finances and avoiding intoxicants help turn this sensitivity into creative or healing work.",
       "keywords": [
         "spiritual longing",
         "escapist tendency",
@@ -2339,7 +2341,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Aries",
       "summary": "Reduces attachment to assertive self-interest and personal ambition.",
-      "effects": "The native may feel a subtle disconnect from ordinary competitive drive, acting with quiet, intuitive confidence rather than aggressive self-assertion. This placement often reflects past-life mastery of independent courage, now expressed as understated rather than showy strength.",
+      "effects": "The native may feel a subtle disconnect from ordinary competitive drive, acting with quiet, intuitive confidence rather than aggressive self-assertion. This placement often reflects past-life mastery of independent courage, now expressed as understated rather than showy strength. Ketu here can give sudden bursts of courage and skill in sports, technical work or crisis situations, alongside impatience and minor injuries. The native often acts on instinct, and grows by connecting that inner drive to a cause or person they care about.",
       "keywords": [
         "detached self-interest",
         "intuitive confidence",
@@ -2363,7 +2365,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Taurus",
       "summary": "Reduces attachment to material comfort, security, and sensory pleasure.",
-      "effects": "The native often shows genuine indifference toward accumulating wealth or possessions, finding material attachment less compelling than most people do. This placement supports a naturally simple, spiritually oriented relationship with resources and physical comfort.",
+      "effects": "The native often shows genuine indifference toward accumulating wealth or possessions, finding material attachment less compelling than most people do. This placement supports a naturally simple, spiritually oriented relationship with resources and physical comfort. Ketu here can make income or savings feel uncertain at times, while giving a natural ability to live simply and value what truly matters. Careful budgeting and a little regular saving give security without fighting the placement's detached nature.",
       "keywords": [
         "material detachment",
         "indifference to possessions",
@@ -2387,7 +2389,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Gemini",
       "summary": "Reduces attachment to conventional communication and intellectual curiosity.",
-      "effects": "The native may feel scattered or restless with ordinary information-gathering, sometimes preferring intuitive knowing over analytical study. Speech tends to be selective and minimal rather than expansive, occasionally masking a deep, quietly held understanding.",
+      "effects": "The native may feel scattered or restless with ordinary information-gathering, sometimes preferring intuitive knowing over analytical study. Speech tends to be selective and minimal rather than expansive, occasionally masking a deep, quietly held understanding. Ketu here can give intuitive, unusual thinking and skill in research, coding, languages or spiritual texts, but scattered study habits. Speech can be abrupt or misunderstood, so the native benefits from explaining the steps behind their sudden insights.",
       "keywords": [
         "intellectual detachment",
         "restlessness with analysis",
@@ -2411,7 +2413,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Cancer",
       "summary": "Reduces attachment to conventional home life and emotional dependency on family.",
-      "effects": "The native may feel a degree of emotional distance from domestic roots or the nurturing role expected by family, seeking security through inner rather than external means. This placement often reflects a need to find belonging that is not dependent on conventional home or family structures.",
+      "effects": "The native may feel a degree of emotional distance from domestic roots or the nurturing role expected by family, seeking security through inner rather than external means. This placement often reflects a need to find belonging that is not dependent on conventional home or family structures. Ketu here can bring some distance from family or birthplace, frequent moves, and an inner emotional life that others find hard to read. Spiritual practice and a few deep friendships often give the security that a conventional home life does not.",
       "keywords": [
         "detached domesticity",
         "unconventional family ties",
@@ -2435,7 +2437,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Leo",
       "summary": "Reduces attachment to recognition and dramatic self-expression.",
-      "effects": "The native often feels genuinely indifferent to public validation or being the center of attention, exercising quiet rather than showy authority. This placement can reflect past-life mastery of leadership, now expressed through understated, humble influence.",
+      "effects": "The native often feels genuinely indifferent to public validation or being the center of attention, exercising quiet rather than showy authority. This placement can reflect past-life mastery of leadership, now expressed through understated, humble influence. Ketu here can bring a quiet, behind-the-scenes kind of authority, skill in advisory roles, and some distance from the father or from fame. The native often leads best when they do not need the spotlight, and creative work done for its own sake is especially fulfilling.",
       "keywords": [
         "indifference to recognition",
         "quiet authority",
@@ -2459,7 +2461,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Virgo",
       "summary": "Reduces attachment to perfectionistic analysis and rigid daily routine.",
-      "effects": "The native may feel scattered regarding health habits or meticulous work, preferring intuitive shortcuts over methodical, step-by-step process. This placement can reflect past-life mastery of service or skill, now expressed as effortless, sometimes unexplainable competence.",
+      "effects": "The native may feel scattered regarding health habits or meticulous work, preferring intuitive shortcuts over methodical, step-by-step process. This placement can reflect past-life mastery of service or skill, now expressed as effortless, sometimes unexplainable competence. Ketu here can give sharp diagnostic and analytical ability, useful in medicine, research, editing or technical troubleshooting. The native may worry about small health matters or mistakes, and benefits from trusting the bigger picture once the work is done.",
       "keywords": [
         "detachment from perfectionism",
         "intuitive shortcuts",
@@ -2483,7 +2485,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Libra",
       "summary": "Reduces attachment to conventional partnership and social harmony-seeking.",
-      "effects": "The native may feel a degree of ambivalence or detachment in close relationships, sometimes finding balance through inner reflection rather than through relational compromise. This placement can indicate a need to develop fairness and equilibrium independently, rather than relying solely on partnership for a sense of completeness.",
+      "effects": "The native may feel a degree of ambivalence or detachment in close relationships, sometimes finding balance through inner reflection rather than through relational compromise. This placement can indicate a need to develop fairness and equilibrium independently, rather than relying solely on partnership for a sense of completeness. Ketu here can bring unusual or spiritually tinged partnerships and a feeling of detachment even in close relationships. Clear communication about expectations helps partners understand that the native's need for space is not a lack of care.",
       "keywords": [
         "relationship ambivalence",
         "inner balance",
@@ -2507,7 +2509,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Scorpio",
       "summary": "Considered one of Ketu's most naturally comfortable placements — deep intuitive mastery of transformation.",
-      "effects": "The native often shows genuine detachment from material power struggles or possessiveness, paired with profound, sometimes uncanny insight into psychology, the occult, or life's hidden dimensions. This placement frequently reflects significant past-life spiritual work around intensity and transformation, now expressed as natural depth rather than turmoil.",
+      "effects": "The native often shows genuine detachment from material power struggles or possessiveness, paired with profound, sometimes uncanny insight into psychology, the occult, or life's hidden dimensions. This placement frequently reflects significant past-life spiritual work around intensity and transformation, now expressed as natural depth rather than turmoil. Many traditions consider Scorpio a strong sign for Ketu, favouring research, healing, astrology, psychology and spiritual discipline. The native handles crises calmly, and needs only to make sure that this inner strength is shared rather than kept entirely private.",
       "keywords": [
         "natural transformative mastery",
         "psychological insight",
@@ -2531,7 +2533,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Sagittarius",
       "summary": "Reduces attachment to conventional, doctrinal belief systems.",
-      "effects": "The native may feel restless with organized religion or fixed philosophy, trusting an innate, largely unspoken sense of truth over external doctrine. This placement can reflect past-life mastery of wisdom, now expressed as quiet, intuitive understanding rather than active teaching or preaching.",
+      "effects": "The native may feel restless with organized religion or fixed philosophy, trusting an innate, largely unspoken sense of truth over external doctrine. This placement can reflect past-life mastery of wisdom, now expressed as quiet, intuitive understanding rather than active teaching or preaching. Ketu here can bring an independent spiritual path, interest in philosophy or foreign traditions, and distrust of formal religious authority. The native's wisdom is often intuitive and experiential, and becomes most useful when it is shared in simple, practical terms.",
       "keywords": [
         "detachment from doctrine",
         "innate wisdom",
@@ -2555,7 +2557,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Capricorn",
       "summary": "Reduces attachment to conventional ambition, status, and career achievement.",
-      "effects": "The native may feel genuinely indifferent to climbing social or professional hierarchies, exercising authority and responsibility effortlessly rather than through visible striving. This placement can reflect past-life mastery of discipline, now expressed as natural, unforced capability.",
+      "effects": "The native may feel genuinely indifferent to climbing social or professional hierarchies, exercising authority and responsibility effortlessly rather than through visible striving. This placement can reflect past-life mastery of discipline, now expressed as natural, unforced capability. Ketu here can bring sudden changes of direction in career and a preference for meaningful work over titles or status. Steady, simple routines help the native stay effective, since long-term plans can lose their pull when they feel empty.",
       "keywords": [
         "detachment from ambition",
         "effortless authority",
@@ -2579,7 +2581,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Aquarius",
       "summary": "Reduces attachment to group identity and collective social causes.",
-      "effects": "The native may feel detached from group belonging even while intellectually sympathetic to humanitarian or reformist ideals, preferring an independent, sometimes solitary path even among the unconventional. This placement favors an intuitive, personally derived sense of vision rather than adherence to any collective ideology.",
+      "effects": "The native may feel detached from group belonging even while intellectually sympathetic to humanitarian or reformist ideals, preferring an independent, sometimes solitary path even among the unconventional. This placement favors an intuitive, personally derived sense of vision rather than adherence to any collective ideology. Ketu here can give original, humanitarian thinking and skill in science or technology, with a preference for working independently. The native may feel like an outsider in groups, and finds belonging through a few like-minded people rather than large networks.",
       "keywords": [
         "detachment from group identity",
         "solitary independence",
@@ -2603,7 +2605,7 @@
       "dignity": "see dignity_note (classical texts disagree for the lunar nodes)",
       "title": "Ketu in Pisces",
       "summary": "Considered one of Ketu's most naturally resonant placements — deep spiritual intuition and compassion.",
-      "effects": "This mirrors Ketu's comfortable dignity in the 12th house of liberation, giving profound imagination, empathy, and a strong pull toward dissolving the ego in service of something greater. The native often shows a natural, largely effortless spiritual sensitivity, with worldly ambition holding relatively little pull compared to inner or transcendent concerns.",
+      "effects": "This mirrors Ketu's comfortable dignity in the 12th house of liberation, giving profound imagination, empathy, and a strong pull toward dissolving the ego in service of something greater. The native often shows a natural, largely effortless spiritual sensitivity, with worldly ambition holding relatively little pull compared to inner or transcendent concerns. Many traditions consider Pisces a favourable sign for Ketu, supporting meditation, charity, healing and a quiet, compassionate nature. Practical structure in daily life helps the native stay grounded, so that sensitivity remains a strength rather than a drain.",
       "keywords": [
         "natural spiritual resonance",
         "deep compassion",
@@ -2613,5 +2615,14 @@
       "status": "verified",
       "verified": true
     }
-  ]
+  ],
+  "deepening_pass": {
+    "performed": "2026-11-07",
+    "by": "Claude",
+    "method": "Two sentences added to every entry's `effects`: the classical picture of the placement (paraphrasing the planet-in-sign chapters of Saravali, Brihat Jataka and Phaladeepika as commonly rendered in English) and a practical growth note. Existing text was kept word for word so its Bengali translation still applies; each new sentence has its own Bengali entry in i18n_src/bn.py. Rahu/Ketu sentences say 'many traditions' where the classical sources disagree.",
+    "average_effects_words_before": 41.5,
+    "average_effects_words_after": 82.5,
+    "policy": "Follows the app content policy introduced in v1.2 (see README_ANDROID.md).",
+    "owner_review": "pending - please spot-check the classical claims and the Bengali"
+  }
 }

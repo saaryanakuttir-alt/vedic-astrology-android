@@ -3,22 +3,22 @@
   "name": "Divisional Charts (Vargas)",
   "tradition": "Parashari",
   "schema_version": "1.2",
-  "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. This file covers the 12 vargas at the REFERENCE/OVERVIEW level only, matching the checklist's own item shape for this category (varga, name, primary_use, priority) — it is NOT the full 9-planets x 12-signs interpretive expansion per varga (which the checklist itself marks as later-phase work, 'Do not start until Phase 3 core categories are verified'). Each item's expansion_scope_note flags this explicitly. Before implementing varga calculation in the app, verify each division_scheme and calculation_note against a trusted classical reference or a tested ephemeris/astrology calculation library, since divisional chart math is easy to get subtly wrong (especially for D3, D4, D30, and D60, which use non-trivial or unequal assignment schemes).",
+  "note": "Parashari astrology only; Jaimini/KP rules are not blended into this dataset. This file covers 11 vargas (D7 Saptamsa removed on 19 Sep 2026 under the app's no-children-predictions policy) at the REFERENCE/OVERVIEW level only, matching the checklist's own item shape for this category (varga, name, primary_use, priority) — it is NOT the full 9-planets x 12-signs interpretive expansion per varga (which the checklist itself marks as later-phase work, 'Do not start until Phase 3 core categories are verified'). Each item's expansion_scope_note flags this explicitly. Before implementing varga calculation in the app, verify each division_scheme and calculation_note against a trusted classical reference or a tested ephemeris/astrology calculation library, since divisional chart math is easy to get subtly wrong (especially for D3, D4, D30, and D60, which use non-trivial or unequal assignment schemes).",
   "verification_pass": {
     "performed": true,
     "method": "Recomputed each varga's degree-per-division directly from 30/N (or the documented unequal scheme for D30) and cross-checked both the resulting figures and each chart's primary_use against multiple independent online sources.",
     "changes_made": [],
-    "unchanged_after_verification": "All 12 division_scheme degree values and primary_use assignments confirmed correct (D2=15°, D3=10°, D4=7°30', D7=4°17'8\", D9=3°20', D10=3°, D12=2°30', D16=1°52'30\", D20=1°30', D24=1°15', D30=unequal 5-planet scheme, D60=0°30'). One source consulted during this pass stated D9 as 3°33', which is arithmetically incorrect (30/9 = 3°20', not 3°33') and appears to be a typo on that source's part rather than a real alternative convention; this file's 3°20' figure is the mathematically correct one and was left unchanged."
+    "unchanged_after_verification": "All 12 division_scheme degree values at the time (D7 has since been removed) and primary_use assignments confirmed correct (D2=15°, D3=10°, D4=7°30', D7=4°17'8\", D9=3°20', D10=3°, D12=2°30', D16=1°52'30\", D20=1°30', D24=1°15', D30=unequal 5-planet scheme, D60=0°30'). One source consulted during this pass stated D9 as 3°33', which is arithmetically incorrect (30/9 = 3°20', not 3°33') and appears to be a typo on that source's part rather than a real alternative convention; this file's 3°20' figure is the mathematically correct one and was left unchanged."
   },
   "user_review_pass": {
     "performed": true,
     "reviewer": "project owner",
     "method": "Spot-check sampling across the file following the online-source verification pass above.",
-    "outcome": "Approved as-is; no changes requested. All 12 items marked verified: true."
+    "outcome": "Approved as-is; no changes requested. All 12 items marked verified: true at the time; 11 remain after D7 was removed."
   },
   "generated_at": "2026-09-05T12:56:31.433624+00:00",
   "generated_by": "Claude (Cowork) - drafted from training knowledge, cross-checked against online sources; still recommend a final pass against your primary reference text",
-  "total_items": 12,
+  "total_items": 11,
   "items": [
     {
       "id": "DIV-D9",

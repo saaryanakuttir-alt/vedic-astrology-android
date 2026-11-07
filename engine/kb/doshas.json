@@ -8,7 +8,18 @@
     "performed": true,
     "method": "Each indicator cross-checked against multiple classical/reference sources for the underlying combination (Rahu/Ketu-9th, Sun-shadow conjunction, Guru Chandal, both Grahan Dosha forms, and Shrapit Yog are all well-established, frequently-cited combinations) and for consistent framing across all 7 entries.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed_with_variants",
+      "sources": [
+        "https://jagannathhora.com/pitra-dosha-complete-guide/",
+        "https://vedicmarga.com/pitra-dosha/",
+        "https://panchangbodh.com/kundali-dosha"
+      ],
+      "findings": "Guru Chandal (Jupiter+Rahu), Grahan (Sun/Moon with Rahu/Ketu) and Shrapit (Saturn+Rahu) match the standard definitions. The three Pitra indicators used (Rahu/Ketu in 9th, Sun with a node, afflicted 9th lord) are among the commonly cited definitions.",
+      "variants": "Pitra Dosha has no single classical definition; some sources also count Sun-Saturn affliction or the 9th lord in a dusthana. The file already discloses this disagreement."
+    }
   },
   "user_review_pass": {
     "performed": false,

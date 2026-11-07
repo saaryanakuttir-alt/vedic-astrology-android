@@ -1,0 +1,110 @@
+{
+  "checklist_category_id": "shadbala_rules",
+  "name": "Shadbala and Bhavabala - Classical Calculation Rules",
+  "tradition": "Parashari",
+  "schema_version": "1.0",
+  "note": "Reference rules for the Shadbala parts KNOWLEDGE_GAPS.md lists as missing or unconfirmed in engine/shadbala.py: Drik, Cheshta, Abda, Masa, Hora convention, Yuddha, Saptavargaja values, minimum required strength, and Bhavabala. This is calculation knowledge for the engine, not reading text. 1 Rupa = 60 Virupas. Rahu and Ketu get no Shadbala. Where a rule comes from a modern standard reference (B.V. Raman, 'Graha and Bhava Balas') rather than the BPHS verse itself, 'basis' says so. BPHS ch.26-27 English translations are ambiguous in places, so each formula should be tested against a trusted calculator before it replaces the current 'strength points' display.",
+  "verification_pass": {
+    "performed": true,
+    "method": "BPHS ch.27 rules taken from an English rendering (barbarapijan.com), aspect thresholds from BPHS ch.26 (enjoylearningsanskrit.com), and sphuta drishti piecewise values from saravali.github.io, cross-checked against the BPHS ch.26 aspect fractions (3rd/10th a quarter, 5th/9th a half, 4th/8th three-quarters, 7th full).",
+    "changes_made": ["The published sphuta drishti table shows the 150-180 degree branch as 2*(150-a), which goes negative; it is written here as 2*(a-150), the only form that rises to the full 60 at 180 degrees."],
+    "unchanged_after_verification": "Cheshta motion values, Kala-bala lord values (15/30/45/60), minimum Shadbala and Bhavabala sign groups all appear consistently across the consulted sources."
+  },
+  "user_review_pass": {"performed": false, "reviewer": null, "method": null, "outcome": "Not yet reviewed by the project owner."},
+  "sources": [
+    "https://www.barbarapijan.com/bpa/Graha/bala_BPHS_ch27_StrengthWeights.htm",
+    "https://enjoylearningsanskrit.com/scriptures/parashara/chapter-26",
+    "https://saravali.github.io/astrology/drishti_sputa.html",
+    "https://saravali.github.io/astrology/bala_sthana.html",
+    "https://vedicmarga.com/shadbala-calculator/"
+  ],
+  "generated_at": "2026-11-07T20:00:00+01:00",
+  "generated_by": "Claude - compiled from BPHS ch.26-27 translations and standard references found online",
+  "total_items": 10,
+  "items": [
+    {
+      "id": "SB-DRISHTI",
+      "category": "shadbala_rules",
+      "title": "Sphuta Drishti (exact aspect value)",
+      "basis": "BPHS 26.2-12 (fractions and thresholds); piecewise form as used by B.V. Raman / saravali.github.io",
+      "rule": "Let a = longitude of the aspected point minus longitude of the aspecting planet, normalised to 0-360 degrees. General value in virupas: 0-30: 0; 30-60: (a-30)/2; 60-90: a-45; 90-120: 30+(120-a)/2; 120-150: 150-a; 150-180: 2*(a-150); 180-300: (300-a)/2; 300-360: 0. This gives 15 at the 3rd (60 deg), 45 at the 4th (90), 30 at the 5th (120), 60 at the 7th (180), 45 at the 8th (210), 30 at the 9th (240) and 15 at the 10th (270).",
+      "special_aspects": "Add to the general value: Mars +15 virupas in the 90-120 and 210-240 ranges (full aspect on the 4th and 8th); Jupiter +30 in the 120-150 and 240-270 ranges (full on the 5th and 9th); Saturn +45 in the 60-90 and 270-300 ranges (full on the 3rd and 10th). This is the usual 'special aspect addition' implementation; some programs use the per-planet replacement formulas instead, so check the engine against a reference calculator.",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-DRIK",
+      "category": "shadbala_rules",
+      "title": "Drik Bala (aspect strength)",
+      "basis": "BPHS 27.19",
+      "rule": "For each planet sum the sphuta drishti it receives from benefics and from malefics. Drik Bala = (benefic total - malefic total) / 4, so it can be negative. Then add the FULL sphuta drishti received from Mercury and Jupiter (not just a quarter). Benefics: Jupiter, Venus, a waxing Moon, and Mercury when not joined with malefics; malefics: Sun, Mars, Saturn, a waning Moon, Mercury joined with malefics. Rahu/Ketu aspects are not counted in classical Drik Bala.",
+      "known_gap_note": "KNOWLEDGE_GAPS.md reports Drik Bala matched AstroSage only for Mars and the Moon. The likely differences are (1) special-aspect additions vs replacements, (2) the Mercury/Moon benefic test, and (3) adding the full Jupiter/Mercury drishti, which some programs skip.",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-CHESHTA",
+      "category": "shadbala_rules",
+      "title": "Cheshta Bala (motional strength)",
+      "basis": "BPHS 27.18, 27.21-25",
+      "rule": "Mars to Saturn: Cheshta Kendra = Seeghrochcha - (mean longitude + true longitude)/2, reduced to 0-360 degrees; if over 180 take 360 minus it; Cheshta Bala = that value / 3 virupas (max 60). For Mars, Jupiter and Saturn the seeghrochcha is the Sun's mean longitude; for Mercury and Venus it is their own heliocentric mean longitude. Sun: Cheshta Bala = its Ayana Bala. Moon: Cheshta Bala = its Paksha Bala.",
+      "motion_table_virupas": {"Vakra (retrograde)": 60, "Anuvakra (retrograde re-entering previous sign)": 30, "Vikala (stationary)": 15, "Manda (slower than mean)": 30, "Mandatara (slower than Manda)": 15, "Sama (normal)": 7.5, "Chara (faster than mean)": 45, "Atichara (fast entry into next sign)": 30},
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-AYANA",
+      "category": "shadbala_rules",
+      "title": "Ayana Bala (declination strength)",
+      "basis": "BPHS 27.15-17; modern form from the Santhanam translator's note",
+      "rule": "Ayana Bala (virupas) = (23deg27' + K) x 1.2793, where K is the declination taken as plus or minus: for the Moon and Saturn plus when declination is SOUTH; for the Sun, Mars, Jupiter and Venus plus when NORTH; for Mercury always plus. The Sun's Ayana Bala is doubled.",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-KALA-LORDS",
+      "category": "shadbala_rules",
+      "title": "Abda, Masa, Vara and Hora Bala",
+      "basis": "BPHS 27.13",
+      "rule": "Lord of the year (Abda) 15 virupas; lord of the month (Masa) 30; lord of the weekday (Vara) 45; lord of the planetary hour (Hora) 60. From the Ahargana (days elapsed since the epoch): year lord = weekday on which the year began: ((floor(A/360) x 3) + 1) mod 7; month lord = weekday on which the month began: ((floor(A/30) x 2) + 1) mod 7; weekday = A mod 7 (with 1 = Sunday ... 0 = Saturday in this scheme). The Hora count starts at SUNRISE in local mean time: the first hora belongs to the weekday lord and each next hora goes to the planet six places further in the weekday order.",
+      "known_gap_note": "The page this came from shows the year-lord step as 'divide by 60', which is likely a transcription slip for 360 (one Savana year = 360 days in this scheme); test both against a reference chart. KNOWLEDGE_GAPS.md notes AstroSage counts horas from midnight; BPHS counts from sunrise, which this KB takes as the classical convention.",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-YUDDHA",
+      "category": "shadbala_rules",
+      "title": "Yuddha Bala (planetary war)",
+      "basis": "BPHS 27.20; war definition from Surya Siddhanta tradition",
+      "rule": "Two of Mars, Mercury, Jupiter, Venus and Saturn are at war when within 1 degree of longitude (the Sun and Moon never take part). BPHS: the difference between the two planets' Shadbala is added to the winner's Shadbala and subtracted from the loser's. Because Yuddha Bala is itself part of Kala Bala, implementations take the difference of the strengths computed before this step. The winner is traditionally the planet with the more northerly latitude (some texts: the brighter planet).",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-SAPTAVARGAJA",
+      "category": "shadbala_rules",
+      "title": "Saptavargaja Bala values",
+      "basis": "BPHS 27 (Sthana Bala); values as given by B.V. Raman",
+      "rule": "In each of D1, D2, D3, D7, D9, D12 and D30: Moolatrikona 45 virupas (D1 only, in most implementations), own sign 30, great friend 22.5, friend 15, neutral 7.5, enemy 3.75, great enemy 1.875. Friendship is the five-fold (Panchadha) relationship with the sign lord. Some programs round to 20/15/10/4/2 and some give moolatrikona in every varga - these two conventions explain most differences from other software (the Mercury/Venus/Saturn mismatches noted in KNOWLEDGE_GAPS.md).",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-DREKKANA",
+      "category": "shadbala_rules",
+      "title": "Drekkana Bala",
+      "basis": "BPHS 27.6",
+      "rule": "Male planets (Sun, Mars, Jupiter) get 15 virupas in the first decanate (0-10 deg), female (Moon, Venus) in the second (10-20), neuter (Mercury, Saturn) in the third (20-30). It is part of Sthana Bala and should be included in the total.",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "SB-MINIMUM",
+      "category": "shadbala_rules",
+      "title": "Minimum required Shadbala",
+      "basis": "BPHS 27.32-36",
+      "rule": "Total needed (virupas / rupas): Sun 390 / 6.5, Moon 360 / 6, Mars 300 / 5, Mercury 420 / 7, Jupiter 390 / 6.5, Venus 330 / 5.5, Saturn 300 / 5. Above this a planet is strong. Component minimums (Sthana / Dig / Kala / Cheshta / Ayana): Jupiter, Mercury, Sun 165 / 35 / 50 / 112 / 30; Moon, Venus 133 / 50 / 30 / 100 / 40; Mars, Saturn 96 / 30 / 40 / 67 / 20.",
+      "status": "verified", "verified": true
+    },
+    {
+      "id": "BB-BHAVABALA",
+      "category": "shadbala_rules",
+      "title": "Bhavabala (house strength)",
+      "basis": "BPHS 27.26-31",
+      "rule": "Bhavabala = Bhavadhipati Bala + Bhava Dig Bala + Bhava Drishti Bala + occupation and time adjustments. (1) Bhavadhipati Bala = the total Shadbala of the house lord. (2) Bhava Dig Bala: from the bhava's longitude subtract the cusp of the house where its sign group is strongest - human signs (Gemini, Virgo, Libra, Aquarius, first half of Sagittarius) strongest in the 1st, so subtract the 7th cusp; quadruped signs (Aries, Taurus, Leo, second half of Sagittarius, first half of Capricorn) strongest in the 10th, so subtract the 4th cusp; insect signs (Cancer, Scorpio) strongest in the 7th, so subtract the lagna; water signs (second half of Capricorn, Pisces) strongest in the 4th, so subtract the 10th cusp. If the remainder exceeds 180 degrees take 360 minus it; divide by 3 to get virupas (max 60). (3) Bhava Drishti Bala: a quarter of the sphuta drishti from benefics minus a quarter from malefics, plus the full drishti of Jupiter and Mercury. (4) Add 60 virupas if Jupiter or Mercury occupies the house; subtract 60 if Saturn, Mars or the Sun does. (5) Add 15 virupas if the house is in a Shirshodaya sign and the birth is by day, in a dual sign at twilight, or in a Prishtodaya sign at night.",
+      "status": "verified", "verified": true
+    }
+  ]
+}

@@ -8,7 +8,13 @@
     "performed": true,
     "method": "navamsa_sign for all 108 entries verified computationally against divisional.py's own d9_navamsa() function (the same code path the app's D9 chart tab uses) rather than derived by hand; the resulting Fire/Earth/Air/Water cycling pattern was checked to hold with zero exceptions across all 27 nakshatras before this file was written. sign_flavor phrases are standard, uncontested classical sign-temperament keywords.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "computed",
+      "sources": [],
+      "findings": "navamsa_sign values come from the engine's own d9_navamsa(); nakshatra themes reuse nakshatra.json, which was web-checked today."
+    }
   },
   "user_review_pass": {
     "performed": false,

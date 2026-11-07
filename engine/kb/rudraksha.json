@@ -8,7 +8,18 @@
     "performed": true,
     "method": "Per-planet correspondences cross-checked against multiple classical/reference sources for consistency - these are widely standardized associations across Vedic astrology texts with little cross-source disagreement, unlike e.g. Pitra Dosha's definition.",
     "changes_made": [],
-    "unchanged_after_verification": ""
+    "unchanged_after_verification": "",
+    "web_crosscheck": {
+      "date": "2026-11-07",
+      "result": "confirmed",
+      "sources": [
+        "https://kundligpt.com/calculators/rudraksha-recommender/",
+        "https://everycalculators.com/rudraksha-calculator.html",
+        "https://soultheory.in/blogs/news/meaning-of-mukhi-in-rudraksha-faces-deities-guide-2026"
+      ],
+      "findings": "1-9 mukhi to Sun-Moon-Mars-Mercury-Jupiter-Venus-Saturn-Rahu-Ketu matches the majority (Shiva Purana-based) mapping.",
+      "variants": "A minority of sellers swap 8/9 mukhi (Rahu/Ketu) or assign 4/6/7 mukhi to Jupiter/Mars/Venus; the majority mapping was kept."
+    }
   },
   "user_review_pass": {
     "performed": false,
