@@ -47,6 +47,22 @@ def glossary(query=""):
     return sorted(rows, key=lambda g: g["term"].lower())
 
 
+_ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "planets")
+
+
+def planet_lore():
+    return data()["planet_lore"]
+
+
+def planet_image(pid):
+    """Path of the owner-supplied picture assets/planets/<pid>.png (or .jpg / .jpeg / .webp), or None."""
+    for ext in (".png", ".jpg", ".jpeg", ".webp"):
+        path = os.path.join(_ASSETS, pid + ext)
+        if os.path.isfile(path):
+            return path
+    return None
+
+
 def picture_guide():
     return data()["picture_guide"]
 

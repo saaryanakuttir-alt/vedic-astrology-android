@@ -532,6 +532,17 @@ New screen **Learn Astrology** (Home card under People & Help; included in the l
 Teaching only: it reads the same chart data as the other screens and makes no new predictions. Bengali translations
 for all of it. Tests: `tests/test_learn.py`; desktop smoke opens a lesson, the walk-through and a glossary search.
 
+## 2.6.0 - Deeper lessons and the nine planets
+- Every Learn Astrology lesson is longer: 106 sections in all (was 56). New topics include the signs one by one,
+  Sanskrit names and directions, natural friendships, weekdays and colours, karakas, reading from the Moon, bhavat
+  bhavam, the four aims of life, Parivartana, yogakarakas by rising sign, moolatrikona and exact exaltation degrees,
+  dig bala, combustion distances, partial and mutual aspects, the 27 nakshatras with their lords, padas and ganas,
+  Raja/Dhana/Viparita yogas, working out sub-periods, dasha sandhi, Ashtakavarga in transits, dhaiya, what each varga
+  shows, and a worked order for one question.
+- **Meet the nine planets** (in lesson 3): each planet as the Puranas picture it (colour, hands, vehicle) and its
+  story. Pictures are optional: drop `assets/planets/<sun|moon|mars|mercury|jupiter|venus|saturn|rahu|ketu>.png`
+  (or .jpg) into the app and it shows them; `assets/planets/PROMPTS.md` has an image prompt for each.
+
 ## 2.5.1 - Reading the Chart Picture, shorter Home, new bottom bar
 ### Reading the Chart Picture
 A fourth part of Learn Astrology, with its own Home card: a 15-step guide to the chart diagram itself. It covers the

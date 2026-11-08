@@ -879,6 +879,8 @@ class LearnTab(_InsightPage):
             self._text(tr('--- {0} ---', tx(sec[0])) + "\n" + tx(sec[1]))
             if len(sec) > 2:
                 self._diagram(None, "North Indian" if sec[2] == "north_template" else "South Indian")
+        if les["id"] == "planets":
+            self._planet_gallery()
         chart = self.store.current["chart"]
         if les.get("try"):
             if chart is None:
@@ -894,6 +896,21 @@ class LearnTab(_InsightPage):
         if idx + 1 < len(all_lessons):
             nxt = all_lessons[idx + 1]
             self._button(tr('Next: {0}', tx(nxt["title"])), lambda: self.show("lessons", nxt["id"]))
+
+    def _planet_gallery(self):
+        """The nine planets as the classical texts picture them, with the owner's image when one is supplied."""
+        import learn
+        from kivy.uix.image import Image
+        self._text(tx("=== Meet the nine planets ===\nHow the Puranas and the navagraha prayers picture each planet as a "
+                      "deity, and the story behind it. The form, colour and vehicle are also used in worship and in "
+                      "choosing remedies."))
+        for lore in learn.planet_lore():
+            path = learn.planet_image(lore["id"])
+            if path:
+                img = Image(source=path, size_hint_y=None, height=dp(300), fit_mode="contain")
+                self.page.add_widget(img)
+            self._text(tr('--- {0} ({1}) ---', tx(lore["name"]), tx(lore["planet"])) + "\n" +
+                       tr('[How he is pictured: {0}]', tx(lore["form"])) + "\n\n" + tx(lore["story"]))
 
     # ---------------------------------------------------------------- chart picture guide
     def _picture(self):

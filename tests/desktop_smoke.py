@@ -428,6 +428,9 @@ lt.show("lessons", "houses"); pump(12)
 blob = " ".join(texts(lt))
 check("Lesson 4: The 12 houses (Bhavas)" in blob and "IN YOUR CHART" in blob.upper() and "Next: Reading the chart picture" in blob,
       "learn: a lesson opens with the user's chart and a next button")
+lt.show("lessons", "planets"); pump(12)
+blob = " ".join(texts(lt))
+check("Meet the nine planets" in blob and "Svarbhanu" in blob, "learn: planets lesson shows the nine planets' forms and stories")
 lt.show("chart"); pump(12)
 blob = " ".join(texts(lt))
 check("Step 1: Find your way round the picture" in blob and "Step 2: Your rising sign" in blob and "Step 12: Putting it together" in blob and "hit an error" not in blob,

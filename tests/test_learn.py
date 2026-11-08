@@ -89,3 +89,11 @@ def test_picture_guide(chart_reading):
     assert "shows 11" in ex["navamsa"]["text"]
     quiz = ex["quiz"]["quiz"]
     assert len(quiz) == 6 and quiz[5][1].startswith("The 12th house (Taurus)")
+
+
+def test_deeper_lessons_and_planet_lore():
+    assert sum(len(l["sections"]) for l in learn.lessons()) >= 100
+    lore = learn.planet_lore()
+    assert [x["planet"] for x in lore] == ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
+    assert all(x["form"] and x["story"] for x in lore)
+    assert learn.planet_image("no-such-planet") is None

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "system": "Learn Astrology - teaching text for the Parashari basics used in this app",
   "sources": [
     "Brihat Parashara Hora Shastra (signs, planets, houses, lordships, aspects, dignity, Vimshottari)",
@@ -28,6 +28,18 @@
         [
           "Tendencies, not fate",
           "A chart shows inclinations and favourable or testing periods. Your choices, effort and circumstances shape how they play out. Read the chart as a weather forecast, not a verdict."
+        ],
+        [
+          "The four parts of a reading",
+          "Every reading combines four things: the signs (how something is expressed), the planets (what acts), the houses (where in life it shows) and the dashas (when it comes up). Every screen in this app works with these four, and the lessons follow the same order."
+        ],
+        [
+          "What you need to cast a chart",
+          "The date, the exact time and the place of birth. The time matters most: the rising sign changes about every two hours and the houses change with it. If the birth time is uncertain by more than a few minutes, read the house-based results with care; the Moon sign and the nakshatra are more reliable."
+        ],
+        [
+          "The classical books",
+          "Besides BPHS, the app draws on Brihat Jataka by Varahamihira, Saravali by Kalyanavarma, Phaladeepika by Mantreswara and Jataka Parijata. Where they disagree, the app follows BPHS or notes the difference."
         ]
       ]
     },
@@ -51,6 +63,22 @@
         [
           "Ruler",
           "Every sign has a ruling planet: Mars rules Aries and Scorpio; Venus rules Taurus and Libra; Mercury rules Gemini and Virgo; the Moon rules Cancer; the Sun rules Leo; Jupiter rules Sagittarius and Pisces; Saturn rules Capricorn and Aquarius. The ruler of a sign is called its lord."
+        ],
+        [
+          "Odd and even signs",
+          "Odd signs (Aries, Gemini, Leo, Libra, Sagittarius, Aquarius) are masculine: outgoing and active. Even signs (Taurus, Cancer, Virgo, Scorpio, Capricorn, Pisces) are feminine: receptive and steady."
+        ],
+        [
+          "The signs one by one",
+          "Aries: bold, quick, pioneering. Taurus: steady, sensual, practical. Gemini: curious, talkative, versatile. Cancer: caring, protective, emotional. Leo: proud, generous, a natural leader. Virgo: precise, helpful, analytical. Libra: fair, social, artistic. Scorpio: intense, private, determined. Sagittarius: idealistic, frank, a seeker. Capricorn: patient, ambitious, dutiful. Aquarius: independent, humane, unconventional. Pisces: gentle, imaginative, spiritual."
+        ],
+        [
+          "Sanskrit names",
+          "Mesha (Aries), Vrishabha (Taurus), Mithuna (Gemini), Karka (Cancer), Simha (Leo), Kanya (Virgo), Tula (Libra), Vrishchika (Scorpio), Dhanu (Sagittarius), Makara (Capricorn), Kumbha (Aquarius), Meena (Pisces)."
+        ],
+        [
+          "Directions",
+          "The fire signs belong to the east, the earth signs to the south, the air signs to the west and the water signs to the north. The directions are used in Vastu, in Prashna and when choosing which way to face for a practice."
         ]
       ]
     },
@@ -74,6 +102,22 @@
         [
           "The Moon and the Ascendant",
           "The rising sign shows the body and the way you meet life; the Moon shows the mind. That is why Vedic astrology often reads the chart from both."
+        ],
+        [
+          "Natural friends and enemies",
+          "BPHS gives each planet natural friends, neutrals and enemies. The Sun's friends are the Moon, Mars and Jupiter; Venus and Saturn are its enemies. The Moon has no enemies; the Sun and Mercury are its friends. Mars is friendly to the Sun, Moon and Jupiter and unfriendly to Mercury. Mercury likes the Sun and Venus and dislikes the Moon. Jupiter likes the Sun, Moon and Mars and dislikes Mercury and Venus. Venus likes Mercury and Saturn and dislikes the Sun and Moon. Saturn likes Mercury and Venus and dislikes the Sun, Moon and Mars. A planet in a friend's sign is at ease; in an enemy's sign it struggles."
+        ],
+        [
+          "Days and colours",
+          "Each planet rules a weekday and a colour: the Sun Sunday and copper-red, the Moon Monday and white, Mars Tuesday and red, Mercury Wednesday and green, Jupiter Thursday and yellow, Venus Friday and bright white, Saturn Saturday and dark blue or black. Rahu and Ketu have no day of their own and are usually honoured on Saturday. These are used in remedies and in choosing a good day."
+        ],
+        [
+          "Natural significators (karakas)",
+          "Each planet stands for certain people and things in every chart: the Sun for the father and the soul, the Moon for the mother and the mind, Mars for brothers, courage and land, Mercury for speech and learning, Jupiter for teachers, wisdom and wealth, Venus for the spouse, comforts and the arts, Saturn for work, servants and discipline, Rahu for foreign things and ambition, and Ketu for detachment and spiritual release."
+        ],
+        [
+          "Fast and slow planets",
+          "The Moon goes round the zodiac in about 27 days, the Sun in a year, Mercury and Venus stay near the Sun, Mars takes about two years, Jupiter about twelve, Saturn about thirty, and Rahu and Ketu about eighteen and a half, always moving backwards through the signs."
         ]
       ]
     },
@@ -93,6 +137,22 @@
         [
           "Empty houses",
           "An empty house is not a bad house. It is judged by its lord: where that planet sits and how strong it is."
+        ],
+        [
+          "Reading from the Moon too",
+          "Vedic astrology also counts the houses from the Moon's sign (Chandra Lagna). A result promised from both the Lagna and the Moon is much more reliable. Transits are read mainly from the Moon."
+        ],
+        [
+          "Bhavat bhavam: house from house",
+          "Counting a house as many houses from itself as its own number repeats its theme: the 4th from the 4th is the 7th, the 9th from the 9th is the 5th, the 10th from the 10th is the 7th. So the 7th also carries something of the 4th and the 10th."
+        ],
+        [
+          "The four aims of life",
+          "The houses are grouped by the four aims of life: dharma (purpose) 1, 5, 9; artha (wealth) 2, 6, 10; kama (desire) 3, 7, 11; moksha (release) 4, 8, 12. A chart heavy in one group shows what the person is drawn to."
+        ],
+        [
+          "Strong and weak houses",
+          "A house is strong when its lord is strong and well placed, when benefics occupy or aspect it, and when it is a kendra or trikona. It is weaker when its lord falls in a dusthana or is debilitated or combust, or when only malefics aspect it."
         ]
       ]
     },
@@ -145,6 +205,18 @@
         [
           "Good and difficult lordships",
           "Lords of trikonas (1, 5, 9) are helpful for any rising sign; lords of dusthanas (6, 8, 12) bring their tests wherever they go. A planet that rules both a kendra and a trikona is a Yogakaraka, an especially helpful planet for that rising sign."
+        ],
+        [
+          "The Lagna lord matters most",
+          "The lord of the 1st house stands for the person. Its sign, house and strength colour the whole chart: a strong Lagna lord in a good house supports everything else."
+        ],
+        [
+          "Exchange of signs (Parivartana)",
+          "When two lords sit in each other's signs, for example the 10th lord in the 4th and the 4th lord in the 10th, the two houses are tied together strongly, as if each lord were in its own sign. Exchanges between good houses form a strong yoga; exchanges with a dusthana mix the results."
+        ],
+        [
+          "Yogakarakas by rising sign",
+          "Saturn is the yogakaraka for Taurus and Libra rising, Mars for Cancer and Leo, and Venus for Capricorn and Aquarius. The other rising signs have no single planet ruling both a kendra and a trikona."
         ]
       ]
     },
@@ -168,6 +240,22 @@
         [
           "Cancellation",
           "A debilitated planet can recover (Neecha Bhanga) when, for example, the lord of its sign sits in a kendra. Weakness in one place is rarely the whole story."
+        ],
+        [
+          "Moolatrikona signs",
+          "Between its exaltation and its own sign, each planet has a moolatrikona sign where it works especially well: the Sun Leo, the Moon Taurus, Mars Aries, Mercury Virgo, Jupiter Sagittarius, Venus Libra and Saturn Aquarius."
+        ],
+        [
+          "Exact exaltation degrees",
+          "Exaltation is strongest at one degree: the Sun at 10 degrees Aries, the Moon at 3 Taurus, Mars at 28 Capricorn, Mercury at 15 Virgo, Jupiter at 5 Cancer, Venus at 27 Pisces and Saturn at 20 Libra. Debilitation is deepest at the same degree of the opposite sign."
+        ],
+        [
+          "Directional strength (Dig bala)",
+          "Planets also gain strength in certain houses: Jupiter and Mercury in the 1st, the Sun and Mars in the 10th, Saturn in the 7th, and the Moon and Venus in the 4th."
+        ],
+        [
+          "How close is combust?",
+          "BPHS gives the distance from the Sun at which each planet becomes combust: the Moon 12 degrees, Mars 17, Mercury 14 (12 when retrograde), Jupiter 11, Venus 10 (8 when retrograde) and Saturn 15."
         ]
       ]
     },
@@ -187,6 +275,18 @@
         [
           "Rahu and Ketu",
           "Texts differ on the nodes' aspects. This app counts only their 7th-house aspect; some astrologers also give them the 5th and 9th."
+        ],
+        [
+          "Full and partial aspects",
+          "The classical texts also give partial aspects (a quarter, a half or three quarters) to other houses. The app, like most modern practice, counts only the full aspects: the 7th for everyone plus the special ones of Mars, Jupiter and Saturn."
+        ],
+        [
+          "Mutual aspects",
+          "When two planets aspect each other, for example from opposite houses, they exchange influence. Jupiter and the Moon in mutual aspect form a Gajakesari-like support; Saturn and Mars in mutual aspect add pressure to both houses."
+        ],
+        [
+          "Aspects in the picture",
+          "Open the Chart picture guide in this screen to see how to find aspects on the chart itself by counting boxes."
         ]
       ]
     },
@@ -206,6 +306,22 @@
         [
           "The key to timing",
           "The ruler of your Moon's nakshatra decides the first period of the Vimshottari dasha you were born into, and how much of it was left at birth."
+        ],
+        [
+          "The 27 nakshatras",
+          "Ashwini, Bharani, Krittika, Rohini, Mrigashira, Ardra, Punarvasu, Pushya, Ashlesha, Magha, Purva Phalguni, Uttara Phalguni, Hasta, Chitra, Swati, Vishakha, Anuradha, Jyeshtha, Mula, Purva Ashadha, Uttara Ashadha, Shravana, Dhanishta, Shatabhisha, Purva Bhadrapada, Uttara Bhadrapada and Revati."
+        ],
+        [
+          "Their lords",
+          "The nakshatra lords repeat in a fixed cycle of nine, three times round the zodiac: Ketu, Venus, the Sun, the Moon, Mars, Rahu, Jupiter, Saturn, Mercury. Ashwini, Magha and Mula are Ketu's; Bharani, Purva Phalguni and Purva Ashadha are Venus's; and so on. This is the same order as the Vimshottari dasha."
+        ],
+        [
+          "Padas and the Navamsa",
+          "Each nakshatra has four padas of 3 degrees 20 minutes, 108 in all, and each pada is exactly one navamsa. That is why the pada of the Moon or the Lagna tells you its Navamsa sign."
+        ],
+        [
+          "Ganas",
+          "Each nakshatra has a temperament (gana): divine (deva), human (manushya) or fierce (rakshasa). The gana is used, with other factors, when matching charts for marriage."
         ]
       ]
     },
@@ -225,6 +341,22 @@
         [
           "A yoga needs strength",
           "A yoga works fully only when the planets forming it are strong and unafflicted, and it shows most in their periods. Many charts have several yogas; their presence alone is not a promise."
+        ],
+        [
+          "Raja yogas",
+          "A Raja Yoga forms when a kendra lord and a trikona lord join, aspect each other or exchange signs. It promises rise and recognition, mostly in the periods of the planets that form it."
+        ],
+        [
+          "Dhana yogas",
+          "Dhana yogas link the lords of the wealth houses (2nd, 5th, 9th and 11th) with each other or with the Lagna lord. They show the capacity to earn and keep money."
+        ],
+        [
+          "Viparita Raja yogas",
+          "When the lords of the 6th, 8th or 12th fall into another of these houses, a difficulty cancels a difficulty and the person rises after setbacks. The three are Harsha (6th lord), Sarala (8th lord) and Vimala (12th lord)."
+        ],
+        [
+          "Challenging combinations",
+          "Some combinations are traditionally difficult, such as Kemadruma (no planet on either side of the Moon) or Kuja Dosha. Most have classical cancellations, and the app checks them before naming a dosha. Kala Sarpa is a later idea, not found in BPHS."
         ]
       ]
     },
@@ -244,6 +376,22 @@
         [
           "How to read a period",
           "A period brings out what its planet promises in your chart: the houses it rules, the house it sits in, its strength and the yogas it joins. A well-placed planet's period tends to go smoothly; a troubled one's asks for more care."
+        ],
+        [
+          "Working out a sub-period",
+          "The length of an Antardasha is the main period's years times the sub-period planet's years, divided by 120. In Saturn's 19-year Mahadasha, the Mercury Antardasha lasts 19 x 17 / 120, about 2 years 8 months."
+        ],
+        [
+          "Smaller periods",
+          "Each Antardasha is again divided into nine Pratyantardashas in the same order, which help with timing to the month."
+        ],
+        [
+          "Changing periods",
+          "The months around a change of Mahadasha (dasha sandhi) often feel unsettled, as one theme closes and another opens. They are a time for patience, not alarm."
+        ],
+        [
+          "Other dasha systems",
+          "Vimshottari is the main system, but there are others. The app also gives Yogini dasha (36-year cycle) and Jaimini's Char dasha on the More Dashas screen; agreement between systems strengthens a prediction."
         ]
       ]
     },
@@ -267,6 +415,18 @@
         [
           "Dasha first",
           "Transits trigger what the dashas promise. A good transit in a difficult period helps a little; a testing transit in a good period is usually mild."
+        ],
+        [
+          "Transits and Ashtakavarga",
+          "A planet transiting a sign with many Ashtakavarga points (bindus) gives better results than one transiting a sign with few. The Ashtakavarga screen shows the points for each sign."
+        ],
+        [
+          "Saturn's small panoti",
+          "Saturn's transit of the 4th or the 8th sign from the Moon (dhaiya, about two and a half years each) is also watched, like Sade Sati, as a time to slow down and be careful."
+        ],
+        [
+          "Retrograde transits",
+          "When a slow planet turns retrograde it can move back into the previous sign, so its transit effects return for a while. Matters started then often need revisiting."
         ]
       ]
     },
@@ -290,6 +450,18 @@
         [
           "Other vargas",
           "D10 (Dashamsa) is read for career, D2 for wealth, D4 for property and D12 for parents."
+        ],
+        [
+          "What each varga shows",
+          "D2 Hora: wealth. D3 Drekkana: siblings and courage. D4 Chaturthamsa: home and property. D9 Navamsa: marriage, dharma and inner strength. D10 Dashamsa: career. D12 Dwadashamsa: parents. D16: vehicles and comforts. D20: spiritual practice. D24: learning. D27: strengths and weaknesses. D30: hardships. D40 and D45: maternal and paternal legacy. D60: past karma, the finest division."
+        ],
+        [
+          "Accurate time needed",
+          "The finer the division, the faster it changes: D9 every 3 degrees 20 minutes (about 13 minutes of birth time), D60 every half degree (about 2 minutes). Read the fine vargas only with an exact birth time."
+        ],
+        [
+          "Strength across vargas",
+          "A planet that is well placed in many vargas is reliable. The Shodashvarga screen shows every planet's sign in each varga side by side."
         ]
       ]
     },
@@ -329,6 +501,14 @@
         [
           "8. Put it together",
           "Look for themes that repeat in several places. A single factor is a hint; three factors pointing the same way are a pattern."
+        ],
+        [
+          "A worked order for one question",
+          "For career, for example: look at the 10th house and the planets in it or aspecting it; find the 10th lord and its strength; consider the karakas (the Sun for status, Saturn for work, Mercury for business); check the D10; then see whether the running dasha involves these planets."
+        ],
+        [
+          "Three witnesses",
+          "Look for the same promise from the Lagna, from the Moon and in the relevant varga. One witness is a hint, two make it likely, three make it a strong theme."
         ]
       ]
     },
@@ -348,6 +528,14 @@
         [
           "Remedies",
           "Mantras, charity, fasting and practices are traditional supports, never a substitute for medical, legal or financial advice."
+        ],
+        [
+          "Effort counts",
+          "The classical view is that karma from the past (shown by the chart) and effort in the present work together. A difficult period tells you where to put more care, not that effort is useless."
+        ],
+        [
+          "Check the birth time",
+          "Before relying on a reading, make sure the birth time is accurate. If two charts a few minutes apart give different rising signs, the house-based readings are uncertain; the Moon and the planets' signs are still reliable."
         ]
       ]
     }
@@ -729,6 +917,71 @@
       "heading": "Check yourself",
       "example": "quiz",
       "text": "Open your chart on the Chart Diagram screen and answer these from the picture alone. Then tap the button to see the answers worked out from your chart."
+    }
+  ],
+  "planet_lore": [
+    {
+      "id": "sun",
+      "planet": "Sun",
+      "name": "Surya",
+      "form": "Red-gold in colour, with two hands, each holding a lotus. He wears red and a crown, and rides a golden chariot drawn by seven horses, driven by Aruna, the dawn.",
+      "story": "Surya is the son of the sage Kashyapa and Aditi, the light that sustains all life. He is greeted at sunrise with the Gayatri mantra. Shani and Yama are his sons."
+    },
+    {
+      "id": "moon",
+      "planet": "Moon",
+      "name": "Chandra",
+      "form": "White and calm, with two hands holding a lotus and a mace, a crescent on his crown, riding a chariot drawn by ten white horses.",
+      "story": "Chandra married the 27 nakshatras, the daughters of Daksha, but loved Rohini most. Daksha's curse made him waste away; Shiva saved him and wore him on his head. So the Moon wanes and waxes every month."
+    },
+    {
+      "id": "mars",
+      "planet": "Mars",
+      "name": "Mangala",
+      "form": "Red, with four arms holding a spear, a trident and a mace, the fourth raised in blessing. He wears red and rides a ram.",
+      "story": "Mangala is the son of Bhumi Devi, the Earth, and is also called Bhauma, 'born of the Earth'. He is a warrior, the commander of the planets."
+    },
+    {
+      "id": "mercury",
+      "planet": "Mercury",
+      "name": "Budha",
+      "form": "Yellow-green like the champaka flower, with four arms holding a sword, a shield and a mace, the fourth in blessing. He wears yellow and rides a lion.",
+      "story": "Budha is the son of Chandra and Tara. Wise and witty, he is the prince among the planets and the patron of learning, speech and trade."
+    },
+    {
+      "id": "jupiter",
+      "planet": "Jupiter",
+      "name": "Brihaspati",
+      "form": "Golden yellow, with four arms holding a staff, a rosary and a water pot, the fourth in blessing. He wears yellow and sits on a lotus or rides an elephant.",
+      "story": "Brihaspati, son of the sage Angiras, is the guru of the gods, their teacher and priest. He is called Guru, the one who removes darkness."
+    },
+    {
+      "id": "venus",
+      "planet": "Venus",
+      "name": "Shukra",
+      "form": "Bright white, with four arms holding a staff, a rosary and a water pot, the fourth in blessing. He wears white and rides a chariot drawn by horses.",
+      "story": "Shukracharya, son of the sage Bhrigu, is the guru of the asuras. He alone knew the Sanjivani, the knowledge that restores life, and he stands for refinement, art and devotion."
+    },
+    {
+      "id": "saturn",
+      "planet": "Saturn",
+      "name": "Shani",
+      "form": "Dark blue, lean and austere, with four arms holding a bow, an arrow and a trident, the fourth in blessing. He wears dark clothes and rides a vulture or a crow.",
+      "story": "Shani is the son of Surya and Chhaya, the Sun's shadow-wife. He moves slowest of all and is the judge who rewards patience and honest work. He is honoured on Saturdays."
+    },
+    {
+      "id": "rahu",
+      "planet": "Rahu",
+      "name": "Rahu",
+      "form": "Smoky dark with a fierce face, four arms holding a sword, a shield and a trident, the fourth in blessing, riding a lion; often shown as a head alone, rising from dark clouds.",
+      "story": "At the churning of the ocean the asura Svarbhanu sat among the gods and drank the nectar of immortality. The Sun and Moon saw him and Vishnu cut off his head with the Sudarshana disc. The immortal head became Rahu, who chases the Sun and Moon and swallows them at eclipses."
+    },
+    {
+      "id": "ketu",
+      "planet": "Ketu",
+      "name": "Ketu",
+      "form": "Smoky grey, with two arms holding a mace, the other in blessing, riding a vulture; the body ends in a serpent's tail and a banner flies above.",
+      "story": "Ketu is the body of Svarbhanu, separated from the head. Without a head he stands for detachment, insight and liberation; his name means 'banner' and also 'comet'."
     }
   ]
 }
