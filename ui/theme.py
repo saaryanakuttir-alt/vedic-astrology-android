@@ -757,7 +757,8 @@ class SegmentedControl(BoxLayout):
     """A pill-shaped switch: a tonal track with the selected option on a filled accent thumb.
     SegmentedControl(["Known","Unknown"], selected="Known", on_select=fn)"""
 
-    def __init__(self, options, selected=None, on_select=None, **kwargs):
+    def __init__(self, options, selected=None, on_select=None, item_width=None, **kwargs):
+        item_width = item_width or dp(104)
         kwargs.setdefault("size_hint", (None, None))
         kwargs.setdefault("height", dp(40))
         super().__init__(orientation="horizontal", **kwargs)
@@ -772,11 +773,11 @@ class SegmentedControl(BoxLayout):
             self._thumb = RoundedRectangle(radius=[dp(17)])
         for opt in self.options:
             b = Button(text=opt, background_normal="", background_down="", background_color=(0, 0, 0, 0),
-                       font_size="13sp", size_hint_x=None, width=dp(104))
+                       font_size="13sp", size_hint_x=None, width=item_width)
             b.bind(on_release=lambda inst, o=opt: self.select(o))
             self._buttons[opt] = b
             self.add_widget(b)
-        self.width = dp(104) * len(self.options)
+        self.width = item_width * len(self.options)
         self.bind(pos=self._sync, size=self._sync)
         self._apply()
 

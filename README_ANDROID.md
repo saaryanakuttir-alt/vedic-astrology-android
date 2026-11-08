@@ -531,3 +531,20 @@ New screen **Learn Astrology** (Home card under People & Help; included in the l
 - **Glossary**: 55 terms with a search box; each points to the lesson that explains it.
 Teaching only: it reads the same chart data as the other screens and makes no new predictions. Bengali translations
 for all of it. Tests: `tests/test_learn.py`; desktop smoke opens a lesson, the walk-through and a glossary search.
+
+## 2.5.1 - Reading the Chart Picture, shorter Home, new bottom bar
+### Reading the Chart Picture
+A fourth part of Learn Astrology, with its own Home card: a 15-step guide to the chart diagram itself. It covers the
+North Indian chart (fixed houses running anticlockwise, the four diamonds and eight triangles, sign numbers vs house
+positions), the South Indian chart (fixed signs from Pisces at the top left, clockwise, the marked ASC box), reading one
+box and the planet short names, conjunctions, seeing aspects and following lords on the picture, what the picture does not
+show, divisional charts, the Bengali (East Indian) style, common mistakes, and a self-check with answers from the user's
+chart. Empty teaching charts (`TeachingChartCanvas` in `ui/tabs_chart.py`) show each layout; each step is then worked out
+on the user's own chart (a 12-row house/sign/planet table, their chart in both styles, their D9). Lesson 5 is a short
+version, and the "Your chart" walk-through now starts by finding the Lagna and Moon in the picture.
+
+### Home and bottom bar
+- Home groups now open and close: Start here and Learn Astrology are open, the other groups show a one-line header with
+  the number of screens and open with a tap. Home is about half as long.
+- Bottom bar (full): Chart, Predictions, Learn, Library (was Chart, Dasha, Yogas, Library; Dasha and Yogas stay on Home
+  under Start here). Lite: Chart, Kundli, Learn, Library.

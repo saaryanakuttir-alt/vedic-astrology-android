@@ -97,6 +97,39 @@
       ]
     },
     {
+      "id": "picture",
+      "title": "Reading the chart picture",
+      "try": "picture",
+      "sections": [
+        [
+          "Two ways to draw one chart",
+          "A birth chart is drawn as a square picture with twelve boxes, one for each house. Two styles are common, and this app can draw both: the North Indian chart (a diamond pattern) and the South Indian chart (a ring of squares). They hold exactly the same information. Bengal also uses an East Indian style, which this app does not draw; like the South Indian one, it keeps the signs in fixed boxes. You can switch style on the Chart Diagram screen."
+        ],
+        [
+          "North Indian: the houses stay in place",
+          "In the North Indian chart the boxes are the houses, and they never move. The diamond at the top centre is always the 1st house (the Lagna). From there the houses run anticlockwise: the 2nd is the triangle to its upper left, the 3rd the triangle below that, the 4th the diamond on the left, and so on round to the 12th, the triangle to the upper right of the Lagna. The four diamonds are the kendras: 1st at the top, 4th on the left, 7th at the bottom and 10th on the right.",
+          "north_template"
+        ],
+        [
+          "The small numbers are signs",
+          "In the North Indian chart the small number in each box is the sign in that house, counted from Aries: 1 Aries, 2 Taurus, 3 Gemini, 4 Cancer, 5 Leo, 6 Virgo, 7 Libra, 8 Scorpio, 9 Sagittarius, 10 Capricorn, 11 Aquarius, 12 Pisces. So the number in the top diamond tells you the rising sign: a 6 there means Virgo rising. The numbers go up by one as you go anticlockwise. Beginners often mistake these numbers for house numbers; the house is the position of the box, the number is the sign."
+        ],
+        [
+          "South Indian: the signs stay in place",
+          "In the South Indian chart the boxes are the signs, and they never move. Pisces is the top-left box, Aries the next one to the right, and the signs run clockwise round the edge to Aquarius below Pisces. The four middle boxes are left empty. The rising sign is marked: in this app its box has a bold border and the word ASC. To find any house, start at the marked box as the 1st and count clockwise.",
+          "south_template"
+        ],
+        [
+          "The planets",
+          "Planets are written as short names: Su Sun, Mo Moon, Ma Mars, Me Mercury, Ju Jupiter, Ve Venus, Sa Saturn, Ra Rahu, Ke Ketu, and ASC for the Ascendant. Planets in the same box share a house and a sign; they are conjunct and colour each other. Rahu and Ketu are always in opposite boxes, seven houses apart. An empty box simply has no planet; it is read through its lord."
+        ],
+        [
+          "Divisional charts",
+          "The Navamsa (D9) and the other divisional charts are drawn the same way, with their own rising sign. Read them with the same steps: find the Lagna, then count the houses from it."
+        ]
+      ]
+    },
+    {
       "id": "lords",
       "title": "House lords: how areas connect",
       "try": "lords",
@@ -586,6 +619,21 @@
       "lesson": "what"
     },
     {
+      "term": "North Indian chart",
+      "meaning": "The diamond-style chart picture, in which the houses stay in fixed boxes and the numbers show the signs.",
+      "lesson": "picture"
+    },
+    {
+      "term": "South Indian chart",
+      "meaning": "The square chart picture with the signs in fixed boxes, Pisces at the top left, running clockwise.",
+      "lesson": "picture"
+    },
+    {
+      "term": "Yuti",
+      "meaning": "Conjunction: two or more planets in the same sign and house.",
+      "lesson": "picture"
+    },
+    {
       "term": "KP",
       "meaning": "Krishnamurti Paddhati: a modern system based on star lords and sub lords of the house cusps.",
       "lesson": "what"
@@ -594,6 +642,93 @@
       "term": "Lal Kitab",
       "meaning": "A system with fixed houses and practical remedies, separate from Parashari astrology.",
       "lesson": "what"
+    }
+  ],
+  "picture_guide": [
+    {
+      "id": "what",
+      "heading": "What the picture is",
+      "text": "A birth chart is drawn as a square with twelve boxes. Each box is one house, and each house holds one sign; the planets are written into the box of the sign they were in at birth. The picture is only a map: once you can find the houses, the signs and the planets on it, everything else in the app (lords, aspects, yogas, dashas) can be checked by eye. Two styles are common in India and this app draws both: the North Indian chart and the South Indian chart. They hold exactly the same information, arranged differently."
+    },
+    {
+      "id": "north",
+      "heading": "The North Indian chart: the houses stay in place",
+      "diagram": "north_template",
+      "text": "The North Indian chart is a square crossed by its two diagonals, with a diamond drawn inside by joining the middles of the four sides. That makes four diamonds and eight triangles: twelve boxes. The boxes are the houses and they never move. The diamond at the top centre is always the 1st house, the Lagna. From there the houses run anticlockwise: the 2nd is the triangle at the top left, the 3rd the triangle below it on the left edge, the 4th the diamond on the left, the 5th and 6th the two triangles at the bottom left, the 7th the diamond at the bottom, the 8th and 9th the triangles at the bottom right, the 10th the diamond on the right, and the 11th and 12th the triangles at the top right, ending next to the Lagna."
+    },
+    {
+      "id": "shapes",
+      "heading": "Four diamonds and eight triangles",
+      "text": "The shape of a box tells you a lot. The four diamonds are the kendras (1st, 4th, 7th, 10th), the pillars of the chart: a planet in a diamond acts strongly. The 1st, 5th and 9th houses, the trikonas or houses of fortune, form a large triangle on the picture: the top diamond and the lower triangles on the left and right edges. The houses of growth (3rd, 6th, 10th, 11th) and the testing houses (6th, 8th, 12th) are mostly triangles. Opposite boxes face each other across the centre: 1st and 7th, 2nd and 8th, 3rd and 9th, 4th and 10th, 5th and 11th, 6th and 12th."
+    },
+    {
+      "id": "numbers",
+      "heading": "The small numbers are signs, not houses",
+      "example": "north_signs",
+      "text": "Each box of a North Indian chart carries a small number. It is the sign in that house, counted from Aries: 1 Aries, 2 Taurus, 3 Gemini, 4 Cancer, 5 Leo, 6 Virgo, 7 Libra, 8 Scorpio, 9 Sagittarius, 10 Capricorn, 11 Aquarius, 12 Pisces. The number in the top diamond is the rising sign: a 6 there means Virgo rising. Going anticlockwise, each box's number is one more than the last, and after 12 comes 1 again. This is the most common beginner's mistake: the house is the position of the box; the number inside is the sign."
+    },
+    {
+      "id": "box",
+      "heading": "Reading one box",
+      "table": "abbreviations",
+      "text": "Inside a box you find the sign number (small) and the planets (bold short names). The 1st house also shows ASC, the Ascendant. The short names used in this app are listed below."
+    },
+    {
+      "id": "south",
+      "heading": "The South Indian chart: the signs stay in place",
+      "diagram": "south_template",
+      "text": "The South Indian chart is a ring of twelve squares round an empty centre (some astrologers write the name and birth details there). Here the boxes are the signs, and they never move: Pisces is always the top-left box, Aries the next one to the right, then Taurus and Gemini along the top, and the signs carry on clockwise round the edge: Cancer and Leo down the right side, Virgo, Libra, Scorpio and Sagittarius along the bottom from right to left, and Capricorn and Aquarius up the left side. Because the signs are fixed, the boxes carry sign names, not numbers."
+    },
+    {
+      "id": "count",
+      "heading": "Finding the houses in a South Indian chart",
+      "example": "south_count",
+      "text": "In a South Indian chart the rising sign is marked; in this app its box has a bold border and the word ASC (in printed charts it is often a diagonal line across the box). That box is the 1st house. To find any other house, count clockwise from it, counting the ASC box itself as 1. The 7th house is always the box opposite it, across the centre."
+    },
+    {
+      "id": "together",
+      "heading": "Planets together and apart",
+      "example": "conjunctions",
+      "text": "Planets in the same box share a house and a sign: they are conjunct and colour each other's results. Rahu and Ketu are always in opposite boxes, seven houses apart. An empty box simply has no planet; it is read through its lord. Two planets in one box can still be up to 29 degrees apart; the degrees are on the Kundli Details and planet screens."
+    },
+    {
+      "id": "aspects",
+      "heading": "Seeing aspects on the picture",
+      "example": "aspects",
+      "text": "Every planet looks at (aspects) the box opposite its own, the 7th from it. Mars also looks at the 4th and 8th, Jupiter at the 5th and 9th, and Saturn at the 3rd and 10th. Always count from the planet's own box as 1, in the same direction as the houses: anticlockwise in a North Indian chart, clockwise in a South Indian one."
+    },
+    {
+      "id": "lords",
+      "heading": "Following a lord across the picture",
+      "example": "lords",
+      "text": "To find where a house's lord sits: read the sign in that box, recall the sign's lord (Mars for Aries and Scorpio, Venus for Taurus and Libra, Mercury for Gemini and Virgo, the Moon for Cancer, the Sun for Leo, Jupiter for Sagittarius and Pisces, Saturn for Capricorn and Aquarius), then find that planet's short name on the chart. The box it sits in is where that house's matters are carried."
+    },
+    {
+      "id": "missing",
+      "heading": "What the picture does not show",
+      "text": "The picture shows signs, houses and planets only. Degrees, nakshatras, retrograde and combust planets, and strength are not drawn on it; read them on the Kundli Details, Planet by Planet and Planet Strength screens. Some printed charts add an R or brackets for a retrograde planet; this app keeps the picture clean and lists those facts separately."
+    },
+    {
+      "id": "vargas",
+      "heading": "Divisional charts look the same",
+      "example": "navamsa",
+      "text": "The Navamsa (D9), the Dashamsa (D10) and the other divisional charts are drawn exactly the same way, each with its own rising sign. Read them with the same steps: find the Lagna, read the sign numbers or names, count the houses from it. Choose a divisional chart on the Chart Diagram screen."
+    },
+    {
+      "id": "east",
+      "heading": "The East Indian chart",
+      "text": "In Bengal an East Indian style (also called the Bengali chart) is used. Like the South Indian chart it keeps the signs in fixed boxes, but Aries sits in the top centre box and the signs run anticlockwise. The rising sign is marked in its box. This app does not draw the East Indian style, but the reading is the same: find the marked box and count the houses from it in the direction the signs run."
+    },
+    {
+      "id": "mistakes",
+      "heading": "Common mistakes",
+      "text": "Reading a North Indian sign number as a house number. Counting in the wrong direction: North Indian houses run anticlockwise, South Indian signs run clockwise. Forgetting to count the starting box as 1, which puts every house one box out. Looking for the Lagna in the top-left box of a South Indian chart: that box is always Pisces, whatever the rising sign. Mixing up the birth chart (D1) and the Navamsa (D9) when both are on screen."
+    },
+    {
+      "id": "quiz",
+      "heading": "Check yourself",
+      "example": "quiz",
+      "text": "Open your chart on the Chart Diagram screen and answer these from the picture alone. Then tap the button to see the answers worked out from your chart."
     }
   ]
 }

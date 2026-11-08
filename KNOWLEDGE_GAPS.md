@@ -44,7 +44,7 @@ conservative starting values, not a progression plan; no audio guidance (Yoga Ni
 Lessons and glossary restate standard Parashari basics (BPHS; aspects, exaltations and dasha years as used in the engine).
 The walk-through only re-reads facts the engine already computes. Choices to note: the nodes are taught with the 7th
 aspect only (as the engine counts them, with a note that some give 5th/9th); the walk-through looks at the 1st, 4th, 7th
-and 10th lords only. Still open: no owner review of lesson wording or the Bengali yet.
+and 10th lords only. Still open: no owner review of lesson wording or the Bengali yet. The chart picture guide describes the Bengali (East Indian) chart (Aries top centre, signs anticlockwise) but the app does not draw it; the Odia chart is not covered.
 
 ## Conventions that differ from AstroSage (not errors, but worth knowing)
 Rahu/Ketu aspect only the 7th here (AstroSage: 5th, 7th, 9th). Moon-Mars natural friendship: neutral here, friendly there. Vimshottari dates use 365.25-day years (AstroSage dates differ by 3-4 days). Paya is not computed. Gochara: Rahu's favourable transit houses now follow kb/gochara_vedha.json (3rd, 6th, 11th from the Moon); the older code also counted the 10th. Vedha is applied, with the fast Moon ignored as an obstructer in the monthly outlook. The Moon in D7 differs (D7 is not shown in this app).

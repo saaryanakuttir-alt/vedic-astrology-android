@@ -259,6 +259,61 @@ class BodyMapCanvas(ChartCanvas):
             self._cell_text(house, sign_planets[sign], x0 + cell / 2, y0 + cell / 2, sign == asc_sign)
 
 
+class TeachingChartCanvas(ChartCanvas):
+    """An empty teaching chart for Learn Astrology: the North Indian frame with the HOUSE number in each box (the
+    1st house shaded), or the South Indian grid with each fixed box's sign and sign number. No chart needed."""
+
+    def __init__(self, style="North Indian", **kwargs):
+        super().__init__(**kwargs)
+        self.style = style
+
+    def _redraw(self, *args):
+        self.canvas.clear()
+        if self.width < 10 or self.height < 10:
+            return
+        size = min(self.width, self.height) - dp(20)
+        ox = self.x + (self.width - size) / 2
+        oy = self.y + (self.height - size) / 2
+        with self.canvas:
+            Color(*theme.SURFACE)
+            Rectangle(pos=(ox, oy), size=(size, size))
+            if self.style == "North Indian":
+                self._template_north(ox, oy, size)
+            else:
+                self._template_south(ox, oy, size)
+
+    def _template_north(self, ox, oy, size):
+        def to_canvas(pt):
+            return ox + pt[0] * size, oy + (1 - pt[1]) * size
+
+        Color(theme.ACCENT[0], theme.ACCENT[1], theme.ACCENT[2], 0.22)
+        Quad(points=[c for v in cg.NORTH_INDIAN_HOUSES[1]["polygon"] for c in to_canvas(v)])
+        Color(*theme.ACCENT)
+        for p1, p2 in cg.NORTH_INDIAN_FRAME_LINES:
+            a, b = to_canvas(p1), to_canvas(p2)
+            Line(points=[a[0], a[1], b[0], b[1]], width=1.3)
+        for house_num, house_def in cg.NORTH_INDIAN_HOUSES.items():
+            cx, cy = to_canvas(cg.polygon_centroid(house_def["polygon"]))
+            label = tr('House {0}', house_num) if house_num in (1, 4, 7, 10) else str(house_num)
+            self._text_at(label, cx, cy, 12.5 if house_num in (1, 4, 7, 10) else 13.5, True, theme.TEXT)
+            if house_num == 1:
+                self._text_at(tx("Lagna"), cx, cy - dp(18), 10.5, False, theme.ACCENT_700)
+
+    def _template_south(self, ox, oy, size):
+        cell = size / 4.0
+        Color(*theme.ACCENT)
+        for i in range(5):
+            Line(points=[ox, oy + i * cell, ox + size, oy + i * cell], width=1)
+            Line(points=[ox + i * cell, oy, ox + i * cell, oy + size], width=1)
+        Color(*theme.SURFACE)
+        Rectangle(pos=(ox + cell + 1, oy + cell + 1), size=(2 * cell - 2, 2 * cell - 2))
+        for sign, (row, col) in cg.SOUTH_INDIAN_GRID.items():
+            x0, y0 = ox + col * cell, oy + (3 - row) * cell
+            self._text_at(tx(sign), x0 + cell / 2, y0 + cell / 2 + dp(8), 10.5, True, theme.TEXT)
+            self._text_at(str(_sign_number(sign)), x0 + cell / 2, y0 + cell / 2 - dp(10), 10.5, False, theme.NEUTRAL_600)
+        self._text_at(tx("Signs run clockwise"), ox + size / 2, oy + size / 2, 11, False, theme.NEUTRAL_600)
+
+
 class ChartTab(BoxLayout):
     def __init__(self, store, **kwargs):
         super().__init__(orientation="vertical", **kwargs)

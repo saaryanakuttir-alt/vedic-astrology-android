@@ -40,6 +40,10 @@ HOME_CORE = [
     ("library", "Saved Charts", "Your saved birth details", "book", None),
 ]
 HOME_GROUPS = [
+    ("LEARN ASTROLOGY", [
+        ("learn", "Learn Astrology", "Lessons, your chart, glossary", "star", "lessons"),
+        ("learn", "Reading the Chart Picture", "How to read the chart diagram", "diamond", "picture"),
+    ]),
     ("CHARTS & TABLES", [
         ("chart", "Chart Diagram", "North / South Indian", "diamond", None),
         ("kundli", "Kundli Details", "Key facts & classifications", "card", None),
@@ -73,7 +77,6 @@ HOME_GROUPS = [
     ]),
     ("PEOPLE & HELP", [
         ("family", "Family Compatibility", "Partner & child bonds", "people", None),
-        ("learn", "Learn Astrology", "Basics, read your own chart, glossary", "star", None),
         ("help", "Help & About", "FAQ and credits", "help", None),
     ]),
 ]
@@ -205,7 +208,31 @@ class _SettingsCard(OutlineBox):
             self.add_widget(row)
 
 
+class GroupHeader(ButtonBehavior, OutlineBox):
+    """A Home group title that opens and closes its cards: accent bar, title, card count and a chevron."""
+
+    def __init__(self, title, count, expanded, **kwargs):
+        kwargs.setdefault("size_hint_y", None)
+        kwargs.setdefault("height", dp(48))
+        kwargs.setdefault("padding", (dp(12), dp(6), dp(12), dp(6)))
+        kwargs.setdefault("spacing", dp(10))
+        super().__init__(orientation="horizontal", **kwargs)
+        self.add_widget(theme.SectionHeader(None, title, size_hint_y=1, height=dp(36)))
+        n = Label(text=tr('{0} screens', count), font_size="11.5sp", color=theme.MUTED, size_hint_x=None, width=dp(80),
+                  halign="right", valign="middle")
+        n.bind(size=lambda inst, sz: setattr(inst, "text_size", sz))
+        self.add_widget(n)
+        self.chevron = theme.LineIcon("chevron_down" if expanded else "chevron", size_dp=18, pos_hint={"center_y": 0.5})
+        self.add_widget(self.chevron)
+
+    def set_expanded(self, expanded):
+        self.chevron.set_icon("chevron_down" if expanded else "chevron")
+
+
 class HomeScreen(BoxLayout):
+    # Groups shown open the first time Home is built; the rest are one tap away, which keeps Home short.
+    OPEN_AT_START = {"LEARN ASTROLOGY"}
+
     def __init__(self, store, goto, on_language=None, on_theme=None, on_motion=None, **kwargs):
         super().__init__(orientation="vertical", **kwargs)
         self.goto = goto
@@ -234,16 +261,32 @@ class HomeScreen(BoxLayout):
         body.add_widget(theme.SectionHeader(None, "Start here"))
         body.add_widget(self._grid(_free(HOME_CORE)))
 
+        self._body = body
         for title, cards in HOME_GROUPS:
             cards = _free(cards)
             if not cards:                          # this whole group is Premium-only in this edition
                 continue
-            body.add_widget(theme.SectionHeader(None, title))
-            body.add_widget(self._grid(cards))
+            expanded = title in self.OPEN_AT_START
+            grid = self._grid(cards)
+            header = GroupHeader(title, len(cards), expanded)
+            header.bind(on_release=lambda h, g=grid: self._toggle(h, g))
+            body.add_widget(header)
+            if expanded:
+                body.add_widget(grid)
 
         credit = Label(text=tr('{0}  -  version {1}', CREDIT, VERSION), font_size="12sp", color=theme.MUTED, italic=True,
                        size_hint_y=None, height=dp(44))
         body.add_widget(credit)
+
+    def _toggle(self, header, grid):
+        """Open or close one group; its cards appear right under its header."""
+        if grid.parent is self._body:
+            self._body.remove_widget(grid)
+            header.set_expanded(False)
+        else:
+            self._body.add_widget(grid, index=self._body.children.index(header))
+            header.set_expanded(True)
+            theme.stagger([c for c in grid.children[::-1]][:8], step=0.03, start=0.02)
 
     def _grid(self, items):
         rows = (len(items) + 1) // 2

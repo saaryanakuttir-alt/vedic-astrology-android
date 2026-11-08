@@ -80,8 +80,15 @@ check(app.header.title_label.text == "Home", "header title is Home")
 
 print("== Home cards navigate")
 home = app._screens["home"]
-cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 34, f"34 home cards (got {len(cards)})")
+cards = list(home._cards)                       # every card, in order (closed groups are not in the widget tree)
+check(len(cards) == 35, f"35 home cards (got {len(cards)})")
+shown = [w for w in walk(home) if type(w).__name__ == "HomeCard"]
+check(len(shown) == 10, f"Home starts short: only Start here and Learn Astrology open (got {len(shown)} cards shown)")
+heads = [w for w in walk(home) if type(w).__name__ == "GroupHeader"][::-1]
+tap(heads[1]); pump(4)
+check(len([w for w in walk(home) if type(w).__name__ == "HomeCard"]) == 18, "tapping a group header opens its cards")
+tap(heads[1]); pump(4)
+check(len([w for w in walk(home) if type(w).__name__ == "HomeCard"]) == 10, "tapping it again closes them")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -416,15 +423,30 @@ check(bool(btns), "remedies: links to Meditation & Practice")
 app.goto("learn"); pump(12)
 lt = app._screens["learn"]
 blob = " ".join(texts(lt))
-check("Learn Astrology" in blob and "14. Using astrology wisely" in blob, "learn: lists the 14 lessons")
+check("Learn Astrology" in blob and "15. Using astrology wisely" in blob, "learn: lists the 15 lessons")
 lt.show("lessons", "houses"); pump(12)
 blob = " ".join(texts(lt))
-check("Lesson 4: The 12 houses (Bhavas)" in blob and "IN YOUR CHART" in blob.upper() and "Next: House lords" in blob,
+check("Lesson 4: The 12 houses (Bhavas)" in blob and "IN YOUR CHART" in blob.upper() and "Next: Reading the chart picture" in blob,
       "learn: a lesson opens with the user's chart and a next button")
 lt.show("chart"); pump(12)
 blob = " ".join(texts(lt))
-check("Step 1: Your rising sign" in blob and "Step 11: Putting it together" in blob and "hit an error" not in blob,
+check("Step 1: Find your way round the picture" in blob and "Step 2: Your rising sign" in blob and "Step 12: Putting it together" in blob and "hit an error" not in blob,
       "learn: walks through the user's own chart")
+lt.show("lessons", "picture"); pump(12)
+canv = [w for w in walk(lt) if type(w).__name__ in ("TeachingChartCanvas", "ChartCanvas")]
+check(len(canv) == 4 and "Lesson 5: Reading the chart picture" in " ".join(texts(lt)),
+      f"learn: chart-picture lesson shows two teaching charts and the user's chart in both styles (got {len(canv)})")
+lt.show("picture"); pump(12)
+blob = " ".join(texts(lt))
+canv = [w for w in walk(lt) if type(w).__name__ in ("TeachingChartCanvas", "ChartCanvas")]
+check("Reading the chart picture" in blob and "15. Check yourself" in blob and "Your top diamond shows 6" in blob
+      and len(canv) == 5 and "hit an error" not in blob, f"learn: chart picture guide with examples ({len(canv)} charts)")
+lt.show_answers = True; lt.refresh(); pump(10)
+check("Answers from your chart" in " ".join(texts(lt)), "learn: chart picture quiz shows answers")
+lt.show_answers = False
+app.goto("home"); pump(6)
+app.goto("learn", preset="picture"); pump(10)
+check(lt.part == "picture", "learn: the Home card opens the chart picture guide")
 lt.query = "nakshatra"; lt.show("glossary"); pump(12)
 blob = " ".join(texts(lt))
 check("Janma nakshatra" in blob and "Raja Yoga" not in blob, "learn: glossary search filters terms")
@@ -464,7 +486,7 @@ check("hit an error" not in house_blob + sign_blob, "both screens build without 
 check(any("Planet in House" in str(getattr(c, "text", "")) for c in walk(app._screens["home"])) and
       any("Planet in Sign" in str(getattr(c, "text", "")) for c in walk(app._screens["home"])), "Home still lists both cards")
 app.goto("home"); pump(4)
-cards2 = [w for w in walk(app._screens["home"]) if type(w).__name__ == "HomeCard"][::-1]
+cards2 = list(app._screens["home"]._cards)
 tap(cards2[2]); check(app.current_key == "planet_house", "Planet in House card opens its own screen")
 app.goto("home"); pump(4)
 tap(cards2[3]); check(app.current_key == "planet_sign", "Planet in Sign card opens its own screen")

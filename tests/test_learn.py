@@ -26,11 +26,12 @@ def chart_reading():
 
 def test_lessons_well_formed():
     ids = [l["id"] for l in learn.lessons()]
-    assert len(ids) == 14 and len(set(ids)) == 14
+    assert len(ids) == 15 and len(set(ids)) == 15
     for l in learn.lessons():
         assert l["title"] and l["sections"]
-        for heading, text in l["sections"]:
-            assert heading and len(text) > 20
+        for sec in l["sections"]:
+            assert sec[0] and len(sec[1]) > 20
+            assert len(sec) == 2 or sec[2] in ("north_template", "south_template")
 
 
 def test_glossary_links_to_real_lessons_and_search():
@@ -61,6 +62,8 @@ def test_walkthrough_known_chart(chart_reading):
     assert "Kendra-Trikona Raja Yoga" in steps["yogas"]["text"]
     assert "Moon until Nov 2032" in steps["dasha"]["text"]
     assert "Sade Sati" in steps["transits"]["text"]
+    assert "number 3, so your rising sign is Gemini" in steps["picture"]["text"]
+    assert "the 11th box you reach is Aries" in steps["picture"]["text"] and steps["picture"]["diagram"]
     assert "Aquarius" in steps["navamsa"]["text"] and "Sun" in steps["navamsa"]["text"]
 
 
@@ -69,3 +72,20 @@ def test_lesson_try_keys_resolve(chart_reading):
     for l in learn.lessons():
         out = learn.try_in_chart(l.get("try"), c, r, dt.datetime(2026, 11, 8))
         assert (out is None) == (l.get("try") is None)
+
+
+def test_picture_guide(chart_reading):
+    c, r = chart_reading
+    guide = learn.picture_guide()
+    assert len(guide) >= 12 and len({g["id"] for g in guide}) == len(guide)
+    ex = {g["example"]: learn.picture_example(g["example"], c, r) for g in guide if g.get("example")}
+    assert "top diamond shows 3, so your rising sign is Gemini" in ex["north_signs"]["text"]
+    cols, rows = ex["north_signs"]["table"]
+    assert len(rows) == 12 and rows[11][:3] == ["12th", "2", "Taurus"] and "Sun" in rows[11][3]
+    assert "10 Pisces" in ex["south_count"]["text"] and "7th house is the Sagittarius box" in ex["south_count"]["text"]
+    assert "Rahu is in the 7th house" in ex["conjunctions"]["text"]
+    assert "Jupiter sits in your 3rd house (Leo)" in ex["aspects"]["text"] and "7th, 9th, 11th" in ex["aspects"]["text"]
+    assert "10th house box holds Pisces; its lord is Jupiter" in ex["lords"]["text"]
+    assert "shows 11" in ex["navamsa"]["text"]
+    quiz = ex["quiz"]["quiz"]
+    assert len(quiz) == 6 and quiz[5][1].startswith("The 12th house (Taurus)")

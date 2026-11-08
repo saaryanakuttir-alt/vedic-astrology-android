@@ -7,6 +7,7 @@ Compact | Detailed switch, tables always show everything.
 import traceback
 
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.logger import Logger
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
@@ -808,16 +809,22 @@ class RemediesTab(_InsightPage):
 class LearnTab(_InsightPage):
     """Learn Astrology: short lessons on the basics, a step-by-step reading of the user's own chart, and a searchable
     glossary. Lessons and the glossary work without a chart; the walkthrough uses the current profile's chart."""
-    caption = ("Learn how Vedic astrology works and how to read a chart. The lessons and the glossary work without a chart; "
-               "'Read your chart' walks through the chart of the current profile, one step at a time.")
+    caption = ("Learn how Vedic astrology works and how to read a chart. The lessons, the chart picture guide and the glossary "
+               "work without a chart; 'Your chart' walks through the chart of the current profile, one step at a time.")
     uses_mode = False
-    PARTS = (("lessons", "Lessons"), ("chart", "Read your chart"), ("glossary", "Glossary"))
+    PARTS = (("lessons", "Lessons"), ("chart", "Your chart"), ("picture", "Chart picture"), ("glossary", "Glossary"))
 
     def __init__(self, store, **kwargs):
         super().__init__(store, **kwargs)
         self.part = "lessons"
         self.lesson_id = None
         self.query = ""
+        self.show_answers = False
+
+    def preset_part(self, preset):
+        """A Home card opened this screen: 'lessons' shows the lesson list, 'picture' the chart picture guide."""
+        if preset in ("lessons", "picture"):
+            self.part, self.lesson_id, self.show_answers = preset, None, False
 
     # ---------------------------------------------------------------- navigation
     def show(self, part, lesson_id=None):
@@ -842,11 +849,12 @@ class LearnTab(_InsightPage):
         back = {v: k for k, v in labels.items()}
         row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(44), padding=(dp(10), dp(3)))
         row.add_widget(SegmentedControl([labels[k] for k, _l in self.PARTS], selected=labels[self.part],
-                                        on_select=lambda opt: self.show(back[opt])))
+                                        on_select=lambda opt: self.show(back[opt]), item_width=dp(96)))
         row.add_widget(BoxLayout())
         self.page.add_widget(row)
         try:
-            {"lessons": self._lessons, "chart": self._walkthrough, "glossary": self._glossary}[self.part]()
+            {"lessons": self._lessons, "chart": self._walkthrough, "picture": self._picture,
+             "glossary": self._glossary}[self.part]()
         except Exception:  # noqa: BLE001 - show the problem on screen, never a blank page
             tb = traceback.format_exc()
             Logger.error(f"VedicAstro:LearnTab: failed:\n{tb}")
@@ -867,8 +875,10 @@ class LearnTab(_InsightPage):
         les = all_lessons[idx]
         self._button(tx("Back to all lessons"), lambda: self.show("lessons"), height=44)
         self._text(tr('=== Lesson {0}: {1} ===', idx + 1, tx(les["title"])))
-        for heading, text in les["sections"]:
-            self._text(tr('--- {0} ---', tx(heading)) + "\n" + tx(text))
+        for sec in les["sections"]:
+            self._text(tr('--- {0} ---', tx(sec[0])) + "\n" + tx(sec[1]))
+            if len(sec) > 2:
+                self._diagram(None, "North Indian" if sec[2] == "north_template" else "South Indian")
         chart = self.store.current["chart"]
         if les.get("try"):
             if chart is None:
@@ -876,9 +886,77 @@ class LearnTab(_InsightPage):
             else:
                 self._text(tx("--- See it in your chart ---") + "\n" +
                            tr('[In your chart: {0}]', learn.try_in_chart(les["try"], chart, self.store.current["reading"])))
+                if les["id"] == "picture":
+                    for style in ("North Indian", "South Indian"):
+                        self._diagram(chart, style, tr('Your chart, {0} style', tx(style)))
+        if les["id"] == "picture":
+            self._button(tx("Open the full Chart picture guide"), lambda: self.show("picture"))
         if idx + 1 < len(all_lessons):
             nxt = all_lessons[idx + 1]
             self._button(tr('Next: {0}', tx(nxt["title"])), lambda: self.show("lessons", nxt["id"]))
+
+    # ---------------------------------------------------------------- chart picture guide
+    def _picture(self):
+        import learn
+        chart = self.store.current["chart"]
+        reading = self.store.current["reading"]
+        self._text(tx("=== Reading the chart picture ===\nA step-by-step guide to the chart diagram: where each house is, how "
+                      "the signs are shown, how to find planets, aspects and lords by eye, and the mistakes beginners make. "
+                      "Each idea is shown on an empty teaching chart and then worked out on your own chart."))
+        if chart is None:
+            self._text(tx("[In your chart: generate a chart on the Birth Chart screen to see each step worked out on your "
+                          "own chart.]"))
+        for n, sec in enumerate(learn.picture_guide(), start=1):
+            self._text(tr('--- {0}. {1} ---', n, tx(sec["heading"])) + "\n" + tx(sec["text"]))
+            if sec.get("diagram"):
+                self._diagram(None, "North Indian" if sec["diagram"] == "north_template" else "South Indian",
+                              tx("Teaching chart"))
+            if sec.get("table") == "abbreviations":
+                self._table([tx("Short name"), tx("Planet")], [0.35, 0.65],
+                            [[abbr, tx(name)] for abbr, name in learn.ABBREVIATIONS])
+            if not sec.get("example") or chart is None:
+                continue
+            ex = learn.picture_example(sec["example"], chart, reading)
+            if ex["text"]:
+                self._text(tr('[In your chart: {0}]', ex["text"]))
+            if ex["table"]:
+                cols, rows = ex["table"]
+                self._table([tx(c) for c in cols], [0.18, 0.18, 0.28, 0.36], rows)
+            for varga, style in ex["diagrams"]:
+                style = style or self.store.chart_style
+                self._diagram(chart, style, tr('Your chart ({0}), {1} style', varga, tx(style)), varga)
+            if ex["quiz"]:
+                self._quiz(ex["quiz"])
+
+    def _quiz(self, items):
+        qs = "\n\n".join(tr('{0}. {1}', n, q) for n, (q, _a) in enumerate(items, start=1))
+        self._text(tx("--- Questions ---") + "\n" + qs)
+        label = tx("Hide the answers") if self.show_answers else tx("Show the answers")
+
+        def toggle():
+            self.show_answers = not self.show_answers
+            self.refresh()
+            Clock.schedule_once(lambda *_: setattr(self._scroll, "scroll_y", 0), 0.1)
+
+        self._button(label, toggle)
+        if self.show_answers:
+            self._text(tx("--- Answers from your chart ---") + "\n" +
+                       "\n\n".join(tr('{0}. {1}', n, a) for n, (_q, a) in enumerate(items, start=1)))
+
+    def _diagram(self, chart, style, label=None, varga="D1"):
+        """A chart picture inside the page: the empty teaching chart (chart=None) or the user's own D1 chart."""
+        from kivy.uix.label import Label
+        from ui.tabs_chart import ChartCanvas, TeachingChartCanvas
+        if label:
+            cap = Label(text=label, color=theme.MUTED, font_size="12sp", size_hint_y=None, height=dp(22))
+            self.page.add_widget(cap)
+        if chart is None:
+            canvas = TeachingChartCanvas(style=style, size_hint_y=None, height=dp(340))
+        else:
+            canvas = ChartCanvas(size_hint_y=None, height=dp(340))
+            canvas.set_chart(chart, varga, style)
+        self.page.add_widget(canvas)
+        return canvas
 
     # ---------------------------------------------------------------- walkthrough
     def _walkthrough(self):
@@ -897,6 +975,8 @@ class LearnTab(_InsightPage):
         for n, step in enumerate(learn.walkthrough(chart, reading), start=1):
             self._text(tr('--- Step {0}: {1} ---', n, tx(step["title"])) + "\n" + step["text"] + "\n" +
                        tr('[Lesson: {0}]', tx(titles[step["lesson"]])))
+            if step.get("diagram"):
+                self._diagram(chart, self.store.chart_style, tr('Your chart, {0} style', tx(self.store.chart_style)))
         self._text(tx("[Remember: These steps teach the method. For the full reading of each part, open the matching screen from "
                       "Home.]"))
 

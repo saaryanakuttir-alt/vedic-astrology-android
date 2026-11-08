@@ -47,6 +47,101 @@ def glossary(query=""):
     return sorted(rows, key=lambda g: g["term"].lower())
 
 
+def picture_guide():
+    return data()["picture_guide"]
+
+
+ABBREVIATIONS = [("Su", "Sun"), ("Mo", "Moon"), ("Ma", "Mars"), ("Me", "Mercury"), ("Ju", "Jupiter"), ("Ve", "Venus"),
+                 ("Sa", "Saturn"), ("Ra", "Rahu"), ("Ke", "Ketu"), ("ASC", "Ascendant (Lagna)")]
+
+
+def _sign_of_house(chart, h):
+    return SIGNS[(SIGNS.index(chart["ascendant"]["sign"]) + h - 1) % 12]
+
+
+def _in_house(chart, h):
+    return [p for p in BODIES if chart["planets"][p]["house"] == h]
+
+
+def _aspected(p, h):
+    return sorted(((h - 1 + d - 1) % 12) + 1 for d in aspect_distances_for(p))
+
+
+def picture_example(key, chart, reading=None):
+    """The Chart picture guide's idea `key` worked out on the user's chart:
+    {"text": str, "table": (columns, rows) or None, "diagrams": [(varga, style or None)], "quiz": [(q, a)]}."""
+    asc = chart["ascendant"]["sign"]
+    pl = chart["planets"]
+    out = {"text": "", "table": None, "diagrams": [], "quiz": []}
+    if key == "north_signs":
+        out["text"] = tr('Your top diamond shows {0}, so your rising sign is {1}. Going anticlockwise from it, the boxes '
+                         'show {2}. The table lists every house of your chart with its sign and planets.',
+                         SIGNS.index(asc) + 1, asc, ", ".join(str((SIGNS.index(asc) + i) % 12 + 1) for i in range(12)))
+        out["table"] = (["House", "Sign no.", "Sign", "Planets"],
+                        [[ordinal(h), str(SIGNS.index(_sign_of_house(chart, h)) + 1), tx(_sign_of_house(chart, h)),
+                          ", ".join(tx(p) for p in _in_house(chart, h)) or "-"] for h in range(1, 13)])
+        out["diagrams"] = [("D1", "North Indian")]
+    elif key == "south_count":
+        seq = ", ".join(tr('{0} {1}', h, tx(_sign_of_house(chart, h))) for h in range(1, 13))
+        out["text"] = tr('Your ASC box is {0}. Counting clockwise from it: {1}. So your 10th house is the {2} box and your '
+                         '7th house is the {3} box, opposite your ASC box across the centre.', asc, seq, _sign_of_house(chart, 10),
+                         _sign_of_house(chart, 7))
+        out["diagrams"] = [("D1", "South Indian")]
+    elif key == "conjunctions":
+        groups = [tr('the {0} house ({1}): {2}', ordinal(h), _sign_of_house(chart, h), ", ".join(tx(p) for p in ps))
+                  for h in range(1, 13) for ps in [_in_house(chart, h)] if len(ps) >= 2]
+        text = (tr('Boxes with more than one planet in your chart - {0}.', "; ".join(groups)) if groups else
+                tx("No box in your chart holds more than one planet, so none of your planets are conjunct."))
+        out["text"] = text + " " + tr('Your Rahu is in the {0} house ({1}) and your Ketu in the {2} house ({3}), opposite '
+                                     'boxes.', ordinal(pl["Rahu"]["house"]), pl["Rahu"]["sign"], ordinal(pl["Ketu"]["house"]),
+                                     pl["Ketu"]["sign"])
+    elif key == "aspects":
+        parts = []
+        for p in ("Jupiter", "Saturn", "Mars"):
+            h = pl[p]["house"]
+            hs = _aspected(p, h)
+            parts.append(tr('{0} sits in your {1} house ({2}); counting from its box as 1, it looks at the {3} houses ({4}).',
+                            p, ordinal(h), pl[p]["sign"], ", ".join(ordinal(x) for x in hs),
+                            ", ".join(tx(_sign_of_house(chart, x)) for x in hs)))
+        out["text"] = " ".join(parts)
+    elif key == "lords":
+        parts = []
+        for h in (1, 7, 10):
+            sign = _sign_of_house(chart, h)
+            lord = SIGN_LORD[sign]
+            lh = pl[lord]["house"]
+            parts.append(tr('Your {0} house box holds {1}; its lord is {2}, which sits in the {3} house box ({4}).',
+                            ordinal(h), sign, lord, ordinal(lh), pl[lord]["sign"]))
+        out["text"] = " ".join(parts)
+    elif key == "navamsa":
+        d9 = chart["ascendant"]["vargas"].get("D9")
+        out["text"] = tr('Your Navamsa (D9) rising sign is {0}, so the top diamond of your North Indian D9 chart shows {1}, '
+                         'and in the South Indian D9 chart the {0} box is marked ASC.', d9, SIGNS.index(d9) + 1)
+        out["diagrams"] = [("D9", None)]
+    elif key == "quiz":
+        moon_h = pl["Moon"]["house"]
+        s10 = _sign_of_house(chart, 10)
+        l10 = SIGN_LORD[s10]
+        sat = _aspected("Saturn", pl["Saturn"]["house"])
+        crowded = sorted((h for h in range(1, 13) if len(_in_house(chart, h)) >= 2), key=lambda h: -len(_in_house(chart, h)))
+        out["quiz"] = [
+            (tx("Which number is in the top diamond of your North Indian chart, and what does it mean?"),
+             tr('{0}: your rising sign is {1}.', SIGNS.index(asc) + 1, asc)),
+            (tx("Which house holds your Moon?"), tr('The {0} house ({1}).', ordinal(moon_h), pl["Moon"]["sign"])),
+            (tx("Which sign is on your 10th house?"), tr('{0} (sign number {1}).', s10, SIGNS.index(s10) + 1)),
+            (tx("Where does your 10th lord sit?"), tr('{0} rules {1} and sits in your {2} house.', l10, s10,
+                                                      ordinal(pl[l10]["house"]))),
+            (tx("Which houses does your Saturn look at?"), tr('From the {0} house it looks at the {1} houses.',
+                                                             ordinal(pl["Saturn"]["house"]),
+                                                             ", ".join(ordinal(x) for x in sat))),
+            (tx("Which box holds the most planets?"),
+             tr('The {0} house ({1}): {2}.', ordinal(crowded[0]), _sign_of_house(chart, crowded[0]),
+                ", ".join(tx(p) for p in _in_house(chart, crowded[0]))) if crowded else
+             tx("No box holds more than one planet in your chart.")),
+        ]
+    return out
+
+
 def _area(h):
     return tx(HOUSE_AREA[h])
 
@@ -69,7 +164,28 @@ def _dignity(p, sign):
     return None
 
 
+NORTH_POS = {1: "the top centre diamond", 2: "the top-left triangle", 3: "the upper triangle on the left",
+             4: "the left diamond", 5: "the lower triangle on the left", 6: "the bottom-left triangle",
+             7: "the bottom diamond", 8: "the bottom-right triangle", 9: "the lower triangle on the right",
+             10: "the right diamond", 11: "the upper triangle on the right", 12: "the top-right triangle"}
+
+
 # ------------------------------------------------------------------ walkthrough steps
+def step_picture(chart, reading, at):
+    asc = chart["ascendant"]["sign"]
+    m = chart["planets"]["Moon"]
+    h = m["house"]
+    text = tr('In the North Indian picture, the top centre diamond (your 1st house) shows the number {0}, so your rising '
+              'sign is {1}. In the South Indian picture, the {1} box is the one marked ASC.', SIGNS.index(asc) + 1, asc)
+    if h == 1:
+        text += " " + tr('Your Moon (Mo) is in {0}, the same box as the Lagna.', m["sign"])
+    else:
+        text += " " + tr('Your Moon (Mo) is in {0}, your {1} house. In the North Indian picture that is {2}, showing the '
+                         'number {3}. In the South Indian picture, start at the ASC box as 1 and count clockwise: the '
+                         '{1} box you reach is {0}.', m["sign"], ordinal(h), tx(NORTH_POS[h]), SIGNS.index(m["sign"]) + 1)
+    return text
+
+
 def step_lagna(chart, reading, at):
     asc = chart["ascendant"]["sign"]
     sign, lord, lh = _lord_house(chart, 1)
@@ -224,6 +340,7 @@ def step_synthesis(chart, reading, at):
 
 
 STEPS = [
+    ("picture", "Find your way round the picture", "picture", step_picture),
     ("lagna", "Your rising sign", "signs", step_lagna),
     ("moon", "Your Moon and birth star", "nakshatras", step_moon),
     ("houses", "Which houses hold planets", "houses", step_houses),
@@ -242,7 +359,8 @@ _EXTRA = {"sun_moon": step_sun_moon}
 def walkthrough(chart, reading, at=None):
     """[{"id", "title", "lesson", "text"}] - the user's own chart, read step by step."""
     at = at or _dt.datetime.now(_dt.timezone.utc).replace(tzinfo=None)
-    return [{"id": sid, "title": title, "lesson": lid, "text": fn(chart, reading, at)} for sid, title, lid, fn in STEPS]
+    return [{"id": sid, "title": title, "lesson": lid, "text": fn(chart, reading, at), "diagram": sid == "picture"}
+            for sid, title, lid, fn in STEPS]
 
 
 def try_in_chart(step_id, chart, reading, at=None):

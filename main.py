@@ -15,7 +15,7 @@ back for a future paid Premium edition.
 
 Navigation follows the Birth Chart App design handoff: a Home menu of cards,
 a header whose gold diamond mark always returns Home, and a 4-tab bottom bar
-(Chart / Dasha / Yogas / Library in the full edition - see main.py's BOTTOM_NAV_LITE for the
+(Chart / Predictions / Learn / Library in the full edition - see main.py's BOTTOM_NAV_LITE for the
 lite edition's bar). Screens are built lazily on first visit, so start-up only constructs Home.
 
 Created by Sammya Das.
@@ -68,11 +68,13 @@ from ui.tabs_tables import (
     AshtakvargaTab, ChalitTab, DashaTab, HousesTab, KundliDetailsTab, PlanetsTab, YogasTab,
 )
 
-BOTTOM_NAV_FULL = [("entry", "Chart", "diamond"), ("dasha", "Dasha", "clock"),
-                    ("yogas", "Yogas", "rings"), ("library", "Library", "book")]
-# The lite edition has no Dasha/Yogas screens (see engine/edition.py) - Kundli and House Lords fill the bar instead.
+# v2.5: the bar holds what people open every day - their chart, what is coming (Predictions), Learn Astrology and
+# their saved charts. Dasha and Yogas are the first cards on Home ("Start here").
+BOTTOM_NAV_FULL = [("entry", "Chart", "diamond"), ("predictions", "Predictions", "calendar"),
+                    ("learn", "Learn", "star"), ("library", "Library", "book")]
+# The lite edition has no Predictions screen (see engine/edition.py) - Kundli Details takes its place.
 BOTTOM_NAV_LITE = [("entry", "Chart", "diamond"), ("kundli", "Kundli", "card"),
-                    ("houses", "Houses", "key"), ("library", "Library", "book")]
+                    ("learn", "Learn", "star"), ("library", "Library", "book")]
 BOTTOM_NAV = BOTTOM_NAV_FULL if edition.EDITION == "full" else BOTTOM_NAV_LITE
 
 
@@ -223,6 +225,8 @@ class VedicAstrologyApp(App):
         self.bottom.set_active(key)
         if preset and hasattr(screen, "preset_varga"):
             screen.preset_varga(preset)
+        if hasattr(screen, "preset_part"):
+            screen.preset_part(preset)
         if hasattr(screen, "refresh"):
             screen.refresh()
 
