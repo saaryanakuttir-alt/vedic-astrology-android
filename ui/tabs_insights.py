@@ -6,6 +6,7 @@ Compact | Detailed switch, tables always show everything.
 """
 import traceback
 
+from kivy.app import App
 from kivy.logger import Logger
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
@@ -637,6 +638,94 @@ class LalKitabTab(_InsightPage):
             self.refresh()
 
 
+class PracticesTab(_InsightPage):
+    caption = ("Meditation, breath and yoga practices matched to your chart: for the planets that need support right now, for your "
+               "running periods, for your Moon's temperament, and sized for your stage of life. The practices come from classical "
+               "yoga texts; matching them to planets is a modern Jyotish-Ayurveda approach. Traditional guidance, not medical "
+               "treatment.")
+    show_advanced = False
+
+    def _practice_text(self, pr, heading=None):
+        import practices
+        body = [tx(pr["why"]),
+                tr('{0} · {1} · about {2} minutes a day', tx(pr["kind"]), tx(practices.data()["levels"][pr["level"]]), pr["minutes_now"])]
+        body += [tr('{0}. {1}', n, tx(step)) for n, step in enumerate(pr["steps"], start=1)]
+        tail = ([tr('[Caution: {0}]', " ".join(tx(c) for c in pr["caution_text"]))] if pr["caution_text"] else []) + \
+            [tr('[Source: {0}]', tx(pr["source"]))]
+        return (heading or tr('--- {0} ---', tx(pr["name"]))) + "\n" + "\n\n".join(body) + "\n" + "\n".join(tail)
+
+    def _build(self, chart, reading):
+        import practices
+        from ui.theme import ThemedButton
+        plan = practices.practice_plan(chart, reading)
+        band = plan["band"]
+        self._text(tr('=== Meditation & practice - {0} ===', self._name(reading)))
+        self._text(tr('--- Your stage of life: {0} (age {1}) ---\n{2}', tx(band["label"]), plan["age"], tx(band["advice"])) +
+                   "\n" + tr('[Safety: {0}]', tx(plan["safety"])))
+        r = plan["routine"]
+        self._text(tr('--- A simple daily routine (about {0} minutes) ---', r["total_minutes"]) + "\n" +
+                   tr('Morning: {0}.', ", ".join(tr('{0} ({1} min)', tx(x["name"]), x["minutes_now"]) for x in r["morning"])) + "\n" +
+                   tr('Evening: {0}.', ", ".join(tr('{0} ({1} min)', tx(x["name"]), x["minutes_now"]) for x in r["evening"])) + "\n" +
+                   tx("[In simple terms: a short practice done every day helps more than a long one done now and then. Start small and "
+                      "add time only when it feels easy.]"))
+        base = plan["base"]
+        self._text(self._practice_text(base["practice"], tr('--- Your base practice: {0} ---', tx(base["practice"]["name"]))) +
+                   "\n" + tr('[Why this one: {0}]', tx(base["why"])), compactable=True)
+        if plan["focus"]:
+            self._text(tx("--- Planets that need support now ---\nThese planets are weak or troubled in your chart and active in "
+                          "your life right now (the same planets the Remedies screen lists). Their practices work on the qualities "
+                          "the planet stands for."))
+            for f in plan["focus"]:
+                head = tr('--- For {0}: {1} ---', tx(f["planet"]), tx(f["theme"]))
+                intro = tr('Why now: {0}. Its traditional day is {1}.', f["why"], tx(f["day"])) + (
+                    "\n" + tr('[Mantra: {0}]', f["mantra"]) if f["mantra"] else "")
+                self._text(head + "\n" + intro, compactable=True)
+                for pr in f["practices"]:
+                    self._text(self._practice_text(pr), compactable=True)
+        else:
+            self._text(tx("--- Planets that need support now ---\nNo planet is both troubled and active for you right now, so the "
+                          "practices below follow your running periods instead."))
+        for per in plan["periods"]:
+            head = tr('--- For your {0}: {1} ---', tx(per["label"]), tx(per["planet"]))
+            intro = tr('{0} runs until {1:%b %Y}. Working with it supports {2}. Its traditional day is {3}.', tx(per["planet"]),
+                       per["until"], tx(per["theme"]), tx(per["day"])) + ("\n" + tr('[Mantra: {0}]', per["mantra"]) if per["mantra"] else "")
+            self._text(head + "\n" + intro, compactable=True)
+            for pr in per["practices"]:
+                self._text(self._practice_text(pr), compactable=True)
+        k = plan["kundalini"]
+        self._text(tx("--- The Kundalini path ---\nKundalini yoga works with energy said to rest at the base of the spine. The classical "
+                      "texts teach it in stages: first steady breath awareness and attention to the energy centres, and only later "
+                      "the locks (bandhas) and breath holding, under a teacher. Begin with the two gentle practices below and keep "
+                      "them up for several months before going further."))
+        for pr in k["gentle"]:
+            self._text(self._practice_text(pr), compactable=True)
+        if not k["advanced_allowed"]:
+            self._text(tr('[Advanced practices: {0}]', tx("The locks and breath holding are not shown for your stage of life; the "
+                                                         "gentle practices above are the safe way to work with this path.")))
+            return
+        btn = ThemedButton(text=tx("Hide advanced Kundalini practices") if self.show_advanced else tx("Show advanced Kundalini practices"),
+                           size_hint_y=None, height=dp(44))
+
+        def toggle(*_):
+            self.show_advanced = not self.show_advanced
+            self.refresh()
+
+        btn.bind(on_release=toggle)
+        holder = BoxLayout(size_hint_y=None, height=dp(44), padding=(dp(12), 0))
+        holder.add_widget(btn)
+        self.page.add_widget(holder)
+        if self.show_advanced:
+            self._text(tx("--- Before you start the advanced practices ---\n[Warning: These are powerful classical techniques. Learn "
+                          "them from a qualified teacher in person. Do not practise them if you are pregnant, have high or low blood "
+                          "pressure, heart disease, glaucoma, epilepsy, a hernia, recent surgery, or a history of panic attacks, "
+                          "psychosis or bipolar disorder. Stop at once if you notice headaches, a racing heart, sleeplessness, strong "
+                          "anxiety, shaking or heat that does not settle.]\nPractise them in this order, each only once the one "
+                          "before is easy: the root lock, the chin lock, the abdominal lock, gentle breath holding, then the three "
+                          "locks together."))
+            for pr in k["advanced"]:
+                self._text(self._practice_text(pr))
+
+
 class VarshaphalTab(_InsightPage):
     caption = ("Varshaphal is your yearly chart (Tajika system), cast for the moment the Sun returns to its birth position each year "
                "(near your birthday). It shows the year's rising sign, the lord of the year, the Muntha (the life area in the spotlight), "
@@ -708,3 +797,138 @@ class RemediesTab(_InsightPage):
         from ui.knowledge_widgets import FunctionalNatureCard
         self._card(FunctionalNatureCard(chart))
         self._text(remedy_plan.remedy_text(chart, reading), compactable=True)
+        from ui.theme import ThemedButton
+        go = ThemedButton(text=tx("Meditation & practice for your chart"), variant="primary", size_hint_y=None, height=dp(46))
+        go.bind(on_release=lambda *_: App.get_running_app().goto("practices"))
+        holder = BoxLayout(size_hint_y=None, height=dp(46), padding=(dp(12), 0))
+        holder.add_widget(go)
+        self.page.add_widget(holder)
+
+
+class LearnTab(_InsightPage):
+    """Learn Astrology: short lessons on the basics, a step-by-step reading of the user's own chart, and a searchable
+    glossary. Lessons and the glossary work without a chart; the walkthrough uses the current profile's chart."""
+    caption = ("Learn how Vedic astrology works and how to read a chart. The lessons and the glossary work without a chart; "
+               "'Read your chart' walks through the chart of the current profile, one step at a time.")
+    uses_mode = False
+    PARTS = (("lessons", "Lessons"), ("chart", "Read your chart"), ("glossary", "Glossary"))
+
+    def __init__(self, store, **kwargs):
+        super().__init__(store, **kwargs)
+        self.part = "lessons"
+        self.lesson_id = None
+        self.query = ""
+
+    # ---------------------------------------------------------------- navigation
+    def show(self, part, lesson_id=None):
+        self.part, self.lesson_id = part, lesson_id
+        self.refresh()
+
+    def _button(self, text, on_press, height=48):
+        from ui.theme import ThemedButton
+        btn = ThemedButton(text=text, size_hint_y=None, height=dp(height), halign="center")
+        btn.bind(width=lambda b, w: setattr(b, "text_size", (w - dp(20), None)))
+        btn.bind(on_release=lambda *_: on_press())
+        holder = BoxLayout(size_hint_y=None, height=dp(height), padding=(dp(12), 0))
+        holder.add_widget(btn)
+        self.page.add_widget(holder)
+        return btn
+
+    def refresh(self):
+        from ui.theme import SegmentedControl
+        self.page.clear_widgets()
+        self.page.add_widget(CaptionLabel(self.caption))
+        labels = {key: tx(label) for key, label in self.PARTS}
+        back = {v: k for k, v in labels.items()}
+        row = BoxLayout(orientation="horizontal", size_hint_y=None, height=dp(44), padding=(dp(10), dp(3)))
+        row.add_widget(SegmentedControl([labels[k] for k, _l in self.PARTS], selected=labels[self.part],
+                                        on_select=lambda opt: self.show(back[opt])))
+        row.add_widget(BoxLayout())
+        self.page.add_widget(row)
+        try:
+            {"lessons": self._lessons, "chart": self._walkthrough, "glossary": self._glossary}[self.part]()
+        except Exception:  # noqa: BLE001 - show the problem on screen, never a blank page
+            tb = traceback.format_exc()
+            Logger.error(f"VedicAstro:LearnTab: failed:\n{tb}")
+            self._text(tx("This screen hit an error while building - details below so it can be reported:\n\n") + tb)
+        self._scroll.scroll_y = 1
+
+    # ---------------------------------------------------------------- lessons
+    def _lessons(self):
+        import learn
+        all_lessons = learn.lessons()
+        if self.lesson_id is None:
+            self._text(tx("=== Learn Astrology ===\nStart with lesson 1 and go in order; each lesson is a few minutes' reading and "
+                          "builds on the one before. Where a lesson says so, you can see the idea in your own chart."))
+            for n, les in enumerate(all_lessons, start=1):
+                self._button(tr('{0}. {1}', n, tx(les["title"])), lambda lid=les["id"]: self.show("lessons", lid))
+            return
+        idx = next(i for i, les in enumerate(all_lessons) if les["id"] == self.lesson_id)
+        les = all_lessons[idx]
+        self._button(tx("Back to all lessons"), lambda: self.show("lessons"), height=44)
+        self._text(tr('=== Lesson {0}: {1} ===', idx + 1, tx(les["title"])))
+        for heading, text in les["sections"]:
+            self._text(tr('--- {0} ---', tx(heading)) + "\n" + tx(text))
+        chart = self.store.current["chart"]
+        if les.get("try"):
+            if chart is None:
+                self._text(tx("[In your chart: generate a chart on the Birth Chart screen to see this lesson in your own chart.]"))
+            else:
+                self._text(tx("--- See it in your chart ---") + "\n" +
+                           tr('[In your chart: {0}]', learn.try_in_chart(les["try"], chart, self.store.current["reading"])))
+        if idx + 1 < len(all_lessons):
+            nxt = all_lessons[idx + 1]
+            self._button(tr('Next: {0}', tx(nxt["title"])), lambda: self.show("lessons", nxt["id"]))
+
+    # ---------------------------------------------------------------- walkthrough
+    def _walkthrough(self):
+        import learn
+        chart = self.store.current["chart"]
+        if chart is None:
+            self._text(tx("No chart generated yet for this profile. Make one on the Birth Chart screen, then come back here to "
+                          "read it step by step."))
+            return
+        reading = self.store.current["reading"]
+        titles = {les["id"]: les["title"] for les in learn.lessons()}
+        self._text(tr('=== Read your chart - {0} ===', self._name(reading)) + "\n" +
+                   tx("Astrologers read a chart in a fixed order: the rising sign, the Moon, the houses and their lords, the "
+                      "strength of each planet, aspects, yogas, and then timing. Follow the same steps here; each one names "
+                      "the lesson that explains it."))
+        for n, step in enumerate(learn.walkthrough(chart, reading), start=1):
+            self._text(tr('--- Step {0}: {1} ---', n, tx(step["title"])) + "\n" + step["text"] + "\n" +
+                       tr('[Lesson: {0}]', tx(titles[step["lesson"]])))
+        self._text(tx("[Remember: These steps teach the method. For the full reading of each part, open the matching screen from "
+                      "Home.]"))
+
+    # ---------------------------------------------------------------- glossary
+    def _glossary(self):
+        from ui.theme import ThemedTextInput
+        field = ThemedTextInput(multiline=False, text=self.query, hint_text=tx("Search a term, e.g. 'dasha' or 'lord'"),
+                                size_hint_y=None, height=dp(46), padding=(dp(12), dp(12)))
+        holder = BoxLayout(size_hint_y=None, height=dp(46), padding=(dp(12), 0))
+        holder.add_widget(field)
+        self.page.add_widget(holder)
+        self._gloss_grid = GridLayout(cols=1, size_hint_y=None, spacing=dp(8))
+        self._gloss_grid.bind(minimum_height=self._gloss_grid.setter("height"))
+        self.page.add_widget(self._gloss_grid)
+        field.bind(text=lambda _w, t: self._fill_glossary(t))
+        self._fill_glossary(self.query)
+
+    def _fill_glossary(self, query):
+        import learn
+        self.query = query
+        titles = {les["id"]: les["title"] for les in learn.lessons()}
+        self._gloss_grid.clear_widgets()
+        q = (query or "").strip().lower()
+        rows = [g for g in learn.glossary() if not q or q in g["term"].lower() or q in tx(g["term"]).lower()
+                or q in g["meaning"].lower() or q in tx(g["meaning"]).lower()]
+        if not rows:
+            widget = FlowText()
+            widget.set_text(tx("No term matches that search."))
+            self._gloss_grid.add_widget(widget)
+            return
+        for g in rows:
+            widget = FlowText()
+            widget.set_text(tr('--- {0} ---', tx(g["term"])) + "\n" + tx(g["meaning"]) + "\n" +
+                            tr('[Lesson: {0}]', tx(titles[g["lesson"]])))
+            self._gloss_grid.add_widget(widget)

@@ -69,9 +69,11 @@ HOME_GROUPS = [
         ("strength", "Planet Strength", "How strong is each planet?", "gem", None),
         ("doshas", "Doshas & Sade Sati", "Manglik, Kalsarpa, Saturn", "warn", None),
         ("remedies", "Remedies", "What helps right now", "key", None),
+        ("practices", "Meditation & Practice", "Yoga, breath and meditation for your chart", "heart", None),
     ]),
     ("PEOPLE & HELP", [
         ("family", "Family Compatibility", "Partner & child bonds", "people", None),
+        ("learn", "Learn Astrology", "Basics, read your own chart, glossary", "star", None),
         ("help", "Help & About", "FAQ and credits", "help", None),
     ]),
 ]

@@ -23,7 +23,7 @@ APP_TITLE = {"full": "Vedic Astrology", "lite": "Vedic Astrology Compact"}
 # Screen keys (main.py's _registry / ui/tabs_home.py's card keys) kept in the lite edition: generate
 # and view a chart (with every divisional-chart diagram), the classical placement lookups, and the
 # plumbing every edition needs (saved charts, help). Everything else is Premium-only for now.
-FREE_SCREENS = {"home", "entry", "library", "chart", "kundli", "planet_house", "planet_sign", "houses", "help"}
+FREE_SCREENS = {"home", "entry", "library", "chart", "kundli", "planet_house", "planet_sign", "houses", "learn", "help"}
 
 
 def visible(key):

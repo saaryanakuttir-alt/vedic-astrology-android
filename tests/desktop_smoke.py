@@ -81,7 +81,7 @@ check(app.header.title_label.text == "Home", "header title is Home")
 print("== Home cards navigate")
 home = app._screens["home"]
 cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 32, f"32 home cards (got {len(cards)})")
+check(len(cards) == 34, f"34 home cards (got {len(cards)})")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -375,7 +375,8 @@ for key, words in (("nature", ["Your character", "Virgo rising", "career"]),
                    ("strength", ["Planet strength", "Naisargika", "Total"]),
                    ("prastara", ["Sun", "Lagna", "Total", "Reduced points", "Shodhya Pinda", "Kakshya"]),
                    ("kphorary", ["KP horary", "1 to 249"]),
-                   ("lalkitab", ["Lal Kitab", "How each planet stands", "35-year cycle", "Varshphal"])):
+                   ("lalkitab", ["Lal Kitab", "How each planet stands", "35-year cycle", "Varshphal"]),
+                   ("practices", ["Meditation & practice", "Your stage of life", "Your base practice", "The Kundalini path"])):
     app.goto(key); pump(16)
     blob = " ".join(texts(app._screens[key]))
     check("hit an error" not in blob and "Traceback" not in blob, f"{key}: no error text")
@@ -403,6 +404,31 @@ check(bool(spin), "lalkitab: year picker present")
 if spin:
     spin[0].text = spin[0].values[0]; pump(16)
     check(lt.year_no == 1 and lt.year_no != first_lk, f"lalkitab: choosing year 1 changes the yearly chart ({first_lk} -> {lt.year_no})")
+app.goto("practices"); pump(6)
+ps = app._screens["practices"]
+ps.show_advanced = True; ps.refresh(); pump(16)
+blob = " ".join(texts(ps))
+check("Before you start the advanced practices" in blob and "Maha Bandha" in blob, "practices: advanced Kundalini section opens")
+ps.show_advanced = False; ps.refresh(); pump(6)
+app.goto("remedies"); pump(12)
+btns = [w for w in walk(app._screens["remedies"]) if getattr(w, "text", "") == "Meditation & practice for your chart"]
+check(bool(btns), "remedies: links to Meditation & Practice")
+app.goto("learn"); pump(12)
+lt = app._screens["learn"]
+blob = " ".join(texts(lt))
+check("Learn Astrology" in blob and "14. Using astrology wisely" in blob, "learn: lists the 14 lessons")
+lt.show("lessons", "houses"); pump(12)
+blob = " ".join(texts(lt))
+check("Lesson 4: The 12 houses (Bhavas)" in blob and "IN YOUR CHART" in blob.upper() and "Next: House lords" in blob,
+      "learn: a lesson opens with the user's chart and a next button")
+lt.show("chart"); pump(12)
+blob = " ".join(texts(lt))
+check("Step 1: Your rising sign" in blob and "Step 11: Putting it together" in blob and "hit an error" not in blob,
+      "learn: walks through the user's own chart")
+lt.query = "nakshatra"; lt.show("glossary"); pump(12)
+blob = " ".join(texts(lt))
+check("Janma nakshatra" in blob and "Raja Yoga" not in blob, "learn: glossary search filters terms")
+lt.query = ""; lt.show("lessons"); pump(6)
 app.goto("doshas"); pump(12)
 check("Sade Sati for you" in " ".join(texts(app._screens["doshas"])), "doshas: personal Sade Sati section")
 

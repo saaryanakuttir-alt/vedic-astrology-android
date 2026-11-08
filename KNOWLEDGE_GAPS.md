@@ -33,6 +33,19 @@ Char Dasha, Yogini dates (within 2-3 days) and karakas match. Missing or unconfi
 ## Other AstroSage sections not built
 **Lal Kitab** - added in v2.4.0 as a separate module (`engine/lal_kitab.py`, `kb/lal_kitab.json`): the fixed-house chart, pakka ghar / exalted / debilitated / good / weak houses (kept only where two references agree), planet-in-house readings built from those facts, the nine debts (rin) with shared family remedies, the **35-year cycle** (Saturn 6, Rahu 6, Ketu 3, Jupiter 6, Sun 2, Moon 1, Venus 3, Mars 6, Mercury 2) and **Lal Kitab Varshphal** from the 120-year table (two independent copies agree on all 120 rows). Still open: Rahu/Ketu exaltation houses differ between texts; sleeping planets and houses, Lal Kitab aspects and the long per-house Lal Kitab prose are not built. **Prastharashtakvarga** is built, and v2.4.0 adds **Trikona and Ekadhipatya Shodhana**, **Shodhya Pinda** and **Kakshya** (`engine/ashtakvarga_reductions.py`, checked against a published worked example). **Ascendant / nakshatra / character prose** is original text at a shorter length than AstroSage's pages; more depth needs more source material.
 
+## Meditation & Practice - `engine/practices.py` (v2.5.0)
+Practices and cautions are from the classical yoga texts and standard yoga-therapy contraindications; the planet-to-practice
+matching and the Moon-element base practice are a modern Jyotish-Ayurveda convention (not in BPHS), so they are a
+suggestion, not a classical rule. Still open: no owner or teacher review of the steps and the Bengali yet; durations are
+conservative starting values, not a progression plan; no audio guidance (Yoga Nidra, mantra pronunciation).
+
+
+## Learn Astrology - `engine/learn.py` (v2.5.0)
+Lessons and glossary restate standard Parashari basics (BPHS; aspects, exaltations and dasha years as used in the engine).
+The walk-through only re-reads facts the engine already computes. Choices to note: the nodes are taught with the 7th
+aspect only (as the engine counts them, with a note that some give 5th/9th); the walk-through looks at the 1st, 4th, 7th
+and 10th lords only. Still open: no owner review of lesson wording or the Bengali yet.
+
 ## Conventions that differ from AstroSage (not errors, but worth knowing)
 Rahu/Ketu aspect only the 7th here (AstroSage: 5th, 7th, 9th). Moon-Mars natural friendship: neutral here, friendly there. Vimshottari dates use 365.25-day years (AstroSage dates differ by 3-4 days). Paya is not computed. Gochara: Rahu's favourable transit houses now follow kb/gochara_vedha.json (3rd, 6th, 11th from the Moon); the older code also counted the 10th. Vedha is applied, with the fast Moon ignored as an obstructer in the monthly outlook. The Moon in D7 differs (D7 is not shown in this app).
 
