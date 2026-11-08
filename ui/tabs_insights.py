@@ -910,7 +910,15 @@ class LearnTab(_InsightPage):
                 img = Image(source=path, size_hint_y=None, height=dp(300), fit_mode="contain")
                 self.page.add_widget(img)
             self._text(tr('--- {0} ({1}) ---', tx(lore["name"]), tx(lore["planet"])) + "\n" +
-                       tr('[How he is pictured: {0}]', tx(lore["form"])) + "\n\n" + tx(lore["story"]))
+                       tr('[How he is pictured: {0}]', tx(lore["form"])) + "\n\n" + tx(lore["story"]) + "\n\n" +
+                       tx(lore["story_more"]))
+            self._text(tr('--- How {0} influences you ---', tx(lore["planet"])) + "\n" + tx(lore["nature"]) + "\n" +
+                       tr('[When strong: {0}]', tx(lore["strong"])) + "\n" + tr('[When weak: {0}]', tx(lore["weak"])))
+            self._text(tr('--- {0}: signs and houses ---', tx(lore["planet"])) + "\n" + tx(lore["signs"]) + "\n\n" +
+                       tx(lore["houses"]) + "\n" + tr('[At a glance: {0}]', tx(lore["facts"])))
+            chart = self.store.current["chart"]
+            if chart is not None:
+                self._text(tr('[In your chart: {0}]', learn.planet_in_chart(lore["planet"], chart)))
 
     # ---------------------------------------------------------------- chart picture guide
     def _picture(self):

@@ -428,7 +428,7 @@ PLANET_LORE = [
              "drawn by ten white horses.",
      "story": "Chandra married the 27 nakshatras, the daughters of Daksha, but loved Rohini most. Daksha's curse made "
              "him waste away; Shiva saved him and wore him on his head. So the Moon wanes and waxes every month."},
-    {"id": "mars", "planet": "Mars", "name": "Mangala",
+    {"id": "mars", "planet": "Mars", "name": "Mangal",
      "form": "Red, with four arms holding a spear, a trident and a mace, the fourth raised in blessing. He wears red "
              "and rides a ram.",
      "story": "Mangala is the son of Bhumi Devi, the Earth, and is also called Bhauma, 'born of the Earth'. He is a "
@@ -465,6 +465,162 @@ PLANET_LORE = [
      "story": "Ketu is the body of Svarbhanu, separated from the head. Without a head he stands for detachment, "
               "insight and liberation; his name means 'banner' and also 'comet'."},
 ]
+
+# v2.6.2: a fuller profile for each planet (story, nature, influence, signs, houses, facts).
+PLANET_MORE = {
+    "sun": {
+        "story_more": "In the Rig Veda Surya is the eye of the world, seeing everything people do. Each morning he "
+                      "drives his chariot across the sky, and the seven horses are said to be the seven colours of "
+                      "light or the seven metres of the Vedas. Hanuman took him as his teacher and learnt the scriptures "
+                      "by flying beside his chariot. His son Karna, born to Kunti, carried his father's generosity and "
+                      "courage into the Mahabharata.",
+        "nature": "King of the planets. Fiery, masculine and steady; a mild natural malefic because his heat burns as "
+                  "well as gives life.",
+        "strong": "A strong Sun gives confidence, self-respect, leadership, a clear sense of purpose, good energy and "
+                  "the trust of people in authority. Such people like to stand on their own feet and do the right thing "
+                  "in public.",
+        "weak": "A weak or troubled Sun shows as low confidence or, the other way, pride and a need for approval, "
+                "friction with the father or with bosses, and tiredness.",
+        "signs": "Own sign Leo (moolatrikona in its first 20 degrees). Exalted in Aries, deepest at 10 degrees; "
+                 "debilitated in Libra.",
+        "houses": "Natural significator of the 1st (self), 9th (father) and 10th (career and status) houses. "
+                  "Strongest in the 10th house (directional strength), and does well in the 3rd, 6th and 11th.",
+        "facts": "Day Sunday · colour copper-red · gem ruby · metal gold or copper · Vimshottari period 6 years."},
+    "moon": {
+        "story_more": "Chandra holds the vessel of soma, the nectar that nourishes plants and the gods; as he gives it "
+                      "away the Moon wanes, and as it fills again he waxes. His son Budha, born of Tara, the wife of "
+                      "Brihaspati, caused a war in heaven before the gods made peace. The Moon's 27 wives are the 27 "
+                      "nakshatras he visits on his monthly round.",
+        "nature": "Queen of the planets. Cool, watery and feminine; a natural benefic when bright (waxing) and weaker "
+                  "when dark (waning).",
+        "strong": "A strong Moon gives a calm, contented mind, warmth, a good memory, imagination, care for others and "
+                  "the ability to connect with the public. Home and mother tend to be a source of support.",
+        "weak": "A weak or troubled Moon shows as worry, changing moods, restlessness, oversensitivity and difficulty "
+                "settling down.",
+        "signs": "Own sign Cancer. Exalted in Taurus, deepest at 3 degrees (moolatrikona in the rest of Taurus); "
+                 "debilitated in Scorpio.",
+        "houses": "Natural significator of the 4th house (mind, mother, home). Strongest in the 4th house, and good in "
+                  "kendras and trikonas when bright.",
+        "facts": "Day Monday · colour white · gem pearl · metal silver · Vimshottari period 10 years."},
+    "mars": {
+        "story_more": "Mangala was born when a drop of Shiva's sweat, shed in deep meditation or in battle, fell to "
+                      "the Earth, who raised the child as her own. He is the god of war and is often linked with "
+                      "Kartikeya, the commander of the gods' army. His temple at Vaitheeswaran Koil in Tamil Nadu is one "
+                      "of the nine Navagraha temples.",
+        "nature": "Commander of the planets. Fiery, masculine and quick; a natural malefic that gives through effort "
+                  "and courage.",
+        "strong": "A strong Mars gives courage, drive, physical energy, a protective spirit, skill with tools, "
+                  "engineering or sport, and the will to finish what is started. Land and property often come through "
+                  "effort.",
+        "weak": "A weak or troubled Mars shows as anger, impatience, rash decisions, quarrels and accidents through "
+                "haste, or the opposite: a lack of drive.",
+        "signs": "Own signs Aries (moolatrikona in its first 12 degrees) and Scorpio. Exalted in Capricorn, deepest at "
+                 "28 degrees; debilitated in Cancer.",
+        "houses": "Natural significator of the 3rd (courage, siblings) and 6th (competition) houses. Strongest in the "
+                  "10th house, and very good in the 3rd, 6th and 11th.",
+        "facts": "Day Tuesday · colour red · gem red coral · metal copper · Vimshottari period 7 years."},
+    "mercury": {
+        "story_more": "Budha's birth caused a quarrel: Brihaspati and Chandra both claimed him until Tara declared "
+                      "that Chandra was his father. The child was so bright that he was named Budha, 'the awakened "
+                      "one'. He married Ila and became the ancestor of the Lunar dynasty of kings, from which the "
+                      "Pandavas descend.",
+        "nature": "Prince of the planets. Earthy, youthful and neutral: he becomes benefic with benefics and malefic "
+                  "with malefics.",
+        "strong": "A strong Mercury gives a quick, logical mind, clear speech and writing, humour, skill with numbers "
+                  "and trade, adaptability and a lifelong love of learning.",
+        "weak": "A weak or troubled Mercury shows as nervousness, overthinking, indecision, careless speech or trouble "
+                "concentrating and studying.",
+        "signs": "Own signs Gemini and Virgo. Exalted in Virgo, deepest at 15 degrees (moolatrikona from 16 to 20 "
+                 "degrees of Virgo); debilitated in Pisces.",
+        "houses": "Natural significator of the 4th (education) and 10th (business) houses. Strongest in the 1st house, "
+                  "and good in kendras and trikonas.",
+        "facts": "Day Wednesday · colour green · gem emerald · metal brass or bronze · Vimshottari period 17 years."},
+    "jupiter": {
+        "story_more": "Brihaspati is the priest who makes the gods' sacrifices succeed and the counsellor who guides "
+                      "Indra. When his son Kacha went to learn the secret of reviving the dead from Shukra, the rival "
+                      "guru, the story became a lesson in loyalty and learning. Jupiter takes about twelve years to "
+                      "go round the zodiac, which sets the twelve-year cycle of the Kumbh Mela.",
+        "nature": "Guru of the planets. Expansive and wise, of the element of space; the greatest natural benefic.",
+        "strong": "A strong Jupiter gives wisdom, good judgement, faith, generosity, respect from others, good teachers "
+                  "and advisers, growth of wealth and a sense of meaning. His aspect protects the houses it falls on.",
+        "weak": "A weak or troubled Jupiter shows as poor judgement, overconfidence or overspending, a lack of guidance "
+                "and doubts about one's beliefs.",
+        "signs": "Own signs Sagittarius (moolatrikona in its first 10 degrees) and Pisces. Exalted in Cancer, deepest "
+                 "at 5 degrees; debilitated in Capricorn.",
+        "houses": "Natural significator of the 2nd (wealth), 5th (learning), 9th (fortune), 10th and 11th (gains) "
+                  "houses. Strongest in the 1st house, and excellent in kendras and trikonas.",
+        "facts": "Day Thursday · colour yellow · gem yellow sapphire · metal gold · Vimshottari period 16 years."},
+    "venus": {
+        "story_more": "Shukra won the Sanjivani by long penance to Shiva. When Vishnu, as the dwarf Vamana, asked king "
+                      "Bali for three steps of land, Shukra saw through him and blocked the spout of the water pot to "
+                      "stop the gift; a blade of grass pierced his eye, so he is often shown with one eye. His wisdom "
+                      "is collected in the Shukra Niti, a book on statecraft.",
+        "nature": "Teacher of the asuras. Watery, feminine and graceful; a natural benefic.",
+        "strong": "A strong Venus gives charm, love and harmony in relationships, a sense of beauty, artistic or musical "
+                  "talent, comfort, good vehicles and fine things, and the ability to enjoy life.",
+        "weak": "A weak or troubled Venus shows as difficulties in love or partnership, over-indulgence, vanity, or a "
+                "life short of comfort and pleasure.",
+        "signs": "Own signs Taurus and Libra (moolatrikona in the first 15 degrees of Libra). Exalted in Pisces, "
+                 "deepest at 27 degrees; debilitated in Virgo.",
+        "houses": "Natural significator of the 7th house (marriage and partnership) and of comforts in the 4th. "
+                  "Strongest in the 4th house, and good in kendras and trikonas.",
+        "facts": "Day Friday · colour bright white · gem diamond · metal silver or platinum · Vimshottari period 20 "
+                 "years."},
+    "saturn": {
+        "story_more": "Shani was born dark while his mother Chhaya fasted in the heat. Surya doubted that the child was "
+                      "his, and Shani's first glance is said to have darkened his father, so their relationship is "
+                      "a classic of tension between father and son. When Shani looked at the infant Ganesha, the "
+                      "baby's head was lost, which is why his gaze (drishti) is feared. Hanuman is said to have freed "
+                      "him from Ravana's prison, and so Hanuman's devotees are spared Shani's harshness.",
+        "nature": "Servant of the planets. Cold, airy and slow; a natural malefic who rewards patience and punishes "
+                  "shortcuts.",
+        "strong": "A strong Saturn gives discipline, endurance, organisation, a sense of duty and justice, success "
+                  "through steady work, and respect that grows with age.",
+        "weak": "A weak or troubled Saturn shows as delays, heavy responsibilities, fear, pessimism, loneliness and "
+                "work that feels like a burden.",
+        "signs": "Own signs Capricorn and Aquarius (moolatrikona in the first 20 degrees of Aquarius). Exalted in Libra, "
+                 "deepest at 20 degrees; debilitated in Aries.",
+        "houses": "Natural significator of the 6th (service), 10th (work) and 12th (detachment) houses. Strongest in the "
+                  "7th house, and gives his best results in the 3rd, 6th and 11th.",
+        "facts": "Day Saturday · colour dark blue or black · gem blue sapphire · metal iron · Vimshottari period 19 "
+                 "years."},
+    "rahu": {
+        "story_more": "Because Rahu drank the nectar, he is immortal, and he never forgets the Sun and Moon who exposed "
+                      "him: at every eclipse he catches one of them, but having no body he cannot hold it, and it "
+                      "slips out again. He is shown with the tail of a serpent in some temples, and his shrine at "
+                      "Thirunageswaram is one of the Navagraha temples.",
+        "nature": "A shadow planet (chhaya graha), the north node of the Moon. Smoky, restless and hungry for more; "
+                  "a natural malefic that works like Saturn and takes on the colour of the sign it sits in and of its "
+                  "sign lord.",
+        "strong": "A well-placed Rahu gives ambition, originality, boldness, success with technology, foreign places "
+                  "and the unconventional, and the ability to rise fast in the wider world.",
+        "weak": "A troubled Rahu shows as confusion, obsession, restlessness, fear of the unknown, and being misled or "
+                "misleading.",
+        "signs": "Has no sign of its own in BPHS. The texts disagree on its exaltation: some give Taurus, others Gemini; "
+                 "the app does not use an exaltation for Rahu.",
+        "houses": "Gives its best results in the 3rd, 6th, 10th and 11th houses (houses of growth), and is read through "
+                  "the lord of the sign it occupies.",
+        "facts": "No weekday of its own (usually honoured on Saturday) · colour smoky · gem hessonite (gomed) · "
+                 "Vimshottari period 18 years."},
+    "ketu": {
+        "story_more": "The headless body of Svarbhanu fell to earth and, in one account, was taken in by the sage "
+                      "Jaimini, who taught it wisdom. Without a head, Ketu does not plan or desire; he simply knows. "
+                      "That is why Ketu is linked with intuition, past-life skills and moksha, the release from the "
+                      "cycle of birth. His shrine is at Keezhaperumpallam in Tamil Nadu.",
+        "nature": "A shadow planet, the south node of the Moon. Fiery, detached and inward; a natural malefic that works "
+                  "like Mars.",
+        "strong": "A well-placed Ketu gives intuition, insight, spiritual depth, research and healing abilities, and "
+                  "skills that seem to come without being learnt.",
+        "weak": "A troubled Ketu shows as confusion, loss of interest, sudden breaks, feeling cut off, and doubts about "
+                "one's direction.",
+        "signs": "Has no sign of its own in BPHS. The texts disagree on its exaltation: some give Scorpio, others "
+                 "Sagittarius; the app does not use an exaltation for Ketu.",
+        "houses": "Gives good results in the 3rd, 6th and 11th houses, and its spiritual side shows well in the 12th. "
+                  "It is read through the lord of the sign it occupies.",
+        "facts": "No weekday of its own · colour smoky grey · gem cat's eye (lehsunia) · Vimshottari period 7 years."},
+}
+for _p in PLANET_LORE:
+    _p.update(PLANET_MORE[_p["id"]])
 
 # The Chart picture guide: a separate part of Learn Astrology. "diagram" draws an empty teaching chart;
 # "example" asks engine/learn.py for the same idea worked out on the user's own chart.

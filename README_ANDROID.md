@@ -532,6 +532,14 @@ New screen **Learn Astrology** (Home card under People & Help; included in the l
 Teaching only: it reads the same chart data as the other screens and makes no new predictions. Bengali translations
 for all of it. Tests: `tests/test_learn.py`; desktop smoke opens a lesson, the walk-through and a glossary search.
 
+## 2.6.2 - A full profile for each planet
+Meet the nine planets now gives each planet: its picture, how the Puranas picture it, its story in more depth (Hanuman
+and Surya, Chandra's soma, Mangala's birth, Budha and the Lunar dynasty, Kacha and Brihaspati, Shukra and Vamana,
+Shani's gaze, Rahu at eclipses, Ketu and Jaimini), its nature, what it gives when strong and when weak, its own,
+exaltation, debilitation and moolatrikona signs, the houses it signifies and does best in, its day, colour, gem, metal and
+dasha years, and where it sits in the user's own chart (sign, house, dignity, retrograde/combust, the houses it rules, or
+for Rahu and Ketu the lord they act through).
+
 ## 2.6.1 - Planet pictures
 The nine planet pictures (made by the owner from `assets/planets/PROMPTS.md`) are in `assets/planets/*.jpg`, 768 px,
 about 200 KB each, and show in lesson 3's Meet the nine planets.

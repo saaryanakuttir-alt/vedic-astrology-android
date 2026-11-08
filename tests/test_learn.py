@@ -98,3 +98,13 @@ def test_deeper_lessons_and_planet_lore():
     assert all(x["form"] and x["story"] for x in lore)
     assert learn.planet_image("no-such-planet") is None
     assert all(learn.planet_image(x["id"]) for x in lore), "every planet has its picture in assets/planets/"
+
+
+def test_planet_profiles(chart_reading):
+    c, _r = chart_reading
+    for x in learn.planet_lore():
+        for k in ("story_more", "nature", "strong", "weak", "signs", "houses", "facts"):
+            assert len(x[k]) > 30, (x["id"], k)
+    assert "rules your 1st house (self and body) and your 4th house" in learn.planet_in_chart("Mercury", c)
+    assert "own sign" in learn.planet_in_chart("Saturn", c) and "retrograde" in learn.planet_in_chart("Saturn", c)
+    assert "acts through Jupiter" in learn.planet_in_chart("Rahu", c)

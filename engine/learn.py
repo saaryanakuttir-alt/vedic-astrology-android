@@ -63,6 +63,38 @@ def planet_image(pid):
     return None
 
 
+def planet_in_chart(planet, chart):
+    """One paragraph: where `planet` sits in this chart, its dignity and state, and which houses it rules."""
+    pl = chart["planets"][planet]
+    h = pl["house"]
+    text = tr('Your {0} is in {1}, in your {2} house ({3}).', planet, pl["sign"], ordinal(h), _area(h))
+    d = _dignity(planet, pl["sign"])
+    if d == "exalted":
+        text += " " + tr('{0} is exalted here, at its strongest.', planet)
+    elif d == "debilitated":
+        text += " " + tr('{0} is debilitated here and needs support.', planet)
+    elif d == "own":
+        text += " " + tr('{0} is in its own sign here, comfortable and reliable.', planet)
+    if planet not in ("Sun", "Moon", "Rahu", "Ketu") and pl.get("retrograde"):
+        text += " " + tr('{0} is retrograde.', planet)
+    if planet not in ("Sun", "Rahu", "Ketu") and is_combust(planet, chart["planets"]["Sun"]["longitude"], pl["longitude"],
+                                                          bool(pl.get("retrograde"))):
+        text += " " + tr('{0} is combust, close to the Sun.', planet)
+    if planet in ("Rahu", "Ketu"):
+        lord = SIGN_LORD[pl["sign"]]
+        text += " " + tr('As a shadow planet it acts through {0}, the lord of {1}, which sits in your {2} house.', lord,
+                         pl["sign"], ordinal(chart["planets"][lord]["house"]))
+    else:
+        ruled = sorted(x for x in range(1, 13) if SIGN_LORD[_sign_of_house(chart, x)] == planet)
+        if len(ruled) == 1:
+            text += " " + tr('It rules your {0} house ({1}), so it carries that house\'s matters into the {2} house.',
+                             ordinal(ruled[0]), _area(ruled[0]), ordinal(h))
+        else:
+            text += " " + tr('It rules your {0} house ({1}) and your {2} house ({3}), so it carries their matters into the '
+                             '{4} house.', ordinal(ruled[0]), _area(ruled[0]), ordinal(ruled[1]), _area(ruled[1]), ordinal(h))
+    return text
+
+
 def picture_guide():
     return data()["picture_guide"]
 
