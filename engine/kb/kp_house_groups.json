@@ -1,0 +1,390 @@
+{
+  "schema_version": "1.0",
+  "system": "KP (Krishnamurti Paddhati) - a separate system, not part of the Parashari knowledge base",
+  "description": "KP house groups: the sub lord of the main cusp of a matter must signify the matter's houses for the matter to be promised. Houses that are the 12th from those houses work against it.",
+  "rules": {
+    "promise": "The sub lord of the matter's main cusp is judged by the houses its star lord signifies (occupies and owns); its own houses are a second, weaker level.",
+    "against": "The 12th house from any house negates it, so the houses 12th from each favourable house (minus the favourable ones) are read as obstructing.",
+    "nodes": "Rahu and Ketu act as agents of their sign lord, so they also give the houses of that lord.",
+    "retrograde": "A cusp sub lord that is retrograde, or in the star of a retrograde planet, is read as delay or obstruction until it turns direct.",
+    "timing": "Events come in the periods of planets that signify the matter's houses."
+  },
+  "sources": [
+    "K. S. Krishnamurti, Krishnamurti Paddhati Readers (house grouping and sub lord theory)",
+    "KP house grouping table as compiled on kpastrology.astrosage.com/Home/house-grouping (archived copy on archive.org, 'House Grouping - KP Astrology')",
+    "KP house combinations (education 4-9-11, foreign travel 3-9-12, building 4-11-12, speculation 2-5-6-11, independent business 2-7-10) as given in widely used KP study notes"
+  ],
+  "policy": "Matters the app does not read (see the v1.2 content policy) are left out of this table on purpose.",
+  "cusps": {
+    "1": "Yourself: body, energy, personality and the way you meet life.",
+    "2": "Money you earn and keep, family, speech and food.",
+    "3": "Courage, writing and communication, short journeys, neighbours and younger siblings.",
+    "4": "Home, mother, property, vehicles, inner peace and basic education.",
+    "5": "Romance, creativity, intelligence, speculation and past good deeds.",
+    "6": "Work and service, competition, loans and debts, illness and recovery.",
+    "7": "Marriage, partners in life and business, contracts and the public.",
+    "8": "Inheritance, insurance, shared money, hidden matters and sudden changes.",
+    "9": "Luck, father and teachers, higher learning, faith and long journeys.",
+    "10": "Career, status, authority and your public reputation.",
+    "11": "Gains, income, friends, elder siblings and wishes coming true.",
+    "12": "Expenses, investment, foreign lands, rest, retreat and letting go."
+  },
+  "matters": [
+    {
+      "id": "wellbeing",
+      "cusp": 1,
+      "title": "Good health and general wellbeing",
+      "houses": [
+        1,
+        11
+      ],
+      "against": [
+        6,
+        8,
+        12
+      ],
+      "meaning": "how well you keep and recover your energy",
+      "against_note": "KP reads 6, 8 and 12 as the houses of illness, so they work against health instead of the plain 12th-from rule."
+    },
+    {
+      "id": "money",
+      "cusp": 2,
+      "title": "Money and family savings",
+      "houses": [
+        2,
+        6,
+        11
+      ],
+      "against": [
+        1,
+        5,
+        10
+      ],
+      "meaning": "income that stays with you and the growth of savings"
+    },
+    {
+      "id": "loan_taken",
+      "cusp": 2,
+      "title": "Getting a loan",
+      "houses": [
+        2,
+        6,
+        11
+      ],
+      "against": [
+        1,
+        5,
+        10
+      ],
+      "meaning": "whether borrowed money comes when you ask for it"
+    },
+    {
+      "id": "writing",
+      "cusp": 3,
+      "title": "Writing, publishing and communication as work",
+      "houses": [
+        2,
+        3,
+        10,
+        11
+      ],
+      "against": [
+        1,
+        9
+      ],
+      "meaning": "earning through words, media and contacts"
+    },
+    {
+      "id": "basic_education",
+      "cusp": 4,
+      "title": "School and basic education",
+      "houses": [
+        4,
+        9,
+        11
+      ],
+      "against": [
+        3,
+        8,
+        10
+      ],
+      "meaning": "steady study and passing examinations"
+    },
+    {
+      "id": "property_buy",
+      "cusp": 4,
+      "title": "Buying a home, land or vehicle",
+      "houses": [
+        4,
+        11,
+        12
+      ],
+      "against": [
+        3,
+        10
+      ],
+      "meaning": "purchase of property or a vehicle (12 = paying the seller)"
+    },
+    {
+      "id": "property_sale",
+      "cusp": 4,
+      "title": "Selling property",
+      "houses": [
+        3,
+        5,
+        10
+      ],
+      "against": [
+        2,
+        4,
+        9
+      ],
+      "meaning": "selling a home, land or vehicle (3, 5 and 10 are the 12th from 4, 6 and 11)"
+    },
+    {
+      "id": "romance",
+      "cusp": 5,
+      "title": "Romance that leads to commitment",
+      "houses": [
+        5,
+        7,
+        11
+      ],
+      "against": [
+        4,
+        6,
+        10
+      ],
+      "meaning": "a relationship of your own choosing growing into commitment"
+    },
+    {
+      "id": "speculation",
+      "cusp": 5,
+      "title": "Gains from speculation",
+      "houses": [
+        2,
+        5,
+        6,
+        11
+      ],
+      "against": [
+        1,
+        4,
+        10
+      ],
+      "meaning": "profit from shares, trading and risk-taking"
+    },
+    {
+      "id": "competition",
+      "cusp": 6,
+      "title": "Success in competition and legal disputes",
+      "houses": [
+        1,
+        6,
+        11
+      ],
+      "against": [
+        5,
+        10,
+        12
+      ],
+      "meaning": "winning over rivals, in exams or in a dispute"
+    },
+    {
+      "id": "service",
+      "cusp": 6,
+      "title": "Getting or keeping a job",
+      "houses": [
+        2,
+        6,
+        10,
+        11
+      ],
+      "against": [
+        1,
+        5,
+        9
+      ],
+      "meaning": "employment and service under others"
+    },
+    {
+      "id": "recovery",
+      "cusp": 6,
+      "title": "Recovery from illness",
+      "houses": [
+        1,
+        5,
+        11
+      ],
+      "against": [
+        6,
+        8,
+        12
+      ],
+      "meaning": "getting well again after a setback",
+      "against_note": "KP reads 6, 8 and 12 as the houses of illness, so they work against health instead of the plain 12th-from rule."
+    },
+    {
+      "id": "marriage",
+      "cusp": 7,
+      "title": "Marriage",
+      "houses": [
+        2,
+        7,
+        11
+      ],
+      "against": [
+        1,
+        6,
+        10
+      ],
+      "meaning": "the promise of marriage and its timing"
+    },
+    {
+      "id": "partnership",
+      "cusp": 7,
+      "title": "Business and partnership",
+      "houses": [
+        2,
+        7,
+        10,
+        11
+      ],
+      "against": [
+        1,
+        6,
+        9
+      ],
+      "meaning": "independent business and dealings with partners"
+    },
+    {
+      "id": "inheritance",
+      "cusp": 8,
+      "title": "Inheritance and shared money",
+      "houses": [
+        4,
+        8,
+        11
+      ],
+      "against": [
+        3,
+        7,
+        10
+      ],
+      "meaning": "property or money that comes through family or others"
+    },
+    {
+      "id": "long_journey",
+      "cusp": 9,
+      "title": "Long journeys",
+      "houses": [
+        3,
+        9,
+        12
+      ],
+      "against": [
+        2,
+        8,
+        11
+      ],
+      "meaning": "long-distance travel"
+    },
+    {
+      "id": "higher_education",
+      "cusp": 9,
+      "title": "Higher education",
+      "houses": [
+        4,
+        9,
+        11
+      ],
+      "against": [
+        3,
+        8,
+        10
+      ],
+      "meaning": "college, university and advanced study"
+    },
+    {
+      "id": "career",
+      "cusp": 10,
+      "title": "Career and promotion",
+      "houses": [
+        2,
+        6,
+        10,
+        11
+      ],
+      "against": [
+        1,
+        5,
+        9
+      ],
+      "meaning": "career progress, promotion and status at work"
+    },
+    {
+      "id": "wishes",
+      "cusp": 11,
+      "title": "Gains and fulfilment of wishes",
+      "houses": [
+        2,
+        6,
+        11
+      ],
+      "against": [
+        1,
+        5,
+        10
+      ],
+      "meaning": "income, help from friends and wishes coming true"
+    },
+    {
+      "id": "foreign",
+      "cusp": 12,
+      "title": "Living or working abroad",
+      "houses": [
+        3,
+        9,
+        12
+      ],
+      "against": [
+        2,
+        8,
+        11
+      ],
+      "meaning": "travel or settlement far from home"
+    },
+    {
+      "id": "investment",
+      "cusp": 12,
+      "title": "Gain from investment",
+      "houses": [
+        2,
+        6,
+        11
+      ],
+      "against": [
+        1,
+        5,
+        10
+      ],
+      "meaning": "money put in coming back with profit"
+    },
+    {
+      "id": "loan_repay",
+      "cusp": 12,
+      "title": "Repaying a loan",
+      "houses": [
+        5,
+        8,
+        12
+      ],
+      "against": [
+        4,
+        7,
+        11
+      ],
+      "meaning": "clearing debts you owe"
+    }
+  ]
+}

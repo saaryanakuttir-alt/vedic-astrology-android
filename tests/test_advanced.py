@@ -120,7 +120,7 @@ def test_kp_vimshottari_matches_astrosage_within_a_few_days(chart):
 
 def test_tajika_yogas_are_well_formed(chart):
     vp = varshaphal.varshaphal(chart, 2026)
-    assert vp["tajika"] and all(y["kind"] in ("Ithasala", "Ishrafa") and y["gap"] < y["limit"] for y in vp["tajika"])
+    assert vp["tajika"] and all(y["kind"] in ("Ithasala", "Ishrafa") and y["gap"] <= y["limit"] for y in vp["tajika"])
     assert vp["tajika"] == sorted(vp["tajika"], key=lambda y: y["gap"])
     assert "Ithasala" in varshaphal.tajika_text(vp) and FORBIDDEN.search(varshaphal.tajika_text(vp)) is None
 

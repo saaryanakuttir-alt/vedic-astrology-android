@@ -81,7 +81,7 @@ check(app.header.title_label.text == "Home", "header title is Home")
 print("== Home cards navigate")
 home = app._screens["home"]
 cards = [w for w in walk(home) if type(w).__name__ == "HomeCard"][::-1]   # insertion order
-check(len(cards) == 30, f"30 home cards (got {len(cards)})")
+check(len(cards) == 32, f"32 home cards (got {len(cards)})")
 check(not any("Sample" in str(getattr(c, "text", "")) for c in walk(home)), "no Sample Charts card on Home")
 check("sample" not in app._registry, "no sample screen registered")
 tap(cards[0])
@@ -369,9 +369,13 @@ check(app._screens["family"].mode_bar is not None, "family: has the Compact | De
 
 print("== Nature, Varshaphal, KP, Strength and Ashtakvarga detail screens")
 app.store.current_profile_id = "self"
-for key, words in (("nature", ["Your character", "Virgo rising", "career"]), ("varshaphal", ["Muntha", "Mudda", "Age "]),
-                   ("kp", ["Cusps", "Ruling planets", "Sub-sub"]), ("strength", ["Planet strength", "Naisargika", "Total"]),
-                   ("prastara", ["Sun", "Lagna", "Total"])):
+for key, words in (("nature", ["Your character", "Virgo rising", "career"]),
+                   ("varshaphal", ["Muntha", "Mudda", "Age ", "Lord of the year", "Sahams", "five office-bearers"]),
+                   ("kp", ["Cusps", "Ruling planets", "Sub-sub", "What each cusp's sub lord says", "Promised"]),
+                   ("strength", ["Planet strength", "Naisargika", "Total"]),
+                   ("prastara", ["Sun", "Lagna", "Total", "Reduced points", "Shodhya Pinda", "Kakshya"]),
+                   ("kphorary", ["KP horary", "1 to 249"]),
+                   ("lalkitab", ["Lal Kitab", "How each planet stands", "35-year cycle", "Varshphal"])):
     app.goto(key); pump(16)
     blob = " ".join(texts(app._screens[key]))
     check("hit an error" not in blob and "Traceback" not in blob, f"{key}: no error text")
@@ -385,6 +389,20 @@ check(bool(spin), "varshaphal: year picker present")
 if spin:
     spin[0].text = spin[0].values[0]; pump(16)
     check(vt.year != first_year, f"varshaphal: choosing another year changes the chart ({first_year} -> {vt.year})")
+app.goto("kphorary"); pump(6)
+kh = app._screens["kphorary"]
+kh.number, kh.matter_id, kh.show_table = 137, "marriage", True
+kh.refresh(); pump(16)
+blob = " ".join(texts(kh))
+check("The answer: Marriage (cusp 7)" in blob and "Horary cusps" in blob and "The 1-249 table" in blob, "kphorary: judges a number and shows the table")
+app.goto("lalkitab"); pump(6)
+lt = app._screens["lalkitab"]
+first_lk = lt.year_no
+spin = [w for w in walk(lt) if type(w).__name__ == "ThemedSpinner"]
+check(bool(spin), "lalkitab: year picker present")
+if spin:
+    spin[0].text = spin[0].values[0]; pump(16)
+    check(lt.year_no == 1 and lt.year_no != first_lk, f"lalkitab: choosing year 1 changes the yearly chart ({first_lk} -> {lt.year_no})")
 app.goto("doshas"); pump(12)
 check("Sade Sati for you" in " ".join(texts(app._screens["doshas"])), "doshas: personal Sade Sati section")
 

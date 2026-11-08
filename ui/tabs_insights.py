@@ -326,16 +326,47 @@ class StrengthTab(_InsightPage):
 class PrastaraTab(_InsightPage):
     caption = ("Prastharashtakvarga shows WHO gives each point in a planet's Ashtakvarga row. For each planet, every helper "
                "(the other planets and the Lagna) gives a point (1) to some signs and none (.) to others; the last row is the "
-               "planet's usual Ashtakvarga row. A sign with more points is friendlier for that planet.")
+               "planet's usual Ashtakvarga row. A sign with more points is friendlier for that planet. Above that: the "
+               "classical reductions of each row, the Shodhya Pinda, and the Kakshya each planet is passing through now.")
     uses_mode = False
 
     def _build(self, chart, reading):
+        import datetime
+
+        import ashtakvarga_reductions as red
         import prastara
         from panchanga import SIGNS
         self._text(tr('=== Ashtakvarga detail - {0} ===', self._name(reading)))
+        r = red.reductions(chart)
+        self._text(tx("--- Reduced points (Trikona and Ekadhipatya Shodhana) ---") + "\n" +
+                   tx("Classical texts first 'reduce' each planet's row: points shared by a group of trine signs are taken "
+                      "out (Trikona), then points doubled up between the two signs one planet rules (Ekadhipatya). What "
+                      "is left shows where each planet's support is really concentrated, and is what the timing rules use.") +
+                   "\n" + tx("[In simple terms: a higher reduced number means that sign is a genuinely strong place for "
+                              "that planet in your chart; 0 means no special support.]"))
+        rows = [(p,) + tuple(str(r[p]["ekadhipatya"][s]) for s in SIGNS) for p in red.PLANET_ORDER]
+        rows.append(("Sarva",) + tuple(str(r["sarva_reduced"][s]) for s in SIGNS))
+        self._table(["Planet"] + [s[:3] for s in SIGNS], [0.16] + [0.07] * 12, rows, "10sp")
+        self._text(tx("--- Shodhya Pinda ---") + "\n" +
+                   tx("Each reduced sign figure multiplied by the sign's classical multiplier (Rasi Pinda), plus the "
+                      "figures of the signs the planets occupy multiplied by each planet's multiplier (Graha Pinda). "
+                      "Classical texts use the total in their timing arithmetic; it is shown here as a figure only."))
+        self._table(["Planet", "Rasi Pinda", "Graha Pinda", "Shodhya Pinda"], [0.28, 0.24, 0.24, 0.24],
+                    [(p, r[p]["rasi_pinda"], r[p]["graha_pinda"], r[p]["shodhya_pinda"]) for p in red.PLANET_ORDER])
+        now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+        k = red.kakshya_now(chart, now)
+        self._text(tx("--- Kakshya: where each planet is passing now ---") + "\n" +
+                   tr('Each sign is split into eight parts of 3 deg 45 min (Kakshyas), ruled in turn by Saturn, Jupiter, '
+                      'Mars, the Sun, Venus, Mercury, the Moon and the Lagna. When a planet passes through a part whose '
+                      'ruler gave that sign a point in the planet\'s own row, the stretch is traditionally favourable. '
+                      'As of {0:%d %b %Y}:', now))
+        self._table(["Planet", "In", "Kakshya", "Ruler gives point?", "Points"], [0.17, 0.22, 0.25, 0.22, 0.14],
+                    [(p, tr('{0} {1}°', tx(t["sign"]), int(t["degree"])), tr('{0} ({1})', t["kakshya"], t["lord"]),
+                      tx("Yes") if t["lord_gives_point"] else tx("No"), t["bindus"]) for p, t in k.items()])
+        self._text(tx("--- Who gives each point ---"))
         for planet, grid in prastara.all_prastara(chart).items():
             self._text(tr('--- {0} ---', planet))
-            rows = [(c,) + tuple("1" if v else "." for v in r) for c, r in grid["rows"].items()]
+            rows = [(c,) + tuple("1" if v else "." for v in r_) for c, r_ in grid["rows"].items()]
             rows.append(("Total",) + tuple(str(t) for t in grid["totals"]))
             self._table(["From"] + [s[:3] for s in SIGNS], [0.16] + [0.07] * 12, rows, "10sp")
 
@@ -366,6 +397,7 @@ class KPTab(_InsightPage):
                                              'active at the time and place of your birth.]', r['Day lord']), compactable=True)
         self._text(tx("--- Planets linked with each house (significators, strongest first) ---"))
         self._table(["House", "Signified by"], [0.2, 0.8], [(h, ", ".join(x[:3] for x in pl)) for h, pl in t["significators"].items()], "11sp")
+        _kp_cusp_readings(self, t)
         import datetime
         now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
         fmt = lambda d: tr('{0:%d %b %Y}', d)
@@ -387,10 +419,229 @@ class KPTab(_InsightPage):
                             [(x["lord"], fmt(x["start"]), fmt(x["end"])) for x in ant["pratyantars"]], "11sp")
 
 
+def _houses(hs):
+    return ", ".join(str(h) for h in hs) if hs else tx("none")
+
+
+def kp_verdict_text(j):
+    """One plain paragraph for a KP judgement (kp_judgement.judge)."""
+    m = j["matter"]
+    head = {"promised": tx("Promised"), "mixed": tx("Promised, with obstacles"), "weak": tx("Weak support"),
+            "not_shown": tx("Not clearly shown")}[j["verdict"]]
+    if j["verdict"] == "promised":
+        body = tr('The sub lord {0} links to houses {1} through its star lord {2}, and to nothing that works against it.',
+                  j["sub_lord"], _houses(j["for"]), j["star_lord"])
+    elif j["verdict"] == "mixed":
+        body = tr('The sub lord {0} links to houses {1}, but also to {2}, which work against it. Expect delays or extra effort.',
+                  j["sub_lord"], _houses(j["for"]), _houses(j["against"]))
+    elif j["verdict"] == "weak":
+        body = tr('Only the sub lord {0} itself links to houses {1}; its star lord {2} does not, so this needs the right period to show.',
+                  j["sub_lord"], _houses(j["for"]), j["star_lord"])
+    else:
+        body = tr('The sub lord {0} does not link to houses {1}, the houses this matter needs.', j["sub_lord"], _houses(m["houses"]))
+    retro = {"retro_self": tx(" The sub lord is retrograde, which KP reads as delay."),
+             "retro_star": tx(" The sub lord is in the star of a retrograde planet, which KP reads as delay.")}.get(j["retro"], "")
+    return f"[{head}: {tx(m['title'])} - {tr('houses {0}', _houses(m['houses']))}. {body}{retro}]"
+
+
+def _kp_cusp_readings(page, t):
+    import kp_judgement as kj
+    page._text(tx("--- What each cusp's sub lord says ---\nIn KP the sub lord of a cusp decides whether that house's matters "
+                  "come through. It is judged by the houses its star lord sits in and owns (the main level) and by the houses "
+                  "it sits in and owns itself (a weaker level). Houses that are 12th from the needed ones work against the matter.\n\n"
+                  "[In simple terms: \"Promised\" means the chart supports it; it still comes in the right period. \"Not clearly "
+                  "shown\" means KP does not see it from this cusp alone. It is a tendency, not a verdict.]"), compactable=True)
+    readings = kj.cusp_readings(t)
+    page._table(["Cusp", "Sub lord", "Via star lord", "Own houses"], [0.13, 0.2, 0.35, 0.32],
+                [(r["cusp"], r["sub_lord"][:3], tr('{0}: {1}', r["star_lord"][:3], _houses(r["star"])), _houses(r["own"]))
+                 for r in readings], "11sp")
+    for r in readings:
+        lines = [tr('--- Cusp {0}: {1} ---', r["cusp"], tx(r["theme"]))]
+        for j in r["judgements"]:
+            lines.append(kp_verdict_text(j))
+            who = kj.timing_planets(t, j["matter"]["id"])
+            if who:
+                lines.append(tr('Periods that can bring it: {0}.', ", ".join(tx(p) for p in who)))
+        if not r["judgements"]:
+            lines.append(tr('The sub lord {0} gives houses {1} through its star lord {2}.', r["sub_lord"], _houses(r["star"]), r["star_lord"]))
+        page._text("\n".join(lines), compactable=True)
+
+
+class KPHoraryTab(_InsightPage):
+    caption = ("KP horary (prashna): hold one clear question in mind, think of a number from 1 to 249 and pick the matter it is "
+               "about. The number fixes the rising point of a chart cast for this moment, and the sub lord of the matter's cusp "
+               "answers. No birth details are needed. One sincere question at a time; a tendency, not a certainty.")
+    number = None
+    matter_id = "career"
+    show_table = False
+
+    def _build(self, chart, reading):
+        import datetime
+        import kp_judgement as kj
+        from ui.theme import ThemedButton, ThemedSpinner, ThemedTextInput
+        loc = chart["resolved_location"]
+        titles = {tx(m["title"]): m["id"] for m in kj.matters()}
+        row = BoxLayout(size_hint_y=None, height=dp(46), spacing=dp(8), padding=(dp(12), 0))
+        field = ThemedTextInput(multiline=False, input_filter="int", kb_layout="number", hint_text=tx("1 to 249"),
+                                text=str(self.number or ""), size_hint_x=0.32)
+        pick = ThemedSpinner(text=tx(kj.matter(self.matter_id)["title"]), values=list(titles), size_hint_x=0.68)
+        row.add_widget(field)
+        row.add_widget(pick)
+        self.page.add_widget(row)
+        buttons = BoxLayout(size_hint_y=None, height=dp(44), spacing=dp(8), padding=(dp(12), 0))
+        ask = ThemedButton(text=tx("Judge the question"), variant="primary")
+        table_btn = ThemedButton(text=tx("Hide the 1-249 table") if self.show_table else tx("Show the 1-249 table"))
+        buttons.add_widget(ask)
+        buttons.add_widget(table_btn)
+        self.page.add_widget(buttons)
+
+        def judge(*_):
+            try:
+                n = int(field.text or 0)
+            except ValueError:
+                n = 0
+            self.number = n if 1 <= n <= 249 else None
+            self.matter_id = titles.get(pick.text, self.matter_id)
+            self.refresh()
+
+        def toggle(*_):
+            self.show_table = not self.show_table
+            self.refresh()
+
+        ask.bind(on_release=judge)
+        table_btn.bind(on_release=toggle)
+        if self.number is None:
+            self._text(tx("Enter a number from 1 to 249, choose the matter and tap \"Judge the question\"."))
+        else:
+            now = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+            h = kj.horary_judgement(self.number, self.matter_id, now, loc["latitude"], loc["longitude"], loc.get("tz_name"))
+            t, j = h["tables"], h["judgement"]
+            r = t["row"]
+            self._text(tr('=== KP horary number {0} ===', self.number))
+            self._text(tr('Rising point: {0} (sign lord {1}, star lord {2}, sub lord {3}). Judged at {4:%d %b %Y %H:%M} for {5}.\n\n'
+                          '[Place: The chart uses the place saved in this profile. KP casts the horary chart for where the question '
+                          'is judged, so use a profile for your current town if you are elsewhere.]',
+                          "{0} {1} - {2}".format(tx(kj.horary_row_parts(r)[0]), *kj.horary_row_parts(r)[1:]), r["sign_lord"], r["star_lord"], r["sub_lord"], t["local"],
+                          loc.get("matched_name") or loc.get("place_name_as_entered") or ""), compactable=True)
+            self._text(tr('--- The answer: {0} (cusp {1}) ---', tx(j["matter"]["title"]), j["cusp"]) + "\n" + kp_verdict_text(j))
+            rp = t["ruling"]
+            names = ", ".join(tx(x) for x in sorted(kj.ruling_set(t)))
+            self._text(tr('Ruling planets now: {0}.', names) + " " +
+                       (tx("The deciding planet is among them, which KP takes as confirmation.") if h["in_ruling"] else
+                        tx("The deciding planet is not among them, so KP would treat the answer with less confidence.")) +
+                       ("\n" + tr('Periods or days ruled by these planets can bring it: {0}.', ", ".join(tx(p) for p in h["timing"]))
+                        if h["timing"] and j["verdict"] in ("promised", "mixed") else ""), compactable=True)
+            ab = lambda p: p[:3]
+            self._text(tx("--- Horary cusps ---"))
+            self._table(["House", "Degree", "Sign lord", "Star", "Sub"], [0.13, 0.27, 0.2, 0.2, 0.2],
+                        [(c["cusp"], c["dms"], ab(c["sign_lord"]), ab(c["star_lord"]), ab(c["sub_lord"])) for c in t["cusps"]], "11sp")
+            self._text(tx("--- Planets now ---"))
+            self._table(["Planet", "Degree", "House", "Star", "Sub"], [0.17, 0.27, 0.14, 0.21, 0.21],
+                        [(p["planet"][:3] + ("R" if p["retrograde"] and p["planet"] not in ("Rahu", "Ketu") else ""), p["dms"],
+                          p["house"], ab(p["star_lord"]), ab(p["sub_lord"])) for p in t["planets"]], "11sp")
+        if self.show_table:
+            self._text(tx("--- The 1-249 table ---\nEach number is one KP sub. The six subs that cross from one sign into the next "
+                          "are counted once on each side, which is why there are 249 and not 243."))
+            self._table(["No.", "From - to", "Sign", "Star", "Sub"], [0.1, 0.42, 0.16, 0.16, 0.16],
+                        [(x["number"], "{1} - {2}".format(*kj.horary_row_parts(x)), x["sign"][:3], x["star_lord"][:3], x["sub_lord"][:3])
+                         for x in kj.HORARY], "10sp")
+
+
+class LalKitabTab(_InsightPage):
+    caption = ("Lal Kitab is a separate system of astrology with its own rules. Its chart keeps every planet in the same house as "
+               "your birth chart, but reads the houses as fixed (house 1 is always Aries). It judges each planet by its house, finds "
+               "family debts (rin), runs a 35-year planetary cycle and a yearly chart from a fixed 120-year table. Its remedies are "
+               "traditional and optional, never a cure or a guarantee.")
+    year_no = None
+
+    _STANDING = {"pakka": "Own house (pakka ghar)", "exalted": "Exalted", "debilitated": "Debilitated", "good": "Good house",
+                 "weak": "Weak house", "neutral": "Neutral"}
+
+    def _build(self, chart, reading):
+        import datetime
+        import lal_kitab as lk
+        from ui.theme import ThemedSpinner
+        today = datetime.date.today()
+        x = lk.lal_kitab(chart, today)
+        self._text(tr('=== Lal Kitab - {0} ===', self._name(reading)))
+        self._text(tx("--- How each planet stands ---\nA planet in its own permanent house (pakka ghar) or its house of exaltation "
+                      "gives good results; in its house of debilitation or a weak house it needs support. Planets sharing a house "
+                      "affect each other: friends help, enemies spoil each other's results."), compactable=True)
+        self._table(["Planet", "House", "Standing", "Shares with"], [0.18, 0.14, 0.38, 0.3],
+                    [(p["planet"], p["house"], tx(self._STANDING[p["status"]]), ", ".join(q[:3] for q in p["with"]) or "-")
+                     for p in x["placements"]], "11sp")
+        for p in x["placements"]:
+            r = lk.reading(p["planet"], p["house"], p["with"])
+            lines = [tr('--- {0} in house {1} ---', p["planet"], p["house"]),
+                     tr('{0} stands for {1}. House {2} covers {3}.', p["planet"], tx(r["stands_for"]), p["house"], tx(r["house_area"])),
+                     tx(r["status_text"]).replace("{p}", tx(p["planet"]))]
+            if r["friends_with"]:
+                lines.append(tr('It shares the house with its friend(s) {0}, which helps.', ", ".join(tx(q) for q in r["friends_with"])))
+            if r["enemies_with"]:
+                lines.append(tr('It shares the house with its enemy(ies) {0}, which can spoil some of its results.',
+                                ", ".join(tx(q) for q in r["enemies_with"])))
+            if r["remedy"]:
+                lines.append(tr('[Remedy: {0}]', tx(r["remedy"])))
+            self._text("\n".join(lines), compactable=True)
+        self._text(tx("--- Family debts (rin) ---\nLal Kitab says some placements show a debt carried by the family line. Each "
+                      "debt follows one rule: a planet's own houses are disturbed by that planet's enemies. The traditional remedy is a "
+                      "shared act: every family member gives an equal share, and it is given away together on one day."), compactable=True)
+        if x["debts"]:
+            for d in x["debts"]:
+                self._text(tr('--- {0} ({1}) ---\nShown by {2} in house {3}. {4}\n[Remedy: {5}]', tx(d["name"]), tx(d["meaning"]),
+                              ", ".join(tx(b) for b in d["by"]), ", ".join(str(x["houses"][b]) for b in d["by"]), tx(d["why"]),
+                              tx(d["remedy"])), compactable=True)
+        else:
+            self._text(tx("No Lal Kitab debt (rin) is shown in this chart."))
+        cyc = x["cycle"]
+        self._text(tr('--- The 35-year cycle (cycle {0}) ---\nLal Kitab gives each planet a fixed stretch of years, the same order for '
+                      'everyone, repeating every 35 years. The planet running now colours the period through the house it sits in.',
+                      cyc["cycle_no"]), compactable=True)
+        fmt = lambda d: tr('{0:%d %b %Y}', datetime.datetime(d.year, d.month, d.day))
+        self._table(["Planet", "Years", "From", "To"], [0.28, 0.14, 0.29, 0.29],
+                    [(tx(p["planet"]) + tx(" (now)") if p["now"] else tx(p["planet"]), p["years"], fmt(p["start"]), fmt(p["end"]))
+                     for p in cyc["periods"]], "11sp")
+        now = next((p for p in cyc["periods"] if p["now"]), None)
+        if now:
+            st, tone = lk.status(now["planet"], x["houses"][now["planet"]])
+            self._text(tr('[Now: The {0} period. {0} sits in house {1} ({2}), so this stretch is felt through {3}.]', now["planet"],
+                          x["houses"][now["planet"]], tx(self._STANDING[st]).lower(), tx(lk.data()["houses"][str(x["houses"][now["planet"]])])))
+        # Varshphal
+        birth_year = int(chart["birth_input"]["birth_date"][:4])
+        if self.year_no is None:
+            self.year_no = min(max(x["running_year"], 1), 120)
+        labels = {n: tr('Year {0} of life (age {1}-{2})', n, n - 1, n) for n in range(1, 121)}
+        self._text(tx("--- Lal Kitab Varshphal (yearly chart) ---\nEach year of life the planets move to new houses by a fixed "
+                      "120-year table; the year runs from one birthday to the next. Pick the year below."), compactable=True)
+        spinner = ThemedSpinner(text=labels[self.year_no], values=list(labels.values()), size_hint_y=None, height=dp(44))
+        by_label = {v: k for k, v in labels.items()}
+        spinner.bind(text=lambda inst, text: self._pick(by_label.get(text)))
+        self.page.add_widget(spinner)
+        vp = lk.varshphal(chart, self.year_no)
+        self._text(tr('Year {0} of life: {1} to {2}.', self.year_no, fmt(vp["start"]), fmt(vp["end"])))
+        self._table(["Planet", "Birth house", "This year", "Standing"], [0.2, 0.2, 0.2, 0.4],
+                    [(m["planet"], m["birth_house"], m["year_house"], tx(self._STANDING[pl["status"]]))
+                     for m, pl in zip(vp["moves"], vp["placements"])], "11sp")
+        good = [pl["planet"] for pl in vp["placements"] if pl["tone"] == "good"]
+        care = [pl["planet"] for pl in vp["placements"] if pl["tone"] == "care"]
+        line = []
+        if good:
+            line.append(tr('Well placed this year: {0}.', ", ".join(tx(p) for p in good)))
+        if care:
+            line.append(tr('Needs support this year: {0}; their remedies above help.', ", ".join(tx(p) for p in care)))
+        self._text(" ".join(line) or tx("No planet is especially strong or weak this year."))
+
+    def _pick(self, year_no):
+        if year_no and year_no != self.year_no:
+            self.year_no = year_no
+            self.refresh()
+
+
 class VarshaphalTab(_InsightPage):
-    caption = ("Varshaphal is your yearly chart, cast for the moment the Sun returns to its birth position each year (near your "
-               "birthday). It shows the year's rising sign, the Muntha (the life area in the spotlight) and how the year's mood changes "
-               "period by period. Pick the year below. Tendencies only, not fixed events.")
+    caption = ("Varshaphal is your yearly chart (Tajika system), cast for the moment the Sun returns to its birth position each year "
+               "(near your birthday). It shows the year's rising sign, the lord of the year, the Muntha (the life area in the spotlight), "
+               "the Tajika yogas and Sahams, and how the year's mood changes period by period. Pick the year below. Tendencies only, "
+               "not fixed events.")
     year = None
 
     def _default_year(self, chart):
@@ -418,6 +669,23 @@ class VarshaphalTab(_InsightPage):
         self._text(varshaphal.varshaphal_text(vp), compactable=True)
         self._table(["Period", "From", "To", "House", "Feels"], [0.2, 0.22, 0.22, 0.12, 0.24],
                     [(p["lord"], tr('{0:%d %b %y}', p['start']), tr('{0:%d %b %y}', p['end']), p["house"], p["tone"]) for p in vp["mudda"]], "11sp")
+        x = vp["tajika_extras"]
+        self._text(tx("--- The five office-bearers ---"))
+        self._table(["Office", "Planet", "Points", "Looks at rising sign"], [0.36, 0.2, 0.16, 0.28],
+                    [(tx(r["office"]), tx(r["planet"]) + (" *" if r["planet"] == x["varshesh"]["lord"] else ""), tr('{0:.1f}', r["bala"]["total"]),
+                      tx("Yes") if r["aspects_lagna"] else tx("No")) for r in x["varshesh"]["bearers"]], "11sp")
+        self._text(tx("--- Planet strength in the year (Pancha-vargiya bala, out of 20) ---\nFive Tajika dignities: sign, exaltation, "
+                      "hadda (terms), drekkana and navamsa. Over 10 is strong, under 5 weak. Kuttha marks a planet that gives its results "
+                      "in full; Durupha one that gives weak results this year."), compactable=True)
+        cond = {"kuttha": tx("Kuttha (full results)"), "durupha": tx("Durupha (weak results)")}
+        self._table(["Planet", "Sign", "Exalt.", "Hadda", "Total", "Condition"], [0.14, 0.13, 0.13, 0.13, 0.13, 0.34],
+                    [(p[:3], tr('{0:g}', b["kshetra"]), tr('{0:.1f}', b["uchcha"]), tr('{0:g}', b["hadda"]), tr('{0:.1f}', b["total"]),
+                      cond.get(x["conditions"][p][0], "-")) for p, b in x["bala"].items()], "11sp")
+        verdict = {"supported": tx("Supported"), "mixed": tx("Mixed"), "care": tx("Needs care")}
+        self._text(tx("--- Sahams of the year ---"))
+        self._table(["Saham", "Point", "House", "Ruler", "Reading"], [0.26, 0.24, 0.12, 0.16, 0.22],
+                    [(tx(s["name"]), tr('{0} {1}°', tx(s["sign"][:3]), int(s["degree"])), s["house"], s["lord"][:3],
+                      (tx("Active") if s["malefic"] and s["verdict"] == "supported" else verdict[s["verdict"]])) for s in x["sahams"]], "11sp")
         self._text(tx("--- The yearly chart ---"))
         canvas = ChartCanvas(size_hint_y=None, height=dp(340))
         canvas.set_chart(vp["varsha"], "D1", self.store.chart_style)

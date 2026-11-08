@@ -1,0 +1,748 @@
+{
+  "schema_version": "1.0",
+  "system": "Tajika (Varshaphal, the yearly chart) - a separate system, not part of the Parashari knowledge base",
+  "sources": [
+    "Balabhadra, Hayanaratna, tr. Martin Gansten, The Jewel of Annual Astrology (Brill 2020, open access; wisdomlib.org): the sixteen configurations, orbs of light, hadda table, five dignities and their points",
+    "Neelakantha, Tajika Neelakanthi (1587) as followed by B. V. Raman, Varshaphala or the Hindu Progressed Horoscope: five office-bearers, Tri-rashi lords, Sahams",
+    "Saham formulas are kept only where the classical texts agree; where Raman's table differs from Neelakanthi/Hayanaratna (Mitra, Asha, Vyapara and the night rule of some Sahams) the classical reading is used"
+  ],
+  "policy": "Sahams for matters the app does not read (see the v1.2 content policy) and those for imprisonment, illness and affliction are left out on purpose.",
+  "deeptamsa": {
+    "Sun": 15,
+    "Moon": 12,
+    "Mars": 8,
+    "Mercury": 7,
+    "Jupiter": 9,
+    "Venus": 7,
+    "Saturn": 9
+  },
+  "orb_rule": "Two planets are within orbs when the gap is no more than half the sum of their orbs.",
+  "speed_order": [
+    "Moon",
+    "Mercury",
+    "Venus",
+    "Sun",
+    "Mars",
+    "Jupiter",
+    "Saturn"
+  ],
+  "aspects": {
+    "1": [
+      "conjunction",
+      "inimical"
+    ],
+    "3": [
+      "sextile",
+      "friendly"
+    ],
+    "11": [
+      "sextile",
+      "friendly"
+    ],
+    "5": [
+      "trine",
+      "friendly"
+    ],
+    "9": [
+      "trine",
+      "friendly"
+    ],
+    "4": [
+      "square",
+      "inimical"
+    ],
+    "10": [
+      "square",
+      "inimical"
+    ],
+    "7": [
+      "opposition",
+      "inimical"
+    ]
+  },
+  "aspect_note": "Tajika aspects go by sign: the 3rd/11th (sextile) and 5th/9th (trine) are friendly; the same sign, the 4th/10th (square) and the 7th (opposition) are inimical; the 2nd/12th and 6th/8th signs have no aspect.",
+  "exaltation_degree": {
+    "Sun": [
+      "Aries",
+      10
+    ],
+    "Moon": [
+      "Taurus",
+      3
+    ],
+    "Mars": [
+      "Capricorn",
+      28
+    ],
+    "Mercury": [
+      "Virgo",
+      15
+    ],
+    "Jupiter": [
+      "Cancer",
+      5
+    ],
+    "Venus": [
+      "Pisces",
+      27
+    ],
+    "Saturn": [
+      "Libra",
+      20
+    ]
+  },
+  "hadda": {
+    "Aries": [
+      [
+        "Jupiter",
+        6
+      ],
+      [
+        "Venus",
+        6
+      ],
+      [
+        "Mercury",
+        8
+      ],
+      [
+        "Mars",
+        5
+      ],
+      [
+        "Saturn",
+        5
+      ]
+    ],
+    "Taurus": [
+      [
+        "Venus",
+        8
+      ],
+      [
+        "Mercury",
+        6
+      ],
+      [
+        "Jupiter",
+        8
+      ],
+      [
+        "Saturn",
+        5
+      ],
+      [
+        "Mars",
+        3
+      ]
+    ],
+    "Gemini": [
+      [
+        "Mercury",
+        6
+      ],
+      [
+        "Venus",
+        6
+      ],
+      [
+        "Jupiter",
+        5
+      ],
+      [
+        "Mars",
+        7
+      ],
+      [
+        "Saturn",
+        6
+      ]
+    ],
+    "Cancer": [
+      [
+        "Mars",
+        7
+      ],
+      [
+        "Venus",
+        6
+      ],
+      [
+        "Mercury",
+        6
+      ],
+      [
+        "Jupiter",
+        7
+      ],
+      [
+        "Saturn",
+        4
+      ]
+    ],
+    "Leo": [
+      [
+        "Jupiter",
+        6
+      ],
+      [
+        "Venus",
+        5
+      ],
+      [
+        "Saturn",
+        7
+      ],
+      [
+        "Mercury",
+        6
+      ],
+      [
+        "Mars",
+        6
+      ]
+    ],
+    "Virgo": [
+      [
+        "Mercury",
+        7
+      ],
+      [
+        "Venus",
+        10
+      ],
+      [
+        "Jupiter",
+        4
+      ],
+      [
+        "Mars",
+        7
+      ],
+      [
+        "Saturn",
+        2
+      ]
+    ],
+    "Libra": [
+      [
+        "Saturn",
+        6
+      ],
+      [
+        "Mercury",
+        8
+      ],
+      [
+        "Jupiter",
+        7
+      ],
+      [
+        "Venus",
+        7
+      ],
+      [
+        "Mars",
+        2
+      ]
+    ],
+    "Scorpio": [
+      [
+        "Mars",
+        7
+      ],
+      [
+        "Venus",
+        4
+      ],
+      [
+        "Mercury",
+        8
+      ],
+      [
+        "Jupiter",
+        5
+      ],
+      [
+        "Saturn",
+        6
+      ]
+    ],
+    "Sagittarius": [
+      [
+        "Jupiter",
+        12
+      ],
+      [
+        "Venus",
+        5
+      ],
+      [
+        "Mercury",
+        4
+      ],
+      [
+        "Mars",
+        5
+      ],
+      [
+        "Saturn",
+        4
+      ]
+    ],
+    "Capricorn": [
+      [
+        "Mercury",
+        7
+      ],
+      [
+        "Jupiter",
+        7
+      ],
+      [
+        "Venus",
+        8
+      ],
+      [
+        "Saturn",
+        4
+      ],
+      [
+        "Mars",
+        4
+      ]
+    ],
+    "Aquarius": [
+      [
+        "Venus",
+        7
+      ],
+      [
+        "Mercury",
+        6
+      ],
+      [
+        "Jupiter",
+        7
+      ],
+      [
+        "Mars",
+        5
+      ],
+      [
+        "Saturn",
+        5
+      ]
+    ],
+    "Pisces": [
+      [
+        "Venus",
+        12
+      ],
+      [
+        "Jupiter",
+        4
+      ],
+      [
+        "Mercury",
+        3
+      ],
+      [
+        "Mars",
+        9
+      ],
+      [
+        "Saturn",
+        2
+      ]
+    ]
+  },
+  "drekkana": {
+    "Aries": [
+      "Mars",
+      "Sun",
+      "Venus"
+    ],
+    "Taurus": [
+      "Mercury",
+      "Moon",
+      "Saturn"
+    ],
+    "Gemini": [
+      "Jupiter",
+      "Mars",
+      "Sun"
+    ],
+    "Cancer": [
+      "Venus",
+      "Mercury",
+      "Moon"
+    ],
+    "Leo": [
+      "Saturn",
+      "Jupiter",
+      "Mars"
+    ],
+    "Virgo": [
+      "Sun",
+      "Venus",
+      "Mercury"
+    ],
+    "Libra": [
+      "Moon",
+      "Saturn",
+      "Jupiter"
+    ],
+    "Scorpio": [
+      "Mars",
+      "Sun",
+      "Venus"
+    ],
+    "Sagittarius": [
+      "Mercury",
+      "Moon",
+      "Saturn"
+    ],
+    "Capricorn": [
+      "Jupiter",
+      "Mars",
+      "Sun"
+    ],
+    "Aquarius": [
+      "Venus",
+      "Mercury",
+      "Moon"
+    ],
+    "Pisces": [
+      "Saturn",
+      "Jupiter",
+      "Mars"
+    ]
+  },
+  "dignity_points": {
+    "kshetra": [
+      30,
+      22.5,
+      15,
+      7.5
+    ],
+    "hadda": [
+      15,
+      11.25,
+      7.5,
+      3.75
+    ],
+    "drekkana": [
+      10,
+      7.5,
+      5,
+      2.5
+    ],
+    "navamsa": [
+      5,
+      3.75,
+      2.5,
+      1.25
+    ],
+    "order": [
+      "own",
+      "friend",
+      "neutral",
+      "enemy"
+    ],
+    "uchcha": "distance from the fall degree (under 180) divided by 9, at most 20",
+    "total": "sum of the five divided by 4 (at most 20); under 5 weak, over 10 strong",
+    "relationship": "Friend / neutral / enemy by Tajika aspect in the yearly chart: the sign lord in the 3rd, 5th, 9th or 11th sign from the planet is a friend, in the same, 4th, 7th or 10th an enemy, otherwise neutral (Hayanaratna 2.4).",
+    "check": "Checked against a published Varshaphal report (Prokerala sample, 17 Feb 1990 10:00 Kottayam, years 2024 and 2025): Kshetra, Uchcha, Hadda, Drekkana and Navamsa points agree."
+  },
+  "trirashi": {
+    "Aries": [
+      "Sun",
+      "Jupiter"
+    ],
+    "Taurus": [
+      "Venus",
+      "Moon"
+    ],
+    "Gemini": [
+      "Saturn",
+      "Mercury"
+    ],
+    "Cancer": [
+      "Venus",
+      "Mars"
+    ],
+    "Leo": [
+      "Jupiter",
+      "Sun"
+    ],
+    "Virgo": [
+      "Moon",
+      "Venus"
+    ],
+    "Libra": [
+      "Mercury",
+      "Saturn"
+    ],
+    "Scorpio": [
+      "Mars",
+      "Venus"
+    ],
+    "Sagittarius": [
+      "Saturn",
+      "Saturn"
+    ],
+    "Capricorn": [
+      "Mars",
+      "Mars"
+    ],
+    "Aquarius": [
+      "Jupiter",
+      "Jupiter"
+    ],
+    "Pisces": [
+      "Moon",
+      "Moon"
+    ]
+  },
+  "trirashi_note": "Day / night lord of the Tri-rashi (triplicity) for the yearly ascendant.",
+  "varshesh_rules": [
+    "The five office-bearers: lord of the birth ascendant, lord of the yearly ascendant, lord of the Muntha sign, the Tri-rashi lord and the day/night lord (lord of the Sun's sign by day, the Moon's sign by night).",
+    "The strongest of them by Pancha-vargiya bala that aspects the yearly ascendant (Tajika aspect) is the lord of the year.",
+    "If none aspects the ascendant, or all score under 5, the Muntha lord becomes the lord of the year.",
+    "The Moon is made lord of the year only when no other office-bearer aspects the ascendant."
+  ],
+  "saham_rule": "Saham = A - B + C (by day). By night A and B swap unless the Saham is the same by day and night. Add 30 degrees when C does not fall between B and A counting forward through the zodiac.",
+  "sahams": [
+    {
+      "name": "Punya",
+      "meaning": "fortune and good deeds",
+      "a": "Moon",
+      "b": "Sun",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Vidya",
+      "meaning": "learning and knowledge",
+      "a": "Sun",
+      "b": "Moon",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Yasha",
+      "meaning": "fame and reputation",
+      "a": "Jupiter",
+      "b": "Punya",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Mitra",
+      "meaning": "friends",
+      "a": "Vidya",
+      "b": "Punya",
+      "c": "Venus",
+      "night": "reverse"
+    },
+    {
+      "name": "Mahatmya",
+      "meaning": "greatness and standing",
+      "a": "Punya",
+      "b": "Mars",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Asha",
+      "meaning": "hopes and wishes",
+      "a": "Saturn",
+      "b": "Venus",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Samartha",
+      "meaning": "ability and drive",
+      "a": "Mars",
+      "b": "AscLord",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Bhratri",
+      "meaning": "brothers and sisters",
+      "a": "Jupiter",
+      "b": "Saturn",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Gaurava",
+      "meaning": "honour and respect",
+      "a": "Jupiter",
+      "b": "Moon",
+      "c": "Sun",
+      "night": "gaurava"
+    },
+    {
+      "name": "Pitri",
+      "meaning": "father",
+      "a": "Saturn",
+      "b": "Sun",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Rajya",
+      "meaning": "authority and rank",
+      "a": "Saturn",
+      "b": "Sun",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Matri",
+      "meaning": "mother",
+      "a": "Moon",
+      "b": "Venus",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Karma",
+      "meaning": "work and career",
+      "a": "Mars",
+      "b": "Mercury",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Kali",
+      "meaning": "quarrels and strife",
+      "a": "Jupiter",
+      "b": "Mars",
+      "c": "Asc",
+      "night": "reverse",
+      "malefic": true
+    },
+    {
+      "name": "Shastra",
+      "meaning": "study of the sciences",
+      "a": "Jupiter",
+      "b": "Saturn",
+      "c": "Mercury",
+      "night": "reverse"
+    },
+    {
+      "name": "Bandhu",
+      "meaning": "relatives",
+      "a": "Mercury",
+      "b": "Moon",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Paradesha",
+      "meaning": "foreign lands and journeys",
+      "a": "H9",
+      "b": "H9Lord",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Artha",
+      "meaning": "money",
+      "a": "H2",
+      "b": "H2Lord",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Vanik",
+      "meaning": "trade",
+      "a": "Moon",
+      "b": "Mercury",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Karyasiddhi",
+      "meaning": "success in undertakings",
+      "a": "Saturn",
+      "b": "Sun",
+      "c": "SunSignLord",
+      "night": "karyasiddhi"
+    },
+    {
+      "name": "Vivaha",
+      "meaning": "marriage",
+      "a": "Venus",
+      "b": "Saturn",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Shraddha",
+      "meaning": "faith and devotion",
+      "a": "Venus",
+      "b": "Mars",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Vyapara",
+      "meaning": "business dealings",
+      "a": "Mars",
+      "b": "Mercury",
+      "c": "Asc",
+      "night": "same"
+    },
+    {
+      "name": "Shatru",
+      "meaning": "rivals and opponents",
+      "a": "Mars",
+      "b": "Saturn",
+      "c": "Asc",
+      "night": "reverse",
+      "malefic": true
+    },
+    {
+      "name": "Jalapatha",
+      "meaning": "journeys over water",
+      "a": "Cancer15",
+      "b": "Saturn",
+      "c": "Asc",
+      "night": "reverse"
+    },
+    {
+      "name": "Labha",
+      "meaning": "gains",
+      "a": "H11",
+      "b": "H11Lord",
+      "c": "Asc",
+      "night": "same"
+    }
+  ],
+  "yogas": {
+    "Ikkavala": "All seven planets are in angular or succedent houses (1, 2, 4, 5, 7, 8, 10, 11): a year of rising fortunes; a feared difficulty tends to turn around.",
+    "Induvara": "All seven planets are in cadent houses (3, 6, 9, 12): the year asks for patience; results come slowly.",
+    "Ithasala": "The faster planet is behind the slower one in degrees, their signs aspect each other and the gap is within orbs: the matter is coming together.",
+    "Ishrafa": "The faster planet has moved at least one degree past the slower one: the matter has peaked or is slipping away. Between benefics it is not harmful.",
+    "Nakta": "The two significators do not aspect each other, but a faster planet in Ithasala with both carries the light between them: success through the help of another person.",
+    "Yamaya": "The two significators do not aspect each other, but a slower planet in Ithasala with both carries the light: success through a counsellor or senior person.",
+    "Manau": "The two significators are in Ithasala, but Mars or Saturn, slower than the faster of them, aspects it with an inimical aspect within its own orb: the promise is spoilt or delayed.",
+    "Kambool": "The two significators are in Ithasala and the Moon is also in Ithasala with one or both: the matter is strongly supported.",
+    "Gairi-kambool": "The two significators are in Ithasala, the Moon has no aspect to them but is in Ithasala with another planet from that planet's own or exaltation sign: support comes from outside.",
+    "Khallasara": "The Moon is in no aspect or Ithasala with either significator: it weakens or cancels the promise.",
+    "Radda": "A planet in the Ithasala is retrograde, combust or in the 6th, 8th or 12th house: the result is held back.",
+    "Duhphali-kuttha": "The slower planet of an Ithasala is in its own or exaltation sign while the faster one has no dignity: still favourable.",
+    "Dutthottha-davira": "Both significators are weak but in Ithasala: the matter is done with someone else's help.",
+    "Tambira": "No Ithasala between the significators, but one of them, strong and at the end of a sign, applies to a strong planet in the next sign: very favourable.",
+    "Kuttha": "A planet in its own or exaltation sign, in an angle or aspecting the ascendant, direct and not combust, and not aspected by Mars or Saturn: it gives its results in full.",
+    "Durupha": "A planet that is retrograde, combust, in the 6th, 8th or 12th house, in the 7th sign from its own sign, or aspected by Mars or Saturn: it gives weak results."
+  },
+  "hadda_note": "Hadda (terms) as in Hayanaratna 2.5, except Aquarius, where Raman's Varshaphala order (Venus, Mercury, Jupiter, Mars, Saturn) is used: it is what the common Varshaphal software uses. Hayanaratna gives Mercury 7, Venus 6 there.",
+  "saham_judgement": "A Saham does well when its ruler aspects it (Tajika aspect), sits in a good house and is strong, and is spoilt when its ruler sits in the 6th, 8th or 12th house, is combust or retrograde (Hayanaratna ch. 4; Raman). For the Sahams of strife and rivals a strong ruler means more of that matter, so they are shown as 'active' instead of 'supported'."
+}

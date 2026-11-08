@@ -61,7 +61,7 @@ from ui.tabs_family import FamilyTab
 from ui.tabs_help import HelpTab
 from ui.tabs_home import HomeScreen, LibraryScreen
 from ui.tabs_insights import (
-    DoshaTab, KPTab, MoreDashaTab, NatureTab, PlanetRelationsTab, PrastaraTab, RemediesTab, ShodashvargaTab, StrengthTab, VarshaphalTab,
+    DoshaTab, KPHoraryTab, KPTab, LalKitabTab, MoreDashaTab, NatureTab, PlanetRelationsTab, PrastaraTab, RemediesTab, ShodashvargaTab, StrengthTab, VarshaphalTab,
 )
 from ui.tabs_reports import FullReadingTab, KarmicTab, LifePredictionsTab
 from ui.tabs_tables import (
@@ -167,6 +167,8 @@ class VedicAstrologyApp(App):
             "nature": ("Your Nature", lambda: NatureTab(self.store)),
             "varshaphal": ("Varshaphal - Your Year", lambda: VarshaphalTab(self.store)),
             "kp": ("KP System", lambda: KPTab(self.store)),
+            "kphorary": ("KP Horary (1-249)", lambda: KPHoraryTab(self.store)),
+            "lalkitab": ("Lal Kitab", lambda: LalKitabTab(self.store)),
             "remedies": ("Remedies", lambda: RemediesTab(self.store)),
             "strength": ("Planet Strength", lambda: StrengthTab(self.store)),
             "prastara": ("Ashtakvarga Detail", lambda: PrastaraTab(self.store)),

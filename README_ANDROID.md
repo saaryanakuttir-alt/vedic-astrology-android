@@ -481,3 +481,21 @@ Favourable / Held back / Eased / Effortful and who causes the Vedha); Planet Str
 Drik value beside each, and a Drik row in the source table.
 **Fixed**: Help & About's FAQ cards were blank (their background was drawn over their text) and its filter chips
 showed as white boxes. Tests: `tests/test_ui_v23.py` (layout, motion clean-up, cards), `tests/test_kb_wiring.py`.
+
+## 2.4.0 - KP judgement and horary, Tajika extras, Lal Kitab, Ashtakavarga reductions
+Each system stays in its own labelled module; the Parashari knowledge base is unchanged.
+**Ashtakavarga** (`engine/ashtakvarga_reductions.py`): Trikona and Ekadhipatya Shodhana, Shodhya Pinda (Rasi and Graha
+Pinda) and Kakshya (which 3 deg 45 min part each planet is passing now and whether its ruler gives a point). Shown on
+Ashtakvarga Detail. Checked against a published worked example.
+**KP** (`engine/kp_judgement.py`, `kb/kp_house_groups.json`): the KP System screen now says what each cusp's sub lord
+promises for 22 life matters (Promised / with obstacles / weak / not shown, plus retrograde delay and the planets whose
+periods can bring it). New **KP Horary** screen: a number 1-249 sets the rising point, the chart is cast for now at
+the profile's place, and the matter's cusp sub lord answers, with the ruling planets; the full 1-249 table can be shown.
+**Tajika** (`engine/tajika.py`, `kb/tajika_rules.json`): aspects by sign, Ithasala/Ishrafa by degree, the sixteen
+Tajika yogas per life area, Pancha-vargiya bala, the five office-bearers and the lord of the year, and 26 Sahams.
+Shown on the Varshaphal screen (text and three tables).
+**Lal Kitab** (`engine/lal_kitab.py`, `kb/lal_kitab.json`): new screen with each planet's standing in its house,
+planet-in-house readings with simple remedies, the nine family debts (rin), the 35-year cycle and the Lal Kitab
+Varshphal for any year of life 1-120.
+Bengali translations for all new text. Tests: `tests/test_ashtakvarga_reductions.py`, `tests/test_kp_judgement.py`,
+`tests/test_tajika.py`, `tests/test_lal_kitab.py`.

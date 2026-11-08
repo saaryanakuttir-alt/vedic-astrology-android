@@ -45,9 +45,10 @@ HOME_GROUPS = [
         ("kundli", "Kundli Details", "Key facts & classifications", "card", None),
         ("shodashvarga", "Shodashvarga Table", "All 15 divisional charts", "grid", None),
         ("ashtakvarga", "Ashtakvarga", "Sign-by-sign support", "grid", None),
-        ("prastara", "Ashtakvarga Detail", "Who gives each point", "grid", None),
+        ("prastara", "Ashtakvarga Detail", "Reductions, Kakshya, who gives points", "grid", None),
         ("chalit", "Chalit", "Bhava house boundaries", "diamond", None),
-        ("kp", "KP System", "Cusps, star & sub lords", "grid", None),
+        ("kp", "KP System", "Cusps, sub lords and what they say", "grid", None),
+        ("kphorary", "KP Horary", "Ask a question with a number 1-249", "help", None),
     ]),
     ("READINGS", [
         ("nature", "Your Nature", "Character, career, hobbies", "star", None),
@@ -59,7 +60,8 @@ HOME_GROUPS = [
     ]),
     ("TIMING & YEARS", [
         ("moredashas", "More Dashas", "Yogini, Char & Karakamsa", "hourglass", None),
-        ("varshaphal", "Varshaphal", "Your year, from birthday", "calendar", None),
+        ("varshaphal", "Varshaphal", "Your year, lord of the year, Sahams", "calendar", None),
+        ("lalkitab", "Lal Kitab", "Houses, debts, 35-year cycle, yearly chart", "book", None),
         ("predictions", "Predictions", "Any date, year & transits", "calendar", None),
     ]),
     ("STRENGTH, DOSHAS & REMEDIES", [

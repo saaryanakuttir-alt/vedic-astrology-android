@@ -57,45 +57,30 @@ def _dms(deg):
     return f"{d:03d}-{m:02d}-{s:02d}"
 
 
-def kp_tables(chart):
-    """{ayanamsa, cusps: [...], planets: [...], ruling: {...}, significators: {...}}."""
-    jd = chart["resolved_datetime"]["julian_day_ut"]
-    loc = chart["resolved_location"]
-    with ephemeris.EPHEMERIS_LOCK:
-        ephemeris.ensure_sidereal_mode()
-        ayan = ephemeris.get_ayanamsa(jd) - KP_OFFSET
-        cusps_trop, _ascmc = swe.houses(jd, loc["latitude"], loc["longitude"], b"P")
-    cusp_lon = [(c - ayan) % 360 for c in cusps_trop]
+def house_of(lon, cusp_lon):
+    """The Placidus house (1-12) a longitude falls in, given the 12 cusp longitudes."""
+    for i in range(12):
+        a, b = cusp_lon[i], cusp_lon[(i + 1) % 12]
+        if (a <= lon < b) if a < b else (lon >= a or lon < b):
+            return i + 1
+    return 1
+
+
+def build_tables(cusp_lon, positions, retro):
+    """(cusps, planets, significators) from 12 KP cusp longitudes and {planet: KP longitude}. Shared by the
+    birth chart and the horary chart."""
     cusps = []
     for i, lon in enumerate(cusp_lon, start=1):
         sl, st, sb, ss = lords(lon)
         cusps.append({"cusp": i, "longitude": lon, "dms": _dms(lon), "sign": SIGNS[int(lon // 30)], "sign_lord": sl,
                       "star_lord": st, "sub_lord": sb, "subsub_lord": ss})
-
-    def house_of(lon):
-        for i in range(12):
-            a, b = cusp_lon[i], cusp_lon[(i + 1) % 12]
-            if (a <= lon < b) if a < b else (lon >= a or lon < b):
-                return i + 1
-        return 1
-
     planets = []
     for p in BODIES:
-        lon = (chart["planets"][p]["longitude"] + KP_OFFSET) % 360
+        lon = positions[p] % 360
         sl, st, sb, ss = lords(lon)
-        planets.append({"planet": p, "longitude": lon, "dms": _dms(lon), "sign": SIGNS[int(lon // 30)], "house": house_of(lon),
-                        "sign_lord": sl, "star_lord": st, "sub_lord": sb, "subsub_lord": ss,
-                        "retrograde": bool(chart["planets"][p].get("retrograde"))})
-    by = {x["planet"]: x for x in planets}
-
-    # ruling planets: lagna and Moon (sign / star / sub lords) and the weekday lord
-    weekday = ["Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Sun"]                      # Monday = 0
-    import datetime
-    y, m, d = (int(v) for v in chart["birth_input"]["birth_date"].split("-"))
-    ruling = {"Lagna": (cusps[0]["sign_lord"], cusps[0]["star_lord"], cusps[0]["sub_lord"]),
-              "Moon": (by["Moon"]["sign_lord"], by["Moon"]["star_lord"], by["Moon"]["sub_lord"]),
-              "Day lord": weekday[datetime.date(y, m, d).weekday()]}
-
+        planets.append({"planet": p, "longitude": lon, "dms": _dms(lon), "sign": SIGNS[int(lon // 30)],
+                        "house": house_of(lon, cusp_lon), "sign_lord": sl, "star_lord": st, "sub_lord": sb,
+                        "subsub_lord": ss, "retrograde": bool(retro.get(p))})
     # significators of each house, strongest first: planets in the star of an occupant, occupants,
     # planets in the star of the house's owner (cusp sign lord), and the owner itself
     sig = {}
@@ -111,6 +96,31 @@ def kp_tables(chart):
                     seen.add(pl)
                     ordered.append(pl)
         sig[h] = ordered
+    return cusps, planets, sig
+
+
+def kp_tables(chart):
+    """{ayanamsa, cusps: [...], planets: [...], ruling: {...}, significators: {...}}."""
+    jd = chart["resolved_datetime"]["julian_day_ut"]
+    loc = chart["resolved_location"]
+    with ephemeris.EPHEMERIS_LOCK:
+        ephemeris.ensure_sidereal_mode()
+        ayan = ephemeris.get_ayanamsa(jd) - KP_OFFSET
+        cusps_trop, _ascmc = swe.houses(jd, loc["latitude"], loc["longitude"], b"P")
+    cusp_lon = [(c - ayan) % 360 for c in cusps_trop]
+    positions = {p: (chart["planets"][p]["longitude"] + KP_OFFSET) % 360 for p in BODIES}
+    retro = {p: bool(chart["planets"][p].get("retrograde")) for p in BODIES}
+    cusps, planets, sig = build_tables(cusp_lon, positions, retro)
+    by = {x["planet"]: x for x in planets}
+
+    # ruling planets: lagna and Moon (sign / star / sub lords) and the weekday lord
+    weekday = ["Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Sun"]                      # Monday = 0
+    import datetime
+    y, m, d = (int(v) for v in chart["birth_input"]["birth_date"].split("-"))
+    ruling = {"Lagna": (cusps[0]["sign_lord"], cusps[0]["star_lord"], cusps[0]["sub_lord"]),
+              "Moon": (by["Moon"]["sign_lord"], by["Moon"]["star_lord"], by["Moon"]["sub_lord"]),
+              "Day lord": weekday[datetime.date(y, m, d).weekday()]}
+
     return {"ayanamsa": ayan, "ayanamsa_dms": _dms(ayan), "cusps": cusps, "planets": planets, "ruling": ruling, "significators": sig}
 
 
