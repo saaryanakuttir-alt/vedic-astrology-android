@@ -532,6 +532,10 @@ New screen **Learn Astrology** (Home card under People & Help; included in the l
 Teaching only: it reads the same chart data as the other screens and makes no new predictions. Bengali translations
 for all of it. Tests: `tests/test_learn.py`; desktop smoke opens a lesson, the walk-through and a glossary search.
 
+## 2.6.1 - Planet pictures
+The nine planet pictures (made by the owner from `assets/planets/PROMPTS.md`) are in `assets/planets/*.jpg`, 768 px,
+about 200 KB each, and show in lesson 3's Meet the nine planets.
+
 ## 2.6.0 - Deeper lessons and the nine planets
 - Every Learn Astrology lesson is longer: 106 sections in all (was 56). New topics include the signs one by one,
   Sanskrit names and directions, natural friendships, weekdays and colours, karakas, reading from the Moon, bhavat

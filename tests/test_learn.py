@@ -97,3 +97,4 @@ def test_deeper_lessons_and_planet_lore():
     assert [x["planet"] for x in lore] == ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
     assert all(x["form"] and x["story"] for x in lore)
     assert learn.planet_image("no-such-planet") is None
+    assert all(learn.planet_image(x["id"]) for x in lore), "every planet has its picture in assets/planets/"
